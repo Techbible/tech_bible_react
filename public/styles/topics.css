@@ -1,0 +1,581 @@
+
+html {
+	font-size:62.5%;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+ul, li {
+	list-style: none;
+}
+input {
+	border: none;
+}
+body {
+  width: 144rem;
+}.topics-pYM {
+  box-sizing: border-box;
+  padding: 1.4rem 0rem 9.95rem 0.1rem;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 79.1292rem);
+  grid-auto-rows: 40.1167rem;
+  background-color: #000000;
+}
+.topics-pYM .auto-group-ijjf-enH {
+  height: 5.3rem;
+  display: flex;
+  align-items: center;
+}
+.topics-pYM .auto-group-ijjf-enH .tech-bible-logo-MRo {
+  margin: 0rem 8.4rem 0.1rem 0rem;
+  box-sizing: border-box;
+  padding: 3rem 0.4rem 0.3rem 0.4rem;
+  width: 5.1rem;
+  border: solid 0.2rem #ffffff;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-ijjf-enH .tech-bible-logo-MRo .tech-bible-d8R {
+  max-width: 2.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.0402272542;
+  color: #ffffff;
+  font-family: Inter, 'Source Sans Pro';
+}
+.topics-pYM .auto-group-ijjf-enH .auto-group-l4bw-GhB {
+  margin: 1.7rem 9.8rem 1.2rem 0rem;
+  width: 5.8rem;
+  height: calc(100% - 2.9rem);
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-ijjf-enH .auto-group-l4bw-GhB .all-tools-6AR {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-ijjf-enH .auto-group-l4bw-GhB .vector-3-jUH {
+  width: 5.8rem;
+  height: 0;
+  object-fit: contain;
+  vertical-align: top;
+  border-radius: 25rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-ijjf-enH .submit-your-tool-RM7 {
+  margin: 0.5rem 8.9rem 0rem 0rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-ijjf-enH .resources-siu {
+  margin: 0.5rem 10.55rem 0rem 0rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-ijjf-enH .community-mJV {
+  margin: 0.5rem 8.15rem 0rem 0rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-ijjf-enH .tiktok-logo-edB {
+  margin: 0.3rem 13.1rem 0rem 0rem;
+  width: 5rem;
+  height: 5rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-ijjf-enH .tiktok-logo-edB .rectangle-81-jed {
+  width: 3.2rem;
+  height: 3.2rem;
+  position: absolute;
+  left: 0.9rem;
+  top: 0.9rem;
+  background-color: #ffffff;
+}
+.topics-pYM .auto-group-ijjf-enH .tiktok-logo-edB .tiktok-1-SJ9 {
+  width: 5rem;
+  height: 5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  vertical-align: top;
+}
+.topics-pYM .auto-group-ijjf-enH .sign-in-button-LuK {
+  margin: 1.1rem 3rem 0.6rem 0rem;
+  width: 8.6rem;
+  height: calc(100% - 1.7rem);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 0.1rem #ffffff;
+  box-sizing: border-box;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-ijjf-enH .sign-up-button-KmF {
+  margin: 1.2rem 0rem 0.5rem 0rem;
+  width: 8.6rem;
+  height: calc(100% - 1.7rem);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7869e6;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.topics-pYM .vector-69-Ye1 {
+  width: 143.9rem;
+  height: 0;
+  object-fit: contain;
+  vertical-align: top;
+}
+.topics-pYM .auto-group-1jbb-UXf {
+  display: flex;
+  align-items: flex-start;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-isxw-a4u {
+  margin-top: 0rem;
+  width: 5rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-isxw-a4u .topics-T8h {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-isxw-a4u .auto-group-jc53-vY5 {
+  box-sizing: border-box;
+  padding-top: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-isxw-a4u .auto-group-jc53-vY5 .rectangle-109-bu7 {
+  margin-bottom: 3.3rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #d9d9d9;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-isxw-a4u .auto-group-jc53-vY5 .rectangle-110-gvZ {
+  margin-bottom: 3rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #d9d9d9;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-isxw-a4u .auto-group-jc53-vY5 .rectangle-111-oVP {
+  margin-bottom: 3.3rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #d9d9d9;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-isxw-a4u .auto-group-jc53-vY5 .rectangle-112-v4D {
+  margin-bottom: 3.3rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #d9d9d9;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-isxw-a4u .auto-group-jc53-vY5 .rectangle-113-EKo {
+  margin-bottom: 3rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #d9d9d9;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-isxw-a4u .auto-group-jc53-vY5 .rectangle-114-wzu {
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #d9d9d9;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-ozev-Rv5 {
+  margin: 5.7rem 8.59rem 0rem 0rem;
+  width: 7.1rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-ozev-Rv5 .auto-group-gcsz-iuB {
+  margin-bottom: 4rem;
+  width: 100%;
+  height: 2.1rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 0.1rem #ffffff;
+  box-sizing: border-box;
+  background-color: #232628;
+  border-radius: 0.6rem;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-ozev-Rv5 .no-code-ZQ1 {
+  margin-bottom: 3.5rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-ozev-Rv5 .project-UG5 {
+  margin-bottom: 3.8rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-ozev-Rv5 .design-CC5 {
+  margin-bottom: 3.8rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-ozev-Rv5 .no-code-igD {
+  margin-bottom: 3.5rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-ozev-Rv5 .project-epm {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.topics-pYM .auto-group-1jbb-UXf .vector-71-jrD {
+  margin-right: 8.1487rem;
+  width: 0.0609rem;
+  height: 68.35rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T {
+  margin-top: 0rem;
+  width: 94.8rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f {
+  margin-bottom: 6.1rem;
+  width: 100%;
+  height: 30.8rem;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-pppp-MWD {
+  margin-right: 5.9rem;
+  box-sizing: border-box;
+  padding: 1.3rem 2.4rem;
+  width: 44.3rem;
+  height: 100%;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  box-shadow: 0 0.4rem 3rem rgba(56, 55, 55, 0.200000003);
+  background-color: #151618;
+  border-radius: 2.1rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo {
+  box-sizing: border-box;
+  padding: 1.3rem 2.3rem 3.1rem 2.5rem;
+  width: 44.6rem;
+  height: 100%;
+  box-shadow: 0 0.4rem 3rem rgba(56, 55, 55, 0.200000003);
+  background-color: rgba(35, 38, 40, 0.5899999738);
+  border-radius: 2.1rem;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .trending-design-tools-ETX {
+  margin: 0rem 0rem 2.2rem 0.1rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-11sb-7XK {
+  margin: 0rem 5.7rem 4.3rem 0rem;
+  width: calc(100% - 5.7rem);
+  display: flex;
+  align-items: flex-end;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-11sb-7XK .webflowlogoicon169218-2-cDB {
+  margin-right: 3.9rem;
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-11sb-7XK .auto-group-ztuh-tgV {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-11sb-7XK .auto-group-ztuh-tgV .webflow-pa9 {
+  margin-bottom: 0.2rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-11sb-7XK .auto-group-ztuh-tgV .build-websites-without-code-jBK {
+  margin-bottom: 1.9rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-11sb-7XK .auto-group-ztuh-tgV .auto-group-vyvj-SLd {
+  margin-left: 0.9rem;
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-11sb-7XK .auto-group-ztuh-tgV .auto-group-vyvj-SLd .layer1-nJ1 {
+  margin: 0rem 0.5rem 0.1rem 0rem;
+  width: 1.3rem;
+  height: 1.1rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-11sb-7XK .auto-group-ztuh-tgV .auto-group-vyvj-SLd .item-120-c29 {
+  margin-right: 4.1rem;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-11sb-7XK .auto-group-ztuh-tgV .auto-group-vyvj-SLd .free-ezR {
+  margin-right: 5.3rem;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-11sb-7XK .auto-group-ztuh-tgV .auto-group-vyvj-SLd .no-code-tool-wyX {
+  margin-bottom: 0.1rem;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-tsdj-3Wm {
+  margin-left: 0.1rem;
+  width: calc(100% - 0.1rem);
+  height: 9.6rem;
+  display: flex;
+  align-items: center;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-tsdj-3Wm .pngwing-2-9Ju {
+  margin-right: 3.1rem;
+  width: 9.6rem;
+  height: 9.6rem;
+  object-fit: cover;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-tsdj-3Wm .auto-group-o6p5-F73 {
+  margin: 0.8rem 0rem 0.6rem 0rem;
+  height: calc(100% - 1.4rem);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-tsdj-3Wm .auto-group-o6p5-F73 .figma-79F {
+  margin-bottom: 0.2rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-tsdj-3Wm .auto-group-o6p5-F73 .browse-1000-of-the-latest-tech-tools-per-task-updated-daily-cbo {
+  margin-bottom: 0.5rem;
+  max-width: 27rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-tsdj-3Wm .auto-group-o6p5-F73 .auto-group-xns1-h7T {
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-tsdj-3Wm .auto-group-o6p5-F73 .auto-group-xns1-h7T .layer1-ENH {
+  margin: 0rem 0.5rem 0.1rem 0rem;
+  width: 1.3rem;
+  height: 1.1rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-tsdj-3Wm .auto-group-o6p5-F73 .auto-group-xns1-h7T .item-120-w1o {
+  margin-right: 4.1rem;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-tsdj-3Wm .auto-group-o6p5-F73 .auto-group-xns1-h7T .free-ctd {
+  margin-right: 5.3rem;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-isqx-r3f .auto-group-bfjb-YKo .auto-group-tsdj-3Wm .auto-group-o6p5-F73 .auto-group-xns1-h7T .design-tool-8ry {
+  margin-bottom: 0.1rem;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.topics-pYM .auto-group-1jbb-UXf .auto-group-fdcz-z1T .auto-group-gsgr-NmK {
+  box-sizing: border-box;
+  padding: 2rem 2.4rem;
+  width: 100%;
+  height: 30.8rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  box-shadow: 0 0.4rem 3rem rgba(56, 55, 55, 0.200000003);
+  background-color: #151618;
+  border-radius: 2.1rem;
+  flex-shrink: 0;
+}
+.topics-pYM .title-GER {
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 500;
+  line-height: 0.9;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.topics-pYM .browse-latest-design-tools-per-task-updated-daily-93K {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #ffffff;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
