@@ -1,18 +1,10 @@
 import React from 'react'
-import "/styles/sign-up.css";
 
 function SignUp() {
   return (
-    <div className="sign-up-tZj">
-  <div className="auto-group-bcjh-bj3">
-    <div className="auto-group-zen1-Hrm">
-      <img alt="pic" className="eba91235a2dc1787ad14305033cb2e0ec5720x720-2-NdK" src="./assets/eba91235a2dc1787ad14305033cb2e0ec5720x720-2.png"/>
-      <p className="you-already-have-an-account--eqj">You already have an account ?</p>
-      <div className="auto-group-hkyz-JfP">Sign in</div>
-    </div>
-    <img alt="pic" className="vector-69-vRs" src="REPLACE_IMAGE:18:476"/>
-  </div>
-  <div className="auto-group-4ktm-e6y">
+    <div className="sign-up-tZj" >
+
+  <div className="auto-group-4ktm-e6y" style={{margin:"10vh"}}>
     <div className="rectangle-99-RX3">
     </div>
     <p className="by-clicking-on-sign-up-you-agree-to-our-conditions-of-use-and-our-privacy-settings-6NH">By clicking on sign up you agree to our conditions of use and our privacy settings</p>

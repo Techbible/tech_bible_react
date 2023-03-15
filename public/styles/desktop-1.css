@@ -12,6 +12,15 @@ html {
   outline: none;
 }
 
+#email_input{
+  border: 0px !important;
+  outline: none;
+}
+
+#email_input{
+width: 12em;
+border: 0px transparent;
+}
 #search-box{
 width: 37em;
 border: 0px transparent;

@@ -63,7 +63,7 @@ function LandingPage() {
   <p className="subscribe-to-news-letter-149">Subscribe to news letter</p>
   <div className="rectangle-90-S9T">
   </div>
-  <div className="your-email-CH3">Your Email</div>
+  <input id='email_input' placeholder='Your Email' className="your-email-CH3" />
   <img alt="pic" className="layer1-qau" src="/assets/layer1-Gv1.png"/>
   <img alt="pic" className="layer1-M3T" src="/assets/layer1-pSR.png"/>
   <img alt="pic" className="layer1-f49" src="/assets/layer1-8PF.png"/>
