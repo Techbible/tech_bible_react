@@ -143,11 +143,11 @@ function LandingPage() {
 
 
   <Link to="/signup"><div className="sign-up-button-boT">Sign up</div></Link>
-  <div className="sign-in-button-zqb">Sign in</div>
+  <Link to="/signin"><div className="sign-in-button-zqb">Sign in</div></Link>
   <p className="community-21b">Community</p>
-  <p className="resources-5Em">Resources</p>
-  <p className="submit-your-tool-xZT">Submit your tool</p>
-  <a href="www.google.com"><p className="all-tools-357">All tools</p></a>
+  <Link to="/resources"><p className="resources-5Em">Resources</p></Link>
+  <Link to="/submit_tool"><p className="submit-your-tool-xZT">Submit your tool</p></Link>
+  <Link to="/all_tools"><p className="all-tools-357">All tools</p></Link>
   <div className="tiktok-logo-WUV">
     <div className="rectangle-81-pEH">
     </div>
