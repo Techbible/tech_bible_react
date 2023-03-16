@@ -23,6 +23,16 @@ body {
   flex-direction: column;
   background-color: #000000;
 }
+
+
+.text_input_w{
+  width: 22em !important;
+}
+.text_input:focus{
+  outline: none;
+  border: 0px;
+}
+
 .sign-in-eAR .auto-group-gwmf-gcu {
   box-sizing: border-box;
   padding: 0.1rem 0rem 8.8rem 0rem;
