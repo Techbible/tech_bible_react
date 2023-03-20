@@ -145,6 +145,7 @@ body {
   color: #ffffff;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
+  cursor:pointer;
 }
 .sign-in-ebw .auto-group-ec53-2TP .e-mail-Vp9 {
   width: 4.8rem;

@@ -25,6 +25,9 @@ body {
   flex-direction: column;
   background-color: #0d0c12;
 }
+a{
+  text-decoration: none !important;
+}
 .home-page-SPw .nav-bar-viR {
   width: 100%;
   align-items: center;
@@ -251,6 +254,9 @@ body {
   background-color: #ffffff;
   border-radius: 0.6rem;
   flex-shrink: 0;
+}
+.no-dec{
+  text-decoration: none !important;
 }
 
 .home-page-SPw .auto-group-7wa1-Yvh .auto-group-8r4h-YpD .header-Lk5 .sear-box-filter-p2H .search-logo-kCm {

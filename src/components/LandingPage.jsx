@@ -21,8 +21,8 @@ function LandingPage() {
         <div className="auto-group-aeah-kEq">
          <img alt="tech bible" className="youtube-button-MVX" src="/assets/youtube-button.png"/>
          <img alt="tech bible" className="instagram-button-vww" src="/assets/instagram-button.png"/>
-          <Link to="/signin"><div className="sign-in-button-v4m">Sign in</div></Link>
-          <Link to="/signup"><div className="sign-up-button-rm3">Sign up</div></Link>
+          <Link to="/signin"><div className="sign-in-button-v4m no-dec">Sign in</div></Link>
+          <Link to="/signup"><div className="sign-up-button-rm3 no-dec">Sign up</div></Link>
         </div>
       </div>
      <img alt="tech bible" className="line-iAy" src="REPLACE_IMAGE:1:171"/>
