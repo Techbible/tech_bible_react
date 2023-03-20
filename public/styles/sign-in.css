@@ -14,7 +14,7 @@ input {
 }
 body {
   width: 144rem;
-}.sign-in-eAR {
+}.sign-in-ebw {
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -23,42 +23,41 @@ body {
   flex-direction: column;
   background-color: #000000;
 }
-
-
-.text_input_w{
-  width: 22em !important;
-}
-.text_input:focus{
-  outline: none;
-  border: 0px;
-}
-
-.sign-in-eAR .auto-group-gwmf-gcu {
+.sign-in-ebw .auto-group-1hg9-H97 {
   box-sizing: border-box;
-  padding: 0.1rem 0rem 8.8rem 0rem;
+  padding: 1.7rem 0rem 8.8rem 0rem;
   width: 100%;
   align-items: center;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
 }
-.sign-in-eAR .auto-group-gwmf-gcu .auto-group-nnzk-hnu {
-  margin: 0 10rem;
+.sign-in-ebw .auto-group-1hg9-H97 .auto-group-gz6d-6cM {
+  margin: 0rem 10rem 1.6rem 10rem;
   width: calc(100% - 20rem);
-  height: 8.4rem;
+  height: 5.2rem;
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
-.sign-in-eAR .auto-group-gwmf-gcu .auto-group-nnzk-hnu .eba91235a2dc1787ad14305033cb2e0ec5720x720-1-Fxq {
-  margin-right: 81.25rem;
-  width: 8.1rem;
-  height: 8.4rem;
-  object-fit: cover;
-  vertical-align: top;
+.sign-in-ebw .auto-group-1hg9-H97 .auto-group-gz6d-6cM .tech-bible-logo-71f {
+  margin-right: 84.25rem;
+  box-sizing: border-box;
+  padding: 3rem 0.4rem 0.3rem 0.4rem;
+  width: 5.1rem;
+  height: 100%;
+  border: solid 0.2rem #ffffff;
   flex-shrink: 0;
 }
-.sign-in-eAR .auto-group-gwmf-gcu .auto-group-nnzk-hnu .you-dont-have-an-account-yet--peZ {
+.sign-in-ebw .auto-group-1hg9-H97 .auto-group-gz6d-6cM .tech-bible-logo-71f .tech-bible-vzh {
+  max-width: 2.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.0402272542;
+  color: #ffffff;
+  font-family: Inter, 'Source Sans Pro';
+}
+.sign-in-ebw .auto-group-1hg9-H97 .auto-group-gz6d-6cM .you-dont-have-an-account-yet--zDs {
   margin: 0.2rem 2.05rem 0rem 0rem;
   text-align: center;
   font-size: 1.5rem;
@@ -69,10 +68,10 @@ body {
   white-space: nowrap;
   flex-shrink: 0;
 }
-.sign-in-eAR .auto-group-gwmf-gcu .auto-group-nnzk-hnu .auto-group-ydzw-u3j {
-  margin: 2.5rem 0rem 2.3rem 0rem;
+.sign-in-ebw .auto-group-1hg9-H97 .auto-group-gz6d-6cM .auto-group-h2er-qEV {
+  margin: 0.9rem 0rem 0.7rem 0rem;
   width: 8.6rem;
-  height: calc(100% - 4.8rem);
+  height: calc(100% - 1.6rem);
   text-align: center;
   font-size: 1.5rem;
   font-weight: 300;
@@ -87,7 +86,7 @@ body {
   border-radius: 0.6rem;
   flex-shrink: 0;
 }
-.sign-in-eAR .auto-group-gwmf-gcu .vector-69-vsw {
+.sign-in-ebw .auto-group-1hg9-H97 .vector-69-12V {
   margin-right: 0.15rem;
   width: 143.85rem;
   height: 0;
@@ -95,23 +94,23 @@ body {
   vertical-align: top;
   flex-shrink: 0;
 }
-.sign-in-eAR .auto-group-gtos-yrD {
+.sign-in-ebw .auto-group-ec53-2TP {
   width: 100%;
   height: 114rem;
   position: relative;
   flex-shrink: 0;
 }
-.sign-in-eAR .auto-group-gtos-yrD .rectangle-99-HEd {
+.sign-in-ebw .auto-group-ec53-2TP .rectangle-99-4oP {
   width: 50.5rem;
   height: 44.3rem;
   position: absolute;
   left: 46.8rem;
   top: 0;
   box-shadow: 0 0.4rem 3rem #1f1e1e;
-  background-color: #232628;
+  background-color: rgba(35, 38, 40, 0.5899999738);
   border-radius: 1.5rem;
 }
-.sign-in-eAR .auto-group-gtos-yrD .welcome-back-A3X {
+.sign-in-ebw .auto-group-ec53-2TP .welcome-back-2dj {
   width: 18rem;
   height: 2.4rem;
   position: absolute;
@@ -124,7 +123,7 @@ body {
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
-.sign-in-eAR .auto-group-gtos-yrD .vector-68-BjK {
+.sign-in-ebw .auto-group-ec53-2TP .vector-68-bKT {
   width: 50.6rem;
   height: 0;
   position: absolute;
@@ -133,7 +132,7 @@ body {
   object-fit: contain;
   vertical-align: top;
 }
-.sign-in-eAR .auto-group-gtos-yrD .or-sign-in-with-google-65b {
+.sign-in-ebw .auto-group-ec53-2TP .or-sign-in-with-google-e2q {
   width: 16.2rem;
   height: 2.3rem;
   position: absolute;
@@ -147,7 +146,7 @@ body {
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
-.sign-in-eAR .auto-group-gtos-yrD .e-mail-MXK {
+.sign-in-ebw .auto-group-ec53-2TP .e-mail-Vp9 {
   width: 4.8rem;
   height: 2.3rem;
   position: absolute;
@@ -160,7 +159,7 @@ body {
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
-.sign-in-eAR .auto-group-gtos-yrD .password-FMo {
+.sign-in-ebw .auto-group-ec53-2TP .password-AvH {
   width: 7.2rem;
   height: 2.3rem;
   position: absolute;
@@ -173,7 +172,7 @@ body {
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
-.sign-in-eAR .auto-group-gtos-yrD .rectangle-102-9CH {
+.sign-in-ebw .auto-group-ec53-2TP .rectangle-102-3z5 {
   width: 37.8rem;
   height: 5rem;
   position: absolute;
@@ -182,7 +181,7 @@ body {
   background-color: #7869e6;
   border-radius: 0.6rem;
 }
-.sign-in-eAR .auto-group-gtos-yrD .sign-up-3Hf {
+.sign-in-ebw .auto-group-ec53-2TP .sign-up-kNh {
   width: 5.8rem;
   height: 2.4rem;
   position: absolute;
@@ -195,7 +194,7 @@ body {
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
-.sign-in-eAR .auto-group-gtos-yrD .rectangle-100-wP3 {
+.sign-in-ebw .auto-group-ec53-2TP .rectangle-100-cQu {
   width: 37.8rem;
   height: 3.6rem;
   position: absolute;
@@ -204,7 +203,7 @@ body {
   background-color: #ffffff;
   border-radius: 0.6rem;
 }
-.sign-in-eAR .auto-group-gtos-yrD .rectangle-101-3gy {
+.sign-in-ebw .auto-group-ec53-2TP .rectangle-101-WFP {
   width: 37.8rem;
   height: 3.6rem;
   position: absolute;
@@ -213,7 +212,7 @@ body {
   background-color: #ffffff;
   border-radius: 0.6rem;
 }
-.sign-in-eAR .auto-group-gtos-yrD .characters-minimum-x3F {
+.sign-in-ebw .auto-group-ec53-2TP .characters-minimum-Qbf {
   width: 17.5rem;
   height: 2.4rem;
   position: absolute;
@@ -228,7 +227,7 @@ body {
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
-.sign-in-eAR .auto-group-gtos-yrD .examplesitecom-DE5 {
+.sign-in-ebw .auto-group-ec53-2TP .examplesitecom-Gtm {
   width: 14.5rem;
   height: 2.4rem;
   position: absolute;
@@ -243,7 +242,7 @@ body {
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
-.sign-in-eAR .auto-group-gtos-yrD .item-561127-1-h9F {
+.sign-in-ebw .auto-group-ec53-2TP .item-561127-1-wzu {
   width: 1.9rem;
   height: 1.9rem;
   position: absolute;
@@ -252,7 +251,7 @@ body {
   object-fit: cover;
   vertical-align: top;
 }
-.sign-in-eAR .auto-group-gtos-yrD .iconspassword-512-1-nRb {
+.sign-in-ebw .auto-group-ec53-2TP .iconspassword-512-1-3o3 {
   width: 2.2rem;
   height: 2.2rem;
   position: absolute;
@@ -261,7 +260,7 @@ body {
   object-fit: cover;
   vertical-align: top;
 }
-.sign-in-eAR .auto-group-gtos-yrD .you-dont-have-an-account-click-here-to-sign-up-59o {
+.sign-in-ebw .auto-group-ec53-2TP .you-dont-have-an-account-click-here-to-sign-up-Xy7 {
   width: 27.1rem;
   height: 1.7rem;
   position: absolute;
@@ -277,9 +276,9 @@ body {
   display: flex;
   align-items: baseline;
 }
-.sign-in-eAR .auto-group-gtos-yrD .you-dont-have-an-account-click-here-to-sign-up-59o .you-dont-have-an-account-click-here-to-sign-up-59o-sub-0 {
+.sign-in-ebw .auto-group-ec53-2TP .you-dont-have-an-account-click-here-to-sign-up-Xy7 .you-dont-have-an-account-click-here-to-sign-up-Xy7-sub-0 {
 }
-.sign-in-eAR .auto-group-gtos-yrD .you-dont-have-an-account-click-here-to-sign-up-59o .you-dont-have-an-account-click-here-to-sign-up-59o-sub-1 {
+.sign-in-ebw .auto-group-ec53-2TP .you-dont-have-an-account-click-here-to-sign-up-Xy7 .you-dont-have-an-account-click-here-to-sign-up-Xy7-sub-1 {
   font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -287,7 +286,7 @@ body {
   color: #ffffff;
   font-family: Poppins, 'Source Sans Pro';
 }
-.sign-in-eAR .auto-group-gtos-yrD .forgot-password--LWy {
+.sign-in-ebw .auto-group-ec53-2TP .forgot-password--u6V {
   width: 11.9rem;
   height: 2.4rem;
   position: absolute;
