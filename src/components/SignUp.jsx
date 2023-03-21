@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, provider, db } from "../firebase";
@@ -7,6 +7,16 @@ import { useNavigate } from "react-router-dom";
 
 import { doc, setDoc,Timestamp } from "firebase/firestore";
 
+//integrating open AI in order to generate auto profiles pictures for the users
+import {Configuration, OpenAIApi} from "openai";
+
+const configuration = new Configuration({
+  apiKey : process.env.OPENAI_API_KEY
+})
+const openai = new OpenAIApi(configuration);
+
+
+
 function SignUp() {
   const navigate = useNavigate();
 
@@ -14,14 +24,33 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [FullName, setFullName] = useState("");
 
+  const [generatedImgURL, setGenratedImgURL] = useState();
+
+  //it's basically just the description of the image that you want to be generated 
+  // const [userPrompt,setUserPrompt] = useState("profile picture on avatar format");
+
   const [userData, setUserData] = useState(null);
+
+  const generateImage = async ()=>{
+    const response =await openai.createImage( {
+      prompt : "test",
+      n : 1,
+      size : "256x256"
+    });
+    console.log(response.data.data[0].url);
+    setGenratedImgURL(response.data.data[0].url);
+
+  }
+
 
   const handleSignUp = (e) => {
     e.preventDefault();
+    generateImage();
     createUserWithEmailAndPassword(auth, email, password).then(
       async (result) => {
         //
-        console.log(result);
+       
+        console.log(generatedImgURL);
 
         const docData = {
           uid : result.user.uid,
@@ -29,7 +58,7 @@ function SignUp() {
           bio : "",
           interests : "",
           list : "",
-          profile_picture: "https://www.kindpng.com/picc/m/451-4517876_default-profile-hd-png-download.png",
+          profile_picture: generatedImgURL,
           timestamp:Timestamp.now()
         };
         await setDoc(doc(db, "Users", result.user.uid), docData);
@@ -39,9 +68,20 @@ function SignUp() {
   };
 
   const handleGoogleSignIn = () => {
-    signInWithPopup(auth, provider).then((data) => {
+    signInWithPopup(auth, provider).then(async(data) => {
       setUserData(data.user.email);
       localStorage.setItem("email", data.user.email);
+      const GoogleData= {
+        uid : data.user.uid,
+        username : data.user.displayName,
+        bio : "",
+        interests : "",
+        list : "",
+        photo: data.user.photoURL,
+        timestamp:Timestamp.now()
+      };
+      // console.log(data);
+      await setDoc(doc(db, "Users", data.user.uid), GoogleData);
       navigate("/");
     });
   };

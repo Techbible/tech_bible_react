@@ -36,12 +36,14 @@ function LandingPage() {
         const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
           // console.log(" data: ", doc.data());
           setUserData({
-            pfp: doc.data().profile_picture,
-            username: doc.data().FullName,
+            pfp: doc.data().photo,
+            username: doc.data().username,
           });
-          console.log(userData);
+          // console.log(userData);
+
         });
         
+          notify();
 
         // console.log(user);
       } else {
@@ -52,9 +54,6 @@ function LandingPage() {
     return listen();
   }, []);
 
-  useEffect(()=>{
-    notify();
-  },[authUser])
 
   const UserSignOut = () => {
     signOut(auth)
@@ -112,7 +111,7 @@ function LandingPage() {
               />{" "}
               {authUser ? (
                 
-                <div class>
+                <div className="user-info-container">
                 <Link to="/profile"><div className="user-info">
                   <div
                     className="user"

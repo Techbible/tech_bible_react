@@ -32,8 +32,12 @@ a{
   text-decoration: none !important;
 }
 
+.user-info-container{
+  display : flex;
+}
 .signout{
   cursor : pointer;
+  margin-top:1.2em;
 }
 
 .username{
