@@ -183,6 +183,7 @@ body {
   border-radius: 0.6rem;
 }
 .sign-in-ebw .auto-group-ec53-2TP .sign-up-kNh {
+  cursor: pointer;
   width: 5.8rem;
   height: 2.4rem;
   position: absolute;

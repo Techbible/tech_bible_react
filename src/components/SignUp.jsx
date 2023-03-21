@@ -25,13 +25,15 @@ function SignUp() {
 
         const docData = {
           uid : result.user.uid,
-          FullName: FullName,
+          username : FullName,
           bio : "",
           interests : "",
           list : "",
-          profile_picture: ""
+          profile_picture: "https://www.kindpng.com/picc/m/451-4517876_default-profile-hd-png-download.png",
+          timestamp:Timestamp.now()
         };
-        await setDoc(doc(db, "data", "User Details"), docData);
+        await setDoc(doc(db, "Users", result.user.uid), docData);
+        navigate("/");
       }
     );
   };
@@ -40,7 +42,7 @@ function SignUp() {
     signInWithPopup(auth, provider).then((data) => {
       setUserData(data.user.email);
       localStorage.setItem("email", data.user.email);
-      navigate("/home");
+      navigate("/");
     });
   };
   return (

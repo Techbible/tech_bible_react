@@ -25,9 +25,43 @@ body {
   flex-direction: column;
   background-color: #0d0c12;
 }
+.flex{
+  display : flex;
+}
 a{
   text-decoration: none !important;
 }
+
+.signout{
+  cursor : pointer;
+}
+
+.username{
+  margin-left : 2em;
+  margin-right: 2em;
+  text-align: center;
+  align-items : center;
+  padding-bottom: 3epx !important;
+}
+
+.user-info{
+  color: #ffff;
+  font-weight : bold;
+  align-items : center !important;
+  justify-content: center;
+  justify-content: space-between;
+  display : flex;
+}
+.user {
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
 .home-page-SPw .nav-bar-viR {
   width: 100%;
   align-items: center;
