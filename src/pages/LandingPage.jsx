@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { doc, onSnapshot } from "firebase/firestore";
+import Navbar from "../layouts/Navbar";
 
 function LandingPage() {
   const [authUser, setAuthUser] = useState(null);
@@ -66,76 +67,19 @@ function LandingPage() {
 
   return (
     <div className="home-page-SPw">
-      <div className="nav-bar-viR">
-        <div className="auto-group-hejw-bLh">
-          <div className="tech-bible-logo-XNm">
-            <p className="tech-bible-fdP">
-              Tech
-              <br />
-              Bible
-            </p>
-          </div>
-          <p className="all-tools-ik5">All tools</p>
-          <p className="submit-your-tool-VeM">Submit your tool</p>
-          <p className="resources-W3f">Resources</p>
-          <p className="community-VgH">Community</p>
-          <img
-            alt="tech bible"
-            className="tiktok-X7B"
-            src="/assets/tiktok.png"
-          />
-          <div className="auto-group-aeah-kEq">
-            <img
-              alt="tech bible"
-              className="youtube-button-MVX"
-              src="/assets/youtube-button.png"
-            />
-            <img
-              alt="tech bible"
-              className="instagram-button-vww"
-              src="/assets/instagram-button.png"
-            />
-
-            <div>
-              <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-              />{" "}
-              {authUser ? (
-                
-                <div className="user-info-container">
-                <Link to="/profile"><div className="user-info">
-                  <div
-                    className="user"
-                    style={{ backgroundImage: `url(${userData.pfp})` }}
-                  ></div>
-                  <div className="username">{userData.username}</div>
-                </div></Link>
-                <span class="signout" onClick={UserSignOut}><img src="/assets/logout.png" alt="sign out" /></span>
-                </div>
-              ) : (
-                <div className="flex">
-                  <Link to="/signin">
-                    <div className="sign-in-button-v4m no-dec">Sign in</div>
-                  </Link>
-                  <Link to="/signup">
-                    <div className="sign-up-button-rm3 no-dec">Sign up</div>
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-        <img alt="tech bible" className="line-iAy" src="REPLACE_IMAGE:1:171" />
-      </div>
+    <Navbar />
+    <ToastContainer
+    position="top-center"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="dark"
+  />
       <div className="auto-group-7wa1-Yvh">
         <div className="auto-group-8r4h-YpD">
           <div className="header-Lk5">
@@ -173,6 +117,7 @@ function LandingPage() {
                 className="filter-button-aUd"
                 src="/assets/filter-button.png"
               />
+
             </div>
             <div className="sub-header-nah">
               <div className="auto-group-aplz-yv5">
@@ -266,11 +211,7 @@ function LandingPage() {
                   </div>
                 </div>
               </div>
-              <img
-                alt="tech bible"
-                className="line-NNH"
-                src="REPLACE_IMAGE:1:138"
-              />
+
             </div>
           </div>
           <div className="tools-section-ngu">
@@ -563,11 +504,7 @@ function LandingPage() {
                 </div>
               </div>
               <div className="auto-group-wqpt-ox9">Ask Questions</div>
-              <img
-                alt="tech bible"
-                className="vector-TvD"
-                src="REPLACE_IMAGE:1:13"
-              />
+
             </div>
           </div>
           <div className="news-letter-section-7E5">

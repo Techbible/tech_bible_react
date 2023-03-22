@@ -52,13 +52,11 @@ function SignIn() {
         <p className="you-dont-have-an-account-yet--zDs">You don't have an account yet ?</p>
         <Link to="/signup"><div className="auto-group-h2er-qEV">Sign up</div></Link>
       </div>
-     <img  alt="pic" className="vector-69-12V"src="REPLACE_IMAGE:1:210"/>
     </div>
     <div className="auto-group-ec53-2TP">
       <div className="rectangle-99-4oP">
       </div>
       <p className="welcome-back-2dj"> Sign in </p>
-     <img  alt="pic" className="vector-68-bKT" src="REPLACE_IMAGE:1:194"/>
       <div className="or-sign-in-with-google-e2q" onClick={handleGoogleSignIn}>Or Sign in with google</div>
       <p className="e-mail-Vp9">E-mail</p>
       <p className="password-AvH">Password</p>

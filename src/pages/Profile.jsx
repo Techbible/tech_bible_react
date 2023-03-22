@@ -1,21 +1,66 @@
-import React from 'react'
+
+import { onAuthStateChanged} from "firebase/auth";
+import React, { useEffect, useState } from "react";
+import { auth, db } from "../firebase";
+import { Link, useNavigate } from "react-router-dom";
+import { doc, onSnapshot } from "firebase/firestore";
+
+
 
 const Profile = () => {
+
+  const [authUser, setAuthUser] = useState(null);
+
+  const [userData, setUserData] = useState({
+    pfp: "",
+    username: "",
+  });
+
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthUser(user);
+
+        const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
+          // console.log(" data: ", doc.data());
+          setUserData({
+            pfp: doc.data().photo,
+            username: doc.data().username,
+          });
+          // console.log(userData);
+
+        });
+        
+
+        // console.log(user);
+      } else {
+        navigate("/signin")
+        setAuthUser(null);
+      }
+    });
+    return listen();
+  }, []);
+
+
   return (
     <div>
     <div className="profile-about-NVb">
     <div className="auto-group-q16m-m1w">
-      <div className="tech-bible-logo-wad">
+     
+   <Link to="/"> <div className="tech-bible-logo-wad">
         <p className="tech-bible-Kr5">
         Tech
         <br/>
         Bible
         </p>
       </div>
+      </Link>
       <div className="auto-group-nrn5-Tau">
         <div className="auto-group-jkx1-qLZ">
           <p className="all-tools-cVj">All tools</p>
-         <img alt="pic" className="vector-3-QgV" src="REPLACE_IMAGE:1:249"/>
         </div>
         <p className="submit-your-tool-Rbb">Submit your tool</p>
         <p className="resources-cvy">Resources</p>
@@ -23,21 +68,34 @@ const Profile = () => {
        <img alt="pic" className="layer1-3uo" src="./assets/layer1-xyT.png"/>
        <img alt="pic" className="white-youtube-icon-png-28-1-Cw7" src="./assets/white-youtube-icon-png-28-1.png"/>
        <img alt="pic" className="pngfind-1-uU9" src="./assets/pngfind-1.png"/>
-       <img alt="pic" className="layer1-hQ1" src="./assets/layer1-Ywf.png"/>
-       <img alt="pic" className="layer1-gmj" src="./assets/layer1-FMX.png"/>
-       <img alt="pic" className="screen-shot-2023-03-14-at-2022-3-gv9" src="./assets/screen-shot-2023-03-14-at-2022-3.png"/>
+       <div>
+       {authUser ? (
+         
+         <div className="user-info-container">
+         <Link to="/profile"><div className="user-info">
+           <div
+             className="user"
+             style={{ backgroundImage: `url(${userData.pfp})` }}
+           ></div>
+           <div className="username">{userData.username}</div>
+         </div></Link>
+         </div>
+       ) : (
+         null
+       )}
+     </div>
       </div>
     </div>
-   <img alt="pic" className="vector-69-fXB" src="REPLACE_IMAGE:1:250"/>
     <div className="auto-group-7qjo-JyT">
       <div className="auto-group-x7xy-7AD">
-        <div className="ellipse-1-Hyo">
-        </div>
-       <img alt="pic" className="screen-shot-2023-03-14-at-2022-2-8Ud" src="./assets/screen-shot-2023-03-14-at-2022-2.png"/>
+        <div
+        className="user"
+        style={{ backgroundImage: `url(${userData.pfp})`, width:"86px",height:"86px" }}
+      ></div>
       </div>
       <div className="auto-group-fpf7-J1j">
         <div className="auto-group-e94r-ibF">
-          <p className="miro99-XYh">Miro99</p>
+          <p className="miro99-XYh">{userData.username}</p>
           <div className="auto-group-r9tj-kRT">Edit</div>
         </div>
         <p className="sheesh-digital-marketing-and-graphic-design-adobe-suites-1kh">
@@ -57,7 +115,6 @@ const Profile = () => {
     <p className="about-Djb">About</p>
     <p className="recently-browsed-dYR">Recently browsed</p>
     <div className="auto-group-zyow-V4q">
-     <img alt="pic" className="vector-54-mY9" src="REPLACE_IMAGE:1:323"/>
       <div className="auto-group-jo33-GE1">
         <div className="auto-group-lzzw-bGH">
           <p className="bio-JAh">Bio</p>

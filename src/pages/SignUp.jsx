@@ -30,7 +30,7 @@ function SignUp() {
   // const [userPrompt,setUserPrompt] = useState("profile picture on avatar format");
 
   const [userData, setUserData] = useState(null);
-
+/* 
   const generateImage = async ()=>{
     const response =await openai.createImage( {
       prompt : "test",
@@ -40,12 +40,12 @@ function SignUp() {
     console.log(response.data.data[0].url);
     setGenratedImgURL(response.data.data[0].url);
 
-  }
+  } */
 
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    generateImage();
+    // generateImage();
     createUserWithEmailAndPassword(auth, email, password).then(
       async (result) => {
         //
@@ -67,7 +67,7 @@ function SignUp() {
     );
   };
 
-  const handleGoogleSignIn = () => {
+  const handleGoogleSignUp = () => {
     signInWithPopup(auth, provider).then(async(data) => {
       setUserData(data.user.email);
       localStorage.setItem("email", data.user.email);
@@ -105,7 +105,6 @@ function SignUp() {
             <div className="auto-group-bmrx-LXo">Sign in</div>
           </Link>
         </div>
-        <img alt="pic" className="vector-69-LgD" src="REPLACE_IMAGE:1:239" />
       </div>
       <div className="auto-group-kmcz-SjF">
         <div className="rectangle-99-SMs"></div>
@@ -115,10 +114,9 @@ function SignUp() {
         </p>
         <p className="new-account-76d">New Account</p>
         <form onSubmit={handleSignUp}>
-          <img alt="pic" className="vector-68-ZjK" src="REPLACE_IMAGE:1:221" />
           <div
             className="or-sign-up-with-google-Gdj"
-            onClick={handleGoogleSignIn}
+            onClick={handleGoogleSignUp}
           >
             Or Sign up with google
           </div>

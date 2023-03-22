@@ -1,9 +1,12 @@
 import { Route,Routes } from 'react-router-dom';
 import './App.css';
-import LandingPage from './components/LandingPage';
-import Profile from './components/Profile';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+import{
+    LandingPage,
+    Profile,
+    SignIn,
+    SignUp,
+    Tools
+} from "./pages"
 
 function App() {
   return (
