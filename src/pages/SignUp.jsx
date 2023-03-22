@@ -56,8 +56,8 @@ function SignUp() {
           uid : result.user.uid,
           username : FullName,
           bio : "",
-          interests : "",
-          list : "",
+          interests : [],
+          list : [],
           profile_picture: generatedImgURL,
           timestamp:Timestamp.now()
         };
@@ -75,8 +75,8 @@ function SignUp() {
         uid : data.user.uid,
         username : data.user.displayName,
         bio : "",
-        interests : "",
-        list : "",
+        interests : [],
+        list : [],
         photo: data.user.photoURL,
         timestamp:Timestamp.now()
       };
@@ -124,7 +124,7 @@ function SignUp() {
           <p className="email-Eiy">Email</p>
           <p className="password-uq7">Password</p>
           <div className="rectangle-102-PVP"></div>
-          <button className="sign-up-5ND">Sign Up</button>
+          <button style={{backgroundColor:"transparent",border:"0px",cursor:"pointer"}} className="sign-up-5ND">Sign Up</button>
           <div className="rectangle-100-xB7"></div>
           <div className="rectangle-101-4E9"></div>
           <div className="rectangle-66-kcm"></div>
