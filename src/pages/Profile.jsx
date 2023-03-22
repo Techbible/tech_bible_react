@@ -2,12 +2,18 @@ import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 
 const Profile = () => {
   const [authUser, setAuthUser] = useState(null);
+  const [addBio, setAddBio] = useState(false);
+  const [updateBio, setUpdateBio] = useState(false);
+
+  const [bio, setBio] = useState("");
+  const [interests, setIntersts] = useState([]);
 
   const [userData, setUserData] = useState({
+    uid: "",
     photo: "",
     username: "",
     bio: "",
@@ -17,6 +23,7 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
+  //Verifying Sign in
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -25,6 +32,7 @@ const Profile = () => {
         const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
           // console.log(" data: ", doc.data());
           setUserData({
+            uid: doc.data().uid,
             photo: doc.data().photo,
             username: doc.data().username,
             bio: doc.data().bio,
@@ -43,12 +51,23 @@ const Profile = () => {
     return listen();
   }, []);
 
+  //To add a Bio
+  const UpdatingBio = async (id) => {
+    try {
+      const UserRef = doc(db, "Users", id);
+      await updateDoc(UserRef, { bio: bio });
+      setAddBio(false);
+      setUpdateBio(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className="profile-about-NVb">
         <div className="auto-group-q16m-m1w">
           <Link to="/">
-            {" "}
             <div className="tech-bible-logo-wad">
               <p className="tech-bible-Kr5">
                 Tech
@@ -132,15 +151,94 @@ const Profile = () => {
           <div className="auto-group-jo33-GE1">
             <div className="auto-group-lzzw-bGH">
               <p className="bio-JAh">Bio</p>
-              <p className="sheesh-QDj">{userData.bio}</p>
+
+              <span className="sheesh-QDj">
+                {userData.bio ? (
+                  <div>
+                    {updateBio ? (
+                      <div>
+                        <input
+                          className="profile-input"
+                          placeholder={userData.bio}
+                          onChange={(e) => setBio(e.target.value)}
+                          type="text"
+                        />
+                        <div>
+                          <span
+                            onClick={() => setUpdateBio(false)}
+                            className="profile-cancel"
+                          >
+                            Cancel
+                          </span>
+                          <span
+                            onClick={() => UpdatingBio(userData.uid)}
+                            className="profile-btn-outlined"
+                          >
+                            Update
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      userData.bio
+                    )}
+                    
+                    {updateBio?<div></div>:<span
+                      onClick={() => setUpdateBio(true)}
+                      className="profile-btn-outlined"
+                    >
+                      Edit
+                    </span>}
+                  </div>
+                ) : (
+                  <div className="bio">
+                    {addBio ? (
+                      <input
+                        className="profile-input"
+                        placeholder="You can add your bio here"
+                        onChange={(e) => setBio(e.target.value)}
+                        type="text"
+                      />
+                    ) : (
+                      <span style={{ color: "red" }}>
+                        you don't have a bio yet
+                      </span>
+                    )}
+
+                    {addBio ? (
+                      <div>
+                        <span
+                          onClick={() => setAddBio(false)}
+                          className="profile-cancel"
+                        >
+                          Cancel
+                        </span>
+                        <span
+                          onClick={() => UpdatingBio(userData.uid)}
+                          className="profile-btn-outlined"
+                        >
+                          Submit
+                        </span>
+                      </div>
+                    ) : (
+                      <span
+                        onClick={() => setAddBio(true)}
+                        className="profile-btn-outlined"
+                      >
+                        {" "}
+                        + Add
+                      </span>
+                    )}
+                  </div>
+                )}
+              </span>
             </div>
             <div className="auto-group-rpbb-gww">
-              <p className="interests-bp1">{userData.interests}</p>
+              <p className="interests-bp1">Interests</p>
               <p className="digital-marketing-and-graphic-design-adobe-suites-KV7">
-                Digital Marketing and Graphic Design, Adobe suites
+                {userData.interests}
               </p>
             </div>
-          </div> 
+          </div>
         </div>
         <div className="auto-group-xkhf-yZf">
           <div className="rectangle-87-Gof"></div>

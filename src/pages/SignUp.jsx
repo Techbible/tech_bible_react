@@ -30,7 +30,7 @@ function SignUp() {
   // const [userPrompt,setUserPrompt] = useState("profile picture on avatar format");
 
   const [userData, setUserData] = useState(null);
-/* 
+
   const generateImage = async ()=>{
     const response =await openai.createImage( {
       prompt : "test",
@@ -40,17 +40,17 @@ function SignUp() {
     console.log(response.data.data[0].url);
     setGenratedImgURL(response.data.data[0].url);
 
-  } */
+  }
 
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    // generateImage();
+    generateImage();
     createUserWithEmailAndPassword(auth, email, password).then(
       async (result) => {
         //
        
-        console.log(generatedImgURL);
+        // console.log(generatedImgURL);
 
         const docData = {
           uid : result.user.uid,
@@ -58,7 +58,7 @@ function SignUp() {
           bio : "",
           interests : [],
           list : [],
-          profile_picture: generatedImgURL,
+         photo: "https://t3.ftcdn.net/jpg/05/11/52/90/360_F_511529094_PISGWTmlfmBu1g4nocqdVKaHBnzMDWrN.jpg",
           timestamp:Timestamp.now()
         };
         await setDoc(doc(db, "Users", result.user.uid), docData);
