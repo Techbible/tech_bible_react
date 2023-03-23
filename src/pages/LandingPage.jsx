@@ -4,11 +4,12 @@ import { auth, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot } from "firebase/firestore";
 import Navbar from "../layouts/Navbar";
 
 function LandingPage() {
   const [authUser, setAuthUser] = useState(null);
+  const [tools, setTools] = useState([]);
 
   const [userData, setUserData] = useState({
     pfp: "",
@@ -17,8 +18,9 @@ function LandingPage() {
 
   const navigate = useNavigate();
 
-  const notify = () =>
-    toast(`Welcome to the community ${userData.username}! 👋🏻`, {
+//Pop up Wemcome Notification
+  const notify = (username) =>
+    toast(`Welcome to the community ${username}! 👋🏻`, {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -31,6 +33,7 @@ function LandingPage() {
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
+      //checking if the user exist or not
       if (user) {
         setAuthUser(user);
 
@@ -44,14 +47,26 @@ function LandingPage() {
 
         });
         
-          notify();
+          notify(userData.username);
 
         // console.log(user);
       } else {
         // navigate("/signin")
         setAuthUser(null);
       }
+      const dbRef = collection(db, "Tools");
+
+onSnapshot(dbRef, docsSnap => {
+  const ToolsArray = [];
+  docsSnap.forEach(doc => {
+    console.log(doc.data())
+    ToolsArray.push(doc.data())
+  })
+  // console.log(ToolsArray)
+  setTools(ToolsArray);
+});
     });
+
     return listen();
   }, []);
 
