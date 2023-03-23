@@ -4,7 +4,7 @@ import { auth, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import { collection, doc, getDocs, limit, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import Navbar from "../layouts/Navbar";
 
 function LandingPage() {
@@ -31,8 +31,8 @@ function LandingPage() {
       theme: "dark",
     });
 
-  useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
+useEffect(() => {
+  const listen = onAuthStateChanged(auth, async (user) => {
       //checking if the user exist or not
       if (user) {
         setAuthUser(user);
@@ -54,21 +54,21 @@ function LandingPage() {
         // navigate("/signin")
         setAuthUser(null);
       }
-///
-const dbRef = collection(db, "Tools");
-onSnapshot(dbRef, docsSnap => {
-  const ToolsArray = [];
-  docsSnap.forEach(doc => {
-    console.log(doc.data())
-    ToolsArray.push(doc.data())
-  })
-  // console.log(ToolsArray)
+
+//fetching the Tools collection
+const getTools = query(collection(db, "Tools"), where("followers", ">", 50), orderBy("followers", "desc"),limit(4));
+const querySnapshot = await getDocs(getTools);
+const ToolsArray = [];
+querySnapshot.forEach((doc) => {
+  ToolsArray.push(doc.data())
+});
+// const dbRef = 
+
   setTools(ToolsArray);
 });
-    });
-
-    return listen();
-  }, []);
+return listen();
+    }, []);
+  
 
 
 

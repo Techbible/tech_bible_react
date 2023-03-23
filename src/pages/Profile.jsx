@@ -58,10 +58,9 @@ const Profile = () => {
             interests: doc.data().interests,
             list: doc.data().list,
           });
-          // userData.interests.length>0?setAddInterests(true)
           // console.log(userData);
         });
-        userData.interests.length>0?setAddInterests(false):setAddInterests(true)
+        userData.interests.length>0?setAddInterests(false):setAddInterests(false)
 
         // console.log(user);
       } else {
