@@ -48,7 +48,7 @@ function SignUp() {
     generateImage();
     createUserWithEmailAndPassword(auth, email, password).then(
       async (result) => {
-        //
+        //https://t3.ftcdn.net/jpg/05/11/52/90/360_F_511529094_PISGWTmlfmBu1g4nocqdVKaHBnzMDWrN.jpg
        
         // console.log(generatedImgURL);
 
@@ -58,7 +58,7 @@ function SignUp() {
           bio : "",
           interests : [],
           list : [],
-         photo: "https://t3.ftcdn.net/jpg/05/11/52/90/360_F_511529094_PISGWTmlfmBu1g4nocqdVKaHBnzMDWrN.jpg",
+          photo: "https://picsum.photos/200",
           timestamp:Timestamp.now()
         };
         await setDoc(doc(db, "Users", result.user.uid), docData);

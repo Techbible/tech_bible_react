@@ -7,10 +7,14 @@ import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 const Profile = () => {
   const [authUser, setAuthUser] = useState(null);
   const [addBio, setAddBio] = useState(false);
+  const [addInterests, setAddInterests] = useState(true);
   const [updateBio, setUpdateBio] = useState(false);
-
+  const [updateInterests, setUpdateInterests] = useState(false);
+  
+  const [interests, setIntersts] = useState(null);
   const [bio, setBio] = useState("");
-  const [interests, setIntersts] = useState([]);
+
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState({
     uid: "",
@@ -21,9 +25,24 @@ const Profile = () => {
     interests: [],
   });
 
-  const navigate = useNavigate();
+  const handleInterestsChange = async(id) => {
+    // const interestss = interests.split(/[ ,]+/);
+    // setIntersts(interestss)
+    // console.log(interestss);
+    // setUserData(prevState => ({ ...prevState, interestss }));
 
-  //Verifying Sign in
+    try {
+      const UserRef = doc(db, "Users", id);
+      await updateDoc(UserRef, { interests: interests.split(",") });
+      setAddInterests(false);
+      setUpdateInterests(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  //Verifying Sign in and loading users infos on load
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -39,8 +58,10 @@ const Profile = () => {
             interests: doc.data().interests,
             list: doc.data().list,
           });
+          // userData.interests.length>0?setAddInterests(true)
           // console.log(userData);
         });
+        userData.interests.length>0?setAddInterests(false):setAddInterests(true)
 
         // console.log(user);
       } else {
@@ -51,7 +72,7 @@ const Profile = () => {
     return listen();
   }, []);
 
-  //To add a Bio
+  //To add/Update a Bio
   const UpdatingBio = async (id) => {
     try {
       const UserRef = doc(db, "Users", id);
@@ -224,7 +245,6 @@ const Profile = () => {
                         onClick={() => setAddBio(true)}
                         className="profile-btn-outlined"
                       >
-                        {" "}
                         + Add
                       </span>
                     )}
@@ -232,10 +252,86 @@ const Profile = () => {
                 )}
               </span>
             </div>
-            <div className="auto-group-rpbb-gww">
+            <div className="auto-group-rpbb-gww" style={{position:"relative"}}>
               <p className="interests-bp1">Interests</p>
               <p className="digital-marketing-and-graphic-design-adobe-suites-KV7">
-                {userData.interests}
+              {userData.interests.length > 0 ? (
+                <div>
+                  {updateInterests ? (
+                    <div>
+                      <input
+                        className="profile-input"
+                        placeholder={userData.interests}
+                        onChange={(e) => setIntersts(e.target.value)}
+                        type="text"
+                      />
+                      <div id="interests-action-btns">
+                        <span
+                          onClick={() => setUpdateInterests(false)}
+                          className="profile-cancel"
+                        >
+                          Cancel
+                        </span>
+                        <span
+                          onClick={() => handleInterestsChange(userData.uid)}
+                          className="profile-btn-outlined"
+                        >
+                          Update
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    userData.interests.map((i)=>(<span className="Interest">{i}</span>))
+                  )}
+                  
+                  {updateInterests?<div></div>:
+                  <span
+                    onClick={() => setUpdateInterests(true)}
+                    className="profile-btn-outlined"
+                  >
+                    Edit
+                  </span>}
+                </div>
+              ) : (
+                <div>
+                  {addInterests? (
+                    <input
+                      className="profile-input"
+                      placeholder="Marketing, SEO ..."
+                      onChange={(e) => setIntersts(e.target.value)}
+                      type="text"
+                    />
+                  ) : (
+                    <span style={{ color: "red" }}>
+                      you don't have any interests yet
+                    </span>
+                  )}
+
+                  {addInterests ? (
+                    <div >
+                      <span
+                        onClick={() => setAddInterests(false)}
+                        className="profile-cancel"
+                      >
+                        Cancel
+                      </span>
+                      <span
+                        onClick={() => handleInterestsChange(userData.uid)}
+                        className="profile-btn-outlined"
+                      >
+                        Submit
+                      </span>
+                    </div>
+                  ) : (
+                    <span
+                      onClick={() => setAddInterests(true)}
+                      className="profile-btn-outlined"
+                    >
+                      + Add
+                    </span>
+                  )}
+                </div>
+              )}
               </p>
             </div>
           </div>

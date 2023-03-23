@@ -56,14 +56,6 @@ function LandingPage() {
   }, []);
 
 
-  const UserSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("signed out on successfully");
-        navigate("/signin");
-      })
-      .catch((error) => console.log(error));
-  };
 
   return (
     <div className="home-page-SPw">

@@ -17,6 +17,15 @@ input {
 .profile-input{
   background-color: #151617 !important;
   color: #fff;
+  width:35rem;
+}
+
+.Interest{
+  border: 1px solid #0000;
+  background-color: #272727 !important;
+  border-radius: 7px;
+  margin : 20px;
+  padding: 7px;
 }
 .profile-cancel{
   border : 1px solid #fff;
@@ -32,6 +41,10 @@ input {
 .bio{
   width: 100% !important;
 }
+.interests{
+  width: 100% !important;
+  position : relative !important;
+}
 .profile-btn-outlined{
   border : 1px solid #5c6bc0;
   background-color: #5c6bc0;
@@ -43,6 +56,14 @@ input {
   top : 20px;
   right:60px;
   cursor: pointer;
+}
+.profile-btn-outlined-interests{
+  border : 1px solid #5c6bc0;
+  background-color: #5c6bc0;
+  color : #fff;
+  padding : 5px 7px;
+  border-radius: 4px;
+  
 }
 .profile-btn-outlined:hover{
 background-color: #5c6bca;
