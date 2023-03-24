@@ -19,8 +19,8 @@ function LandingPage() {
   const navigate = useNavigate();
 
 //Pop up Wemcome Notification
-  const notify = (username) =>
-    toast(`Welcome to the community ${username}! 👋🏻`, {
+  const notify = (message) =>
+    toast(message, {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -47,13 +47,23 @@ function LandingPage() {
 
         });
         
-          notify(userData.username);
+          // notify(userData.username);
+          localStorage.setItem('SignedUp', true); 
 
         // console.log(user);
       } else {
         // navigate("/signin")
         setAuthUser(null);
       }
+
+//showing the Welcome Message, if it's the user's first sign up
+      if(localStorage.getItem("SignedUp")){
+        <div></div>
+      }
+      else{
+        notify('Welcome to the community! 👋🏻')
+      }
+
 ///
 const dbRef = collection(db, "Tools");
 onSnapshot(dbRef, docsSnap => {
@@ -230,7 +240,7 @@ onSnapshot(dbRef, docsSnap => {
                 src={tool.photo}
               />
               <div className="auto-group-1hwv-Rmo">
-                <p className="adobe-xd-67F">{tool.title}</p>
+                <Link to={`/ToolDetails/${tool.id}`}><p className="adobe-xd-67F">{tool.title}</p></Link>
                 <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-iPX">
                   {tool.description}
                 </p>
@@ -265,7 +275,7 @@ onSnapshot(dbRef, docsSnap => {
                     />
                   </div>
                 </div>
-                <p className="item-20-8so">{tool.followers}</p>
+                <p className="followers">{tool.followers}</p>
               </div>
             </div>))
           }

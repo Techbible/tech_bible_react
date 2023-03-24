@@ -24,7 +24,7 @@ input {
   border: 1px solid #0000;
   background-color: #272727 !important;
   border-radius: 7px;
-  margin : 20px;
+  margin : 10px;
   padding: 4px;
 }
 .profile-cancel{
@@ -57,14 +57,7 @@ input {
   right:60px;
   cursor: pointer;
 }
-.profile-btn-outlined-interests{
-  border : 1px solid #5c6bc0;
-  background-color: #5c6bc0;
-  color : #fff;
-  padding : 5px 7px;
-  border-radius: 4px;
-  
-}
+
 .profile-btn-outlined:hover{
 background-color: #5c6bca;
 }

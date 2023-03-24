@@ -31,21 +31,21 @@ function SignUp() {
 
   const [userData, setUserData] = useState(null);
 
-  const generateImage = async ()=>{
-    const response =await openai.createImage( {
-      prompt : "test",
-      n : 1,
-      size : "256x256"
-    });
-    console.log(response.data.data[0].url);
-    setGenratedImgURL(response.data.data[0].url);
+  // const generateImage = async ()=>{
+  //   const response =await openai.createImage( {
+  //     prompt : "profile picture vector",
+  //     n : 1,
+  //     size : "256x256"
+  //   });
+  //   console.log(response.data.data[0].url);
+  //   setGenratedImgURL(response.data.data[0].url);
 
-  }
+  // }
 
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    generateImage();
+    // generateImage();
     createUserWithEmailAndPassword(auth, email, password).then(
       async (result) => {
         //https://t3.ftcdn.net/jpg/05/11/52/90/360_F_511529094_PISGWTmlfmBu1g4nocqdVKaHBnzMDWrN.jpg

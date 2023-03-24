@@ -3,8 +3,10 @@ import {Navbar} from "../layouts"
 
 function Tools() {
   return (
-    <div>
+   <div> 
+   <div className="home-page-SPw">
       <Navbar />
+    </div>
     </div>
   )
 }

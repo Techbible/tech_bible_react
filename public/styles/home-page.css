@@ -806,6 +806,17 @@ a{
   object-fit: cover;
   vertical-align: top;
 }
+.followers{
+  color:#fff;
+  /* text-align: center; */
+  margin-left: 5px;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  width: 100%;
+}
 .home-page-SPw .auto-group-7wa1-Yvh .auto-group-8r4h-YpD .tools-section-ngu .adobe-xd-group-EJ1 .like-save-button-RFK .item-20-8so {
   width: 100%;
   text-align: center;

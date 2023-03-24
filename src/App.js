@@ -7,6 +7,7 @@ import{
     SignUp,
     Tools
 } from "./pages"
+import ToolDetails from './pages/ToolDetails';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
  <Route path='/signup' element=<SignUp /> />
  <Route path='/signin' element=<SignIn /> />
  <Route path='/profile' element=<Profile /> />
+ <Route path='/tools' element=<Tools /> />
+ <Route path='/ToolDetails/:id' element=<ToolDetails /> />
  </Routes>
   );
 }

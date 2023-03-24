@@ -253,6 +253,7 @@ const Profile = () => {
             </div>
             <div className="auto-group-rpbb-gww" style={{position:"relative"}}>
               <p className="interests-bp1">Interests</p>
+              <br/>
               <p className="digital-marketing-and-graphic-design-adobe-suites-KV7">
               {userData.interests.length > 0 ? (
                 <div>

@@ -5,11 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { doc, onSnapshot } from "firebase/firestore";
+
+
 function Navbar() {
-
-
-
-
     const [authUser, setAuthUser] = useState(null);
 
     const [userData, setUserData] = useState({
