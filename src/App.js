@@ -10,6 +10,8 @@ import{
 } from "./pages";
 import ToolDetails from './pages/ToolDetails';
 
+//TODO : Adding a proper Authentification Provider to wrap it around the app
+
 function App() {
   return (
  <Routes>
