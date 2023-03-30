@@ -6,28 +6,31 @@ import { Navbar } from "../layouts";
 
 const ToolDetails = () => {
   const { id } = useParams();
-  const [toolData, setToolsData] = useState({
+
+  const [ToolsData, setToolsData] = useState({
+    Name: "",
     photo: null,
-    title: "",
     description: "",
     followers: null,
     pricing: null,
     category: null,
     comments: null,
   });
+
+
   useEffect(() => {
     onSnapshot(doc(db, "Tools", id), (doc) => {
       // console.log(" data: ", doc.data());
       setToolsData({
-        title: doc.data().Name,
+        Name: doc.data().Name,
         photo: doc.data().Icon,
         description: doc.data().Description,
-        pricing: doc.data().Price,
-        category: "",
         followers: doc.data().Likes,
+        pricing: doc.data().Price,
+        category: [],
         comments: doc.data().Comments,
       });
-      // console.log(userData);
+      console.log(ToolsData);
     });
   }, []);
   return (
@@ -43,11 +46,11 @@ const ToolDetails = () => {
               <img
                 alt="tools"
                 class="adobexdccicon-1-Sdb"
-                src={toolData.photo}
+                src={ToolsData.photo}
               />
               <div class="auto-group-qs2z-Fqw">
                 <div class="auto-group-iytd-KzD">
-                  <p class="adobe-xd-7fB">{toolData.title}</p>
+                  <p class="adobe-xd-7fB">{ToolsData.Name}</p>
                   <img
                     alt="tools"
                     class="layer1-KmF"
@@ -55,24 +58,24 @@ const ToolDetails = () => {
                   />
                 </div>
                 <p class="adobe-xd-is-an-interface-prototyping-and-design-tool-for-websites-or-mobile-applications-it-is-aimed-at-ux-ui-designers-YA9">
-                  {toolData.description}
+                  {ToolsData.description}
                   <br />
                 </p>
                 <div class="auto-group-bvds-q2m">
-                  <div class="auto-group-9czh-FsB">{toolData.pricing}</div>
-                  <p class="design-tool-Vuw">{toolData.category}</p>
+                  <div class="auto-group-9czh-FsB">{ToolsData.pricing}</div>
+                  <p class="design-tool-Vuw">{ToolsData.category}</p>
                   <img
                     alt="tools"
                     class="layer1-LQm"
                     src="/assets/layer1-wEm.png"
                   />
-                  <p class="item-120-8rR">{toolData.comments}</p>
+                  <p class="item-120-8rR">{ToolsData.comments}</p>
                   <img
                     alt="tools"
                     class="layer1-vnH"
                     src="/assets/layer1-rUD.png"
                   />
-                  <p class="item-20-KZX">{toolData.followers}</p>
+                  <p class="item-20-KZX">{ToolsData.followers}</p>
                 </div>
               </div>
             </div>

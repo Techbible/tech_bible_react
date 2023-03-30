@@ -233,7 +233,7 @@ onSnapshot(dbRef, docsSnap => {
           </div>
           <div className="tools-section-ngu">
           {!tools?<div>loading</div>:tools.map((tool)=>(   
-            <div className="adobe-xd-group-EJ1">
+            <div className="adobe-xd-group-EJ1" key={tool.id}>
               <img
                 alt="tech bible"
                 className="adobe-xd-logo-GVb"
@@ -241,8 +241,8 @@ onSnapshot(dbRef, docsSnap => {
               />
               <div className="auto-group-1hwv-Rmo">
                 <Link to={`/ToolDetails/${tool.id}`}><p className="adobe-xd-67F">{tool.Name}</p></Link>
-                <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-iPX">
-                  {tool.description}
+                <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-iPX description" >
+                  {tool.Description}
                 </p>
                 <div className="auto-group-ebkb-hWM">
                   <img

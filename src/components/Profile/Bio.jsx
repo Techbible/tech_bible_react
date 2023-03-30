@@ -1,7 +1,14 @@
 import React from "react";
 
 const Bio = ({ userData, updateBio, setBio, setUpdateBio, UpdatingBio, addBio, setAddBio }) => {
-
+  // <Bio  
+  //           userData={userData}
+  //           setAddBio={setAddBio}
+  //           addBio={addBio}
+  //           UpdatingBio={UpdatingBio}
+  //           setUpdateBio={setUpdateBio}
+  //           setBio = {setBio}
+  //              />
     return (
     <div className="auto-group-lzzw-bGH">
       <p className="bio-JAh">Bio</p>

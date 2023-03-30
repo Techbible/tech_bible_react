@@ -4,7 +4,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
-import {Bio} from "../components";
+import { Bio } from "../components";
 import { Link, useNavigate } from "react-router-dom";
 import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import Modal from "react-modal";
@@ -19,7 +19,7 @@ const Profile = () => {
   const [interests, setIntersts] = useState(null);
   const [bio, setBio] = useState("");
   const [categories, setCategories] = useState();
-  const [checkedInterest, setCheckedInterest] = useState([]);
+  const [checkedInterests, setcheckedInterests] = useState([]);
 
   const navigate = useNavigate();
 
@@ -30,25 +30,21 @@ const Profile = () => {
     bio: "",
     list: [],
     interests: [],
-  }); 
+  });
 
-  const Test = () =>{
-    alert('haha')
-  }
-
+  //Handling Interests with Checkbox
   const handleInterestCheck = (event) => {
     const { value, checked } = event.target;
 
-    let interests = checkedInterest;
+    let interests = checkedInterests;
     if (checked) {
-      interests = checkedInterest;
+      interests = checkedInterests;
       interests.push(value);
-      setCheckedInterest(interests);
-      console.log(checkedInterest); 
-
+      setcheckedInterests(interests);
+      console.log(checkedInterests);
     } else {
-     interests = interests.filter(interest => interest !== value);
-     setCheckedInterest(interests);
+      interests = interests.filter((interest) => interest !== value);
+      setcheckedInterests(interests);
     }
   };
   //_______________________________Modal Configs_____________________________________________
@@ -84,10 +80,20 @@ const Profile = () => {
   //*************************END Modal Configs*********************************
 
   //_______________________________Inserting Changes_____________________________________________
-  const handleInterestsChange = async (id) => {
+  const handleInterestsChange = async () => {
+    //BUG : *
     try {
-      const UserRef = doc(db, "Users", id);
-      await updateDoc(UserRef, {interests : checkedInterest});
+      const UserRef = doc(db, "Users", userData.uid);
+      const data = { interests: checkedInterests };
+       await updateDoc(UserRef, data)
+        .then((UserRef) => {
+          console.log(
+            "A New Document Field has been added to an existing document"
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       setAddInterests(false);
       setUpdateInterests(false);
     } catch (error) {
@@ -137,9 +143,9 @@ const Profile = () => {
   }, []);
 
   //To add/Update a Bio
-  const UpdatingBio = async (id) => {
+  const UpdatingBio = async () => {
     try {
-      const UserRef = doc(db, "Users", id);
+      const UserRef = doc(db, "Users", userData.uid);
       await updateDoc(UserRef, { bio: bio });
       setAddBio(false);
       setUpdateBio(false);
@@ -234,7 +240,7 @@ const Profile = () => {
         <p className="recently-browsed-dYR">Recently browsed</p>
         <div className="auto-group-zyow-V4q">
           <div className="auto-group-jo33-GE1">
-          <div className="auto-group-lzzw-bGH">
+            <div className="auto-group-lzzw-bGH">
               <p className="bio-JAh">Bio</p>
 
               <span className="sheesh-QDj">
@@ -256,7 +262,7 @@ const Profile = () => {
                             Cancel
                           </span>
                           <span
-                            onClick={() => UpdatingBio(userData.uid)}
+                            onClick={() => UpdatingBio()}
                             className="profile-btn-outlined"
                           >
                             Update
@@ -302,7 +308,7 @@ const Profile = () => {
                           Cancel
                         </span>
                         <span
-                          onClick={() => UpdatingBio(userData.uid)}
+                          onClick={() => UpdatingBio()}
                           className="profile-btn-outlined"
                         >
                           Submit
@@ -319,14 +325,12 @@ const Profile = () => {
                   </div>
                 )}
               </span>
-            </div>   
+            </div>
 
             <div
               className="auto-group-rpbb-gww"
               style={{ position: "relative" }}
             >
-
-
               <p className="interests-bp1">Interests</p>
               <br />
               <p className="digital-marketing-and-graphic-design-adobe-suites-KV7">
@@ -540,15 +544,19 @@ const Profile = () => {
                     type={"checkbox"}
                     value={`${categorie.Category}`}
                     onChange={(e) => handleInterestCheck(e)}
-                  /> &nbsp;
+                  />{" "}
+                  &nbsp;
                   {categorie.Category}
                 </span>
               </div>
             ))}
           </div>
-          <span className="profile-btn-outlined"
-          onClick={handleInterestsChange}
-          >Submit</span>
+          <span
+            className="profile-btn-outlined"
+            onClick={handleInterestsChange}
+          >
+            Submit
+          </span>
         </Modal>
       </div>
     </div>
@@ -556,4 +564,3 @@ const Profile = () => {
 };
 
 export default Profile;
- 
