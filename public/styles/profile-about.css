@@ -37,11 +37,14 @@ input {
 
 .interests-wrapper{
   margin-top: 40px;
+  text-align: center;
+  flex: auto;
+  align-items: center;
 }
 
 .Interest{
-  border: 1px solid #222f3e;
-  background-color: #222f3e !important;
+  border: 1px solid #151617;
+  background-color: #151617 !important;
   border-radius: 7px;
   margin : 10px;
   padding: 4px;

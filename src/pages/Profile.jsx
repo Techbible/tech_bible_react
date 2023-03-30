@@ -1,6 +1,10 @@
+//TODO : STRUCTURING THE PROFILE, AND SPLICING IT INTO TINY COMPONENTS
+
+//Imports
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
+import {Bio} from "../components";
 import { Link, useNavigate } from "react-router-dom";
 import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import Modal from "react-modal";
@@ -28,6 +32,10 @@ const Profile = () => {
     interests: [],
   }); 
 
+  const Test = () =>{
+    alert('haha')
+  }
+
   const handleInterestCheck = (event) => {
     const { value, checked } = event.target;
 
@@ -53,7 +61,7 @@ const Profile = () => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "#272727",
+      backgroundColor: "#000",
       color: "#fff",
     },
   };
@@ -226,7 +234,7 @@ const Profile = () => {
         <p className="recently-browsed-dYR">Recently browsed</p>
         <div className="auto-group-zyow-V4q">
           <div className="auto-group-jo33-GE1">
-            <div className="auto-group-lzzw-bGH">
+          <div className="auto-group-lzzw-bGH">
               <p className="bio-JAh">Bio</p>
 
               <span className="sheesh-QDj">
@@ -311,11 +319,14 @@ const Profile = () => {
                   </div>
                 )}
               </span>
-            </div>
+            </div>   
+
             <div
               className="auto-group-rpbb-gww"
               style={{ position: "relative" }}
             >
+
+
               <p className="interests-bp1">Interests</p>
               <br />
               <p className="digital-marketing-and-graphic-design-adobe-suites-KV7">
@@ -529,7 +540,7 @@ const Profile = () => {
                     type={"checkbox"}
                     value={`${categorie.Category}`}
                     onChange={(e) => handleInterestCheck(e)}
-                  />
+                  /> &nbsp;
                   {categorie.Category}
                 </span>
               </div>
