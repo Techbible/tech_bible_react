@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import Modal from "react-modal";
 
 const Profile = () => {
   const [authUser, setAuthUser] = useState(null);
@@ -10,9 +11,11 @@ const Profile = () => {
   const [addInterests, setAddInterests] = useState(true);
   const [updateBio, setUpdateBio] = useState(false);
   const [updateInterests, setUpdateInterests] = useState(false);
-  
+
   const [interests, setIntersts] = useState(null);
   const [bio, setBio] = useState("");
+  const [categories, setCategories] = useState();
+  const [checkedInterest, setCheckedInterest] = useState([]);
 
   const navigate = useNavigate();
 
@@ -23,24 +26,67 @@ const Profile = () => {
     bio: "",
     list: [],
     interests: [],
-  });
+  }); 
 
-  const handleInterestsChange = async(id) => {
-    // const interestss = interests.split(/[ ,]+/);
-    // setIntersts(interestss)
-    // console.log(interestss);
-    // setUserData(prevState => ({ ...prevState, interestss }));
+  const handleInterestCheck = (event) => {
+    const { value, checked } = event.target;
 
+    let interests = checkedInterest;
+    if (checked) {
+      interests = checkedInterest;
+      interests.push(value);
+      setCheckedInterest(interests);
+      console.log(checkedInterest); 
+
+    } else {
+     interests = interests.filter(interest => interest !== value);
+     setCheckedInterest(interests);
+    }
+  };
+  //_______________________________Modal Configs_____________________________________________
+  //Modal Styles
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "#272727",
+      color: "#fff",
+    },
+  };
+
+  Modal.setAppElement("#root");
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+  //*************************END Modal Configs*********************************
+
+  //_______________________________Inserting Changes_____________________________________________
+  const handleInterestsChange = async (id) => {
     try {
       const UserRef = doc(db, "Users", id);
-      await updateDoc(UserRef, { interests: interests.split(",") });
+      await updateDoc(UserRef, {interests : checkedInterest});
       setAddInterests(false);
       setUpdateInterests(false);
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
+  //************************END Inserting Changes*********************************
 
   //Verifying Sign in and loading users infos on load
   useEffect(() => {
@@ -49,7 +95,6 @@ const Profile = () => {
         setAuthUser(user);
 
         const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
-          // console.log(" data: ", doc.data());
           setUserData({
             uid: doc.data().uid,
             photo: doc.data().photo,
@@ -58,16 +103,28 @@ const Profile = () => {
             interests: doc.data().interests,
             list: doc.data().list,
           });
-          // console.log(userData);
         });
-        userData.interests.length>0?setAddInterests(false):setAddInterests(false)
-
-        // console.log(user);
+        userData.interests.length > 0
+          ? setAddInterests(false)
+          : setAddInterests(false);
       } else {
         navigate("/signin");
         setAuthUser(null);
       }
     });
+
+    //getting the categories
+    const dbRef = collection(db, "Categories");
+    onSnapshot(dbRef, (docsSnap) => {
+      const CategoriesArray = [];
+      docsSnap.forEach((doc) => {
+        // console.log(doc.data());
+        CategoriesArray.push(doc.data());
+      });
+      console.log(CategoriesArray);
+      setCategories(CategoriesArray);
+    });
+
     return listen();
   }, []);
 
@@ -201,13 +258,17 @@ const Profile = () => {
                     ) : (
                       userData.bio
                     )}
-                    
-                    {updateBio?<div></div>:<span
-                      onClick={() => setUpdateBio(true)}
-                      className="profile-btn-outlined"
-                    >
-                      Edit
-                    </span>}
+
+                    {updateBio ? (
+                      <div></div>
+                    ) : (
+                      <span
+                        onClick={() => setUpdateBio(true)}
+                        className="profile-btn-outlined"
+                      >
+                        Edit
+                      </span>
+                    )}
                   </div>
                 ) : (
                   <div className="bio">
@@ -251,23 +312,74 @@ const Profile = () => {
                 )}
               </span>
             </div>
-            <div className="auto-group-rpbb-gww" style={{position:"relative"}}>
+            <div
+              className="auto-group-rpbb-gww"
+              style={{ position: "relative" }}
+            >
               <p className="interests-bp1">Interests</p>
-              <br/>
+              <br />
               <p className="digital-marketing-and-graphic-design-adobe-suites-KV7">
-              {userData.interests.length > 0 ? (
-                <div>
-                  {updateInterests ? (
-                    <div>
+                {userData.interests.length > 0 ? (
+                  <div>
+                    {updateInterests ? (
+                      <div>
+                        <input
+                          className="profile-input"
+                          placeholder={userData.interests}
+                          onChange={(e) => setIntersts(e.target.value)}
+                          type="text"
+                        />
+                        <div id="interests-action-btns">
+                          <span
+                            onClick={() => setUpdateInterests(false)}
+                            className="profile-cancel"
+                          >
+                            Cancel
+                          </span>
+                          <span
+                            onClick={() => handleInterestsChange(userData.uid)}
+                            className="profile-btn-outlined"
+                          >
+                            Update
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      userData.interests.map((i) => (
+                        <span className="Interest">{i}</span>
+                      ))
+                    )}
+
+                    {updateInterests ? (
+                      <div></div>
+                    ) : (
+                      <span
+                        onClick={() => setUpdateInterests(true)}
+                        className="profile-btn-outlined"
+                      >
+                        Edit
+                      </span>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    {addInterests ? (
                       <input
                         className="profile-input"
-                        placeholder={userData.interests}
+                        placeholder="Marketing, SEO ..."
                         onChange={(e) => setIntersts(e.target.value)}
                         type="text"
                       />
-                      <div id="interests-action-btns">
+                    ) : (
+                      <span style={{ color: "red" }}>
+                        you don't have any interests yet
+                      </span>
+                    )}
+
+                    {addInterests ? (
+                      <div>
                         <span
-                          onClick={() => setUpdateInterests(false)}
+                          onClick={() => setAddInterests(false)}
                           className="profile-cancel"
                         >
                           Cancel
@@ -276,62 +388,20 @@ const Profile = () => {
                           onClick={() => handleInterestsChange(userData.uid)}
                           className="profile-btn-outlined"
                         >
-                          Update
+                          Submit
                         </span>
                       </div>
-                    </div>
-                  ) : (
-                    userData.interests.map((i)=>(<span className="Interest">{i}</span>))
-                  )}
-                  
-                  {updateInterests?<div></div>:
-                  <span
-                    onClick={() => setUpdateInterests(true)}
-                    className="profile-btn-outlined"
-                  >
-                    Edit
-                  </span>}
-                </div>
-              ) : (
-                <div>
-                  {addInterests? (
-                    <input
-                      className="profile-input"
-                      placeholder="Marketing, SEO ..."
-                      onChange={(e) => setIntersts(e.target.value)}
-                      type="text"
-                    />
-                  ) : (
-                    <span style={{ color: "red" }}>
-                      you don't have any interests yet
-                    </span>
-                  )}
-
-                  {addInterests ? (
-                    <div >
+                    ) : (
                       <span
-                        onClick={() => setAddInterests(false)}
-                        className="profile-cancel"
-                      >
-                        Cancel
-                      </span>
-                      <span
-                        onClick={() => handleInterestsChange(userData.uid)}
+                        // onClick={() => setAddInterests(true)}
+                        onClick={openModal}
                         className="profile-btn-outlined"
                       >
-                        Submit
+                        + Add
                       </span>
-                    </div>
-                  ) : (
-                    <span
-                      onClick={() => setAddInterests(true)}
-                      className="profile-btn-outlined"
-                    >
-                      + Add
-                    </span>
-                  )}
-                </div>
-              )}
+                    )}
+                  </div>
+                )}
               </p>
             </div>
           </div>
@@ -436,8 +506,43 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
+      <div>
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
+            Please choose your interests :{" "}
+          </h2>
+          <span id="close-button" onClick={closeModal}>
+            X
+          </span>
+          <div className="flex inner-modal">
+            {categories?.map((categorie) => (
+              <div className="flex interests-wrapper">
+                <span className="Interest">
+                  <input
+                    type={"checkbox"}
+                    value={`${categorie.Category}`}
+                    onChange={(e) => handleInterestCheck(e)}
+                  />
+                  {categorie.Category}
+                </span>
+              </div>
+            ))}
+          </div>
+          <span className="profile-btn-outlined"
+          onClick={handleInterestsChange}
+          >Submit</span>
+        </Modal>
+      </div>
     </div>
   );
 };
 
 export default Profile;
+ 

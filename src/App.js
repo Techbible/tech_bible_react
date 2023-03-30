@@ -1,12 +1,13 @@
 import { Route,Routes } from 'react-router-dom';
-import './App.css';
+import NewsList from './News Scraper/NewsList';
+
 import{
     LandingPage,
     Profile,
     SignIn,
     SignUp,
     Tools
-} from "./pages"
+} from "./pages";
 import ToolDetails from './pages/ToolDetails';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
  <Route path='/profile' element=<Profile /> />
  <Route path='/tools' element=<Tools /> />
  <Route path='/ToolDetails/:id' element=<ToolDetails /> />
+ <Route path='/News/:keyword' element=<NewsList /> />
  </Routes>
   );
 }

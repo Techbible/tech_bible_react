@@ -9,6 +9,16 @@ html {
 ul, li {
 	list-style: none;
 }
+
+#close-button{
+  padding: 7px;
+  background-color: #000;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+
 input {
 	border: none;
   outline: none;
@@ -20,12 +30,25 @@ input {
   width:35rem;
 }
 
+.inner-modal{
+  width: 600px;
+  flex-wrap: wrap;
+}
+
+.interests-wrapper{
+  margin-top: 40px;
+}
+
 .Interest{
-  border: 1px solid #0000;
-  background-color: #272727 !important;
+  border: 1px solid #222f3e;
+  background-color: #222f3e !important;
   border-radius: 7px;
   margin : 10px;
   padding: 4px;
+  cursor: pointer;
+}
+.flex{
+  display: flex;
 }
 .profile-cancel{
   border : 1px solid #fff;
@@ -38,12 +61,14 @@ input {
   right:125px;
   cursor: pointer;
 }
+
 .bio{
   width: 100% !important;
 }
 .interests{
   width: 100% !important;
   position : relative !important;
+
 }
 .profile-btn-outlined{
   border : 1px solid #5c6bc0;
