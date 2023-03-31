@@ -8,14 +8,13 @@ import {
   collection,
   doc,
   onSnapshot,
-  Limit,
   orderBy,
-  query,
+  query, 
   limit,
   getDocs,
   where,
 } from "firebase/firestore";
-import Navbar from "../layouts/Navbar";
+import {Navbar} from "../layouts";
 
 function LandingPage() {
   const [authUser, setAuthUser] = useState(null);
@@ -74,7 +73,7 @@ function LandingPage() {
 
       const ToolsArray = [];
 
-      const q = query(collection(db, "Tools"), limit(3));
+      const q = query(collection(db, "Tools"),where("Likes", ">=", 50), limit(3));
       //Just add the where statement later : , where('followers','==', 0)
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {

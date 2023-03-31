@@ -59,6 +59,7 @@ function SignUp() {
           interests : [],
           list : [],
           photo: "https://picsum.photos/200",
+          isAdmin : false,
           timestamp:Timestamp.now()
         };
         await setDoc(doc(db, "Users", result.user.uid), docData);
@@ -78,6 +79,7 @@ function SignUp() {
         interests : [],
         list : [],
         photo: data.user.photoURL,
+        isAdmin : false,
         timestamp:Timestamp.now()
       };
       // console.log(data);

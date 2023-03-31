@@ -1,5 +1,5 @@
 import { Route,Routes } from 'react-router-dom';
-import NewsList from './News Scraper/NewsList';
+import {NewsList} from './components';
 
 import{
     LandingPage,
@@ -8,7 +8,9 @@ import{
     SignUp,
     Tools
 } from "./pages";
+
 import ToolDetails from './pages/ToolDetails';
+import {AddTool} from './admin';
 
 //TODO : Adding a proper Authentification Provider to wrap it around the app
 
@@ -22,6 +24,7 @@ function App() {
  <Route path='/tools' element=<Tools /> />
  <Route path='/ToolDetails/:id' element=<ToolDetails /> />
  <Route path='/News/:keyword' element=<NewsList /> />
+ <Route path='/addTool' element=<AddTool /> />
  </Routes>
   );
 }

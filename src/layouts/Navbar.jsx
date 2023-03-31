@@ -67,7 +67,7 @@ function Navbar() {
       </div>
       </Link> 
       <p className="all-tools-ik5">All tools</p>
-      <p className="submit-your-tool-VeM">Submit your tool</p>
+      <Link to="/addTool"><p className="submit-your-tool-VeM">Submit your tool</p></Link>
       <p className="resources-W3f">Resources</p>
       <p className="community-VgH">Community</p>
       
