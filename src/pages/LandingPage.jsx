@@ -238,7 +238,7 @@ function LandingPage() {
           </div>
           <div className="tools-section-ngu">
             {!tools ? (
-              <div>loading</div>
+              <h1 style={{color:"#fff"}}>Loading</h1>
             ) : (
               tools.map((tool) => (
                 <div className="adobe-xd-group-EJ1" key={tool.id}>

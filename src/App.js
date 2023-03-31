@@ -38,6 +38,7 @@ function App() {
  <Route path='/ToolDetails/:id' element=<ToolDetails /> />
  <Route path='/News/:keyword' element=<NewsList /> />
  <Route path='/addTool' element=<AddTool /> />
+ <Route path='/tools' element=<Tools /> />
  </Routes>
   );
 }

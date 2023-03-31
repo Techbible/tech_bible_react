@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar } from "../../layouts";
-import "../../assets/addTool.css";
+import "../../assets/styles/addTool.css";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
