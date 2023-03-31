@@ -32,10 +32,23 @@ label {
   font-weight: 700;
 }
 
-input[type="text"],
-input[type="textarea"],
-input[type="date"],
-input[type="email"] {
+.addTools-wrapper input[type="text"],
+.addTools-wrapper input[type="textarea"],
+.addTools-wrapper input[type="date"],
+.addTools-wrapper input[type="email"] {
+  width: 100%;
+  display: block;
+  margin: 40px 0px;
+  height: 30px;
+  border: 1px solid white;
+  background: rgb(27, 29, 31);
+  color: white;
+  padding: 5px;
+  font-size: 1.5em;
+  outline: none;
+  border: 0px;
+}
+.addTools-wrapper select {
   width: 100%;
   display: block;
   margin: 40px 0px;
@@ -49,16 +62,16 @@ input[type="email"] {
   border: 0px;
 }
 
-input[type="text"]:focus,
-input[type="textarea"]:focus,
-input[type="date"]:focus,
-input[type="email"]:focus {
+.addTools-wrapper input[type="text"]:focus,
+.addTools-wrapper input[type="textarea"]:focus,
+.addTools-wrapper input[type="date"]:focus,
+.addTools-wrapper input[type="email"]:focus {
   border-bottom: 1px solid #5c6bc0;
   box-shadow: inset 0 -4px 0px #5c6bc0;
   background: rgba(255, 255, 255, 0.178);
 }
 
-input[type="submit"] {
+.addTools-wrapper button {
   display: block;
   padding: 10px 20px;
   background: white;

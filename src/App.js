@@ -1,5 +1,6 @@
-import { Route,Routes } from 'react-router-dom';
+import { Navigate, Route,Routes } from 'react-router-dom';
 import {NewsList} from './components';
+import { AuthContext } from "./context/AuthContext";
 
 import{
     LandingPage,
@@ -11,10 +12,22 @@ import{
 
 import ToolDetails from './pages/ToolDetails';
 import {AddTool} from './admin';
+import { useContext } from 'react';
 
 //TODO : Adding a proper Authentification Provider to wrap it around the app
 
+
 function App() {
+
+  // const { currentUser } = useContext(AuthContext);
+
+  // const ProtectedRoute = ({ children }) => {
+  //   if (!currentUser) {
+  //     return <Navigate to="/login" />;
+  //   }
+  //   return children
+  // };
+  
   return (
  <Routes>
  <Route path='/' element=<LandingPage /> />
