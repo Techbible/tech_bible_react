@@ -4,7 +4,17 @@ import { auth, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  onSnapshot,
+  Limit,
+  orderBy,
+  query,
+  limit,
+  getDocs,
+  where,
+} from "firebase/firestore";
 import Navbar from "../layouts/Navbar";
 
 function LandingPage() {
@@ -18,7 +28,7 @@ function LandingPage() {
 
   const navigate = useNavigate();
 
-//Pop up Wemcome Notification
+  //Pop up Wemcome Notification
   const notify = (message) =>
     toast(message, {
       position: "top-center",
@@ -32,7 +42,7 @@ function LandingPage() {
     });
 
   useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
+    const listen = onAuthStateChanged(auth, async (user) => {
       //checking if the user exist or not
       if (user) {
         setAuthUser(user);
@@ -44,11 +54,10 @@ function LandingPage() {
             username: doc.data().username,
           });
           // console.log(userData);
-
         });
-        
-          // notify(userData.username);
-          localStorage.setItem('SignedUp', true); 
+
+        // notify(userData.username);
+        localStorage.setItem("SignedUp", true);
 
         // console.log(user);
       } else {
@@ -56,47 +65,45 @@ function LandingPage() {
         setAuthUser(null);
       }
 
-//showing the Welcome Message, if it's the user's first sign up
-      if(localStorage.getItem("SignedUp")){
-        <div></div>
-      }
-      else{
-        notify('Welcome to the community! 👋🏻')
+      //showing the Welcome Message, if it's the user's first sign up
+      if (localStorage.getItem("SignedUp")) {
+        <div></div>;
+      } else {
+        notify("Welcome to the community! 👋🏻");
       }
 
-///
-const dbRef = collection(db, "Tools");
-onSnapshot(dbRef, docsSnap => {
-  const ToolsArray = [];
-  docsSnap.forEach(doc => {
-    console.log(doc.data())
-    ToolsArray.push(doc.data())
-  })
-  // console.log(ToolsArray)
-  setTools(ToolsArray);
-});
+      const ToolsArray = [];
+
+      const q = query(collection(db, "Tools"), limit(3), where('followers','==','0'));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        ToolsArray.push(doc.data());
+      });
+
+      setTools(ToolsArray);
     });
 
     return listen();
   }, []);
 
-
-
   return (
     <div className="home-page-SPw">
-    <Navbar />
-    <ToastContainer
-    position="top-center"
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="dark"
-  />
+      <Navbar />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="auto-group-7wa1-Yvh">
         <div className="auto-group-8r4h-YpD">
           <div className="header-Lk5">
@@ -134,7 +141,6 @@ onSnapshot(dbRef, docsSnap => {
                 className="filter-button-aUd"
                 src="/assets/filter-button.png"
               />
-
             </div>
             <div className="sub-header-nah">
               <div className="auto-group-aplz-yv5">
@@ -228,57 +234,62 @@ onSnapshot(dbRef, docsSnap => {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
           <div className="tools-section-ngu">
-          {!tools?<div>loading</div>:tools.map((tool)=>(   
-            <div className="adobe-xd-group-EJ1" key={tool.id}>
-              <img
-                alt="tech bible"
-                className="adobe-xd-logo-GVb"
-                src={tool.Icon}
-              />
-              <div className="auto-group-1hwv-Rmo">
-                <Link to={`/ToolDetails/${tool.id}`}><p className="adobe-xd-67F">{tool?.Name}</p></Link>
-                <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-iPX description" >
-                  {tool?.Description}
-                </p>
-                <div className="auto-group-ebkb-hWM">
+            {!tools ? (
+              <div>loading</div>
+            ) : (
+              tools.map((tool) => (
+                <div className="adobe-xd-group-EJ1" key={tool.id}>
                   <img
                     alt="tech bible"
-                    className="layer1-xx5"
-                    src="/assets/layer1-xPw.png"
+                    className="adobe-xd-logo-GVb"
+                    src={tool.Icon}
                   />
-                  <p className="item-120-kd3">{tool?.Comments}</p>
-                  <p className="premium-mY9">{tool?.Price}</p>
-                  <p className="design-tool-oDw">{tool?.Category}</p>
-                </div>
-              </div>
-              <div className="like-save-button-RFK">
-                <div className="auto-group-l2sx-bp1">
-                  <img
-                    alt="tech bible"
-                    className="like-eGV"
-                    src="/assets/like.png"
-                  />
-                  <div className="save-3ZX">
-                    <img
-                      alt="tech bible"
-                      className="ellipse-4-v7X"
-                      src="/assets/ellipse-4-ray.png"
-                    />
-                    <img
-                      alt="tech bible"
-                      className="item-32360-1-iJH"
-                      src="/assets/-aLV.png"
-                    />
+                  <div className="auto-group-1hwv-Rmo">
+                    <Link to={`/ToolDetails/${tool.id}`}>
+                      <p className="adobe-xd-67F">{tool?.Name}</p>
+                    </Link>
+                    <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-iPX description">
+                      {tool?.Description}
+                    </p>
+                    <div className="auto-group-ebkb-hWM">
+                      <img
+                        alt="tech bible"
+                        className="layer1-xx5"
+                        src="/assets/layer1-xPw.png"
+                      />
+                      <p className="item-120-kd3">{tool?.Comments}</p>
+                      <p className="premium-mY9">{tool?.Price}</p>
+                      <p className="design-tool-oDw">{tool?.Category}</p>
+                    </div>
+                  </div>
+                  <div className="like-save-button-RFK">
+                    <div className="auto-group-l2sx-bp1">
+                      <img
+                        alt="tech bible"
+                        className="like-eGV"
+                        src="/assets/like.png"
+                      />
+                      <div className="save-3ZX">
+                        <img
+                          alt="tech bible"
+                          className="ellipse-4-v7X"
+                          src="/assets/ellipse-4-ray.png"
+                        />
+                        <img
+                          alt="tech bible"
+                          className="item-32360-1-iJH"
+                          src="/assets/-aLV.png"
+                        />
+                      </div>
+                    </div>
+                    <p className="followers">{tool.Likes}</p>
                   </div>
                 </div>
-                <p className="followers">{tool.Likes}</p>
-              </div>
-            </div>))
-          }
+              ))
+            )}
           </div>
         </div>
         <img
@@ -386,7 +397,6 @@ onSnapshot(dbRef, docsSnap => {
                 </div>
               </div>
               <div className="auto-group-wqpt-ox9">Ask Questions</div>
-
             </div>
           </div>
           <div className="news-letter-section-7E5">
