@@ -40,14 +40,21 @@ input {
   text-align: center;
   flex: auto;
   align-items: center;
+  flex-wrap: wrap !important;
+}
+
+.interests-wrapper-V{
+  align-items: center;
+  white-space: initial;
+  display: flex;
 }
 
 .Interest{
-  border: 1px solid #151617;
-  background-color: #151617 !important;
-  border-radius: 7px;
-  margin : 10px;
-  padding: 4px;
+  border: 1px solid #000;
+  background-color: #000 !important;
+  border-radius: 30px;
+  margin : 30px 10px;
+  padding: 6px;
   cursor: pointer;
 }
 .flex{
@@ -504,6 +511,7 @@ body {
   box-sizing: border-box;
   padding: 1.6rem 4.7rem;
   width: 100%;
+  height: auto !important;
   display: flex;
   flex-direction: column;
   background-color: rgba(35, 38, 40, 0.5899999738);
@@ -517,7 +525,7 @@ body {
   line-height: 1.5;
   color: #ffffff;
   font-family: Poppins, 'Source Sans Pro';
-  white-space: nowrap;
+  /* white-space: nowrap; */
   flex-shrink: 0;
 }
 .profile-about-NVb .auto-group-zyow-V4q .auto-group-jo33-GE1 .auto-group-rpbb-gww .digital-marketing-and-graphic-design-adobe-suites-KV7 {
@@ -526,7 +534,8 @@ body {
   line-height: 1.5;
   color: #ffffff;
   font-family: Poppins, 'Source Sans Pro';
-  white-space: nowrap;
+  white-space: pre-wrap;
+  height: auto;
   flex-shrink: 0;
 }
 .profile-about-NVb .auto-group-xkhf-yZf {

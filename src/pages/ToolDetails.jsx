@@ -17,10 +17,12 @@ const ToolDetails = () => {
     comments: null,
   });
 
-
   useEffect(() => {
-    onSnapshot(doc(db, "Tools", id), (doc) => {
-      // console.log(" data: ", doc.data());
+    console.log(id);
+    const ToolRef = doc(db, "Tools", id);
+    onSnapshot(ToolRef, (doc) => {
+      //BUG: *
+      console.log(" data: ", doc.data());
       setToolsData({
         Name: doc.data().Name,
         photo: doc.data().Icon,
@@ -33,6 +35,7 @@ const ToolDetails = () => {
       console.log(ToolsData);
     });
   }, []);
+
   return (
     <div>
       <div className="home-page-SPw">

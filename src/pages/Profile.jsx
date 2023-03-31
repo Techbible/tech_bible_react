@@ -224,8 +224,7 @@ const Profile = () => {
             </div>
             <p className="sheesh-digital-marketing-and-graphic-design-adobe-suites-1kh">
               {userData.bio}
-              <br />
-              {userData.interests}
+
             </p>
             <div className="auto-group-nshf-mtH">
               <div className="auto-group-jzmb-aqj">About</div>
@@ -335,7 +334,7 @@ const Profile = () => {
               <br />
               <p className="digital-marketing-and-graphic-design-adobe-suites-KV7">
                 {userData.interests.length > 0 ? (
-                  <div>
+                  <div className="interests-wrapper-V">
                     {updateInterests ? (
                       <div>
                         <input
@@ -359,17 +358,18 @@ const Profile = () => {
                           </span>
                         </div>
                       </div>
-                    ) : (
-                      userData.interests.map((i) => (
-                        <span className="Interest">{i}</span>
-                      ))
-                    )}
+                    ) :
+                     <div >
+                      {userData.interests.map((i) => (<span className="Interest">{i}</span>))}
+                      </div>
+                    
+                  }
 
                     {updateInterests ? (
                       <div></div>
                     ) : (
                       <span
-                        onClick={() => setUpdateInterests(true)}
+                      onClick={openModal}
                         className="profile-btn-outlined"
                       >
                         Edit

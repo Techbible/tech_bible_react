@@ -240,9 +240,9 @@ onSnapshot(dbRef, docsSnap => {
                 src={tool.Icon}
               />
               <div className="auto-group-1hwv-Rmo">
-                <Link to={`/ToolDetails/${tool.id}`}><p className="adobe-xd-67F">{tool.Name}</p></Link>
+                <Link to={`/ToolDetails/${tool.id}`}><p className="adobe-xd-67F">{tool?.Name}</p></Link>
                 <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-iPX description" >
-                  {tool.Description}
+                  {tool?.Description}
                 </p>
                 <div className="auto-group-ebkb-hWM">
                   <img
@@ -250,9 +250,9 @@ onSnapshot(dbRef, docsSnap => {
                     className="layer1-xx5"
                     src="/assets/layer1-xPw.png"
                   />
-                  <p className="item-120-kd3">{tool.Comments}</p>
-                  <p className="premium-mY9">{tool.Price}</p>
-                  <p className="design-tool-oDw">{tool.Category}</p>
+                  <p className="item-120-kd3">{tool?.Comments}</p>
+                  <p className="premium-mY9">{tool?.Price}</p>
+                  <p className="design-tool-oDw">{tool?.Category}</p>
                 </div>
               </div>
               <div className="like-save-button-RFK">
