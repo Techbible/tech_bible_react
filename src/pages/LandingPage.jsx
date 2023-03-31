@@ -74,8 +74,8 @@ function LandingPage() {
 
       const ToolsArray = [];
 
-      const q = query(collection(db, "Tools"), limit(3), where('followers','==','0'));
-
+      const q = query(collection(db, "Tools"), limit(3));
+      //Just add the where statement later : , where('followers','==', 0)
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
