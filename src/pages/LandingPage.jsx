@@ -19,6 +19,7 @@ import {Navbar} from "../layouts";
 function LandingPage() {
   const [authUser, setAuthUser] = useState(null);
   const [tools, setTools] = useState([]);
+  const [FollowIcon, setFollowIcon] = useState(false);
 
   const [userData, setUserData] = useState({
     pfp: "",
@@ -269,7 +270,8 @@ function LandingPage() {
                       <img
                         alt="tech bible"
                         className="like-eGV"
-                        src="/assets/like.png"
+                        src={FollowIcon?"/assets/like.png":"/assets/liked.png"}
+                        onClick={()=>setFollowIcon(!FollowIcon)}
                       />
                       <div className="save-3ZX">
                         <img
