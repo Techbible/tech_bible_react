@@ -8,6 +8,7 @@ body {
   zoom : 142%;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  background-color: #000;
 }
 
 code {

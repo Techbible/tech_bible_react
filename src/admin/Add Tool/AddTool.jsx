@@ -39,13 +39,13 @@ function AddTool() {
           <h1>Add a Tool</h1>
           <input type="file" />
           <input type="text" placeholder="Tool Name (Canvas, Adobe XD..)" />
-          <input type="text" placeholder="Price" />
+          <input type="text" placeholder="Pricing" />
           <select name="categories">
           <option>Select a Category</option>
           {categories?.map((c)=>(<option value={c.id}>{c.Category}</option>))}
      
          </select>
-          <textarea>The tool's description</textarea>
+          <textarea placeholder="Tool's Description"></textarea>
           <button>+ Add</button>
         </div>
       </div>

@@ -51,28 +51,25 @@ function Tools() {
                       <div className="text-left my-2">
                         <div className="sub-cat text-truncate">
                           <span className="badge rounded-pill bg-category text-uppercase">
-                            topic
+                            {tool.Price}
                           </span>{" "}
                         </div>
                       </div>
-                      <p className="card-text">
-                        This is a longer card with supporting text below as a
-                        natural lead-in to additional content. This content is a
-                        little bit longer. This is a longer card with supporting
-                        text below as a natural lead-in to additional content.
-                        This content is a little bit longer.
+                      <p className="card-text description" id="tool-description">
+                      {
+                        tool.Description
+                      }
                       </p>
                     </div>
                     <div className="card-footer py-3">
                       <div className="card-footer__info">
                         <span>01/04/2021</span>
                         <span className="read-more">
-                          <a
-                            className="text-uppercase read-more-2"
-                            href="www.google.com"
-                          >
+                          <Link
+                          className="text-uppercase read-more-2"
+                          to={`/ToolDetails/${tool.id}`}                          >
                             Read more{" "}
-                          </a>
+                          </Link>
                         </span>
                       </div>
                     </div>

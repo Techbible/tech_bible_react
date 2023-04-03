@@ -2,6 +2,7 @@ import { Navigate, Route,Routes } from 'react-router-dom';
 import {NewsList} from './components';
 import { AuthContext } from "./context/AuthContext";
 
+
 import{
     LandingPage,
     Profile,
@@ -19,14 +20,14 @@ import { useContext } from 'react';
 
 function App() {
 
-  // const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
-  // const ProtectedRoute = ({ children }) => {
-  //   if (!currentUser) {
-  //     return <Navigate to="/login" />;
-  //   }
-  //   return children
-  // };
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/signin" />;
+    }
+    return children
+  };
   
   return (
  <Routes>
@@ -34,8 +35,13 @@ function App() {
  <Route path='/signup' element=<SignUp /> />
  <Route path='/signin' element=<SignIn /> />
  <Route path='/profile' element=<Profile /> />
- <Route path='/tools' element=<Tools /> />
+ <Route path='/tools' element={
+  <ProtectedRoute>
+  <Tools />
+  </ProtectedRoute>
+} />
  <Route path='/ToolDetails/:id' element=<ToolDetails /> />
+ <Route path='/tools/ToolDetails/:id' element=<ToolDetails /> />
  <Route path='/News/:keyword' element=<NewsList /> />
  <Route path='/addTool' element=<AddTool /> />
  <Route path='/tools' element=<Tools /> />
