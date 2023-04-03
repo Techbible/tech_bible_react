@@ -16,13 +16,13 @@ import { auth, db, storage } from "../../firebase";
 import { v4 as uuid } from "uuid";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 
 function AddTool() {
   const { currentUser } = useContext(AuthContext);
   const [UID, setUID] = useState(currentUser?.uid);
-
+  const navigate = useNavigate();
   useEffect(() => {
     setUID(currentUser?.uid);
   }, [currentUser?.uid]);
@@ -67,29 +67,31 @@ function AddTool() {
 
   const handleAddTool = async () => {
     if (img) {
-      const storageRef = ref(storage, uuid());
+      const storageRef = ref(storage, `Tools/${img.name + uuid()}`);
 
       const uploadTask = uploadBytesResumable(storageRef, img);
 
       uploadTask.on(
         (error) => {
           //TODO:Handle Error
+
+          //TODO: Link the store folder with the Tools document
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateDoc(doc(db, "Tools", uuid()), {
-              messages: arrayUnion({
-                id: uuid(),
-                Name: Name,
-                Description: Description,
-                Price: Pricing,
-                URL: URL,
-                CategoryID: Category,
-                Likes: 0,
-                Comments: 0,
-                Icon: downloadURL,
-              })
+            await setDoc(doc(db, "Tools", uuid()), {
+              id: uuid(),
+              Name: Name,
+              Description: Description,
+              Price: Pricing,
+              URL: URL,
+              CategoryID: Category,
+              Likes: 0,
+              Comments: 0,
+              Icon: downloadURL,
             });
+            // navigate('/tools')
+
           });
         }
       );
@@ -115,7 +117,7 @@ function AddTool() {
         {isAdmin ? (
           <div className="form">
             <h1>Add a Tool</h1>
-            <input type="file" />
+            <input type="file" onChange={(e) => setImg(e.target.files[0])} />
             <input
               type="text"
               onChange={(e) => setName(e.target.value)}
