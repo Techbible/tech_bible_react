@@ -3,9 +3,17 @@ import { Navbar } from "../../layouts";
 import "../../assets/styles/addTool.css";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
-import { collection, doc, onSnapshot } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  onSnapshot,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { auth, db, storage } from "../../firebase";
 
+import { v4 as uuid } from "uuid";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Navigate } from "react-router-dom";
@@ -21,7 +29,9 @@ function AddTool() {
 
   const [Name, setName] = useState("");
   const [Description, setDescription] = useState("");
-  const [Price, setPrice] = useState("");
+  const [URL, setURL] = useState("");
+  const [Pricing, setPricing] = useState("");
+  const [Category, setCategory] = useState("");
   const [img, setImg] = useState(null);
 
   const [categories, setCategories] = useState();
@@ -55,6 +65,48 @@ function AddTool() {
     return listen();
   }, []);
 
+  const handleAddTool = async () => {
+    if (img) {
+      const storageRef = ref(storage, uuid());
+
+      const uploadTask = uploadBytesResumable(storageRef, img);
+
+      uploadTask.on(
+        (error) => {
+          //TODO:Handle Error
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            await updateDoc(doc(db, "Tools", uuid()), {
+              messages: arrayUnion({
+                id: uuid(),
+                Name: Name,
+                Description: Description,
+                Price: Pricing,
+                URL: URL,
+                CategoryID: Category,
+                Likes: 0,
+                Comments: 0,
+                Icon: downloadURL,
+              })
+            });
+          });
+        }
+      );
+    } else {
+      await setDoc(doc(db, "Tools", uuid()), {
+        Name: Name,
+        Description: Description,
+        Price: Pricing,
+        URL: URL,
+        CategoryID: Category,
+        Likes: 0,
+        Comments: 0,
+        Icon: "https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png",
+      });
+    }
+  };
+
   return (
     <div className="home-page-SPw">
       <Navbar />
@@ -64,16 +116,35 @@ function AddTool() {
           <div className="form">
             <h1>Add a Tool</h1>
             <input type="file" />
-            <input type="text" placeholder="Tool Name (Canvas, Adobe XD..)" />
-            <input type="text" placeholder="Pricing" />
-            <select name="categories">
+            <input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Tool Name (Canvas, Adobe XD..)"
+            />
+            <input
+              type="text"
+              onChange={(e) => setPricing(e.target.value)}
+              placeholder="Pricing"
+            />
+            <input
+              type="text"
+              onChange={(e) => setURL(e.target.value)}
+              placeholder="embed URL : www.canvas.com"
+            />
+            <select
+              name="categories"
+              onChange={(e) => setCategory(e.target.value)}
+            >
               <option>Select a Category</option>
               {categories?.map((c) => (
                 <option value={c.id}>{c.Category}</option>
               ))}
             </select>
-            <textarea placeholder="Tool Description"></textarea>
-            <button>+ Add</button>
+            <textarea
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Tool Description"
+            ></textarea>
+            <button onClick={() => handleAddTool()}>+ Add</button>
           </div>
         ) : (
           <div className="flex-container">

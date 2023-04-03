@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {getAuth, GoogleAuthProvider} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -26,5 +27,8 @@ const auth = getAuth(app);
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
+
+export const storage = getStorage();
+
 
 export {auth, provider, db};
