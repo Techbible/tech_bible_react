@@ -102,7 +102,7 @@ function Navbar() {
               ></div>
               <div className="username">{userData.username}</div>
             </div></Link>
-            <span class="signout" onClick={UserSignOut}><img src="/assets/logout.png" alt="sign out" /></span>
+            <span className="signout" onClick={UserSignOut}><img src="/assets/logout.png" alt="sign out" /></span>
             </div>
           ) : (
             <div className="flex">
