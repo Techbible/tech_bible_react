@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import NewsItem  from './NewsItem'
 import { useParams } from 'react-router-dom'
+import {Navbar} from "../../layouts"
 
 const NewsList = () => {
     const [articles, setArticles] = useState([])
@@ -17,7 +18,8 @@ const NewsList = () => {
         getArticles()
     }, [])
     return (
-        <div>
+        <div className='home-page-SPw'>
+        <Navbar />
             {articles.map(article => {
                 return(
                     <NewsItem 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar } from "../layouts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import "../assets/styles/Tools.scss";
@@ -10,17 +10,20 @@ function Tools() {
   const [tools, setTools] = useState();
   const [FollowIcon, setFollowIcon] = useState(false);
 
-  //getting all the tools
-  const dbRef = collection(db, "Tools");
-  onSnapshot(dbRef, (docsSnap) => {
-    const ToolsArray = [];
-    docsSnap.forEach((doc) => {
-      // console.log(doc.data());
-      ToolsArray.push(doc.data());
+
+  useEffect(()=>{
+    //getting all the tools
+    const dbRef = collection(db, "Tools");
+    onSnapshot(dbRef, (docsSnap) => {
+      const ToolsArray = [];
+      docsSnap.forEach((doc) => {
+        // console.log(doc.data());
+        ToolsArray.push(doc.data());
+      });
+      // console.log(ToolsArray);
+      setTools(ToolsArray);
     });
-    console.log(ToolsArray);
-    setTools(ToolsArray);
-  });
+  },[])
 
   return (
     <div className="home-page-SPw">

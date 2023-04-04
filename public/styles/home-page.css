@@ -79,6 +79,7 @@ a{
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  margin-bottom: 0px !important;
 }
 .home-page-SPw .nav-bar-viR .auto-group-hejw-bLh {
   margin: 0rem 10rem 1.6rem 9.9rem;
@@ -87,6 +88,7 @@ a{
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  
 }
 .home-page-SPw .nav-bar-viR .auto-group-hejw-bLh .tech-bible-logo-XNm {
   margin-right: 8.8rem;

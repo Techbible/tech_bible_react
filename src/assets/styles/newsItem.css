@@ -2,7 +2,12 @@
     display: flex;
     justify-content: center;
     margin: auto;
+    color:#fff;
 
+}
+
+.news-app a{
+    color: #5c6bc0;
 }
 
 .news-item {

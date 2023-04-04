@@ -67,7 +67,7 @@ function AddTool() {
 
   const handleAddTool = async () => {
     if (img) {
-      const storageRef = ref(storage, `Tools/${img.name + uuid()}`);
+      const storageRef = ref(storage, `Tools/${img.name +"_"+ uuid()}`);
 
       const uploadTask = uploadBytesResumable(storageRef, img);
 
@@ -90,13 +90,14 @@ function AddTool() {
               Comments: 0,
               Icon: downloadURL,
             });
-            // navigate('/tools')
 
           });
         }
       );
     } else {
-      await setDoc(doc(db, "Tools", uuid()), {
+      const randomId = uuid();
+      await setDoc(doc(db, "Tools", randomId), {
+        id : randomId,
         Name: Name,
         Description: Description,
         Price: Pricing,
@@ -105,7 +106,9 @@ function AddTool() {
         Likes: 0,
         Comments: 0,
         Icon: "https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png",
-      });
+      })
+      navigate("/tools")
+
     }
   };
 

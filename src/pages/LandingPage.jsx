@@ -9,18 +9,23 @@ import {
   doc,
   onSnapshot,
   orderBy,
-  query, 
+  query,
   limit,
   getDocs,
   where,
+  updateDoc,
 } from "firebase/firestore";
-import {Navbar} from "../layouts";
+import { Navbar } from "../layouts";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 function LandingPage() {
+  const { currentUser } = useContext(AuthContext);
+
   const [authUser, setAuthUser] = useState(null);
   const [tools, setTools] = useState([]);
   const [FollowIcon, setFollowIcon] = useState(false);
-
+  const [isLiked, setIsLiked] = useState(false);
   const [userData, setUserData] = useState({
     pfp: "",
     username: "",
@@ -74,12 +79,16 @@ function LandingPage() {
 
       const ToolsArray = [];
 
-      const q = query(collection(db, "Tools"),where("Likes", ">=", 50), limit(3));
+      const q = query(
+        collection(db, "Tools"),
+        where("Likes", ">=", 50),
+        limit(3)
+      );
       //Just add the where statement later : , where('followers','==', 0)
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
         ToolsArray.push(doc.data());
       });
 
@@ -88,6 +97,23 @@ function LandingPage() {
 
     return listen();
   }, []);
+
+    // Check if user has liked this tool on mount
+    // useEffect(() => {
+    //   const uid = firebase.auth().currentUser?.uid;
+    //   if (uid) {
+    //     db.collection("users")
+    //       .doc(uid)
+    //       .collection("LikedTools")
+    //       .doc(tool.id)
+    //       .get()
+    //       .then((doc) => {
+    //         if (doc.exists) {
+    //           setLiked(true);
+    //         }
+    //       });
+    //   }
+    // }, [tool]);
 
   return (
     <div className="home-page-SPw">
@@ -238,7 +264,7 @@ function LandingPage() {
           </div>
           <div className="tools-section-ngu">
             {!tools ? (
-              <h1 style={{color:"#fff"}}>Loading</h1>
+              <h1 style={{ color: "#fff" }}>Loading</h1>
             ) : (
               tools.map((tool) => (
                 <div className="adobe-xd-group-EJ1" key={tool.id}>
@@ -270,8 +296,10 @@ function LandingPage() {
                       <img
                         alt="tech bible"
                         className="like-eGV"
-                        src={FollowIcon?"/assets/like.png":"/assets/liked.png"}
-                        onClick={()=>setFollowIcon(!FollowIcon)}
+                        src={
+                          FollowIcon ? "/assets/like.png" : "/assets/liked.png"
+                        }
+                        onClick={() => setFollowIcon(!FollowIcon)}
                       />
                       <div className="save-3ZX">
                         <img
@@ -300,7 +328,9 @@ function LandingPage() {
         />
         <div className="right-section-m9o">
           <div className="news-cw7">
-            <p className="news-UiR">News</p>
+            <Link to="/News/AI Tools">
+              <p className="news-UiR">News</p>
+            </Link>
             <p className="slack-boosts-ai-capabilities-with-new-chatgpt-app-Hfs">
               Slack boosts AI capabilities with new ChatGPT app
               <br />
