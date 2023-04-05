@@ -25,7 +25,10 @@ function LandingPage() {
   const [authUser, setAuthUser] = useState(null);
   const [tools, setTools] = useState([]);
   const [FollowIcon, setFollowIcon] = useState(false);
+  const [Search, setSearch] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+
   const [userData, setUserData] = useState({
     pfp: "",
     username: "",
@@ -33,7 +36,7 @@ function LandingPage() {
 
   const navigate = useNavigate();
 
-  //Pop up Wemcome Notification
+  //Pop up Welcome Notification
   const notify = (message) =>
     toast(message, {
       position: "top-center",
@@ -66,7 +69,7 @@ function LandingPage() {
 
         // console.log(user);
       } else {
-        // navigate("/signin")
+        navigate("/signin");
         setAuthUser(null);
       }
 
@@ -79,15 +82,14 @@ function LandingPage() {
 
       const ToolsArray = [];
 
+      //In case we will have more conditions in the future
       const q = query(
         collection(db, "Tools"),
         where("Likes", ">=", 50),
         limit(3)
       );
-      //Just add the where statement later : , where('followers','==', 0)
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data());
         ToolsArray.push(doc.data());
       });
@@ -98,22 +100,45 @@ function LandingPage() {
     return listen();
   }, []);
 
-    // Check if user has liked this tool on mount
-    // useEffect(() => {
-    //   const uid = firebase.auth().currentUser?.uid;
-    //   if (uid) {
-    //     db.collection("users")
-    //       .doc(uid)
-    //       .collection("LikedTools")
-    //       .doc(tool.id)
-    //       .get()
-    //       .then((doc) => {
-    //         if (doc.exists) {
-    //           setLiked(true);
-    //         }
-    //       });
-    //   }
-    // }, [tool]);
+  const SearchTool = async () => {
+    const SearchedTools = [];
+
+    const q = query(collection(db, "Tools"), where("Name", "==", Search));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      SearchedTools.push(doc.data());
+    });
+
+    setTools(SearchedTools);
+  };
+
+  useEffect(() => {
+    if (Search.length > 0) {
+      setIsSearching(true);
+      SearchTool();
+    }
+    else{
+      setIsSearching(false)
+      setTools([]);
+    }
+  }, [Search]);
+
+  // Check if user has liked this tool on mount
+  // useEffect(() => {
+  //   const uid = firebase.auth().currentUser?.uid;
+  //   if (uid) {
+  //     db.collection("users")
+  //       .doc(uid)
+  //       .collection("LikedTools")
+  //       .doc(tool.id)
+  //       .get()
+  //       .then((doc) => {
+  //         if (doc.exists) {
+  //           setLiked(true);
+  //         }
+  //       });
+  //   }
+  // }, [tool]);
 
   return (
     <div className="home-page-SPw">
@@ -159,6 +184,7 @@ function LandingPage() {
                   type="text"
                   style={{ width: "61.9rem" }}
                   placeholder="Search"
+                  onChange={(e) => setSearch(e.target.value)}
                   className="search-VZf"
                 />
               </div>
@@ -191,135 +217,153 @@ function LandingPage() {
               </p>
             </div>
           </div>
-          <div className="section-2-VMw">
-            <div className="app-of-the-day-uRf">
-              <p className="app-of-the-day-MoT">App of the Day</p>
-              <div className="auto-group-zmz5-BXb">
-                <img
-                  alt="tech bible"
-                  className="chatgptlogo-1-bLR"
-                  src="/assets/chatgptlogo-1.png"
-                />
-                <div className="auto-group-j2f7-cWR">
-                  <p className="chat-gpt-CjX">Chat GPT</p>
-                  <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-PZ7">
-                    Browse 1000+ of the latest tech tools per task Updated daily
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="tools-MuF">
-              <div className="auto-group-ydy1-DwT">
-                <div className="auto-group-78ud-sFK">
-                  <p className="you-might-also-like-hEM">YOU MIGHT ALSO LIKE</p>
-                  <div className="group-1-UPX">
-                    <img
-                      alt="tech bible"
-                      className="adobecreativecloudrainbowicon-1-MCR"
-                      src="/assets/adobecreativecloudrainbowicon-1-s9P.png"
-                    />
-                    <p className="adobe-suites-757">Adobe Suites</p>
-                    <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-7jK">
+          {!isSearching ? (
+            <div className="section-2-VMw">
+              <div className="app-of-the-day-uRf">
+                <p className="app-of-the-day-MoT">App of the Day</p>
+                <div className="auto-group-zmz5-BXb">
+                  <img
+                    alt="tech bible"
+                    className="chatgptlogo-1-bLR"
+                    src="/assets/chatgptlogo-1.png"
+                  />
+                  <div className="auto-group-j2f7-cWR">
+                    <p className="chat-gpt-CjX">Chat GPT</p>
+                    <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-PZ7">
                       Browse 1000+ of the latest tech tools per task Updated
                       daily
                     </p>
-                    <div className="visit-button-qYq">
-                      <p className="visit-gpM">Visit</p>
-                      <div className="rectangle-103-Ad3"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="tools-MuF">
+                <div className="auto-group-ydy1-DwT">
+                  <div className="auto-group-78ud-sFK">
+                    <p className="you-might-also-like-hEM">
+                      YOU MIGHT ALSO LIKE
+                    </p>
+                    <div className="group-1-UPX">
+                      <img
+                        alt="tech bible"
+                        className="adobecreativecloudrainbowicon-1-MCR"
+                        src="/assets/adobecreativecloudrainbowicon-1-s9P.png"
+                      />
+                      <p className="adobe-suites-757">Adobe Suites</p>
+                      <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-7jK">
+                        Browse 1000+ of the latest tech tools per task Updated
+                        daily
+                      </p>
+                      <div className="visit-button-qYq">
+                        <p className="visit-gpM">Visit</p>
+                        <div className="rectangle-103-Ad3"></div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="group-2-ruB">
-                  <img
-                    alt="tech bible"
-                    className="minecraft-2752120-2284937-1-t5B"
-                    src="/assets/minecraft-2752120-2284937-1.png"
-                  />
-                  <p className="minecraft-TXb">Minecraft</p>
-                  <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-5Yy">
-                    Browse 1000+ of the latest tech tools per task Updated daily
-                  </p>
-                  <div className="visit-button-15F">
-                    <p className="visit-SRT">Visit</p>
-                    <div className="rectangle-104-mc9"></div>
+                  <div className="group-2-ruB">
+                    <img
+                      alt="tech bible"
+                      className="minecraft-2752120-2284937-1-t5B"
+                      src="/assets/minecraft-2752120-2284937-1.png"
+                    />
+                    <p className="minecraft-TXb">Minecraft</p>
+                    <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-5Yy">
+                      Browse 1000+ of the latest tech tools per task Updated
+                      daily
+                    </p>
+                    <div className="visit-button-15F">
+                      <p className="visit-SRT">Visit</p>
+                      <div className="rectangle-104-mc9"></div>
+                    </div>
                   </div>
-                </div>
-                <div className="group-3-4Ds">
-                  <img
-                    alt="tech bible"
-                    className="python-logo-notext-1-6gM"
-                    src="/assets/python-logo-notext-1.png"
-                  />
-                  <p className="python-Evy">Python</p>
-                  <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-FbB">
-                    Browse 1000+ of the latest tech tools per task Updated daily
-                  </p>
-                  <div className="visit-button-xtu">
-                    <p className="visit-Azy">Visit</p>
-                    <div className="rectangle-105-snu"></div>
+                  <div className="group-3-4Ds">
+                    <img
+                      alt="tech bible"
+                      className="python-logo-notext-1-6gM"
+                      src="/assets/python-logo-notext-1.png"
+                    />
+                    <p className="python-Evy">Python</p>
+                    <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-FbB">
+                      Browse 1000+ of the latest tech tools per task Updated
+                      daily
+                    </p>
+                    <div className="visit-button-xtu">
+                      <p className="visit-Azy">Visit</p>
+                      <div className="rectangle-105-snu"></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="tools-section-ngu">
-            {!tools ? (
-              <h1 style={{ color: "#fff" }}>Loading</h1>
-            ) : (
-              tools.map((tool) => (
-                <div className="adobe-xd-group-EJ1" key={tool.id}>
-                  <img
-                    alt="tech bible"
-                    className="adobe-xd-logo-GVb"
-                    src={tool.Icon}
-                  />
-                  <div className="auto-group-1hwv-Rmo">
-                    <Link to={`/ToolDetails/${tool.id}`}>
-                      <p className="adobe-xd-67F">{tool?.Name}</p>
-                    </Link>
-                    <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-iPX description">
-                      {tool?.Description}
-                    </p>
-                    <div className="auto-group-ebkb-hWM">
-                      <img
-                        alt="tech bible"
-                        className="layer1-xx5"
-                        src="/assets/layer1-xPw.png"
-                      />
-                      <p className="item-120-kd3">{tool?.Comments}</p>
-                      <p className="premium-mY9">{tool?.Price}</p>
-                      <p className="design-tool-oDw">{tool?.Category}</p>
-                    </div>
-                  </div>
-                  <div className="like-save-button-RFK">
-                    <div className="auto-group-l2sx-bp1">
-                      <img
-                        alt="tech bible"
-                        className="like-eGV"
-                        src={
-                          FollowIcon ? "/assets/like.png" : "/assets/liked.png"
-                        }
-                        onClick={() => setFollowIcon(!FollowIcon)}
-                      />
-                      <div className="save-3ZX">
+          ) : (
+            tools?.map((tool)=>(
+              <div>{tool.Name}</div>
+            ))
+          )}
+
+          {!isSearching ? (
+            <div className="tools-section-ngu">
+              {!tools ? (
+                <h1 style={{ color: "#fff" }}>Loading</h1>
+              ) : (
+                tools.map((tool) => (
+                  <div className="adobe-xd-group-EJ1" key={tool.id}>
+                    <img
+                      alt="tech bible"
+                      className="adobe-xd-logo-GVb"
+                      src={tool.Icon}
+                    />
+                    <div className="auto-group-1hwv-Rmo">
+                      <Link to={`/ToolDetails/${tool.id}`}>
+                        <p className="adobe-xd-67F">{tool?.Name}</p>
+                      </Link>
+                      <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-iPX description">
+                        {tool?.Description}
+                      </p>
+                      <div className="auto-group-ebkb-hWM">
                         <img
                           alt="tech bible"
-                          className="ellipse-4-v7X"
-                          src="/assets/ellipse-4-ray.png"
+                          className="layer1-xx5"
+                          src="/assets/layer1-xPw.png"
                         />
-                        <img
-                          alt="tech bible"
-                          className="item-32360-1-iJH"
-                          src="/assets/-aLV.png"
-                        />
+                        <p className="item-120-kd3">{tool?.Comments}</p>
+                        <p className="premium-mY9">{tool?.Price}</p>
+                        <p className="design-tool-oDw">{tool?.Category}</p>
                       </div>
                     </div>
-                    <p className="followers">{tool.Likes}</p>
+                    <div className="like-save-button-RFK">
+                      <div className="auto-group-l2sx-bp1">
+                        <img
+                          alt="tech bible"
+                          className="like-eGV"
+                          src={
+                            FollowIcon
+                              ? "/assets/like.png"
+                              : "/assets/liked.png"
+                          }
+                          onClick={() => setFollowIcon(!FollowIcon)}
+                        />
+                        <div className="save-3ZX">
+                          <img
+                            alt="tech bible"
+                            className="ellipse-4-v7X"
+                            src="/assets/ellipse-4-ray.png"
+                          />
+                          <img
+                            alt="tech bible"
+                            className="item-32360-1-iJH"
+                            src="/assets/-aLV.png"
+                          />
+                        </div>
+                      </div>
+                      <p className="followers">{tool.Likes}</p>
+                    </div>
                   </div>
-                </div>
-              ))
-            )}
-          </div>
+                ))
+              )}
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
         <img
           alt="tech bible"

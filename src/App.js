@@ -14,6 +14,7 @@ import {
 import ToolDetails from './pages/ToolDetails';
 import { AddTool } from './admin';
 import { useContext } from 'react';
+import { NewsContextProvider } from './context/NewsContext';
 
 
 function App() {
@@ -52,7 +53,11 @@ function App() {
         </ProtectedRoute>
       } />
 
-      <Route path='/News/:keyword' element=<NewsList /> />
+      <Route path='/News/:keyword' element={
+        <NewsContextProvider>
+        <NewsList />
+        </NewsContextProvider>
+      } />
       <Route path='/addTool' element=<AddTool /> />
       <Route path='/tools' element=<Tools /> />
     </Routes>

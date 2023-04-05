@@ -3,33 +3,33 @@ import axios from 'axios'
 import NewsItem  from './NewsItem'
 import { useParams } from 'react-router-dom'
 import {Navbar} from "../../layouts"
+import { useContext } from 'react'
+import { NewsContext } from '../../context/NewsContext'
 
 const NewsList = () => {
-    const [articles, setArticles] = useState([])
-    const { keyword } = useParams();
+    const { data } = useContext(NewsContext)
 
-    useEffect(() => {
-        const getArticles = async () => {
-            const response = await axios.get(`https://newsapi.org/v2/everything?q=${keyword}&apiKey=e7eb7131ce9941609ec6cddbd650f536`)
-            setArticles(response.data.articles)
-            console.log(response)
-        }
 
-        getArticles()
-    }, [])
+    useEffect(()=>{console.log(data)},[])
     return (
         <div className='home-page-SPw'>
         <Navbar />
-            {articles.map(article => {
+        <div className="News-title"><h1>Daily AI news</h1></div>
+          <div className="container">  
+          {data?.articles?.map(article => {
                 return(
+                    <div className='News-container'>
                     <NewsItem 
                         title={article.title}
                         description={article.description}
                         url={article.url}
                         urlToImage={article.urlToImage} 
                     />
+                    </div>
                 )
-            })}
+            })}:
+            <div className='loader'></div>
+            </div>
         </div>
     )
 }

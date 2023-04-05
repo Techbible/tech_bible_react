@@ -30,6 +30,7 @@ function AddTool() {
   const [Name, setName] = useState("");
   const [Description, setDescription] = useState("");
   const [URL, setURL] = useState("");
+  const [VideoURL, setVideoURL] = useState("");
   const [Pricing, setPricing] = useState("");
   const [Category, setCategory] = useState("");
   const [img, setImg] = useState(null);
@@ -84,6 +85,7 @@ function AddTool() {
               Name: Name,
               Description: Description,
               Price: Pricing,
+              VideoURL: VideoURL,
               URL: URL,
               CategoryID: Category,
               Likes: 0,
@@ -135,6 +137,11 @@ function AddTool() {
               type="text"
               onChange={(e) => setURL(e.target.value)}
               placeholder="embed URL : www.canvas.com"
+            />
+            <input
+              type="text"
+              onChange={(e) => setVideoURL(e.target.value)}
+              placeholder="embed The Video URL : www.tiktok.com/..."
             />
             <select
               name="categories"

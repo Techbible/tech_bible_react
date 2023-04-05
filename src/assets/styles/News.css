@@ -1,0 +1,47 @@
+.news-app {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    color:#fff;
+
+}
+
+.News-title{
+    margin: 4vh 0px;
+}
+.News-title h1{
+   font-size: 49px;
+   font-weight: 700;
+}
+
+.news-app a{
+    color: #5c6bc0;
+}
+
+.news-item {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid;
+    margin-bottom: 20px;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.news-img {
+    width: 300px;
+    margin: 0 !important;
+}
+
+.News-container, .container{
+    display: flex;
+    justify-content: space-evenly;
+    /* border: 1px solid #fff; */
+    flex-wrap: wrap;
+}
+
+
+
+.article-title{
+    margin: 20px 0px;
+}

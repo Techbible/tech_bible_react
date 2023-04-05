@@ -121,6 +121,12 @@
             }
         }
 
+        .image-overlay .delete-btn{
+            position: absolute;
+            top: 20px;
+            right:20px;
+            cursor: pointer;
+        }
 
         .card-image {
             position: relative;
