@@ -19,15 +19,25 @@ import { Navbar } from "../layouts";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
+import "../assets/styles/landingpage.css";
 function LandingPage() {
   const { currentUser } = useContext(AuthContext);
 
   const [authUser, setAuthUser] = useState(null);
+  //To store the fetched trending tools
   const [tools, setTools] = useState([]);
+
   const [FollowIcon, setFollowIcon] = useState(false);
+
+  //To store the searched value
   const [Search, setSearch] = useState("");
+
+  //to keep track either if the user is searching or not
   const [isSearching, setIsSearching] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+
+  //To store the results of the research
+  const [SearchedTool, setSearchedTool] = useState([]);
+
 
   const [userData, setUserData] = useState({
     pfp: "",
@@ -109,17 +119,17 @@ function LandingPage() {
       SearchedTools.push(doc.data());
     });
 
-    setTools(SearchedTools);
+    setSearchedTool(SearchedTools);
+    console.log(SearchedTool);
   };
 
   useEffect(() => {
     if (Search.length > 0) {
       setIsSearching(true);
       SearchTool();
-    }
-    else{
-      setIsSearching(false)
-      setTools([]);
+    } else {
+      setIsSearching(false);
+      setSearchedTool([]);
     }
   }, [Search]);
 
@@ -294,10 +304,63 @@ function LandingPage() {
                 </div>
               </div>
             </div>
+          ) : SearchedTool.length > 0 ? (
+            <div className="tools-section-ngu">
+              {SearchedTool?.map((tool) => (
+                <div className="adobe-xd-group-EJ1" key={tool.id}>
+                  <img
+                    alt="tech bible"
+                    className="adobe-xd-logo-GVb"
+                    src={tool.Icon}
+                  />
+                  <div className="auto-group-1hwv-Rmo">
+                    <Link to={`/ToolDetails/${tool.id}`}>
+                      <p className="adobe-xd-67F">{tool?.Name}</p>
+                    </Link>
+                    <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-iPX description">
+                      {tool?.Description}
+                    </p>
+                    <div className="auto-group-ebkb-hWM">
+                      <img
+                        alt="tech bible"
+                        className="layer1-xx5"
+                        src="/assets/layer1-xPw.png"
+                      />
+                      <p className="item-120-kd3">{tool?.Comments}</p>
+                      <p className="premium-mY9">{tool?.Price}</p>
+                      <p className="design-tool-oDw">{tool?.Category}</p>
+                    </div>
+                  </div>
+                  <div className="like-save-button-RFK">
+                    <div className="auto-group-l2sx-bp1">
+                      <img
+                        alt="tech bible"
+                        className="like-eGV"
+                        src={
+                          FollowIcon ? "/assets/like.png" : "/assets/liked.png"
+                        }
+                        onClick={() => setFollowIcon(!FollowIcon)}
+                      />
+                      <div className="save-3ZX">
+                        <img
+                          alt="tech bible"
+                          className="ellipse-4-v7X"
+                          src="/assets/ellipse-4-ray.png"
+                        />
+                        <img
+                          alt="tech bible"
+                          className="item-32360-1-iJH"
+                          src="/assets/-aLV.png"
+                        />
+                      </div>
+                    </div>
+                    <p className="followers">{tool.Likes}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           ) : (
-            tools?.map((tool)=>(
-              <div>{tool.Name}</div>
-            ))
+            <div className="not-found">Nothing Found</div>
           )}
 
           {!isSearching ? (
