@@ -20,6 +20,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 import "../assets/styles/landingpage.css";
+
 function LandingPage() {
   const { currentUser } = useContext(AuthContext);
 
@@ -34,10 +35,13 @@ function LandingPage() {
 
   //to keep track either if the user is searching or not
   const [isSearching, setIsSearching] = useState(false);
+  const [isFiltering, setIsFiltering] = useState(false);
 
   //To store the results of the research
   const [SearchedTool, setSearchedTool] = useState([]);
 
+  //storing the pricing choice
+  const [Pricing, setPricing] = useState("");
 
   const [userData, setUserData] = useState({
     pfp: "",
@@ -110,6 +114,7 @@ function LandingPage() {
     return listen();
   }, []);
 
+  //Searching for tools by name (fulltext search)
   const SearchTool = async () => {
     const SearchedTools = [];
 
@@ -123,6 +128,7 @@ function LandingPage() {
     console.log(SearchedTool);
   };
 
+  //keeping track on what's the user is searching for
   useEffect(() => {
     if (Search.length > 0) {
       setIsSearching(true);
@@ -133,22 +139,24 @@ function LandingPage() {
     }
   }, [Search]);
 
-  // Check if user has liked this tool on mount
-  // useEffect(() => {
-  //   const uid = firebase.auth().currentUser?.uid;
-  //   if (uid) {
-  //     db.collection("users")
-  //       .doc(uid)
-  //       .collection("LikedTools")
-  //       .doc(tool.id)
-  //       .get()
-  //       .then((doc) => {
-  //         if (doc.exists) {
-  //           setLiked(true);
-  //         }
-  //       });
-  //   }
-  // }, [tool]);
+useEffect(()=>{
+  handleFilter();
+},[Pricing])
+
+  // handling filter
+  const handleFilter =async () => {
+    const SearchedTools = [];
+
+    const q = query(collection(db, "Tools"), where("Pricing", "==", Pricing));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      SearchedTools.push(doc.data());
+    });
+
+    setSearchedTool(SearchedTools);
+    console.log(SearchedTool);
+  
+  };
 
   return (
     <div className="home-page-SPw">
@@ -202,32 +210,44 @@ function LandingPage() {
                 alt="tech bible"
                 className="filter-button-aUd"
                 src="/assets/filter-button.png"
+                onClick={() => setIsFiltering(!isFiltering)}
               />
             </div>
-            <div className="sub-header-nah">
-              <div className="auto-group-aplz-yv5">
-                <img
-                  alt="tech bible"
-                  className="chatgptlogo--V9f"
-                  src="/assets/chatgptlogo-.png"
-                />
-                <img
-                  alt="tech bible"
-                  className="canva-logo--rPX"
-                  src="/assets/canva-logo-.png"
-                />
-                <img
-                  alt="tech bible"
-                  className="adobe-suites-logo-Hzd"
-                  src="/assets/adobe-suites-logo.png"
-                />
+            {!isFiltering ? (
+              <div className="sub-header-nah">
+                <div className="auto-group-aplz-yv5">
+                  <img
+                    alt="tech bible"
+                    className="chatgptlogo--V9f"
+                    src="/assets/chatgptlogo-.png"
+                  />
+                  <img
+                    alt="tech bible"
+                    className="canva-logo--rPX"
+                    src="/assets/canva-logo-.png"
+                  />
+                  <img
+                    alt="tech bible"
+                    className="adobe-suites-logo-Hzd"
+                    src="/assets/adobe-suites-logo.png"
+                  />
+                </div>
+                <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-WcV">
+                  Browse 1000+ of the latest tech tools per task Updated daily
+                </p>
               </div>
-              <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-WcV">
-                Browse 1000+ of the latest tech tools per task Updated daily
-              </p>
-            </div>
+            ) : (
+              <div className="filter-box">
+                <select onChange={(e)=>setPricing(e.target.value)}>
+                  <option defaultChecked disabled>Pricing</option>
+                  <option value="Freemium">Freemium</option>
+                  <option value="Free">Free</option>
+                  <option value="Paid">Paid</option>
+                </select>
+              </div>
+            )}
           </div>
-          {!isSearching ? (
+          {(!isSearching || !isFiltering) ? (
             <div className="section-2-VMw">
               <div className="app-of-the-day-uRf">
                 <p className="app-of-the-day-MoT">App of the Day</p>
@@ -304,7 +324,8 @@ function LandingPage() {
                 </div>
               </div>
             </div>
-          ) : SearchedTool.length > 0 ? (
+          ) : 
+          SearchedTool.length > 0 ? (
             <div className="tools-section-ngu">
               {SearchedTool?.map((tool) => (
                 <div className="adobe-xd-group-EJ1" key={tool.id}>
