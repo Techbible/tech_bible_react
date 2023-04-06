@@ -57,8 +57,9 @@ const Profile = () => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "#000",
+      backgroundColor: "rgba(0,0,0,0.8)",
       color: "#fff",
+      borderRadius: "40px"
     },
   };
 
@@ -85,7 +86,7 @@ const Profile = () => {
     try {
       const UserRef = doc(db, "Users", userData.uid);
       const data = { interests: checkedInterests };
-       await updateDoc(UserRef, data)
+      await updateDoc(UserRef, data)
         .then((UserRef) => {
           console.log(
             "A New Document Field has been added to an existing document"
@@ -127,7 +128,7 @@ const Profile = () => {
       }
     });
 
-    //getting the categories
+    //getting the available categories
     const dbRef = collection(db, "Categories");
     onSnapshot(dbRef, (docsSnap) => {
       const CategoriesArray = [];
@@ -224,7 +225,6 @@ const Profile = () => {
             </div>
             <p className="sheesh-digital-marketing-and-graphic-design-adobe-suites-1kh">
               {userData.bio}
-
             </p>
             <div className="auto-group-nshf-mtH">
               <div className="auto-group-jzmb-aqj">About</div>
@@ -358,19 +358,20 @@ const Profile = () => {
                           </span>
                         </div>
                       </div>
-                    ) :
-                     <div >
-                      {userData.interests.map((i) => (<span className="Interest">{i}</span>))}
+                    ) : (
+                      <div className="Intrests-container">
+                        {userData.interests.map((i) => (
+                          <span className="Interest">{i}</span>
+                        ))}
                       </div>
-                    
-                  }
+                    )}
 
                     {updateInterests ? (
                       <div></div>
                     ) : (
                       <span
-                      onClick={openModal}
-                        className="profile-btn-outlined"
+                        onClick={openModal}
+                        className="profile-btn-outlined-2"
                       >
                         Edit
                       </span>
@@ -410,7 +411,7 @@ const Profile = () => {
                       <span
                         // onClick={() => setAddInterests(true)}
                         onClick={openModal}
-                        className="profile-btn-outlined"
+                        className="profile-btn-outlined-2"
                       >
                         + Add
                       </span>
@@ -552,10 +553,10 @@ const Profile = () => {
             ))}
           </div>
           <span
-            className="profile-btn-outlined"
+            className="profile-btn-outlined-3"
             onClick={handleInterestsChange}
           >
-            Submit
+            Save
           </span>
         </Modal>
       </div>
