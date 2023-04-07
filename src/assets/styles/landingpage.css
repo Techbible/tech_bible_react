@@ -5,3 +5,15 @@
     align-items: center;
 }
 
+.filter-box{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.combo-box{
+    padding: 5px;
+    width: 150px;
+    outline: none;
+
+}

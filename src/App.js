@@ -28,13 +28,20 @@ function App() {
     return children
   };
 
+  const CheckAdmin = ({ children }) => {
+    if (!currentUser.isAdmin) {
+      return <Navigate to="/" />;
+    }
+    return <Navigate to="/signin" />
+  };
+
   return (
     <Routes>
       <Route path='/' element=<LandingPage /> />
       <Route path='/signup' element=<SignUp /> />
       <Route path='/signin' element=<SignIn /> />
       <Route path='/profile' element=<Profile /> />
-      
+
       <Route path='/tools' element={
         <ProtectedRoute>
           <Tools />
@@ -55,11 +62,15 @@ function App() {
 
       <Route path='/News/:keyword' element={
         <NewsContextProvider>
-        <NewsList />
+          <NewsList />
         </NewsContextProvider>
       } />
       <Route path='/addTool' element=<AddTool /> />
-      <Route path='/tools' element=<Tools /> />
+      <Route path='/tools' element={
+        <CheckAdmin>
+          <Tools />
+        </CheckAdmin>
+      } />
     </Routes>
   );
 }

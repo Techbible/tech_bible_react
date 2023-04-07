@@ -140,6 +140,7 @@ function LandingPage() {
   }, [Search]);
 
 useEffect(()=>{
+  setIsFiltering(true)
   handleFilter();
 },[Pricing])
 
@@ -147,7 +148,7 @@ useEffect(()=>{
   const handleFilter =async () => {
     const SearchedTools = [];
 
-    const q = query(collection(db, "Tools"), where("Pricing", "==", Pricing));
+    const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       SearchedTools.push(doc.data());
@@ -238,8 +239,8 @@ useEffect(()=>{
               </div>
             ) : (
               <div className="filter-box">
-                <select onChange={(e)=>setPricing(e.target.value)}>
-                  <option defaultChecked disabled>Pricing</option>
+                <select className="combo-box" onChange={(e)=>setPricing(e.target.value)}>
+                  <option selected disabled>Pricing</option>
                   <option value="Freemium">Freemium</option>
                   <option value="Free">Free</option>
                   <option value="Paid">Paid</option>
@@ -247,7 +248,7 @@ useEffect(()=>{
               </div>
             )}
           </div>
-          {(!isSearching || !isFiltering) ? (
+          {(!isFiltering) ? (
             <div className="section-2-VMw">
               <div className="app-of-the-day-uRf">
                 <p className="app-of-the-day-MoT">App of the Day</p>
@@ -384,7 +385,7 @@ useEffect(()=>{
             <div className="not-found">Nothing Found</div>
           )}
 
-          {!isSearching ? (
+          {!isFiltering ? (
             <div className="tools-section-ngu">
               {!tools ? (
                 <h1 style={{ color: "#fff" }}>Loading</h1>
