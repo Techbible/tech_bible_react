@@ -248,7 +248,7 @@ useEffect(()=>{
               </div>
             )}
           </div>
-          {(!isFiltering) ? (
+          {!isFiltering ? (
             <div className="section-2-VMw">
               <div className="app-of-the-day-uRf">
                 <p className="app-of-the-day-MoT">App of the Day</p>
