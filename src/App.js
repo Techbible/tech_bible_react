@@ -4,36 +4,39 @@ import { AuthContext } from "./context/AuthContext";
 
 
 import {
-  LandingPage,
-  Profile,
-  SignIn,
-  SignUp,
-  Tools
+  LandingPage, Profile, SignIn, SignUp, Tools
 } from "./pages";
 
 import ToolDetails from './pages/ToolDetails';
 import { AddTool } from './admin';
 import { useContext } from 'react';
 import { NewsContextProvider } from './context/NewsContext';
+import { useEffect } from 'react';
+
 
 
 function App() {
 
-  const { currentUser } = useContext(AuthContext);
+
+  const { currentUser, isAdmin } = useContext(AuthContext);
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/signin" />;
     }
-    return children
+    return children;
   };
 
-  const CheckAdmin = ({ children }) => {
-    if (!currentUser.isAdmin) {
-      return <Navigate to="/" />;
-    }
-    return <Navigate to="/signin" />
-  };
+
+  // const CheckAdmin = ({ children }) => {
+  //   console.log("from routing",isAdmin)
+  //   if (!isAdmin) {
+  //     return <Navigate to="/" />;
+  //   }
+  //   return children;
+  // };
+
+
 
   return (
     <Routes>
@@ -65,11 +68,11 @@ function App() {
           <NewsList />
         </NewsContextProvider>
       } />
+
       <Route path='/addTool' element=<AddTool /> />
+
       <Route path='/tools' element={
-        <CheckAdmin>
           <Tools />
-        </CheckAdmin>
       } />
     </Routes>
   );

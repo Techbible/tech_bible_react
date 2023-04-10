@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar } from "../layouts";
 import { useState, useEffect } from "react";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import "../assets/styles/Tools.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
+
+
 function Tools() {
   const [tools, setTools] = useState();
   const [FollowIcon, setFollowIcon] = useState(false);
+  const [IsAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
+
+  const { currentUser, isAdmin } = useContext(AuthContext);
+
 
   useEffect(() => {
+    //Re-Checking if the user is admin or not
+    if(!isAdmin){
+      alert('access denied!')
+      navigate('/')
+    }
+
     //getting all the tools
     const dbRef = collection(db, "Tools");
     onSnapshot(dbRef, (docsSnap) => {
@@ -24,6 +38,8 @@ function Tools() {
     });
   }, []);
 
+
+
   const notify = (message) =>
     toast.success(message, {
       position: "top-center",
@@ -35,7 +51,7 @@ function Tools() {
       progress: undefined,
       theme: "dark",
     });
-
+//delete alert
   const deleteTool = (id) => {
     if(window.confirm('Are you sure that you want to delete this item?')) {
     deleteDoc(doc(db, "Tools", id))
@@ -60,7 +76,7 @@ function Tools() {
               </div>
               <div className="row row-cols-1 row-cols-md-3 g-4">
                 {tools?.map((tool) => (
-                  <div className="col">
+                  <div className="col" key={tool.id}>
                     <div className="card shadow-sm h-100">
                       <div className="card-image">
                         <img
@@ -73,7 +89,7 @@ function Tools() {
                             className="delete-btn"
                             onClick={() => deleteTool(tool.id)}
                           >
-                            <span class="material-symbols-outlined">
+                            <span className="material-symbols-outlined">
                               delete
                             </span>
                           </span>

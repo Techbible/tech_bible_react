@@ -66,15 +66,12 @@ const Profile = () => {
   Modal.setAppElement("#root");
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
-
   function openModal() {
     setIsOpen(true);
   }
-
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
   }
-
   function closeModal() {
     setIsOpen(false);
   }
@@ -172,24 +169,25 @@ const Profile = () => {
             <div className="auto-group-jkx1-qLZ">
               <p className="all-tools-cVj">All tools</p>
             </div>
-            <p className="submit-your-tool-Rbb">Submit your tool</p>
+            <Link to="/addTool"><p className="submit-your-tool-Rbb">Submit your tool</p></Link>
             <p className="resources-cvy">Resources</p>
             <p className="community-q33">Community</p>
-            <img
+           <a
+           href="https://www.tiktok.com/discover/TechBible?lang=en" target="_blank" rel="noreferrer"><img
               alt="pic"
               className="layer1-3uo"
               src="./assets/layer1-xyT.png"
-            />
-            <img
+            /></a> 
+            <a  href="https://www.youtube.com/channel/UCkyxFbFun3bjehZAdkVQgZw" title="Youtube" target="_blank" rel="noreferrer"><img
               alt="pic"
               className="white-youtube-icon-png-28-1-Cw7"
               src="./assets/white-youtube-icon-png-28-1.png"
-            />
-            <img
+            /></a>
+            <a href="https://www.instagram.com/my.techbible/" title="instagram" target="_blank" rel="noreferrer"><img
               alt="pic"
               className="pngfind-1-uU9"
               src="./assets/pngfind-1.png"
-            />
+            /></a>
             <div>
               {authUser ? (
                 <div className="user-info-container">
@@ -227,16 +225,13 @@ const Profile = () => {
               {userData.bio}
             </p>
             <div className="auto-group-nshf-mtH">
-              <div className="auto-group-jzmb-aqj">About</div>
               <div className="auto-group-sgto-To3">My List</div>
-              <div className="auto-group-3yw7-PaD">Share</div>
             </div>
           </div>
-          <div className="auto-group-cmjk-Jah">Folder</div>
         </div>
         <p className="welcome-Roj">WELCOME,</p>
         <p className="about-Djb">About</p>
-        <p className="recently-browsed-dYR">Recently browsed</p>
+        <p className="recently-browsed-dYR">Liked Posts</p>
         <div className="auto-group-zyow-V4q">
           <div className="auto-group-jo33-GE1">
             <div className="auto-group-lzzw-bGH">

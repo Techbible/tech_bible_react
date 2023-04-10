@@ -83,7 +83,7 @@ function LandingPage() {
 
         // console.log(user);
       } else {
-        navigate("/signin");
+        // navigate("/signin");
         setAuthUser(null);
       }
 
@@ -140,7 +140,6 @@ function LandingPage() {
   }, [Search]);
 
 useEffect(()=>{
-  setIsFiltering(true)
   handleFilter();
 },[Pricing])
 
