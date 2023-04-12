@@ -6,16 +6,31 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { Bio } from "../components";
 import { Link, useNavigate } from "react-router-dom";
-import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  limit,
+  onSnapshot,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import Modal from "react-modal";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import "../assets/styles/profile.css";
 
 const Profile = () => {
+  const { currentUser } = useContext(AuthContext);
+
   const [authUser, setAuthUser] = useState(null);
   const [addBio, setAddBio] = useState(false);
   const [addInterests, setAddInterests] = useState(true);
   const [updateBio, setUpdateBio] = useState(false);
   const [updateInterests, setUpdateInterests] = useState(false);
 
+  const [LikedTools, setLikedTools] = useState([]);
   const [interests, setIntersts] = useState(null);
   const [bio, setBio] = useState("");
   const [categories, setCategories] = useState();
@@ -59,7 +74,7 @@ const Profile = () => {
       transform: "translate(-50%, -50%)",
       backgroundColor: "rgba(0,0,0,0.8)",
       color: "#fff",
-      borderRadius: "40px"
+      borderRadius: "40px",
     },
   };
 
@@ -100,8 +115,32 @@ const Profile = () => {
   };
   //************************END Inserting Changes*********************************
 
+  //loading the liked tools by the currentUser
+  const LoadLikedTools = async () => {
+    const ToolsRef = collection(db, "Tools");
+    const LikedOnes = [];
+    const q = query(
+      ToolsRef,
+      where("LikedBy", "array-contains", currentUser?.uid),
+      limit(2)
+    );
+    try {
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        LikedOnes.push(doc.data());
+        setLikedTools(LikedOnes);
+        console.log(LikedTools);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //Verifying Sign in and loading users infos on load
   useEffect(() => {
+    LoadLikedTools();
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
@@ -133,7 +172,7 @@ const Profile = () => {
         // console.log(doc.data());
         CategoriesArray.push(doc.data());
       });
-      console.log(CategoriesArray);
+      // console.log(CategoriesArray);
       setCategories(CategoriesArray);
     });
 
@@ -169,25 +208,46 @@ const Profile = () => {
             <div className="auto-group-jkx1-qLZ">
               <p className="all-tools-cVj">All tools</p>
             </div>
-            <Link to="/addTool"><p className="submit-your-tool-Rbb">Submit your tool</p></Link>
+            <Link to="/addTool">
+              <p className="submit-your-tool-Rbb">Submit your tool</p>
+            </Link>
             <p className="resources-cvy">Resources</p>
             <p className="community-q33">Community</p>
-           <a
-           href="https://www.tiktok.com/discover/TechBible?lang=en" target="_blank" rel="noreferrer"><img
-              alt="pic"
-              className="layer1-3uo"
-              src="./assets/layer1-xyT.png"
-            /></a> 
-            <a  href="https://www.youtube.com/channel/UCkyxFbFun3bjehZAdkVQgZw" title="Youtube" target="_blank" rel="noreferrer"><img
-              alt="pic"
-              className="white-youtube-icon-png-28-1-Cw7"
-              src="./assets/white-youtube-icon-png-28-1.png"
-            /></a>
-            <a href="https://www.instagram.com/my.techbible/" title="instagram" target="_blank" rel="noreferrer"><img
-              alt="pic"
-              className="pngfind-1-uU9"
-              src="./assets/pngfind-1.png"
-            /></a>
+            <a
+              href="https://www.tiktok.com/discover/TechBible?lang=en"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                alt="pic"
+                className="layer1-3uo"
+                src="./assets/layer1-xyT.png"
+              />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UCkyxFbFun3bjehZAdkVQgZw"
+              title="Youtube"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                alt="pic"
+                className="white-youtube-icon-png-28-1-Cw7"
+                src="./assets/white-youtube-icon-png-28-1.png"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/my.techbible/"
+              title="instagram"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                alt="pic"
+                className="pngfind-1-uU9"
+                src="./assets/pngfind-1.png"
+              />
+            </a>
             <div>
               {authUser ? (
                 <div className="user-info-container">
@@ -354,8 +414,10 @@ const Profile = () => {
                       </div>
                     ) : (
                       <div className="Intrests-container">
-                        {userData.interests.map((i) => (
-                          <span className="Interest">{i}</span>
+                        {userData.interests.map((i, index) => (
+                          <span className="Interest" key={index}>
+                            {i}
+                          </span>
                         ))}
                       </div>
                     )}
@@ -416,105 +478,49 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <div className="auto-group-xkhf-yZf">
-          <div className="rectangle-87-Gof"></div>
-          <div className="auto-group-dhc1-B9w">
-            <p className="bibletech-iQm">BibleTech</p>
-            <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-2gM">
-              Browse 1000+ of the latest tech tools per task Updated daily
-            </p>
-          </div>
-        </div>
-      <div className="auto-group-3qfs-Jtm">
-          <img
-            alt="pic"
-            className="ec-ac1c-4a9c-a816-a1fb1882abbe-1-CjF"
-            src="./assets/ec-ac1c-4a9c-a816-a1fb1882abbe-1.png"
-          />
-          <div className="auto-group-rxhs-AZb">
-            <p className="flutter-flow-G6q">Flutter Flow</p>
-            <p className="build-native-android-and-ios-apps-without-code-yG9">
-              Build native Android and IOS apps without code
-            </p>
-            <div className="auto-group-u4dj-4YV">
-              <img
-                alt="pic"
-                className="layer1-P4y"
-                src="./assets/layer1-gzH.png"
-              />
-              <p className="item-120-UMK">120</p>
-              <p className="free-n77">Free</p>
-              <p className="no-code-tool-JLM">No Code tool</p>
-            </div>
-          </div>
-          <div className="auto-group-titd-QuB">
-            <img
-              alt="pic"
-              className="layer1-WBX"
-              src="./assets/layer1-z5b.png"
-            />
-            <p className="item-20-ogR">20</p>
-          </div>
-          <div className="group-25-5P3">
-            <img
-              alt="pic"
-              className="ellipse-4-xxd"
-              src="./assets/ellipse-4-izZ.png"
-            />
-            <img
-              alt="pic"
-              className="item-32360-1-4Vs"
-              src="./assets/-8tD.png"
-            />
-          </div>
-        </div>
-        <div className="auto-group-v261-ktV">
-          <img
-            alt="pic"
-            className="webflowlogoicon169218-1-rwX"
-            src="./assets/webflowlogoicon169218-1.png"
-          />
-          <div className="auto-group-zu1w-nKP">
-            <div className="auto-group-2eh3-t7X">
-              <div className="auto-group-mb3s-C8D">
-                <p className="webflow-Weh">WebFlow</p>
-                <p className="build-websites-without-code-p9b">
-                  Build websites without code
-                </p>
-              </div>
-              <div className="auto-group-dhg9-Ks3">
+      </div>
+
+      <div className="liked-tools-container">
+        {LikedTools ? (
+          LikedTools.map((LikedTool) => (
+            <div className="tool-container">
+              <img className="tool-logo" src={LikedTool.Icon} alt="" />
+              <div className="tool-data">
+              <Link to={`/ToolDetails/${LikedTool.id}`}> <div className="tool-title">{LikedTool.Name}</div></Link>
+                <div className="tool-description">{LikedTool.Description}</div>
+                <div className="tool-comments">
                 <img
-                  alt="pic"
-                  className="layer1-eeR"
-                  src="./assets/layer1-QJh.png"
-                />
-                <p className="item-120-WwX">120</p>
-                <p className="free-2ey">Free</p>
-                <p className="no-code-tool-YdK">No Code tool</p>
+                alt="tech bible"
+                className="layer1-xx5"
+                src="/assets/layer1-xPw.png"
+              />
+                {LikedTool.Comments}
+                </div>
+              </div>
+              <div className="tool-icons">
+               <img
+                          alt="tech bible"
+                          className="like-eGV"
+                          src="/assets/liked.png"
+                        />
+                        <div className="save-3ZX">
+                          <img
+                            alt="tech bible"
+                            className="ellipse-4-v7X"
+                            src="/assets/ellipse-4-ray.png"
+                          />
+                          <img
+                            alt="tech bible"
+                            className="item-32360-1-iJH"
+                            src="/assets/-aLV.png"
+                          />
+                        </div>
               </div>
             </div>
-            <div className="auto-group-wvnh-45s">
-              <img
-                alt="pic"
-                className="group-30-N6Z"
-                src="./assets/group-30.png"
-              />
-              <p className="item-20-Gxd">20</p>
-            </div>
-            <div className="group-26-Q3F">
-              <img
-                alt="pic"
-                className="ellipse-4-JPX"
-                src="./assets/ellipse-4-YPF.png"
-              />
-              <img
-                alt="pic"
-                className="item-32360-1-QhT"
-                src="./assets/-xwo.png"
-              />
-            </div>
-          </div>
-        </div>
+          ))
+        ) : (
+          <div>you didn't like any tools yet</div>
+        )}
       </div>
 
       <div>

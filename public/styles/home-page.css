@@ -23,7 +23,7 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
-  background-color: #0d0c12;
+  background-color: #1D1D1F;
 }
 .flex{
   display : flex;
@@ -322,7 +322,7 @@ a{
   line-height: 1.5;
   letter-spacing: 0.08rem;
   font-style: italic;
-  color: #1D1D1F;
+  color: #000000;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -820,7 +820,7 @@ a{
 .followers{
   color:#fff;
   /* text-align: center; */
-  margin-left: 5px;
+  margin-left: 9.4px;
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
@@ -1630,7 +1630,7 @@ a{
   line-height: 1.8461538462;
   letter-spacing: 0.065rem;
   font-style: italic;
-  color: #1D1D1F;
+  color: #000000;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   border: solid 0.1rem #F5F5F7;

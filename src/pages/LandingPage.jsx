@@ -395,7 +395,13 @@ function LandingPage() {
                       <img
                         alt="tech bible"
                         className="like-eGV"
-                        src={"/assets/like.png"}
+                        src={
+                          tool.LikedBy?.find(
+                            (user) => user === currentUser?.uid
+                          )
+                            ? "/assets/liked.png"
+                            : "/assets/like.png"
+                        }
                       />
                       <div className="save-3ZX">
                         <img
@@ -410,7 +416,7 @@ function LandingPage() {
                         />
                       </div>
                     </div>
-                    <p className="followers">TODO</p>
+                    <p className="followers">{tool.LikedBy.length}</p>
                   </div>
                 </div>
               ))}
