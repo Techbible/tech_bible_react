@@ -27,7 +27,7 @@ export const AuthContextProvider = ({ children }) => {
       if (user) {
         console.log(2, user);
         const userData = await onSnapshot(doc(db, "Users", user.uid), (doc) => {
-          console.log("from auth context",doc.data());
+          // console.log("from auth context",doc.data());
           setIsAdmin(doc.data().isAdmin);
         });
       }

@@ -1,5 +1,5 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { auth, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,13 +12,15 @@ import {
   query,
   limit,
   getDocs,
+  arrayUnion,
   where,
   updateDoc,
+  arrayRemove,
+  increment,
 } from "firebase/firestore";
 import { Navbar } from "../layouts";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-
 import "../assets/styles/landingpage.css";
 
 function LandingPage() {
@@ -27,8 +29,7 @@ function LandingPage() {
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
   const [tools, setTools] = useState([]);
-
-  const [FollowIcon, setFollowIcon] = useState(false);
+  const [toolsCopy, setToolsCopy] = useState([]);
 
   //To store the searched value
   const [Search, setSearch] = useState("");
@@ -99,7 +100,7 @@ function LandingPage() {
       //In case we will have more conditions in the future
       const q = query(
         collection(db, "Tools"),
-        where("Likes", ">=", 50),
+        // where("Likes", ">=", 50),
         limit(3)
       );
       const querySnapshot = await getDocs(q);
@@ -114,16 +115,17 @@ function LandingPage() {
     return listen();
   }, []);
 
+
+
   //Searching for tools by name (fulltext search)
+
   const SearchTool = async () => {
     const SearchedTools = [];
-
     const q = query(collection(db, "Tools"), where("Name", "==", Search));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       SearchedTools.push(doc.data());
     });
-
     setSearchedTool(SearchedTools);
     console.log(SearchedTool);
   };
@@ -139,12 +141,12 @@ function LandingPage() {
     }
   }, [Search]);
 
-useEffect(()=>{
-  handleFilter();
-},[Pricing])
+  useEffect(() => {
+    handleFilter();
+  }, [Pricing]);
 
-  // handling filter
-  const handleFilter =async () => {
+  // handling  by price
+  const handleFilter = async () => {
     const SearchedTools = [];
 
     const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
@@ -155,7 +157,39 @@ useEffect(()=>{
 
     setSearchedTool(SearchedTools);
     console.log(SearchedTool);
-  
+  };
+
+  //handling the likes/follow logic
+  const handleLikes = async (ToolId) => {
+    try {
+      const ToolRef = doc(db, "Tools", ToolId);
+      const UserRef = doc(db, "Users", currentUser.uid);
+      await updateDoc(ToolRef, {
+        LikedBy: arrayUnion(currentUser.uid),
+      });
+      await updateDoc(UserRef, {
+        LikedTools: arrayUnion(ToolId),
+      });
+      //  forceRender();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //handling unfollow logic
+  const handleUnLike = async (ToolId) => {
+    try {
+      const ToolRef = doc(db, "Tools", ToolId);
+      const UserRef = doc(db, "Users", currentUser.uid);
+      await updateDoc(ToolRef, {
+        LikedBy: arrayRemove(currentUser.uid),
+      });
+      await updateDoc(UserRef, {
+        LikedTools: arrayRemove(ToolId),
+      });
+      //  forceRender();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -238,8 +272,13 @@ useEffect(()=>{
               </div>
             ) : (
               <div className="filter-box">
-                <select className="combo-box" onChange={(e)=>setPricing(e.target.value)}>
-                  <option selected disabled>Pricing</option>
+                <select
+                  className="combo-box"
+                  onChange={(e) => setPricing(e.target.value)}
+                >
+                  <option selected disabled>
+                    Pricing
+                  </option>
                   <option value="Freemium">Freemium</option>
                   <option value="Free">Free</option>
                   <option value="Paid">Paid</option>
@@ -324,8 +363,7 @@ useEffect(()=>{
                 </div>
               </div>
             </div>
-          ) : 
-          SearchedTool.length > 0 ? (
+          ) : SearchedTool.length > 0 ? (
             <div className="tools-section-ngu">
               {SearchedTool?.map((tool) => (
                 <div className="adobe-xd-group-EJ1" key={tool.id}>
@@ -357,10 +395,7 @@ useEffect(()=>{
                       <img
                         alt="tech bible"
                         className="like-eGV"
-                        src={
-                          FollowIcon ? "/assets/like.png" : "/assets/liked.png"
-                        }
-                        onClick={() => setFollowIcon(!FollowIcon)}
+                        src={"/assets/like.png"}
                       />
                       <div className="save-3ZX">
                         <img
@@ -375,7 +410,7 @@ useEffect(()=>{
                         />
                       </div>
                     </div>
-                    <p className="followers">{tool.Likes}</p>
+                    <p className="followers">TODO</p>
                   </div>
                 </div>
               ))}
@@ -387,7 +422,7 @@ useEffect(()=>{
           {!isFiltering ? (
             <div className="tools-section-ngu">
               {!tools ? (
-                <h1 style={{ color: "#fff" }}>Loading</h1>
+                <h1 style={{ color: "#fff" }}>Loading...</h1>
               ) : (
                 tools.map((tool) => (
                   <div className="adobe-xd-group-EJ1" key={tool.id}>
@@ -420,11 +455,19 @@ useEffect(()=>{
                           alt="tech bible"
                           className="like-eGV"
                           src={
-                            FollowIcon
-                              ? "/assets/like.png"
-                              : "/assets/liked.png"
+                            tool.LikedBy?.find(
+                              (user) => user === currentUser?.uid
+                            )
+                              ? "/assets/liked.png"
+                              : "/assets/like.png"
                           }
-                          onClick={() => setFollowIcon(!FollowIcon)}
+                          onClick={() => {
+                            tool.LikedBy?.find(
+                              (user) => user === currentUser?.uid
+                            )
+                              ? handleUnLike(tool.id)
+                              : handleLikes(tool.id);
+                          }}
                         />
                         <div className="save-3ZX">
                           <img
@@ -439,7 +482,7 @@ useEffect(()=>{
                           />
                         </div>
                       </div>
-                      <p className="followers">{tool.Likes}</p>
+                      <p className="followers">{tool.LikedBy.length}</p>
                     </div>
                   </div>
                 ))

@@ -96,7 +96,7 @@ a{
   padding: 3rem 0.4rem 0.3rem 0.4rem;
   width: 5.1rem;
   height: 100%;
-  border: solid 0.2rem #ffffff;
+  border: solid 0.2rem #F5F5F7;
   flex-shrink: 0;
 }
 .home-page-SPw .nav-bar-viR .auto-group-hejw-bLh .tech-bible-logo-XNm .tech-bible-fdP {
@@ -104,7 +104,7 @@ a{
   font-size: 0.9rem;
   font-weight: 700;
   line-height: 1.0402272542;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Inter, 'Source Sans Pro';
 }
 .home-page-SPw .nav-bar-viR .auto-group-hejw-bLh .all-tools-ik5 {
@@ -113,7 +113,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.6;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -124,7 +124,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.6;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -135,7 +135,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.6;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -146,7 +146,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.6;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -192,13 +192,13 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.6;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid 0.1rem #ffffff;
+  border: solid 0.1rem #F5F5F7;
   box-sizing: border-box;
   border-radius: 0.6rem;
   flex-shrink: 0;
@@ -211,7 +211,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.6;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   display: flex;
@@ -262,7 +262,7 @@ a{
   font-size: 1.8rem;
   font-weight: 500;
   line-height: 1.3333333333;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -298,7 +298,7 @@ a{
   height: 100%;
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #F5F5F7;
   border-radius: 0.6rem;
   flex-shrink: 0;
 }
@@ -322,7 +322,7 @@ a{
   line-height: 1.5;
   letter-spacing: 0.08rem;
   font-style: italic;
-  color: #000000;
+  color: #1D1D1F;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -385,7 +385,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -403,7 +403,7 @@ a{
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -434,7 +434,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -444,7 +444,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -494,7 +494,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -505,7 +505,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -526,7 +526,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -536,7 +536,7 @@ a{
   position: absolute;
   left: 1rem;
   top: 0;
-  border: solid 0.1rem #ffffff;
+  border: solid 0.1rem #F5F5F7;
   box-sizing: border-box;
   border-radius: 0.6rem;
 }
@@ -559,7 +559,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -570,7 +570,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -592,7 +592,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -602,7 +602,7 @@ a{
   position: absolute;
   left: 0;
   top: 0;
-  border: solid 0.1rem #ffffff;
+  border: solid 0.1rem #F5F5F7;
   box-sizing: border-box;
   border-radius: 0.6rem;
 }
@@ -625,7 +625,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -636,7 +636,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -658,7 +658,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -668,7 +668,7 @@ a{
   position: absolute;
   left: 0;
   top: 0;
-  border: solid 0.1rem #ffffff;
+  border: solid 0.1rem #F5F5F7;
   box-sizing: border-box;
   border-radius: 0.6rem;
 }
@@ -714,7 +714,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -725,7 +725,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -747,7 +747,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -757,7 +757,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -766,7 +766,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -834,7 +834,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -873,7 +873,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -884,7 +884,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -906,7 +906,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -916,7 +916,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -926,7 +926,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -960,7 +960,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1018,7 +1018,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1029,7 +1029,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -1051,7 +1051,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1061,7 +1061,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1071,7 +1071,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1105,7 +1105,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1161,7 +1161,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1172,7 +1172,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -1194,7 +1194,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1204,7 +1204,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1213,7 +1213,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1247,7 +1247,7 @@ a{
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1299,7 +1299,7 @@ a{
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1310,7 +1310,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -1320,7 +1320,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -1330,7 +1330,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -1359,7 +1359,7 @@ a{
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1368,7 +1368,7 @@ a{
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   display: flex;
@@ -1379,7 +1379,7 @@ a{
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
 }
 .home-page-SPw .auto-group-7wa1-Yvh .right-section-m9o .community-TXj .auto-group-l2qm-X1o .trendy-posts-of-the-week-bfs .trendy-posts-of-the-week-bfs-sub-1 {
@@ -1420,7 +1420,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   display: flex;
@@ -1433,7 +1433,7 @@ a{
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
 }
 .home-page-SPw .auto-group-7wa1-Yvh .right-section-m9o .community-TXj .auto-group-j9hf-ZAm .auto-group-2zjd-MsK .auto-group-lnwz-WXF .published-by-r-rita64-2-hours-ago-BNV .published-by-r-rita64-2-hours-ago-BNV-sub-2 {
@@ -1443,7 +1443,7 @@ a{
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1476,7 +1476,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   display: flex;
@@ -1489,7 +1489,7 @@ a{
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
 }
 .home-page-SPw .auto-group-7wa1-Yvh .right-section-m9o .community-TXj .auto-group-j9hf-ZAm .auto-group-xfyf-51w .auto-group-qdjk-oEm .published-by-r-imane31-20-hours-ago-CGu .published-by-r-imane31-20-hours-ago-CGu-sub-2 {
@@ -1498,7 +1498,7 @@ a{
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1531,7 +1531,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   display: flex;
@@ -1544,7 +1544,7 @@ a{
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
 }
 .home-page-SPw .auto-group-7wa1-Yvh .right-section-m9o .community-TXj .auto-group-j9hf-ZAm .auto-group-ri8v-cG5 .auto-group-d9d7-PpZ .published-by-r-miro99-20-hours-ago-DHo .published-by-r-miro99-20-hours-ago-DHo-sub-2 {
@@ -1554,7 +1554,7 @@ a{
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1567,13 +1567,13 @@ a{
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.7142857143;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid 0.1rem #ffffff;
+  border: solid 0.1rem #F5F5F7;
   box-sizing: border-box;
   background-color: #181a1a;
   border-radius: 0.6rem;
@@ -1606,7 +1606,7 @@ a{
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -1616,7 +1616,7 @@ a{
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   flex-shrink: 0;
 }
@@ -1630,11 +1630,11 @@ a{
   line-height: 1.8461538462;
   letter-spacing: 0.065rem;
   font-style: italic;
-  color: #000000;
+  color: #1D1D1F;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
-  border: solid 0.1rem #ffffff;
-  background-color: #ffffff;
+  border: solid 0.1rem #F5F5F7;
+  background-color: #F5F5F7;
   border-radius: 0.6rem;
   flex-shrink: 0;
 }
@@ -1645,7 +1645,7 @@ a{
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.7142857143;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   display: flex;

@@ -22,7 +22,7 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
-  background-color: #000000;
+  background-color: #1D1D1F;
 }
 
 .sign-up_input{
@@ -52,7 +52,7 @@ body {
   padding: 3rem 0.4rem 0.3rem 0.4rem;
   width: 5.1rem;
   height: 100%;
-  border: solid 0.2rem #ffffff;
+  border: solid 0.2rem #F5F5F7;
   flex-shrink: 0;
 }
 .sign-up-i5B .auto-group-yw4r-Qyb .auto-group-gvnh-HXb .tech-bible-logo-YyK .tech-bible-pvq {
@@ -60,7 +60,7 @@ body {
   font-size: 0.9rem;
   font-weight: 700;
   line-height: 1.0402272542;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Inter, 'Source Sans Pro';
 }
 .sign-up-i5B .auto-group-yw4r-Qyb .auto-group-gvnh-HXb .you-already-have-an-account--tA1 {
@@ -69,7 +69,7 @@ body {
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.6;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -82,7 +82,7 @@ body {
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.6;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
   display: flex;
@@ -124,7 +124,7 @@ body {
   font-size: 1.1rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -137,7 +137,7 @@ body {
   font-size: 2.4rem;
   font-weight: 500;
   line-height: 1;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -161,7 +161,7 @@ body {
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -174,7 +174,7 @@ body {
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -187,7 +187,7 @@ body {
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -200,7 +200,7 @@ body {
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -222,7 +222,7 @@ body {
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 1.6;
-  color: #ffffff;
+  color: #F5F5F7;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -232,7 +232,7 @@ body {
   position: absolute;
   left: 52.95rem;
   top: 21rem;
-  background-color: #ffffff;
+  background-color: #F5F5F7;
   border-radius: 0.6rem;
 }
 .sign-up-i5B .auto-group-kmcz-SjF .rectangle-101-4E9 {
@@ -241,7 +241,7 @@ body {
   position: absolute;
   left: 52.95rem;
   top: 29.6rem;
-  background-color: #ffffff;
+  background-color: #F5F5F7;
   border-radius: 0.6rem;
 }
 .sign-up-i5B .auto-group-kmcz-SjF .rectangle-66-kcm {
@@ -250,7 +250,7 @@ body {
   position: absolute;
   left: 52.95rem;
   top: 12.4rem;
-  background-color: #ffffff;
+  background-color: #F5F5F7;
   border-radius: 0.6rem;
 }
 .sign-up-i5B .auto-group-kmcz-SjF .full-name-rA1 {
@@ -264,7 +264,7 @@ body {
   line-height: 1.7142857143;
   letter-spacing: 0.07rem;
   font-style: italic;
-  color: #000000;
+  color: #1D1D1F;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -279,7 +279,7 @@ body {
   line-height: 1.7142857143;
   letter-spacing: 0.07rem;
   font-style: italic;
-  color: #000000;
+  color: #1D1D1F;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }
@@ -294,7 +294,7 @@ body {
   line-height: 1.7142857143;
   letter-spacing: 0.07rem;
   font-style: italic;
-  color: #000000;
+  color: #1D1D1F;
   font-family: Poppins, 'Source Sans Pro';
   white-space: nowrap;
 }

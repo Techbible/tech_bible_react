@@ -229,9 +229,8 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <p className="welcome-Roj">WELCOME,</p>
         <p className="about-Djb">About</p>
-        <p className="recently-browsed-dYR">Liked Posts</p>
+        <p className="recently-browsed-dYR">Liked Tools</p>
         <div className="auto-group-zyow-V4q">
           <div className="auto-group-jo33-GE1">
             <div className="auto-group-lzzw-bGH">
@@ -426,7 +425,7 @@ const Profile = () => {
             </p>
           </div>
         </div>
-        <div className="auto-group-3qfs-Jtm">
+      <div className="auto-group-3qfs-Jtm">
           <img
             alt="pic"
             className="ec-ac1c-4a9c-a816-a1fb1882abbe-1-CjF"
