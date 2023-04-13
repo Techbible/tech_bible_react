@@ -1,9 +1,7 @@
-import React, { useEffect, useReducer, useState, forwardRef, useImperativeHandle  } from "react";
-import { auth, db } from "../firebase";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useReducer, forwardRef, useImperativeHandle  } from "react";
+import { db } from "../firebase";
 import "react-toastify/dist/ReactToastify.css";
 import {
-  collection,
   doc,
   arrayUnion,
   updateDoc,
@@ -18,8 +16,6 @@ import { AuthContext } from "../context/AuthContext";
 const LikeMethods = forwardRef((props, ref) => {
     const { currentUser } = useContext(AuthContext);
     
-    const [reducerValue,forceRender] = useReducer(x => x+1,0);
-
   //handling the likes/follow logic
   const handleLikes = async (ToolId) => {
     try {
@@ -27,7 +23,6 @@ const LikeMethods = forwardRef((props, ref) => {
       await updateDoc(ToolRef, {
         LikedBy: arrayUnion(currentUser.uid),
       });
-       forceRender();
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +36,6 @@ const LikeMethods = forwardRef((props, ref) => {
         LikedBy: arrayRemove(currentUser.uid),
       });
 
-       forceRender();
     } catch (error) {
       console.log(error);
     }

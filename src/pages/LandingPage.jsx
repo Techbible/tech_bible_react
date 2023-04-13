@@ -105,9 +105,7 @@ const LandingPage = () =>{
       } else {
         notify("Welcome to the community! 👋🏻");
       }
-
       const ToolsArray = [];
-
       //In case we will have more conditions in the future
       const q = query(
         collection(db, "Tools"),
@@ -119,14 +117,10 @@ const LandingPage = () =>{
         // console.log(doc.id, " => ", doc.data());
         ToolsArray.push(doc.data());
       });
-
       setTools(ToolsArray);
     });
-
     return listen();
   }, [reducerValue]);
-
-
 
   //Searching for tools by name (fulltext search)
 
@@ -159,7 +153,6 @@ const LandingPage = () =>{
   // handling  by price
   const handleFilter = async () => {
     const SearchedTools = [];
-
     const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {

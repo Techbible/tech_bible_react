@@ -139,7 +139,7 @@ const Profile = () => {
     const q = query(
       ToolsRef,
       where("LikedBy", "array-contains", currentUser?.uid),
-      limit(2)
+      limit(10)
     );
     try {
       const querySnapshot = await getDocs(q);
