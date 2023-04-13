@@ -1,5 +1,5 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState, forwardRef, useImperativeHandle  } from "react";
 import { auth, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -23,8 +23,11 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "../assets/styles/landingpage.css";
 
-function LandingPage() {
+const LandingPage = forwardRef((props, ref) =>{
   const { currentUser } = useContext(AuthContext);
+
+
+
 
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
@@ -196,7 +199,25 @@ function LandingPage() {
     } catch (error) {
       console.log(error);
     }
+
   };
+
+
+  /********************************Malking the methods exportable START***************************** */
+    // create our ref object
+    const publicRef = {
+      // Referencing our methods
+      handleLikes: handleLikes(),
+      handleUnlike : handleUnLike(),
+      hello() {
+        alert('hello');
+      }
+    };
+
+  // pass the ref and a function that returns our object
+  useImperativeHandle(ref, () => publicRef);
+
+/********************************Malking the methods exportable END******************************* */
 
   return (
     <div className="home-page-SPw">
@@ -631,6 +652,6 @@ function LandingPage() {
       </div>
     </div>
   );
-}
+});
 
 export default LandingPage;

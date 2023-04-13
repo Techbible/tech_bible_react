@@ -2,7 +2,7 @@
 
 //Imports
 import { onAuthStateChanged } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { auth, db } from "../firebase";
 import { Bio } from "../components";
 import { Link, useNavigate } from "react-router-dom";
@@ -21,7 +21,37 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "../assets/styles/profile.css";
 
-const Profile = () => {
+import LandingPage from "./LandingPage";
+
+
+
+
+
+
+const Profile = (props) => {
+
+/*****************************Importing Ready Methods START******************************* */
+  // create a ref to pass
+  const LandingPageRef = useRef(null);
+
+  const landingPage = <LandingPage ref={ LandingPageRef } />;
+
+
+  const wrapperFunction = () => {
+    // check that the ref exists to avoid errors
+    if (!LandingPageRef.current) return;
+
+    LandingPageRef.current.hello();
+  }
+
+
+/*****************************Importing Ready Methods END******************************* */
+
+
+
+
+
+
   const { currentUser } = useContext(AuthContext);
 
   const [authUser, setAuthUser] = useState(null);
@@ -193,6 +223,7 @@ const Profile = () => {
 
   return (
     <div>
+    <button onClick={ () => LandingPageRef.current.hello() }>Hello</button>
       <div className="profile-about-NVb">
         <div className="auto-group-q16m-m1w">
           <Link to="/">
