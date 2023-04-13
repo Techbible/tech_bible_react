@@ -92,6 +92,7 @@
     flex-shrink: 0;
     margin: 0.2rem 1.6rem 0rem 0rem;
     width: 2.4rem;
+    cursor: pointer;
 }
 
 .liked-tools-container .tool-container .tool-icons .save-3ZX{

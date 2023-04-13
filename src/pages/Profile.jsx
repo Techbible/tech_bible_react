@@ -2,7 +2,7 @@
 
 //Imports
 import { onAuthStateChanged } from "firebase/auth";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useReducer } from "react";
 import { auth, db } from "../firebase";
 import { Bio } from "../components";
 import { Link, useNavigate } from "react-router-dom";
@@ -21,34 +21,18 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "../assets/styles/profile.css";
 
-import LandingPage from "./LandingPage";
+import { LikeMethods } from "../Methods";
 
 
 
 
 
 
-const Profile = (props) => {
+const Profile = () => {
 
 /*****************************Importing Ready Methods START******************************* */
-  // create a ref to pass
-  const LandingPageRef = useRef(null);
-
-  const landingPage = <LandingPage ref={ LandingPageRef } />;
-
-
-  const wrapperFunction = () => {
-    // check that the ref exists to avoid errors
-    if (!LandingPageRef.current) return;
-
-    LandingPageRef.current.hello();
-  }
-
-
-/*****************************Importing Ready Methods END******************************* */
-
-
-
+  // referencing our methods
+  const LikeMethodsRef = useRef(null);
 
 
 
@@ -65,6 +49,8 @@ const Profile = (props) => {
   const [bio, setBio] = useState("");
   const [categories, setCategories] = useState();
   const [checkedInterests, setcheckedInterests] = useState([]);
+
+  const [reducerValue,forceRender] = useReducer(x => x+1,0);
 
   const navigate = useNavigate();
 
@@ -111,6 +97,7 @@ const Profile = (props) => {
   Modal.setAppElement("#root");
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
+
   function openModal() {
     setIsOpen(true);
   }
@@ -168,6 +155,10 @@ const Profile = (props) => {
     }
   };
 
+  useEffect(()=>{
+    LoadLikedTools()
+  },[reducerValue]);
+
   //Verifying Sign in and loading users infos on load
   useEffect(() => {
     LoadLikedTools();
@@ -221,9 +212,14 @@ const Profile = (props) => {
     }
   };
 
+  const handleUnlike = (toolID)=>{
+    LikeMethodsRef.current.Unlike(toolID)
+    forceRender();
+  }
+
   return (
     <div>
-    <button onClick={ () => LandingPageRef.current.hello() }>Hello</button>
+    <LikeMethods ref={LikeMethodsRef}/>
       <div className="profile-about-NVb">
         <div className="auto-group-q16m-m1w">
           <Link to="/">
@@ -530,9 +526,12 @@ const Profile = (props) => {
               </div>
               <div className="tool-icons">
                <img
-                          alt="tech bible"
-                          className="like-eGV"
-                          src="/assets/liked.png"
+                  alt="tech bible"
+                  className="like-eGV"
+                  src="/assets/liked.png"
+                  title="unfollow"
+                  onClick={()=>handleUnlike(LikedTool.id)}
+
                         />
                         <div className="save-3ZX">
                           <img

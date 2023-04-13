@@ -10,15 +10,16 @@ const Parent = () => {
 //   const landingPage = <Child ref={ ChildRef } />;
 
 
-  const wrapperFunction = () => {
-    // check that the ref exists to avoid errors
-    if (!ChildRef.current) return alert('ouf');
+  // const wrapperFunction = () => {
+  //   // check that the ref exists to avoid errors
+  //   if (!ChildRef.current) return alert('ouf');
 
-    ChildRef.current.hello();
-  }
+  //   ChildRef.current.hello();
+  // }
 
 
 /*****************************Importing Ready Methods END******************************* */
+
   return (
     <div>
     <Child ref={ ChildRef } />
@@ -26,7 +27,7 @@ const Parent = () => {
     Lorem ipsum dolor sit amet consectetur adipisicing elit.
      Repellendus, distinctio, eum ad quia consequatur ab unde et autem sunt a incidunt dolorum. Dolore est exercitationem vel nesciunt et eaque ab.
      </h1>
-     <button onClick={ () => ChildRef.current.hello("Mordred") }>Hello</button>
+     <button onClick={ () => ChildRef.current.hello("Mordred")}>Hello</button>
     </div>
   )
 }

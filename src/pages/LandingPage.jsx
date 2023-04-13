@@ -1,5 +1,5 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import React, { useEffect, useReducer, useState, forwardRef, useImperativeHandle  } from "react";
+import React, { useEffect, useReducer, useState, forwardRef, useImperativeHandle, useRef  } from "react";
 import { auth, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -22,9 +22,12 @@ import { Navbar } from "../layouts";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "../assets/styles/landingpage.css";
+import { LikeMethods } from "../Methods";
 
-const LandingPage = forwardRef((props, ref) =>{
+
+const LandingPage = () =>{
   const { currentUser } = useContext(AuthContext);
+  const LikeMethodsRef = useRef(null);
 
 
 
@@ -167,57 +170,17 @@ const LandingPage = forwardRef((props, ref) =>{
     console.log(SearchedTool);
   };
 
-  //handling the likes/follow logic
-  const handleLikes = async (ToolId) => {
-    try {
-      const ToolRef = doc(db, "Tools", ToolId);
-      const UserRef = doc(db, "Users", currentUser.uid);
-      await updateDoc(ToolRef, {
-        LikedBy: arrayUnion(currentUser.uid),
-      });
-      await updateDoc(UserRef, {
-        LikedTools: arrayUnion(ToolId),
-      });
-       forceRender();
-      setUpdated(1);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //handling unfollow logic
-  const handleUnLike = async (ToolId) => {
-    try {
-      const ToolRef = doc(db, "Tools", ToolId);
-      const UserRef = doc(db, "Users", currentUser.uid);
-      await updateDoc(ToolRef, {
-        LikedBy: arrayRemove(currentUser.uid),
-      });
-      await updateDoc(UserRef, {
-        LikedTools: arrayRemove(ToolId),
-      });
-       forceRender();
-    } catch (error) {
-      console.log(error);
-    }
-
-  };
+  const handleUnLikes = (toolID)=>{
+    LikeMethodsRef.current.Unlike(toolID)
+    forceRender();
+  }
+  const handleLikes = (toolID)=>{
+    LikeMethodsRef.current.Like(toolID)
+    forceRender();
+  }
 
 
-  /********************************Malking the methods exportable START***************************** */
-    // create our ref object
-    const publicRef = {
-      // Referencing our methods
-      handleLikes: handleLikes(),
-      handleUnlike : handleUnLike(),
-      hello() {
-        alert('hello');
-      }
-    };
 
-  // pass the ref and a function that returns our object
-  useImperativeHandle(ref, () => publicRef);
-
-/********************************Malking the methods exportable END******************************* */
 
   return (
     <div className="home-page-SPw">
@@ -234,6 +197,8 @@ const LandingPage = forwardRef((props, ref) =>{
         pauseOnHover
         theme="dark"
       />
+     <LikeMethods ref={LikeMethodsRef}/>
+
       <div className="auto-group-7wa1-Yvh">
         <div className="auto-group-8r4h-YpD">
           <div className="header-Lk5">
@@ -498,7 +463,7 @@ const LandingPage = forwardRef((props, ref) =>{
                             tool.LikedBy?.find(
                               (user) => user === currentUser?.uid
                             )
-                              ? handleUnLike(tool.id)
+                              ? handleUnLikes(tool.id)
                               : handleLikes(tool.id);
                           }}
                         />
@@ -652,6 +617,6 @@ const LandingPage = forwardRef((props, ref) =>{
       </div>
     </div>
   );
-});
+};
 
 export default LandingPage;
