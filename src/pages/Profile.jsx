@@ -285,7 +285,7 @@ const Profile = () => {
               {userData.bio}
             </p>
             <div className="auto-group-nshf-mtH">
-              <div className="auto-group-sgto-To3">My List</div>
+              <Link to='/list'><div className="auto-group-sgto-To3">My List</div></Link>
             </div>
           </div>
         </div>

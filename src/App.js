@@ -4,7 +4,7 @@ import { AuthContext } from "./context/AuthContext";
 
 
 import {
-  LandingPage, Profile, SignIn, SignUp, Tools
+  LandingPage, Profile, SignIn, SignUp, Tools, UserList
 } from "./pages";
 
 import ToolDetails from './pages/ToolDetails';
@@ -44,6 +44,7 @@ function App() {
       <Route path='/signup' element=<SignUp /> />
       <Route path='/signin' element=<SignIn /> />
       <Route path='/profile' element=<Profile /> />
+      <Route path='//list' element=<UserList /> />
 
       <Route path='/tools' element={
         <ProtectedRoute>

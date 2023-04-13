@@ -31,6 +31,8 @@ function LandingPage() {
   const [tools, setTools] = useState([]);
   const [toolsCopy, setToolsCopy] = useState([]);
 
+  const [updated,setUpdated] = useState(0)
+
   //To store the searched value
   const [Search, setSearch] = useState("");
 
@@ -43,6 +45,9 @@ function LandingPage() {
 
   //storing the pricing choice
   const [Pricing, setPricing] = useState("");
+
+  //to force Re-render
+  const [reducerValue,forceRender] = useReducer(x => x+1,0);
 
   const [userData, setUserData] = useState({
     pfp: "",
@@ -113,7 +118,7 @@ function LandingPage() {
     });
 
     return listen();
-  }, []);
+  }, [reducerValue]);
 
 
 
@@ -170,7 +175,8 @@ function LandingPage() {
       await updateDoc(UserRef, {
         LikedTools: arrayUnion(ToolId),
       });
-      //  forceRender();
+       forceRender();
+      setUpdated(1);
     } catch (error) {
       console.log(error);
     }
@@ -186,7 +192,7 @@ function LandingPage() {
       await updateDoc(UserRef, {
         LikedTools: arrayRemove(ToolId),
       });
-      //  forceRender();
+       forceRender();
     } catch (error) {
       console.log(error);
     }
