@@ -126,6 +126,7 @@ const Profile = () => {
         });
       setAddInterests(false);
       setUpdateInterests(false);
+      closeModal();
     } catch (error) {
       console.log(error);
     }
@@ -575,7 +576,7 @@ const Profile = () => {
                     type={"checkbox"}
                     value={`${categorie.Category}`}
                     onChange={(e) => handleInterestCheck(e)}
-                  />{" "}
+                    checked={checkedInterests.includes(`${categorie.Category}`) ? true : null}/>
                   &nbsp;
                   {categorie.Category}
                 </span>

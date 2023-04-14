@@ -5,7 +5,6 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
 
 import {
-  arrayUnion,
   collection,
   doc,
   onSnapshot,

@@ -7,6 +7,7 @@ import {
   limit,
   onSnapshot,
   query,
+  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -18,9 +19,13 @@ import { db } from "../firebase";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../assets/styles/profile.css";
+import Modal from "react-modal";
 
 const UserList = () => {
   const { currentUser } = useContext(AuthContext);
+  const [categories, setCategories] = useState([]);
+  const [Category, setCategory] = useState("");
+  const [Name, setName] = useState('');
 
   const [LikedTools, setLikedTools] = useState([]);
 
@@ -51,14 +56,86 @@ const UserList = () => {
     }
     // console.log("xxx", LikedTools);
   };
+
+
+  const createFolder = async() =>{
+    try{
+    await setDoc(doc(db, "Users", currentUser?.uid), 
+    {
+      folders : [
+        {
+          name : Name,
+          category : Category,
+          tools : []
+        }
+      ]
+    }
+    );
+  }
+  catch(error){
+    console.log(error)
+  }
+
+  }
+
+
+  const getCategories = () => {
+    //getting the categories
+    const dbRef = collection(db, "Categories");
+    onSnapshot(dbRef, (docsSnap) => {
+      const CategoriesArray = [];
+      docsSnap.forEach((doc) => {
+        // console.log(doc.data());
+        CategoriesArray.push(doc.data());
+      });
+      setCategories(CategoriesArray);
+      console.log(categories);
+    });
+  };
+
   useEffect(() => {
     LoadLikedTools();
+    getCategories()
   }, []);
+
+
+  //_______________________________Modal Configs_____________________________________________
+  //Modal Styles
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "rgba(0,0,0,0.8)",
+      color: "#fff",
+      borderRadius: "40px",
+    },
+  };
+
+  Modal.setAppElement("#root");
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
+  //*************************END Modal Configs*********************************
 
   return (
     <div className="home-page-SPw">
       <Navbar />
-      <div className="create-folder">+ create a new folder</div>
+      <div className="create-folder" onClick={openModal}>
+        + create a new folder
+      </div>
       <div className="lists-container">
         <div className="tools-list-container">
           {LikedTools ? (
@@ -107,6 +184,44 @@ const UserList = () => {
             <div>you didn't like any tools yet</div>
           )}
         </div>
+      </div>
+
+      <div>
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
+            Create a <span className="under-line">New folder</span>{" "}
+          </h2>
+          <span id="close-button" onClick={closeModal}>
+            X
+          </span>
+          <div className="flex inner-modal mt-5">
+            <div className="flex m-5">
+              {" "}
+              <h4>Folder Name : </h4>{" "}
+              <input type="text" className="folder-input" onChange={(e)=>setName(e.target.value)} placeholder="Enter a name..." />
+            </div>
+            <div className="flex m-5">
+              {" "}
+              <h4>Folder Category : </h4>
+              <select className="folder-input"
+              name="categories"
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option>Select a Category</option>
+              {categories?.map((c) => (
+                <option value={c.id}>{c.Category}</option>
+              ))}
+            </select>
+            </div>
+          </div>
+          <span className="profile-btn-outlined-3 mt-5" onClick={()=>createFolder}>+ create</span>
+        </Modal>
       </div>
     </div>
   );
