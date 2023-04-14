@@ -57,7 +57,7 @@ function SignUp() {
           username : FullName,
           bio : "",
           interests : [],
-          list : [],
+          folders : [],
           photo: "https://picsum.photos/200",
           isAdmin : false,
           timestamp:Timestamp.now()
@@ -77,7 +77,7 @@ function SignUp() {
         username : data.user.displayName,
         bio : "",
         interests : [],
-        list : [],
+        folders : [],
         photo: data.user.photoURL,
         isAdmin : false,
         timestamp:Timestamp.now()

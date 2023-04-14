@@ -12,7 +12,6 @@ import { AddTool } from './admin';
 import { useContext } from 'react';
 import { NewsContextProvider } from './context/NewsContext';
 import { useEffect } from 'react';
-import Parent from './Experiments/Parent';
 
 
 
@@ -75,9 +74,6 @@ function App() {
 
       <Route path='/tools' element={
           <Tools />
-      } />
-      <Route path='/testing' element={
-          <Parent />
       } />
     </Routes>
   );
