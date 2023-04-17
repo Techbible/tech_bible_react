@@ -131,6 +131,13 @@ const Profile = () => {
       console.log(error);
     }
   };
+
+  const editInterests = ()=>{
+    let userInterests = userData.interests
+    setcheckedInterests(userInterests)
+    console.log('User Interests ' + checkedInterests)
+    openModal()
+  }
   //************************END Inserting Changes*********************************
 
   //loading the liked tools by the currentUser
@@ -454,7 +461,7 @@ const Profile = () => {
                       <div></div>
                     ) : (
                       <span
-                        onClick={openModal}
+                        onClick={editInterests}
                         className="profile-btn-outlined-2"
                       >
                         Edit
