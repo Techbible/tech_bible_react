@@ -573,8 +573,8 @@ const Profile = () => {
             X
           </span>
           <div className="flex inner-modal">
-            {categories?.map((categorie,index) => (
-              <div className="flex interests-wrapper" key={index}>
+            {categories?.map((categorie) => (
+              <div className="flex interests-wrapper">
                 <span className="Interest">
                   <input
                     type={"checkbox"}
