@@ -1,8 +1,12 @@
-<h2>├── public/                index.html, global assets, favicon..</h2>
-<h2>├── src/                     # Source files (pages, components, app provider(s),components assets)</h2>
-<h2>├── .env                    #the app's env variables</h2>
-<h2>└── README.md </h2><br>
 
+### A typical top-level directory layout
+
+    .
+    ├── public/                 #index.html, global assets, favicon..
+    ├── src/                    # Source files (pages, components, app provider(s),components assets)
+    ├── .env                    #the app's env variables
+    └── README.md
+<br>
 
 <b>Routes</b> : Go to <b>src/App.js</b> to find all the routes of the application. 
 <br><br>
