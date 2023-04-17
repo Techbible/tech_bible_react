@@ -149,8 +149,8 @@ function AddTool() {
               onChange={(e) => setCategory(e.target.value)}
             >
               <option>Select a Category</option>
-              {categories?.map((c) => (
-                <option value={c.id}>{c.Category}</option>
+              {categories?.map((c,index) => (
+                <option value={c.id} key={index}>{c.Category}</option>
               ))}
             </select>
             <textarea

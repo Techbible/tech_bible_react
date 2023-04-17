@@ -21,7 +21,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "../assets/styles/profile.css";
 
-import { LikeMethods } from "../Methods";
+import { LikeMethods } from "../Global Methods";
 
 
 
@@ -72,7 +72,7 @@ const Profile = () => {
       interests = checkedInterests;
       interests.push(value);
       setcheckedInterests(interests);
-      console.log(checkedInterests);
+      // console.log(checkedInterests);
     } else {
       interests = interests.filter((interest) => interest !== value);
       setcheckedInterests(interests);
@@ -135,7 +135,7 @@ const Profile = () => {
   const editInterests = ()=>{
     let userInterests = userData.interests
     setcheckedInterests(userInterests)
-    console.log('User Interests ' + checkedInterests)
+    // console.log('User Interests ' + checkedInterests)
     openModal()
   }
   //************************END Inserting Changes*********************************
@@ -153,10 +153,10 @@ const Profile = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
         LikedOnes.push(doc.data());
         setLikedTools(LikedOnes);
-        console.log(LikedTools);
+        // console.log(LikedTools);
       });
     } catch (error) {
       console.log(error);
@@ -240,9 +240,6 @@ const Profile = () => {
             </div>
           </Link>
           <div className="auto-group-nrn5-Tau">
-            <div className="auto-group-jkx1-qLZ">
-              <p className="all-tools-cVj">All tools</p>
-            </div>
             <Link to="/addTool">
               <p className="submit-your-tool-Rbb">Submit your tool</p>
             </Link>
@@ -576,8 +573,8 @@ const Profile = () => {
             X
           </span>
           <div className="flex inner-modal">
-            {categories?.map((categorie) => (
-              <div className="flex interests-wrapper">
+            {categories?.map((categorie,index) => (
+              <div className="flex interests-wrapper" key={index}>
                 <span className="Interest">
                   <input
                     type={"checkbox"}

@@ -16,9 +16,9 @@ const NewsList = () => {
         <Navbar />
         <div className="News-title"><h1>Daily AI news</h1></div>
           <div className="container">  
-          {data?.articles?.map(article => {
+          {data?.articles?.map((article,index) => {
                 return(
-                    <div className='News-container'>
+                    <div className='News-container' key={index}>
                     <NewsItem 
                         title={article.title}
                         description={article.description}
