@@ -25,7 +25,7 @@ const UserList = () => {
   const { currentUser } = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
   const [Category, setCategory] = useState("");
-  const [Name, setName] = useState('');
+  const [Name, setName] = useState("");
 
   const [LikedTools, setLikedTools] = useState([]);
 
@@ -42,7 +42,7 @@ const UserList = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
 
         // setLikedTools([...LikedTools, doc.data()]);
         // setLikedTools(LikedTools.concat(doc.data()));
@@ -57,27 +57,31 @@ const UserList = () => {
     // console.log("xxx", LikedTools);
   };
 
+  const createFolder = async () => {
+    // alert("lvl 0");
+    try {
+      // console.log("lvl 1");
 
-  const createFolder = async() =>{
-    try{
-    await setDoc(doc(db, "Users", currentUser?.uid), 
-    {
-      folders : [
-        {
-          name : Name,
-          category : Category,
-          tools : []
-        }
-      ]
+      await setDoc(doc(db, "Users", currentUser?.uid), 
+      {
+        folders : [
+          {
+            name : Name,
+            category : Category,
+            tools : []
+          }
+        ]
+      }
+      )
+      .then(function() {
+        console.log("lvl 3");
+        closeModal();
+        console.log("Folder updated!");
+      }); 
+    } catch (error) {
+      console.log(error); 
     }
-    );
-  }
-  catch(error){
-    console.log(error)
-  }
-
-  }
-
+  };
 
   const getCategories = () => {
     //getting the categories
@@ -89,15 +93,14 @@ const UserList = () => {
         CategoriesArray.push(doc.data());
       });
       setCategories(CategoriesArray);
-      console.log(categories);
+      // console.log(categories);
     });
   };
 
   useEffect(() => {
     LoadLikedTools();
-    getCategories()
+    getCategories();
   }, []);
-
 
   //_______________________________Modal Configs_____________________________________________
   //Modal Styles
@@ -204,23 +207,34 @@ const UserList = () => {
             <div className="flex m-5">
               {" "}
               <h4>Folder Name : </h4>{" "}
-              <input type="text" className="folder-input" onChange={(e)=>setName(e.target.value)} placeholder="Enter a name..." />
+              <input
+                type="text"
+                className="folder-input"
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter a name..."
+              />
             </div>
             <div className="flex m-5">
               {" "}
               <h4>Folder Category : </h4>
-              <select className="folder-input"
-              name="categories"
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option>Select a Category</option>
-              {categories?.map((c) => (
-                <option value={c.id}>{c.Category}</option>
-              ))}
-            </select>
+              <select
+                className="folder-input"
+                name="categories"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option>Select a Category</option>
+                {categories?.map((c,index) => (
+                  <option value={c.id} ket={index}>{c.Category}</option>
+                ))}
+              </select>
             </div>
           </div>
-          <span className="profile-btn-outlined-3 mt-5" onClick={()=>createFolder}>+ create</span>
+          <span
+            className="profile-btn-outlined-3 mt-5"
+            onClick={createFolder}
+          >
+            + create
+          </span>
         </Modal>
       </div>
     </div>

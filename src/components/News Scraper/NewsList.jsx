@@ -16,19 +16,23 @@ const NewsList = () => {
         <Navbar />
         <div className="News-title"><h1>Daily AI news</h1></div>
           <div className="container">  
-          {data?.articles?.map(article => {
+          <div className="row">  
+          {data?.articles?.map((article,index) => {
                 return(
-                    <div className='News-container'>
+                    <div className="col col-lg-4 col-md-6 col-sm-12">
+                    <div className='News-container' key={index}>
                     <NewsItem 
                         title={article.title}
                         description={article.description}
                         url={article.url}
                         urlToImage={article.urlToImage} />
                     </div>
+                    </div>
                 )
             })}:
             <div className="tenor-gif-embed" data-postid="18368917" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/loading-loading-forever-bobux-loader-gif-18368917">Loading Loading Forever Sticker</a>from <a href="https://tenor.com/search/loading-stickers">Loading Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
             </div>
+        </div>
         </div>
     )
 }
