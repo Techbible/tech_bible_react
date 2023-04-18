@@ -184,6 +184,7 @@ const Profile = () => {
       }).catch((error) => {
         console.log("Error getting download URL:", error);
       });
+      closeModal();
     });
 
     closeModal();
@@ -218,6 +219,10 @@ const Profile = () => {
   useEffect(()=>{
     LoadLikedTools()
   },[reducerValue]);
+
+  useEffect(()=>{
+    LoadLikedTools()
+  });
 
   //Verifying Sign in and loading users infos on load
   useEffect(() => {
@@ -277,6 +282,9 @@ const Profile = () => {
   const handleUnlike = (toolID)=>{
     LikeMethodsRef.current.Unlike(toolID)
     forceRender();
+    if(LikedTools.length === 1)
+        setLikedTools([])
+      // window.location.reload()
   }
 
   return (
@@ -583,10 +591,10 @@ const Profile = () => {
                 <div className="tool-description">{LikedTool.Description}</div>
                 <div className="tool-comments">
                 <img
-                alt="tech bible"
-                className="layer1-xx5"
-                src="/assets/layer1-xPw.png"
-              />
+                  alt="tech bible"
+                  className="layer1-xx5"
+                  src="/assets/layer1-xPw.png"
+                />
                 {LikedTool.Comments}
                 </div>
               </div>
@@ -597,8 +605,7 @@ const Profile = () => {
                   src="/assets/liked.png"
                   title="unfollow"
                   onClick={()=>handleUnlike(LikedTool.id)}
-
-                        />
+                />
                         <div className="save-3ZX">
                           <img
                             alt="tech bible"
@@ -680,8 +687,11 @@ const Profile = () => {
           <br/><br/>
           <label className="form-label">
             Select a photo:
+            {/* <input className="form-input" type="file" accept="image/*" onChange={(event)=>setProfilePicture(event.target.files[0])} />
+            <button onClick={uploadImage}>Upload</button> */}
             <input className="form-input" type="file" accept="image/*" onChange={(event)=>setProfilePicture(event.target.files[0])} />
-            <button onClick={uploadImage}>Upload</button>
+            <button className="upload-button" onClick={uploadImage}>Upload</button>
+
           </label>
         </Modal>
       </div>
