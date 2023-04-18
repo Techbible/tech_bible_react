@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Techbible.github.io/tech_bible_react/static/css/main.4e5d19d5.css",
+    "main.css": "/Techbible.github.io/tech_bible_react/static/css/main.0709be28.css",
     "main.js": "/Techbible.github.io/tech_bible_react/static/js/main.c167d15c.js",
     "index.html": "/Techbible.github.io/tech_bible_react/index.html",
-    "main.4e5d19d5.css.map": "/Techbible.github.io/tech_bible_react/static/css/main.4e5d19d5.css.map",
+    "main.0709be28.css.map": "/Techbible.github.io/tech_bible_react/static/css/main.0709be28.css.map",
     "main.c167d15c.js.map": "/Techbible.github.io/tech_bible_react/static/js/main.c167d15c.js.map"
   },
   "entrypoints": [
-    "static/css/main.4e5d19d5.css",
+    "static/css/main.0709be28.css",
     "static/js/main.c167d15c.js"
   ]
 }
