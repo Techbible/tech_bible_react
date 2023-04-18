@@ -314,7 +314,7 @@ const Profile = () => {
               <img
                 alt="pic"
                 className="layer1-3uo"
-                src="./assets/layer1-xyT.png"
+                src={`${process.env.PUBLIC_URL}/assets/layer1-xyT.png`}
               />
             </a>
             <a
@@ -326,7 +326,7 @@ const Profile = () => {
               <img
                 alt="pic"
                 className="white-youtube-icon-png-28-1-Cw7"
-                src="./assets/white-youtube-icon-png-28-1.png"
+                src={`${process.env.PUBLIC_URL}/assets/white-youtube-icon-png-28-1.png`}
               />
             </a>
             <a
@@ -338,7 +338,7 @@ const Profile = () => {
               <img
                 alt="pic"
                 className="pngfind-1-uU9"
-                src="./assets/pngfind-1.png"
+                src={`${process.env.PUBLIC_URL}/assets/pngfind-1.png`}
               />
             </a>
             <div>
@@ -589,7 +589,7 @@ const Profile = () => {
                 <img
                   alt="tech bible"
                   className="layer1-xx5"
-                  src="/assets/layer1-xPw.png"
+                  src={`${process.env.PUBLIC_URL}/assets/layer1-xPw.png`}
                 />
                 {LikedTool.Comments}
                 </div>
@@ -598,7 +598,7 @@ const Profile = () => {
                <img
                   alt="tech bible"
                   className="like-eGV"
-                  src="/assets/liked.png"
+                  src={`${process.env.PUBLIC_URL}/assets/liked.png`}
                   title="unfollow"
                   onClick={()=>handleUnlike(LikedTool.id)}
                 />
@@ -606,12 +606,12 @@ const Profile = () => {
                           <img
                             alt="tech bible"
                             className="ellipse-4-v7X"
-                            src="/assets/ellipse-4-ray.png"
+                            src={`${process.env.PUBLIC_URL}/assets/ellipse-4-ray.png`}
                           />
                           <img
                             alt="tech bible"
                             className="item-32360-1-iJH"
-                            src="/assets/-aLV.png"
+                            src={`${process.env.PUBLIC_URL}/assets/-aLV.png`}
                           />
                         </div>
               </div>

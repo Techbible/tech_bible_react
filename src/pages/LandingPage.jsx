@@ -384,10 +384,10 @@ const LandingPage = () =>{
                           tool.LikedBy?.find(
                             (user) => user === currentUser?.uid
                           )
-                            ? "/assets/liked.png"
-                            : "/assets/like.png"
+                            ? process.env.PUBLIC_URL+"/assets/liked.png"
+                            : process.env.PUBLIC_URL+"/assets/like.png"
                         }
-                      />
+                      /> 
                       <div className="save-3ZX">
                         <img
                           alt="tech bible"
@@ -443,14 +443,14 @@ const LandingPage = () =>{
                     <div className="like-save-button-RFK">
                       <div className="auto-group-l2sx-bp1">
                         <img
-                          alt="tech bible"
+                          alt="tech bible" 
                           className="like-eGV"
                           src={
                             tool.LikedBy?.find(
                               (user) => user === currentUser?.uid
                             )
-                              ? "/assets/liked.png"
-                              : "/assets/like.png"
+                              ? process.env.PUBLIC_URL+"/assets/liked.png"
+                              : process.env.PUBLIC_URL+"/assets/like.png"
                           }
                           onClick={() => {
                             tool.LikedBy?.find(

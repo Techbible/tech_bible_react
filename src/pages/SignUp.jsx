@@ -159,13 +159,13 @@ function SignUp() {
           <img
             alt="pic"
             className="item-1-04-512-1-pPf"
-            src="/assets/-k8d.png"
+            src={`${process.env.PUBLIC_URL}/assets//-k8d.png`}
           />
-          <img alt="pic" className="item-561127-1-hiM" src="/assets/-Yff.png" />
+          <img alt="pic" className="item-561127-1-hiM" src={`${process.env.PUBLIC_URL}/assets//-Yff.png`} />
           <img
             alt="pic"
             className="iconspassword-512-1-Pr5"
-            src="/assets/iconspassword-512-1.png"
+            src={`${process.env.PUBLIC_URL}/assets/iconspassword-512-1.png`}
           />
         </form>
       </div>

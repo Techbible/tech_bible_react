@@ -107,8 +107,8 @@ function SignIn() {
       required 
       />
 
-     <img  alt="pic" className="item-561127-1-wzu" src="/assets/mail.png"/>
-     <img  alt="pic" className="iconspassword-512-1-3o3" src="/assets/iconspassword-512-1-Fj3.png"/>
+     <img  alt="pic" className="item-561127-1-wzu" src={`${process.env.PUBLIC_URL}/assets/mail.png`}/>
+     <img  alt="pic" className="iconspassword-512-1-3o3" src={`${process.env.PUBLIC_URL}/assets/iconspassword-512-1-Fj3.png`}/>
       <p className="you-dont-have-an-account-click-here-to-sign-up-Xy7">
         
         <span className="you-dont-have-an-account-click-here-to-sign-up-Xy7-sub-0">You don't have an account ? Click here to </span>
