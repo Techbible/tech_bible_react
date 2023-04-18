@@ -12,12 +12,16 @@ body {
   background-color: #1D1D1F;
 }
 
+#root{
+  width: 100% !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-@media screen and (min-width: 1200px) {
+/* @media screen and (min-width: 1200px) {
   body {
     zoom : 142%;
   }
@@ -27,4 +31,4 @@ code {
   body {
     zoom : 152%;
   }
-}
+} */
