@@ -40,7 +40,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path='/' element=<LandingPage /> />
+      <Route index path="/" element=<LandingPage /> />
       <Route path='/signup' element=<SignUp /> />
       <Route path='/signin' element=<SignIn /> />
       <Route path='/profile' element=<Profile /> />
