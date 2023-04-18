@@ -1,0 +1,1300 @@
+
+html {
+	font-size:62.5%;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+ul, li {
+	list-style: none;
+}
+input {
+	border: none;
+}
+body {
+  width: 144rem;
+}.design-tools-page--573 {
+  width: 100%;
+  height: 189.5rem;
+  position: relative;
+  overflow: hidden;
+  background-color: #1D1D1F;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV {
+  width: 124rem;
+  height: 5.2rem;
+  position: absolute;
+  left: 9.9rem;
+  top: 1.7rem;
+  display: flex;
+  align-items: center;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .tech-bible-logo-h3s {
+  box-sizing: border-box;
+  padding: 3rem 0.4rem 0.3rem 0.4rem;
+  width: 5.1rem;
+  height: 100%;
+  border: solid 0.2rem #F5F5F7;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .tech-bible-logo-h3s .tech-bible-VEd {
+  max-width: 2.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.0402272542;
+  color: #F5F5F7;
+  font-family: Inter, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj {
+  box-sizing: border-box;
+  padding: 0.8rem 0rem 0.7rem 8.7rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .auto-group-cnqk-SSh {
+  margin: 0.6rem 9.8rem 0.7rem 0rem;
+  width: 5.8rem;
+  height: calc(100% - 1.3rem);
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .auto-group-cnqk-SSh .all-tools-RpR {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .auto-group-cnqk-SSh .vector-3-r93 {
+  width: 5.8rem;
+  height: 0;
+  object-fit: contain;
+  vertical-align: top;
+  border-radius: 25rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .submit-your-tool-spq {
+  margin: 0rem 8.9rem 0.1rem 0rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .resources-pNh {
+  margin: 0rem 10.55rem 0.1rem 0rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .community-zwP {
+  margin: 0rem 4.35rem 0.1rem 0rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .layer1-nMT {
+  margin-right: 2.3rem;
+  width: 2.4rem;
+  height: 2.9rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .white-youtube-icon-png-28-1-Qtd {
+  margin-right: 2.3rem;
+  width: 3.7rem;
+  height: 3.7rem;
+  object-fit: cover;
+  vertical-align: top;
+  border-radius: 0.9rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .pngfind-1-D7K {
+  margin-right: 9.1rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  object-fit: cover;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .sign-in-button-quP {
+  margin: 0rem 3rem 0.1rem 0rem;
+  width: 8.6rem;
+  height: 3.6rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 0.1rem #F5F5F7;
+  box-sizing: border-box;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-m6gm-ViV .auto-group-ra8u-emj .sign-up-button-f1F {
+  margin-top: 0.1rem;
+  width: 8.6rem;
+  height: 3.6rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7869e6;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M {
+  width: 117.15rem;
+  height: 186.7973rem;
+  position: absolute;
+  left: 18.1rem;
+  top: 8.6rem;
+  display: flex;
+  align-items: flex-start;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK {
+  margin: 7.3rem 12.73rem 17.997rem 0rem;
+  width: 64.74rem;
+  height: calc(100% - 25.2973rem);
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .design-tools-FQh {
+  margin: 0rem 0rem 4.5rem 1.2rem;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ {
+  margin: 0rem 2.34rem 6.1rem 0rem;
+  width: calc(100% - 2.34rem);
+  display: flex;
+  align-items: flex-start;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .adobexdccicon-1-Sdb {
+  margin-right: 2.5rem;
+  width: 18.9rem;
+  height: 18.4rem;
+  object-fit: cover;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw {
+  width: 41rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .auto-group-iytd-KzD {
+  margin: 0rem 26.9rem 1.4rem 0rem;
+  width: calc(100% - 26.9rem);
+  display: flex;
+  align-items: center;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .auto-group-iytd-KzD .adobe-xd-7fB {
+  margin-right: 2.6rem;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .auto-group-iytd-KzD .layer1-KmF {
+  margin-bottom: 0rem;
+  width: 1.7rem;
+  height: 1.6001rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .adobe-xd-is-an-interface-prototyping-and-design-tool-for-websites-or-mobile-applications-it-is-aimed-at-ux-ui-designers-YA9 {
+  margin-bottom: 3.1rem;
+  max-width: 41rem;
+  font-size: 1.7rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .auto-group-bvds-q2m {
+  height: 3.1rem;
+  display: flex;
+  align-items: center;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .auto-group-bvds-q2m .auto-group-9czh-FsB {
+  margin-right: 3.3rem;
+  width: 9.8rem;
+  height: 100%;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 0.1rem #F5F5F7;
+  box-sizing: border-box;
+  background-color: #181a1a;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .auto-group-bvds-q2m .design-tool-Vuw {
+  margin-right: 4.1rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .auto-group-bvds-q2m .layer1-LQm {
+  margin: 0.5rem 0.8rem 0rem 0rem;
+  width: 1.9rem;
+  height: 1.6rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .auto-group-bvds-q2m .item-120-8rR {
+  margin: 0.4rem 3.7rem 0rem 0rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .auto-group-bvds-q2m .layer1-vnH {
+  margin: 0.5rem 0.8rem 0rem 0rem;
+  width: 1.8rem;
+  height: 1.6rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-5fs3-3LZ .auto-group-qs2z-Fqw .auto-group-bvds-q2m .item-20-KZX {
+  margin-top: 0.4rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-swmj-uXj {
+  margin: 0rem 0rem 4.3rem 1.2rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-swmj-uXj .community-thoughts-WXX {
+  margin-right: 16.1rem;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-swmj-uXj .ask-a-question-about-this-tool-XBj {
+  margin: 0rem 1.1rem 0.1rem 0rem;
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-swmj-uXj .auto-group-o5im-J7w {
+  margin: 0.6rem 0rem 0.6rem 0rem;
+  width: 1.84rem;
+  height: calc(100% - 1.2rem);
+  position: relative;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-swmj-uXj .auto-group-o5im-J7w .layer1-75P {
+  width: 1.7998rem;
+  height: 1.7rem;
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-swmj-uXj .auto-group-o5im-J7w .group-26-KhF {
+  width: 0.84rem;
+  height: 0.8167rem;
+  position: absolute;
+  left: 1rem;
+  top: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-swmj-uXj .auto-group-o5im-J7w .group-26-KhF .ellipse-4-mZF {
+  width: 0.7906rem;
+  height: 0.7446rem;
+  position: absolute;
+  left: 0.0247rem;
+  top: 0.024rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .auto-group-swmj-uXj .auto-group-o5im-J7w .group-26-KhF .item-32360-1-AbP {
+  width: 0.84rem;
+  height: 0.8167rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh {
+  margin: 0rem 0rem 2.1rem 1.2rem;
+  box-sizing: border-box;
+  padding: 1.7rem 5.1rem 2rem 4rem;
+  width: 63.2rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0.4rem 3rem rgba(56, 55, 55, 0.200000003);
+  background-color: rgba(35, 38, 40, 0.5899999738);
+  border-radius: 2.1rem;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h {
+  margin: 0rem 6.7rem 0.8rem 0rem;
+  width: calc(100% - 6.7rem);
+  height: 5.7rem;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h .screen-shot-2023-03-14-at-2022-5-iYM {
+  margin-right: 4rem;
+  width: 4.9rem;
+  height: 5rem;
+  object-fit: cover;
+  vertical-align: top;
+  border-radius: 9rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h .auto-group-mnht-iAy {
+  width: 38.5rem;
+  height: 100%;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h .auto-group-mnht-iAy .auto-group-mxmt-zPP {
+  margin-bottom: 0.6rem;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h .auto-group-mnht-iAy .auto-group-mxmt-zPP .miro99-3sT {
+  margin-right: 0.7rem;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h .auto-group-mnht-iAy .auto-group-mxmt-zPP .posted-in-r-design-tools-adobe-xd-2-hours-ago-uRo {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h .auto-group-mnht-iAy .auto-group-mxmt-zPP .posted-in-r-design-tools-adobe-xd-2-hours-ago-uRo .posted-in-r-design-tools-adobe-xd-2-hours-ago-uRo-sub-0 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h .auto-group-mnht-iAy .auto-group-mxmt-zPP .posted-in-r-design-tools-adobe-xd-2-hours-ago-uRo .posted-in-r-design-tools-adobe-xd-2-hours-ago-uRo-sub-1 {
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h .auto-group-mnht-iAy .auto-group-mxmt-zPP .posted-in-r-design-tools-adobe-xd-2-hours-ago-uRo .posted-in-r-design-tools-adobe-xd-2-hours-ago-uRo-sub-2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h .auto-group-mnht-iAy .auto-group-mxmt-zPP .posted-in-r-design-tools-adobe-xd-2-hours-ago-uRo .posted-in-r-design-tools-adobe-xd-2-hours-ago-uRo-sub-3 {
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-c4e9-v6h .auto-group-mnht-iAy .what-is-the-use-of-adobe-xd-mXs {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-4fho-B5o {
+  margin-left: 8.9rem;
+  width: 45.2rem;
+  height: 21.2rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-4fho-B5o .item-0-CWh {
+  width: 1rem;
+  height: 2.3rem;
+  position: absolute;
+  left: 44.2rem;
+  top: 18.9rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-4fho-B5o .layer1-AM3 {
+  width: 1.8rem;
+  height: 1.6rem;
+  position: absolute;
+  left: 35.5rem;
+  top: 19.3rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-4fho-B5o .item-20-YcV {
+  width: 1.8rem;
+  height: 2.3rem;
+  position: absolute;
+  left: 38.4rem;
+  top: 18.9rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-4fho-B5o .it-is-basically-an-ui-ux-designing-application-like-sketch-in-my-opinion-it-has-bunch-of-tools-like-pen-tool-selection-tool-etc-designing-in-xd-is-simple-its-based-on-the-adobe-conventions-if-youre-used-to-work-in-adobe-softwares-like-photoshop-illustrator-you-can-work-with-xd-very-easily-and-efficiently-just-like-in-illustrator-of-sketch-you-can-have-multiple-artboards-v7F {
+  width: 45.1rem;
+  height: 19.2rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.825;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-4fho-B5o .group-41-NG5 {
+  width: 1.84rem;
+  height: 1.8rem;
+  position: absolute;
+  left: 41.3rem;
+  top: 19.1rem;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-4fho-B5o .group-41-NG5 .layer1-BjK {
+  width: 1.4999rem;
+  height: 1.4rem;
+  position: absolute;
+  left: 0rem;
+  top: 0.4rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-4fho-B5o .group-41-NG5 .group-27-SSH {
+  width: 0.84rem;
+  height: 0.8167rem;
+  position: absolute;
+  left: 1rem;
+  top: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-4fho-B5o .group-41-NG5 .group-27-SSH .ellipse-4-5k9 {
+  width: 0.7906rem;
+  height: 0.7446rem;
+  position: absolute;
+  left: 0.0247rem;
+  top: 0.024rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-42-Azh .auto-group-4fho-B5o .group-41-NG5 .group-27-SSH .item-32360-1-i2R {
+  width: 0.84rem;
+  height: 0.8167rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f {
+  margin: 0rem 0rem 2.4rem 1.2rem;
+  box-sizing: border-box;
+  padding: 1.9rem 3rem 4.1rem 3rem;
+  width: 63.2rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0.4rem 3rem rgba(56, 55, 55, 0.200000003);
+  background-color: rgba(35, 38, 40, 0.5899999738);
+  border-radius: 2.1rem;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f {
+  margin: 0rem 9.8rem 0.8rem 0rem;
+  width: calc(100% - 9.8rem);
+  height: 5.7rem;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f .screen-shot-2023-03-14-at-2022-5-8XP {
+  margin-right: 4rem;
+  width: 4.9rem;
+  height: 5rem;
+  object-fit: cover;
+  vertical-align: top;
+  border-radius: 9rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f .auto-group-xgcm-j1P {
+  width: 38.5rem;
+  height: 100%;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f .auto-group-xgcm-j1P .auto-group-rfdp-1Do {
+  margin-bottom: 0.6rem;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f .auto-group-xgcm-j1P .auto-group-rfdp-1Do .miro99-UNH {
+  margin-right: 0.7rem;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f .auto-group-xgcm-j1P .auto-group-rfdp-1Do .posted-in-r-design-tools-adobe-xd-2-hours-ago-UFo {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f .auto-group-xgcm-j1P .auto-group-rfdp-1Do .posted-in-r-design-tools-adobe-xd-2-hours-ago-UFo .posted-in-r-design-tools-adobe-xd-2-hours-ago-UFo-sub-0 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f .auto-group-xgcm-j1P .auto-group-rfdp-1Do .posted-in-r-design-tools-adobe-xd-2-hours-ago-UFo .posted-in-r-design-tools-adobe-xd-2-hours-ago-UFo-sub-1 {
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f .auto-group-xgcm-j1P .auto-group-rfdp-1Do .posted-in-r-design-tools-adobe-xd-2-hours-ago-UFo .posted-in-r-design-tools-adobe-xd-2-hours-ago-UFo-sub-2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f .auto-group-xgcm-j1P .auto-group-rfdp-1Do .posted-in-r-design-tools-adobe-xd-2-hours-ago-UFo .posted-in-r-design-tools-adobe-xd-2-hours-ago-UFo-sub-3 {
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-myxw-99f .auto-group-xgcm-j1P .what-is-the-use-of-adobe-xd-fYZ {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-aysd-G2Z {
+  margin: 0rem 3.1rem 1.5rem 8.9rem;
+  width: calc(100% - 12rem);
+  height: 21.2rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-aysd-G2Z .item-0-QHB {
+  width: 1rem;
+  height: 2.3rem;
+  position: absolute;
+  left: 44.2rem;
+  top: 18.9rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-aysd-G2Z .layer1-xT7 {
+  width: 1.8rem;
+  height: 1.6rem;
+  position: absolute;
+  left: 35.5rem;
+  top: 19.3rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-aysd-G2Z .item-20-wpq {
+  width: 1.8rem;
+  height: 2.3rem;
+  position: absolute;
+  left: 38.4rem;
+  top: 18.9rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-aysd-G2Z .it-is-basically-an-ui-ux-designing-application-like-sketch-in-my-opinion-it-has-bunch-of-tools-like-pen-tool-selection-tool-etc-designing-in-xd-is-simple-its-based-on-the-adobe-conventions-if-youre-used-to-work-in-adobe-softwares-like-photoshop-illustrator-you-can-work-with-xd-very-easily-and-efficiently-just-like-in-illustrator-of-sketch-you-can-have-multiple-artboards-sru {
+  width: 45.1rem;
+  height: 19.2rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.825;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-aysd-G2Z .group-41-L1j {
+  width: 1.84rem;
+  height: 1.8rem;
+  position: absolute;
+  left: 41.3rem;
+  top: 19.1rem;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-aysd-G2Z .group-41-L1j .layer1-LR3 {
+  width: 1.4999rem;
+  height: 1.4rem;
+  position: absolute;
+  left: 0rem;
+  top: 0.4rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-aysd-G2Z .group-41-L1j .group-27-Yn1 {
+  width: 0.84rem;
+  height: 0.8167rem;
+  position: absolute;
+  left: 1rem;
+  top: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-aysd-G2Z .group-41-L1j .group-27-Yn1 .ellipse-4-ycR {
+  width: 0.7906rem;
+  height: 0.7446rem;
+  position: absolute;
+  left: 0.0247rem;
+  top: 0.024rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-aysd-G2Z .group-41-L1j .group-27-Yn1 .item-32360-1-EKP {
+  width: 0.84rem;
+  height: 0.8167rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-45-Q3f .auto-group-7puf-dcR {
+  margin: 0rem 3.2rem 0rem 8.9rem;
+  box-sizing: border-box;
+  padding: 0.6rem 3rem;
+  width: calc(100% - 12.1rem);
+  display: flex;
+  font-size: 1.3rem;
+  line-height: 1.8461538462;
+  letter-spacing: 0.065rem;
+  font-style: italic;
+  color: #181a1a;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  background-color: #F5F5F7;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw {
+  margin-left: 1.2rem;
+  box-sizing: border-box;
+  padding: 1.9rem 2.8rem 3.8rem 2.8rem;
+  width: 63.2rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0.4rem 3rem rgba(56, 55, 55, 0.200000003);
+  background-color: rgba(35, 38, 40, 0.5899999738);
+  border-radius: 2.1rem;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT {
+  margin: 0rem 3.3rem 0.3rem 0rem;
+  width: calc(100% - 3.3rem);
+  height: 37.7003rem;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-fldt-tcD {
+  margin-right: 3.2rem;
+  width: 5.1rem;
+  height: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-fldt-tcD .vector-75-YRs {
+  width: 0.1rem;
+  height: 32.9003rem;
+  position: absolute;
+  left: 2.6rem;
+  top: 4.8rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-fldt-tcD .screen-shot-2023-03-14-at-2022-5-Mu7 {
+  width: 4.9rem;
+  height: 5rem;
+  position: absolute;
+  left: 0.2rem;
+  top: 0;
+  object-fit: cover;
+  vertical-align: top;
+  border-radius: 9rem;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-fldt-tcD .screen-shot-2023-03-14-at-2022-1-M1w {
+  width: 5rem;
+  height: 5rem;
+  position: absolute;
+  left: 0;
+  top: 32.7rem;
+  object-fit: cover;
+  vertical-align: top;
+  border-radius: 9rem;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 {
+  width: 46rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-jadj-Nr9 {
+  margin: 0rem 6.7rem 0.6rem 0.8rem;
+  width: calc(100% - 7.5rem);
+  display: flex;
+  align-items: flex-end;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-jadj-Nr9 .miro99-Q29 {
+  margin-right: 0.7rem;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-jadj-Nr9 .posted-in-r-design-tools-adobe-xd-2-hours-ago-EYu {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-jadj-Nr9 .posted-in-r-design-tools-adobe-xd-2-hours-ago-EYu .posted-in-r-design-tools-adobe-xd-2-hours-ago-EYu-sub-0 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-jadj-Nr9 .posted-in-r-design-tools-adobe-xd-2-hours-ago-EYu .posted-in-r-design-tools-adobe-xd-2-hours-ago-EYu-sub-1 {
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-jadj-Nr9 .posted-in-r-design-tools-adobe-xd-2-hours-ago-EYu .posted-in-r-design-tools-adobe-xd-2-hours-ago-EYu-sub-2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-jadj-Nr9 .posted-in-r-design-tools-adobe-xd-2-hours-ago-EYu .posted-in-r-design-tools-adobe-xd-2-hours-ago-EYu-sub-3 {
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .what-is-the-use-of-adobe-xd-neH {
+  margin: 0rem 0rem 0.8rem 0.8rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-chn5-APw {
+  margin: 0rem 0rem 5rem 0.8rem;
+  width: 45.2rem;
+  height: 21.2rem;
+  position: relative;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-chn5-APw .item-0-MjK {
+  width: 1rem;
+  height: 2.3rem;
+  position: absolute;
+  left: 44.2rem;
+  top: 18.9rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-chn5-APw .layer1-KJm {
+  width: 1.8rem;
+  height: 1.6rem;
+  position: absolute;
+  left: 35.5rem;
+  top: 19.3rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-chn5-APw .item-20-YSR {
+  width: 1.8rem;
+  height: 2.3rem;
+  position: absolute;
+  left: 38.4rem;
+  top: 18.9rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-chn5-APw .it-is-basically-an-ui-ux-designing-application-like-sketch-in-my-opinion-it-has-bunch-of-tools-like-pen-tool-selection-tool-etc-designing-in-xd-is-simple-its-based-on-the-adobe-conventions-if-youre-used-to-work-in-adobe-softwares-like-photoshop-illustrator-you-can-work-with-xd-very-easily-and-efficiently-just-like-in-illustrator-of-sketch-you-can-have-multiple-artboards-VFB {
+  width: 45.1rem;
+  height: 19.2rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.825;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-chn5-APw .group-41-xwP {
+  width: 1.84rem;
+  height: 1.8rem;
+  position: absolute;
+  left: 41.3rem;
+  top: 19.1rem;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-chn5-APw .group-41-xwP .layer1-P17 {
+  width: 1.4999rem;
+  height: 1.4rem;
+  position: absolute;
+  left: 0rem;
+  top: 0.4rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-chn5-APw .group-41-xwP .group-27-2bo {
+  width: 0.84rem;
+  height: 0.8167rem;
+  position: absolute;
+  left: 1rem;
+  top: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-chn5-APw .group-41-xwP .group-27-2bo .ellipse-4-s6d {
+  width: 0.7906rem;
+  height: 0.7446rem;
+  position: absolute;
+  left: 0.0247rem;
+  top: 0.024rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .auto-group-chn5-APw .group-41-xwP .group-27-2bo .item-32360-1-Us7 {
+  width: 0.84rem;
+  height: 0.8167rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .rita64-6Nh {
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1-sub-0 {
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1-sub-1 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1-sub-2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1-sub-3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-muru-6RT .auto-group-nc4v-KN5 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1 .reply-to-r-miro99-in-r-design-tools-adobe-xd-2-hours-ago-xA1-sub-4 {
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-fwtw-nTo {
+  margin: 0rem 5.36rem 0rem 8.3rem;
+  width: calc(100% - 13.66rem);
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-fwtw-nTo .you-are-100-right--z45 {
+  margin: 0rem 22.2rem 1rem 0rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.825;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-fwtw-nTo .layer1-ywb {
+  margin: 0rem 1.1rem 0.3rem 0rem;
+  width: 1.8rem;
+  height: 1.6rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-fwtw-nTo .item-20-x4m {
+  margin-right: 1.1rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-fwtw-nTo .group-42-BCR {
+  margin-bottom: 0.3rem;
+  width: 1.84rem;
+  height: 1.8rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-fwtw-nTo .group-42-BCR .layer1-coX {
+  width: 1.4999rem;
+  height: 1.4rem;
+  position: absolute;
+  left: 0rem;
+  top: 0.4rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-fwtw-nTo .group-42-BCR .group-27-qwB {
+  width: 0.84rem;
+  height: 0.8167rem;
+  position: absolute;
+  left: 1rem;
+  top: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-fwtw-nTo .group-42-BCR .group-27-qwB .ellipse-4-HHP {
+  width: 0.7906rem;
+  height: 0.7446rem;
+  position: absolute;
+  left: 0.0247rem;
+  top: 0.024rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-uwdt-UmK .group-46-XDw .auto-group-fwtw-nTo .group-42-BCR .group-27-qwB .item-32360-1-6Vj {
+  width: 0.84rem;
+  height: 0.8167rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  vertical-align: top;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .midle-line-xgM {
+  margin-right: 9.9632rem;
+  width: 0.1664rem;
+  height: 186.7973rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K {
+  margin-top: 7.3rem;
+  width: 29.55rem;
+  height: 104.7rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .similar-apps-to-r-adobe-xd-QRs {
+  width: 21.7rem;
+  height: 2.4rem;
+  position: absolute;
+  left: 0;
+  top: 62.7rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .similar-apps-to-r-adobe-xd-QRs .similar-apps-to-r-adobe-xd-QRs-sub-0 {
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .similar-apps-to-r-adobe-xd-QRs .similar-apps-to-r-adobe-xd-QRs-sub-1 {
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX {
+  width: 29.55rem;
+  height: 104.7rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-3SD {
+  margin-bottom: 4.4429rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-3SD .whatsapp-image-2023-03-20-at-0954-1-gk5 {
+  margin-bottom: 11.3rem;
+  width: 29.3rem;
+  height: 57.6rem;
+  object-fit: cover;
+  vertical-align: top;
+  border-radius: 1.2rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-3SD .auto-group-sccu-eaR {
+  margin: 0rem 21.65rem 2.8rem 0rem;
+  width: calc(100% - 21.65rem);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-3SD .auto-group-sccu-eaR .adobecreativecloudrainbowicon-1-eyj {
+  margin-right: 1.204rem;
+  width: 2.596rem;
+  height: 2.5065rem;
+  object-fit: cover;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-3SD .auto-group-sccu-eaR .figma-rpu {
+  margin-top: 0.0935rem;
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-3SD .auto-group-qb4q-Fc9 {
+  margin: 0rem 15.15rem 4.73rem 0rem;
+  width: calc(100% - 15.15rem);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-3SD .auto-group-qb4q-Fc9 .adobecreativecloudrainbowicon-2-3nu {
+  margin-right: 1.204rem;
+  width: 2.596rem;
+  height: 2.5065rem;
+  object-fit: cover;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-3SD .auto-group-qb4q-Fc9 .adobe-illustrator-3wK {
+  margin-top: 0.0935rem;
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-3SD .vector-53-fSu {
+  margin-left: 0.2rem;
+  width: 29.35rem;
+  height: 0.2142rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-letter-section-XG9 {
+  width: 27.8rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.6rem;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-letter-section-XG9 .auto-group-8tvy-Mky {
+  box-sizing: border-box;
+  padding-bottom: 2.2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-letter-section-XG9 .auto-group-8tvy-Mky .news-letter-DHP {
+  margin-bottom: 1.2rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-letter-section-XG9 .auto-group-8tvy-Mky .get-the-latest-saas-products-news-directly-to-your-inbox-Sfw {
+  max-width: 27rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-letter-section-XG9 .auto-group-ntsm-dkR {
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+  padding: 0.6rem 1.1rem;
+  width: 100%;
+  display: flex;
+  font-size: 1.3rem;
+  line-height: 1.8461538462;
+  letter-spacing: 0.065rem;
+  font-style: italic;
+  color: #000000;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  border: solid 0.1rem #F5F5F7;
+  background-color: #F5F5F7;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .auto-group-wzxd-h6M .auto-group-s9pj-B3K .right-section-1VX .news-letter-section-XG9 .auto-group-txsd-UeZ {
+  width: 100%;
+  height: 3.6rem;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.7142857143;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7869e6;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+}
+.design-tools-page--573 .vector-69-wAm {
+  width: 151.65rem;
+  height: 0;
+  position: absolute;
+  left: 0;
+  top: 8.5rem;
+  object-fit: contain;
+  vertical-align: top;
+}
