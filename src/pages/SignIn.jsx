@@ -16,6 +16,21 @@ function SignIn() {
   const [password, setPassword] = useState("");
 
   const [userData, setUserData] = useState(null);
+  const [passwordError, setPasswordError] = useState('');
+  useEffect(()=>{console.log("message")},[passwordError])
+
+  function handlePasswordChange(e) {
+   
+    
+    if (password.length < 8) {
+      setPasswordError('Password must be at least 8 characters long');
+    } else {
+      setPasswordError('');
+    }
+  }
+  
+
+  
 
   const handleSignIn= (e) =>{
       e.preventDefault();
@@ -27,6 +42,8 @@ function SignIn() {
            .catch((error) =>{
               console.log(error);
            })
+           handlePasswordChange();
+      
   }
 
   const handleGoogleSignIn = () =>{
@@ -58,8 +75,8 @@ function SignIn() {
       </div>
       <p className="welcome-back-2dj"> Sign in </p>
       <div className="or-sign-in-with-google-e2q" onClick={handleGoogleSignIn}>Or Sign in with google</div>
-      <p className="e-mail-Vp9">E-mail</p>
-      <p className="password-AvH">Password</p>
+      <p className="e-mail-Vp9">E-mail *</p>
+      <p className="password-AvH">Password *</p>
       <div className="rectangle-102-3z5">
       </div>
       <p className="sign-up-kNh" onClick={(e)=>handleSignIn(e)}>Sign In</p>
@@ -68,24 +85,38 @@ function SignIn() {
       
       <div className="rectangle-101-WFP">
       </div>
+      <div>
       <input type={"password"}
       onChange={(e) => setPassword(e.target.value)}
       value={password}
       placeholder="8 characters minimum"
       className="characters-minimum-Qbf"
+      
+      required
         />
-
+        <p></p>
+        <div>
+      </div>
+        </div>
+       { console.log(passwordError)}
       <input type={"email"}
       onChange={(e) => setEmail(e.target.value)}
       value={email}
       placeholder='Example@site.com' 
-      className="examplesitecom-Gtm" />
+      className="examplesitecom-Gtm"
+      required 
+      />
 
      <img  alt="pic" className="item-561127-1-wzu" src="/assets/mail.png"/>
      <img  alt="pic" className="iconspassword-512-1-3o3" src="/assets/iconspassword-512-1-Fj3.png"/>
       <p className="you-dont-have-an-account-click-here-to-sign-up-Xy7">
+        
         <span className="you-dont-have-an-account-click-here-to-sign-up-Xy7-sub-0">You don't have an account ? Click here to </span>
-        <span className="you-dont-have-an-account-click-here-to-sign-up-Xy7-sub-1">Sign in</span>
+        
+        <Link to="/signup">
+        <span className="you-dont-have-an-account-click-here-to-sign-up-Xy7-sub-1"> Sign up</span>
+          </Link>
+        
       </p>
       <p className="forgot-password--u6V">Forgot Password ?</p>
     </div>
