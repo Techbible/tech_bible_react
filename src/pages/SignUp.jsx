@@ -23,7 +23,7 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [FullName, setFullName] = useState("");
-
+  const [passwordError, setPasswordError] = useState('');
   const [generatedImgURL, setGenratedImgURL] = useState();
 
   //it's basically just the description of the image that you want to be generated 
@@ -87,6 +87,8 @@ function SignUp() {
       navigate("/");
     });
   };
+
+
   return (
     <div className="sign-up-i5B">
       <div className="auto-group-yw4r-Qyb">
@@ -122,9 +124,9 @@ function SignUp() {
           >
             Or Sign up with google
           </div>
-          <p className="full-name-M9P">Full Name</p>
-          <p className="email-Eiy">Email</p>
-          <p className="password-uq7">Password</p>
+          <p className="full-name-M9P">Full Name *</p>
+          <p className="email-Eiy">Email *</p>
+          <p className="password-uq7">Password *</p>
           <div className="rectangle-102-PVP"></div>
           <button style={{backgroundColor:"transparent",border:"0px",cursor:"pointer"}} className="sign-up-5ND">Sign Up</button>
           <div className="rectangle-100-xB7"></div>
@@ -145,6 +147,7 @@ function SignUp() {
             className="characters-minimum-v9s sign-up_input"
             required
           />
+          
           <input
             type={"email"}
             value={email}

@@ -2,6 +2,13 @@
 
 //Imports
 import { onAuthStateChanged } from "firebase/auth";
+import 'firebase/storage';
+import 'firebase/firestore';
+import { storage } from "../firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+
+
 import React, { useEffect, useState, useRef, useReducer } from "react";
 import { auth, db } from "../firebase";
 import { Bio } from "../components";
@@ -20,6 +27,8 @@ import Modal from "react-modal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "../assets/styles/profile.css";
+import "../assets/styles/editProfile.css";
+
 
 import { LikeMethods } from "../Global Methods";
 
@@ -51,6 +60,9 @@ const Profile = () => {
   const [checkedInterests, setcheckedInterests] = useState([]);
 
   const [reducerValue,forceRender] = useReducer(x => x+1,0);
+
+  //To Check if Edit profile button was clicked
+  const [editProfileClicked, setEditProfileClicked] = useState(false);
 
   const navigate = useNavigate();
 
@@ -124,20 +136,60 @@ const Profile = () => {
         .catch((error) => {
           console.log(error);
         });
-      setAddInterests(false);
-      setUpdateInterests(false);
+
       closeModal();
     } catch (error) {
       console.log(error);
     }
   };
 
+  //Edit interests
   const editInterests = ()=>{
-    let userInterests = userData.interests
+      let userInterests = userData.interests
     setcheckedInterests(userInterests)
-    // console.log('User Interests ' + checkedInterests)
+    console.log('User Interests ' + checkedInterests)
+    setEditProfileClicked(false)
     openModal()
   }
+  
+  //Edit profile
+  const openEditProfileModal = () => {
+    setEditProfileClicked(true)
+    setEditedUsername(userData.username)
+    openModal();
+  }
+  
+
+  /**************** Editing username and Profile PIC *****************/
+  const [profilePicture, setProfilePicture] = useState(null)
+  const [editedUsername, setEditedUsername] = useState(userData.username)
+
+  const uploadImage = () => {
+    if(profilePicture === null) return;
+    const imageRef = ref(storage, `profile-pictures/${profilePicture.name+currentUser.uid}`);
+    const usersRef = collection(db, 'Users');
+    const userDocRef = doc(usersRef, currentUser.uid);
+    uploadBytes(imageRef, profilePicture).then((snapshot) => {
+      console.log("Image uploaded");
+      getDownloadURL(snapshot.ref).then((url) => {
+        updateDoc(userDocRef, {
+          username: editedUsername,
+          photo: url
+        }).then(() => {
+          console.log("Photo updated");
+        }).catch((error) => {
+          console.log("Error updating photo:", error);
+        });
+      }).catch((error) => {
+        console.log("Error getting download URL:", error);
+      });
+      closeModal();
+    });
+
+    closeModal();
+  };
+  
+
   //************************END Inserting Changes*********************************
 
   //loading the liked tools by the currentUser
@@ -166,6 +218,10 @@ const Profile = () => {
   useEffect(()=>{
     LoadLikedTools()
   },[reducerValue]);
+
+  useEffect(()=>{
+    LoadLikedTools()
+  });
 
   //Verifying Sign in and loading users infos on load
   useEffect(() => {
@@ -204,6 +260,8 @@ const Profile = () => {
       // console.log(CategoriesArray);
       setCategories(CategoriesArray);
     });
+    // (false)
+    // setEditProfileSelected(false)
 
     return listen();
   }, []);
@@ -223,6 +281,9 @@ const Profile = () => {
   const handleUnlike = (toolID)=>{
     LikeMethodsRef.current.Unlike(toolID)
     forceRender();
+    if(LikedTools.length === 1)
+        setLikedTools([])
+      // window.location.reload()
   }
 
   return (
@@ -311,7 +372,12 @@ const Profile = () => {
           <div className="auto-group-fpf7-J1j">
             <div className="auto-group-e94r-ibF">
               <p className="miro99-XYh">{userData.username}</p>
-              <div className="auto-group-r9tj-kRT">Edit</div>
+              <button
+                onClick={openEditProfileModal}
+                className="auto-group-r9tj-kRT"
+              >
+                Edit
+              </button>
             </div>
             <p className="sheesh-digital-marketing-and-graphic-design-adobe-suites-1kh">
               {userData.bio}
@@ -497,8 +563,7 @@ const Profile = () => {
                       </div>
                     ) : (
                       <span
-                        // onClick={() => setAddInterests(true)}
-                        onClick={openModal}
+                        onClick={editInterests}
                         className="profile-btn-outlined-2"
                       >
                         + Add
@@ -522,10 +587,10 @@ const Profile = () => {
                 <div className="tool-description">{LikedTool.Description}</div>
                 <div className="tool-comments">
                 <img
-                alt="tech bible"
-                className="layer1-xx5"
-                src="/assets/layer1-xPw.png"
-              />
+                  alt="tech bible"
+                  className="layer1-xx5"
+                  src="/assets/layer1-xPw.png"
+                />
                 {LikedTool.Comments}
                 </div>
               </div>
@@ -536,8 +601,7 @@ const Profile = () => {
                   src="/assets/liked.png"
                   title="unfollow"
                   onClick={()=>handleUnlike(LikedTool.id)}
-
-                        />
+                />
                         <div className="save-3ZX">
                           <img
                             alt="tech bible"
@@ -558,7 +622,47 @@ const Profile = () => {
         )}
       </div>
 
-      <div>
+      {!editProfileClicked ? (
+        <div>
+          <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+            <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
+              Please choose your interests :{" "}
+            </h2>
+            <span id="close-button" onClick={closeModal}>
+              X
+            </span>
+            <div className="flex inner-modal">
+              {categories?.map((categorie) => (
+                <div className="flex interests-wrapper">
+                  <span className="Interest">
+                    <input
+                      type={"checkbox"}
+                      value={`${categorie.Category}`}
+                      onChange={(e) => handleInterestCheck(e)}
+                      checked={checkedInterests.includes(`${categorie.Category}`) ? true : null}/>
+                    &nbsp;
+                    {categorie.Category}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <span
+              className="profile-btn-outlined-3"
+              onClick={handleInterestsChange}
+            >
+              Save
+            </span>
+          </Modal>
+        </div>
+
+      ) : (
+        <div className="form-container">
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -566,37 +670,30 @@ const Profile = () => {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
-            Please choose your interests :{" "}
-          </h2>
-          <span id="close-button" onClick={closeModal}>
-            X
-          </span>
-          <div className="flex inner-modal">
-            {categories?.map((categorie) => (
-              <div className="flex interests-wrapper">
-                <span className="Interest">
-                  <input
-                    type={"checkbox"}
-                    value={`${categorie.Category}`}
-                    onChange={(e) => handleInterestCheck(e)}
-                    checked={checkedInterests.includes(`${categorie.Category}`) ? true : null}/>
-                  &nbsp;
-                  {categorie.Category}
-                </span>
-              </div>
-            ))}
-          </div>
-          <span
-            className="profile-btn-outlined-3"
-            onClick={handleInterestsChange}
-          >
-            Save
-          </span>
+          <label className="form-label">
+            Username:
+            <input
+              className="form-input"
+              // placeholder="username"
+              // value={!isUsernameEditing ? userData.username : editedUsername}
+              value={editedUsername}
+              onChange={(e)=>{setEditedUsername(e.target.value)}}
+            />
+          </label>
+          <br/><br/>
+          <label className="form-label">
+            Select a photo:
+            {/* <input className="form-input" type="file" accept="image/*" onChange={(event)=>setProfilePicture(event.target.files[0])} />
+            <button onClick={uploadImage}>Upload</button> */}
+            <input className="form-input" type="file" accept="image/*" onChange={(event)=>setProfilePicture(event.target.files[0])} />
+            <button className="upload-button" onClick={uploadImage}>Upload</button>
+
+          </label>
         </Modal>
       </div>
+      )}
     </div>
   );
-};
+}
 
 export default Profile;
