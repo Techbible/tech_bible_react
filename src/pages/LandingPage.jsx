@@ -202,12 +202,12 @@ const LandingPage = () =>{
               <img
                 alt="tech bible"
                 className="share-link-button-EAZ"
-                src="/assets/share-link-button.png"
+                src={`${process.env.PUBLIC_URL}/assets/share-link-button.png`}
               />
               <img
                 alt="tech bible"
                 className="cancel-buton-aNq"
-                src="/assets/cancel-buton.png"
+                src={`${process.env.PUBLIC_URL}/assets/cancel-buton.png`}
               />
             </div>
             <div className="sear-box-filter-p2H">
@@ -215,7 +215,7 @@ const LandingPage = () =>{
                 <img
                   alt="tech bible"
                   className="search-logo-kCm"
-                  src="/assets/search-logo.png"
+                  src={`${process.env.PUBLIC_URL}/assets/search-logo.png`}
                 />
                 <input
                   type="text"
@@ -228,7 +228,7 @@ const LandingPage = () =>{
               <img
                 alt="tech bible"
                 className="filter-button-aUd"
-                src="/assets/filter-button.png"
+                src={`${process.env.PUBLIC_URL}/assets/filter-button.png`}
                 onClick={() => setIsFiltering(!isFiltering)}
               />
             </div>
@@ -238,17 +238,17 @@ const LandingPage = () =>{
                   <img
                     alt="tech bible"
                     className="chatgptlogo--V9f"
-                    src="/assets/chatgptlogo-.png"
+                    src={`${process.env.PUBLIC_URL}/assets/chatgptlogo-.png`}
                   />
                   <img
                     alt="tech bible"
                     className="canva-logo--rPX"
-                    src="/assets/canva-logo-.png"
+                    src={`${process.env.PUBLIC_URL}/assets/canva-logo-.png`}
                   />
                   <img
                     alt="tech bible"
                     className="adobe-suites-logo-Hzd"
-                    src="/assets/adobe-suites-logo.png"
+                    src={`${process.env.PUBLIC_URL}/assets/adobe-suites-logo.png`}
                   />
                 </div>
                 <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-WcV">
@@ -279,7 +279,7 @@ const LandingPage = () =>{
                   <img
                     alt="tech bible"
                     className="chatgptlogo-1-bLR"
-                    src="/assets/chatgptlogo-1.png"
+                    src={`${process.env.PUBLIC_URL}/assets/chatgptlogo-1.png`}
                   />
                   <div className="auto-group-j2f7-cWR">
                     <p className="chat-gpt-CjX">Chat GPT</p>
@@ -300,7 +300,7 @@ const LandingPage = () =>{
                       <img
                         alt="tech bible"
                         className="adobecreativecloudrainbowicon-1-MCR"
-                        src="/assets/adobecreativecloudrainbowicon-1-s9P.png"
+                        src={`${process.env.PUBLIC_URL}/assets/adobecreativecloudrainbowicon-1-s9P.png`}
                       />
                       <p className="adobe-suites-757">Adobe Suites</p>
                       <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-7jK">
@@ -317,7 +317,7 @@ const LandingPage = () =>{
                     <img
                       alt="tech bible"
                       className="minecraft-2752120-2284937-1-t5B"
-                      src="/assets/minecraft-2752120-2284937-1.png"
+                      src={`${process.env.PUBLIC_URL}/assets/minecraft-2752120-2284937-1.png`}
                     />
                     <p className="minecraft-TXb">Minecraft</p>
                     <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-5Yy">
@@ -333,7 +333,7 @@ const LandingPage = () =>{
                     <img
                       alt="tech bible"
                       className="python-logo-notext-1-6gM"
-                      src="/assets/python-logo-notext-1.png"
+                      src={`${process.env.PUBLIC_URL}/assets/python-logo-notext-1.png`}
                     />
                     <p className="python-Evy">Python</p>
                     <p className="browse-1000-of-the-latest-tech-tools-per-task-updated-daily-FbB">
@@ -368,7 +368,7 @@ const LandingPage = () =>{
                       <img
                         alt="tech bible"
                         className="layer1-xx5"
-                        src="/assets/layer1-xPw.png"
+                        src={`${process.env.PUBLIC_URL}/assets/layer1-xPw.png`}
                       />
                       <p className="item-120-kd3">{tool?.Comments}</p>
                       <p className="premium-mY9">{tool?.Price}</p>
@@ -392,12 +392,12 @@ const LandingPage = () =>{
                         <img
                           alt="tech bible"
                           className="ellipse-4-v7X"
-                          src="/assets/ellipse-4-ray.png"
+                          src={`${process.env.PUBLIC_URL}/assets/ellipse-4-ray.png`}
                         />
                         <img
                           alt="tech bible"
                           className="item-32360-1-iJH"
-                          src="/assets/-aLV.png"
+                          src={`${process.env.PUBLIC_URL}/assets/-aLV.png`}
                         />
                       </div>
                     </div>
@@ -433,7 +433,7 @@ const LandingPage = () =>{
                         <img
                           alt="tech bible"
                           className="layer1-xx5"
-                          src="/assets/layer1-xPw.png"
+                          src={`${process.env.PUBLIC_URL}/assets/layer1-xPw.png`}
                         />
                         <p className="item-120-kd3">{tool.Comments}</p>
                         <p className="premium-mY9">{tool.Price}</p>
@@ -464,12 +464,12 @@ const LandingPage = () =>{
                           <img
                             alt="tech bible"
                             className="ellipse-4-v7X"
-                            src="/assets/ellipse-4-ray.png"
+                            src={`${process.env.PUBLIC_URL}/assets/ellipse-4-ray.png`}
                           />
                           <img
                             alt="tech bible"
                             className="item-32360-1-iJH"
-                            src="/assets/-aLV.png"
+                            src={`${process.env.PUBLIC_URL}/assets/-aLV.png`}
                           />
                         </div>
                       </div>
@@ -486,7 +486,7 @@ const LandingPage = () =>{
         <img
           alt="tech bible"
           className="midle-line-98R"
-          src="/assets/midle-line.png"
+          src={`${process.env.PUBLIC_URL}/assets/midle-line.png`}
         />
         <div className="right-section-m9o">
           <div className="news-cw7">
@@ -507,7 +507,7 @@ const LandingPage = () =>{
             <img
               alt="tech bible"
               className="vector-53-2BX"
-              src="/assets/vector-53.png"
+              src={`${process.env.PUBLIC_URL}/assets/vector-53.png`}
             />
           </div>
           <div className="community-TXj">
@@ -525,7 +525,7 @@ const LandingPage = () =>{
                 <img
                   alt="tech bible"
                   className="screen-shot-2023-03-14-at-2022-1-Lz9"
-                  src="/assets/screen-shot-2023-03-14-at-2022-1.png"
+                  src={`${process.env.PUBLIC_URL}/assets/screen-shot-2023-03-14-at-2022-1.png`}
                 />
                 <div className="auto-group-lnwz-WXF">
                   <p className="published-by-r-rita64-2-hours-ago-BNV">
@@ -547,7 +547,7 @@ const LandingPage = () =>{
                 <img
                   alt="tech bible"
                   className="screen-shot-2023-03-14-at-2021-1-EZ3"
-                  src="/assets/screen-shot-2023-03-14-at-2021-1.png"
+                  src={`${process.env.PUBLIC_URL}/assets/screen-shot-2023-03-14-at-2021-1.png`}
                 />
                 <div className="auto-group-qdjk-oEm">
                   <p className="published-by-r-imane31-20-hours-ago-CGu">
@@ -569,7 +569,7 @@ const LandingPage = () =>{
                 <img
                   alt="tech bible"
                   className="screen-shot-2023-03-14-at-2022-2-bNu"
-                  src="/assets/screen-shot-2023-03-14-at-2022-2-T4h.png"
+                  src={`${process.env.PUBLIC_URL}/assets/screen-shot-2023-03-14-at-2022-2-T4h.png`}
                 />
                 <div className="auto-group-d9d7-PpZ">
                   <p className="published-by-r-miro99-20-hours-ago-DHo">
