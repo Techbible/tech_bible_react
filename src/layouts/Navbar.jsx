@@ -88,7 +88,7 @@ function Navbar() {
           <img
             alt="tech bible"
             className="tiktok-X7B"
-            src="/assets/tiktok.png"
+            src={`${process.env.PUBLIC_URL}/assets/tiktok.png`}
           />
         </a>
         <div className="auto-group-aeah-kEq">
@@ -101,7 +101,7 @@ function Navbar() {
             <img
               alt="tech bible"
               className="youtube-button-MVX"
-              src="/assets/youtube-button.png"
+              src={`${process.env.PUBLIC_URL}/assets/youtube-button.png`}
             />
           </a>
           <a
@@ -113,7 +113,7 @@ function Navbar() {
             <img
               alt="tech bible"
               className="instagram-button-vww"
-              src="/assets/instagram-button.png"
+              src={`${process.env.PUBLIC_URL}/assets/instagram-button.png`}
             />
           </a>
 
@@ -130,7 +130,7 @@ function Navbar() {
                   </div>
                 </Link>
                 <span className="signout" onClick={UserSignOut}>
-                  <img src="/assets/logout.png" alt="sign out" />
+                  <img src={`${process.env.PUBLIC_URL}/assets/logout.png`} alt="sign out" />
                 </span>
               </div>
             ) : (

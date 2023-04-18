@@ -57,7 +57,7 @@ const ToolDetails = () => {
                   <img
                     alt="tools"
                     className="layer1-KmF"
-                    src="/assets/layer1-wR7.png"
+                    src={`${process.env.PUBLIC_URL}/assets/layer1-wR7.png`}
                   />
                 </div>
                 <p className="adobe-xd-is-an-interface-prototyping-and-design-tool-for-websites-or-mobile-applications-it-is-aimed-at-ux-ui-designers-YA9">
@@ -70,13 +70,13 @@ const ToolDetails = () => {
                   <img
                     alt="tools"
                     className="layer1-LQm"
-                    src="/assets/layer1-wEm.png"
+                    src={`${process.env.PUBLIC_URL}/assets/layer1-wEm.png`}
                   />
                   <p className="item-120-8rR">{ToolsData.comments}</p>
                   <img
                     alt="tools"
                     className="layer1-vnH"
-                    src="/assets/layer1-rUD.png"
+                    src={`${process.env.PUBLIC_URL}/assets/layer1-rUD.png`}
                   />
                   <p className="item-20-KZX">{ToolsData.followers}</p>
                 </div>
@@ -91,18 +91,18 @@ const ToolDetails = () => {
                 <img
                   alt="tools"
                   className="layer1-75P"
-                  src="/assets/layer1-ams.png"
+                  src={`${process.env.PUBLIC_URL}/assets/layer1-ams.png`}
                 />
                 <div className="group-26-KhF">
                   <img
                     alt="tools"
                     className="ellipse-4-mZF"
-                    src="/assets/ellipse-4-CqK.png"
+                    src={`${process.env.PUBLIC_URL}/assets/ellipse-4-CqK.png`}
                   />
                   <img
                     alt="tools"
                     className="item-32360-1-AbP"
-                    src="/assets/-DEM.png"
+                    src={`${process.env.PUBLIC_URL}/assets/-DEM.png`}
                   />
                 </div>
               </div>
@@ -112,7 +112,7 @@ const ToolDetails = () => {
                 <img
                   alt="tools"
                   className="screen-shot-2023-03-14-at-2022-5-iYM"
-                  src="/assets/screen-shot-2023-03-14-at-2022-5-xXX.png"
+                  src={`${process.env.PUBLIC_URL}/assets/screen-shot-2023-03-14-at-2022-5-xXX.png`}
                 />
                 <div className="auto-group-mnht-iAy">
                   <div className="auto-group-mxmt-zPP">
@@ -143,7 +143,7 @@ const ToolDetails = () => {
                 <img
                   alt="tools"
                   className="layer1-AM3"
-                  src="/assets/layer1-C2R.png"
+                  src={`${process.env.PUBLIC_URL}/assets/layer1-C2R.png`}
                 />
                 <p className="item-20-YcV">20</p>
                 <p className="it-is-basically-an-ui-ux-designing-application-like-sketch-in-my-opinion-it-has-bunch-of-tools-like-pen-tool-selection-tool-etc-designing-in-xd-is-simple-its-based-on-the-adobe-conventions-if-youre-used-to-work-in-adobe-softwares-like-photoshop-illustrator-you-can-work-with-xd-very-easily-and-efficiently-just-like-in-illustrator-of-sketch-you-can-have-multiple-artboards-v7F">
@@ -159,18 +159,18 @@ const ToolDetails = () => {
                   <img
                     alt="tools"
                     className="layer1-BjK"
-                    src="/assets/layer1-dNd.png"
+                    src={`${process.env.PUBLIC_URL}/assets/layer1-dNd.png`}
                   />
                   <div className="group-27-SSH">
                     <img
                       alt="tools"
                       className="ellipse-4-5k9"
-                      src="/assets/ellipse-4-Qry.png"
+                      src={`${process.env.PUBLIC_URL}/assets/ellipse-4-Qry.png`}
                     />
                     <img
                       alt="tools"
                       className="item-32360-1-i2R"
-                      src="/assets/-keZ.png"
+                      src={`${process.env.PUBLIC_URL}/assets/-keZ.png`}
                     />
                   </div>
                 </div>
@@ -181,7 +181,7 @@ const ToolDetails = () => {
                 <img
                   alt="tools"
                   className="screen-shot-2023-03-14-at-2022-5-8XP"
-                  src="/assets/screen-shot-2023-03-14-at-2022-5-gW9.png"
+                  src={`${process.env.PUBLIC_URL}/assets/screen-shot-2023-03-14-at-2022-5-gW9.png`}
                 />
                 <div className="auto-group-xgcm-j1P">
                   <div className="auto-group-rfdp-1Do">
@@ -212,7 +212,7 @@ const ToolDetails = () => {
                 <img
                   alt="tools"
                   className="layer1-xT7"
-                  src="/assets/layer1-XMX.png"
+                  src={`${process.env.PUBLIC_URL}/assets/layer1-XMX.png`}
                 />
                 <p className="item-20-wpq">20</p>
                 <p className="it-is-basically-an-ui-ux-designing-application-like-sketch-in-my-opinion-it-has-bunch-of-tools-like-pen-tool-selection-tool-etc-designing-in-xd-is-simple-its-based-on-the-adobe-conventions-if-youre-used-to-work-in-adobe-softwares-like-photoshop-illustrator-you-can-work-with-xd-very-easily-and-efficiently-just-like-in-illustrator-of-sketch-you-can-have-multiple-artboards-sru">
@@ -228,18 +228,18 @@ const ToolDetails = () => {
                   <img
                     alt="tools"
                     className="layer1-LR3"
-                    src="/assets/layer1-66h.png"
+                    src={`${process.env.PUBLIC_URL}/assets/layer1-66h.png`}
                   />
                   <div className="group-27-Yn1">
                     <img
                       alt="tools"
                       className="ellipse-4-ycR"
-                      src="/assets/ellipse-4-esX.png"
+                      src={`${process.env.PUBLIC_URL}/assets/ellipse-4-esX.png`}
                     />
                     <img
                       alt="tools"
                       className="item-32360-1-EKP"
-                      src="/assets/-VyX.png"
+                      src={`${process.env.PUBLIC_URL}/assets/-VyX.png`}
                     />
                   </div>
                 </div>
@@ -252,17 +252,17 @@ const ToolDetails = () => {
                   <img
                     alt="tools"
                     className="vector-75-YRs"
-                    src="/assets/vector-75.png"
+                    src={`${process.env.PUBLIC_URL}/assets/vector-75.png`}
                   />
                   <img
                     alt="tools"
                     className="screen-shot-2023-03-14-at-2022-5-Mu7"
-                    src="/assets/screen-shot-2023-03-14-at-2022-5.png"
+                    src={`${process.env.PUBLIC_URL}/assets/screen-shot-2023-03-14-at-2022-5.png`}
                   />
                   <img
                     alt="tools"
                     className="screen-shot-2023-03-14-at-2022-1-M1w"
-                    src="/assets/screen-shot-2023-03-14-at-2022-1-zFf.png"
+                    src={`${process.env.PUBLIC_URL}/assets/screen-shot-2023-03-14-at-2022-1-zFf.png`}
                   />
                 </div>
                 <div className="auto-group-nc4v-KN5">
@@ -292,7 +292,7 @@ const ToolDetails = () => {
                     <img
                       alt="tools"
                       className="layer1-KJm"
-                      src="/assets/layer1-uoj.png"
+                      src={`${process.env.PUBLIC_URL}/assets/layer1-uoj.png`}
                     />
                     <p className="item-20-YSR">20</p>
                     <p className="it-is-basically-an-ui-ux-designing-application-like-sketch-in-my-opinion-it-has-bunch-of-tools-like-pen-tool-selection-tool-etc-designing-in-xd-is-simple-its-based-on-the-adobe-conventions-if-youre-used-to-work-in-adobe-softwares-like-photoshop-illustrator-you-can-work-with-xd-very-easily-and-efficiently-just-like-in-illustrator-of-sketch-you-can-have-multiple-artboards-VFB">
@@ -308,18 +308,18 @@ const ToolDetails = () => {
                       <img
                         alt="tools"
                         className="layer1-P17"
-                        src="/assets/layer1-jgZ.png"
+                        src={`${process.env.PUBLIC_URL}/assets/layer1-jgZ.png`}
                       />
                       <div className="group-27-2bo">
                         <img
                           alt="tools"
                           className="ellipse-4-s6d"
-                          src="/assets/ellipse-4-hVo.png"
+                          src={`${process.env.PUBLIC_URL}/assets/ellipse-4-hVo.png`}
                         />
                         <img
                           alt="tools"
                           className="item-32360-1-Us7"
-                          src="/assets/-Qww.png"
+                          src={`${process.env.PUBLIC_URL}/assets/-Qww.png`}
                         />
                       </div>
                     </div>
@@ -351,25 +351,25 @@ const ToolDetails = () => {
                 <img
                   alt="tools"
                   className="layer1-ywb"
-                  src="/assets/layer1-1Rw.png"
+                  src={`${process.env.PUBLIC_URL}/assets/layer1-1Rw.png`}
                 />
                 <p className="item-20-x4m">20</p>
                 <div className="group-42-BCR">
                   <img
                     alt="tools"
                     className="layer1-coX"
-                    src="/assets/layer1-ZmP.png"
+                    src={`${process.env.PUBLIC_URL}/assets/layer1-ZmP.png`}
                   />
                   <div className="group-27-qwB">
                     <img
                       alt="tools"
                       className="ellipse-4-HHP"
-                      src="/assets/ellipse-4-hYy.png"
+                      src={`${process.env.PUBLIC_URL}/assets/ellipse-4-hYy.png`}
                     />
                     <img
                       alt="tools"
                       className="item-32360-1-6Vj"
-                      src="/assets/-cYM.png"
+                      src={`${process.env.PUBLIC_URL}/assets/-cYM.png`}
                     />
                   </div>
                 </div>
@@ -379,7 +379,7 @@ const ToolDetails = () => {
           <img
             alt="tools"
             className="midle-line-xgM"
-            src="/assets/midle-line-eus.png"
+            src={`${process.env.PUBLIC_URL}/assets/midle-line-eus.png`}
           />
           <div className="auto-group-s9pj-B3K">
             <p className="similar-apps-to-r-adobe-xd-QRs">
@@ -395,13 +395,13 @@ const ToolDetails = () => {
                 <img
                   alt="tools"
                   className="whatsapp-image-2023-03-20-at-0954-1-gk5"
-                  src="/assets/whatsapp-image-2023-03-20-at-0954-1.png"
+                  src={`${process.env.PUBLIC_URL}/assets/whatsapp-image-2023-03-20-at-0954-1.png`}
                 />
                 <div className="auto-group-sccu-eaR">
                   <img
                     alt="tools"
                     className="adobecreativecloudrainbowicon-1-eyj"
-                    src="/assets/adobecreativecloudrainbowicon-1.png"
+                    src={`${process.env.PUBLIC_URL}/assets/adobecreativecloudrainbowicon-1.png`}
                   />
                   <p className="figma-rpu">Figma</p>
                 </div>
@@ -409,14 +409,14 @@ const ToolDetails = () => {
                   <img
                     alt="tools"
                     className="adobecreativecloudrainbowicon-2-3nu"
-                    src="/assets/adobecreativecloudrainbowicon-2.png"
+                    src={`${process.env.PUBLIC_URL}/assets/adobecreativecloudrainbowicon-2.png`}
                   />
                   <p className="adobe-illustrator-3wK">Adobe Illustrator</p>
                 </div>
                 <img
                   alt="tools"
                   className="vector-53-fSu"
-                  src="/assets/vector-53-2rq.png"
+                  src={`${process.env.PUBLIC_URL}/assets/vector-53-2rq.png`}
                 />
               </div>
               <div className="news-letter-section-XG9">
