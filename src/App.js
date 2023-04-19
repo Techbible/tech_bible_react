@@ -4,10 +4,9 @@ import { AuthContext } from "./context/AuthContext";
 
 
 import {
-  LandingPage, Profile, SignIn, SignUp, Tools, UserList
-} from "./pages";
+  Home, Profile, SignIn, SignUp, Tools, UserList, ToolDetails
+} from "./views";
 
-import ToolDetails from './pages/ToolDetails';
 import { AddTool } from './admin';
 import { useContext } from 'react';
 import { NewsContextProvider } from './context/NewsContext';
@@ -40,7 +39,7 @@ function App() {
 
   return (
     <Routes>
-      <Route index path="/" element=<LandingPage /> />
+      <Route index path="/" element=<Home /> />
       <Route path='/signup' element=<SignUp /> />
       <Route path='/signin' element=<SignIn /> />
       <Route path='/profile' element=<Profile /> />

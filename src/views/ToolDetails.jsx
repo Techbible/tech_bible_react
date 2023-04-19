@@ -1,7 +1,7 @@
 import { doc, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { db } from "../firebase";
+import { db } from "../config/firebase";
 import { Navbar } from "../layouts";
 
 const ToolDetails = () => {
@@ -21,7 +21,6 @@ const ToolDetails = () => {
     console.log(id);
     const ToolRef = doc(db, "Tools", id);
     onSnapshot(ToolRef, (doc) => {
-      //BUG: *
       console.log(" data: ", doc.data());
       setToolsData({
         Name: doc.data().Name,

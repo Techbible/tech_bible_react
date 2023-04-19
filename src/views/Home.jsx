@@ -1,6 +1,6 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useReducer, useState, forwardRef, useImperativeHandle, useRef  } from "react";
-import { auth, db } from "../firebase";
+import { auth, db } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,11 +21,11 @@ import {
 import { Navbar } from "../layouts";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import "../assets/styles/landingpage.css";
-import { LikeMethods } from "../Global Methods";
+import "../assets/styles/home/home.css";
+import { LikeMethods } from "../lib";
 
 
-const LandingPage = () =>{
+const Home = () =>{
   const { currentUser } = useContext(AuthContext);
   const LikeMethodsRef = useRef(null);
 
@@ -612,4 +612,4 @@ const LandingPage = () =>{
   );
 };
 
-export default LandingPage;
+export default Home;

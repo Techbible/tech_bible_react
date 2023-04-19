@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Navbar } from "../../layouts";
-import "../../assets/styles/addTool.css";
+import "../../assets/styles/tools/addTool.css";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
 
@@ -12,7 +12,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-import { auth, db, storage } from "../../firebase";
+import { auth, db, storage } from "../../config/firebase";
 
 import { v4 as uuid } from "uuid";
 import { useContext } from "react";

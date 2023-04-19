@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  zoom : 142%;
+  /* zoom : 142%; */
   scroll-behavior: smooth;
   overflow-x: hidden;
   background-color: #1D1D1F;

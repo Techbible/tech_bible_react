@@ -1,5 +1,5 @@
 import React, { useReducer, forwardRef, useImperativeHandle  } from "react";
-import { db } from "../firebase";
+import { db } from "../config/firebase";
 import "react-toastify/dist/ReactToastify.css";
 import {
   doc,
@@ -10,7 +10,7 @@ import {
 
 
 import { useContext } from "react";
-import "../assets/styles/landingpage.css";
+import "../assets/styles/home/home.css";
 import { AuthContext } from "../context/AuthContext";
 
 const LikeMethods = forwardRef((props, ref) => {

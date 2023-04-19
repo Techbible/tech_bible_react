@@ -4,13 +4,13 @@
 import { onAuthStateChanged } from "firebase/auth";
 import 'firebase/storage';
 import 'firebase/firestore';
-import { storage } from "../firebase";
+import { storage } from "../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 
 import React, { useEffect, useState, useRef, useReducer } from "react";
-import { auth, db } from "../firebase";
+import { auth, db } from "../config/firebase";
 import { Bio } from "../components";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -26,14 +26,12 @@ import {
 import Modal from "react-modal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import "../assets/styles/profile.css";
-import "../assets/styles/editProfile.css";
+
+import "../assets/styles/profile/profile.css";
+import "../assets/styles/profile/editProfile.css";
 
 
-import { LikeMethods } from "../Global Methods";
-
-
-
+import { LikeMethods } from "../lib";
 
 
 
@@ -123,7 +121,6 @@ const Profile = () => {
 
   //_______________________________Inserting Changes_____________________________________________
   const handleInterestsChange = async () => {
-    //BUG : *
     try {
       const UserRef = doc(db, "Users", userData.uid);
       const data = { interests: checkedInterests };

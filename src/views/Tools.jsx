@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { Navbar } from "../layouts";
 import { useState, useEffect } from "react";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { db } from "../firebase";
-import "../assets/styles/Tools.scss";
+import "../assets/styles/tools/Tools.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 
+import { db } from "../config/firebase";
 
 function Tools() {
   const [tools, setTools] = useState();
@@ -26,8 +26,8 @@ function Tools() {
     }
 
     //getting all the tools
-    const dbRef = collection(db, "Tools");
-    onSnapshot(dbRef, (docsSnap) => {
+    const ToolRef = collection(db, "Tools");
+    onSnapshot(ToolRef, (docsSnap) => {
       const ToolsArray = [];
       docsSnap.forEach((doc) => {
         // console.log(doc.data());

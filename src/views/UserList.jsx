@@ -11,15 +11,17 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import "../assets/styles/profile.css";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { db } from "../firebase";
+import { db } from "../config/firebase";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import "../assets/styles/profile.css";
 import Modal from "react-modal";
+
+
+
+import "../assets/styles/profile/profile.css";
 
 const UserList = () => {
   const { currentUser } = useContext(AuthContext);
