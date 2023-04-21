@@ -11,6 +11,8 @@ import { AddTool } from './admin';
 import { useContext } from 'react';
 import { NewsContextProvider } from './context/NewsContext';
 import { useEffect } from 'react';
+import Navbar from './components/Navbar/Navbar';
+import Socials from './components/Socials/Socials';
 
 
 
@@ -38,12 +40,14 @@ function App() {
 
 
   return (
+    <div>
+    <Navbar />
     <Routes>
       <Route index path="/" element=<Home /> />
       <Route path='/signup' element=<SignUp /> />
       <Route path='/signin' element=<SignIn /> />
       <Route path='/profile' element=<Profile /> />
-      <Route path='//list' element=<UserList /> />
+      <Route path='/list' element=<UserList /> />
 
       <Route path='/tools' element={
         <ProtectedRoute>
@@ -63,7 +67,7 @@ function App() {
         </ProtectedRoute>
       } />
 
-      <Route path='/News/:keyword' element={
+      <Route path='/News' element={
         <NewsContextProvider>
           <NewsList />
         </NewsContextProvider>
@@ -75,6 +79,9 @@ function App() {
           <Tools />
       } />
     </Routes>
+
+    <Socials />
+    </div>
   );
 }
 
