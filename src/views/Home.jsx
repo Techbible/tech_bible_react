@@ -32,9 +32,13 @@ import { LikeMethods } from "../lib";
 
 import "../assets/styles/home/home.css";
 import "../assets/styles/home/global.css";
+
 import Search_format from "../components/Search-container/Search_format";
 import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Toolitem from "../components/Tools/Toolitem";
+import YouMustLikeApp from "../components/Filtering-container/YouMightLikeApp";
+import YouMightLikeApp from "../components/Filtering-container/YouMightLikeApp";
+import AppOfTheDay from "../components/Filtering-container/AppOfTheDay";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
@@ -218,8 +222,33 @@ const Home = () => {
             </div>
 
             <div>
-              {/* Search bar */}
-              <Search_format />
+              <div>
+                {/* Search bar */}
+                <Search_format />
+                {/* End Search bar */}
+
+                {/* Filtering container */}
+                <div className="filtering-container">
+                  <AppOfTheDay />
+                  {/************You might also like***********/}
+                  <div className="you-must-like-apps-container">
+                    <p className="fontWeight-500 text-[#15C988] mb-4">
+                      YOU MIGHT ALSO LIKE
+                    </p>
+                    <div
+                      className="flex flex-col sm:flex-row"
+                      style={{ display: "flex" }}
+                    >
+                      <YouMightLikeApp />
+                      <YouMightLikeApp />
+                      <YouMightLikeApp />
+                    </div>
+                  </div>
+                  {/***********END You might also like********/}
+                </div>
+                {/* End Filtering container */}
+              </div>
+
               <div data-test="homepage-section-0">
                 <div>
                   <div>
