@@ -28,8 +28,8 @@
   }
   
   .square {
-    height: 50px;
-    width: 45px;
+    height: 60px;
+    width: 50px;
     border: 1px solid white;
   }
   
@@ -44,6 +44,7 @@
     line-height: 12px;
     padding: 2px 5px;
     box-sizing: border-box;
+    
     
   }
   
@@ -1132,9 +1133,8 @@
   .styles_container__0sZXQ {
     position: relative;
     height: inherit;
-    background-color : #1D1D1F ;
+    background-color: #272727;
     border-radius: 4px;
-
   }
   
   .styles_icon__10p3X {
@@ -1143,7 +1143,7 @@
     top: 10px;
     right: 10px;
     cursor: pointer;
-    color: #4b587c;
+    color: #ffffff;
     display: none;
     z-index: 1;
   }

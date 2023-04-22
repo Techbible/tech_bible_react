@@ -1,5 +1,12 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import React, { useEffect, useReducer, useState, forwardRef, useImperativeHandle, useRef  } from "react";
+import React, {
+  useEffect,
+  useReducer,
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import { auth, db } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -25,21 +32,20 @@ import { LikeMethods } from "../lib";
 
 import "../assets/styles/home/home.css";
 import "../assets/styles/home/global.css";
+import Search_format from "../components/Search-container/Search_format";
+import NewsHomePage from "../components/News Scraper/NewsHomePage";
+import Toolitem from "../components/Tools/Toolitem";
 
-
-const Home = () =>{
+const Home = () => {
   const { currentUser } = useContext(AuthContext);
   const LikeMethodsRef = useRef(null);
-
-
-
 
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
   const [tools, setTools] = useState([]);
   const [toolsCopy, setToolsCopy] = useState([]);
 
-  const [updated,setUpdated] = useState(0)
+  const [updated, setUpdated] = useState(0);
 
   //To store the searched value
   const [Search, setSearch] = useState("");
@@ -55,7 +61,7 @@ const Home = () =>{
   const [Pricing, setPricing] = useState("");
 
   //to force Re-render
-  const [reducerValue,forceRender] = useReducer(x => x+1,0);
+  const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
 
   const [userData, setUserData] = useState({
     pfp: "",
@@ -165,163 +171,61 @@ const Home = () =>{
     console.log(SearchedTool);
   };
 
-  const handleUnLikes = (toolID)=>{
-    LikeMethodsRef.current.Unlike(toolID)
+  const handleUnLikes = (toolID) => {
+    LikeMethodsRef.current.Unlike(toolID);
     forceRender();
-  }
-  const handleLikes = (toolID)=>{
-    LikeMethodsRef.current.Like(toolID)
+  };
+  const handleLikes = (toolID) => {
+    LikeMethodsRef.current.Like(toolID);
     forceRender();
-  }
-
-
-
+  };
 
   return (
     <div id="__next">
-      <div
-        className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer"
-      >
+      <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer">
         <main className="layoutMain">
-          <div className="flex direction-column bg-[##1D1D1F] ">
-            <div
-              className="styles_container__0sZXQ flex direction-column mb-12 p-5"
-            >
-              <button
-                type="button"
-                className="styles_reset__opz7w styles_icon__10p3X"
-              >
-                <svg width="12" height="12" viewBox="0 0 12 12">
-                  <path
-                    d="M6 4.586l4.24-4.24a1 1 0 1 1 1.416 1.413L7.413 6l4.24 4.24a1 1 0 1 1-1.413 1.416L6 7.413l-4.24 4.24A1 1 0 1 1 .344 10.24L4.587 6 .347 1.76A1 1 0 1 1 1.757.343L6 4.587z"
-                    fill-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-              <div
-                className="color-white bg-[##1D1D1F] fs-24 fw-600"
-              >
-                Welcome to Tech Bible! 👋
-              </div>
-              <div className="flex direction-row">
-                <div
-                  className="color-[#F1F1F1] fs-16 fw-400"
+          <div class="flex direction-column">
+            <div class="flex flex-col mb-12 p-5 styles_container__0sZXQ">
+              <div class="flex justify-end">
+                <button
+                  type="button"
+                  class="styles_reset__opz7w styles_icon__10p3X"
                 >
-                  The place to launch and discover new tech Tools.
+                  <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path
+                      d="M6 4.586l4.24-4.24a1 1 0 1 1 1.416 1.413L7.413 6l4.24 4.24a1 1 0 1 1-1.413 1.416L6 7.413l-4.24 4.24A1 1 0 1 1 .344 10.24L4.587 6 .347 1.76A1 1 0 1 1 1.757.343L6 4.587z"
+                      fill="#ffffff"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="color-white fontSize-24 fontWeight-600 noOfLines-undefined">
+                Welcome to Tech Bible! 😎
+              </div>
+              <div class="flex direction-row">
+                <div class="color-white fontSize-16 fontWeight-400 noOfLines-undefined">
+                  The place to discover new tech Tools.
                 </div>
                 <button
                   type="button"
-                  className="styles_textButton__q4xv1 styles_left__i0IgN styles_cta__HXZkL"
+                  class="styles_textButton__q4xv1 styles_left__i0IgN styles_cta__HXZkL"
                 >
-                  <div
-                    className="ml-1 color-blue fs-16 fw-400"
-                  >
+                  <div class="ml-1 text-[#7869E6] fontSize-16 fontWeight-400 noOfLines-undefined">
                     Take a tour.
                   </div>
                 </button>
               </div>
             </div>
+
             <div>
-              <div
-                className="flex direction-row justify-space-between align-center"
-              >
-                <h1
-                  className="color-darker-grey fs-24 fw-600"
-                  data-test="homepage-tagline"
-                >
-                  Your next favorite Tools 👇
-                </h1>
-                <div className="styles_container__5MXSs styles_feeds__6Wr4b">
-                  <span
-                    className="styles_dropdown__BQ713"
-                    data-test="feed-navigation"
-                  ></span>
-                </div>
-              </div>
+              {/* Search bar */}
+              <Search_format />
               <div data-test="homepage-section-0">
                 <div>
                   <div>
-                    <div
-                      className="px-mobile-1 px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6"
-                    >
-                      <div
-                        className="styles_item__Sn_12 flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
-                        data-test="post-item-390145"
-                      >
-                        <a href="/posts/mage-4" aria-label="Mage">
-                          <div
-                            className="styles_thumbnail__Rmwk5 styles_thumbnail__E2_pB"
-                            data-test="post-thumbnail"
-                          >
-                            <img
-                              loading="lazy"
-                              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/2101px-Adobe_XD_CC_icon.svg.png"
-                              style={{width: "80px",height: "80px"}}
-                              alt="Adobe XD"
-                              className="styles_mediaThumbnail__LDCQN"
-                            />
-                          </div>
-                        </a>
-                        <div className="flex direction-column flex-1">
-                          <div
-                            className="color-darker-grey fs-mobile-12 fs-desktop-16 fs-tablet-16 fs-widescreen-16 fw-600 noOfLines-2 styles_format__w0VVk"
-                          >
-                            <a>Adobe XD</a
-                            ><a
-                              href="/r/p/390145"
-                              rel="noopener"
-                              target="_blank"
-                              className="styles_externalLinkIcon__822Ku"
-                              ><svg width="13" height="14" viewBox="0 0 13 14">
-                                <g
-                                  stroke="#4B587C"
-                                  stroke-width="1.5"
-                                  fill="none"
-                                  fill-rule="evenodd"
-                                >
-                                  <path
-                                    d="M9.6 4H4.2a2.4 2.4 0 0 0-2.4 2.4V10"
-                                  ></path>
-                                  <path d="M6.6 7l3-3-3-3M12 10v3H0"></path>
-                                </g></svg
-                            ></a>
-                          </div>
-                          <div
-                            className="color-[#F1F1F1] fs-mobile-12 fs-desktop-16 fs-tablet-16 fs-widescreen-16 fw-400 noOfLines-2"
-                          >
-                              Browse 1000+ of the latest tech tools per task
-                              Updated daily
-                          </div>
-                          <div
-                            className="flex direction-row flex-row-gap-6 mt-3 align-center"
-                          >
-                            <div className="flex direction-row flex-row-gap-3">
-                              <div
-                                className="color-[#F1F1F1] fs-12 fw-400"
-                              >
-                                Free
-                              </div>
-                              <a
-                                className="styles_postTopicLink__wDe_p"
-                                href="/topics/art"
-                              >
-                                <div
-                                  className="color-[#F1F1F1] fs-12 fw-400"
-                                >
-                                  Design tool
-                                </div>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div data-test="ad-slot-3">
-                    <div
-                      className="px-mobile-1 px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6"
-                    >
-                    </div>
+                    <Toolitem />
+                    <Toolitem />
+                    <Toolitem />
                   </div>
                 </div>
               </div>
@@ -329,29 +233,12 @@ const Home = () =>{
           </div>
         </main>
         <aside className="sidebarWithSeparator right">
-         <Link to="/News"><h1>News</h1></Link>
-          <div
-            className="max-w-md mx-auto mb-5 bg-[#E2E2E0] rounded-xl shadow-md overflow-hidden md:max-w-2xl"
-          >
-            <div className="md:flex">
-              
-              <div className="p-8 md:pt-4">
-                <div
-                  className="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-2"
-                >
-                  Breaking News
-                </div>
-                <a
-                  href="www"
-                  className="block text-xl font-bold leading-tight text-gray-900 hover:underline"
-                  >Title of the News Article</a
-                >
-                <p className="mt-2 text-gray-500 text-sm">
-                  By John Doe | April 20, 2023
-                </p>
-              </div>
-            </div>
-          </div>
+          <Link to="/News">
+            <h1>News</h1>
+          </Link>
+          <NewsHomePage />
+          <NewsHomePage />
+          <NewsHomePage />
         </aside>
       </div>
     </div>
