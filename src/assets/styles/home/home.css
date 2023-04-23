@@ -1208,13 +1208,14 @@ input {
   background-color: #4635ca;
 }
 
-.you-must-like-apps-container {
+.you-might-like-apps-container {
   background-color: none;
   border-left: 1px solid rgb(188, 185, 185);
   padding-left: 1rem;
+  margin-bottom: 10vh;
 }
 
-.navbar-header{
+.navbar-header {
   /* ****** */
   position: fixed;
   top: 0;
@@ -1224,12 +1225,10 @@ input {
   /* if we want to remove position fixed ==> we should remove margin-top to the body */
   /* ****** */
   box-shadow: 0px 1px 8px rgba(255, 255, 255, 0.5);
-  padding: .3rem .5rem;
+  padding: 0.3rem 0.5rem;
 }
 
-
-.appOfTheDay-container{
+.appOfTheDay-container {
   /* background-color: grey; */
   padding: 2rem;
-
 }

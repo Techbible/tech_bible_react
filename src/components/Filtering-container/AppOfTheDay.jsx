@@ -2,7 +2,7 @@ import React from "react";
 
 const AppOfTheDay = () => {
   return (
-    <div className="appOfTheDay-container">
+    <div className="appOfTheDay-container duration-500 ease-in-out transform hover:scale-105">
       {/********** App of the day **********/}
       <h2 className="fw-bold mb-5 mb-lg-5">App of the day</h2>
       <div class="flex flex-col md:flex-row items-center mb-4">

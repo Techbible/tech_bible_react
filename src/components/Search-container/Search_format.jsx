@@ -1,7 +1,14 @@
-import React from "react";
-import '../../assets/styles/search-container/search-container.css'
+import React, { useContext } from "react";
+import "../../assets/styles/search-container/search-container.css";
+import { FilteringContext } from "../../context/FilteringContext";
 
 const Search_format = () => {
+  const { isFiltering, setIsFiltering } = useContext(FilteringContext);
+
+  const hundleFiltering = () => {
+    isFiltering ? setIsFiltering(false) : setIsFiltering(true);
+  };
+
   return (
     <div className="search-tool-container max-w-2xl mx-auto">
       <h2 className="text-white fontWeight-500">
@@ -33,6 +40,7 @@ const Search_format = () => {
         </div>
         <div className="ml-2">
           <svg
+            onClick={hundleFiltering}
             width="30"
             height="28"
             viewBox="0 0 30 28"
@@ -79,7 +87,7 @@ const Search_format = () => {
         <div className="mr-4">
           <div>
             {/* --*****************Logo bellow search bar***************** */}
-                
+
             {/* --********************************** */}
           </div>
         </div>

@@ -39,6 +39,7 @@ import Toolitem from "../components/Tools/Toolitem";
 import YouMustLikeApp from "../components/Filtering-container/YouMightLikeApp";
 import YouMightLikeApp from "../components/Filtering-container/YouMightLikeApp";
 import AppOfTheDay from "../components/Filtering-container/AppOfTheDay";
+import { FilteringContext } from "../context/FilteringContext";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
@@ -56,7 +57,7 @@ const Home = () => {
 
   //to keep track either if the user is searching or not
   const [isSearching, setIsSearching] = useState(false);
-  const [isFiltering, setIsFiltering] = useState(false);
+  const [isFiltering, setIsFiltering] = useState(true);
 
   //To store the results of the research
   const [SearchedTool, setSearchedTool] = useState([]);
@@ -224,31 +225,39 @@ const Home = () => {
             <div>
               <div>
                 {/* Search bar */}
-                <Search_format />
+                <FilteringContext.Provider
+                  value={{ isFiltering, setIsFiltering }}
+                >
+                  <Search_format />
+                </FilteringContext.Provider>
                 {/* End Search bar */}
 
-                {/* Filtering container */}
-                <div className="filtering-container">
-                  <AppOfTheDay />
-                  {/************You might also like***********/}
-                  <div className="you-must-like-apps-container">
-                    <p className="fontWeight-500 text-[#15C988] mb-4">
-                      YOU MIGHT ALSO LIKE
-                    </p>
-                    <div
-                      className="flex flex-col sm:flex-row"
-                      style={{ display: "flex" }}
-                    >
-                      <YouMightLikeApp />
-                      <YouMightLikeApp />
-                      <YouMightLikeApp />
+                {!isFiltering ? (
+                  // {/* Filtering container */}
+                  <div className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
+                    <AppOfTheDay />
+                    {/************You might also like***********/}
+                    <div className="you-might-like-apps-container">
+                      <p className="fontWeight-500 text-[#15C988] mb-4">
+                        YOU MIGHT ALSO LIKE
+                      </p>
+                      <div
+                        className="flex flex-col sm:flex-row"
+                        style={{ display: "flex" }}
+                      >
+                        <YouMightLikeApp />
+                        <YouMightLikeApp />
+                        <YouMightLikeApp />
+                      </div>
                     </div>
+                    {/***********END You might also like********/}
                   </div>
-                  {/***********END You might also like********/}
-                </div>
-                {/* End Filtering container */}
+                  // {/* End Filtering container */}
+                ):
+                (
+                  <div></div>
+                )}
               </div>
-
               <div data-test="homepage-section-0">
                 <div>
                   <div>
