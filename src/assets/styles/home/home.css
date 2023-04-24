@@ -1188,6 +1188,7 @@ input {
 .signin-btn:hover {
   background-color: white;
   color: black;
+  letter-spacing: 0.5px;
 }
 .signin-btn:active {
   background-color: rgb(198, 188, 188);
@@ -1203,6 +1204,7 @@ input {
 }
 .signup-btn:hover {
   background-color: #604fe7;
+  letter-spacing: 0.5px;
 }
 .signup-btn:active {
   background-color: #4635ca;

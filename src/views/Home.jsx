@@ -186,7 +186,6 @@ const Home = () => {
   };
 
   return (
-    <div id="__next">
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer">
         <main className="layoutMain">
           <div class="flex direction-column">
@@ -279,7 +278,7 @@ const Home = () => {
           <NewsHomePage />
         </aside>
       </div>
-    </div>
+
   );
 };
 
