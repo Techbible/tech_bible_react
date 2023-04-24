@@ -51,6 +51,12 @@ const Toolitem = () => {
           <div className="flex direction-row flex-row-gap-6 mt-3 align-center">
             <div className="flex direction-row flex-row-gap-3">
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
+                <span class="bi bi-chat-left-dots"></span>
+              </div>
+              <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
+                214
+              </div>
+              <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                 Free
               </div>
               <a className="styles_postTopicLink__wDe_p" href="/topics/art">
@@ -62,32 +68,34 @@ const Toolitem = () => {
           </div>
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
-          <button
-            type="button"
-            data-test="vote-button"
-            className="styles_reset__opz7w styles_feed__JnsOv"
-          >
-            <div className="flex direction-column align-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 fill-current text-red-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18.333L2.5 11.24c-2.19-2.138-2.19-5.617 0-7.755C4.686 1.03 7.836 1.03 10 3.485 12.164 1.03 15.314 1.03 17.5 3.485c2.19 2.138 2.19 5.617 0 7.755L10 18.333z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              <div className="color-lighter-grey fontSize-12 fontWeight-600 noOfLines-undefined">
-                368
-              </div>
+          <div className="flex direction-column align-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 fill-current text-red-500"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18.333L2.5 11.24c-2.19-2.138-2.19-5.617 0-7.755C4.686 1.03 7.836 1.03 10 3.485 12.164 1.03 15.314 1.03 17.5 3.485c2.19 2.138 2.19 5.617 0 7.755L10 18.333z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
+              368
             </div>
-          </button>
+            <span class="bi bi-plus-lg fw-bold text-white"></span>
+          </div>
         </div>
       </div>
-      <div style={{backgroundColor: 'grey', height: '1px', width: '90%', margin: '2rem 0px'}}></div>
+      <div
+        style={{
+          backgroundColor: "grey",
+          height: "1px",
+          width: "90%",
+          margin: "2rem 0px",
+        }}
+      ></div>
     </div>
   );
 };

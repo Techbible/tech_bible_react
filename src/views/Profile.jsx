@@ -2,12 +2,10 @@
 
 //Imports
 import { onAuthStateChanged } from "firebase/auth";
-import 'firebase/storage';
-import 'firebase/firestore';
+import "firebase/storage";
+import "firebase/firestore";
 import { storage } from "../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
-
 
 import React, { useEffect, useState, useRef, useReducer } from "react";
 import { auth, db } from "../config/firebase";
@@ -27,21 +25,17 @@ import Modal from "react-modal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
+// import "../assets/styles/profile/profile.css";
+// import "../assets/styles/profile/editProfile.css";
 import "../assets/styles/profile/profile.css";
-import "../assets/styles/profile/editProfile.css";
-
 
 import { LikeMethods } from "../lib";
-
-
+import Toolitem from "../components/Tools/Toolitem";
 
 const Profile = () => {
-
-/*****************************Importing Ready Methods START******************************* */
+  /*****************************Importing Ready Methods START******************************* */
   // referencing our methods
   const LikeMethodsRef = useRef(null);
-
-
 
   const { currentUser } = useContext(AuthContext);
 
@@ -57,7 +51,7 @@ const Profile = () => {
   const [categories, setCategories] = useState();
   const [checkedInterests, setcheckedInterests] = useState([]);
 
-  const [reducerValue,forceRender] = useReducer(x => x+1,0);
+  const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
 
   //To Check if Edit profile button was clicked
   const [editProfileClicked, setEditProfileClicked] = useState(false);
@@ -141,51 +135,56 @@ const Profile = () => {
   };
 
   //Edit interests
-  const editInterests = ()=>{
-      let userInterests = userData.interests
-    setcheckedInterests(userInterests)
-    console.log('User Interests ' + checkedInterests)
-    setEditProfileClicked(false)
-    openModal()
-  }
-  
+  const editInterests = () => {
+    let userInterests = userData.interests;
+    setcheckedInterests(userInterests);
+    console.log("User Interests " + checkedInterests);
+    setEditProfileClicked(false);
+    openModal();
+  };
+
   //Edit profile
   const openEditProfileModal = () => {
-    setEditProfileClicked(true)
-    setEditedUsername(userData.username)
+    setEditProfileClicked(true);
+    setEditedUsername(userData.username);
     openModal();
-  }
-  
+  };
 
   /**************** Editing username and Profile PIC *****************/
-  const [profilePicture, setProfilePicture] = useState(null)
-  const [editedUsername, setEditedUsername] = useState(userData.username)
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [editedUsername, setEditedUsername] = useState(userData.username);
 
   const uploadImage = () => {
-    if(profilePicture === null) return;
-    const imageRef = ref(storage, `profile-pictures/${profilePicture.name+currentUser.uid}`);
-    const usersRef = collection(db, 'Users');
+    if (profilePicture === null) return;
+    const imageRef = ref(
+      storage,
+      `profile-pictures/${profilePicture.name + currentUser.uid}`
+    );
+    const usersRef = collection(db, "Users");
     const userDocRef = doc(usersRef, currentUser.uid);
     uploadBytes(imageRef, profilePicture).then((snapshot) => {
       console.log("Image uploaded");
-      getDownloadURL(snapshot.ref).then((url) => {
-        updateDoc(userDocRef, {
-          username: editedUsername,
-          photo: url
-        }).then(() => {
-          console.log("Photo updated");
-        }).catch((error) => {
-          console.log("Error updating photo:", error);
+      getDownloadURL(snapshot.ref)
+        .then((url) => {
+          updateDoc(userDocRef, {
+            username: editedUsername,
+            photo: url,
+          })
+            .then(() => {
+              console.log("Photo updated");
+            })
+            .catch((error) => {
+              console.log("Error updating photo:", error);
+            });
+        })
+        .catch((error) => {
+          console.log("Error getting download URL:", error);
         });
-      }).catch((error) => {
-        console.log("Error getting download URL:", error);
-      });
       closeModal();
     });
 
     closeModal();
   };
-  
 
   //************************END Inserting Changes*********************************
 
@@ -212,12 +211,12 @@ const Profile = () => {
     }
   };
 
-  useEffect(()=>{
-    LoadLikedTools()
-  },[reducerValue]);
+  useEffect(() => {
+    LoadLikedTools();
+  }, [reducerValue]);
 
-  useEffect(()=>{
-    LoadLikedTools()
+  useEffect(() => {
+    LoadLikedTools();
   });
 
   //Verifying Sign in and loading users infos on load
@@ -275,422 +274,113 @@ const Profile = () => {
     }
   };
 
-  const handleUnlike = (toolID)=>{
-    LikeMethodsRef.current.Unlike(toolID)
+  const handleUnlike = (toolID) => {
+    LikeMethodsRef.current.Unlike(toolID);
     forceRender();
-    if(LikedTools.length === 1)
-        setLikedTools([])
-      // window.location.reload()
-  }
+    if (LikedTools.length === 1) setLikedTools([]);
+    // window.location.reload()
+  };
 
   return (
-    <div>
-    <LikeMethods ref={LikeMethodsRef}/>
-      <div className="profile-about-NVb">
-        <div className="auto-group-q16m-m1w">
-          <Link to="/">
-            <div className="tech-bible-logo-wad">
-              <p className="tech-bible-Kr5">
-                Tech
-                <br />
-                Bible
-              </p>
-            </div>
-          </Link>
-          <div className="auto-group-nrn5-Tau">
-            <Link to="/addTool">
-              <p className="submit-your-tool-Rbb">Submit your tool</p>
-            </Link>
-            <p className="resources-cvy">Resources</p>
-            <p className="community-q33">Community</p>
-            <a
-              href="https://www.tiktok.com/discover/TechBible?lang=en"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                alt="pic"
-                className="layer1-3uo"
-                src={`${process.env.PUBLIC_URL}/assets/layer1-xyT.png`}
-              />
-            </a>
-            <a
-              href="https://www.youtube.com/channel/UCkyxFbFun3bjehZAdkVQgZw"
-              title="Youtube"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                alt="pic"
-                className="white-youtube-icon-png-28-1-Cw7"
-                src={`${process.env.PUBLIC_URL}/assets/white-youtube-icon-png-28-1.png`}
-              />
-            </a>
-            <a
-              href="https://www.instagram.com/my.techbible/"
-              title="instagram"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                alt="pic"
-                className="pngfind-1-uU9"
-                src={`${process.env.PUBLIC_URL}/assets/pngfind-1.png`}
-              />
-            </a>
-            <div>
-              {authUser ? (
-                <div className="user-info-container">
-                  <Link to="/profile">
-                    <div className="user-info">
-                      <div
-                        className="user"
-                        style={{ backgroundImage: `url(${userData.photo})` }}
-                      ></div>
-                      <div className="username">{userData.username}</div>
-                    </div>
-                  </Link>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
-        <div className="auto-group-7qjo-JyT">
-          <div className="auto-group-x7xy-7AD">
-            <div
-              className="user"
-              style={{
-                backgroundImage: `url(${userData.photo})`,
-                width: "86px",
-                height: "86px",
-              }}
-            ></div>
-          </div>
-          <div className="auto-group-fpf7-J1j">
-            <div className="auto-group-e94r-ibF">
-              <p className="miro99-XYh">{userData.username}</p>
-              <button
-                onClick={openEditProfileModal}
-                className="auto-group-r9tj-kRT"
-              >
-                Edit
-              </button>
-            </div>
-            <p className="sheesh-digital-marketing-and-graphic-design-adobe-suites-1kh">
-              {userData.bio}
-            </p>
-            <div className="auto-group-nshf-mtH">
-              <Link to='/list'><div className="auto-group-sgto-To3">My List</div></Link>
-            </div>
-          </div>
-        </div>
-        <p className="about-Djb">About</p>
-        <p className="recently-browsed-dYR">Liked Tools</p>
-        <div className="auto-group-zyow-V4q">
-          <div className="auto-group-jo33-GE1">
-            <div className="auto-group-lzzw-bGH">
-              <p className="bio-JAh">Bio</p>
+    <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
+      <main className="layoutMain">
 
-              <span className="sheesh-QDj">
-                {userData.bio ? (
-                  <div>
-                    {updateBio ? (
-                      <div>
-                        <input
-                          className="profile-input"
-                          placeholder={userData.bio}
-                          onChange={(e) => setBio(e.target.value)}
-                          type="text"
-                        />
-                        <div>
-                          <span
-                            onClick={() => setUpdateBio(false)}
-                            className="profile-cancel"
-                          >
-                            Cancel
-                          </span>
-                          <span
-                            onClick={() => UpdatingBio()}
-                            className="profile-btn-outlined"
-                          >
-                            Update
-                          </span>
-                        </div>
-                      </div>
-                    ) : (
-                      userData.bio
-                    )}
 
-                    {updateBio ? (
-                      <div></div>
-                    ) : (
-                      <span
-                        onClick={() => setUpdateBio(true)}
-                        className="profile-btn-outlined"
-                      >
-                        Edit
-                      </span>
-                    )}
-                  </div>
-                ) : (
-                  <div className="bio">
-                    {addBio ? (
-                      <input
-                        className="profile-input"
-                        placeholder="You can add your bio here"
-                        onChange={(e) => setBio(e.target.value)}
-                        type="text"
-                      />
-                    ) : (
-                      <span style={{ color: "red" }}>
-                        you don't have a bio yet
-                      </span>
-                    )}
-
-                    {addBio ? (
-                      <div>
-                        <span
-                          onClick={() => setAddBio(false)}
-                          className="profile-cancel"
-                        >
-                          Cancel
-                        </span>
-                        <span
-                          onClick={() => UpdatingBio()}
-                          className="profile-btn-outlined"
-                        >
-                          Submit
-                        </span>
-                      </div>
-                    ) : (
-                      <span
-                        onClick={() => setAddBio(true)}
-                        className="profile-btn-outlined"
-                      >
-                        + Add
-                      </span>
-                    )}
-                  </div>
-                )}
-              </span>
-            </div>
-
-            <div
-              className="auto-group-rpbb-gww"
-              style={{ position: "relative" }}
-            >
-              <p className="interests-bp1">Interests</p>
-              <br />
-              <p className="digital-marketing-and-graphic-design-adobe-suites-KV7">
-                {userData.interests.length > 0 ? (
-                  <div className="interests-wrapper-V">
-                    {updateInterests ? (
-                      <div>
-                        <input
-                          className="profile-input"
-                          placeholder={userData.interests}
-                          onChange={(e) => setIntersts(e.target.value)}
-                          type="text"
-                        />
-                        <div id="interests-action-btns">
-                          <span
-                            onClick={() => setUpdateInterests(false)}
-                            className="profile-cancel"
-                          >
-                            Cancel
-                          </span>
-                          <span
-                            onClick={() => handleInterestsChange(userData.uid)}
-                            className="profile-btn-outlined"
-                          >
-                            Update
-                          </span>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="Intrests-container">
-                        {userData.interests.map((i, index) => (
-                          <span className="Interest" key={index}>
-                            {i}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    {updateInterests ? (
-                      <div></div>
-                    ) : (
-                      <span
-                        onClick={editInterests}
-                        className="profile-btn-outlined-2"
-                      >
-                        Edit
-                      </span>
-                    )}
-                  </div>
-                ) : (
-                  <div>
-                    {addInterests ? (
-                      <input
-                        className="profile-input"
-                        placeholder="Marketing, SEO ..."
-                        onChange={(e) => setIntersts(e.target.value)}
-                        type="text"
-                      />
-                    ) : (
-                      <span style={{ color: "red" }}>
-                        you don't have any interests yet
-                      </span>
-                    )}
-
-                    {addInterests ? (
-                      <div>
-                        <span
-                          onClick={() => setAddInterests(false)}
-                          className="profile-cancel"
-                        >
-                          Cancel
-                        </span>
-                        <span
-                          onClick={() => handleInterestsChange(userData.uid)}
-                          className="profile-btn-outlined"
-                        >
-                          Submit
-                        </span>
-                      </div>
-                    ) : (
-                      <span
-                        onClick={editInterests}
-                        className="profile-btn-outlined-2"
-                      >
-                        + Add
-                      </span>
-                    )}
-                  </div>
-                )}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="liked-tools-container">
-        {LikedTools ? (
-          LikedTools.map((LikedTool) => (
-            <div className="tool-container">
-              <img className="tool-logo" src={LikedTool.Icon} alt="" />
-              <div className="tool-data">
-              <Link to={`/ToolDetails/${LikedTool.id}`}> <div className="tool-title">{LikedTool.Name}</div></Link>
-                <div className="tool-description">{LikedTool.Description}</div>
-                <div className="tool-comments">
+        {/* Profile Info Component */}
+        <div class="w-widescreen-5 mb-[4rem] profile-info-container">
+          <div class="row">
+            <div class="col-md-2">
+              {/* <img
+                src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
+                alt="Profile Image"
+                class="rounded-full max-h-60 max-w-60 object-cover object-center md:h-auto md:w-auto"
+              /> */}
+              <div class="w-full">
                 <img
-                  alt="tech bible"
-                  className="layer1-xx5"
-                  src={`${process.env.PUBLIC_URL}/assets/layer1-xPw.png`}
+                  src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
+                  class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 border-gray-300 rounded-full"
+                  alt="Profile Image"
                 />
-                {LikedTool.Comments}
-                </div>
-              </div>
-              <div className="tool-icons">
-               <img
-                  alt="tech bible"
-                  className="like-eGV"
-                  src={`${process.env.PUBLIC_URL}/assets/liked.png`}
-                  title="unfollow"
-                  onClick={()=>handleUnlike(LikedTool.id)}
-                />
-                        <div className="save-3ZX">
-                          <img
-                            alt="tech bible"
-                            className="ellipse-4-v7X"
-                            src={`${process.env.PUBLIC_URL}/assets/ellipse-4-ray.png`}
-                          />
-                          <img
-                            alt="tech bible"
-                            className="item-32360-1-iJH"
-                            src={`${process.env.PUBLIC_URL}/assets/-aLV.png`}
-                          />
-                        </div>
               </div>
             </div>
-          ))
-        ) : (
-          <div>you didn't like any tools yet</div>
-        )}
-      </div>
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-3">
+                  <p>Username</p>
+                </div>
+                <div class="col">
+                  <button class="edit-profile-btn" type="button">
+                    Edit
+                  </button>
+                </div>
+              </div>
+              <div className="bio-interests-texts">
+                <div class="row">
+                  <div class="col">
+                    <p>Bio</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <p className="text-[12]">
+                      Digital Marketing and Graphic Design, Adobe suites
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col profile-info-buttons">
+                  <button className="mr-4">About</button>
+                  <button className="mr-4">My List</button>
+                  <button className="mr-4">Share</button>
+                  <button className="mr-4">Folder</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* END Profile Info Component */}
 
-      {!editProfileClicked ? (
-        <div>
-          <Modal
-            isOpen={modalIsOpen}
-            onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
-            <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
-              Please choose your interests :{" "}
-            </h2>
-            <span id="close-button" onClick={closeModal}>
-              X
-            </span>
-            <div className="flex inner-modal">
-              {categories?.map((categorie) => (
-                <div className="flex interests-wrapper">
-                  <span className="Interest">
-                    <input
-                      type={"checkbox"}
-                      value={`${categorie.Category}`}
-                      onChange={(e) => handleInterestCheck(e)}
-                      checked={checkedInterests.includes(`${categorie.Category}`) ? true : null}/>
-                    &nbsp;
-                    {categorie.Category}
-                  </span>
-                </div>
-              ))}
+
+        <div style={{ paddingLeft: '3rem', borderLeft: '1px solid white' }}>
+          {/* BIO components */}
+          <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
+            <div class="mb-4 md:mb-0">
+              <p class="font-bold text-lg leading-tight mb-3">Bio</p>
+              <p class="text-sm leading-tight">Sheets</p>
             </div>
-            <span
-              className="profile-btn-outlined-3"
-              onClick={handleInterestsChange}
-            >
-              Save
-            </span>
-          </Modal>
+            <button class="edit-add-btn">Add</button>
+          </div>
+          {/* End Of BIO components */}
+
+          {/* Interests components */}
+          <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]">
+            <div class="mb-4 md:mb-0">
+              <p class="font-bold text-lg leading-tight mb-3">Interests</p>
+              <p class="text-sm leading-tight">
+                Digital Marketing and Graphic Design, Adobe suites
+              </p>
+            </div>
+            <button class="edit-add-btn">Add</button>
+          </div>
+          {/* End Of Interests components */}
         </div>
 
-      ) : (
-        <div className="form-container">
-        <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <label className="form-label">
-            Username:
-            <input
-              className="form-input"
-              // placeholder="username"
-              // value={!isUsernameEditing ? userData.username : editedUsername}
-              value={editedUsername}
-              onChange={(e)=>{setEditedUsername(e.target.value)}}
-            />
-          </label>
-          <br/><br/>
-          <label className="form-label">
-            Select a photo:
-            {/* <input className="form-input" type="file" accept="image/*" onChange={(event)=>setProfilePicture(event.target.files[0])} />
-            <button onClick={uploadImage}>Upload</button> */}
-            <input className="form-input" type="file" accept="image/*" onChange={(event)=>setProfilePicture(event.target.files[0])} />
-            <button className="upload-button" onClick={uploadImage}>Upload</button>
 
-          </label>
-        </Modal>
-      </div>
-      )}
+          {/* My List Container */}
+          <div className="mylist-container" style={{ marginTop: '4rem' }}>
+                <h2 className="font-bold mb-[2rem]">My List</h2>
+                <dir className="list-tools" style={{ padding: '0 0 0 3rem', borderLeft: '1px solid white' }}>
+                  <Toolitem/>
+                  <Toolitem/>
+                  <Toolitem/>
+                </dir>
+
+              </div>
+          {/* END My List Container */}
+      </main>
     </div>
   );
-}
+};
 
 export default Profile;
