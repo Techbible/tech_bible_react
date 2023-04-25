@@ -36,7 +36,6 @@ import "../assets/styles/home/global.css";
 import SearchFormat from "../components/Search-container/SearchFormat";
 import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Toolitem from "../components/Tools/Toolitem";
-import YouMustLikeApp from "../components/Filtering-container/YouMightLikeApp";
 import YouMightLikeApp from "../components/Filtering-container/YouMightLikeApp";
 import AppOfTheDay from "../components/Filtering-container/AppOfTheDay";
 import { FilteringContext } from "../context/FilteringContext";
@@ -49,8 +48,6 @@ const Home = () => {
   //To store the fetched trending tools
   const [TopTools, setTopTools] = useState([]);
   const [toolsCopy, setToolsCopy] = useState([]);
-
-  const [updated, setUpdated] = useState(0);
 
   //To store the searched value
   const [Search, setSearch] = useState("");
@@ -67,11 +64,6 @@ const Home = () => {
 
   //to force Re-render
   const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
-
-  const [userData, setUserData] = useState({
-    pfp: "",
-    username: "",
-  });
 
   const navigate = useNavigate();
 
@@ -90,28 +82,6 @@ const Home = () => {
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, async (user) => {
-      //checking if the user exist or not
-      if (user) {
-        setAuthUser(user);
-
-        const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
-          // console.log(" data: ", doc.data());
-          setUserData({
-            pfp: doc.data().photo,
-            username: doc.data().username,
-          });
-          // console.log(userData);
-        });
-
-        // notify(userData.username);
-        localStorage.setItem("SignedUp", true);
-
-        // console.log(user);
-      } else {
-        // navigate("/signin");
-        setAuthUser(null);
-      }
-
       //showing the Welcome Message, if it's the user's first sign up
       if (localStorage.getItem("SignedUp")) {
         <div></div>;
@@ -186,6 +156,7 @@ const Home = () => {
   };
 
   return (
+<<<<<<< HEAD
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer pt-[6rem]">
         <main className="layoutMain">
           <div class="flex direction-column">
@@ -205,101 +176,118 @@ const Home = () => {
               </div>
               <div class="color-white fontSize-24 fontWeight-600 noOfLines-undefined">
                 Welcome to Tech Bible! 😎
-              </div>
-              <div class="flex direction-row">
-                <div class="color-white fontSize-16 fontWeight-400 noOfLines-undefined">
-                  The place to discover new tech Tools.
-                </div>
-                <button
-                  type="button"
-                  class="styles_textButton__q4xv1 styles_left__i0IgN styles_cta__HXZkL"
-                >
-                  <div class="ml-1 text-[#7869E6] fontSize-16 fontWeight-400 noOfLines-undefined">
-                    Take a tour.
-                  </div>
-                </button>
-              </div>
+=======
+    <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer">
+      <main className="layoutMain">
+        <div class="flex direction-column">
+          <div class="flex flex-col mb-12 p-5 styles_container__0sZXQ">
+            <div class="flex justify-end">
+              <button
+                type="button"
+                class="styles_reset__opz7w styles_icon__10p3X"
+              >
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                  <path
+                    d="M6 4.586l4.24-4.24a1 1 0 1 1 1.416 1.413L7.413 6l4.24 4.24a1 1 0 1 1-1.413 1.416L6 7.413l-4.24 4.24A1 1 0 1 1 .344 10.24L4.587 6 .347 1.76A1 1 0 1 1 1.757.343L6 4.587z"
+                    fill="#ffffff"
+                  ></path>
+                </svg>
+              </button>
             </div>
-
-            <div>
-              <div>
-                {/* Search bar */}
-                <FilteringContext.Provider
-                  value={{ isFiltering, setIsFiltering }}
-                >
-                  <SearchFormat etat={isFiltering} />
-                </FilteringContext.Provider>
-                {/* End Search bar */}
-
-                {!isFiltering ? (
-                  // {/* Filtering container */}
-                  <div className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
-                    <AppOfTheDay />
-                    {/************You might also like***********/}
-                    <div className="you-might-like-apps-container">
-                      <p className="fontWeight-500 text-[#15C988] mb-4">
-                        YOU MIGHT ALSO LIKE
-                      </p>
-                      <div
-                        className="flex flex-col sm:flex-row"
-                        style={{ display: "flex" }}
-                      >
-                        <YouMightLikeApp />
-                        <YouMightLikeApp />
-                        <YouMightLikeApp />
-                      </div>
-                    </div>
-                    {/***********END You might also like********/}
-                  </div>
-                  // {/* End Filtering container */}
-                ):
-                (
-                  <div data-test="homepage-section-0">
-                  <div>
-                    <div>
-                   { TopTools.map((tool,index) => (
-                      <Toolitem key={index} toolData={tool} />
-                     ))}
-                    </div>
-                  </div>
-                </div>
-                )}
-              </div>
-              <div data-test="homepage-section-0">
-              <div>
-                <div>
-                 
-          {!isFiltering ? (
-            <div className="tools-section-ngu">
-              {!TopTools ? (
-                <h1 style={{ color: "#fff" }}>Loading...</h1>
-              ) : (
-                TopTools.map((tool,index) => (
-                  <Toolitem key={index} toolData={tool} />
-                 ))
-              )}
+            <div class="color-white fontSize-24 fontWeight-600 noOfLines-undefined">
+              Welcome to Tech Bible! 😎
             </div>
-          ) : (
-            <div></div>
-          )}
-                </div>
+            <div class="flex direction-row">
+              <div class="color-white fontSize-16 fontWeight-400 noOfLines-undefined">
+                The place to discover new tech Tools.
+>>>>>>> 9c0c438387325f9ee71e31105c7a55da5f643fe6
               </div>
-            </div>
-
+              <button
+                type="button"
+                class="styles_textButton__q4xv1 styles_left__i0IgN styles_cta__HXZkL"
+              >
+                <div class="ml-1 text-[#7869E6] fontSize-16 fontWeight-400 noOfLines-undefined">
+                  Take a tour.
+                </div>
+              </button>
             </div>
           </div>
-        </main>
-        <aside className="sidebarWithSeparator right">
-          <Link to="/News">
-            <h1>News</h1>
-          </Link>
-          
-          <NewsHomePage />
-          <NewsHomePage />
-          <NewsHomePage />
-        </aside>
-      </div>
 
+          <div>
+            <div>
+              {/* Search bar */}
+              <FilteringContext.Provider
+                value={{ isFiltering, setIsFiltering }}
+              >
+                <SearchFormat etat={isFiltering} />
+              </FilteringContext.Provider>
+              {/* End Search bar */}
+
+              {!isFiltering ? (
+                // {/* Filtering container */}
+                <div className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
+                  <AppOfTheDay />
+                  {/************You might also like***********/}
+                  <div className="you-might-like-apps-container">
+                    <p className="fontWeight-500 text-[#15C988] mb-4">
+                      YOU MIGHT ALSO LIKE
+                    </p>
+                    <div
+                      className="flex flex-col sm:flex-row"
+                      style={{ display: "flex" }}
+                    >
+                      <YouMightLikeApp />
+                      <YouMightLikeApp />
+                      <YouMightLikeApp />
+                    </div>
+                  </div>
+                  {/***********END You might also like********/}
+                </div>
+              ) : (
+                // {/* End Filtering container */}
+                <div data-test="homepage-section-0">
+                  <div>
+                    <div>
+                      {SearchedTool.map((tool, index) => (
+                        <Toolitem key={index} toolData={tool} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div data-test="homepage-section-0">
+              <div>
+                <div>
+                  {!isFiltering ? (
+                    <div className="tools-section-ngu">
+                      {!TopTools ? (
+                        <h1 style={{ color: "#fff" }}>Loading...</h1>
+                      ) : (
+                        TopTools.map((tool, index) => (
+                          <Toolitem key={index} toolData={tool} />
+                        ))
+                      )}
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <aside className="sidebarWithSeparator right">
+        <Link to="/News">
+          <h1>News</h1>
+        </Link>
+
+        <NewsHomePage />
+        <NewsHomePage />
+        <NewsHomePage />
+      </aside>
+    </div>
   );
 };
 

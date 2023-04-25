@@ -7,6 +7,17 @@
   }
 }
 
+
+.user-info-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.username{
+  margin-right:20px;
+}
+
 .styles_loader__3cDeT {
   animation-name: styles_rotate__jJ7zF;
   animation-duration: 1.2s;
