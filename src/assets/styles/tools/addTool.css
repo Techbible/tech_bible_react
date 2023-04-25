@@ -1,19 +1,10 @@
-.form {
-  min-width: 100%;
-  min-height: 46.7vh;
-  background-color: #000;
-  color: #fff;
-  text-align: center;
-  align-items: center;
-}
-
-
 .form h1 {
   margin-top: 1vh;
 }
 
 .form {
-  width: 400px;
+  margin-top: 10vh;
+  width: 500px;
   padding: 20px;
   background: #000;
   margin: auto;
@@ -38,6 +29,7 @@ h1 {
 .form input[type="date"],
 .form input[type="email"] {
   width: 100%;
+  min-height: 50px;
   display: block;
   margin: 40px 0px;
   height: 30px;
@@ -53,7 +45,7 @@ h1 {
   width: 100%;
   display: block;
   margin: 40px 0px;
-  height: 30px;
+  min-height: 30px;
   border: 1px solid white;
   background: rgb(27, 29, 31);
   color: white;
@@ -93,6 +85,7 @@ h1 {
   border: none;
   font-size: 1em;
   cursor: pointer;
+  color: #000;
 }
 
 textarea{

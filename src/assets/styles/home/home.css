@@ -1,3 +1,4 @@
+
 .styles_container__5MXSs .styles_dropdown__BQ713 {
   cursor: pointer;
 }
@@ -9,6 +10,12 @@
 
 .styles_selected__HasMu:hover {
   color: #005ef6;
+}
+
+.follow_unfollow{
+  width: 35px;
+  cursor: pointer;
+  /* height: 25px; */
 }
 
 @media (max-width: 759px) {

@@ -59,14 +59,7 @@ function App() {
           }
         />
         <Route
-          path="/tools/ToolDetails/:id"
-          element={
-            <ProtectedRoute>
-              <ToolDetails />
-            </ProtectedRoute>
-          }
-        />
-        <Route
+
           path="/News"
           element={
             <NewsContextProvider>

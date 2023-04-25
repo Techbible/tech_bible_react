@@ -1,3 +1,7 @@
+// .tools-container{
+//     min-height: 97vh !important;
+// }
+
 .tools-wrapper{
     min-width: 100%;
     min-height: 46.7vh;
@@ -7,6 +11,15 @@
     align-items: center;
 }
 
+
+.description{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+    width: 370px;
+    text-align: center;
+}
 
 :root {
     /* GENERAL FONT */
@@ -125,13 +138,18 @@
             position: absolute;
             top: 20px;
             right:20px;
+            background-position: center;
+            text-align: center;
             cursor: pointer;
         }
 
         .card-image {
             position: relative;
+            text-align: center;
             .card-img-top{
-                width:300px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
             }
             .image-overlay {
                 position: absolute;

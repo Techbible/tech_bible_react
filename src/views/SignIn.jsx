@@ -4,6 +4,7 @@ import { auth, provider } from "../config/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import "../assets/styles/signin_signup/signin_signup.css";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ const SignIn = () => {
     });
   };
   return (
-    <div className="h-full bg-gradient-to-tl from-purple-300 to-indigo-900 w-full py-16 px-4 mt-[2rem]">
+    <div className="sign-in h-full bg-gradient-to-tl from-purple-300 to-indigo-900 w-full py-16 px-4 mt-[2rem]">
       <div className="flex flex-col items-center justify-center">
         <Link to="/">
           <h1 className="font-[500]">Tech Bible</h1>

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Navbar } from "../../layouts";
 import "../../assets/styles/tools/addTool.css";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
@@ -9,7 +8,6 @@ import {
   doc,
   onSnapshot,
   setDoc,
-  updateDoc,
 } from "firebase/firestore";
 
 import { auth, db, storage } from "../../config/firebase";
@@ -117,8 +115,6 @@ function AddTool() {
 
   return (
     <div className="home-page-SPw">
-      <Navbar />
-
       <div className="addTools-wrapper">
         {isAdmin ? (
           <div className="form">

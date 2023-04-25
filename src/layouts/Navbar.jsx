@@ -27,17 +27,13 @@ function Navbar() {
         setAuthUser(user);
 
         const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
-          // console.log(" data: ", doc.data());
           setUserData({
             pfp: doc.data().photo,
             username: doc.data().username,
           });
-          // console.log(userData);
         });
 
-        // console.log(user);
       } else {
-        // navigate("/signin")
         setAuthUser(null);
       }
     });
