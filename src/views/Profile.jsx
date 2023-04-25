@@ -465,9 +465,9 @@ const Profile = () => {
               className="list-tools"
               style={{ padding: "0 0 0 3rem", borderLeft: "1px solid white" }}
             >
+              {/* <Toolitem />
               <Toolitem />
-              <Toolitem />
-              <Toolitem />
+              <Toolitem /> */}
             </dir>
           </div>
           {/* END My List Container */}

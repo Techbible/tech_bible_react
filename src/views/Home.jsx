@@ -146,7 +146,8 @@ const Home = () => {
   // };
 
   return (
-      <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer">
+    
+      <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer pt-[6rem]">
         <main className="layoutMain">
           <div class="flex direction-column">
             <div class="flex flex-col mb-12 p-5 styles_container__0sZXQ">
@@ -179,7 +180,6 @@ const Home = () => {
                   </div>
                 </button>
               </div>
-            </div>
 
           <div>
             <div>
@@ -244,6 +244,7 @@ const Home = () => {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </main>
       <aside className="sidebarWithSeparator right">
