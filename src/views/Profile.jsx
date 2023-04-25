@@ -282,7 +282,7 @@ const Profile = () => {
   };
 
   return (
-    <div>
+    <div className="pt-[6rem]">
       <LikeMethods ref={LikeMethodsRef} />
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
         <main className="layoutMain">

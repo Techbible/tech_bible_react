@@ -13,6 +13,7 @@ import { NewsContextProvider } from './context/NewsContext';
 import { useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Socials from './components/Socials/Socials';
+import NewSignIn from './views/NewSignIn';
 
 
 
@@ -48,6 +49,7 @@ function App() {
       <Route path='/signin' element=<SignIn /> />
       <Route path='/profile' element=<Profile /> />
       <Route path='/list' element=<UserList /> />
+      <Route path='/NewSignIn' element=<NewSignIn /> />
 
       <Route path='/tools' element={
         <ProtectedRoute>
