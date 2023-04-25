@@ -149,7 +149,6 @@ const SignUp = () => {
               Full name
             </lable>
             <input
-              type="text"
               onChange={(e) => setFullName(e.target.value)}
               aria-label="enter email adress"
               role="input"
