@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "dotenv": "^16.0.3",
     "eslint-plugin-react-hooks": "^4.6.0",
     "gh-pages": "^5.0.0"
   }

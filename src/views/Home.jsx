@@ -47,7 +47,7 @@ const Home = () => {
 
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
-  const [tools, setTools] = useState([]);
+  const [TopTools, setTopTools] = useState([]);
   const [toolsCopy, setToolsCopy] = useState([]);
 
   const [updated, setUpdated] = useState(0);
@@ -130,7 +130,7 @@ const Home = () => {
         // console.log(doc.id, " => ", doc.data());
         ToolsArray.push(doc.data());
       });
-      setTools(ToolsArray);
+      setTopTools(ToolsArray);
     });
     return listen();
   }, [reducerValue]);
@@ -257,8 +257,9 @@ const Home = () => {
                   <div data-test="homepage-section-0">
                   <div>
                     <div>
-                      <Toolitem />
-                      <Toolitem />
+                   { TopTools.map((tool,index) => (
+                      <Toolitem key={index} toolData={tool} />
+                     ))}
                     </div>
                   </div>
                 </div>
@@ -267,8 +268,20 @@ const Home = () => {
               <div data-test="homepage-section-0">
               <div>
                 <div>
-                  <Toolitem />
-                  <Toolitem />
+                 
+          {!isFiltering ? (
+            <div className="tools-section-ngu">
+              {!TopTools ? (
+                <h1 style={{ color: "#fff" }}>Loading...</h1>
+              ) : (
+                TopTools.map((tool,index) => (
+                  <Toolitem key={index} toolData={tool} />
+                 ))
+              )}
+            </div>
+          ) : (
+            <div></div>
+          )}
                 </div>
               </div>
             </div>
@@ -280,6 +293,7 @@ const Home = () => {
           <Link to="/News">
             <h1>News</h1>
           </Link>
+          
           <NewsHomePage />
           <NewsHomePage />
           <NewsHomePage />
