@@ -43,7 +43,9 @@ function App() {
     <div>
     <Navbar />
     <Routes>
-      <Route index path="/" element=<Home /> />
+      <Route index path="/" element={
+        <Home />
+       }/>
       <Route path='/signup' element=<SignUp /> />
       <Route path='/signin' element=<SignIn /> />
       <Route path='/profile' element=<Profile /> />

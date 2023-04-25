@@ -18,12 +18,22 @@
   }
 }
 
+select{
+  background-color: #1D1D1F;
+}
+
 /*LOGO*/
 .logo {
   display: inline-block;
   height: 50px;
   width: 45px;
   position: relative;
+  text-decoration: none;
+}
+
+.logo:hover{
+  text-decoration: none;
+  color: #fff;
 }
 
 .square {

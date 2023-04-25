@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Toolitem = () => {
+const Toolitem = ({toolData}) => {
   return (
     <div className="px-mobile-1 px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
       <div
@@ -14,7 +15,7 @@ const Toolitem = () => {
           >
             <img
               loading="lazy"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/2101px-Adobe_XD_CC_icon.svg.png"
+              src={toolData?.Icon}
               style={{ width: "80px", height: "80px" }}
               alt="Adobe XD"
               className="styles_mediaThumbnail__LDCQN"
@@ -23,7 +24,7 @@ const Toolitem = () => {
         </a>
         <div className="flex direction-column flex-1">
           <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-600 noOfLines-2 styles_format__w0VVk">
-            <a>Adobe XD</a>
+          <Link to={`/ToolDetails/${toolData.id}`}> {toolData?.Name} </Link>
             <a
               href="/r/p/390145"
               rel="noopener"
@@ -54,14 +55,14 @@ const Toolitem = () => {
                 <span class="bi bi-chat-left-dots"></span>
               </div>
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                214
+              {toolData.Likes}
               </div>
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                Free
+              {toolData.Price}
               </div>
               <a className="styles_postTopicLink__wDe_p" href="/topics/art">
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                  Design tool
+                {toolData.Category}
                 </div>
               </a>
             </div>
