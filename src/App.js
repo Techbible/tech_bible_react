@@ -4,7 +4,7 @@ import { AuthContext } from "./context/AuthContext";
 
 
 import {
-  Home, Profile, SignIn, SignUp, Tools, UserList, ToolDetails
+  Home, Profile, SignIn, SignUp, Tools, UserList, ToolDetails,Community
 } from "./views";
 
 import { AddTool } from './admin';
@@ -42,11 +42,14 @@ function App() {
   return (
     <div>
     <Navbar />
+   
+    
     <Routes>
       <Route index path="/" element=<Home /> />
       <Route path='/signup' element=<SignUp /> />
       <Route path='/signin' element=<SignIn /> />
       <Route path='/profile' element=<Profile /> />
+      <Route path='/community' element=<Community /> />
       <Route path='/list' element=<UserList /> />
 
       <Route path='/tools' element={
@@ -78,7 +81,7 @@ function App() {
       <Route path='/tools' element={
           <Tools />
       } />
-    </Routes>
+    </Routes> 
 
 
     </div>
