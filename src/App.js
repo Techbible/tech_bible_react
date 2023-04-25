@@ -17,8 +17,8 @@ import { useContext } from "react";
 import { NewsContextProvider } from "./context/NewsContext";
 import { useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import Socials from "./components/Socials/Socials";
 
+import Socials from "./components/Socials/Socials";
 
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);
@@ -40,13 +40,13 @@ function App() {
 
   return (
     <div>
-    <Navbar />
-    <Routes>
-      <Route index path="/" element=<Home /> />
-      <Route path='/signup' element=<SignUp /> />
-      <Route path='/signin' element=<SignIn /> />
-      <Route path='/profile' element=<Profile /> />
-      <Route path='/list' element=<UserList /> />
+      <Navbar />
+      <Routes>
+        <Route index path="/" element=<Home /> />
+        <Route path="/signup" element=<SignUp /> />
+        <Route path="/signin" element=<SignIn /> />
+        <Route path="/profile" element=<Profile /> />
+        <Route path="/list" element=<UserList /> />
 
         <Route
           path="/tools"

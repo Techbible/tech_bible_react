@@ -13,6 +13,8 @@ const SignIn = () => {
 
   const [userData, setUserData] = useState(null);
   const [passwordError, setPasswordError] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   useEffect(() => {
     console.log("message");
   }, [passwordError]);
@@ -137,10 +139,15 @@ const SignIn = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 aria-label="enter Password"
                 role="input"
-                type="password"
+                type={isPasswordVisible ? "text" : "password"}
                 className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
               />
-              <div className="absolute right-0 mt-2 mr-3 cursor-pointer">
+              <div
+                onClick={() => {
+                  setIsPasswordVisible(!isPasswordVisible);
+                }}
+                className="absolute right-0 mt-2 mr-3 cursor-pointer"
+              >
                 <svg
                   width={16}
                   height={16}
@@ -161,7 +168,7 @@ const SignIn = () => {
               onClick={(e) => handleSignIn(e)}
               role="button"
               aria-label="create my account"
-              className="focus:ring-2 focus:ring-offset-2 transition .5s focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-[#7869E6] border rounded hover:bg-[#604fe7] py-4 w-full"
+              className="focus:ring-2 focus:ring-offset-2 text-[18px] transition .5s focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-[#7869E6] border rounded hover:bg-[#604fe7] py-4 w-full"
             >
               Sign in
             </button>
