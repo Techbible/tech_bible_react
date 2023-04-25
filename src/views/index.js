@@ -5,6 +5,7 @@ import SignUp from "./SignUp";
 import Tools from "./Tools";
 import UserList from "./UserList";
 import ToolDetails from "./ToolDetails";
+import Community from "./Community";
 
 export {
     Home,
@@ -13,5 +14,6 @@ export {
     SignUp,
     Tools,
     UserList,
-    ToolDetails
+    ToolDetails,
+    Community
 }
