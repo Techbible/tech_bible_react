@@ -265,10 +265,10 @@ const Profile = () => {
   //To add/Update a Bio
   const UpdatingBio = async () => {
     try {
-      const UserRef = doc(db, "Users", userData.uid);
-      await updateDoc(UserRef, { bio: bio });
-      setAddBio(false);
-      setUpdateBio(false);
+        const UserRef = doc(db, "Users", userData.uid);
+        await updateDoc(UserRef, { bio: bio });
+        setAddBio(false);
+        setUpdateBio(false);
     } catch (error) {
       console.log(error);
     }
@@ -282,103 +282,283 @@ const Profile = () => {
   };
 
   return (
-    <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
-      <main className="layoutMain">
-
-
-        {/* Profile Info Component */}
-        <div class="w-widescreen-5 mb-[4rem] profile-info-container">
-          <div class="row">
-            <div class="col-md-2">
-              {/* <img
+    <div className="pt-[6rem]">
+      <LikeMethods ref={LikeMethodsRef} />
+      <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
+        <main className="layoutMain">
+          {/* Profile Info Component */}
+          <div class="w-widescreen-5 mb-[4rem] profile-info-container">
+            <div class="row">
+              <div class="col-md-2">
+                {/* <img
                 src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
                 alt="Profile Image"
                 class="rounded-full max-h-60 max-w-60 object-cover object-center md:h-auto md:w-auto"
               /> */}
-              <div class="w-full">
-                <img
-                  src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
-                  class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 border-gray-300 rounded-full"
-                  alt="Profile Image"
-                />
-              </div>
-            </div>
-            <div class="col-md-7">
-              <div class="row">
-                <div class="col-md-3">
-                  <p>Username</p>
-                </div>
-                <div class="col">
-                  <button class="edit-profile-btn" type="button">
-                    Edit
-                  </button>
+                <div class="w-full">
+                  <img
+                    src={userData.photo}
+                    class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 border-gray-300 rounded-full"
+                    alt="Profile Image"
+                  />
                 </div>
               </div>
-              <div className="bio-interests-texts">
+              <div class="col-md-7">
                 <div class="row">
+                  <div class="col-md-3">
+                    <p>{userData.username}</p>
+                  </div>
                   <div class="col">
-                    <p>Bio</p>
+                    <button
+                      onClick={openEditProfileModal}
+                      class="edit-profile-btn"
+                      type="button"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </div>
+                <div className="bio-interests-texts">
+                  <div class="row">
+                    <div class="col">
+                      <p>{userData.bio}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      {userData.interests.map((interest) => {
+                        return (
+                          <p className="text-[12] d-inline-block">
+                            {interest}&nbsp;&nbsp;
+                          </p>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-12">
-                    <p className="text-[12]">
-                      Digital Marketing and Graphic Design, Adobe suites
-                    </p>
+                  <div class="col profile-info-buttons">
+                    <button className="mr-4">About</button>
+                    <Link to="/list">
+                      <button className="mr-4">My List</button>
+                    </Link>
+                    <button className="mr-4">Share</button>
+                    <button className="mr-4">Folder</button>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col profile-info-buttons">
-                  <button className="mr-4">About</button>
-                  <button className="mr-4">My List</button>
-                  <button className="mr-4">Share</button>
-                  <button className="mr-4">Folder</button>
+            </div>
+          </div>
+          {/* END Profile Info Component */}
+
+          <div style={{ paddingLeft: "3rem", borderLeft: "1px solid white" }}>
+            {/* BIO components */}
+            {userData.bio ? (
+              <div>
+                {updateBio ? (
+                  <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
+                    <div class="mb-4 md:mb-0">
+                      <p class="font-bold text-lg leading-tight mb-3">Bio</p>
+                      <input
+                        class="text-sm leading-tight text-black"
+                        placeholder={userData.bio}
+                        onChange={(e) => setBio(e.target.value)}
+                        type="text"
+                      />
+                    </div>
+                    <div>
+                      <button
+                        onClick={() => setUpdateBio(false)}
+                        class="edit-add-btn"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={() => UpdatingBio()}
+                        class="edit-add-btn"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  // userData.bio
+                  <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
+                    <div class="mb-4 md:mb-0">
+                      <p class="font-bold text-lg leading-tight mb-3">Bio</p>
+                      <p class="text-sm">{userData.bio}</p>
+                        </div>
+                      <div>
+                        <button
+                          onClick={() => setUpdateBio(true)}
+                          class="edit-add-btn"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    </div>
+                )}
+                
+              </div>
+            ) : (
+              <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
+                <div class="mb-4 md:mb-0">
+                  <p class="font-bold text-lg leading-tight mb-3">Bio</p>
+                  {addBio ? (
+                    <input
+                      className="profile-input"
+                      placeholder="You can add your bio here"
+                      onChange={(e) => setBio(e.target.value)}
+                      type="text"
+                    />
+                  ) : (
+                    <span style={{ color: "red" }}>
+                      you don't have a bio yet
+                    </span>
+                  )}
+                  {addBio ? (
+                    <div>
+                      <button
+                        onClick={() => setAddBio(false)}
+                        class="edit-add-btn"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={() => UpdatingBio()}
+                        class="edit-add-btn"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setAddBio(true)}
+                      class="edit-add-btn"
+                    >
+                      +Add
+                    </button>
+                  )}
                 </div>
               </div>
+            )}
+
+            {/* End Of BIO components */}
+
+            {/* Interests components */}
+            <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]">
+              <div class="mb-4 md:mb-0">
+                <p class="font-bold text-lg leading-tight mb-3">Interests</p>
+                <p class="text-sm leading-tight">
+                  Digital Marketing and Graphic Design, Adobe suites
+                </p>
+              </div>
+              <button class="edit-add-btn">Add</button>
             </div>
+            {/* End Of Interests components */}
           </div>
-        </div>
-        {/* END Profile Info Component */}
-
-
-        <div style={{ paddingLeft: '3rem', borderLeft: '1px solid white' }}>
-          {/* BIO components */}
-          <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
-            <div class="mb-4 md:mb-0">
-              <p class="font-bold text-lg leading-tight mb-3">Bio</p>
-              <p class="text-sm leading-tight">Sheets</p>
-            </div>
-            <button class="edit-add-btn">Add</button>
-          </div>
-          {/* End Of BIO components */}
-
-          {/* Interests components */}
-          <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]">
-            <div class="mb-4 md:mb-0">
-              <p class="font-bold text-lg leading-tight mb-3">Interests</p>
-              <p class="text-sm leading-tight">
-                Digital Marketing and Graphic Design, Adobe suites
-              </p>
-            </div>
-            <button class="edit-add-btn">Add</button>
-          </div>
-          {/* End Of Interests components */}
-        </div>
-
 
           {/* My List Container */}
-          <div className="mylist-container" style={{ marginTop: '4rem' }}>
-                <h2 className="font-bold mb-[2rem]">My List</h2>
-                <dir className="list-tools" style={{ padding: '0 0 0 3rem', borderLeft: '1px solid white' }}>
-                  <Toolitem/>
-                  <Toolitem/>
-                  <Toolitem/>
-                </dir>
-
-              </div>
+          <div className="mylist-container" style={{ marginTop: "4rem" }}>
+            <h2 className="font-bold mb-[2rem]">My List</h2>
+            <dir
+              className="list-tools"
+              style={{ padding: "0 0 0 3rem", borderLeft: "1px solid white" }}
+            >
+              {/* <Toolitem />
+              <Toolitem />
+              <Toolitem /> */}
+            </dir>
+          </div>
           {/* END My List Container */}
-      </main>
+        </main>
+      </div>
+
+      {/* View of Profile Modals */}
+      {!editProfileClicked ? (
+        <div>
+          <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+            <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
+              Please choose your interests :{" "}
+            </h2>
+            <span id="close-button" onClick={closeModal}>
+              X
+            </span>
+            <div className="flex inner-modal">
+              {categories?.map((categorie) => (
+                <div className="flex interests-wrapper">
+                  <span className="Interest">
+                    <input
+                      type={"checkbox"}
+                      value={`${categorie.Category}`}
+                      onChange={(e) => handleInterestCheck(e)}
+                      checked={
+                        checkedInterests.includes(`${categorie.Category}`)
+                          ? true
+                          : null
+                      }
+                    />
+                    &nbsp;
+                    {categorie.Category}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <span
+              className="profile-btn-outlined-3"
+              onClick={handleInterestsChange}
+            >
+              Save
+            </span>
+          </Modal>
+        </div>
+      ) : (
+        <div className="form-container">
+          <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+            <label className="form-label">
+              Username:
+              <input
+                className="form-input"
+                // placeholder="username"
+                // value={!isUsernameEditing ? userData.username : editedUsername}
+                value={editedUsername}
+                onChange={(e) => {
+                  setEditedUsername(e.target.value);
+                }}
+              />
+            </label>
+            <br />
+            <br />
+            <label className="form-label">
+              Select a photo:
+              {/* <input className="form-input" type="file" accept="image/*" onChange={(event)=>setProfilePicture(event.target.files[0])} />
+            <button onClick={uploadImage}>Upload</button> */}
+              <input
+                className="form-input"
+                type="file"
+                accept="image/*"
+                onChange={(event) => setProfilePicture(event.target.files[0])}
+              />
+              <button className="upload-button" onClick={uploadImage}>
+                Upload
+              </button>
+            </label>
+          </Modal>
+        </div>
+      )}
+      {/* END View of Profile Modals */}
     </div>
   );
 };
