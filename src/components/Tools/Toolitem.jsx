@@ -55,8 +55,8 @@ const Toolitem = ({toolData}) => {
                 <span class="bi bi-chat-left-dots"></span>
               </div>
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-              {toolData.Likes}
-              </div>
+              {toolData.LikedBy.length }
+          </div>
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
               {toolData.Price}
               </div>
@@ -83,7 +83,7 @@ const Toolitem = ({toolData}) => {
               />
             </svg>
             <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
-              368
+            {toolData.LikedBy.length}
             </div>
             <span class="bi bi-plus-lg fw-bold text-white"></span>
           </div>

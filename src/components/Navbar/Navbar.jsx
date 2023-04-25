@@ -25,7 +25,6 @@ function Navbar() {
         setAuthUser(user);
 
         const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
-          // console.log(" data: ", doc.data());
           setUserData({
             pfp: doc.data().photo,
             username: doc.data().username,
@@ -66,13 +65,18 @@ function Navbar() {
           <div className="hidden md:block">
             <nav aria-label="Site Nav">
               <ul className="flex items-center gap-6 text-sm">
-                <li
-                  className="tracking-wider hover:tracking-widest"
-                  style={{ transition: "0.3s", cursor: "pointer" }}
-                >
-                  All Tools
-                </li>
-
+                {isAdmin ? (
+                  <Link to="/tools">
+                  <li
+                    className="tracking-wider hover:tracking-widest"
+                    style={{ transition: "0.3s", cursor: "pointer" }}
+                  >
+                    All Tools
+                  </li>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
                 <li
                   className="tracking-wider hover:tracking-widest"
                   style={{ transition: "0.3s", cursor: "pointer" }}
@@ -140,7 +144,7 @@ function Navbar() {
                 <div className="user-info">
                   <div
                     className="user"
-                    style={{ backgroundImage: `url(${userData.pfp})` }}
+                    style={{ backgroundImage: `url(${userData.photo})` }}
                   ></div>
                   <div className="username">{userData.username}</div>
                 </div>
