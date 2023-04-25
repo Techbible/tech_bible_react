@@ -65,15 +65,12 @@ function Tools() {
   };
 
   return (
-    <div className="home-page-SPw">
+    <div className="tools-container">
       <div className="tools-wrapper">
         <div className="tools-section-ngu">
           <section id="focus" className="focus-section dark-mode">
-            <div className="container-lg py-5">
-              <div className="container px-0">
-                <div className="row"></div>
-              </div>
-              <div className="row row-cols-1 row-cols-md-4 g-4">
+            <div className="container-lg py-5 px-5">
+              <div className="row row-cols-1 row-cols-md-3 g-4 mt-5">
                 {tools?.map((tool) => (
                   <div className="col" key={tool.id}>
                     <div className="card shadow-sm h-100">
@@ -106,7 +103,6 @@ function Tools() {
                         </div>
                         <p
                           className="card-text description"
-                          id="tool-description"
                         >
                           {tool.Description}
                         </p>

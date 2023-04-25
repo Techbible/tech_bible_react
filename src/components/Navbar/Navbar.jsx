@@ -81,7 +81,7 @@ function Navbar() {
                   className="tracking-wider hover:tracking-widest"
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
-                  Submit your Tool{" "}
+                  <Link to="/addTool">Submit your Tool</Link>
                 </li>
 
                 <li
@@ -142,10 +142,7 @@ function Navbar() {
             <div className="user-info-container">
               <Link to="/profile">
                 <div className="user-info">
-                  <div
-                    className="user"
-                    style={{ backgroundImage: `url(${userData.photo})` }}
-                  ></div>
+                <img src={userData.pfp} className="pfp" alt="pfp" />
                   <div className="username">{userData.username}</div>
                 </div>
               </Link>

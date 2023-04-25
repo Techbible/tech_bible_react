@@ -3,8 +3,6 @@ import React, {
   useEffect,
   useReducer,
   useState,
-  forwardRef,
-  useImperativeHandle,
   useRef,
 } from "react";
 import { auth, db } from "../config/firebase";
@@ -13,19 +11,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   collection,
-  doc,
-  onSnapshot,
-  orderBy,
   query,
   limit,
   getDocs,
-  arrayUnion,
   where,
-  updateDoc,
-  arrayRemove,
-  increment,
 } from "firebase/firestore";
-import { Navbar } from "../layouts";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { LikeMethods } from "../lib";
@@ -146,50 +136,50 @@ const Home = () => {
     console.log(SearchedTool);
   };
 
-  const handleUnLikes = (toolID) => {
-    LikeMethodsRef.current.Unlike(toolID);
-    forceRender();
-  };
-  const handleLikes = (toolID) => {
-    LikeMethodsRef.current.Like(toolID);
-    forceRender();
-  };
+  // const handleUnLikes = (toolID) => {
+  //   LikeMethodsRef.current.Unlike(toolID);
+  //   forceRender();
+  // };
+  // const handleLikes = (toolID) => {
+  //   LikeMethodsRef.current.Like(toolID);
+  //   forceRender();
+  // };
 
   return (
-    <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer">
-      <main className="layoutMain">
-        <div class="flex direction-column">
-          <div class="flex flex-col mb-12 p-5 styles_container__0sZXQ">
-            <div class="flex justify-end">
-              <button
-                type="button"
-                class="styles_reset__opz7w styles_icon__10p3X"
-              >
-                <svg width="12" height="12" viewBox="0 0 12 12">
-                  <path
-                    d="M6 4.586l4.24-4.24a1 1 0 1 1 1.416 1.413L7.413 6l4.24 4.24a1 1 0 1 1-1.413 1.416L6 7.413l-4.24 4.24A1 1 0 1 1 .344 10.24L4.587 6 .347 1.76A1 1 0 1 1 1.757.343L6 4.587z"
-                    fill="#ffffff"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <div class="color-white fontSize-24 fontWeight-600 noOfLines-undefined">
-              Welcome to Tech Bible! 😎
-            </div>
-            <div class="flex direction-row">
-              <div class="color-white fontSize-16 fontWeight-400 noOfLines-undefined">
-                The place to discover new tech Tools.
+      <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer">
+        <main className="layoutMain">
+          <div class="flex direction-column">
+            <div class="flex flex-col mb-12 p-5 styles_container__0sZXQ">
+              <div class="flex justify-end">
+                <button
+                  type="button"
+                  class="styles_reset__opz7w styles_icon__10p3X"
+                >
+                  <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path
+                      d="M6 4.586l4.24-4.24a1 1 0 1 1 1.416 1.413L7.413 6l4.24 4.24a1 1 0 1 1-1.413 1.416L6 7.413l-4.24 4.24A1 1 0 1 1 .344 10.24L4.587 6 .347 1.76A1 1 0 1 1 1.757.343L6 4.587z"
+                      fill="#ffffff"
+                    ></path>
+                  </svg>
+                </button>
               </div>
-              <button
-                type="button"
-                class="styles_textButton__q4xv1 styles_left__i0IgN styles_cta__HXZkL"
-              >
-                <div class="ml-1 text-[#7869E6] fontSize-16 fontWeight-400 noOfLines-undefined">
-                  Take a tour.
+              <div class="color-white fontSize-24 fontWeight-600 noOfLines-undefined">
+                Welcome to Tech Bible! 😎
+              </div>
+              <div class="flex direction-row">
+                <div class="color-white fontSize-16 fontWeight-400 noOfLines-undefined">
+                  The place to discover new tech Tools.
                 </div>
-              </button>
+                <button
+                  type="button"
+                  class="styles_textButton__q4xv1 styles_left__i0IgN styles_cta__HXZkL"
+                >
+                  <div class="ml-1 text-[#7869E6] fontSize-16 fontWeight-400 noOfLines-undefined">
+                    Take a tour.
+                  </div>
+                </button>
+              </div>
             </div>
-          </div>
 
           <div>
             <div>
@@ -243,7 +233,7 @@ const Home = () => {
                         <h1 style={{ color: "#fff" }}>Loading...</h1>
                       ) : (
                         TopTools.map((tool, index) => (
-                          <Toolitem key={index} toolData={tool} />
+                          <Toolitem key={index} toolData={tool} forceRender={forceRender} />
                         ))
                       )}
                     </div>
