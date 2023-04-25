@@ -1,24 +1,17 @@
-import React, { useContext } from "react";
-import "../../assets/styles/search-container/search-container.css";
-import { FilteringContext } from "../../context/FilteringContext";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Search_format = () => {
-  const { isFiltering, setIsFiltering } = useContext(FilteringContext);
-
-  const hundleFiltering = () => {
-    isFiltering ? setIsFiltering(false) : setIsFiltering(true);
-  };
-
+function ToolSearch() {
   return (
-    <div className="search-tool-container max-w-2xl mx-auto">
-      <h2 className="text-white fontWeight-500">
+    <div class="search-tool-container max-w-2xl mx-auto">
+      <h2 class="text-white fontWeight-500">
         The Largest Saas Tools directory
       </h2>
-      <form className="flex items-center  mt-5">
-        <div className="relative w-full">
-          <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+      <form class="flex items-center bg-black mt-5">
+        <div class="relative w-full">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
             <svg
-              className="w-5 h-5 text-gray-500 dark:text-gray-400"
+              class="w-5 h-5 text-gray-500 dark:text-gray-400"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -33,14 +26,13 @@ const Search_format = () => {
           <input
             type="text"
             id="voice-search"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search your tool..."
             required
           />
         </div>
-        <div className="ml-2">
+        <div class="ml-2">
           <svg
-            onClick={hundleFiltering}
             width="30"
             height="28"
             viewBox="0 0 30 28"
@@ -83,20 +75,94 @@ const Search_format = () => {
         </div>
       </form>
 
-      <div className="logo-search-container mt-5">
-        <div className="mr-4">
-          <div>
-            {/* --*****************Logo bellow search bar***************** */}
-
-            {/* --********************************** */}
-          </div>
+      <div class="logo-search-container mt-5">
+        <div class="mr-4">
+          <div>logo</div>
         </div>
-        <p className="fontWeight-300 text-[#F5F5F7]">
+        <p class="fontWeight-300 text-[#F5F5F7]">
           Browse 1000+ of the latest tech tools per task Updated daily
         </p>
       </div>
+
+      <div class="px-mobile-1 px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
+      <div
+        class="styles_item__Sn_12 flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
+        data-test="post-item-390145">
+        <a href="/posts/mage-4" aria-label="Mage">
+          <div
+            class="styles_thumbnail__Rmwk5 styles_thumbnail__E2_pB"
+            data-test="post-thumbnail">
+            <img
+              loading="lazy"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/2101px-Adobe_XD_CC_icon.svg.png"
+              style={{width: "80px",height: "80px"}}
+              alt="Adobe XD"
+              class="styles_mediaThumbnail__LDCQN"
+            />
+          </div>
+        </a>
+        <div class="flex direction-column flex-1">
+          <div class="color-darker-grey fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-600 noOfLines-2 styles_format__w0VVk">
+            <Link to="">Adobe XD</Link>
+            <a
+              href="/r/p/390145"
+              rel="noopener"
+              target="_blank"
+              class="styles_externalLinkIcon__822Ku"
+            >
+              <svg width="13" height="14" viewBox="0 0 13 14">
+                <g
+                  stroke="#4B587C"
+                  stroke-width="1.5"
+                  fill="none"
+                  fill-rule="evenodd"
+                >
+                  <path d="M9.6 4H4.2a2.4 2.4 0 0 0-2.4 2.4V10"></path>
+                  <path d="M6.6 7l3-3-3-3M12 10v3H0"></path>
+                </g>
+              </svg>
+            </a>
+          </div>
+          <div class="color-lighter-grey fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2">
+            <p class="styles_tagline__j29pO">
+              Browse 1000+ of the latest tech tools per task Updated
+              daily
+            </p>
+          </div>
+          <div class="flex direction-row flex-row-gap-6 mt-3 align-center">
+            <div class="flex direction-row flex-row-gap-3">
+              <div class="color-lighter-grey fontSize-12 fontWeight-400 noOfLines-undefined">
+                Free
+              </div>
+              <a
+                class="styles_postTopicLink__wDe_p"
+                href="/topics/art"
+              >
+                <div class="color-lighter-grey fontSize-12 fontWeight-400 noOfLines-undefined">
+                  Design tool
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
+          <button
+            type="button"
+            data-test="vote-button"
+            class="styles_reset__opz7w styles_feed__JnsOv"
+          >
+            <div class="flex direction-column align-center">
+              <div class="styles_icon___8PK0 styles_lightGrey__b_fhT"></div>
+              <div class="color-lighter-grey fontSize-12 fontWeight-600 noOfLines-undefined">
+                368
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
     </div>
   );
-};
+}
 
-export default Search_format;
+export default ToolSearch;

@@ -33,7 +33,7 @@ import { LikeMethods } from "../lib";
 import "../assets/styles/home/home.css";
 import "../assets/styles/home/global.css";
 
-import Search_format from "../components/Search-container/Search_format";
+import SearchFormat from "../components/Search-container/SearchFormat";
 import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Toolitem from "../components/Tools/Toolitem";
 import YouMustLikeApp from "../components/Filtering-container/YouMightLikeApp";
@@ -57,7 +57,7 @@ const Home = () => {
 
   //to keep track either if the user is searching or not
   const [isSearching, setIsSearching] = useState(false);
-  const [isFiltering, setIsFiltering] = useState(true);
+  const [isFiltering, setIsFiltering] = useState(false);
 
   //To store the results of the research
   const [SearchedTool, setSearchedTool] = useState([]);
@@ -227,7 +227,7 @@ const Home = () => {
                 <FilteringContext.Provider
                   value={{ isFiltering, setIsFiltering }}
                 >
-                  <Search_format />
+                  <SearchFormat etat={isFiltering} />
                 </FilteringContext.Provider>
                 {/* End Search bar */}
 
@@ -254,18 +254,25 @@ const Home = () => {
                   // {/* End Filtering container */}
                 ):
                 (
-                  <div></div>
+                  <div data-test="homepage-section-0">
+                  <div>
+                    <div>
+                      <Toolitem />
+                      <Toolitem />
+                    </div>
+                  </div>
+                </div>
                 )}
               </div>
               <div data-test="homepage-section-0">
+              <div>
                 <div>
-                  <div>
-                    <Toolitem />
-                    <Toolitem />
-                    <Toolitem />
-                  </div>
+                  <Toolitem />
+                  <Toolitem />
                 </div>
               </div>
+            </div>
+
             </div>
           </div>
         </main>

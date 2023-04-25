@@ -1164,6 +1164,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  background-color: #1d1d1f !important;
 }
 
 .combo-box {
@@ -1215,6 +1216,10 @@ input {
   border-left: 1px solid rgb(188, 185, 185);
   padding-left: 1rem;
   margin-bottom: 10vh;
+}
+
+.filter-icon{
+  cursor: pointer;
 }
 
 .navbar-header {
