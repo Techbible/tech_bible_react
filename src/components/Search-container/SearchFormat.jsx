@@ -10,7 +10,7 @@ const SearchFormat = () => {
     isFiltering ? setIsFiltering(false) : setIsFiltering(true);
   };
 
-  const [pricing,setPricing] = useState();
+  const [pricing, setPricing] = useState();
 
   return (
     <div className="search-tool-container max-w-2xl mx-auto">
@@ -43,7 +43,7 @@ const SearchFormat = () => {
         </div>
         <div className="ml-2">
           <svg
-          className="filter-icon"
+            className="filter-icon"
             onClick={handleFiltering}
             width="30"
             height="28"
@@ -95,24 +95,25 @@ const SearchFormat = () => {
             {/* --********************************** */}
           </div>
         </div>
-        {isFiltering?
+        {isFiltering ? (
           <div className="filter-box">
-          <select
-            className="combo-box"
-            onChange={(e) => setPricing(e.target.value)}
-          >
-            <option selected disabled>
-              Pricing
-            </option>
-            <option value="Freemium">Freemium</option>
-            <option value="Free">Free</option>
-            <option value="Paid">Paid</option>
-          </select>
-        </div>:
-        <p className="fontWeight-300 text-[#F5F5F7]">
-          Browse 1000+ of the latest tech tools per task Updated daily
-        </p>
-        }
+            <select
+              className="combo-box"
+              onChange={(e) => setPricing(e.target.value)}
+            >
+              <option selected disabled>
+                Pricing
+              </option>
+              <option value="Freemium">Freemium</option>
+              <option value="Free">Free</option>
+              <option value="Paid">Paid</option>
+            </select>
+          </div>
+        ) : (
+          <p className="fontWeight-300 text-[#F5F5F7]">
+            Browse 1000+ of the latest tech tools per task Updated daily
+          </p>
+        )}
       </div>
     </div>
   );
