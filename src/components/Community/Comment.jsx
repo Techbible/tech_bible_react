@@ -39,7 +39,7 @@ const Comment = () => {
               <svg  width="13" height="14" viewBox="0 0 13 14">
                 <g
                   stroke="#4B587C"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   fill="none"
                   fill-rule="evenodd"
                 >
@@ -88,7 +88,7 @@ const Comment = () => {
         <div class="flex items-center space-x-4">
                <button class="p-2 border rounded-full hover:bg-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4  hover:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                 <path stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
                 </svg>
               </button>
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
@@ -96,7 +96,7 @@ const Comment = () => {
                   </div>
             <button class="p-2 border rounded-full hover:bg-gray-100">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-current hover:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
              </button>
             </div>
