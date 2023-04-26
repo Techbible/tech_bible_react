@@ -25,8 +25,7 @@ import Modal from "react-modal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
-// import "../assets/styles/profile/profile.css";
-// import "../assets/styles/profile/editProfile.css";
+
 import "../assets/styles/profile/profile.css";
 
 import { LikeMethods } from "../lib";
@@ -265,10 +264,10 @@ const Profile = () => {
   //To add/Update a Bio
   const UpdatingBio = async () => {
     try {
-        const UserRef = doc(db, "Users", userData.uid);
-        await updateDoc(UserRef, { bio: bio });
-        setAddBio(false);
-        setUpdateBio(false);
+      const UserRef = doc(db, "Users", userData.uid);
+      await updateDoc(UserRef, { bio: bio });
+      setAddBio(false);
+      setUpdateBio(false);
     } catch (error) {
       console.log(error);
     }
@@ -360,7 +359,7 @@ const Profile = () => {
                     <div class="mb-4 md:mb-0">
                       <p class="font-bold text-lg leading-tight mb-3">Bio</p>
                       <input
-                        class="text-sm leading-tight text-black"
+                        class="h-7 p-2 w-full text-sm leading-tight text-black border-gray-400 border rounded-lg"
                         placeholder={userData.bio}
                         onChange={(e) => setBio(e.target.value)}
                         type="text"
@@ -369,13 +368,13 @@ const Profile = () => {
                     <div>
                       <button
                         onClick={() => setUpdateBio(false)}
-                        class="edit-add-btn"
+                        class="cancel-btn fw-500"
                       >
                         Cancel
                       </button>
                       <button
                         onClick={() => UpdatingBio()}
-                        class="edit-add-btn"
+                        class="update-btn"
                       >
                         Update
                       </button>
@@ -387,26 +386,26 @@ const Profile = () => {
                     <div class="mb-4 md:mb-0">
                       <p class="font-bold text-lg leading-tight mb-3">Bio</p>
                       <p class="text-sm">{userData.bio}</p>
-                        </div>
-                      <div>
-                        <button
-                          onClick={() => setUpdateBio(true)}
-                          class="edit-add-btn"
-                        >
-                          Edit
-                        </button>
-                      </div>
                     </div>
+                    <div>
+                      <button
+                        onClick={() => setUpdateBio(true)}
+                        class="edit-btn"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
                 )}
-                
               </div>
             ) : (
               <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
                 <div class="mb-4 md:mb-0">
                   <p class="font-bold text-lg leading-tight mb-3">Bio</p>
+
                   {addBio ? (
                     <input
-                      className="profile-input"
+                      className="h-7 p-2 w-full text-sm leading-tight text-black border-gray-400 border rounded-lg"
                       placeholder="You can add your bio here"
                       onChange={(e) => setBio(e.target.value)}
                       type="text"
@@ -416,33 +415,29 @@ const Profile = () => {
                       you don't have a bio yet
                     </span>
                   )}
-                  {addBio ? (
-                    <div>
-                      <button
-                        onClick={() => setAddBio(false)}
-                        class="edit-add-btn"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        onClick={() => UpdatingBio()}
-                        class="edit-add-btn"
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
+                </div>
+                {addBio ? (
+                  <div>
+                    <button
+                      onClick={() => setAddBio(false)}
+                      class="cancel-btn"
+                    >
+                      Cancel
+                    </button>
+                    <button onClick={() => UpdatingBio()} class="submit-btn">
+                      Submit
+                    </button>
+                  </div>
+                ) : (
+                  <div>
                     <button
                       onClick={() => setAddBio(true)}
-                      class="edit-add-btn"
+                      class="add-btn"
                     >
                       +Add
                     </button>
-
-                    </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             )}
 
@@ -456,7 +451,7 @@ const Profile = () => {
                   Digital Marketing and Graphic Design, Adobe suites
                 </p>
               </div>
-              <button class="edit-add-btn">Add</button>
+              <button class="edit-btn">+Add</button>
             </div>
             {/* End Of Interests components */}
           </div>
