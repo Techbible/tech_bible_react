@@ -9,7 +9,7 @@ import {
   Tools,
   UserList,
   ToolDetails,
-  Community
+  Community,
 } from "./views";
 import { AddTool } from "./admin";
 import { useContext } from "react";
@@ -17,6 +17,8 @@ import { NewsContextProvider } from "./context/NewsContext";
 import { useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Socials from "./components/Socials/Socials";
+import NewToolDetails from "./views/NewToolDetails";
+
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);
   const ProtectedRoute = ({ children }) => {
@@ -42,6 +44,8 @@ function App() {
         <Route path="/profile" element=<Profile /> />
         <Route path="/list" element=<UserList /> />
         <Route path="/community" element=<Community /> />
+        <Route path="/newtooldetails" element=<NewToolDetails /> />
+
         <Route
           path="/tools"
           element={
@@ -59,7 +63,6 @@ function App() {
           }
         />
         <Route
-
           path="/News"
           element={
             <NewsContextProvider>

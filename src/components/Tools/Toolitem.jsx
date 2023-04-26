@@ -57,7 +57,7 @@ const Toolitem = ({toolData,forceRender}) => {
               <svg width="13" height="14" viewBox="0 0 13 14">
                 <g
                   stroke="#4B587C"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   fill="none"
                   fill-rule="evenodd"
                 >

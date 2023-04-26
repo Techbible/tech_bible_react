@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
-import "../../assets/styles/search-container/search-container.css";
-import { FilteringContext } from "../../context/FilteringContext";
-import { useState } from "react";
+// import React, { useContext, useEffect } from "react";
+// import "../../assets/styles/search-container/search-container.css";
+// import { FilteringContext } from "../../context/FilteringContext";
+// import { useState } from "react";
 
-const SearchFormat = () => {
-  const { isFiltering, setIsFiltering } = useContext(FilteringContext);
+// const SearchFormat = ({handleFilter}) => {
+//   const { isFiltering, setIsFiltering } = useContext(FilteringContext);
+//   //storing the pricing choice
+//   const [Pricing, setPricing] = useState("");
 
-  const handleFiltering = () => {
-    isFiltering ? setIsFiltering(false) : setIsFiltering(true);
-  };
+//   const handleFiltering = () => {
+//     isFiltering ? setIsFiltering(false) : setIsFiltering(true);
+    
+//   };
+
 
   const [pricing,setPricing] = useState();
 
@@ -87,10 +91,10 @@ const SearchFormat = () => {
         </div>
       </form>
 
-      <div className="logo-search-container mt-5">
-        <div className="mr-4">
-          <div>
-            {/* --*****************Logo bellow search bar***************** */}
+//       <div className="logo-search-container mt-5">
+//         <div className="mr-4">
+//           <div>
+//             {/* --*****************Logo bellow search bar***************** */}
 
             {/* --********************************** */}
           </div>
@@ -118,4 +122,4 @@ const SearchFormat = () => {
   );
 };
 
-export default SearchFormat;
+// export default SearchFormat;
