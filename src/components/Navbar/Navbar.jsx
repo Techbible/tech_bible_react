@@ -67,12 +67,12 @@ function Navbar() {
               <ul className="flex items-center gap-6 text-sm">
                 {isAdmin ? (
                   <Link to="/tools">
-                  <li
-                    className="tracking-wider hover:tracking-widest"
-                    style={{ transition: "0.3s", cursor: "pointer" }}
-                  >
-                    All Tools
-                  </li>
+                    <li
+                      className="tracking-wider hover:tracking-widest"
+                      style={{ transition: "0.3s", cursor: "pointer" }}
+                    >
+                      All Tools
+                    </li>
                   </Link>
                 ) : (
                   <div></div>
@@ -91,12 +91,15 @@ function Navbar() {
                   Resources
                 </li>
 
-                <li
-                  className="tracking-wider hover:tracking-widest"
-                  style={{ transition: "0.3s", cursor: "pointer" }}
-                >
-                  Community
-                </li>
+                <Link to="community">
+                  {" "}
+                  <li
+                    className="tracking-wider hover:tracking-widest"
+                    style={{ transition: "0.3s", cursor: "pointer" }}
+                  >
+                    Community
+                  </li>
+                </Link>
                 <li
                   className="tracking-wider hover:tracking-widest"
                   style={{ transition: "0.3s", cursor: "pointer" }}
@@ -142,7 +145,7 @@ function Navbar() {
             <div className="user-info-container">
               <Link to="/profile">
                 <div className="user-info">
-                <img src={userData.pfp} className="pfp" alt="pfp" />
+                  <img src={userData.pfp} className="pfp" alt="pfp" />
                   <div className="username">{userData.username}</div>
                 </div>
               </Link>

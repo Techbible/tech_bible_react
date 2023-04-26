@@ -6,6 +6,7 @@ import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 import { doc, setDoc, Timestamp } from "firebase/firestore";
+import "../assets/styles/signin_signup/signin_signup.css";
 
 //integrating open AI in order to generate auto profiles pictures for the users
 import { Configuration, OpenAIApi } from "openai";
@@ -87,7 +88,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="h-full bg-gradient-to-tl from-purple-300 to-indigo-900 w-full py-16 px-4 mt-[2rem]">
+    <div className="h-full sign-up bg-gradient-to-tl from-purple-300 to-indigo-900 w-full py-16 px-4 mt-[2rem]">
       <div className="flex flex-col items-center justify-center">
         <Link to="/">
           <h1 className="font-[500]">Tech Bible</h1>
