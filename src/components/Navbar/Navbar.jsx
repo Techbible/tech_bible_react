@@ -95,7 +95,7 @@ function Navbar() {
                   className="tracking-wider hover:tracking-widest"
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
-                  Community
+                 <Link to="/Community">Community</Link>
                 </li>
                 <li
                   className="tracking-wider hover:tracking-widest"
