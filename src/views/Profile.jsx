@@ -25,7 +25,6 @@ import Modal from "react-modal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
-
 import "../assets/styles/profile/profile.css";
 
 import { LikeMethods } from "../lib";
@@ -372,10 +371,7 @@ const Profile = () => {
                       >
                         Cancel
                       </button>
-                      <button
-                        onClick={() => UpdatingBio()}
-                        class="update-btn"
-                      >
+                      <button onClick={() => UpdatingBio()} class="update-btn">
                         Update
                       </button>
                     </div>
@@ -418,10 +414,7 @@ const Profile = () => {
                 </div>
                 {addBio ? (
                   <div>
-                    <button
-                      onClick={() => setAddBio(false)}
-                      class="cancel-btn"
-                    >
+                    <button onClick={() => setAddBio(false)} class="cancel-btn">
                       Cancel
                     </button>
                     <button onClick={() => UpdatingBio()} class="submit-btn">
@@ -430,28 +423,34 @@ const Profile = () => {
                   </div>
                 ) : (
                   <div>
-                    <button
-                      onClick={() => setAddBio(true)}
-                      class="add-btn"
-                    >
+                    <button onClick={() => setAddBio(true)} class="add-btn">
                       +Add
                     </button>
                   </div>
                 )}
               </div>
             )}
-
             {/* End Of BIO components */}
 
             {/* Interests components */}
             <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]">
               <div class="mb-4 md:mb-0">
                 <p class="font-bold text-lg leading-tight mb-3">Interests</p>
-                <p class="text-sm leading-tight">
-                  Digital Marketing and Graphic Design, Adobe suites
-                </p>
+                {userData.interests.map((i, index) => (
+                  <p className="text-sm leading-tight d-inline" key={index}>
+                    {i},&nbsp;
+                  </p>
+                ))}
               </div>
-              <button class="edit-btn">+Add</button>
+              {updateInterests ? (
+                <button onClick={editInterests} class="edit-btn">
+                  +Add
+                </button>
+              ) : (
+                <button onClick={editInterests} class="edit-btn">
+                  Edit
+                </button>
+              )}
             </div>
             {/* End Of Interests components */}
           </div>
