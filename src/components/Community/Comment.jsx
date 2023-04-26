@@ -14,9 +14,9 @@ const Comment = () => {
           >
             <img
               loading="lazy"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/2101px-Adobe_XD_CC_icon.svg.png"
+              src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
               style={{ width: "60px", height: "60px" ,borderRadius: "50%" }}
-              alt="Adobe XD"
+              alt="Profile image"
               className="styles_mediaThumbnail__LDCQN "
             />
             

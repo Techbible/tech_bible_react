@@ -1,21 +1,10 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import React, {
-  useEffect,
-  useReducer,
-  useState,
-  useRef,
-} from "react";
+import React, { useEffect, useReducer, useState, useRef } from "react";
 import { auth, db } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  collection,
-  query,
-  limit,
-  getDocs,
-  where,
-} from "firebase/firestore";
+import { collection, query, limit, getDocs, where } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { LikeMethods } from "../lib";
@@ -146,12 +135,10 @@ const Home = () => {
   // };
 
   return (
-<<<<<<< HEAD
-      <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">
-=======
+    <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">
       <div className="home-container mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer">
->>>>>>> 22b7effb14e884bcb10cc35057290d705af0392b
         <main className="layoutMain">
+
           <div class="flex direction-column">
             <div class="flex flex-col mb-12 p-5 styles_container__0sZXQ">
               <div class="flex justify-end">
@@ -183,83 +170,87 @@ const Home = () => {
                   </div>
                 </button>
               </div>
-
             </div>
 
-          <div>
             <div>
-              {/* Search bar */}
-              <FilteringContext.Provider
-                value={{ isFiltering, setIsFiltering }}
-              >
-                <SearchFormat etat={isFiltering} />
-              </FilteringContext.Provider>
-              {/* End Search bar */}
-
-              {!isFiltering ? (
-                // {/* Filtering container */}
-                <div className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
-                  <AppOfTheDay />
-                  {/************You might also like***********/}
-                  <div className="you-might-like-apps-container">
-                    <p className="fontWeight-500 text-[#15C988] mb-4">
-                      YOU MIGHT ALSO LIKE
-                    </p>
-                    <div
-                      className="flex flex-col sm:flex-row"
-                      style={{ display: "flex" }}
-                    >
-                      <YouMightLikeApp />
-                      <YouMightLikeApp />
-                      <YouMightLikeApp />
-                    </div>
-                  </div>
-                  {/***********END You might also like********/}
-                </div>
-              ) : (
-                // {/* End Filtering container */}
-                <div data-test="homepage-section-0">
-                  <div>
-                    <div>
-                      {SearchedTool.map((tool, index) => (
-                        <Toolitem key={index} toolData={tool} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-            <div data-test="homepage-section-0">
               <div>
-                <div>
-                  {!isFiltering ? (
-                    <div className="tools-section-ngu">
-                      {!TopTools ? (
-                        <h1 style={{ color: "#fff" }}>Loading...</h1>
-                      ) : (
-                        TopTools.map((tool, index) => (
-                          <Toolitem key={index} toolData={tool} forceRender={forceRender} />
-                        ))
-                      )}
+                {/* Search bar */}
+                <FilteringContext.Provider
+                  value={{ isFiltering, setIsFiltering }}
+                >
+                  <SearchFormat etat={isFiltering} />
+                </FilteringContext.Provider>
+                {/* End Search bar */}
+
+                {!isFiltering ? (
+                  // {/* Filtering container */}
+                  <div className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
+                    <AppOfTheDay />
+                    {/************You might also like***********/}
+                    <div className="you-might-like-apps-container">
+                      <p className="fontWeight-500 text-[#15C988] mb-4">
+                        YOU MIGHT ALSO LIKE
+                      </p>
+                      <div
+                        className="flex flex-col sm:flex-row"
+                        style={{ display: "flex" }}
+                      >
+                        <YouMightLikeApp />
+                        <YouMightLikeApp />
+                        <YouMightLikeApp />
+                      </div>
                     </div>
-                  ) : (
-                    <div></div>
-                  )}
+                    {/***********END You might also like********/}
+                  </div>
+                ) : (
+                  // {/* End Filtering container */}
+                  <div data-test="homepage-section-0">
+                    <div>
+                      <div>
+                        {SearchedTool.map((tool, index) => (
+                          <Toolitem key={index} toolData={tool} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div data-test="homepage-section-0">
+                <div>
+                  <div>
+                    {!isFiltering ? (
+                      <div className="tools-section-ngu">
+                        {!TopTools ? (
+                          <h1 style={{ color: "#fff" }}>Loading...</h1>
+                        ) : (
+                          TopTools.map((tool, index) => (
+                            <Toolitem
+                              key={index}
+                              toolData={tool}
+                              forceRender={forceRender}
+                            />
+                          ))
+                        )}
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
-      <aside className="sidebarWithSeparator right">
-        <Link to="/News">
-          <h1>News</h1>
-        </Link>
+        </main>
+        <aside className="sidebarWithSeparator right">
+          <Link to="/News">
+            <h1>News</h1>
+          </Link>
 
-        <NewsHomePage />
-        <NewsHomePage />
-        <NewsHomePage />
-      </aside>
+          <NewsHomePage />
+          <NewsHomePage />
+          <NewsHomePage />
+        </aside>
+      </div>
     </div>
   );
 };
