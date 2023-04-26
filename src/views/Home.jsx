@@ -146,7 +146,7 @@ const Home = () => {
   // };
 
   return (
-      <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer">
+      <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">
         <main className="layoutMain">
           <div class="flex direction-column">
             <div class="flex flex-col mb-12 p-5 styles_container__0sZXQ">

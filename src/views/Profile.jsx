@@ -432,12 +432,15 @@ const Profile = () => {
                       </button>
                     </div>
                   ) : (
+                    <div>
                     <button
                       onClick={() => setAddBio(true)}
                       class="edit-add-btn"
                     >
                       +Add
                     </button>
+
+                    </div>
                   )}
                 </div>
               </div>

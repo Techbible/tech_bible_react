@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import "../assets/styles/community/community.css";
 import "../assets/styles/home/global.css";
-import Search_format from "../components/Search-container/Search_format";
+
 import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Comment from '../components/Community/Comment';
 import Toolitem from "../components/Tools/Toolitem";
