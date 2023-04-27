@@ -66,13 +66,10 @@ function Navbar() {
 
           <div className="hidden md:block">
             <nav aria-label="Site Nav">
-<<<<<<< HEAD
-              <ul className="flex items-center lg:gap-[50px] gap-6 text-sm">
-=======
+
               <ul className="flex items-center gap-6 text-sm">
 
                 <div className="flex flex-row lg:gap-[64px] gap-6">
->>>>>>> 339591c60d39b32b6d5e453fcbfcaa28237f13bd
                 {isAdmin ? (
                   <Link to="/tools">
                     <li
@@ -98,10 +95,7 @@ function Navbar() {
                 >
                   Resources
                 </li>
-<<<<<<< HEAD
 
-=======
->>>>>>> 339591c60d39b32b6d5e453fcbfcaa28237f13bd
                 <Link to="community">
                   {" "}
                   <li
@@ -145,11 +139,7 @@ function Navbar() {
           </div>
           {!authUser ? (
             <div className="flex items-center gap-4">
-<<<<<<< HEAD
-              <div className="hidden sm:flex sm:gap-4">
-=======
-              <div className="sm:flex sm:gap-4 lg:mr-[94px]">
->>>>>>> 339591c60d39b32b6d5e453fcbfcaa28237f13bd
+      <div className="sm:flex sm:gap-4 lg:mr-[94px]">
                 <Link to="/signin">
                   <div className="signin-btn">Sign in</div>
                 </Link>
