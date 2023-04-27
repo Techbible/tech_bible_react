@@ -49,9 +49,10 @@ function Navbar() {
   return (
     <header
       aria-label="Site Header"
-      className="navbar-header dark:bg-[#1D1D1F]"
+      className="navbar-header"
     >
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      {/* <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8"> */}
+      <div className="lg:px-[94px] px-[20px]">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
             <Link to="/">
@@ -59,12 +60,13 @@ function Navbar() {
                 <div className="square"></div>
                 <div className="name">Tech Bible</div>
               </div>
+              {/* <img src="../public/Tech Bible Logo" alt="" /> */}
             </Link>
           </div>
 
           <div className="hidden md:block">
             <nav aria-label="Site Nav">
-              <ul className="flex items-center gap-6 text-sm">
+              <ul className="flex items-center lg:gap-[50px] gap-6 text-sm">
                 {isAdmin ? (
                   <Link to="/tools">
                     <li
@@ -90,7 +92,6 @@ function Navbar() {
                 >
                   Resources
                 </li>
-
 
                 <Link to="community">
                   {" "}
@@ -131,9 +132,9 @@ function Navbar() {
           </div>
           {!authUser ? (
             <div className="flex items-center gap-4">
-              <div className="sm:flex sm:gap-4">
+              <div className="hidden sm:flex sm:gap-4">
                 <Link to="/signin">
-                  <button className="signin-btn">Sign in</button>
+                  <div className="signin-btn">Sign in</div>
                 </Link>
 
                 <div className="hidden sm:flex">
