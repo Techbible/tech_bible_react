@@ -73,7 +73,7 @@ const Toolitem = ({ toolData, forceRender }) => {
                 <span class="bi bi-chat-left-dots"></span>
               </div>
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                {toolData.LikedBy.length}
+                {toolData?.LikedBy?.length}
               </div>
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                 {toolData.Price}
@@ -103,7 +103,7 @@ const Toolitem = ({ toolData, forceRender }) => {
               }}
             />
             <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
-              {toolData.LikedBy.length}
+              {toolData.LikedBy?.length}
             </div>
             <span class="bi bi-plus-lg fw-bold text-white"></span>
           </div>

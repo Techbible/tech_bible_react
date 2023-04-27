@@ -21,6 +21,10 @@
 
 }
 
+.under-line{
+    border-bottom: 2px solid purple;
+}
+
 .modal-flex {
     display: flex;
     position: relative;
@@ -44,4 +48,16 @@
     color: #fff;
     border-radius: 12px;
     display: inline-flex;
+}
+
+
+
+
+.folder-input{
+    background: rgb(27, 29, 31);
+    color: white;
+    padding: 5px;
+    outline: none;
+    border: 0px;
+    margin-left: 20px;
 }

@@ -70,7 +70,7 @@ function Tools() {
         <div className="tools-section-ngu">
           <section id="focus" className="focus-section dark-mode">
             <div className="container-lg py-5 px-5">
-              <div className="row row-cols-1 row-cols-md-3 g-4 mt-5">
+              <div className="row sm:row-cols-1 lg:row-cols-md-3  md:row-cols-md-2 g-4 mt-5">
                 {tools?.map((tool) => (
                   <div className="col" key={tool.id}>
                     <div className="card shadow-sm h-100">

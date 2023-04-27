@@ -23,6 +23,7 @@ import { useReducer } from "react";
 import { ModalcustomStyles } from "./Profile";
 
 import "../assets/styles/profile/profile.css";
+import "../assets/styles/Modal/modal.css";
 
 
 
@@ -139,7 +140,7 @@ const UserList = () => {
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
-          style={ModalcustomStyles }
+          style={ModalcustomStyles}
           contentLabel="Example Modal"
         >
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
@@ -148,9 +149,8 @@ const UserList = () => {
           <span id="close-button" onClick={closeModal}>
             X
           </span>
-          <div className="flex inner-modal mt-5">
+          <div className="flex flex-col inner-modal my-10">
             <div className="flex m-5">
-              {" "}
               <h4>Folder Name : </h4>{" "}
               <input
                 type="text"
@@ -175,7 +175,7 @@ const UserList = () => {
             </div>
           </div>
           <span
-            className="profile-btn-outlined-3 mt-5"
+            className="save-btn"
             onClick={createFolder}
           >
             + create

@@ -32,7 +32,6 @@ export const ModalcustomStyles = {
     flexDirection:"column",
     justifyContent:"space-between",
     flexWrap:"wrap",
-    overflow:"scroll"
   },
   overlay:{
     backgroundColor:"rgba(0,0,0,0.8)",
