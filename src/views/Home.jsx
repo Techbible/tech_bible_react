@@ -175,7 +175,6 @@ const Home = () => {
               </div>
 
             </div>
-
           <div>
             <div>
             <div className="search-tool-container max-w-2xl mx-auto">
@@ -253,13 +252,9 @@ const Home = () => {
               </div>
             </form>
       
-            <div className="logo-search-container mt-5">
-              <div className="mr-4">
-                <div>
-                  {/* --*****************Logo bellow search bar***************** */}
-      
-                  {/* --********************************** */}
-                </div>
+            <div className="logo-search-container">
+              <div className="my-0 mr-4">
+              <img className="w-[100px]"  src={`${process.env.PUBLIC_URL}/assets/logo-homepage.png`} alt="search-box-logo" />
               </div>
               {isFiltering?
                 <div className="filter-box">

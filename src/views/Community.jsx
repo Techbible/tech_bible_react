@@ -19,7 +19,7 @@ function Community() {
     
   
     return (
-        <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer ">
+        <div className="mt-desktop-20 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer ">
        
         <main className="layoutMain">
         <div class="flex flex-col mb-12 p-5 text-white">

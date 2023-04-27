@@ -18,12 +18,19 @@ import { db } from "../config/firebase";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Modal from "react-modal";
-
-
+import Toolitem from "../components/Tools/Toolitem"
+import { useReducer } from "react";
+import { ModalcustomStyles } from "./Profile";
 
 import "../assets/styles/profile/profile.css";
 
+
+
+
 const UserList = () => {
+  //to force re-render
+  const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
+
   const { currentUser } = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
   const [Category, setCategory] = useState("");
@@ -43,26 +50,16 @@ const UserList = () => {
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data());
-
-        // setLikedTools([...LikedTools, doc.data()]);
-        // setLikedTools(LikedTools.concat(doc.data()));
-
         LikedOnes.push(doc.data());
         setLikedTools(LikedOnes);
-        // console.log(LikedOnes);
       });
     } catch (error) {
       console.log(error);
     }
-    // console.log("xxx", LikedTools);
   };
 
   const createFolder = async () => {
-    // alert("lvl 0");
     try {
-      // console.log("lvl 1");
 
       await setDoc(doc(db, "Users", currentUser?.uid), 
       {
@@ -105,20 +102,6 @@ const UserList = () => {
   }, []);
 
   //_______________________________Modal Configs_____________________________________________
-  //Modal Styles
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "rgba(0,0,0,0.8)",
-      color: "#fff",
-      borderRadius: "40px",
-    },
-  };
 
   Modal.setAppElement("#root");
   let subtitle;
@@ -136,54 +119,15 @@ const UserList = () => {
   //*************************END Modal Configs*********************************
 
   return (
-    <div className="home-page-SPw">
-      <Navbar />
+    <div className="wrapper">
       <div className="create-folder" onClick={openModal}>
         + create a new folder
       </div>
       <div className="lists-container">
         <div className="tools-list-container">
           {LikedTools ? (
-            LikedTools.map((LikedTool, index) => (
-              <div className="tool-container" key={index}>
-                <img className="tool-logo" src={LikedTool.Icon} alt="" />
-                <div className="tool-data">
-                  <Link to={`/ToolDetails/${LikedTool.id}`}>
-                    {" "}
-                    <div className="tool-title">{LikedTool.Name}</div>
-                  </Link>
-                  <div className="tool-description">
-                    {LikedTool.Description}
-                  </div>
-                  <div className="tool-comments">
-                    <img
-                      alt="tech bible"
-                      className="layer1-xx5"
-                      src="/assets/layer1-xPw.png"
-                    />
-                    {LikedTool.Comments}
-                  </div>
-                </div>
-                <div className="tool-icons">
-                  <img
-                    alt="tech bible"
-                    className="like-eGV"
-                    src="/assets/liked.png"
-                  />
-                  <div className="save-3ZX">
-                    <img
-                      alt="tech bible"
-                      className="ellipse-4-v7X"
-                      src="/assets/ellipse-4-ray.png"
-                    />
-                    <img
-                      alt="tech bible"
-                      className="item-32360-1-iJH"
-                      src="/assets/-aLV.png"
-                    />
-                  </div>
-                </div>
-              </div>
+            LikedTools.map((LikedTool) => (
+              <Toolitem toolData={LikedTool} forceRender={forceRender} />
             ))
           ) : (
             <div>you didn't like any tools yet</div>
@@ -191,12 +135,11 @@ const UserList = () => {
         </div>
       </div>
 
-      <div>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
-          style={customStyles}
+          style={ModalcustomStyles }
           contentLabel="Example Modal"
         >
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
@@ -238,7 +181,6 @@ const UserList = () => {
             + create
           </span>
         </Modal>
-      </div>
     </div>
   );
 };

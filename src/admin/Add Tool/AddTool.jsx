@@ -114,7 +114,7 @@ function AddTool() {
   };
 
   return (
-    <div className="home-page-SPw">
+    <div className="addtool-page">
       <div className="addTools-wrapper">
         {isAdmin ? (
           <div className="form">
@@ -159,7 +159,7 @@ function AddTool() {
           <div className="flex-container">
             <div className="content-container">
               <div className="form-container">
-                <form action="/action_page.php">
+                <form>
                   <h1>Reach out</h1>
                   <br />
                   <br />

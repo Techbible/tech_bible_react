@@ -47,10 +47,6 @@ const SignUp = () => {
     // generateImage();
     createUserWithEmailAndPassword(auth, email, password).then(
       async (result) => {
-        //https://t3.ftcdn.net/jpg/05/11/52/90/360_F_511529094_PISGWTmlfmBu1g4nocqdVKaHBnzMDWrN.jpg
-
-        // console.log(generatedImgURL);
-
         const docData = {
           uid: result.user.uid,
           username: FullName,
@@ -88,7 +84,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="h-full sign-up bg-gradient-to-tl from-purple-300 to-indigo-900 w-full py-16 px-4 mt-[2rem]">
+    <div className="h-full sign-up bg-gradient-to-tl from-purple-300 to-indigo-900 w-full py-16 px-4">
       <div className="flex flex-col items-center justify-center">
         <Link to="/">
           <h1 className="font-[500]">Tech Bible</h1>
