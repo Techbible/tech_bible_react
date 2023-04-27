@@ -49,11 +49,11 @@ function Navbar() {
   return (
     <header
       aria-label="Site Header"
-      className="navbar-header dark:bg-[#1D1D1F]"
+      className="navbar-header"
     >
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <div className="md:flex md:items-center md:gap-12">
+          <div className="md:flex md:items-center md:gap-12 lg:ml-[94px]">
             <Link to="/">
               <div className="logo">
                 <div className="square"></div>
@@ -65,6 +65,8 @@ function Navbar() {
           <div className="hidden md:block">
             <nav aria-label="Site Nav">
               <ul className="flex items-center gap-6 text-sm">
+
+                <div className="flex flex-row lg:gap-[64px] gap-6">
                 {isAdmin ? (
                   <Link to="/tools">
                     <li
@@ -90,8 +92,6 @@ function Navbar() {
                 >
                   Resources
                 </li>
-
-
                 <Link to="community">
                   {" "}
                   <li
@@ -101,6 +101,10 @@ function Navbar() {
                     Community
                   </li>
                 </Link>
+
+                </div>
+
+
 
                 <li
                   className="tracking-wider hover:tracking-widest"
@@ -131,7 +135,7 @@ function Navbar() {
           </div>
           {!authUser ? (
             <div className="flex items-center gap-4">
-              <div className="sm:flex sm:gap-4">
+              <div className="sm:flex sm:gap-4 lg:mr-[94px]">
                 <Link to="/signin">
                   <button className="signin-btn">Sign in</button>
                 </Link>
