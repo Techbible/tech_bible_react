@@ -120,6 +120,6 @@
       </div>
     </div>
   );
-};
+
 
 // export default SearchFormat;
