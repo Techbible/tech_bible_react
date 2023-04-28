@@ -132,7 +132,7 @@ const Home = () => {
           <div>
             <div>
               {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
-              <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500">
+              <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5">
                 <h2 className="text-white fontWeight-500 text-[18px] mt-2">
                   The Largest Saas Tools directory
                 </h2>
@@ -230,7 +230,7 @@ const Home = () => {
                       </select>
                     </div>
                   ) : (
-                    <div className="fontWeight-300 text-[#F5F5F7] text-[12px] w-[274px]">
+                    <div className="fontWeight-500 text-[#F5F5F7] text-[12px] w-[274px]">
                       Browse 1000+ of the latest tech tools per task Updated
                       daily
                     </div>
