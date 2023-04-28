@@ -1,8 +1,9 @@
-import React from "react";
-import Post from "../components/ToolDetails/Post";
 import ToolInfo from "../components/ToolDetails/ToolInfo";
+import Post from "../components/ToolDetails/Post";
+
 
 const NewToolDetails = () => {
+
   return (
     <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">
       <div className="home-container mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer">
