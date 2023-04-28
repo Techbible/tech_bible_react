@@ -1,6 +1,6 @@
 import React from "react";
 
-const ToolInfo = () => {
+const ToolInfo = ({ toolData }) => {
   return (
     <div>
       <p className="font-bold">Design tools</p>
@@ -16,7 +16,7 @@ const ToolInfo = () => {
             >
               <img
                 loading="lazy"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png"
+                src={toolData?.Icon}
                 style={{ width: "140px", height: "140px" }}
                 alt="Adobe XD"
                 className="w-full md:w-140 rounded-sm"
@@ -25,7 +25,7 @@ const ToolInfo = () => {
           </a>
           <div className="flex direction-column flex-1 mt-2">
             <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-600 mb-3 noOfLines-2 styles_format__w0VVk">
-              Adobe XD
+              {toolData?.Name}
               <i class="ml-3 text-white hover:text-gray-600 transition-colors duration-300 fas fa-share"></i>
               <a
                 href="/r/p/390145"
@@ -48,18 +48,17 @@ const ToolInfo = () => {
             </div>
             <div className="fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2">
               <span className="styles_tagline__j29pO text-gray-300">
-                Adobe XD is an interface prototyping and design tool for
-                websites or mobile applications. It is aimed at UX/UI designers
+                {toolData?.Description}
               </span>
             </div>
             <div className="flex direction-row flex-row-gap-6 mt-3 align-center">
               <div className="flex direction-row flex-row-gap-3">
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined border-1 border-white rounded-md px-3 bg-gradient">
-                  Premium
+                  {toolData?.Price}
                 </div>
                 <a className="styles_postTopicLink__wDe_p" href="/topics/art">
                   <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                    Design Tool
+                    {toolData?.category}
                   </div>
                 </a>
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">

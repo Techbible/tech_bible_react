@@ -43,7 +43,7 @@ const Toolitem = ({ toolData, forceRender }) => {
         <div className="flex direction-column flex-1">
           {/* <div className="color-white fontSize-mobile-12 fontSize-desktop-15 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-600 noOfLines-2 styles_format__w0VVk"> */}
           <div className="color-white font-700 text-[15px] font-bold mb-1">
-            <Link to={`/ToolDetails/${toolData.id}`}> {toolData?.Name} </Link>
+            <Link to={`/newtooldetails/${toolData.id}`}>{toolData?.Name} </Link>
             <a
               href="/r/p/390145"
               rel="noopener"

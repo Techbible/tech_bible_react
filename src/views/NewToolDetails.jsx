@@ -1,15 +1,31 @@
 import ToolInfo from "../components/ToolDetails/ToolInfo";
 import Post from "../components/ToolDetails/Post";
-
+import { useParams } from "react-router-dom";
+import { useEffect,useState } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const NewToolDetails = () => {
+  let { id } = useParams();
+
+  const [ToolData, setToolData] = useState();
+
+  useEffect(() => {
+    console.log(id);
+    const ToolRef = doc(db, "Tools", id);
+    onSnapshot(ToolRef, (doc) => {
+      console.log(" data: ", doc.data());
+      setToolData(doc.data());
+      console.log(ToolData);
+    });
+  }, []);
 
   return (
     <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">
       <div className="home-container mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer">
         <main className="layoutMain">
           {/* ToolItem Tooldetails */}
-          <ToolInfo />
+          <ToolInfo toolData={ToolData} />
           {/* END ToolItem Tooldetails */}
 
           {/* Community Thoughts  */}

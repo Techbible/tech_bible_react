@@ -40,7 +40,7 @@ function App() {
         <Route path="/profile" element=<Profile /> />
         <Route path="/list" element=<UserList /> />
         <Route path="/community" element=<Community /> />
-        <Route path="/newtooldetails" element=<NewToolDetails /> />
+        <Route path="/newtooldetails/:id" element=<NewToolDetails /> />
         <Route path="/liked-tools" element=<LikedTools /> />
 
         <Route
