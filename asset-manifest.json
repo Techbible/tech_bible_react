@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/tech_bible_react/static/css/main.bc69b124.css",
-    "main.js": "/tech_bible_react/static/js/main.e3396d80.js",
+    "main.css": "/tech_bible_react/static/css/main.4189e7e5.css",
+    "main.js": "/tech_bible_react/static/js/main.c453313f.js",
     "index.html": "/tech_bible_react/index.html",
-    "main.bc69b124.css.map": "/tech_bible_react/static/css/main.bc69b124.css.map",
-    "main.e3396d80.js.map": "/tech_bible_react/static/js/main.e3396d80.js.map"
+    "main.4189e7e5.css.map": "/tech_bible_react/static/css/main.4189e7e5.css.map",
+    "main.c453313f.js.map": "/tech_bible_react/static/js/main.c453313f.js.map"
   },
   "entrypoints": [
-    "static/css/main.bc69b124.css",
-    "static/js/main.e3396d80.js"
+    "static/css/main.4189e7e5.css",
+    "static/js/main.c453313f.js"
   ]
 }
