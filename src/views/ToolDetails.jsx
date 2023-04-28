@@ -2,7 +2,6 @@ import { doc, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../config/firebase";
-import { Navbar } from "../layouts";
 
 const ToolDetails = () => {
   const { id } = useParams();
@@ -37,9 +36,6 @@ const ToolDetails = () => {
 
   return (
     <div>
-      <div className="home-page-SPw">
-        <Navbar />
-      </div>
       <div className="design-tools-page--573">
         <div className="auto-group-wzxd-h6M">
           <div className="auto-group-uwdt-UmK">

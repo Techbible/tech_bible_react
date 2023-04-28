@@ -2,14 +2,10 @@
 import React, { useState } from 'react';
 import "../assets/styles/community/community.css";
 import "../assets/styles/home/global.css";
-import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Comment from '../components/Community/Comment';
 import Toolitem from "../components/Tools/Toolitem";
 
-import YouMustLikeApp from "../components/Filtering-container/YouMightLikeApp";
-import YouMightLikeApp from "../components/Filtering-container/YouMightLikeApp";
-import AppOfTheDay from "../components/Filtering-container/AppOfTheDay";
-import { FilteringContext } from "../context/FilteringContext";
+
 import Topic from '../components/Community/Topic';
 import Discussion from '../components/Community/Discussion';
 

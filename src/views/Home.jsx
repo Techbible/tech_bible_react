@@ -25,8 +25,8 @@ import "../assets/styles/home/global.css";
 
 import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Toolitem from "../components/Tools/Toolitem";
-import YouMightLikeApp from "../components/Filtering-container/YouMightLikeApp";
-import AppOfTheDay from "../components/Filtering-container/AppOfTheDay";
+import YouMightLikeApp from "../components/home components/Filtering-container/YouMightLikeApp";
+import AppOfTheDay from "../components/home components/Filtering-container/AppOfTheDay";
 import { FilteringContext } from "../context/FilteringContext";
 
 import "../assets/styles/search-container/search-container.css";
@@ -119,6 +119,10 @@ const Home = () => {
       setIsSearching(false);
       setSearchedTool([]);
     }
+    return () =>{
+      setIsSearching(false);
+      setSearchedTool([]);
+    }
   }, [Search]);
 
 
@@ -136,6 +140,10 @@ const Home = () => {
 
   useEffect(() => {
     handleFilter();
+
+    return () =>{
+      handleFilter();
+    }
   }, [Pricing]);
 
 
@@ -146,7 +154,7 @@ const Home = () => {
 
           <div>
             <div>
-            <div className="search-tool-container max-w-2xl mx-auto">
+            <div className="search-tool-container max-w-2xl mx-auto bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 lg:w-[816px]">
             <h2 className="text-white fontWeight-500">
               The Largest Saas Tools directory
             </h2>

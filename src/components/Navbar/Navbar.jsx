@@ -15,7 +15,7 @@ function Navbar() {
     username: "",
   });
 
-  const { currentUser, isAdmin } = useContext(AuthContext);
+  const { currentUserData, isAdmin } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -23,13 +23,6 @@ function Navbar() {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
-
-        const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
-          setUserData({
-            pfp: doc.data().photo,
-            username: doc.data().username,
-          });
-        });
       } else {
         setAuthUser(null);
       }
@@ -51,16 +44,11 @@ function Navbar() {
       aria-label="Site Header"
       className="navbar-header"
     >
-      {/* <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8"> */}
       <div className="lg:px-[94px] px-[20px]">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12 lg:ml-[94px]">
             <Link to="/">
-              <div className="logo">
-                <div className="square"></div>
-                <div className="name">Tech Bible</div>
-              </div>
-              {/* <img src="../public/Tech Bible Logo" alt="" /> */}
+              <img width={"51px"} height={"52px"} src={`${process.env.PUBLIC_URL}/Tech_Bible_Logo.png`} alt="" /> 
             </Link>
           </div>
 
@@ -155,8 +143,8 @@ function Navbar() {
             <div className="user-info-container">
               <Link to="/profile">
                 <div className="user-info">
-                  <img src={userData.pfp} className="pfp" alt="pfp" />
-                  <div className="username">{userData.username}</div>
+                  <img src={currentUserData.photo} className="pfp" alt="pfp" />
+                  <div className="username">{currentUserData.username}</div>
                 </div>
               </Link>
               <span className="signout" onClick={UserSignOut}>

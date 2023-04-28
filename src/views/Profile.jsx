@@ -40,7 +40,12 @@ export const ModalcustomStyles = {
 
 const Profile = () => {
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, currentUserData } = useContext(AuthContext);
+
+  useEffect(()=>{
+    console.log(currentUserData)},[])
+
+
   const [authUser, setAuthUser] = useState(null);
   const [addBio, setAddBio] = useState(false);
   const [addInterests, setAddInterests] = useState(true);
@@ -48,7 +53,6 @@ const Profile = () => {
   const [updateInterests, setUpdateInterests] = useState(false);
 
   const [LikedTools, setLikedTools] = useState([]);
-  const [interests, setIntersts] = useState(null);
   const [bio, setBio] = useState("");
   const [categories, setCategories] = useState();
   const [checkedInterests, setcheckedInterests] = useState([]);
@@ -86,7 +90,6 @@ const Profile = () => {
   function openModal() {
     setIsOpen(true);
   }
-
   function closeModal() {
     setIsOpen(false);
   }
@@ -179,11 +182,8 @@ const Profile = () => {
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data());
         LikedOnes.push(doc.data());
         setLikedTools(LikedOnes);
-        // console.log(LikedTools);
       });
     } catch (error) {
       console.log(error);
@@ -192,6 +192,8 @@ const Profile = () => {
 
   useEffect(() => {
     LoadLikedTools();
+
+    return () =>LoadLikedTools();
   }, [reducerValue]);
 
  
@@ -201,18 +203,7 @@ const Profile = () => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
-
-        const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
-          setUserData({
-            uid: doc.data().uid,
-            photo: doc.data().photo,
-            username: doc.data().username,
-            bio: doc.data().bio,
-            interests: doc.data().interests,
-            list: doc.data().list,
-          });
-        });
-        userData.interests.length > 0
+        currentUserData.interests.length > 0
           ? setAddInterests(false)
           : setAddInterests(false);
       } else {
@@ -256,7 +247,7 @@ const Profile = () => {
               <div class="col-md-2">
                 <div class="w-full">
                   <img
-                    src={userData.photo}
+                    src={currentUserData.photo}
                     class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 border-gray-300 rounded-full"
                     alt="pfp"
                   />
@@ -265,7 +256,7 @@ const Profile = () => {
               <div class="col-md-7">
                 <div class="row">
                   <div class="col-md-3">
-                    <p>{userData.username}</p>
+                    <p>{currentUserData.username}</p>
                   </div>
                   <div class="col">
                     <button
@@ -280,12 +271,12 @@ const Profile = () => {
                 <div className="bio-interests-texts">
                   <div class="row">
                     <div class="col">
-                      <p>{userData.bio}</p>
+                      <p>{currentUserData.bio}</p>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      {userData.interests.map((interest) => {
+                      {currentUserData.interests.map((interest) => {
                         return (
                           <p className="text-[12] d-inline-block">
                             {interest}&nbsp;&nbsp;
@@ -320,7 +311,7 @@ const Profile = () => {
                       <p class="font-bold text-lg leading-tight mb-3">Bio</p>
                       <input
                         class="h-7 p-2 w-full text-sm leading-tight text-black border-gray-400 border rounded-lg"
-                        placeholder={userData.bio}
+                        placeholder={currentUserData.bio}
                         onChange={(e) => setBio(e.target.value)}
                         type="text"
                       />
@@ -342,13 +333,12 @@ const Profile = () => {
                   <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
                     <div class="mb-4 md:mb-0">
                       <p class="font-bold text-lg leading-tight mb-3">Bio</p>
-                      <p class="text-sm">{userData.bio}</p>
+                      <p class="text-sm">{currentUserData.bio}</p>
                     </div>
                     <div>
                       <button
                         onClick={() => setUpdateBio(true)}
-                        class="edit-btn"
-                      >
+                        class="edit-btn">
                         Edit
                       </button>
                     </div>
@@ -423,7 +413,7 @@ const Profile = () => {
               className="list-tools"
               style={{ padding: "0 0 0 3rem", borderLeft: "1px solid white" }}
             >
-           { LikedTools?.map((tool)=>(
+           {LikedTools?.map((tool)=>(
             <Toolitem toolData={tool} forceRender={forceRender}/>
            ))
 }

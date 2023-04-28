@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Navbar } from "../layouts";
 import { useState, useEffect } from "react";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import "../assets/styles/tools/Tools.scss";

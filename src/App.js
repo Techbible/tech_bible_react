@@ -10,6 +10,7 @@ import {
   UserList,
   ToolDetails,
   Community,
+  LikedTools
 } from "./views";
 import { AddTool } from "./admin";
 import { useContext } from "react";
@@ -20,6 +21,7 @@ import Socials from "./components/Socials/Socials";
 import NewToolDetails from "./views/NewToolDetails";
 
 function App() {
+  
   const { currentUser, isAdmin } = useContext(AuthContext);
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
@@ -27,13 +29,7 @@ function App() {
     }
     return children;
   };
-  // const CheckAdmin = ({ children }) => {
-  //   console.log("from routing",isAdmin)
-  //   if (!isAdmin) {
-  //     return <Navigate to="/" />;
-  //   }
-  //   return children;
-  // };
+
   return (
     <div>
       <Navbar />
@@ -45,6 +41,7 @@ function App() {
         <Route path="/list" element=<UserList /> />
         <Route path="/community" element=<Community /> />
         <Route path="/newtooldetails" element=<NewToolDetails /> />
+        <Route path="/liked-tools" element=<LikedTools /> />
 
         <Route
           path="/tools"
