@@ -5,19 +5,16 @@ import { db } from "../../../config/firebase";
 import YouMightLikeItem from "./YouMightLikeItem";
 
 const YouMightLikeApp = () => {
-  const { currentUser,currentUserData, isAdmin } = useContext(AuthContext);
+  const { currentUser, currentUserData, isAdmin } = useContext(AuthContext);
   // const [userData, setUserData] = useContext()
-  const [Tools,setTools] = useState();
+  const [Tools, setTools] = useState();
 
   // useEffect(()=>(console.log("current user",currentUser)),[currentUser])
 
   const LoadingMightLike = async () => {
     const ToolsRef = collection(db, "Tools");
     const tools = [];
-    const q = query(
-      ToolsRef,
-      where("category", "in", currentUser?.interests)
-    );
+    const q = query(ToolsRef, where("category", "in", currentUser?.interests));
 
     try {
       const querySnapshot = await getDocs(q);
@@ -31,19 +28,11 @@ const YouMightLikeApp = () => {
   };
 
   return (
-    <div className="you-might-like-apps-container">
-    <p className="fontWeight-500 text-[#15C988] mb-4">
-      YOU MIGHT ALSO LIKE
-    </p>
-    <div
-      className="flex flex-col sm:flex-row"
-      style={{ display: "flex" }}
-    >
-
-    <YouMightLikeItem title="" description="" icon="" />
-
+    <div>
+      <div className="flex flex-col sm:flex-row" style={{ display: "flex" }}>
+        <YouMightLikeItem title="" description="" icon="" />
+      </div>
     </div>
-  </div>
   );
 };
 
