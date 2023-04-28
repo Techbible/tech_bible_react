@@ -86,55 +86,55 @@ const NewToolDetails = () => {
 
           {/* Community Thoughts  */}
           <div>
+            <div className="max-w-4xl px-10 my-4 py-6 bg-[#232628] rounded-lg shadow-md flex flex-row">
+              <div>
+                <div className="w-10 h-10 rounded-full overflow-hidden mr-[1rem]">
+                  <img
+                    className="w-full h-full object-cover rounded-full"
+                    src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
+                    alt="Profile picture"
+                  />
+                </div>
+              </div>
 
-          </div>
-          <div className="max-w-4xl px-10 my-4 py-6 bg-[#232628] rounded-lg shadow-md flex flex-row">
-            <div>
-            <div className="w-10 h-10 rounded-full overflow-hidden mr-[1rem]">
-              <img
-                className="w-full h-full object-cover rounded-full"
-                src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
-                alt="Profile picture"
-              />
-            </div>
-
-            </div>
-
-            <div>
-              <div className="flex flex-row ml-3">
-                    <p className="text-white text-[18px]">User78-&nbsp;</p>
-                    <div className="flex flex-row mt-[6px]">
+              <div>
+                <div className="flex flex-row">
+                  <p className="text-white text-[18px]">User78-&nbsp;</p>
+                  <div className="flex flex-row mt-[6px]">
                     <p className="text-gray-300 text-[12px]">Posted in&nbsp;</p>
-                    <p className="text-gray-200 text-[12px]">r/Design Tools&nbsp;-&nbsp;</p>
-                    <p className="text-gray-200 text-[12px]">Adobe XD&nbsp;-&nbsp;</p>
-                    <p className="text-gray-300 text-[12px] text-bold-500">2 hours ago</p>
+                    <p className="text-gray-200 text-[12px]">
+                      r/Design Tools&nbsp;-&nbsp;
+                    </p>
+                    <p className="text-gray-200 text-[12px]">
+                      Adobe XD&nbsp;-&nbsp;
+                    </p>
+                    <p className="text-gray-300 text-[12px] text-bold-500">
+                      2 hours ago
+                    </p>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-white text-[20px] mt-1 font-bold">
+                    What is the use of Adobe XD?
+                  </span>
+                </div>
+                <div className="mt-2">
+                  <p className="mt-2 text-gray-100 text-[15px] font-sans">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Tempora expedita dicta totam aspernatur doloremque.
+                    Excepturi iste iusto eos enim reprehenderit nisi, accusamus
+                    delectus nihil quis facere in modi ratione libero!
+                  </p>
+                </div>
 
-                    </div>
-              </div>
-              <div className="flex justify-between items-center ml-3">
-                <span className="text-white text-[20px] mt-1 font-bold">What is the use of Adobe XD?</span>
-              </div>
-              <div className="mt-2">
-                <p className="mt-2 text-gray-100">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Tempora expedita dicta totam aspernatur doloremque. Excepturi
-                  iste iusto eos enim reprehenderit nisi, accusamus delectus
-                  nihil quis facere in modi ratione libero!
-                </p>
-              </div>
-              <div className="flex justify-between items-center mt-4">
-                <a className="text-blue-600 hover:underline" href="#">
-                  Read more
-                </a>
-                <div>
-                  <a className="flex items-center" href="#">
-                    <img
-                      className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
-                      src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80"
-                      alt="avatar"
-                    />
-                    <h1 className="text-gray-700 font-bold">Khatab wedaa</h1>
-                  </a>
+                <div className="flex justify-between items-center mt-4">
+                  <div></div>
+                  <div className="flex flex-row gap-2">
+                    <i className="text-red-500 fas fa-heart text-[25px]"></i>
+                    <div className="text-[14px]">23</div>
+                    <i className=" bi bi-chat-left-dots text-[18px]"></i>
+                    <div className="text-[14px]">10</div>
+                  </div>
                 </div>
               </div>
             </div>
