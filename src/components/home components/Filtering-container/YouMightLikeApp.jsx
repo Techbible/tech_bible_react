@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../config/firebase";
+import YouMightLikeItem from "./YouMightLikeItem";
 
 const YouMightLikeApp = () => {
   const { currentUser,currentUserData, isAdmin } = useContext(AuthContext);
@@ -39,7 +40,7 @@ const YouMightLikeApp = () => {
       style={{ display: "flex" }}
     >
 
-    <YouMightLikeItem />
+    <YouMightLikeItem title="" description="" icon="" />
 
     </div>
   </div>

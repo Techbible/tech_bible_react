@@ -28,20 +28,21 @@ const Toolitem = ({ toolData, forceRender }) => {
       >
         <a href="/posts/mage-4" aria-label="Mage">
           <div
-            className="styles_thumbnail__Rmwk5 styles_thumbnail__E2_pB"
+            className="styles_thumbnail__Rmwk5 styles_thumbnail__E2_pB mr-3"
             data-test="post-thumbnail"
           >
             <img
               loading="lazy"
               src={toolData?.Icon}
-              style={{ width: "80px", height: "80px" }}
+              style={{ width: "81px", height: "79px" }}
               alt="Adobe XD"
               className="styles_mediaThumbnail__LDCQN"
             />
           </div>
         </a>
         <div className="flex direction-column flex-1">
-          <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-600 noOfLines-2 styles_format__w0VVk">
+          {/* <div className="color-white fontSize-mobile-12 fontSize-desktop-15 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-600 noOfLines-2 styles_format__w0VVk"> */}
+          <div className="color-white font-700 text-[15px] font-bold mb-1">
             <Link to={`/ToolDetails/${toolData.id}`}> {toolData?.Name} </Link>
             <a
               href="/r/p/390145"
@@ -62,8 +63,9 @@ const Toolitem = ({ toolData, forceRender }) => {
               </svg>
             </a>
           </div>
-          <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2">
-            <span className="styles_tagline__j29pO">
+          {/* <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2"> */}
+          <div className="color-white text-[12px] ">
+            <span className="styles_tagline__j29pO fontWeight-500">
               {toolData.Description}
             </span>
           </div>
@@ -87,7 +89,7 @@ const Toolitem = ({ toolData, forceRender }) => {
           </div>
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
-          <div className="flex direction-column align-center">
+          <div className="flex direction-column align-center mt-3">
             <img
               alt="tech bible"
               className="follow_unfollow"

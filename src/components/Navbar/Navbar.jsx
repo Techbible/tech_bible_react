@@ -40,13 +40,12 @@ function Navbar() {
       .catch((error) => console.log(error));
   };
   return (
-    <header
-      aria-label="Site Header"
-      className="navbar-header"
-    >
+
+    <header aria-label="Site Header" className="navbar-header">
+      {/* <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8"> */}
       <div className="lg:px-[94px] px-[20px]">
         <div className="flex h-16 items-center justify-between">
-          <div className="md:flex md:items-center md:gap-12 lg:ml-[94px]">
+          <div className="md:flex md:items-center md:gap-12 lg:ml-[30px]">
             <Link to="/">
               <img width={"51px"} height={"52px"} src={`${process.env.PUBLIC_URL}/Tech_Bible_Logo.png`} alt="" /> 
             </Link>
@@ -54,49 +53,44 @@ function Navbar() {
 
           <div className="hidden md:block">
             <nav aria-label="Site Nav">
-
-              <ul className="flex items-center gap-6 text-sm">
-
+              <ul className="flex items-center gap-6 text-sm mr-6">
                 <div className="flex flex-row lg:gap-[64px] gap-6">
-                {isAdmin ? (
-                  <Link to="/tools">
-                    <li
-                      className="tracking-wider hover:tracking-widest"
-                      style={{ transition: "0.3s", cursor: "pointer" }}
-                    >
-                      All Tools
-                    </li>
-                  </Link>
-                ) : (
-                  <div></div>
-                )}
-                <li
-                  className="tracking-wider hover:tracking-widest"
-                  style={{ transition: "0.3s", cursor: "pointer" }}
-                >
-                  <Link to="/addTool">Submit your Tool</Link>
-                </li>
-
-                <li
-                  className="tracking-wider hover:tracking-widest"
-                  style={{ transition: "0.3s", cursor: "pointer" }}
-                >
-                  Resources
-                </li>
-
-                <Link to="community">
-                  {" "}
+                  {isAdmin ? (
+                    <Link to="/tools">
+                      <li
+                        className="tracking-wider hover:tracking-widest"
+                        style={{ transition: "0.3s", cursor: "pointer" }}
+                      >
+                        All Tools
+                      </li>
+                    </Link>
+                  ) : (
+                    <div></div>
+                  )}
                   <li
                     className="tracking-wider hover:tracking-widest"
                     style={{ transition: "0.3s", cursor: "pointer" }}
                   >
-                    Community
+                    <Link to="/addTool">Submit your Tool</Link>
                   </li>
-                </Link>
 
+                  <li
+                    className="tracking-wider hover:tracking-widest"
+                    style={{ transition: "0.3s", cursor: "pointer" }}
+                  >
+                    Resources
+                  </li>
+
+                  <Link to="community">
+                    {" "}
+                    <li
+                      className="tracking-wider hover:tracking-widest"
+                      style={{ transition: "0.3s", cursor: "pointer" }}
+                    >
+                      Community
+                    </li>
+                  </Link>
                 </div>
-
-
 
                 <li
                   className="tracking-wider hover:tracking-widest"
@@ -127,7 +121,7 @@ function Navbar() {
           </div>
           {!authUser ? (
             <div className="flex items-center gap-4">
-      <div className="sm:flex sm:gap-4 lg:mr-[94px]">
+              <div className="sm:flex sm:gap-4 lg:mr-[30px]">
                 <Link to="/signin">
                   <div className="signin-btn">Sign in</div>
                 </Link>
