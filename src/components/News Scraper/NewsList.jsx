@@ -17,15 +17,15 @@ const NewsList = () => {
     <h1 className="text-4xl font-bold">Daily AI News</h1>
   </div>
   <div className="flex flex-wrap justify-center">
-    {data?.articles?.map((article,index) => (
+    {data?.map((article,index) => (
       <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4" key={index}>
         <div className="News-container bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-          <NewsItem 
-            title={article.title}
-            description={article.description}
-            url={article.url}
-            urlToImage={article.urlToImage} 
-          />
+        <NewsItem 
+        title={article.name}
+        description={article.description}
+        url={article.url}
+        urlToImage={article.image?.thumbnail?.contentUrl} 
+      />
         </div>
       </div>
     ))}

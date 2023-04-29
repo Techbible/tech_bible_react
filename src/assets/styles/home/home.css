@@ -1,8 +1,6 @@
-.home-container{
+.home-container {
   margin-top: 10vh !important;
 }
-
-
 
 .styles_container__5MXSs .styles_dropdown__BQ713 {
   cursor: pointer;
@@ -17,7 +15,7 @@
   color: #005ef6;
 }
 
-.follow_unfollow{
+.follow_unfollow {
   width: 35px;
   cursor: pointer;
   /* height: 25px; */
@@ -30,8 +28,8 @@
   }
 }
 
-select{
-  background-color: #1D1D1F;
+select {
+  background-color: #1d1d1f;
 }
 
 /*LOGO*/
@@ -43,7 +41,7 @@ select{
   text-decoration: none;
 }
 
-.logo:hover{
+.logo:hover {
   text-decoration: none;
   color: #fff;
 }
@@ -1203,7 +1201,7 @@ input {
   color: white;
   background-color: #1d1d1f;
   border: 1px solid white;
-  padding: 0.5rem 0.8rem;
+  padding: 5px 12px;
   border-radius: 5px;
   font-weight: 500;
   transition: 0.35s;
@@ -1211,7 +1209,6 @@ input {
 .signin-btn:hover {
   background-color: white;
   color: black;
-  letter-spacing: 0.5px;
 }
 .signin-btn:active {
   background-color: rgb(198, 188, 188);
@@ -1220,27 +1217,22 @@ input {
   color: white;
   background-color: #7869e6;
   border: 1px solid #7869e6;
-  padding: 0.5rem 0.8rem;
+  padding: 5px 12px;
   border-radius: 5px;
   font-weight: 500;
   transition: 0.35s;
 }
 .signup-btn:hover {
   background-color: #604fe7;
-  letter-spacing: 0.5px;
+
 }
 .signup-btn:active {
   background-color: #4635ca;
 }
 
-.you-might-like-apps-container {
-  background-color: none;
-  border-left: 1px solid rgb(188, 185, 185);
-  padding-left: 1rem;
-  margin-bottom: 10vh;
-}
 
-.filter-icon{
+
+.filter-icon {
   cursor: pointer;
 }
 
@@ -1250,10 +1242,11 @@ input {
   top: 0;
   z-index: 100;
   width: 100%;
-  background-color: #1d1d1f;
+  background-color: #0D0C12;
   /* if we want to remove position fixed ==> we should remove margin-top to the body */
   /* ****** */
-  box-shadow: 0px 1px 8px rgba(255, 255, 255, 0.5);
+  /* box-shadow: 0px 1px 8px rgba(255, 255, 255, 0.5); */
+  border-bottom: 1px solid rgb(214, 214, 214);
   padding: 0.3rem 0.5rem;
 }
 

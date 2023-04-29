@@ -1,41 +1,50 @@
 //TODO : STRUCTURING THE PROFILE, AND SPLICING IT INTO TINY COMPONENTS
-
-//Imports
 import { onAuthStateChanged } from "firebase/auth";
 import "firebase/storage";
 import "firebase/firestore";
 import { storage } from "../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
 import React, { useEffect, useState, useRef, useReducer } from "react";
 import { auth, db } from "../config/firebase";
-import { Bio } from "../components";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  collection,
-  doc,
-  getDocs,
-  limit,
-  onSnapshot,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import {collection,doc,getDocs, limit,onSnapshot,query,updateDoc,where,} from "firebase/firestore";
 import Modal from "react-modal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-
-import "../assets/styles/profile/profile.css";
-
-import { LikeMethods } from "../lib";
 import Toolitem from "../components/Tools/Toolitem";
 
-const Profile = () => {
-  /*****************************Importing Ready Methods START******************************* */
-  // referencing our methods
-  const LikeMethodsRef = useRef(null);
+import "../assets/styles/profile/profile.css";
+import "../assets/styles/Modal/modal.css";
 
-  const { currentUser } = useContext(AuthContext);
+
+export const ModalcustomStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "rgba(0,0,0,0.8)",
+    color: "#fff",
+    borderRadius: "34px",
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"space-between",
+    flexWrap:"wrap",
+  },
+  overlay:{
+    backgroundColor:"rgba(0,0,0,0.8)",
+  }
+};
+
+const Profile = () => {
+
+  const { currentUser, currentUserData } = useContext(AuthContext);
+
+  useEffect(()=>{
+    console.log(currentUserData)},[])
+
 
   const [authUser, setAuthUser] = useState(null);
   const [addBio, setAddBio] = useState(false);
@@ -44,7 +53,6 @@ const Profile = () => {
   const [updateInterests, setUpdateInterests] = useState(false);
 
   const [LikedTools, setLikedTools] = useState([]);
-  const [interests, setIntersts] = useState(null);
   const [bio, setBio] = useState("");
   const [categories, setCategories] = useState();
   const [checkedInterests, setcheckedInterests] = useState([]);
@@ -55,15 +63,7 @@ const Profile = () => {
   const [editProfileClicked, setEditProfileClicked] = useState(false);
 
   const navigate = useNavigate();
-
-  const [userData, setUserData] = useState({
-    uid: "",
-    photo: "",
-    username: "",
-    bio: "",
-    list: [],
-    interests: [],
-  });
+  const [userData, setUserData] = useState({uid: "",photo: "",username: "",bio: "",list: [],interests: [],});
 
   //Handling Interests with Checkbox
   const handleInterestCheck = (event) => {
@@ -82,19 +82,6 @@ const Profile = () => {
   };
   //_______________________________Modal Configs_____________________________________________
   //Modal Styles
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "rgba(0,0,0,0.8)",
-      color: "#fff",
-      borderRadius: "40px",
-    },
-  };
 
   Modal.setAppElement("#root");
   let subtitle;
@@ -102,9 +89,6 @@ const Profile = () => {
 
   function openModal() {
     setIsOpen(true);
-  }
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
   }
   function closeModal() {
     setIsOpen(false);
@@ -198,11 +182,8 @@ const Profile = () => {
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data());
         LikedOnes.push(doc.data());
         setLikedTools(LikedOnes);
-        // console.log(LikedTools);
       });
     } catch (error) {
       console.log(error);
@@ -211,30 +192,18 @@ const Profile = () => {
 
   useEffect(() => {
     LoadLikedTools();
+
+    return () =>LoadLikedTools();
   }, [reducerValue]);
 
-  useEffect(() => {
-    LoadLikedTools();
-  });
-
+ 
   //Verifying Sign in and loading users infos on load
   useEffect(() => {
     LoadLikedTools();
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
-
-        const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
-          setUserData({
-            uid: doc.data().uid,
-            photo: doc.data().photo,
-            username: doc.data().username,
-            bio: doc.data().bio,
-            interests: doc.data().interests,
-            list: doc.data().list,
-          });
-        });
-        userData.interests.length > 0
+        currentUserData.interests.length > 0
           ? setAddInterests(false)
           : setAddInterests(false);
       } else {
@@ -248,14 +217,10 @@ const Profile = () => {
     onSnapshot(dbRef, (docsSnap) => {
       const CategoriesArray = [];
       docsSnap.forEach((doc) => {
-        // console.log(doc.data());
         CategoriesArray.push(doc.data());
       });
-      // console.log(CategoriesArray);
       setCategories(CategoriesArray);
     });
-    // (false)
-    // setEditProfileSelected(false)
 
     return listen();
   }, []);
@@ -272,39 +237,26 @@ const Profile = () => {
     }
   };
 
-  const handleUnlike = (toolID) => {
-    LikeMethodsRef.current.Unlike(toolID);
-    forceRender();
-    if (LikedTools.length === 1) setLikedTools([]);
-    // window.location.reload()
-  };
-
   return (
-    <div>
-      <LikeMethods ref={LikeMethodsRef} />
+    <div className="pt-[6rem]">
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
-        <main className="layoutMain">
+        <main className="layoutMain ">
           {/* Profile Info Component */}
-          <div class="w-widescreen-5 mb-[4rem] profile-info-container">
+          <div class="w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 rounded-xl p-10">
             <div class="row">
               <div class="col-md-2">
-                {/* <img
-                src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
-                alt="Profile Image"
-                class="rounded-full max-h-60 max-w-60 object-cover object-center md:h-auto md:w-auto"
-              /> */}
                 <div class="w-full">
                   <img
-                    src={userData.photo}
+                    src={currentUserData.photo}
                     class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 border-gray-300 rounded-full"
-                    alt="Profile Image"
+                    alt="pfp"
                   />
                 </div>
               </div>
               <div class="col-md-7">
                 <div class="row">
                   <div class="col-md-3">
-                    <p>{userData.username}</p>
+                    <p>{currentUserData.username}</p>
                   </div>
                   <div class="col">
                     <button
@@ -319,12 +271,12 @@ const Profile = () => {
                 <div className="bio-interests-texts">
                   <div class="row">
                     <div class="col">
-                      <p>{userData.bio}</p>
+                      <p>{currentUserData.bio}</p>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      {userData.interests.map((interest) => {
+                      {currentUserData.interests.map((interest) => {
                         return (
                           <p className="text-[12] d-inline-block">
                             {interest}&nbsp;&nbsp;
@@ -359,7 +311,7 @@ const Profile = () => {
                       <p class="font-bold text-lg leading-tight mb-3">Bio</p>
                       <input
                         class="h-7 p-2 w-full text-sm leading-tight text-black border-gray-400 border rounded-lg"
-                        placeholder={userData.bio}
+                        placeholder={currentUserData.bio}
                         onChange={(e) => setBio(e.target.value)}
                         type="text"
                       />
@@ -381,13 +333,12 @@ const Profile = () => {
                   <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
                     <div class="mb-4 md:mb-0">
                       <p class="font-bold text-lg leading-tight mb-3">Bio</p>
-                      <p class="text-sm">{userData.bio}</p>
+                      <p class="text-sm">{currentUserData.bio}</p>
                     </div>
                     <div>
                       <button
                         onClick={() => setUpdateBio(true)}
-                        class="edit-btn"
-                      >
+                        class="edit-btn">
                         Edit
                       </button>
                     </div>
@@ -458,14 +409,15 @@ const Profile = () => {
           {/* My List Container */}
           <div className="mylist-container" style={{ marginTop: "4rem" }}>
             <h2 className="font-bold mb-[2rem]">My List</h2>
-            <dir
+            <div
               className="list-tools"
               style={{ padding: "0 0 0 3rem", borderLeft: "1px solid white" }}
             >
-              {/* <Toolitem />
-              <Toolitem />
-              <Toolitem /> */}
-            </dir>
+           {LikedTools?.map((tool)=>(
+            <Toolitem toolData={tool} forceRender={forceRender}/>
+           ))
+}
+            </div>
           </div>
           {/* END My List Container */}
         </main>
@@ -475,19 +427,17 @@ const Profile = () => {
       {!editProfileClicked ? (
         <div>
           <Modal
-            isOpen={modalIsOpen}
-            onAfterOpen={afterOpenModal}
+            isOpen={modalIsOpen} 
             onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
+            style={ModalcustomStyles}
+            contentLabel="Example Modal">
             <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
-              Please choose your interests :{" "}
+              Please choose your interests :
             </h2>
             <span id="close-button" onClick={closeModal}>
               X
             </span>
-            <div className="flex inner-modal">
+            <div className="modal-flex inner-modal">
               {categories?.map((categorie) => (
                 <div className="flex interests-wrapper">
                   <span className="Interest">
@@ -508,7 +458,7 @@ const Profile = () => {
               ))}
             </div>
             <span
-              className="profile-btn-outlined-3"
+              className="save-btn"
               onClick={handleInterestsChange}
             >
               Save
@@ -519,29 +469,22 @@ const Profile = () => {
         <div className="form-container">
           <Modal
             isOpen={modalIsOpen}
-            onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
+            style={ModalcustomStyles}
+            contentLabel="Example Modal">
             <label className="form-label">
               Username:
               <input
                 className="form-input"
-                // placeholder="username"
-                // value={!isUsernameEditing ? userData.username : editedUsername}
                 value={editedUsername}
                 onChange={(e) => {
                   setEditedUsername(e.target.value);
                 }}
               />
             </label>
-            <br />
-            <br />
+            <br /><br />
             <label className="form-label">
               Select a photo:
-              {/* <input className="form-input" type="file" accept="image/*" onChange={(event)=>setProfilePicture(event.target.files[0])} />
-            <button onClick={uploadImage}>Upload</button> */}
               <input
                 className="form-input"
                 type="file"
