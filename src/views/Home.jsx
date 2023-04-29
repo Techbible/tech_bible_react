@@ -73,7 +73,7 @@ const Home = () => {
       const q = query(
         collection(db, "Tools"),
         // where("Likes", ">=", 50),
-        limit(3)
+        limit(10)
       );
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {

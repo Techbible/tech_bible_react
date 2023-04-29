@@ -33,6 +33,7 @@ function AddTool() {
   const [Pricing, setPricing] = useState("");
   const [Category, setCategory] = useState("");
   const [img, setImg] = useState(null);
+  const [ImgURL,setImgURL] = useState();
 
   const [categories, setCategories] = useState();
   const [isAdmin, setIsAdmin] = useState();
@@ -96,6 +97,7 @@ function AddTool() {
         }
       );
     } else {
+
       const randomId = uuid();
       await setDoc(doc(db, "Tools", randomId), {
         id : randomId,
@@ -106,10 +108,9 @@ function AddTool() {
         CategoryID: Category,
         Likes: 0,
         Comments: 0,
-        Icon: "https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png",
+        Icon: ImgURL?ImgURL:"https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png",
       })
       navigate("/tools")
-
     }
   };
 
@@ -120,16 +121,27 @@ function AddTool() {
           <div className="form">
             <h1>Add a Tool</h1>
             <input type="file" onChange={(e) => setImg(e.target.files[0])} />
+            <br/><br/>
+            <small>OR</small>
+            <br/>
+            <input type="text" placeholder="Embed image URL" onChange={(e) => setImgURL(e.target.value)} />
             <input
               type="text"
               onChange={(e) => setName(e.target.value)}
               placeholder="Tool Name (Canvas, Adobe XD..)"
             />
-            <input
-              type="text"
-              onChange={(e) => setPricing(e.target.value)}
-              placeholder="Pricing"
-            />
+            <select
+            className="combo-box"
+            onChange={(e) => setPricing(e.target.value)}
+          >
+            <option selected disabled>
+              Pricing
+            </option>
+            <option value="Freemium">Freemium</option>
+            <option value="Free">Free</option>
+            <option value="Paid">Paid</option>
+          </select>
+
             <input
               type="text"
               onChange={(e) => setURL(e.target.value)}

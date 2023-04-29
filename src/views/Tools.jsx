@@ -92,7 +92,7 @@ function Tools() {
                       </div>
 
                       <div className="card-body">
-                        <h3 className="card-title">{tool.Name}</h3>
+                        <Link to="/"><h3 className="card-title">{tool.Name}</h3></Link>
                         <div className="text-left my-2">
                           <div className="sub-cat text-truncate">
                             <span className="badge rounded-pill bg-category text-uppercase">
