@@ -3,7 +3,7 @@
 
     .
     ├── public/                 #index.html, global assets, favicon..
-    ├── src/                    # Source files (pages, components, app provider(s),components assets)
+    ├── src/                    # Source files (pages, components, app provider(s),components, assets)
     ├── .env                    #the app's env variables
     └── README.md
 <br>

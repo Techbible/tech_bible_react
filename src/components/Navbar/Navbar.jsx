@@ -14,10 +14,6 @@ function Navbar() {
     pfp: "",
     username: "",
   });
- 
-
-  
-
 
   const [isMenuClicked, setIsMenuClicked] = useState(false);
 

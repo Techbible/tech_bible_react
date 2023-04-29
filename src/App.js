@@ -77,6 +77,7 @@ function App() {
         <Route path="/tools" element={<Tools />} />
         
       </Routes>
+      
     </div>
   );
 }
