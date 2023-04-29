@@ -2,21 +2,18 @@
 import React, { useState } from 'react';
 import "../assets/styles/community/community.css";
 import "../assets/styles/home/global.css";
-import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Comment from '../components/Community/Comment';
-import Toolitem from "../components/Tools/Toolitem";
-
-import YouMustLikeApp from "../components/Filtering-container/YouMightLikeApp";
-import YouMightLikeApp from "../components/Filtering-container/YouMightLikeApp";
-import AppOfTheDay from "../components/Filtering-container/AppOfTheDay";
-import { FilteringContext } from "../context/FilteringContext";
 import Topic from '../components/Community/Topic';
 import Discussion from '../components/Community/Discussion';
 
 
 
 function Community() {
-    
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
   
     return (
         <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer ">
@@ -25,38 +22,108 @@ function Community() {
         <div class="flex flex-col mb-12 p-5 text-white">
   <p class="text-lg font-bold mb-2">Discussions</p>
   <p class="text-base">Ask questions, find support, and connect with the community</p> 
-  <button class="bg-white text-black py-2  rounded w-25 mt-2 transition delay-150 hover:font-bold hover:delay-200">New Discussion</button>
+  
 
 </div>
           <div className="flex direction-column">
             
 
             <div className="flex direction-row">
-                 <p className='mr-3 hover:cursor-pointer'>New </p>
-                 <p className='mr-3 hover:cursor-pointer'>Popular </p>
+                 <p className='mr-3 hover:cursor-pointer hover:font-bold'>New </p>
+                 <p className='mr-3 hover:cursor-pointer hover:font-bold'>Popular </p>
+                 
+                 <div className="flex direction-row">
+
+                 <button
+        id="dropdownDefaultButton"
+        data-dropdown-toggle="dropdown"
+        onClick={toggleDropdown}
+        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-0.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button"
+      >
+        Filter Date
+        <svg
+          className={`w-4 h-4 ml-2 transition-transform ${
+            isOpen ? 'rotate-180' : ''
+          }`}
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+      {isOpen && (
+        <div
+          id="dropdown"
+          className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+        >
+          <ul
+            className="py-2 text-sm text-gray-700 dark:text-gray-200"
+            aria-labelledby="dropdownDefaultButton"
+          >
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Now
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Week
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Month
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Year
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                All
+              </a>
+            </li>
+          </ul>
+          
+        </div>
+        
+      )}
 
 
-                 <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Filter Date<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
 
-                        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                              <li>
-                             <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                             </li>
-                             <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                            </li>
-                            <li>
-                           <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                           </li>
-                           <li>
-                           <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                           </li>
-                        </ul>
-                      </div>
+                 </div>
+                 
 
                 
-                 <form className='ml-20'>   
+
+                
+                 <form className='ml-3 mx-auto max-w-lg'>   
                       <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                      <div class="relative">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -67,14 +134,6 @@ function Community() {
                        
                      </div>
                 </form>
-
-                
-                    
-
-                
-                 
-
-
             </div>
               
               <div data-test="homepage-section-0">
@@ -103,10 +162,7 @@ function Community() {
                 <Discussion/>
                 <Discussion/>
                 <Discussion/>
-
-                
-               
-        </aside>
+                 </aside>
         </aside>
         
       </div>
