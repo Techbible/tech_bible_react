@@ -6,7 +6,10 @@ import Tools from "./Tools";
 import UserList from "./profile/UserList";
 import ToolDetails from "./ToolDetails";
 import Community from "./Community";
+
+import DiscussionReply from "./DiscussionReply";
 import LikedTools from "./profile/LikedTools";
+
 
 export {
     Home,
@@ -17,5 +20,7 @@ export {
     UserList,
     ToolDetails,
     Community,
-    LikedTools
+    DiscussionReply,
+    LikedTools,
+
 }

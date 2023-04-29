@@ -14,10 +14,20 @@ function Navbar() {
     pfp: "",
     username: "",
   });
+ 
+
+  
+
+
+  const [isMenuClicked, setIsMenuClicked] = useState(false);
 
   const { currentUserData, isAdmin } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  const handleIsMenuClicked = () => {
+    setIsMenuClicked(!isMenuClicked);
+  };
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -39,15 +49,20 @@ function Navbar() {
       })
       .catch((error) => console.log(error));
   };
-  return (
 
+  return (
     <header aria-label="Site Header" className="navbar-header">
       {/* <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8"> */}
       <div className="lg:px-[94px] px-[20px]">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12 lg:ml-[30px]">
             <Link to="/">
-              <img width={"51px"} height={"52px"} src={`${process.env.PUBLIC_URL}/Tech_Bible_Logo.png`} alt="" /> 
+              <img
+                width={"51px"}
+                height={"52px"}
+                src={`${process.env.PUBLIC_URL}/Tech_Bible_Logo.png`}
+                alt=""
+              />
             </Link>
           </div>
 
@@ -150,8 +165,31 @@ function Navbar() {
             </div>
           )}
 
+<<<<<<< HEAD
+<div className="block md:hidden">
+      <button
+        className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+        onClick={handleButtonClick}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      
+    </div>
+=======
           <div className="block md:hidden">
-            <button className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75">
+            <button
+              onClick={handleIsMenuClicked}
+              className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -167,7 +205,71 @@ function Navbar() {
                 />
               </svg>
             </button>
+            {/* ********** */}
+            {isMenuClicked ? (
+              <div
+                class="absolute right-0 mt-[20px] z-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+              >
+                <div class="py-1" role="none">
+                  <a
+                    href="#"
+                    class="text-gray-700 block px-4 py-2 text-sm"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                  >
+                    Submit your tool
+                  </a>
+                  <a
+                    href="#"
+                    class="text-gray-700 block px-4 py-2 text-sm"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-1"
+                  >
+                    Resources
+                  </a>
+                  <a
+                    href="#"
+                    class="text-gray-700 block px-4 py-2 text-sm"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-2"
+                  >
+                    Community
+                  </a>
+                  <form method="POST" action="#" role="none">
+                    <button
+                      type="submit"
+                      class="text-gray-700 block w-full px-4 py-2 text-left text-sm"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-3"
+                    >
+                      Sign in
+                    </button>
+                    <button
+                      type="submit"
+                      class="text-gray-700 block w-full px-4 py-2 text-left text-sm"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-3"
+                    >
+                      Sign out
+                    </button>
+                  </form>
+                </div>
+              </div>
+            ) : (
+              <div></div>
+            )}
+            {/* ********** */}
           </div>
+>>>>>>> 4f90f8a92fc4a16efccbd5002a62f5feed65a573
         </div>
       </div>
     </header>

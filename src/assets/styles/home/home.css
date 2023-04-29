@@ -1230,12 +1230,7 @@ input {
   background-color: #4635ca;
 }
 
-.you-might-like-apps-container {
-  background-color: none;
-  border-left: 1px solid rgb(188, 185, 185);
-  padding-left: 1rem;
-  margin-bottom: 10vh;
-}
+
 
 .filter-icon {
   cursor: pointer;

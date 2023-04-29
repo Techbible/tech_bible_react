@@ -10,7 +10,10 @@ import {
   UserList,
   ToolDetails,
   Community,
+  DiscussionReply,
+
   LikedTools
+
 } from "./views";
 import { AddTool } from "./admin";
 import { useContext } from "react";
@@ -40,8 +43,11 @@ function App() {
         <Route path="/profile" element=<Profile /> />
         <Route path="/list" element=<UserList /> />
         <Route path="/community" element=<Community /> />
-        <Route path="/newtooldetails/:id" element=<NewToolDetails /> />
+        <Route path="/newtooldetails" element=<NewToolDetails /> />
+        <Route path="/DiscussionReply" element=<DiscussionReply/> />
+
         <Route path="/liked-tools" element=<LikedTools /> />
+
 
         <Route
           path="/tools"
@@ -69,6 +75,7 @@ function App() {
         />
         <Route path="/addTool" element=<AddTool /> />
         <Route path="/tools" element={<Tools />} />
+        
       </Routes>
     </div>
   );
