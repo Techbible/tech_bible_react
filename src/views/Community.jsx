@@ -195,6 +195,7 @@ function Community() {
         </aside>
       </aside>
     </div>
+    </div>
   );
 }
 
