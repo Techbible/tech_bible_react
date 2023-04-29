@@ -112,13 +112,15 @@ const Profile = () => {
   //_______________________________Inserting Changes_____________________________________________
   const handleInterestsChange = async () => {
     try {
-      const UserRef = doc(db, "Users", userData.uid);
+      const UserRef = doc(db, "Users", currentUserData.uid);
       const data = { interests: checkedInterests };
       await updateDoc(UserRef, data)
         .then((UserRef) => {
           console.log(
             "A New Document Field has been added to an existing document"
           );
+          closeModal();
+
         })
         .catch((error) => {
           console.log(error);
@@ -132,7 +134,7 @@ const Profile = () => {
 
   //Edit interests
   const editInterests = () => {
-    let userInterests = userData.interests;
+    let userInterests = currentUserData.interests;
     setcheckedInterests(userInterests);
     console.log("User Interests " + checkedInterests);
     setEditProfileClicked(false);
@@ -142,13 +144,13 @@ const Profile = () => {
   //Edit profile
   const openEditProfileModal = () => {
     setEditProfileClicked(true);
-    setEditedUsername(userData.username);
+    setEditedUsername(currentUserData.username);
     openModal();
   };
 
   /**************** Editing username and Profile PIC *****************/
   const [profilePicture, setProfilePicture] = useState(null);
-  const [editedUsername, setEditedUsername] = useState(userData.username);
+  const [editedUsername, setEditedUsername] = useState(currentUserData?.username);
 
   const uploadImage = () => {
     if (profilePicture === null) return;
@@ -342,7 +344,6 @@ const Profile = () => {
                     </div>
                   </div>
                 ) : (
-                  // userData.bio
                   <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
                     <div class="mb-4 md:mb-0">
                       <p class="font-bold text-lg leading-tight mb-3">Bio</p>
@@ -401,7 +402,7 @@ const Profile = () => {
             <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]">
               <div class="mb-4 md:mb-0">
                 <p class="font-bold text-lg leading-tight mb-3">Interests</p>
-                {userData.interests.map((i, index) => (
+                {currentUserData.interests.map((i, index) => (
                   <p className="text-sm leading-tight d-inline" key={index}>
                     {i},&nbsp;
                   </p>

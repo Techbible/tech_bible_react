@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import YouMightLikeItem from "./YouMightLikeItem";
 
@@ -14,18 +14,36 @@ const YouMightLikeApp = () => {
   const LoadingMightLike = async () => {
     const ToolsRef = collection(db, "Tools");
     const tools = [];
-    const q = query(ToolsRef, where("category", "in", currentUser?.interests));
+    const q = query(
+      ToolsRef,
+      where("category", "in", currentUserData?.interests),
+      limit(3)
+    );
 
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        Tools.push(doc.data());
-        setTools(Tools);
+        tools.push(doc.data());
+        setTools(tools);
+        console.log("YOU MIGHT LIKE", Tools);
       });
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    let isMounted = true;
+      if (isMounted) {
+        LoadingMightLike();
+      }
+      console.log('YOU MIGHT LIKE')
+
+    return () => {
+      isMounted = false;
+
+    }; 
+  }, []);
 
   return (
     <div>
