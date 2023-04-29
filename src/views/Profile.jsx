@@ -7,7 +7,16 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import React, { useEffect, useState, useRef, useReducer } from "react";
 import { auth, db } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
-import {collection,doc,getDocs, limit,onSnapshot,query,updateDoc,where,} from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  limit,
+  onSnapshot,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import Modal from "react-modal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -15,7 +24,6 @@ import Toolitem from "../components/Tools/Toolitem";
 
 import "../assets/styles/profile/profile.css";
 import "../assets/styles/Modal/modal.css";
-
 
 export const ModalcustomStyles = {
   content: {
@@ -28,23 +36,22 @@ export const ModalcustomStyles = {
     backgroundColor: "rgba(0,0,0,0.8)",
     color: "#fff",
     borderRadius: "34px",
-    display:"flex",
-    flexDirection:"column",
-    justifyContent:"space-between",
-    flexWrap:"wrap",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
   },
-  overlay:{
-    backgroundColor:"rgba(0,0,0,0.8)",
-  }
+  overlay: {
+    backgroundColor: "rgba(0,0,0,0.8)",
+  },
 };
 
 const Profile = () => {
-
   const { currentUser, currentUserData } = useContext(AuthContext);
 
-  useEffect(()=>{
-    console.log(currentUserData)},[])
-
+  useEffect(() => {
+    console.log(currentUserData);
+  }, []);
 
   const [authUser, setAuthUser] = useState(null);
   const [addBio, setAddBio] = useState(false);
@@ -63,7 +70,14 @@ const Profile = () => {
   const [editProfileClicked, setEditProfileClicked] = useState(false);
 
   const navigate = useNavigate();
-  const [userData, setUserData] = useState({uid: "",photo: "",username: "",bio: "",list: [],interests: [],});
+  const [userData, setUserData] = useState({
+    uid: "",
+    photo: "",
+    username: "",
+    bio: "",
+    list: [],
+    interests: [],
+  });
 
   //Handling Interests with Checkbox
   const handleInterestCheck = (event) => {
@@ -193,10 +207,9 @@ const Profile = () => {
   useEffect(() => {
     LoadLikedTools();
 
-    return () =>LoadLikedTools();
+    return () => LoadLikedTools();
   }, [reducerValue]);
 
- 
   //Verifying Sign in and loading users infos on load
   useEffect(() => {
     LoadLikedTools();
@@ -228,7 +241,7 @@ const Profile = () => {
   //To add/Update a Bio
   const UpdatingBio = async () => {
     try {
-      const UserRef = doc(db, "Users", userData.uid);
+      const UserRef = doc(db, "Users", currentUserData.uid);
       await updateDoc(UserRef, { bio: bio });
       setAddBio(false);
       setUpdateBio(false);
@@ -303,7 +316,7 @@ const Profile = () => {
 
           <div style={{ paddingLeft: "3rem", borderLeft: "1px solid white" }}>
             {/* BIO components */}
-            {userData.bio ? (
+            {currentUserData.bio ? (
               <div>
                 {updateBio ? (
                   <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
@@ -338,7 +351,8 @@ const Profile = () => {
                     <div>
                       <button
                         onClick={() => setUpdateBio(true)}
-                        class="edit-btn">
+                        class="edit-btn"
+                      >
                         Edit
                       </button>
                     </div>
@@ -398,9 +412,11 @@ const Profile = () => {
                   +Add
                 </button>
               ) : (
-                <button onClick={editInterests} class="edit-btn">
-                  Edit
-                </button>
+                <div>
+                  <button onClick={editInterests} class="edit-btn">
+                    Edit
+                  </button>
+                </div>
               )}
             </div>
             {/* End Of Interests components */}
@@ -413,10 +429,9 @@ const Profile = () => {
               className="list-tools"
               style={{ padding: "0 0 0 3rem", borderLeft: "1px solid white" }}
             >
-           {LikedTools?.map((tool)=>(
-            <Toolitem toolData={tool} forceRender={forceRender}/>
-           ))
-}
+              {LikedTools?.map((tool) => (
+                <Toolitem toolData={tool} forceRender={forceRender} />
+              ))}
             </div>
           </div>
           {/* END My List Container */}
@@ -427,10 +442,11 @@ const Profile = () => {
       {!editProfileClicked ? (
         <div>
           <Modal
-            isOpen={modalIsOpen} 
+            isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={ModalcustomStyles}
-            contentLabel="Example Modal">
+            contentLabel="Example Modal"
+          >
             <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
               Please choose your interests :
             </h2>
@@ -457,10 +473,7 @@ const Profile = () => {
                 </div>
               ))}
             </div>
-            <span
-              className="save-btn"
-              onClick={handleInterestsChange}
-            >
+            <span className="save-btn" onClick={handleInterestsChange}>
               Save
             </span>
           </Modal>
@@ -471,7 +484,8 @@ const Profile = () => {
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={ModalcustomStyles}
-            contentLabel="Example Modal">
+            contentLabel="Example Modal"
+          >
             <label className="form-label">
               Username:
               <input
@@ -482,7 +496,8 @@ const Profile = () => {
                 }}
               />
             </label>
-            <br /><br />
+            <br />
+            <br />
             <label className="form-label">
               Select a photo:
               <input

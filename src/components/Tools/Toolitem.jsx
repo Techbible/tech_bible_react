@@ -64,7 +64,7 @@ const Toolitem = ({ toolData, forceRender }) => {
             </a>
           </div>
           {/* <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2"> */}
-          <div className="color-white text-[12px] ">
+          <div className="text-gray-300 text-[12px] ">
             <span className="styles_tagline__j29pO fontWeight-500">
               {toolData.Description}
             </span>
