@@ -26,7 +26,9 @@ const ToolInfo = ({ toolData }) => {
           <div className="flex direction-column flex-1 mt-2">
             <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-600 mb-3 noOfLines-2 styles_format__w0VVk">
               {toolData?.Name}
-              <i class="ml-3 text-white hover:text-gray-600 transition-colors duration-300 fas fa-share"></i>
+             <a className="w-[20px] h-[20px]" href={toolData?.URL} rel="noreferrer" target="_blank">
+              <i class="ml-3 text-sm text-white hover:text-gray-600 transition-colors duration-300 fas fa-share"></i>
+              </a>
               <a
                 href="/r/p/390145"
                 rel="noopener"

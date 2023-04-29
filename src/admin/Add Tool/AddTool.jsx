@@ -130,7 +130,7 @@ function AddTool() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Tool Name (Canvas, Adobe XD..)"
             />
-            <select
+          <select
             className="combo-box"
             onChange={(e) => setPricing(e.target.value)}
           >
@@ -158,7 +158,7 @@ function AddTool() {
             >
               <option>Select a Category</option>
               {categories?.map((c,index) => (
-                <option value={c.id} key={index}>{c.Category}</option>
+                <option value={c.Category} key={index}>{c.Category}</option>
               ))}
             </select>
             <textarea

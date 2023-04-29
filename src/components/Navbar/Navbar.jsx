@@ -152,7 +152,7 @@ function Navbar() {
                   <div className="username">{currentUserData.username}</div>
                 </div>
               </Link>
-              <span className="signout" onClick={UserSignOut}>
+              <span className="signout cursor-pointer" onClick={UserSignOut}>
                 <img
                   src={`${process.env.PUBLIC_URL}/assets/logout.png`}
                   alt="sign out"
