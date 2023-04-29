@@ -181,67 +181,64 @@ function Navbar() {
               </svg>
             </button>
             {/* ********** */}
-            {isMenuClicked ? (
-              <div
-                class="absolute right-0 mt-[20px] z-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="menu-button"
-                tabindex="-1"
-              >
-                <div class="py-1" role="none">
-                  <a
-                    href="#"
-                    class="text-gray-700 block px-4 py-2 text-sm"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-0"
-                  >
+            {/* isMenuClicked */}
+
+            <div
+              style={
+                isMenuClicked
+                  ? {
+                      display: "block",
+                      pointerEvents: "none",
+                      transition:
+                        "transform ease-out .3ms, opacity ease-out .3s",
+                      transform: "scale(1)",
+                      opacity: 0,
+                    }
+                  : {
+                      display: "hidden",
+                      transition: "transform ease-in .3s, opacity ease-in .3s",
+                      transform: "scale(1)",
+                      opacity: 1,
+                    }
+              }
+              className="absolute right-0 mt-[20px] z-10 w-56 origin-top-right"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+              tabindex="-1"
+            >
+              <div class="py-1 bg-black" role="none">
+                <Link to="/addTool">
+                  <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
                     Submit your tool
-                  </a>
-                  <a
-                    href="#"
-                    class="text-gray-700 block px-4 py-2 text-sm"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-1"
-                  >
+                  </div>
+                </Link>
+                <div className="border-[1px] text-white "></div>
+                <Link to="/">
+                  <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
                     Resources
-                  </a>
-                  <a
-                    href="#"
-                    class="text-gray-700 block px-4 py-2 text-sm"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-2"
-                  >
-                    Community
-                  </a>
-                  <form method="POST" action="#" role="none">
-                    <button
-                      type="submit"
-                      class="text-gray-700 block w-full px-4 py-2 text-left text-sm"
-                      role="menuitem"
-                      tabindex="-1"
-                      id="menu-item-3"
-                    >
-                      Sign in
-                    </button>
-                    <button
-                      type="submit"
-                      class="text-gray-700 block w-full px-4 py-2 text-left text-sm"
-                      role="menuitem"
-                      tabindex="-1"
-                      id="menu-item-3"
-                    >
-                      Sign out
-                    </button>
-                  </form>
-                </div>
+                  </div>
+                </Link>
+                <div className="border-[1px] text-white "></div>
+                <Link to="/community">
+                  <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
+                  Community
+                  </div>
+                </Link>
+                <div className="border-[1px] text-white "></div>
+                <Link to="/signin">
+                  <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
+                    Sign in
+                  </div>
+                </Link>
+                <div className="border-[1px] text-white "></div>
+                <Link to="/signout">
+                  <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
+                    Sign out
+                  </div>
+                </Link>
               </div>
-            ) : (
-              <div></div>
-            )}
+            </div>
             {/* ********** */}
           </div>
         </div>
