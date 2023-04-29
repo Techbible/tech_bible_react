@@ -14,10 +14,6 @@ function Navbar() {
     pfp: "",
     username: "",
   });
- 
-
-  
-
 
   const [isMenuClicked, setIsMenuClicked] = useState(false);
 
@@ -164,27 +160,6 @@ function Navbar() {
               </span>
             </div>
           )}
-
-<<<<<<< HEAD
-<div className="block md:hidden">
-      <button
-        className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
-        onClick={handleButtonClick}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-      
-    </div>
-=======
           <div className="block md:hidden">
             <button
               onClick={handleIsMenuClicked}
@@ -269,7 +244,6 @@ function Navbar() {
             )}
             {/* ********** */}
           </div>
->>>>>>> 4f90f8a92fc4a16efccbd5002a62f5feed65a573
         </div>
       </div>
     </header>
