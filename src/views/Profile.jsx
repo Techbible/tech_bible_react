@@ -49,9 +49,6 @@ export const ModalcustomStyles = {
 const Profile = () => {
   const { currentUser, currentUserData } = useContext(AuthContext);
 
-  useEffect(() => {
-    console.log(currentUserData);
-  }, []);
 
   const [authUser, setAuthUser] = useState(null);
   const [addBio, setAddBio] = useState(false);
@@ -70,14 +67,6 @@ const Profile = () => {
   const [editProfileClicked, setEditProfileClicked] = useState(false);
 
   const navigate = useNavigate();
-  const [userData, setUserData] = useState({
-    uid: "",
-    photo: "",
-    username: "",
-    bio: "",
-    list: [],
-    interests: [],
-  });
 
   //Handling Interests with Checkbox
   const handleInterestCheck = (event) => {
@@ -291,7 +280,7 @@ const Profile = () => {
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      {currentUserData.interests.map((interest) => {
+                      {currentUserData?.interests?.map((interest) => {
                         return (
                           <p className="text-[12] d-inline-block">
                             {interest}&nbsp;&nbsp;
@@ -402,7 +391,7 @@ const Profile = () => {
             <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]">
               <div class="mb-4 md:mb-0">
                 <p class="font-bold text-lg leading-tight mb-3">Interests</p>
-                {currentUserData.interests.map((i, index) => (
+                {currentUserData?.interests?.map((i, index) => (
                   <p className="text-sm leading-tight d-inline" key={index}>
                     {i},&nbsp;
                   </p>

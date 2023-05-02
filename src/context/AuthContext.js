@@ -6,6 +6,8 @@ import { doc, onSnapshot } from "firebase/firestore";
 export const AuthContext = createContext();
 
 
+
+
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [currentUserData, setCurrentUserData] = useState({});
@@ -26,7 +28,6 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const listen = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        console.log(2, user);
         const userData = await onSnapshot(doc(db, "Users", user.uid), (doc) => {
           setCurrentUserData(doc.data());
           setIsAdmin(doc.data().isAdmin);

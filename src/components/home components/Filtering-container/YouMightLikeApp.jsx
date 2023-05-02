@@ -25,7 +25,7 @@ const YouMightLikeApp = () => {
       querySnapshot.forEach((doc) => {
         tools.push(doc.data());
         setTools(tools);
-        console.log("YOU MIGHT LIKE", Tools);
+        // console.log("YOU MIGHT LIKE", Tools);
       });
     } catch (error) {
       console.log(error);
@@ -36,8 +36,8 @@ const YouMightLikeApp = () => {
     let isMounted = true;
       if (isMounted) {
         LoadingMightLike();
+        console.log('YOU MIGHT LIKE')
       }
-      console.log('YOU MIGHT LIKE')
 
     return () => {
       isMounted = false;
