@@ -19,7 +19,7 @@ import { useContext } from "react";
 import { NewsContextProvider } from "./context/NewsContext";
 import Navbar from "./components/Navbar/Navbar";
 import NewToolDetails from "./views/NewToolDetails";
-import DataParser from "./components/Excel To Firestore/DataParser";
+import DataParser from "./admin/Excel To Firestore/DataParser";
 
 function App() {
   

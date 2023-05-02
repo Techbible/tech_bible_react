@@ -27,15 +27,15 @@ function DataParser() {
     });
   };
 
-//   useEffect(() => {
-//     if (!isAdmin) {
-//       notify("x");
-//       navigate("/");
-//     }
-//     else{
-//         notify("Welcome to the Admin Space");
-//     }
-//   }, []);
+  useEffect(() => {
+    if (!isAdmin) {
+      notify("x");
+      navigate("/");
+    }
+    else{
+        notify("Welcome to the Admin Space");
+    }
+  }, []);
   // State to store parsed data
   const [ParsedData, setParsedData] = useState([]);
 

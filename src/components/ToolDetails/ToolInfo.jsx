@@ -3,7 +3,9 @@ import React from "react";
 const ToolInfo = ({ toolData }) => {
   return (
     <div>
-      <p className="font-bold">Design tools</p>
+      <p className="font-bold">
+      {toolData?.Category}
+      </p>
       <div className="px-mobile-1 px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
         <div
           className="styles_item__Sn_12 flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
@@ -60,7 +62,7 @@ const ToolInfo = ({ toolData }) => {
                 </div>
                 <a className="styles_postTopicLink__wDe_p" href="/topics/art">
                   <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                    {toolData?.category}
+                    {toolData?.Category}
                   </div>
                 </a>
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
