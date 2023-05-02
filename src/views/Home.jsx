@@ -260,8 +260,6 @@ const Home = () => {
                       style={{ display: "flex" }}
                     >
                       <YouMightLikeApp />
-                      <YouMightLikeApp />
-                      <YouMightLikeApp />
                     </div>
                   </div>
                   {/***********END You might also like********/}

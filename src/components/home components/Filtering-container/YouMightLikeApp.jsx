@@ -25,7 +25,7 @@ const YouMightLikeApp = () => {
       querySnapshot.forEach((doc) => {
         tools.push(doc.data());
         setTools(tools);
-        console.log("YOU MIGHT LIKE", Tools);
+        console.log("UU MIGHT LIKE", Tools);
       });
     } catch (error) {
       console.log(error);
@@ -48,7 +48,7 @@ const YouMightLikeApp = () => {
   return (
     <div>
       <div className="flex flex-col sm:flex-row" style={{ display: "flex" }}>
-        <YouMightLikeItem title="" description="" icon="" />
+      {Tools?.map((tool)=>(<YouMightLikeItem title={tool.Name} description={tool.Description} icon={tool.Icon} url={tool.URL} category={tool.category} />))}
       </div>
     </div>
   );
