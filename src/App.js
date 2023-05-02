@@ -22,6 +22,7 @@ import { useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Socials from "./components/Socials/Socials";
 import NewToolDetails from "./views/NewToolDetails";
+import UpdatePassword from "./components/ProfileSettings/UpdatePassword";
 
 function App() {
   
@@ -73,6 +74,16 @@ function App() {
             </NewsContextProvider>
           }
         />
+
+        <Route
+          path="/updatepassword"
+          element={
+            <NewsContextProvider>
+              <UpdatePassword />
+            </NewsContextProvider>
+          }
+        />
+        
         <Route path="/addTool" element=<AddTool /> />
         <Route path="/tools" element={<Tools />} />
         
