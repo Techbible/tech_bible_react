@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function YouMightLikeItem({ title, description, icon, category, }) {
   return (
@@ -7,17 +8,14 @@ function YouMightLikeItem({ title, description, icon, category, }) {
         <img
           src={icon}
           class="rounded-sm h-10 w-10 mb-5"
-          alt="tool"
-        />
-
+          alt="tool"/>
         <h3 class="mt-0.5 font-medium text-white text-[15px] ">{title}</h3>
-        <h class="text-grey-100 text-opacity-20 text-[12px] noOfLines-2">
+        <h4 class="text-grey-100 text-opacity-20 text-[12px] noOfLines-2">
           {description}
-        </h>
-
+        </h4>
         <div class="mt-4 flex-wrap gap-1">
           <span class="whitespace-nowrap rounded-2 bg-white px-3 py-0.5 text-xs text-black fw-700">
-            Visit
+            <Link to="/newtooldetails/:">Visit</Link>
           </span>
         </div>
       </div>

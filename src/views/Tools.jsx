@@ -23,6 +23,7 @@ function Tools() {
       alert('access denied!')
       navigate('/')
     }
+    notify('Welcome to the Admin Space')
 
     //getting all the tools
     const ToolRef = collection(db, "Tools");
@@ -50,6 +51,18 @@ function Tools() {
       progress: undefined,
       theme: "dark",
     });
+  const ErrorNotify = (message) =>
+    toast.success(message, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+
 //delete alert
   const deleteTool = (id) => {
     if(window.confirm('Are you sure that you want to delete this item?')) {
@@ -67,6 +80,8 @@ function Tools() {
     <div className="tools-container">
       <div className="tools-wrapper">
         <div className="tools-section-ngu">
+        <h2 className="mt-10">The total number of tools is : {tools?.length}</h2>
+
           <section id="focus" className="focus-section dark-mode">
             <div className="container-lg py-5 px-5">
               <div className="row sm:row-cols-1 lg:row-cols-md-3  md:row-cols-md-2 g-4 mt-5">

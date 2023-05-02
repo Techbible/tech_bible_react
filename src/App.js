@@ -11,17 +11,15 @@ import {
   ToolDetails,
   Community,
   DiscussionReply,
-
   LikedTools
-
 } from "./views";
+
 import { AddTool } from "./admin";
 import { useContext } from "react";
 import { NewsContextProvider } from "./context/NewsContext";
-import { useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import Socials from "./components/Socials/Socials";
 import NewToolDetails from "./views/NewToolDetails";
+import DataParser from "./components/Excel To Firestore/DataParser";
 
 function App() {
   
@@ -75,6 +73,7 @@ function App() {
         />
         <Route path="/addTool" element=<AddTool /> />
         <Route path="/tools" element={<Tools />} />
+        <Route path="/DataParser" element={<DataParser />} />
         
       </Routes>
       

@@ -270,7 +270,7 @@ const Home = () => {
                   <div>
                     <div>
                       {SearchedTool.map((tool, index) => (
-                        <Toolitem key={index} toolData={tool} />
+                        <Toolitem key={tool.id} toolData={tool} forceRender={forceRender} />
                       ))}
                     </div>
                   </div>
