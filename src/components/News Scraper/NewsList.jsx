@@ -10,7 +10,7 @@ const NewsList = () => {
     const { data } = useContext(NewsContext)
 
 
-    useEffect(()=>{console.log(data)},[])
+    // useEffect(()=>{console.log(data)},[])
     return (
         <div className="container mx-auto bg-[#1D1D1F] text-white my-3">
   <div className="News-title text-center py-8">

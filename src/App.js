@@ -11,21 +11,18 @@ import {
   ToolDetails,
   Community,
   DiscussionReply,
-
-  LikedTools
-
+  LikedTools,
 } from "./views";
+
 import { AddTool } from "./admin";
 import { useContext } from "react";
 import { NewsContextProvider } from "./context/NewsContext";
-import { useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import Socials from "./components/Socials/Socials";
 import NewToolDetails from "./views/NewToolDetails";
 import UpdatePassword from "./components/ProfileSettings/UpdatePassword";
+import DataParser from "./admin/Excel To Firestore/DataParser";
 
 function App() {
-  
   const { currentUser, isAdmin } = useContext(AuthContext);
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
@@ -45,10 +42,9 @@ function App() {
         <Route path="/list" element=<UserList /> />
         <Route path="/community" element=<Community /> />
         <Route path="/newtooldetails/:id" element=<NewToolDetails /> />
-        <Route path="/DiscussionReply" element=<DiscussionReply/> />
+        <Route path="/DiscussionReply" element=<DiscussionReply /> />
 
         <Route path="/liked-tools" element=<LikedTools /> />
-
 
         <Route
           path="/tools"
@@ -83,12 +79,11 @@ function App() {
             </NewsContextProvider>
           }
         />
-        
+
         <Route path="/addTool" element=<AddTool /> />
         <Route path="/tools" element={<Tools />} />
-        
+        <Route path="/DataParser" element={<DataParser />} />
       </Routes>
-      
     </div>
   );
 }
