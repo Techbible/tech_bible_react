@@ -17,10 +17,12 @@ import YouMightLikeApp from "../components/home components/Filtering-container/Y
 import AppOfTheDay from "../components/home components/Filtering-container/AppOfTheDay";
 
 import "../assets/styles/search-container/search-container.css";
-
+import { NewsContext, NewsContextProvider } from "../context/NewsContext";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
+  const { data } = useContext(NewsContext)
+
 
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
@@ -57,20 +59,20 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     });
-    useEffect(() => {
-      const fetchData = async () => {
-        const ToolsArray = [];
-        const q = query(collection(db, "Tools"), limit(10));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          ToolsArray.push(doc.data());
-        });
-        setTopTools(ToolsArray);
-      };
-    
-      const listen = onAuthStateChanged(auth, fetchData);
-      return listen();
-    }, [reducerValue]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const ToolsArray = [];
+      const q = query(collection(db, "Tools"), limit(10));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        ToolsArray.push(doc.data());
+      });
+      setTopTools(ToolsArray);
+    };
+
+    const listen = onAuthStateChanged(auth, fetchData);
+    return listen();
+  }, [reducerValue]);
 
   //Searching for tools by name (fulltext search)
 
@@ -114,7 +116,7 @@ const Home = () => {
 
   useEffect(() => {
     handleFilter();
-  
+
     return () => {
       handleFilter();
     };
@@ -124,11 +126,9 @@ const Home = () => {
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
       <main className="layoutMain">
         <div class="flex direction-column">
-          <div>
-            <div>
-              <div className="max-w-2xl mx-auto flex flex-column py-2 mb-3 md:mb-[2rem] lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
-              {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5 mb-[30px] "> */}
-                <h2 className="text-white fontWeight-500 text-[18px] mt-2">
+
+            <div className="max-w-2xl mx-auto flex flex-column w-[816px] py-2 mb-3 md:mb-[2rem] lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
+            <h2 className="text-white fontWeight-500 text-[18px] mt-2">
                   The Largest Saas Tools directory
                 </h2>
                 <form className="flex items-center mt-5">
@@ -138,7 +138,7 @@ const Home = () => {
                         className="w-5 h-5 pointer text-gray-500 dark:text-gray-400"
                         fill="currentColor"
                         viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns="http://www.w3.org/2000/svg" 
                       >
                         <path
                           fill-rule="evenodd"
@@ -257,7 +257,11 @@ const Home = () => {
                   <div>
                     <div>
                       {SearchedTool.map((tool, index) => (
-                        <Toolitem key={tool.id} toolData={tool} forceRender={forceRender} />
+                        <Toolitem
+                          key={tool.id}
+                          toolData={tool}
+                          forceRender={forceRender}
+                        />
                       ))}
                     </div>
                   </div>
@@ -287,17 +291,20 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+
       </main>
       <aside className="sidebarWithSeparator right">
         <Link to="/News">
-          <div className="poppins fw-300">News</div>
+          <h2>News</h2>
         </Link>
-
-        <NewsHomePage /> 
-        <NewsHomePage />
-        <NewsHomePage />
+        {data?.slice(0, 3).map((article, index) => (
+          <NewsHomePage
+            key={index}
+            title={article.name}
+            date={article.datePublished}
+            provider={article?.provider[0]?.name}
+          />
+        ))}
       </aside>
     </div>
   );

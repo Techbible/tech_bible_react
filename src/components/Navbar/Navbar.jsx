@@ -56,7 +56,7 @@ function Navbar() {
               <img
                 width={"51px"}
                 height={"52px"}
-                src={`${process.env.PUBLIC_URL}/Tech_Bible_Logo.png`}
+                src={`${process.env.PUBLIC_URL}/logo.svg`}
                 alt=""
               />
             </Link>
