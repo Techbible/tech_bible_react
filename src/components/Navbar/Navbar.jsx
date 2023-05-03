@@ -26,14 +26,16 @@ function Navbar() {
     };
   }, []); // The empty dependency array ensures the effect runs only once on mount
 
-  const [userData, setUserData] = useState({
-    pfp: "",
-    username: "",
-  });
 
   const [isMenuClicked, setIsMenuClicked] = useState(false);
 
   const { currentUserData, isAdmin } = useContext(AuthContext);
+
+  const [userData, setUserData]= useState();
+
+  useEffect(()=>{
+    setUserData(currentUserData); 
+  },[currentUserData]);
 
   const navigate = useNavigate();
 
@@ -165,8 +167,8 @@ function Navbar() {
             <div className="user-info-container" style={{ display: screenWidth<765?"none":"flex" }}>
               <Link to="/profile">
                 <div className="user-info">
-                  <img src={currentUserData.photo} className="pfp" alt="pfp" />
-                  <div className="username">{currentUserData.username}</div>
+                  <img src={userData?.photo} className="pfp" alt="pfp" />
+                  <div className="username">{userData?.username}</div>
                 </div>
               </Link>
               <span className="signout cursor-pointer" onClick={UserSignOut}>

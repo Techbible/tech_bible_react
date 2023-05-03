@@ -174,8 +174,7 @@ const Home = () => {
                       onChange={(e) => {
                         onChange(e);
                         setIsFocused(true);
-                      }}
-                      
+                      }}    
                       onBlur={() => setIsFocused(false)}
                       required
                     />
@@ -284,10 +283,9 @@ const Home = () => {
               </div>
 
               
-                 {/* Filtering container */}
                 <div 
                  style={
-                  !isFiltering
+                  isFiltering
                     ? {
                         display: "block",
                         transition:
