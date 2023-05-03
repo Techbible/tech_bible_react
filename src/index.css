@@ -29,4 +29,5 @@ button {  background-color: transparent;}button,input,optgroup,select,textarea {
 
 a:hover{
   text-decoration: none;
+  color:white;
 }

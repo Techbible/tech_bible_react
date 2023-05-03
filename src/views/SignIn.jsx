@@ -1,18 +1,17 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { auth, provider } from "../config/firebase";
+import { auth, db, provider } from "../config/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../assets/styles/signin_signup/signin_signup.css";
+import { Firestore, Timestamp, collection, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
 
 const SignIn = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [userData, setUserData] = useState(null);
   const [passwordError, setPasswordError] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -41,13 +40,37 @@ const SignIn = () => {
     handlePasswordChange();
   };
 
-  const handleGoogleSignIn = () => {
-    signInWithPopup(auth, provider).then((data) => {
-      setUserData(data.user.email);
-      localStorage.setItem("email", data.user.email);
-      navigate("/");
-    });
-  };
+
+  
+const checkUserCredentials = async (user) => {
+  const userData = await onSnapshot(doc(db, "Users", user.uid), (doc) => {
+    console.log(doc.data());
+    if(doc?.data()?.uid){
+      return true;
+    }
+    return false;
+  });
+};
+
+
+const handleGoogleSignIn = async() => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    console.log("USER",user);
+    const userExists = await checkUserCredentials(user);
+    if (!userExists) {
+      navigate('/signup');
+    }
+    else{
+      navigate('/');
+    }
+  } catch (error) {
+    // Handle sign-in error
+    console.log(error);
+  }
+};
+
   return (
 
     <div className="sign-in h-full bg-gradient-to-tl from-purple-300 to-indigo-900 w-full h-[100%] py-16 px-4">
@@ -58,7 +81,6 @@ const SignIn = () => {
         <div className="bg-[#1D1D1F] shadow rounded lg:w-1/3  md:w-1/2 w-full p-10">
           <p
             tabIndex={0}
-            role="heading"
             aria-label="Login to your account"
             className="text-2xl font-extrabold leading-6 text-white"
           >
@@ -81,7 +103,6 @@ const SignIn = () => {
           <button
             onClick={handleGoogleSignIn}
             aria-label="Continue with google"
-            role="button"
             className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-6"
           >
             <svg
@@ -127,7 +148,6 @@ const SignIn = () => {
             <input
               onChange={(e) => setEmail(e.target.value)}
               aria-label="enter email adress"
-              role="input"
               type="email"
               className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
             />
@@ -140,7 +160,6 @@ const SignIn = () => {
               <input
                 onChange={(e) => setPassword(e.target.value)}
                 aria-label="enter Password"
-                role="input"
                 type={isPasswordVisible ? "text" : "password"}
                 className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
               />
@@ -168,7 +187,6 @@ const SignIn = () => {
           <div className="mt-8">
             <button
               onClick={(e) => handleSignIn(e)}
-              role="button"
               aria-label="create my account"
               className="focus:ring-2 focus:ring-offset-2 text-[18px] transition .5s focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-[#7869E6] border rounded hover:bg-[#604fe7] py-4 w-full"
             >

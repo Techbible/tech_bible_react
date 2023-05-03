@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { collection, query, limit, getDocs, where } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { LikeMethods } from "../lib";
 
 import "../assets/styles/home/home.css";
 import "../assets/styles/home/global.css";
@@ -16,13 +15,12 @@ import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Toolitem from "../components/Tools/Toolitem";
 import YouMightLikeApp from "../components/home components/Filtering-container/YouMightLikeApp";
 import AppOfTheDay from "../components/home components/Filtering-container/AppOfTheDay";
-import { FilteringContext } from "../context/FilteringContext";
 
 import "../assets/styles/search-container/search-container.css";
 
+
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
-  const LikeMethodsRef = useRef(null);
 
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
@@ -59,31 +57,20 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     });
-
-  useEffect(() => {
-    const listen = onAuthStateChanged(auth, async (user) => {
-      //showing the Welcome Message, if it's the user's first sign up
-      if (localStorage.getItem("SignedUp")) {
-        <div></div>;
-      } else {
-        notify("Welcome to the community! 👋🏻");
-      }
-      const ToolsArray = [];
-      //In case we will have more conditions in the future
-      const q = query(
-        collection(db, "Tools"),
-        // where("Likes", ">=", 50),
-        limit(10)
-      );
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        // console.log(doc.id, " => ", doc.data());
-        ToolsArray.push(doc.data());
-      });
-      setTopTools(ToolsArray);
-    });
-    return listen();
-  }, [reducerValue]);
+    useEffect(() => {
+      const fetchData = async () => {
+        const ToolsArray = [];
+        const q = query(collection(db, "Tools"), limit(10));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          ToolsArray.push(doc.data());
+        });
+        setTopTools(ToolsArray);
+      };
+    
+      const listen = onAuthStateChanged(auth, fetchData);
+      return listen();
+    }, [reducerValue]);
 
   //Searching for tools by name (fulltext search)
 
@@ -127,7 +114,7 @@ const Home = () => {
 
   useEffect(() => {
     handleFilter();
-
+  
     return () => {
       handleFilter();
     };
@@ -260,8 +247,6 @@ const Home = () => {
                       style={{ display: "flex" }}
                     >
                       <YouMightLikeApp />
-                      <YouMightLikeApp />
-                      <YouMightLikeApp />
                     </div>
                   </div>
                   {/***********END You might also like********/}
@@ -272,7 +257,7 @@ const Home = () => {
                   <div>
                     <div>
                       {SearchedTool.map((tool, index) => (
-                        <Toolitem key={index} toolData={tool} />
+                        <Toolitem key={tool.id} toolData={tool} forceRender={forceRender} />
                       ))}
                     </div>
                   </div>
