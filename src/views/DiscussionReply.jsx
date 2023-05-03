@@ -18,13 +18,13 @@ const DiscussionReply = () => {
               </button>
               
                 <div class="bg-black text-white p-4 my-2">
-               <p class="text-xl font-bold">How do you measure the success of a product launch?</p>
+               <p class="text-xl font-bold">How do you measure the success of a product launch ?</p>
                 <div class="flex direction-row">
                 <Link to="/profile" class="text-sm ml-2">Merve Tarayıcı</Link>
                  <p class="text-sm ml-2">4h ago</p>
                  <p class="text-sm ml-2">3 replies</p>
                </div>
-               <p class="text-sm mt-2">
+                <p class="text-sm mt-2">
                    Launching a product is an exciting milestone, but how do you know if it's successful? What metrics should you be tracking, and how do you measure the impact of your launch on your business goals?
                 </p>
         </div>
@@ -35,6 +35,8 @@ const DiscussionReply = () => {
        </div>
     </main>
     <aside className="">
+
+   
       
     </aside>
     </div>

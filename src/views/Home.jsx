@@ -292,10 +292,10 @@ const Home = () => {
       </main>
       <aside className="sidebarWithSeparator right">
         <Link to="/News">
-          <div className="text-[20px] fontWeight-500 py-[2rem] ">News</div>
+          <div className="poppins fw-300">News</div>
         </Link>
 
-        <NewsHomePage />
+        <NewsHomePage /> 
         <NewsHomePage />
         <NewsHomePage />
       </aside>
