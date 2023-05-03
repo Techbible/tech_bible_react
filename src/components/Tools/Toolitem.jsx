@@ -64,7 +64,7 @@ const Toolitem = ({ toolData, forceRender }) => {
           </div>
           {/* <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2"> */}
           <div className="text-gray-300 text-[12px] ">
-            <span className="styles_tagline__j29pO fontWeight-500 noOfLines-2">
+            <span className="styles_tagline__j29pO fontWeight-100 poppins noOfLines-2">
               {toolData.Description}
             </span>
           </div>
@@ -89,6 +89,7 @@ const Toolitem = ({ toolData, forceRender }) => {
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
           <div className="flex direction-column align-center mt-3">
+            
             <img
               alt="tech bible"
               className="follow_unfollow"
