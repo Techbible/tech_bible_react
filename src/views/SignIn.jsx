@@ -5,7 +5,17 @@ import { signInWithPopup } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../assets/styles/signin_signup/signin_signup.css";
-import { Firestore, Timestamp, collection, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import {
+  Firestore,
+  Timestamp,
+  collection,
+  doc,
+  getDocs,
+  onSnapshot,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -40,44 +50,36 @@ const SignIn = () => {
     handlePasswordChange();
   };
 
+  const checkUserCredentials = async (user) => {
+    const userData = await onSnapshot(doc(db, "Users", user.uid), (doc) => {
+      console.log(doc.data());
+      if (doc?.data()?.uid) {
+        return true;
+      }
+      return false;
+    });
+  };
 
-  
-const checkUserCredentials = async (user) => {
-  const userData = await onSnapshot(doc(db, "Users", user.uid), (doc) => {
-    console.log(doc.data());
-    if(doc?.data()?.uid){
-      return true;
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log("USER", user);
+      const userExists = await checkUserCredentials(user);
+      if (!userExists) {
+        navigate("/signup");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      // Handle sign-in error
+      console.log(error);
     }
-    return false;
-  });
-};
-
-
-const handleGoogleSignIn = async() => {
-  try {
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-    console.log("USER",user);
-    const userExists = await checkUserCredentials(user);
-    if (!userExists) {
-      navigate('/signup');
-    }
-    else{
-      navigate('/');
-    }
-  } catch (error) {
-    // Handle sign-in error
-    console.log(error);
-  }
-};
+  };
 
   return (
-
-    <div className="sign-in h-full bg-gradient-to-tl from-purple-300 to-indigo-900 w-full h-[100%] py-16 px-4">
+    <div className="sign-in h-full bg-0D0C12 w-full h-[100%] py-16 px-4">
       <div className="flex flex-col items-center justify-center">
-        <Link to="/">
-          <h1 className="font-[500]">Tech Bible</h1>
-        </Link>
         <div className="bg-[#1D1D1F] shadow rounded lg:w-1/3  md:w-1/2 w-full p-10">
           <p
             tabIndex={0}

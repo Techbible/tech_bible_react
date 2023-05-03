@@ -86,9 +86,6 @@ const SignUp = () => {
   return (
     <div className="h-full sign-up bg-gradient-to-tl from-purple-300 to-indigo-900 w-full py-16 px-4">
       <div className="flex flex-col items-center justify-center">
-        <Link to="/">
-          <h1 className="font-[500]">Tech Bible</h1>
-        </Link>
         <div className="bg-[#1D1D1F] shadow rounded lg:w-1/3  md:w-1/2 w-full p-10">
           <p
             tabIndex={0}
