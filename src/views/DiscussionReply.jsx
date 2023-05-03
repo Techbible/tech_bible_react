@@ -18,7 +18,7 @@ const DiscussionReply = () => {
               </button>
               
                 <div class="bg-black text-white p-4 my-2">
-               <p class="text-xl font-bold">How do you measure the success of a product launch?</p>
+               <p class="text-xl font-bold">How do you measure the success of a product launch ?</p>
                 <div class="flex direction-row">
                 <Link to="/profile" class="text-sm ml-2">Merve Tarayıcı</Link>
                  <p class="text-sm ml-2">4h ago</p>
