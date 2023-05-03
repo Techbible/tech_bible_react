@@ -126,8 +126,8 @@ const Home = () => {
         <div class="flex direction-column">
           <div>
             <div>
-              {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
-              <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5 mb-[30px] ">
+              <div className="max-w-2xl mx-auto flex flex-column py-2 mb-3 md:mb-[2rem] lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
+              {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5 mb-[30px] "> */}
                 <h2 className="text-white fontWeight-500 text-[18px] mt-2">
                   The Largest Saas Tools directory
                 </h2>
@@ -292,7 +292,7 @@ const Home = () => {
       </main>
       <aside className="sidebarWithSeparator right">
         <Link to="/News">
-          <h1>News</h1>
+          <div className="text-[20px] fontWeight-500 py-[2rem] ">News</div>
         </Link>
 
         <NewsHomePage />

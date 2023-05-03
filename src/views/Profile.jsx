@@ -49,7 +49,6 @@ export const ModalcustomStyles = {
 const Profile = () => {
   const { currentUser, currentUserData } = useContext(AuthContext);
 
-
   const [authUser, setAuthUser] = useState(null);
   const [addBio, setAddBio] = useState(false);
   const [addInterests, setAddInterests] = useState(true);
@@ -109,7 +108,6 @@ const Profile = () => {
             "A New Document Field has been added to an existing document"
           );
           closeModal();
-
         })
         .catch((error) => {
           console.log(error);
@@ -139,7 +137,9 @@ const Profile = () => {
 
   /**************** Editing username and Profile PIC *****************/
   const [profilePicture, setProfilePicture] = useState(null);
-  const [editedUsername, setEditedUsername] = useState(currentUserData?.username);
+  const [editedUsername, setEditedUsername] = useState(
+    currentUserData?.username
+  );
 
   const uploadImage = () => {
     if (profilePicture === null) return;
@@ -246,7 +246,7 @@ const Profile = () => {
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
         <main className="layoutMain ">
           {/* Profile Info Component */}
-          <div class="w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 rounded-xl p-10">
+          <div class="relative w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-[#18151D] to-[#27242E] rounded-xl p-10">
             <div class="row">
               <div class="col-md-2">
                 <div class="w-full">
@@ -265,7 +265,7 @@ const Profile = () => {
                   <div class="col">
                     <button
                       onClick={openEditProfileModal}
-                      class="edit-profile-btn"
+                      class="edit-profile-btn transition duration-250 hover:bg-white hover:text-black active:bg-gray-400 "
                       type="button"
                     >
                       Edit
@@ -292,16 +292,17 @@ const Profile = () => {
                 </div>
                 <div class="row">
                   <div class="col profile-info-buttons">
-                    <button className="mr-4">About</button>
-                    <Link to="/list">
-                      <button className="mr-4">My List</button>
-                    </Link>
-                    <button className="mr-4">Share</button>
-                    <button className="mr-4">Folder</button>
+                    <button className="mr-4 transition duration-250 w-[100px] hover:bg-white hover:text-black active:bg-gray-400 ">
+                      My Folders
+                    </button>
+                    <button className="mr-4 transition duration-250 hover:bg-white hover:text-black active:bg-gray-400 ">
+                      Share
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="absolute top-0 right-0">Settings</div>
           </div>
           {/* END Profile Info Component */}
 

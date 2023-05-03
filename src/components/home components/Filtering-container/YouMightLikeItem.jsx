@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 function YouMightLikeItem({ title, description, icon, category, }) {
   return (
-    <article class="flex hover:animate-background rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] mb-4 sm:mb-0 sm:mr-4 duration-300 ease-in-out transform hover:scale-105">
-      <div class="rounded-[10px] bg-black p-4 !pt-20 sm:p-6">
+    <article class="flex hover:animate-background rounded-xl p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] mb-4 sm:mb-0 sm:mr-4 duration-300 ease-in-out transform hover:scale-105">
+      <div class="rounded-[10px] max-w-[210px] bg-[#0D0C12] p-4 !pt-20 sm:p-6">
         <img
           src={icon}
           class="rounded-sm h-10 w-10 mb-5"
