@@ -257,9 +257,9 @@ const Profile = () => {
                   />
                 </div>
               </div>
-              <div class="col-md-7">
+              <div class="col-md-7 ml-3">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-3 my-3">
                     <p>{currentUserData.username}</p>
                   </div>
                   <div class="col">
@@ -363,8 +363,8 @@ const Profile = () => {
                       type="text"
                     />
                   ) : (
-                    <span style={{ color: "red" }}>
-                      you don't have a bio yet
+                    <span style={{ color: "green" }}>
+                      Tell us a little bit about you
                     </span>
                   )}
                 </div>
