@@ -35,6 +35,8 @@ const DiscussionReply = () => {
        </div>
     </main>
     <aside className="">
+
+      the side part
       
     </aside>
     </div>
