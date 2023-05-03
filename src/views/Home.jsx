@@ -18,6 +18,8 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
+const toolsdata = require('../config/data.json');
+
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
@@ -126,12 +128,18 @@ const Home = () => {
 
   //search bar suggestions
   const [isFocused, setIsFocused] = useState(false);
-  
+ //input value
+  const [value ,setValue]=useState('');
+  const onChange =(event)=>{
+        setValue(event.target.value);
+     
+  }
+
 
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
-      <main className="layoutMain">
-        <div class="flex direction-column">
+      <main className="layoutMain ">
+        <div class="flex direction-column ">
 
 
               <div className="max-w-[816px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
@@ -162,10 +170,14 @@ const Home = () => {
                       id="voice-search"
                       className="bg-white h-[36px] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Search your tool..."
-                      onChange={(e) => setSearch(e.target.value)}
-                      onFocus={() => setIsFocused(true)}
+                      value={value} 
+                      onChange={(e) => {
+                        onChange(e);
+                        setIsFocused(true);
+                      }}
+                      
                       onBlur={() => setIsFocused(false)}
-                      // required
+                      required
                     />
                   </div>
                   <div className="ml-2">
@@ -212,34 +224,29 @@ const Home = () => {
                       </defs>
                     </svg>
                   </div>
+                   
                 </form>
 
 
                 {isFocused && (
-                  <div class="bg-white p-4 rounded-lg shadow-md">
-                  
-                  <ul>
-                    <li class="flex items-center space-x-4 py-2">
-                      
+                  <div className="bg-white p-4 rounded-lg shadow-md ">
+                    <ul >
+                    
+                   {toolsdata.filter(tool => {
+                    const searchTerm = value.toLowerCase();
+                    const name=tool?.Name?.toLowerCase();
+                     return searchTerm  && name?.startsWith(searchTerm)
+                    ;
+                  }).slice(0,10)
+                    .map((tool, index) => (
+                      <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer pl-6">
                       <div>
-                       
-                        <p class="text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p className="text-gray-500" key={tool.Name}> {tool.Name}</p>
                       </div>
                     </li>
-                    <li class="flex items-center space-x-4 py-2">
-                     
-                      <div>
-                        
-                        <p class="text-gray-500">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                      </div>
-                    </li>
-                    <li class="flex items-center space-x-4 py-2">
-                     
-                      <div>
-                        
-                        <p class="text-gray-500">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                      </div>
-                    </li>
+                   
+                     ))}
+                                   
                   </ul>
                 </div>
                 
