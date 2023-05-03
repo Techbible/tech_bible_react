@@ -122,13 +122,18 @@ const Home = () => {
     };
   }, [Pricing]);
 
+
+  //search bar suggestions
+  const [isFocused, setIsFocused] = useState(false);
+  
+
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
       <main className="layoutMain">
         <div class="flex direction-column">
-
             <div className="max-w-2xl mx-auto flex flex-column w-[816px] py-2 mb-3 md:mb-[2rem] lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
             <h2 className="text-white fontWeight-500 text-[18px] mt-2">
+
                   The Largest Saas Tools directory
                 </h2>
                 <form className="flex items-center mt-5">
@@ -153,7 +158,9 @@ const Home = () => {
                       className="bg-white h-[36px] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Search your tool..."
                       onChange={(e) => setSearch(e.target.value)}
-                      required
+                      onFocus={() => setIsFocused(true)}
+                      onBlur={() => setIsFocused(false)}
+                      // required
                     />
                   </div>
                   <div className="ml-2">
@@ -202,6 +209,37 @@ const Home = () => {
                   </div>
                 </form>
 
+
+                {isFocused && (
+                  <div class="bg-white p-4 rounded-lg shadow-md">
+                  <h2 class="text-gray-900 font-semibold text-lg mb-3">Suggestions</h2>
+                  <ul>
+                    <li class="flex items-center space-x-4 py-2">
+                      
+                      <div>
+                        <h3 class="text-gray-900 font-medium">Suggestion 1</h3>
+                        <p class="text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      </div>
+                    </li>
+                    <li class="flex items-center space-x-4 py-2">
+                     
+                      <div>
+                        <h3 class="text-gray-900 font-medium">Suggestion 2</h3>
+                        <p class="text-gray-500">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                      </div>
+                    </li>
+                    <li class="flex items-center space-x-4 py-2">
+                     
+                      <div>
+                        <h3 class="text-gray-900 font-medium">Suggestion 3</h3>
+                        <p class="text-gray-500">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                
+                  )}
+
                 <div className="logo-search-container">
                   <div className="my-0 mr-4">
                     <img
@@ -213,13 +251,13 @@ const Home = () => {
                   {isFiltering ? (
                     <div className="filter-box">
                       <select
-                        className="combo-box"
+                        className="combo-box bg-white text-black "
                         onChange={(e) => setPricing(e.target.value)}
                       >
                         <option selected disabled>
                           Pricing
                         </option>
-                        <option value="Freemium">Freemium</option>
+                        <option value="Freemium">Preemium</option>
                         <option value="Free">Free</option>
                         <option value="Paid">Paid</option>
                       </select>
@@ -233,9 +271,28 @@ const Home = () => {
                 </div>
               </div>
 
-              {!isFiltering ? (
-                // {/* Filtering container */}
-                <div className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
+              
+                 {/* Filtering container */}
+                <div 
+                 style={
+                  !isFiltering
+                    ? {
+                        display: "block",
+                        // pointerEvents: "none",
+                        transition:
+                          "transform ease-out .3ms, opacity ease-out .3s",
+                        transform: "scale(1)",
+                        opacity: 0,
+                      }
+                    : {
+                        display: "hidden",
+                        pointerEvents: "none",
+                        transition: "transform ease-in .3s, opacity ease-in .3s",
+                        transform: "scale(1)",
+                        opacity: 1,
+                      }
+                }
+                className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
                   <AppOfTheDay />
                   {/************You might also like***********/}
                   <div className="you-might-like-apps-container">
@@ -251,7 +308,7 @@ const Home = () => {
                   </div>
                   {/***********END You might also like********/}
                 </div>
-              ) : (
+                {!isFiltering ? (<div></div>) : (
                 // {/* End Filtering container */}
                 <div data-test="homepage-section-0">
                   <div>
@@ -295,8 +352,9 @@ const Home = () => {
       </main>
       <aside className="sidebarWithSeparator right">
         <Link to="/News">
-          <h2>News</h2>
-        </Link>
+        <div className="poppins text-xl" style={{ fontWeight: '300px' }}>
+        News
+      </div>        </Link>
         {data?.slice(0, 3).map((article, index) => (
           <NewsHomePage
             key={index}
@@ -305,6 +363,7 @@ const Home = () => {
             provider={article?.provider[0]?.name}
           />
         ))}
+
       </aside>
     </div>
   );

@@ -18,8 +18,8 @@ const NewsHomePage = ({ title, date, provider }) => {
           >
             {title}
           </a>
-          <p className="mt-2 poppins text-white-500 text-sm">
-            By {provider} | {formattedDate}
+          <p className="mt-2 poppins fw-[100px] text-white-100 text-sm">
+            By {provider} | {formattedDate} 
           </p>
         </div>
       </div>

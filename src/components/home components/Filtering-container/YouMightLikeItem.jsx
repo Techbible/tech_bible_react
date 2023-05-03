@@ -14,7 +14,7 @@ function YouMightLikeItem({ title, description, icon, category, }) {
           {description}
         </h4>
         <div class="mt-4 flex-wrap gap-1">
-          <span class="whitespace-nowrap rounded-2 bg-white px-3 py-0.5 text-xs text-black fw-700">
+          <span class="whitespace-nowrap rounded-2 bg-black text-white  px-3 py-0.5 text-xs text-black fw-700">
             <Link to="/newtooldetails/:">Visit</Link>
           </span>
         </div>
