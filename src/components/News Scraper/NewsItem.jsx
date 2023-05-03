@@ -15,7 +15,7 @@ const NewsItem = ({ title, description, url, urlToImage }) => {
       />
       <div className="p-6">
         <h3 className="text-xl font-bold mb-2">
-          <a href={url} className="text-white hover:text-blue-800">
+          <a href={url} className="text-white line-clamp-3">
             {title}
           </a>
         </h3>
