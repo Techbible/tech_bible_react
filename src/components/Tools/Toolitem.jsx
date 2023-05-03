@@ -109,7 +109,7 @@ const Toolitem = ({ toolData, forceRender }) => {
             </div>
             <span class="bi bi-plus-lg fw-bold text-white"></span>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   );

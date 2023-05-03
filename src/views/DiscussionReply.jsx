@@ -24,7 +24,7 @@ const DiscussionReply = () => {
                  <p class="text-sm ml-2">4h ago</p>
                  <p class="text-sm ml-2">3 replies</p>
                </div>
-               <p class="text-sm mt-2">
+                <p class="text-sm mt-2">
                    Launching a product is an exciting milestone, but how do you know if it's successful? What metrics should you be tracking, and how do you measure the impact of your launch on your business goals?
                 </p>
         </div>
@@ -36,7 +36,7 @@ const DiscussionReply = () => {
     </main>
     <aside className="">
 
-      the side part
+   
       
     </aside>
     </div>

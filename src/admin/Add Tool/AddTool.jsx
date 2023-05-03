@@ -77,7 +77,7 @@ function AddTool() {
           //TODO:Handle Error
 
           //TODO: Link the store folder with the Tools document
-        },
+        }, 
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await setDoc(doc(db, "Tools", uuid()), {
