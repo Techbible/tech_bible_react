@@ -10,6 +10,22 @@ import { AuthContext } from "../../context/AuthContext";
 function Navbar() {
   const [authUser, setAuthUser] = useState(null);
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    // Attach the event listener on component mount
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // The empty dependency array ensures the effect runs only once on mount
+
   const [userData, setUserData] = useState({
     pfp: "",
     username: "",
@@ -145,7 +161,7 @@ function Navbar() {
               </div>
             </div>
           ) : (
-            <div className="user-info-container">
+            <div className="user-info-container" style={{ display: screenWidth<765?"none":"flex" }}>
               <Link to="/profile">
                 <div className="user-info">
                   <img src={currentUserData.photo} className="pfp" alt="pfp" />
@@ -186,7 +202,7 @@ function Navbar() {
 
             <div
               style={
-                isMenuClicked
+                !isMenuClicked
                   ? {
                       display: "block",
                       pointerEvents: "none",
@@ -208,6 +224,50 @@ function Navbar() {
               aria-labelledby="menu-button"
               tabindex="-1"
             >
+              {!authUser ? (
+                <div>
+                  <div className="border-[1px] text-white "></div>
+                  <Link to="/signin">
+                    <div className="text-[15px] px-4 py-2 bg-black transition duration-300 hover:bg-white hover:text-black">
+                      Sign in
+                    </div>
+                  </Link>
+                  <div className="border-[1px] text-white "></div>
+                </div>
+              ) : (
+                <div>
+                  <div className="text-[15px] px-4 py-2 bg-black transition duration-300 hover:bg-white hover:text-black">
+                    <div className="user-info-container">
+                      <Link to="/profile">
+                        <div className="user-info">
+                          <img
+                            src={currentUserData.photo}
+                            className="pfp"
+                            alt="pfp"
+                          />
+                          <div className="username">
+                            {currentUserData.username}
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="border-[1px] text-white "></div>
+                  <div className="text-[15px] px-4 py-2 bg-black transition duration-300 hover:bg-white hover:text-black">
+                    <span
+                      className="signout cursor-pointer flex"
+                      onClick={UserSignOut}
+                    >
+                      Sign out
+                      <img
+                        src={`${process.env.PUBLIC_URL}/assets/logout.png`}
+                        alt="sign out"
+                        className="ml-5"
+                      />
+                    </span>
+                  </div>
+                </div>
+              )}
               <div class="py-1 bg-black" role="none">
                 <Link to="/addTool">
                   <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
@@ -223,24 +283,11 @@ function Navbar() {
                 <div className="border-[1px] text-white "></div>
                 <Link to="/community">
                   <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
-                  Community
-                  </div>
-                </Link>
-                <div className="border-[1px] text-white "></div>
-                <Link to="/signin">
-                  <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
-                    Sign in
-                  </div>
-                </Link>
-                <div className="border-[1px] text-white "></div>
-                <Link to="/signout">
-                  <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
-                    Sign out
+                    Community
                   </div>
                 </Link>
               </div>
             </div>
-            {/* ********** */}
           </div>
         </div>
       </div>

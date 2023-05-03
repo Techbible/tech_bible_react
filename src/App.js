@@ -21,6 +21,7 @@ import Navbar from "./components/Navbar/Navbar";
 import NewToolDetails from "./views/NewToolDetails";
 import UpdatePassword from "./components/ProfileSettings/UpdatePassword";
 import DataParser from "./admin/Excel To Firestore/DataParser";
+import MyComponent from "./components/MyComponent";
 
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);
@@ -47,6 +48,7 @@ function App() {
         <Route path="/community" element=<Community /> />
         <Route path="/newtooldetails/:id" element=<NewToolDetails /> />
         <Route path="/DiscussionReply" element=<DiscussionReply /> />
+        <Route path="/detect" element=<MyComponent /> />
 
         <Route path="/liked-tools" element=<LikedTools /> />
 

@@ -43,12 +43,16 @@ const SignIn = () => {
 
   
 const checkUserCredentials = async (user) => {
-  const userData = await onSnapshot(doc(db, "Users", user.uid), (doc) => {
+  await onSnapshot(doc(db, "Users", user.uid), (doc) => {
     console.log(doc.data());
     if(doc?.data()?.uid){
+      console.log(doc?.data()?.uid,"trueeeeee")
       return true;
     }
-    return false;
+    else{
+      console.log("false")
+      return false;
+    }
   });
 };
 
@@ -60,7 +64,19 @@ const handleGoogleSignIn = async() => {
     console.log("USER",user);
     const userExists = await checkUserCredentials(user);
     if (!userExists) {
-      navigate('/signup');
+      const GoogleData = {
+        uid: user.uid,
+        username: user.displayName,
+        bio: "",
+        interests: [],
+        folders: [],
+        photo: user.photoURL,
+        isAdmin: false,
+        timestamp: Timestamp.now(),
+      };
+      // console.log(;
+      await setDoc(doc(db, "Users", user.uid), GoogleData);
+      navigate("/");
     }
     else{
       navigate('/');

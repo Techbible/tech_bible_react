@@ -1,10 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-import { auth, db } from "../config/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { auth, db, provider } from "../config/firebase";
+import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 
 export const AuthContext = createContext();
-
 
 
 
@@ -13,16 +12,29 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUserData, setCurrentUserData] = useState({});
   const [isAdmin, setIsAdmin] = useState(false);
  
+
+  const googleSignIn = () => {
+    signInWithPopup(auth, provider);
+    // signInWithRedirect(auth, provider)
+  };
+
+  const logOut = () => {
+      signOut(auth)
+  }
+
+
+
+
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      // console.log(user);
     });
 
     return () => {
       unsub();
     };
   }, []);
+
 
 
   useEffect(() => {
@@ -39,8 +51,13 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
 
+  
+
+  
+
+
   return (
-    <AuthContext.Provider value={{ currentUser, isAdmin, currentUserData }}>
+    <AuthContext.Provider value={{ currentUser, isAdmin, currentUserData, googleSignIn, logOut }}>
       {children}
     </AuthContext.Provider>
   );
