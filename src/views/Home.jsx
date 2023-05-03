@@ -131,7 +131,7 @@ const Home = () => {
         <div class="flex direction-column">
           <div>
             <div>
-              <div className="max-w-2xl mx-auto flex flex-column py-2 mb-3 md:mb-[2rem] lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
+              <div className="max-w-2xl mx-auto flex flex-column py-2 mb-3 md:mb-[2rem]  lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
               {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5 mb-[30px] "> */}
                 <h2 className="text-white fontWeight-500 text-[18px] mt-2">
                   The Largest Saas Tools directory
@@ -212,26 +212,26 @@ const Home = () => {
 
                 {isFocused && (
                   <div class="bg-white p-4 rounded-lg shadow-md">
-                  <h2 class="text-gray-900 font-semibold text-lg mb-3">Suggestions</h2>
+                  
                   <ul>
                     <li class="flex items-center space-x-4 py-2">
                       
                       <div>
-                        <h3 class="text-gray-900 font-medium">Suggestion 1</h3>
+                       
                         <p class="text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                       </div>
                     </li>
                     <li class="flex items-center space-x-4 py-2">
                      
                       <div>
-                        <h3 class="text-gray-900 font-medium">Suggestion 2</h3>
+                        
                         <p class="text-gray-500">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                       </div>
                     </li>
                     <li class="flex items-center space-x-4 py-2">
                      
                       <div>
-                        <h3 class="text-gray-900 font-medium">Suggestion 3</h3>
+                        
                         <p class="text-gray-500">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                       </div>
                     </li>
