@@ -257,7 +257,7 @@ const Profile = () => {
                   />
                 </div>
               </div>
-              <div class="col-md-7 ml-3">
+              <div class="col-md-7 mr-[100px] ">
                 <div class="row">
                   <div class="col-md-3 my-3">
                     <p>{currentUserData.username}</p>
