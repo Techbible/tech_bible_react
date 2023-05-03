@@ -244,11 +244,11 @@ const Profile = () => {
   return (
     <div className="pt-[6rem]">
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
-        <main className="layoutMain lg:pl-[5rem] ">
+        <main className="layoutMain ">
             <div className="text-[16px] fontWeight-500 ml-[2.5rem] " >WELCOME,</div>
           {/* Profile Info Component */}
           {/* <div class="relative max-w-[711px] w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-[#18151D] to-[#27242E] rounded-xl p-10"> */}
-          <div class="relative max-w-[711px] pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
+          <div class="relative max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
             <div class="row">
               <div class="col-md-2">
                 <div class="mb-3">
@@ -454,8 +454,8 @@ const Profile = () => {
                 <div className="flex interests-wrapper">
                   <span className="Interest">
                     <input
-                      type={"button"}
-                      // value={`${categorie.Category}`}
+                      type={"checkbox"}
+                      value={`${categorie.Category}`}
                       onChange={(e) => handleInterestCheck(e)}
                       checked={
                         checkedInterests.includes(`${categorie.Category}`)

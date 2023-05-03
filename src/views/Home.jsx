@@ -291,20 +291,22 @@ const Home = () => {
                         transition:
                           "transform ease-out .3s, opacity ease-out .3s",
                         transform: "scale(1)",
-                        opacity: 0,
-                      }
-                    : {
-                        transition: "transform ease-in .3s, opacity ease-in .3s",
-                        transform: "scale(1)",
                         opacity: 1,
                       }
+                    : {
+                        display: 'hidden',
+                        transition: "transform ease-in .3s, opacity ease-in .3s",
+                        transform: "scale(1)",
+                        opacity: 0,
+
+                      }
                 }
-                    className={!isFiltering ? "transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out" : ""}
-                >
+                    className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
                   <AppOfTheDay />
                   {/************You might also like***********/}
-                  <div className="you-might-like-apps-container">
-                    <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px] ">
+                  <div className={!isFiltering ? "you-might-like-apps-container" : ""}>
+                  {/* <div className="you-might-like-apps-container"> */}
+                    <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
                       YOU MIGHT ALSO LIKE
                     </p>
                     <div
