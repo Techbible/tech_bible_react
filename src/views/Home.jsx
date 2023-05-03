@@ -77,6 +77,7 @@ const Home = () => {
   //Searching for tools by name (fulltext search)
 
   const SearchTool = async () => {
+    
     const SearchedTools = [];
     const q = query(collection(db, "Tools"), where("Name", "==", Search));
     const querySnapshot = await getDocs(q);
