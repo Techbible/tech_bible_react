@@ -18,7 +18,6 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 
-
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
 
@@ -57,20 +56,20 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     });
-    useEffect(() => {
-      const fetchData = async () => {
-        const ToolsArray = [];
-        const q = query(collection(db, "Tools"), limit(10));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          ToolsArray.push(doc.data());
-        });
-        setTopTools(ToolsArray);
-      };
-    
-      const listen = onAuthStateChanged(auth, fetchData);
-      return listen();
-    }, [reducerValue]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const ToolsArray = [];
+      const q = query(collection(db, "Tools"), limit(10));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        ToolsArray.push(doc.data());
+      });
+      setTopTools(ToolsArray);
+    };
+
+    const listen = onAuthStateChanged(auth, fetchData);
+    return listen();
+  }, [reducerValue]);
 
   //Searching for tools by name (fulltext search)
 
@@ -114,7 +113,7 @@ const Home = () => {
 
   useEffect(() => {
     handleFilter();
-  
+
     return () => {
       handleFilter();
     };
@@ -131,8 +130,10 @@ const Home = () => {
         <div class="flex direction-column">
           <div>
             <div>
-              <div className="max-w-2xl mx-auto flex flex-column py-2 mb-3 md:mb-[2rem]  lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
-              {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5 mb-[30px] "> */}
+
+              <div className="max-w-[816px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
+                {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5 mb-[30px] "> */}
+
                 <h2 className="text-white fontWeight-500 text-[18px] mt-2">
                   The Largest Saas Tools directory
                 </h2>
@@ -251,7 +252,7 @@ const Home = () => {
                   {isFiltering ? (
                     <div className="filter-box">
                       <select
-                        className="combo-box"
+                        className="combo-box bg-white text-black "
                         onChange={(e) => setPricing(e.target.value)}
                       >
                         <option selected disabled>
@@ -271,9 +272,28 @@ const Home = () => {
                 </div>
               </div>
 
-              {!isFiltering ? (
-                // {/* Filtering container */}
-                <div className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
+              
+                 {/* Filtering container */}
+                <div 
+                 style={
+                  !isFiltering
+                    ? {
+                        display: "block",
+                        // pointerEvents: "none",
+                        transition:
+                          "transform ease-out .3ms, opacity ease-out .3s",
+                        transform: "scale(1)",
+                        opacity: 0,
+                      }
+                    : {
+                        display: "hidden",
+                        pointerEvents: "none",
+                        transition: "transform ease-in .3s, opacity ease-in .3s",
+                        transform: "scale(1)",
+                        opacity: 1,
+                      }
+                }
+                className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
                   <AppOfTheDay />
                   {/************You might also like***********/}
                   <div className="you-might-like-apps-container">
@@ -289,13 +309,17 @@ const Home = () => {
                   </div>
                   {/***********END You might also like********/}
                 </div>
-              ) : (
+                {!isFiltering ? (<div></div>) : (
                 // {/* End Filtering container */}
                 <div data-test="homepage-section-0">
                   <div>
                     <div>
                       {SearchedTool.map((tool, index) => (
-                        <Toolitem key={tool.id} toolData={tool} forceRender={forceRender} />
+                        <Toolitem
+                          key={tool.id}
+                          toolData={tool}
+                          forceRender={forceRender}
+                        />
                       ))}
                     </div>
                   </div>
@@ -333,7 +357,7 @@ const Home = () => {
           <div className="poppins fw-300">News</div>
         </Link>
 
-        <NewsHomePage /> 
+        <NewsHomePage />
         <NewsHomePage />
         <NewsHomePage />
       </aside>
