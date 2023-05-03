@@ -119,6 +119,11 @@ const Home = () => {
     };
   }, [Pricing]);
 
+
+  //search bar suggestions
+  const [isFocused, setIsFocused] = useState(false);
+  
+
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
       <main className="layoutMain">
@@ -152,7 +157,9 @@ const Home = () => {
                       className="bg-white h-[36px] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Search your tool..."
                       onChange={(e) => setSearch(e.target.value)}
-                      required
+                      onFocus={() => setIsFocused(true)}
+                      onBlur={() => setIsFocused(false)}
+                      // required
                     />
                   </div>
                   <div className="ml-2">
@@ -201,6 +208,37 @@ const Home = () => {
                   </div>
                 </form>
 
+
+                {isFocused && (
+                  <div class="bg-white p-4 rounded-lg shadow-md">
+                  <h2 class="text-gray-900 font-semibold text-lg mb-3">Suggestions</h2>
+                  <ul>
+                    <li class="flex items-center space-x-4 py-2">
+                      
+                      <div>
+                        <h3 class="text-gray-900 font-medium">Suggestion 1</h3>
+                        <p class="text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      </div>
+                    </li>
+                    <li class="flex items-center space-x-4 py-2">
+                     
+                      <div>
+                        <h3 class="text-gray-900 font-medium">Suggestion 2</h3>
+                        <p class="text-gray-500">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                      </div>
+                    </li>
+                    <li class="flex items-center space-x-4 py-2">
+                     
+                      <div>
+                        <h3 class="text-gray-900 font-medium">Suggestion 3</h3>
+                        <p class="text-gray-500">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                
+                  )}
+
                 <div className="logo-search-container">
                   <div className="my-0 mr-4">
                     <img
@@ -218,7 +256,7 @@ const Home = () => {
                         <option selected disabled>
                           Pricing
                         </option>
-                        <option value="Freemium">Freemium</option>
+                        <option value="Freemium">Preemium</option>
                         <option value="Free">Free</option>
                         <option value="Paid">Paid</option>
                       </select>
