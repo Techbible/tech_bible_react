@@ -42,6 +42,7 @@ function Navbar() {
   };
 
   useEffect(() => {
+    setIsMenuClicked(false)
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
@@ -204,7 +205,7 @@ function Navbar() {
               style={
                 !isMenuClicked
                   ? {
-                      display: "block",
+                      display:"hidden",
                       pointerEvents: "none",
                       transition:
                         "transform ease-out .3ms, opacity ease-out .3s",
@@ -212,7 +213,8 @@ function Navbar() {
                       opacity: 0,
                     }
                   : {
-                      display: "hidden",
+                      display: "block",
+                     
                       transition: "transform ease-in .3s, opacity ease-in .3s",
                       transform: "scale(1)",
                       opacity: 1,

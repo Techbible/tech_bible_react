@@ -245,30 +245,35 @@ const Profile = () => {
     <div className="pt-[6rem]">
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
         <main className="layoutMain ">
+            <div className="text-[16px] fontWeight-500 ml-[2.5rem] " >WELCOME,</div>
           {/* Profile Info Component */}
-          <div class="relative w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-[#18151D] to-[#27242E] rounded-xl p-10">
+          {/* <div class="relative max-w-[711px] w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-[#18151D] to-[#27242E] rounded-xl p-10"> */}
+          <div class="relative max-w-[711px] pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
             <div class="row">
               <div class="col-md-2">
-                <div class="w-full">
+                <div class="mb-3">
                   <img
                     src={currentUserData.photo}
-                    class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 border-gray-300 rounded-full"
+                    class="w-[80px] h-[80px] sm:w-[80px] sm:h-[80px] md:w-[80px] md:h-[80px] border-2 border-gray-300 rounded-full"
                     alt="pfp"
                   />
                 </div>
               </div>
               <div class="col-md-7 mr-[100px] ">
-                <div class="row">
-                  <div class="col-md-3 my-3">
-                    <p>{currentUserData.username}</p>
+                <div class="row justify-content-center">
+                  <div class="col-md-3 mb-3">
+                    <p className="fontWeight-500">{currentUserData.username}</p>
                   </div>
                   <div class="col">
                     <button
                       onClick={openEditProfileModal}
-                      class="edit-profile-btn transition duration-250 hover:bg-white hover:text-black active:bg-gray-400 "
+                      class="edit-profile-btn mb-3 transition duration-250 "
                       type="button"
                     >
                       Edit
+                    </button>
+                    <button className="absolute top-[44px] right-[10px] text-[12px]  bg-[#7869e6] px-[15px] py-[1.5px] rounded-[4px] transition duration-300 hover:bg-[#604fe7] active:bg-[#4635ca]">
+                      Share
                     </button>
                   </div>
                 </div>
@@ -292,21 +297,21 @@ const Profile = () => {
                 </div>
                 <div class="row">
                   <div class="col profile-info-buttons">
-                    <button className="mr-4 transition duration-250 w-[100px] hover:bg-white hover:text-black active:bg-gray-400 ">
+                    <button className="mr-4 transition duration-250 w-[100px] my-2 ">
                       My Folders
                     </button>
-                    <button className="mr-4 transition duration-250 hover:bg-white hover:text-black active:bg-gray-400 ">
+                    {/* <button className="mr-4 transition duration-250 ">
                       Share
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
             </div>
-            <div className="absolute top-0 right-0">Settings</div>
+            {/* <div className="absolute top[] right-[10px]">Share</div> */}
           </div>
           {/* END Profile Info Component */}
 
-          <div style={{ paddingLeft: "3rem", borderLeft: "1px solid white" }}>
+          <div style={{ paddingLeft: "3rem", borderLeft: "1px solid white", maxWidth: '710px' }}>
             {/* BIO components */}
             {currentUserData.bio ? (
               <div>
@@ -438,7 +443,7 @@ const Profile = () => {
             style={ModalcustomStyles}
             contentLabel="Example Modal"
           >
-            <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
+            <h2 ref={(_subtitle) => (subtitle = _subtitle)} className="mb-4">
               Please choose your interests :
             </h2>
             <span id="close-button" onClick={closeModal}>
@@ -449,8 +454,8 @@ const Profile = () => {
                 <div className="flex interests-wrapper">
                   <span className="Interest">
                     <input
-                      type={"checkbox"}
-                      value={`${categorie.Category}`}
+                      type={"button"}
+                      // value={`${categorie.Category}`}
                       onChange={(e) => handleInterestCheck(e)}
                       checked={
                         checkedInterests.includes(`${categorie.Category}`)
