@@ -19,13 +19,18 @@
 .profile-info-buttons button,
 .edit-profile-btn {
   color: white;
-  border: 1px solid white;
+  /* border: 1px solid white; */
+  background-color: #151618;
   padding: 2px 0px;
   width: 6rem;
   border-radius: 6px;
   font-size: 12px;
   margin-top: 1%;
-  transition: 0.25s;
+  transition: 0.3s;
+}
+.profile-info-buttons button:hover,
+.edit-profile-btn:hover {
+  border: 1px solid white;
 }
 
 .edit-profile-btn {

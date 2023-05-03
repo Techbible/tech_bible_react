@@ -135,7 +135,7 @@ const Home = () => {
 
 
 
-              <div className="max-w-[816px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
+              <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
                 {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5 mb-[30px] "> */}
                 <h2 className="text-white fontWeight-500 text-[18px] mt-2">
 
@@ -256,7 +256,7 @@ const Home = () => {
                   {isFiltering ? (
                     <div className="filter-box">
                       <select
-                        className="combo-box bg-white text-black "
+                        className="combo-box bg-white text-black rounded-[4px] "
                         onChange={(e) => setPricing(e.target.value)}
                       >
                         <option selected disabled>
@@ -283,21 +283,19 @@ const Home = () => {
                   !isFiltering
                     ? {
                         display: "block",
-                        // pointerEvents: "none",
                         transition:
-                          "transform ease-out .3ms, opacity ease-out .3s",
+                          "transform ease-out .3s, opacity ease-out .3s",
                         transform: "scale(1)",
                         opacity: 0,
                       }
                     : {
-                        display: "hidden",
-                        pointerEvents: "none",
                         transition: "transform ease-in .3s, opacity ease-in .3s",
                         transform: "scale(1)",
                         opacity: 1,
                       }
                 }
-                className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out">
+                    className={!isFiltering ? "transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out" : ""}
+                >
                   <AppOfTheDay />
                   {/************You might also like***********/}
                   <div className="you-might-like-apps-container">
