@@ -22,8 +22,13 @@ const SignIn = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  // const [passwordError, setPasswordError] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
 
   // useEffect(() => {
   //   // console.log("message");
@@ -45,7 +50,24 @@ const SignIn = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
+        switch (e.code) {
+          case 'auth/user-not-found':
+            setEmailError('User not found');
+            setIsEmailValid(false)
+            break;
+            case 'auth/invalid-email':
+              setEmailError('Invalid email');
+              setIsEmailValid(false)
+              break;
+              case 'auth/wrong-password':
+                setPasswordError('Wrong password');
+                setIsPasswordValid(false)
+            break;
+          default:
+            setEmailError(e.message);
+            setPasswordError(e.message);
+        }
       });
     handlePasswordChange();
   };
@@ -168,6 +190,13 @@ const SignIn = () => {
               className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
             />
           </div>
+          
+          {!isEmailValid ? (
+            <div className="text-danger my-2">{emailError}</div>
+          ) : (
+            null
+          )}
+          
           <div className="mt-6  w-full">
             <lable className="text-sm font-medium leading-none text-white">
               Password
