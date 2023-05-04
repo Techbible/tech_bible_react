@@ -92,31 +92,28 @@ const Toolitem = ({ toolData, forceRender }) => {
           </Link>
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
-          <div className="flex direction-row align-items-center mt-3 gap-2">
-            <div className="flex flex-column align-items-center gap-[2px] ">
-              <img
-                alt="tech bible"
-                className="follow_unfollow"
-                src={
-                  toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                    ? process.env.PUBLIC_URL + "/assets/liked.png"
-                    : process.env.PUBLIC_URL + "/assets/like.png"
-                }
-                onClick={() => {
-                  toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                    ? handleUnLikes(toolData.id)
-                    : handleLikes(toolData.id);
-                }}
-              />
-              <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
-                {toolData.LikedBy?.length}
+          <div className="flex direction-column align-center mt-3">   
+            <img
+              alt="tech bible"
+              className="follow_unfollow"
+              src={
+                toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                  ? process.env.PUBLIC_URL + "/assets/liked.png"
+                  : process.env.PUBLIC_URL + "/assets/like.png"
+              }
+              onClick={() => {
+                toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                  ? handleUnLikes(toolData.id)
+                  : handleLikes(toolData.id);
+              }}
+            />
+            <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
+              {toolData.LikedBy?.length}
               </div>
+              <span className="bi bi-plus-lg fw-bold text-white"></span>
             </div>
-            <div className="mb-1 ">
-              <span className="bi bi-plus-lg fw-bold text-white text-[25px] hover:text-[27px] "></span>
-            </div>
-          </div>
-        </div>
+            </div> 
+
       </div>
     </div>
   );

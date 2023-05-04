@@ -60,7 +60,7 @@ try {
 }
 }
 
-  useEffect(() =>fetchNews(), []);
+  useEffect(() =>{fetchNews()}, []);
 
 
 

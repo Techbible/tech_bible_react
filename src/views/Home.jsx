@@ -232,8 +232,13 @@ const Home = () => {
 
                         <div>
                           <p className="text-gray-500" key={tool.Name}>
-                            {" "}
-                            {tool.Name}
+                            
+                           
+                            
+                              
+                               <Link to="/newtooldetails"> { tool.Name}</Link>
+                               
+                                                          
                           </p>
                         </div>
                       </li>
@@ -336,6 +341,7 @@ const Home = () => {
             <div>
               {!isFiltering ? (
                 <div className="tools-section-ngu">
+                  <h1>Top tools</h1>
                   {!TopTools ? (
                     <h1 style={{ color: "#fff" }}>Loading...</h1>
                   ) : (
@@ -358,9 +364,9 @@ const Home = () => {
       </main>
       <aside className="sidebarWithSeparator right">
         <Link to="/News">
-          <div className="poppins text-xl" style={{ fontWeight: "300px" }}>
+          <h1 className="poppins" style={{ fontWeight: "300px" }}>
             News
-          </div>{" "}
+          </h1>{" "}
         </Link>
         {data?.slice(0, 3).map((article, index) => (
           <NewsHomePage
