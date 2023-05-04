@@ -133,8 +133,8 @@ const Home = () => {
 
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
-      <main className="layoutMain ">
-        <div className="flex direction-column ">
+      <main className="layoutMain " onMouseLeave={() => setIsFocused(false)}>
+        <div className="flex direction-column " >
           <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
             {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5 mb-[30px] "> */}
 
@@ -142,7 +142,7 @@ const Home = () => {
               The Largest Saas Tools directory
             </h2>
             <form className="flex items-center mt-5">
-              <div className="relative w-full">
+              <div className="relative w-full" >
                 <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                   <svg
                     className="w-5 h-5 pointer text-gray-500 dark:text-gray-400"
@@ -158,6 +158,7 @@ const Home = () => {
                   </svg>
                 </div>
                 <input
+                autoComplete="false"
                   type="text"
                   id="voice-search"
                   className="bg-white h-[36px] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -167,7 +168,7 @@ const Home = () => {
                     onChange(e);
                     setIsFocused(true);
                   }}
-                  onBlur={() => setIsFocused(false)}
+                  // onBlur={() => setIsFocused(false)}
                   required
                 />
               </div>
