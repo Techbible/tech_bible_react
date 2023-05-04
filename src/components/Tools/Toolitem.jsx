@@ -26,25 +26,24 @@ const Toolitem = ({ toolData, forceRender }) => {
         className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
         data-test="post-item-390145"
       >
-          <div
-            className="styles_thumbnail__Rmwk5 styles_thumbnail__E2_pB mr-3"
-            data-test="post-thumbnail"
-          >
-            <img
-              loading="lazy"
-              src={toolData?.Icon}
-              style={{ width: "81px", height: "79px" }}
-              alt="Adobe XD"
-              className="styles_mediaThumbnail__LDCQN"
-            />
-          </div>
+        <div
+          className="styles_thumbnail__Rmwk5 styles_thumbnail__E2_pB mr-3"
+          data-test="post-thumbnail"
+        >
+          <img
+            loading="lazy"
+            src={toolData?.Icon}
+            style={{ width: "81px", height: "79px" }}
+            alt="Adobe XD"
+            className="styles_mediaThumbnail__LDCQN"
+          />
+        </div>
         <div className="flex direction-column flex-1">
           <Link to={`/newtooldetails/${toolData.id}`}>
             <div className="color-white font-700 text-[15px] font-bold mb-1">
               <Link to={`/newtooldetails/${toolData.id}`}>
                 {toolData?.Name}{" "}
               </Link>
-
             </div>
             {/* <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2"> */}
             <div className="text-gray-300 text-[12px] ">
@@ -73,28 +72,31 @@ const Toolitem = ({ toolData, forceRender }) => {
           </Link>
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
-          <div className="flex direction-column align-center mt-3">   
-            <img
-              alt="tech bible"
-              className="follow_unfollow"
-              src={
-                toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                  ? process.env.PUBLIC_URL + "/assets/liked.png"
-                  : process.env.PUBLIC_URL + "/assets/like.png"
-              }
-              onClick={() => {
-                toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                  ? handleUnLikes(toolData.id)
-                  : handleLikes(toolData.id);
-              }}
-            />
-            <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
-              {toolData.LikedBy?.length}
+          <div className="flex direction-row align-center mt-3">
+            <div className="flex direction-column align-items-center gap-2 mx-3 ">
+              <img
+                alt="tech bible"
+                className="follow_unfollow"
+                src={
+                  toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                    ? process.env.PUBLIC_URL + "/assets/liked.png"
+                    : process.env.PUBLIC_URL + "/assets/like.png"
+                }
+                onClick={() => {
+                  toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                    ? handleUnLikes(toolData.id)
+                    : handleLikes(toolData.id);
+                }}
+              />
+              <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
+                {toolData.LikedBy?.length}
               </div>
-              <span className="bi bi-plus-lg fw-bold text-white"></span>
             </div>
-            </div> 
-
+            <div>
+              <span className="bi bi-plus-lg fw-bold text-[25px] text-gray-400 transition duration-500 hover:text-white hover:text-[27px] "></span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

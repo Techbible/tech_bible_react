@@ -53,7 +53,7 @@ const SignUp = () => {
           bio: "",
           interests: [],
           folders: [],
-          photo: "https://cdn-icons-png.flaticon.com/512/6386/6386976.png",
+          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnyuq5iI30Yo3TwJF-Sr5PJz0KZLImVddlRw&usqp=CAU",
           isAdmin: false,
           timestamp: Timestamp.now(),
         };
