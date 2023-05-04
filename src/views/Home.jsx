@@ -277,7 +277,7 @@ const Home = () => {
 
           <div
             style={
-              isFiltering
+              !isFiltering
                 ? {
                     display: "block",
                     transition: "transform ease-out .5s, opacity ease-out .5s",
@@ -293,7 +293,7 @@ const Home = () => {
             }
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
           >
-            <div style={isFiltering ? {
+            <div style={!isFiltering ? {
               display: 'block',
             } : {
               display: 'none',  

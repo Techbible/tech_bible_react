@@ -55,7 +55,7 @@ const SignIn = () => {
     
   //  }
     const userData = await onSnapshot(doc(db, "Users", user.uid), (doc) => {});
-    console.log(userData)
+    console.log(userData);
   };
 
   const handleGoogleSignIn = async () => {
@@ -81,7 +81,6 @@ const SignIn = () => {
         navigate("/");
       }
     } catch (error) {
-      // Handle sign-in error
       console.log(error);
     }
   };
