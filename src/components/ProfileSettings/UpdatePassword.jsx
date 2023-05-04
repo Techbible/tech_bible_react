@@ -44,24 +44,24 @@ const UpdatePassword = () => {
   };
 
   return (
-    <section class="bg-gradient-to-tl from-purple-300 to-indigo-900">
-      <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div class="w-full p-6 bg-[#0D0C12] rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
-          <h2 class="mb-1 text-xl text-white font-bold leading-tight tracking-tight md:text-2xl dark:text-white">
+    <section className="bg-gradient-to-tl from-purple-300 to-indigo-900">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div className="w-full p-6 bg-[#0D0C12] rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
+          <h2 className="mb-1 text-xl text-white font-bold leading-tight tracking-tight md:text-2xl dark:text-white">
             Change Password
           </h2>
-          <div class="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
+          <div className="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
             <div>
               <label
                 for="current-password"
-                class="block mb-2 text-sm font-medium text-white dark:text-white"
+                className="block mb-2 text-sm font-medium text-white dark:text-white"
               >
                 Current Password
               </label>
               <input
                 type="password"
                 name="current-password"
-                class="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="••••••••"
                 required=""
                 value={currentPassword}
@@ -80,7 +80,7 @@ const UpdatePassword = () => {
             <div>
               <label
                 for="password"
-                class="block mb-2 text-sm font-medium text-white dark:text-white"
+                className="block mb-2 text-sm font-medium text-white dark:text-white"
               >
                 New Password
               </label>
@@ -89,7 +89,7 @@ const UpdatePassword = () => {
                 name="password"
                 id="password"
                 placeholder="••••••••"
-                class="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required=""
                 value={newPassword}
                 onChange={(e) => {
@@ -100,7 +100,7 @@ const UpdatePassword = () => {
             <div>
               <label
                 for="confirm-password"
-                class="block mb-2 text-sm font-medium text-white dark:text-white"
+                className="block mb-2 text-sm font-medium text-white dark:text-white"
               >
                 Confirm password
               </label>
@@ -109,7 +109,7 @@ const UpdatePassword = () => {
                 name="confirm-password"
                 id="confirm-password"
                 placeholder="••••••••"
-                class="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required=""
                 value={confirmPassword}
                 onChange={(e) => {
@@ -122,24 +122,24 @@ const UpdatePassword = () => {
             <div className="text-red-900">The confirmed password and the new password must be the same</div>
         )}
             </div>
-            <div class="flex items-start">
-              <div class="flex items-center h-5">
+            <div className="flex items-start">
+              <div className="flex items-center h-5">
                 <input
                   id="newsletter"
                   aria-describedby="newsletter"
                   type="checkbox"
-                  class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                  className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                   required=""
                 />
               </div>
-              <div class="ml-3 text-sm">
+              <div className="ml-3 text-sm">
                 <label
                   for="newsletter"
-                  class="font-light text-white dark:text-gray-300"
+                  className="font-light text-white dark:text-gray-300"
                 >
                   I accept the{" "}
                   <a
-                    class="font-medium text-[#7869e6] hover:underline dark:text-primary-500"
+                    className="font-medium text-[#7869e6] hover:underline dark:text-primary-500"
                     href="#"
                   >
                     Terms and Conditions
@@ -148,7 +148,7 @@ const UpdatePassword = () => {
               </div>
             </div>
             <button
-              class="w-full text-white bg-[#7869e6] transition duration-300 hover:bg-[#604fe7] active:bg-[#4635ca] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              className="w-full text-white bg-[#7869e6] transition duration-300 hover:bg-[#604fe7] active:bg-[#4635ca] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               onClick={onChangePasswordPress}
             >
               Reset passwod

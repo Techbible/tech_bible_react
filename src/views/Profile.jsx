@@ -247,27 +247,27 @@ const Profile = () => {
         <main className="layoutMain lg:pl-[10rem] ">
             <div className="text-[16px] fontWeight-500 ml-[2.5rem] " >WELCOME,</div>
           {/* Profile Info Component */}
-          {/* <div class="relative max-w-[711px] w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-[#18151D] to-[#27242E] rounded-xl p-10"> */}
-          <div class="relative max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
-            <div class="row">
-              <div class="col-md-2">
-                <div class="mb-3">
+          {/* <div className="relative max-w-[711px] w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-[#18151D] to-[#27242E] rounded-xl p-10"> */}
+          <div className="relative max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
+            <div className="row">
+              <div className="col-md-2">
+                <div className="mb-3">
                   <img
                     src={currentUserData.photo}
-                    class="w-[80px] h-[80px] sm:w-[80px] sm:h-[80px] md:w-[80px] md:h-[80px] border-2 border-gray-300 rounded-full"
+                    className="w-[80px] h-[80px] sm:w-[80px] sm:h-[80px] md:w-[80px] md:h-[80px] border-2 border-gray-300 rounded-full"
                     alt="pfp"
                   />
                 </div>
               </div>
-              <div class="col-md-7 mr-[100px] ">
-                <div class="row justify-content-center">
-                  <div class="col-md-3 mb-3">
+              <div className="col-md-7 mr-[100px] ">
+                <div className="row justify-content-center">
+                  <div className="col-md-3 mb-3">
                     <p className="fontWeight-500">{currentUserData.username}</p>
                   </div>
-                  <div class="col">
+                  <div className="col">
                     <button
                       onClick={openEditProfileModal}
-                      class="edit-profile-btn mb-3 transition duration-250 "
+                      className="edit-profile-btn mb-3 transition duration-250 "
                       type="button"
                     >
                       Edit
@@ -278,13 +278,13 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="bio-interests-texts">
-                  <div class="row">
-                    <div class="col">
+                  <div className="row">
+                    <div className="col">
                       <p>{currentUserData.bio}</p>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12">
+                  <div className="row">
+                    <div className="col-md-12">
                       {currentUserData?.interests?.map((interest) => {
                         return (
                           <p className="text-[12] d-inline-block">
@@ -295,8 +295,8 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col profile-info-buttons">
+                <div className="row">
+                  <div className="col profile-info-buttons">
                     <button className="mr-4 transition duration-250 w-[100px] my-2 ">
                       <Link to="/folders">My Folders</Link>
                     </button>
@@ -316,11 +316,11 @@ const Profile = () => {
             {currentUserData.bio ? (
               <div>
                 {updateBio ? (
-                  <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
-                    <div class="mb-4 md:mb-0">
-                      <p class="font-bold text-lg leading-tight mb-3">Bio</p>
+                  <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
+                    <div className="mb-4 md:mb-0">
+                      <p className="font-bold text-lg leading-tight mb-3">Bio</p>
                       <input
-                        class="h-7 p-2 w-full text-sm leading-tight text-black border-gray-400 border rounded-lg"
+                        className="h-7 p-2 w-full text-sm leading-tight text-black border-gray-400 border rounded-lg"
                         placeholder={currentUserData.bio}
                         onChange={(e) => setBio(e.target.value)}
                         type="text"
@@ -329,25 +329,25 @@ const Profile = () => {
                     <div>
                       <button
                         onClick={() => setUpdateBio(false)}
-                        class="cancel-btn fw-500"
+                        className="cancel-btn fw-500"
                       >
                         Cancel
                       </button>
-                      <button onClick={() => UpdatingBio()} class="update-btn">
+                      <button onClick={() => UpdatingBio()} className="update-btn">
                         Update
                       </button>
                     </div>
                   </div>
                 ) : (
-                  <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
-                    <div class="mb-4 md:mb-0">
-                      <p class="font-bold text-lg leading-tight mb-3">Bio</p>
-                      <p class="text-sm">{currentUserData.bio}</p>
+                  <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
+                    <div className="mb-4 md:mb-0">
+                      <p className="font-bold text-lg leading-tight mb-3">Bio</p>
+                      <p className="text-sm">{currentUserData.bio}</p>
                     </div>
                     <div>
                       <button
                         onClick={() => setUpdateBio(true)}
-                        class="edit-btn"
+                        className="edit-btn"
                       >
                         Edit
                       </button>
@@ -356,9 +356,9 @@ const Profile = () => {
                 )}
               </div>
             ) : (
-              <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
-                <div class="mb-4 md:mb-0">
-                  <p class="font-bold text-lg leading-tight mb-3">Bio</p>
+              <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
+                <div className="mb-4 md:mb-0">
+                  <p className="font-bold text-lg leading-tight mb-3">Bio</p>
 
                   {addBio ? (
                     <input
@@ -375,16 +375,16 @@ const Profile = () => {
                 </div>
                 {addBio ? (
                   <div>
-                    <button onClick={() => setAddBio(false)} class="cancel-btn">
+                    <button onClick={() => setAddBio(false)} className="cancel-btn">
                       Cancel
                     </button>
-                    <button onClick={() => UpdatingBio()} class="submit-btn">
+                    <button onClick={() => UpdatingBio()} className="submit-btn">
                       Submit
                     </button>
                   </div>
                 ) : (
                   <div>
-                    <button onClick={() => setAddBio(true)} class="add-btn">
+                    <button onClick={() => setAddBio(true)} className="add-btn">
                       +Add
                     </button>
                   </div>
@@ -394,9 +394,9 @@ const Profile = () => {
             {/* End Of BIO components */}
 
             {/* Interests components */}
-            <div class="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]">
-              <div class="mb-4 md:mb-0">
-                <p class="font-bold text-lg leading-tight mb-3">Interests</p>
+            <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]">
+              <div className="mb-4 md:mb-0">
+                <p className="font-bold text-lg leading-tight mb-3">Interests</p>
                 {currentUserData?.interests?.map((i, index) => (
                   <p className="text-sm leading-tight d-inline" key={index}>
                     {i},&nbsp;
@@ -404,12 +404,12 @@ const Profile = () => {
                 ))}
               </div>
               {updateInterests ? (
-                <button onClick={editInterests} class="edit-btn">
+                <button onClick={editInterests} className="edit-btn">
                   +Add
                 </button>
               ) : (
                 <div>
-                  <button onClick={editInterests} class="edit-btn">
+                  <button onClick={editInterests} className="edit-btn">
                     Edit
                   </button>
                 </div>

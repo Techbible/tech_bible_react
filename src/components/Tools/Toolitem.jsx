@@ -26,7 +26,6 @@ const Toolitem = ({ toolData, forceRender }) => {
         className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
         data-test="post-item-390145"
       >
-        <a href="/posts/mage-4" aria-label="Mage">
           <div
             className="styles_thumbnail__Rmwk5 styles_thumbnail__E2_pB mr-3"
             data-test="post-thumbnail"
@@ -39,31 +38,13 @@ const Toolitem = ({ toolData, forceRender }) => {
               className="styles_mediaThumbnail__LDCQN"
             />
           </div>
-        </a>
         <div className="flex direction-column flex-1">
           <Link to={`/newtooldetails/${toolData.id}`}>
             <div className="color-white font-700 text-[15px] font-bold mb-1">
               <Link to={`/newtooldetails/${toolData.id}`}>
                 {toolData?.Name}{" "}
               </Link>
-              <a
-                href="/r/p/390145"
-                rel="noopener"
-                target="_blank"
-                className="styles_externalLinkIcon__822Ku"
-              >
-                <svg width="13" height="14" viewBox="0 0 13 14">
-                  <g
-                    stroke="#4B587C"
-                    strokeWidth="1.5"
-                    fill="none"
-                    fill-rule="evenodd"
-                  >
-                    <path d="M9.6 4H4.2a2.4 2.4 0 0 0-2.4 2.4V10"></path>
-                    <path d="M6.6 7l3-3-3-3M12 10v3H0"></path>
-                  </g>
-                </svg>
-              </a>
+
             </div>
             {/* <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2"> */}
             <div className="text-gray-300 text-[12px] ">
@@ -74,7 +55,7 @@ const Toolitem = ({ toolData, forceRender }) => {
             <div className="flex direction-row flex-row-gap-6 mt-3 align-center">
               <div className="flex direction-row flex-row-gap-3">
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                  <span class="bi bi-chat-left-dots"></span>
+                  <span className="bi bi-chat-left-dots"></span>
                 </div>
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                   {toolData?.LikedBy?.length}
@@ -82,11 +63,11 @@ const Toolitem = ({ toolData, forceRender }) => {
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                   {toolData.Price}
                 </div>
-                <a className="styles_postTopicLink__wDe_p" href="/topics/art">
+                <Link to="/" className="styles_postTopicLink__wDe_p">
                   <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                     {toolData.Category}
                   </div>
-                </a>
+                </Link>
               </div>
             </div>
           </Link>

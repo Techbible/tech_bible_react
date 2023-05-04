@@ -265,7 +265,7 @@ function Navbar() {
 
                 </div>
               )}
-              <div class="py-1 bg-black" role="none">
+              <div className="py-1 bg-black" role="none">
                 <Link to="/addTool">
                   <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
                     Submit your tool

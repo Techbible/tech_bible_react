@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ToolInfo = ({ toolData }) => {
   return (
@@ -11,7 +12,6 @@ const ToolInfo = ({ toolData }) => {
           className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
           data-test="post-item-390145"
         >
-          <a href="/posts/mage-4" aria-label="Mage">
             <div
               className="styles_thumbnail__Rmwk5 styles_thumbnail__E2_pB"
               data-test="post-thumbnail"
@@ -24,31 +24,22 @@ const ToolInfo = ({ toolData }) => {
                 className="w-full md:w-140 rounded-sm"
               />
             </div>
-          </a>
           <div className="flex direction-column flex-1 mt-2">
             <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-600 mb-3 noOfLines-2 styles_format__w0VVk">
               {toolData?.Name}
-             <a className="w-[20px] h-[20px]" href={toolData?.URL} rel="noreferrer" target="_blank">
-              <i class="ml-3 text-sm text-white hover:text-gray-600 transition-colors duration-300 fas fa-share"></i>
-              </a>
-              <a
-                href="/r/p/390145"
-                rel="noopener"
-                target="_blank"
-                className="styles_externalLinkIcon__822Ku"
-              >
+              <i className="ml-3 text-sm text-white hover:text-gray-600 transition-colors duration-300 fas fa-share"></i>
+
                 <svg width="13" height="14" viewBox="0 0 13 14">
                   <g
                     stroke="#4B587C"
                     stroke-width="1.5"
                     fill="none"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   >
                     <path d="M9.6 4H4.2a2.4 2.4 0 0 0-2.4 2.4V10"></path>
                     <path d="M6.6 7l3-3-3-3M12 10v3H0"></path>
                   </g>
                 </svg>
-              </a>
             </div>
             <div className="fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2">
               <span className="styles_tagline__j29pO text-gray-300">
@@ -60,13 +51,13 @@ const ToolInfo = ({ toolData }) => {
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined border-1 border-white rounded-md px-3 bg-gradient">
                   {toolData?.Price}
                 </div>
-                <a className="styles_postTopicLink__wDe_p" href="/topics/art">
+                <Link className="styles_postTopicLink__wDe_p" href="/topics/art">
                   <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                     {toolData?.Category}
                   </div>
-                </a>
+                </Link>
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                  <span class="bi bi-chat-left-dots"></span>
+                  <span className="bi bi-chat-left-dots"></span>
                 </div>
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                   20
@@ -74,8 +65,6 @@ const ToolInfo = ({ toolData }) => {
               </div>
             </div>
           </div>
-          {/* <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
-              </div> */}
         </div>
       </div>
     </div>

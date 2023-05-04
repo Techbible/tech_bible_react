@@ -115,7 +115,7 @@ const Home = () => {
       SearchedTools.push(doc.data());
     });
     setSearchedTool(SearchedTools);
-    console.log(SearchedTool);
+    // console.log(SearchedTool);
   };
 
   useEffect(() => {
@@ -134,7 +134,7 @@ const Home = () => {
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
       <main className="layoutMain ">
-        <div class="flex direction-column ">
+        <div className="flex direction-column ">
           <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
             {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5 mb-[30px] "> */}
 
@@ -151,7 +151,7 @@ const Home = () => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                       clip-rule="evenodd"
                     ></path>

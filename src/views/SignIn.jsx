@@ -25,9 +25,9 @@ const SignIn = () => {
   const [passwordError, setPasswordError] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  useEffect(() => {
-    console.log("message");
-  }, [passwordError]);
+  // useEffect(() => {
+  //   // console.log("message");
+  // }, [passwordError]);
 
   function handlePasswordChange(e) {
     if (password.length < 8) {
@@ -54,11 +54,8 @@ const SignIn = () => {
     try {
       const userDoc = await getDoc(doc(db, "Users", user.uid));
       if (userDoc.exists()) {
-        console.log(userDoc.data());
-        console.log(true);
         return true;
       } else {
-        console.log(false);
         return false;
       }
     } catch (error) {

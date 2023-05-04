@@ -47,7 +47,7 @@ const Comment = () => {
                   stroke="#4B587C"
                   strokeWidth="1.5"
                   fill="none"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 >
                   <path d="M9.6 4H4.2a2.4 2.4 0 0 0-2.4 2.4V10"></path>
                   <path d="M6.6 7l3-3-3-3M12 10v3H0"></path>
@@ -95,17 +95,17 @@ const Comment = () => {
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
         <div className="flex direction-column align-center">
-        <div class="flex items-center space-x-4">
-        <button class="p-2 border rounded-full hover:bg-white hover:text-black ">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4  hover:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="flex items-center space-x-4">
+        <button className="p-2 border rounded-full hover:bg-white hover:text-black ">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4  hover:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                  <path stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
                 </svg>
               </button>
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                   42
                   </div>
-            <button class="p-2 border rounded-full hover:bg-gray-100 hover:text-black">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-current hover:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button className="p-2 border rounded-full hover:bg-gray-100 hover:text-black">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-current hover:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
              </button>
