@@ -14,9 +14,9 @@ const NewToolDetails = () => {
     console.log(id);
     const ToolRef = doc(db, "Tools", id);
     onSnapshot(ToolRef, (doc) => {
-      console.log(" data: ", doc.data());
+      // console.log(" data: ", doc.data());
       setToolData(doc.data());
-      console.log(ToolData);
+      // console.log(ToolData);
     });
   }, []);
 

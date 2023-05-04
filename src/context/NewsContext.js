@@ -20,18 +20,6 @@ export const NewsContextProvider = (props) => {
   const currentDateStr = currentDate.toISOString().slice(0, 10);
   const oneWeekAgoStr = oneWeekAgo.toISOString().slice(0, 10);
 
-
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `
-  //       https://newsapi.org/v2/everything?q=${query}&from=${oneWeekAgoStr}&to=${currentDateStr}&sortBy=popularity&apiKey=e7eb7131ce9941609ec6cddbd650f536`
-  //     )
-  //     .then((response) => setData(response.data))
-  //     .catch((error) => console.log(error));
-  // }, []);
-
-
 const fetchNews = async() =>{
 
   const options = {
@@ -53,7 +41,7 @@ const fetchNews = async() =>{
 
 try {
 	const response = await axios.request(options);
-	console.log(response.data.value);
+	// console.log(response.data.value);
   setData(response.data.value)
 } catch (error) {
 	console.error(error);

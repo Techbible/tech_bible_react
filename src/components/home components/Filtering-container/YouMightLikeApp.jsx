@@ -5,7 +5,7 @@ import { db } from "../../../config/firebase";
 import YouMightLikeItem from "./YouMightLikeItem";
 
 const YouMightLikeApp = () => {
-  const { currentUser, currentUserData, isAdmin } = useContext(AuthContext);
+  const { currentUserData } = useContext(AuthContext);
   const [Tools, setTools] = useState();
 
   const LoadingMightLike = async () => {
@@ -21,7 +21,6 @@ const YouMightLikeApp = () => {
       querySnapshot.forEach((doc) => {
         tools.push(doc.data());
         setTools(tools);
-        console.log("UU MIGHT LIKE", Tools);
       });
     } catch (error) {
       console.log(error);
@@ -32,7 +31,6 @@ const YouMightLikeApp = () => {
     let isMounted = true;
     if (isMounted) {
       LoadingMightLike();
-      console.log("YOU MIGHT LIKE");
     }
 
     return () => {

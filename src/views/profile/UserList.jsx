@@ -149,13 +149,13 @@ updateDoc(userDocRef, {
 
       <div className="container mx-auto px-4">
 
-        <div class="max-w-sm w-full lg:max-w-full mb-[10rem] lg:flex">
-        <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+        <div className="max-w-sm w-full lg:max-w-full mb-[10rem] lg:flex">
+        <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
          style={{backgroundImage: "url('https://images.ctfassets.net/lzny33ho1g45/6VcDGWbQfWElVwAiMWLk9c/1bfe7635d6b112fb7be963620c0c6a0d/best_apps_14.png?w=1520&fm=jpg&q=30&fit=thumb&h=760')", title:"Woman holding a mug"}}>
         </div>
-        <div class="border-b border-gray-400 lg:border-gray-400 bg-dark lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-          <div class="mb-8">
-            <div class="text-white font-bold text-xl mb-2">
+        <div className="border-b border-gray-400 lg:border-gray-400 bg-dark lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+          <div className="mb-8">
+            <div className="text-white font-bold text-xl mb-2">
             <Link to="/liked-tools">All your liked tools</Link>
             </div>
           </div>

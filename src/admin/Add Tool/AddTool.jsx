@@ -49,15 +49,14 @@ function AddTool() {
     console.log(1, UID);
     const listen = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        console.log(2, user);
+        // console.log(2, user);
         setUID(user.uid);
         onSnapshot(doc(db, "Users", UID), (doc) => {
-          console.log(doc.data());
+          // console.log(doc.data());
           setIsAdmin(doc.data().isAdmin);
         });
       }
     });
-    console.log(isAdmin);
     return listen();
   }, []);
 

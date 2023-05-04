@@ -4,7 +4,7 @@ const Topic = () => {
   return (
     <div className="px-mobile-1 px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
       
-        <a href="/posts/mage-4" aria-label="Mage" class="flex items-center">
+        <a href="/posts/mage-4" aria-label="Mage" className="flex items-center">
           <div>
             <img
               loading="lazy"

@@ -2,8 +2,8 @@ import React from "react";
 
 function NewsPreview() {
   return (
-    <aside class="sidebarWithSeparator right">
-      <h1 class="fontSize-10">News</h1>
+    <aside className="sidebarWithSeparator right">
+      <h1 className="fontSize-10">News</h1>
 
       <div className="max-w-md mx-auto bg-[#1D1D1F] rounded-xl shadow-md overflow-hidden md:max-w-2xl">
         <div className="md:flex">

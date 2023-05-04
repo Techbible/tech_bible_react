@@ -1,28 +1,26 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { NewsList } from "./components";
-import { AuthContext } from "./context/AuthContext";
+import { useContext } from "react";
+
+
+//Importing the views
 import {
-  Home,
-  Profile,
-  SignIn,
-  SignUp,
-  Tools,
-  UserList,
-  ToolDetails,
-  Community,
-  DiscussionReply,
-  LikedTools,
+  Home,Profile,SignIn,
+  SignUp,Tools,UserList,
+  Community,DiscussionReply,
+  LikedTools,NewToolDetails
 } from "./views";
 
-import { AddTool } from "./admin";
-import { useContext } from "react";
+//impoting the components
+import { Navbar, MyComponent, UpdatePassword } from "./components";
+
+
+//importing the admin components
+import { AddTool, DataParser } from "./admin";
+
+//importing the App's context
 import { NewsContextProvider } from "./context/NewsContext";
-import Navbar from "./components/Navbar/Navbar";
-import NewToolDetails from "./views/NewToolDetails";
-import UpdatePassword from "./components/ProfileSettings/UpdatePassword";
-import DataParser from "./admin/Excel To Firestore/DataParser";
-import MyComponent from "./components/MyComponent";
-import { ToolsContext, ToolsContextProvider } from "./context/ToolsContext";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);
@@ -39,7 +37,7 @@ function App() {
       <Routes>
         <Route index path="/" element={
           <NewsContextProvider>
-              <Home />
+            <Home />
           </NewsContextProvider>
         } />
         <Route path="/signup" element=<SignUp /> />
@@ -58,14 +56,6 @@ function App() {
           element={
             <ProtectedRoute>
               <Tools />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/ToolDetails/:id"
-          element={
-            <ProtectedRoute>
-              <ToolDetails />
             </ProtectedRoute>
           }
         />
