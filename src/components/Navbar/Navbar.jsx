@@ -16,23 +16,15 @@ function Navbar() {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };
-
     // Attach the event listener on component mount
     window.addEventListener("resize", handleResize);
-
     // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []); // The empty dependency array ensures the effect runs only once on mount
-
-  const [userData, setUserData] = useState({
-    pfp: "",
-    username: "",
-  });
+  }, []);
 
   const [isMenuClicked, setIsMenuClicked] = useState(false);
-
   const { currentUserData, isAdmin } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -51,8 +43,7 @@ function Navbar() {
       }
     });
     return listen();
-  }, []);
-
+  }, [currentUserData]);
   //Sign out
   const UserSignOut = () => {
     signOut(auth)
@@ -165,8 +156,8 @@ function Navbar() {
             <div className="user-info-container" style={{ display: screenWidth<765?"none":"flex" }}>
               <Link to="/profile">
                 <div className="user-info">
-                  <img src={currentUserData.photo} className="pfp" alt="pfp" />
-                  <div className="username">{currentUserData.username}</div>
+                  <img src={currentUserData?.photo} className="pfp" alt="pfp" />
+                  <div className="username">{currentUserData?.username}</div>
                 </div>
               </Link>
               <span className="signout cursor-pointer" onClick={UserSignOut}>
@@ -241,7 +232,7 @@ function Navbar() {
                   <div className="text-[15px] px-4 py-2 bg-black transition duration-300 hover:bg-white hover:text-black">
                     <div className="user-info-container">
                       <Link to="/profile">
-                        <div className="user-info">
+                        <div className="user-info" onClick={()=>{navigate("/profile")}}>
                           <img
                             src={currentUserData.photo}
                             className="pfp"
@@ -268,6 +259,8 @@ function Navbar() {
                       />
                     </span>
                   </div>
+                  <div className="border-[1px] text-white "></div>
+
                 </div>
               )}
               <div class="py-1 bg-black" role="none">
@@ -283,11 +276,11 @@ function Navbar() {
                   </div>
                 </Link>
                 <div className="border-[1px] text-white "></div>
-                <Link to="/community">
-                  <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
+                {/* <Link to="/community"> */}
+                  <div onClick={()=>{navigate('/')}} className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
                     Community
                   </div>
-                </Link>
+                {/* </Link> */}
               </div>
             </div>
           </div>
