@@ -59,26 +59,8 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     });
-  
-  
-    // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const ToolsArray = [];
-  //     const q = query(collection(db, "Tools"), limit(10));
-  //     const querySnapshot = await getDocs(q);
-  //     querySnapshot.forEach((doc) => {
-  //       ToolsArray.push(doc.data());
-  //     });
-  //     setTopTools(ToolsArray);
-  //   };
-
-  //   const listen = onAuthStateChanged(auth, fetchData);
-  //   return listen();
-  // }, [reducerValue]);
-  
 
   useEffect(() => {
-    let ignore = false;
     const fetchData = async () => {
       const ToolsArray = [];
       const q = query(collection(db, "Tools"), limit(10));
@@ -86,21 +68,14 @@ const Home = () => {
       querySnapshot.forEach((doc) => {
         ToolsArray.push(doc.data());
       });
-      if (!ignore) {
-        setTopTools(ToolsArray);
-      }
+      setTopTools(ToolsArray);
     };
-  
-    fetchData();
-    
-    return () => {
-      ignore = true;
-    };
+
+    const listen = onAuthStateChanged(auth, fetchData);
+    return listen();
   }, [reducerValue]);
-  
-  
-  
-  
+
+
   //Searching for tools by name (fulltext search)
 
   const SearchTool = async () => {
@@ -315,27 +290,32 @@ const Home = () => {
             }
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
           >
-            <div style={isFiltering ? {
-              display: 'block',
-            } : {
-              display: 'none',  
-            }}>
-            <AppOfTheDay />
-            {/************You might also like***********/}
-            <div className="you-might-like-apps-container">
-              {/* <div className="you-might-like-apps-container"> */}
-              <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
-                YOU MIGHT ALSO LIKE
-              </p>
-              <div
-                className="flex flex-col sm:flex-row"
-                style={{ display: "flex" }}
-              >
-                <YouMightLikeApp />
+            <div
+              style={
+                isFiltering
+                  ? {
+                      display: "block",
+                    }
+                  : {
+                      display: "none",
+                    }
+              }
+            >
+              <AppOfTheDay />
+              {/************You might also like***********/}
+              <div className="you-might-like-apps-container">
+                {/* <div className="you-might-like-apps-container"> */}
+                <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
+                  YOU MIGHT ALSO LIKE
+                </p>
+                <div
+                  className="flex flex-col sm:flex-row"
+                  style={{ display: "flex" }}
+                >
+                  <YouMightLikeApp />
+                </div>
               </div>
-            </div>
-            {/***********END You might also like********/}
-
+              {/***********END You might also like********/}
             </div>
           </div>
           {!isFiltering ? (
@@ -395,6 +375,11 @@ const Home = () => {
             provider={article?.provider[0]?.name}
           />
         ))}
+        <Link to="/News">
+          <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer ">
+            See more...
+          </div>
+        </Link>
       </aside>
     </div>
   );
