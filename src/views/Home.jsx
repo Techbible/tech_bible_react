@@ -296,6 +296,7 @@ const Home = () => {
                         opacity: 0,
                       }
                     : {
+                      
                         transition: "transform ease-in .3s, opacity ease-in .3s",
                         transform: "scale(1)",
                         opacity: 1,
