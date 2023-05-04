@@ -18,7 +18,6 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
-<<<<<<< HEAD
 import { ToolsContext } from "../context/ToolsContext";
 
 const toolsdata = require('../config/data.json');
@@ -29,13 +28,7 @@ const Home = () => {
   const { data } = useContext(NewsContext)
   // const { toolsdata } = useContext(ToolsContext)
 
-=======
-const toolsdata = require("../config/data.json");
 
-const Home = () => {
-  const { currentUser } = useContext(AuthContext);
-  const { data } = useContext(NewsContext);
->>>>>>> aa15879b9b298189e768628396f07ff14d581ad0
 
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
@@ -72,30 +65,9 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     });
-<<<<<<< HEAD
-    
-=======
-  
-  
-    // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const ToolsArray = [];
-  //     const q = query(collection(db, "Tools"), limit(10));
-  //     const querySnapshot = await getDocs(q);
-  //     querySnapshot.forEach((doc) => {
-  //       ToolsArray.push(doc.data());
-  //     });
-  //     setTopTools(ToolsArray);
-  //   };
 
-  //   const listen = onAuthStateChanged(auth, fetchData);
-  //   return listen();
-  // }, [reducerValue]);
   
-
->>>>>>> aa15879b9b298189e768628396f07ff14d581ad0
-  useEffect(() => {
-    let ignore = false;
+    useEffect(() => {
     const fetchData = async () => {
       const ToolsArray = [];
       const q = query(collection(db, "Tools"), limit(10));
@@ -103,27 +75,16 @@ const Home = () => {
       querySnapshot.forEach((doc) => {
         ToolsArray.push(doc.data());
       });
-      if (!ignore) {
-        setTopTools(ToolsArray);
-      }
+      setTopTools(ToolsArray);
     };
-  
-    fetchData();
-    
-    return () => {
-      ignore = true;
-    };
-<<<<<<< HEAD
-    fetchData();
-}, [reducerValue]);
 
-=======
+    const listen = onAuthStateChanged(auth, fetchData);
+    return listen();
   }, [reducerValue]);
   
+
   
   
-  
->>>>>>> aa15879b9b298189e768628396f07ff14d581ad0
   //Searching for tools by name (fulltext search)
 
   const SearchTool = async () => {
@@ -166,20 +127,12 @@ const Home = () => {
 
   //search bar suggestions
   const [isFocused, setIsFocused] = useState(false);
-<<<<<<< HEAD
- //input value
-  const [value ,setValue]=useState('');
-  const onChange =(event)=>{
-        setValue(event.target.value);  
-  }
 
-=======
   //input value
   const [value, setValue] = useState("");
   const onChange = (event) => {
     setValue(event.target.value);
   };
->>>>>>> aa15879b9b298189e768628396f07ff14d581ad0
 
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
@@ -279,49 +232,7 @@ const Home = () => {
                     .slice(0, 10)
                     .map((tool, index) => (
                       <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer pl-6">
-<<<<<<< HEAD
-                      <div>
-                        <Link to=""><p className="text-gray-500" key={tool.Name}> {tool.Name}</p></Link>
-                      </div>
-                    </li>
-                   
-                     ))}
-                                   
-                  </ul>
-                </div>
-                
-                  )}
 
-                <div className="logo-search-container">
-                  <div className="my-0 mr-4">
-                    <img
-                      className="w-[100px]"
-                      src={`${process.env.PUBLIC_URL}/assets/logo-homepage.png`}
-                      alt="search-box-logo"
-                    />
-                  </div>
-                  {isFiltering ? (
-                    <div className="filter-box">
-                      <select
-                        className="combo-box bg-white text-black rounded-[4px] "
-                        onChange={(e) => setPricing(e.target.value)}
-                      >
-                        <option selected disabled>
-                          Pricing
-                        </option>
-                        <option value="Freemium">Preemium</option>
-                        <option value="Free">Free</option>
-                        <option value="Paid">Paid</option>
-                      </select>
-                    </div>
-                  ) : (
-                    <div className="fontWeight-500 text-[#F5F5F7] text-[12px] w-[274px]">
-                      Browse 1000+ of the latest tech tools per task Updated
-                      daily
-                    </div>
-                  )}
-                </div>
-=======
                         <div>
                           <p className="text-gray-500" key={tool.Name}>
                             {" "}
@@ -331,7 +242,6 @@ const Home = () => {
                       </li>
                     ))}
                 </ul>
->>>>>>> aa15879b9b298189e768628396f07ff14d581ad0
               </div>
             )}
 
