@@ -18,11 +18,17 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
-const toolsdata = require("../config/data.json");
+import { ToolsContext } from "../context/ToolsContext";
+
+const toolsdata = require('../config/data.json');
+
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
-  const { data } = useContext(NewsContext);
+  const { data } = useContext(NewsContext)
+  // const { toolsdata } = useContext(ToolsContext)
+
+
 
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
@@ -59,8 +65,8 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     });
-
-  useEffect(() => {
+  
+    useEffect(() => {
     const fetchData = async () => {
       const ToolsArray = [];
       const q = query(collection(db, "Tools"), limit(10));
@@ -98,10 +104,6 @@ const Home = () => {
       setIsSearching(false);
       setSearchedTool([]);
     }
-    return () => {
-      setIsSearching(false);
-      setSearchedTool([]);
-    };
   }, [Search]);
 
   // handling  by price
@@ -118,14 +120,11 @@ const Home = () => {
 
   useEffect(() => {
     handleFilter();
-
-    return () => {
-      handleFilter();
-    };
   }, [Pricing]);
 
   //search bar suggestions
   const [isFocused, setIsFocused] = useState(false);
+
   //input value
   const [value, setValue] = useState("");
   const onChange = (event) => {
@@ -230,6 +229,7 @@ const Home = () => {
                     .slice(0, 10)
                     .map((tool, index) => (
                       <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer pl-6">
+
                         <div>
                           <p className="text-gray-500" key={tool.Name}>
                             {" "}

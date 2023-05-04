@@ -16,26 +16,16 @@ function Navbar() {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };
-
     // Attach the event listener on component mount
     window.addEventListener("resize", handleResize);
-
     // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []); // The empty dependency array ensures the effect runs only once on mount
-
+  }, []);
 
   const [isMenuClicked, setIsMenuClicked] = useState(false);
-
   const { currentUserData, isAdmin } = useContext(AuthContext);
-
-  const [userData, setUserData]= useState();
-
-  useEffect(()=>{
-    setUserData(currentUserData); 
-  },[currentUserData]);
 
   const navigate = useNavigate();
 
@@ -53,8 +43,7 @@ function Navbar() {
       }
     });
     return listen();
-  }, []);
-
+  }, [currentUserData]);
   //Sign out
   const UserSignOut = () => {
     signOut(auth)
@@ -167,8 +156,8 @@ function Navbar() {
             <div className="user-info-container" style={{ display: screenWidth<765?"none":"flex" }}>
               <Link to="/profile">
                 <div className="user-info">
-                  <img src={userData?.photo} className="pfp" alt="pfp" />
-                  <div className="username">{userData?.username}</div>
+                  <img src={currentUserData?.photo} className="pfp" alt="pfp" />
+                  <div className="username">{currentUserData?.username}</div>
                 </div>
               </Link>
               <span className="signout cursor-pointer" onClick={UserSignOut}>

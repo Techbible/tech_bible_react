@@ -65,8 +65,7 @@ const SignUp = () => {
 
   const handleGoogleSignUp = () => {
     signInWithPopup(auth, provider).then(async (data) => {
-      setUserData(data.user.email);
-      localStorage.setItem("email", data.user.email);
+      
       const GoogleData = {
         uid: data.user.uid,
         username: data.user.displayName,
