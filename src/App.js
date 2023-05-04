@@ -5,10 +5,10 @@ import { useContext } from "react";
 
 //Importing the views
 import {
-  Home,Profile,SignIn,
-  SignUp,Tools,UserList,
-  Community,DiscussionReply,
-  LikedTools,NewToolDetails
+  Home, Profile, SignIn,
+  SignUp, Tools, UserList,
+  Community, DiscussionReply,
+  LikedTools, NewToolDetails
 } from "./views";
 
 //impoting the components
@@ -27,6 +27,12 @@ function App() {
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/signin" />;
+    }
+    return children;
+  };
+  const AdminVerif = ({ children }) => {
+    if (!isAdmin) {
+      return <Navigate to="/" />;
     }
     return children;
   };
@@ -79,7 +85,11 @@ function App() {
 
         <Route path="/addTool" element=<AddTool /> />
         <Route path="/tools" element={<Tools />} />
-        <Route path="/DataParser" element={<DataParser />} />
+        <Route path="/DataParser" element={
+          <AdminVerif>
+            <DataParser />
+          </AdminVerif>
+        } />
       </Routes>
     </div>
   );

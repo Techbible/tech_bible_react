@@ -18,22 +18,17 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
-import { ToolsContext } from "../context/ToolsContext";
 
-const toolsdata = require('../config/data.json');
-
+const toolsdata = require("../config/data.json");
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
-  const { data } = useContext(NewsContext)
+  const { data } = useContext(NewsContext);
   // const { toolsdata } = useContext(ToolsContext)
-
-
 
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
-  const [TopTools, setTopTools] = useState([]);
-  const [toolsCopy, setToolsCopy] = useState([]);
+  const [AllTools, setAllTools] = useState([]);
 
   //To store the searched value
   const [Search, setSearch] = useState("");
@@ -65,22 +60,21 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     });
-  
-    useEffect(() => {
+
+  useEffect(() => {
     const fetchData = async () => {
       const ToolsArray = [];
-      const q = query(collection(db, "Tools"), limit(10));
+      const q = query(collection(db, "Tools"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         ToolsArray.push(doc.data());
       });
-      setTopTools(ToolsArray);
+      setAllTools(ToolsArray);
     };
 
     const listen = onAuthStateChanged(auth, fetchData);
     return listen();
   }, [reducerValue]);
-
 
   //Searching for tools by name (fulltext search)
 
@@ -157,6 +151,7 @@ const Home = () => {
                     ></path>
                   </svg>
                 </div>
+                <div></div>
                 <input
                   type="text"
                   id="voice-search"
@@ -167,7 +162,6 @@ const Home = () => {
                     onChange(e);
                     setIsFocused(true);
                   }}
-                  onBlur={() => setIsFocused(false)}
                   required
                 />
               </div>
@@ -216,29 +210,23 @@ const Home = () => {
                 </svg>
               </div>
             </form>
-
             {isFocused && (
               <div className="bg-white p-4 rounded-lg shadow-md ">
                 <ul>
-                  {toolsdata
-                    .filter((tool) => {
-                      const searchTerm = value.toLowerCase();
-                      const name = tool?.Name?.toLowerCase();
-                      return searchTerm && name?.startsWith(searchTerm);
-                    })
+                  {AllTools.filter((tool) => {
+                    const searchTerm = value.toLowerCase();
+                    const name = tool?.Name?.toLowerCase();
+                    return searchTerm && name?.startsWith(searchTerm);
+                  })
                     .slice(0, 10)
                     .map((tool, index) => (
                       <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer pl-6">
-
                         <div>
                           <p className="text-gray-500" key={tool.Name}>
-                            
-                           
-                            
-                              
-                               <Link to="/newtooldetails"> { tool.Name}</Link>
-                               
-                                                          
+                            <Link to={`/newtooldetails/${tool.id}`}>
+                              {" "}
+                              {tool.Name}
+                            </Link>
                           </p>
                         </div>
                       </li>
@@ -295,71 +283,76 @@ const Home = () => {
             }
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
           >
-            <div style={!isFiltering ? {
-              display: 'block',
-            } : {
-              display: 'none',  
-            }}>
-            <AppOfTheDay />
-            {/************You might also like***********/}
-            <div className="you-might-like-apps-container">
-              {/* <div className="you-might-like-apps-container"> */}
-              <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
-                YOU MIGHT ALSO LIKE
-              </p>
-              <div
-                className="flex flex-col sm:flex-row"
-                style={{ display: "flex" }}
-              >
-                <YouMightLikeApp />
-
-              </div>
-              {/***********END You might also like********/}
-            </div>
-          </div>
-          {!isFiltering ? (
-            <div></div>
-          ) : (
-            // {/* End Filtering container */}
-            <div data-test="homepage-section-0">
-              <div>
-                <div>
-                  {SearchedTool.map((tool, index) => (
-                    <Toolitem
-                      key={tool.id}
-                      toolData={tool}
-                      forceRender={forceRender}
-                    />
-                  ))}
+            <div
+              style={
+                !isFiltering
+                  ? {
+                      display: "block",
+                    }
+                  : {
+                      display: "none",
+                    }
+              }
+            >
+              <AppOfTheDay />
+              {/************You might also like***********/}
+              <div className="you-might-like-apps-container">
+                {/* <div className="you-might-like-apps-container"> */}
+                <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
+                  YOU MIGHT ALSO LIKE
+                </p>
+                <div
+                  className="flex flex-col sm:flex-row"
+                  style={{ display: "flex" }}
+                >
+                  <YouMightLikeApp />
                 </div>
+                {/***********END You might also like********/}
               </div>
             </div>
-          )}
-        </div>
-        <div data-test="homepage-section-0">
-          <div>
-            <div>
-              {!isFiltering ? (
-                <div className="tools-section-ngu">
-                  <h1>Top tools</h1>
-                  {!TopTools ? (
-                    <h1 style={{ color: "#fff" }}>Loading...</h1>
-                  ) : (
-                    TopTools.map((tool, index) => (
+            {!isFiltering ? (
+              <div></div>
+            ) : (
+              // {/* End Filtering container */}
+              <div data-test="homepage-section-0">
+                <div>
+                  <div>
+                    {SearchedTool.map((tool, index) => (
                       <Toolitem
-                        key={index}
+                        key={tool.id}
                         toolData={tool}
                         forceRender={forceRender}
                       />
-                    ))
-                  )}
+                    ))}
+                  </div>
                 </div>
-              ) : (
-                <div style={{display: 'none',}}></div>
-              )}
+              </div>
+            )}
+          </div>
+          <div data-test="homepage-section-0">
+            <div>
+              <div>
+                {!isFiltering ? (
+                  <div className="tools-section-ngu">
+                    <h1>Top tools</h1>
+                    {!AllTools ? (
+                      <h1 style={{ color: "#fff" }}>Loading...</h1>
+                    ) : (
+                      AllTools.slice(0, 10).map((tool, index) => (
+                        <Toolitem
+                          key={index}
+                          toolData={tool}
+                          forceRender={forceRender}
+                        />
+                      ))
+                    )}
+                  </div>
+                ) : (
+                  <div style={{ display: "none" }}></div>
+                )}
+              </div>
             </div>
-        </div>
-        </div>
+          </div>
         </div>
       </main>
       <aside className="sidebarWithSeparator right">
