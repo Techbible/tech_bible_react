@@ -25,7 +25,7 @@ function Navbar() {
   }, []);
 
   const [isMenuClicked, setIsMenuClicked] = useState(false);
-  const { currentUserData, isAdmin } = useContext(AuthContext);
+  const { currentUser,currentUserData, isAdmin } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -34,7 +34,8 @@ function Navbar() {
   };
 
   useEffect(() => {
-    setIsMenuClicked(false)
+    setIsMenuClicked(false);
+    
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
@@ -43,7 +44,8 @@ function Navbar() {
       }
     });
     return listen();
-  }, [currentUserData]);
+
+  }, [currentUser]);
   //Sign out
   const UserSignOut = () => {
     signOut(auth)

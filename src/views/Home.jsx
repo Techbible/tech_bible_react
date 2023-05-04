@@ -274,7 +274,7 @@ const Home = () => {
 
           <div
             style={
-              isFiltering
+              !isFiltering
                 ? {
                     display: "block",
                     transition: "transform ease-out .5s, opacity ease-out .5s",
@@ -290,30 +290,24 @@ const Home = () => {
             }
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
           >
-            <div
-              style={
-                isFiltering
-                  ? {
-                      display: "block",
-                    }
-                  : {
-                      display: "none",
-                    }
-              }
-            >
-              <AppOfTheDay />
-              {/************You might also like***********/}
-              <div className="you-might-like-apps-container">
-                {/* <div className="you-might-like-apps-container"> */}
-                <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
-                  YOU MIGHT ALSO LIKE
-                </p>
-                <div
-                  className="flex flex-col sm:flex-row"
-                  style={{ display: "flex" }}
-                >
-                  <YouMightLikeApp />
-                </div>
+            <div style={!isFiltering ? {
+              display: 'block',
+            } : {
+              display: 'none',  
+            }}>
+            <AppOfTheDay />
+            {/************You might also like***********/}
+            <div className="you-might-like-apps-container">
+              {/* <div className="you-might-like-apps-container"> */}
+              <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
+                YOU MIGHT ALSO LIKE
+              </p>
+              <div
+                className="flex flex-col sm:flex-row"
+                style={{ display: "flex" }}
+              >
+                <YouMightLikeApp />
+
               </div>
               {/***********END You might also like********/}
             </div>
@@ -358,7 +352,8 @@ const Home = () => {
                 <div></div>
               )}
             </div>
-          </div>
+        </div>
+        </div>
         </div>
       </main>
       <aside className="sidebarWithSeparator right">

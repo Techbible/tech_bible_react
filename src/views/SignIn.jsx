@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../assets/styles/signin_signup/signin_signup.css";
 import {
-  Firestore,
   Timestamp,
   collection,
   doc,
+  getDoc,
   getDocs,
   onSnapshot,
   query,
@@ -51,13 +51,22 @@ const SignIn = () => {
   };
 
   const checkUserCredentials = async (user) => {
-  //  try{
-    
-  //  }
-    const userData = await onSnapshot(doc(db, "Users", user.uid), (doc) => {});
-    console.log(userData)
+    try {
+      const userDoc = await getDoc(doc(db, "Users", user.uid));
+      if (userDoc.exists()) {
+        console.log(userDoc.data());
+        console.log(true);
+        return true;
+      } else {
+        console.log(false);
+        return false;
+      }
+    } catch (error) {
+      console.log("Error checking user credentials:", error);
+      return false;
+    }
   };
-
+  
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -81,7 +90,6 @@ const SignIn = () => {
         navigate("/");
       }
     } catch (error) {
-      // Handle sign-in error
       console.log(error);
     }
   };
