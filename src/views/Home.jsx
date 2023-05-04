@@ -349,7 +349,7 @@ const Home = () => {
                   )}
                 </div>
               ) : (
-                <div></div>
+                <div style={{display: 'none',}}></div>
               )}
             </div>
         </div>
