@@ -91,8 +91,7 @@ const Toolitem = ({ toolData, forceRender }) => {
         </Link>
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
-          <div className="flex direction-column align-center mt-3">
-            
+          <div className="flex direction-column align-center mt-3">   
             <img
               alt="tech bible"
               className="follow_unfollow"
@@ -109,10 +108,10 @@ const Toolitem = ({ toolData, forceRender }) => {
             />
             <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
               {toolData.LikedBy?.length}
+              </div>
+              <span className="bi bi-plus-lg fw-bold text-white"></span>
             </div>
-            <span class="bi bi-plus-lg fw-bold text-white"></span>
-          </div>
-        </div> 
+            </div> 
       </div>
     </div>
   );

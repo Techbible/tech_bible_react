@@ -44,6 +44,7 @@ const YouMightLikeApp = () => {
     <div>
       <div className="flex flex-col sm:flex-row" style={{ display: "flex" }}>
         {Tools?.map((tool) => (
+         <a href={tool.URL} target="_blank" rel="noreferrer">
           <YouMightLikeItem
             id={tool.id}
             title={tool.Name}
@@ -52,6 +53,7 @@ const YouMightLikeApp = () => {
             url={tool.URL}
             category={tool.category}
           />
+          </a>
         ))}
       </div>
     </div>

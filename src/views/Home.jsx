@@ -358,9 +358,9 @@ const Home = () => {
       </main>
       <aside className="sidebarWithSeparator right">
         <Link to="/News">
-          <div className="poppins text-xl" style={{ fontWeight: "300px" }}>
+          <h1 className="poppins" style={{ fontWeight: "300px" }}>
             News
-          </div>{" "}
+          </h1>{" "}
         </Link>
         {data?.slice(0, 3).map((article, index) => (
           <NewsHomePage

@@ -189,6 +189,8 @@ const Profile = () => {
       querySnapshot.forEach((doc) => {
         LikedOnes.push(doc.data());
         setLikedTools(LikedOnes);
+        forceRender();
+
       });
     } catch (error) {
       console.log(error);
@@ -198,7 +200,6 @@ const Profile = () => {
   useEffect(() => {
     LoadLikedTools();
 
-    return () => LoadLikedTools();
   }, [reducerValue]);
 
   //Verifying Sign in and loading users infos on load
@@ -225,7 +226,6 @@ const Profile = () => {
       });
       setCategories(CategoriesArray);
     });
-
     return listen();
   }, []);
 
@@ -298,7 +298,7 @@ const Profile = () => {
                 <div class="row">
                   <div class="col profile-info-buttons">
                     <button className="mr-4 transition duration-250 w-[100px] my-2 ">
-                      My Folders
+                      <Link to="/folders">My Folders</Link>
                     </button>
                     {/* <button className="mr-4 transition duration-250 ">
                       Share
