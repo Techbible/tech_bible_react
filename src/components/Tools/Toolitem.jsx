@@ -41,6 +41,8 @@ const Toolitem = ({ toolData, forceRender }) => {
           </div>
         </a>
         <div className="flex direction-column flex-1">
+        <Link to={`/newtooldetails/${toolData.id}`}>
+
           <div className="color-white font-700 text-[15px] font-bold mb-1">
             <Link to={`/newtooldetails/${toolData.id}`}>{toolData?.Name} </Link>
             <a
@@ -86,6 +88,7 @@ const Toolitem = ({ toolData, forceRender }) => {
               </a>
             </div>
           </div>
+        </Link>
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
           <div className="flex direction-column align-center mt-3">

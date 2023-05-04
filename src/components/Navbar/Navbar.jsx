@@ -232,7 +232,7 @@ function Navbar() {
                   <div className="text-[15px] px-4 py-2 bg-black transition duration-300 hover:bg-white hover:text-black">
                     <div className="user-info-container">
                       <Link to="/profile">
-                        <div className="user-info">
+                        <div className="user-info" onClick={()=>{navigate("/profile")}}>
                           <img
                             src={currentUserData.photo}
                             className="pfp"
@@ -259,6 +259,8 @@ function Navbar() {
                       />
                     </span>
                   </div>
+                  <div className="border-[1px] text-white "></div>
+
                 </div>
               )}
               <div class="py-1 bg-black" role="none">
@@ -274,11 +276,11 @@ function Navbar() {
                   </div>
                 </Link>
                 <div className="border-[1px] text-white "></div>
-                <Link to="/community">
-                  <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
+                {/* <Link to="/community"> */}
+                  <div onClick={()=>{navigate('/')}} className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
                     Community
                   </div>
-                </Link>
+                {/* </Link> */}
               </div>
             </div>
           </div>
