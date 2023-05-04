@@ -65,7 +65,6 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     });
-
   
     useEffect(() => {
     const fetchData = async () => {
@@ -81,10 +80,8 @@ const Home = () => {
     const listen = onAuthStateChanged(auth, fetchData);
     return listen();
   }, [reducerValue]);
-  
 
-  
-  
+
   //Searching for tools by name (fulltext search)
 
   const SearchTool = async () => {
@@ -282,7 +279,7 @@ const Home = () => {
 
           <div
             style={
-              isFiltering
+              !isFiltering
                 ? {
                     display: "block",
                     transition: "transform ease-out .5s, opacity ease-out .5s",
@@ -298,7 +295,7 @@ const Home = () => {
             }
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
           >
-            <div style={isFiltering ? {
+            <div style={!isFiltering ? {
               display: 'block',
             } : {
               display: 'none',  
@@ -315,10 +312,9 @@ const Home = () => {
                 style={{ display: "flex" }}
               >
                 <YouMightLikeApp />
-              </div>
-            </div>
-            {/***********END You might also like********/}
 
+              </div>
+              {/***********END You might also like********/}
             </div>
           </div>
           {!isFiltering ? (
@@ -362,14 +358,15 @@ const Home = () => {
                 <div></div>
               )}
             </div>
-          </div>
+        </div>
+        </div>
         </div>
       </main>
       <aside className="sidebarWithSeparator right">
         <Link to="/News">
-          <div className="poppins text-xl" style={{ fontWeight: "300px" }}>
+          <h1 className="poppins" style={{ fontWeight: "300px" }}>
             News
-          </div>{" "}
+          </h1>{" "}
         </Link>
         {data?.slice(0, 3).map((article, index) => (
           <NewsHomePage
@@ -379,6 +376,11 @@ const Home = () => {
             provider={article?.provider[0]?.name}
           />
         ))}
+        <Link to="/News">
+          <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer ">
+            See more...
+          </div>
+        </Link>
       </aside>
     </div>
   );

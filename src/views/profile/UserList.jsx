@@ -33,7 +33,6 @@ const UserList = () => {
   const [categories, setCategories] = useState([]);
   const [Category, setCategory] = useState("");
   const [Name, setName] = useState("");
-  const [folderPicture, setFolderPicture] = useState(null);
 
   const [LikedTools, setLikedTools] = useState([]);
   const [UserFolders, setUserFolders] = useState([]);
@@ -74,22 +73,11 @@ const UserList = () => {
   };
 
   const createFolder = () => {
-    if (folderPicture === null) return;
-    const imageRef = ref(
-      storage,
-      `floders images/${currentUser?.name}/${
-        folderPicture.name + currentUser.uid
-      }`
-    );
+  
     const usersRef = collection(db, "Users");
     const userDocRef = doc(usersRef, currentUser.uid);
-    uploadBytes(imageRef, folderPicture).then((snapshot) => {
-      console.log("Image uploaded");
-      getDownloadURL(snapshot.ref)
-        .then((url) => {
-          updateDoc(userDocRef, {
+updateDoc(userDocRef, {
             folders: arrayUnion({
-              photo: url,
               name: Name,
               category: Category,
               tools: [],
@@ -101,13 +89,7 @@ const UserList = () => {
             .catch((error) => {
               console.log("Error updating photo:", error);
             });
-        })
-        .catch((error) => {
-          console.log("Error getting download URL:", error);
-        });
-      closeModal();
-      forceRender();
-    });
+
     closeModal();
     forceRender();
   };
@@ -217,15 +199,6 @@ const UserList = () => {
           X
         </span>
         <div className="flex flex-col inner-modal my-10">
-          <div className="flex m-5">
-            <h4>Folder Photo : </h4>{" "}
-            <input
-              type="file"
-              className="folder-input"
-              onChange={(event) => setFolderPicture(event.target.files[0])}
-              placeholder="Enter a name..."
-            />
-          </div>
           <div className="flex m-5">
             <h4>Folder Name : </h4>{" "}
             <input

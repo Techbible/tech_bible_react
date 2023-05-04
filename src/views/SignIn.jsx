@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../assets/styles/signin_signup/signin_signup.css";
 import {
-  Firestore,
   Timestamp,
   collection,
   doc,
+  getDoc,
   getDocs,
   onSnapshot,
   query,
@@ -51,13 +51,22 @@ const SignIn = () => {
   };
 
   const checkUserCredentials = async (user) => {
-  //  try{
-    
-  //  }
-    const userData = await onSnapshot(doc(db, "Users", user.uid), (doc) => {});
-    console.log(userData)
+    try {
+      const userDoc = await getDoc(doc(db, "Users", user.uid));
+      if (userDoc.exists()) {
+        console.log(userDoc.data());
+        console.log(true);
+        return true;
+      } else {
+        console.log(false);
+        return false;
+      }
+    } catch (error) {
+      console.log("Error checking user credentials:", error);
+      return false;
+    }
   };
-
+  
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -81,17 +90,13 @@ const SignIn = () => {
         navigate("/");
       }
     } catch (error) {
-      // Handle sign-in error
       console.log(error);
     }
   };
 
   return (
-    <div className="sign-in h-full bg-gradient-to-tl from-purple-300 to-indigo-900 w-full h-[100%] py-16 px-4">
+    <div className="sign-in h-full bg-[#0D0C12] w-full h-[100%] py-16 px-4">
       <div className="flex flex-col items-center justify-center">
-        <Link to="/">
-          <h1 className="font-[500]">Tech Bible</h1>
-        </Link>
         <div className="bg-[#1D1D1F] shadow rounded lg:w-1/3  md:w-1/2 w-full p-10">
           <p
             tabIndex={0}

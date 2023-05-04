@@ -12,7 +12,7 @@ const NewsList = () => {
 
     // useEffect(()=>{console.log(data)},[])
     return (
-        <div className="container mx-auto bg-[#1D1D1F] text-white my-3">
+        <div className="container mx-auto bg-[#0D0C12] text-white my-3">
   <div className="News-title text-center py-8">
     <h1 className="text-4xl font-bold">Daily AI News</h1>
   </div>
