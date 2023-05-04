@@ -119,7 +119,10 @@ function Navbar() {
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
                   <span className="text-white rounded-full p-1">
-                    <i className="fab fa-tiktok text-white text-xl"></i>
+                    <a href="https://www.tiktok.com/@tech.bible">
+                       <i className="fab fa-tiktok text-white text-xl"></i>
+                     </a>
+                   
                   </span>
                 </li>
                 <li
@@ -127,7 +130,9 @@ function Navbar() {
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
                   <span className="text-white rounded-full p-1">
+                  <a href="https://youtube.com/@MyTechBible">
                     <i className="fab fa-youtube text-white text-xl"></i>
+                    </a>
                   </span>
                 </li>
                 <li
@@ -135,7 +140,9 @@ function Navbar() {
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
                   <span className="text-white rounded-full p-1">
+                    <a href="https://www.instagram.com/my.techbible">
                     <i className="fab fa-instagram text-white text-xl"></i>
+                    </a>
                   </span>
                 </li>
               </ul>
@@ -156,7 +163,7 @@ function Navbar() {
               </div>
             </div>
           ) : (
-            <div className="user-info-container" style={{ display: screenWidth<765?"none":"flex" }}>
+            <div className="user-info-container" style={{ display: screenWidth<768?"none":"flex" }}>
               <Link to="/profile">
                 <div className="user-info">
                   <img src={currentUserData?.photo} className="pfp" alt="pfp" />
