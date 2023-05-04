@@ -244,7 +244,7 @@ const Profile = () => {
   return (
     <div className="pt-[6rem]">
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
-        <main className="layoutMain ">
+        <main className="layoutMain lg:pl-[10rem] ">
             <div className="text-[16px] fontWeight-500 ml-[2.5rem] " >WELCOME,</div>
           {/* Profile Info Component */}
           {/* <div class="relative max-w-[711px] w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-[#18151D] to-[#27242E] rounded-xl p-10"> */}

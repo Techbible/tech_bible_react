@@ -65,7 +65,6 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     });
-
   
     useEffect(() => {
     const fetchData = async () => {
@@ -81,10 +80,8 @@ const Home = () => {
     const listen = onAuthStateChanged(auth, fetchData);
     return listen();
   }, [reducerValue]);
-  
 
-  
-  
+
   //Searching for tools by name (fulltext search)
 
   const SearchTool = async () => {
@@ -310,10 +307,9 @@ const Home = () => {
                 style={{ display: "flex" }}
               >
                 <YouMightLikeApp />
-              </div>
-            </div>
-            {/***********END You might also like********/}
 
+              </div>
+              {/***********END You might also like********/}
             </div>
           </div>
           {!isFiltering ? (
@@ -356,7 +352,8 @@ const Home = () => {
                 <div></div>
               )}
             </div>
-          </div>
+        </div>
+        </div>
         </div>
       </main>
       <aside className="sidebarWithSeparator right">
@@ -373,6 +370,11 @@ const Home = () => {
             provider={article?.provider[0]?.name}
           />
         ))}
+        <Link to="/News">
+          <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer ">
+            See more...
+          </div>
+        </Link>
       </aside>
     </div>
   );

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import { auth, db, provider } from "../config/firebase";
-import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { auth, db } from "../config/firebase";
+import { onAuthStateChanged} from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 
 export const AuthContext = createContext();
@@ -11,17 +11,6 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [currentUserData, setCurrentUserData] = useState({});
   const [isAdmin, setIsAdmin] = useState(false);
- 
-
-  const googleSignIn = () => {
-    signInWithPopup(auth, provider);
-    // signInWithRedirect(auth, provider)
-  };
-
-  const logOut = () => {
-      signOut(auth)
-  }
-
 
 
 
