@@ -18,12 +18,15 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
+import { ToolsContext } from "../context/ToolsContext";
+
 const toolsdata = require('../config/data.json');
 
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(NewsContext)
+  // const { toolsdata } = useContext(ToolsContext)
 
 
   const [authUser, setAuthUser] = useState(null);
@@ -61,6 +64,7 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     });
+    
   useEffect(() => {
     const fetchData = async () => {
       const ToolsArray = [];
@@ -71,10 +75,8 @@ const Home = () => {
       });
       setTopTools(ToolsArray);
     };
-
-    const listen = onAuthStateChanged(auth, fetchData);
-    return listen();
-  }, [reducerValue]);
+    fetchData();
+}, [reducerValue]);
 
   //Searching for tools by name (fulltext search)
 
@@ -99,10 +101,6 @@ const Home = () => {
       setIsSearching(false);
       setSearchedTool([]);
     }
-    return () => {
-      setIsSearching(false);
-      setSearchedTool([]);
-    };
   }, [Search]);
 
   // handling  by price
@@ -119,10 +117,6 @@ const Home = () => {
 
   useEffect(() => {
     handleFilter();
-
-    return () => {
-      handleFilter();
-    };
   }, [Pricing]);
 
 
@@ -131,8 +125,7 @@ const Home = () => {
  //input value
   const [value ,setValue]=useState('');
   const onChange =(event)=>{
-        setValue(event.target.value);
-     
+        setValue(event.target.value);  
   }
 
 
@@ -240,7 +233,7 @@ const Home = () => {
                     .map((tool, index) => (
                       <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer pl-6">
                       <div>
-                        <p className="text-gray-500" key={tool.Name}> {tool.Name}</p>
+                        <Link to=""><p className="text-gray-500" key={tool.Name}> {tool.Name}</p></Link>
                       </div>
                     </li>
                    

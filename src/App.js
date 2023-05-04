@@ -22,6 +22,7 @@ import NewToolDetails from "./views/NewToolDetails";
 import UpdatePassword from "./components/ProfileSettings/UpdatePassword";
 import DataParser from "./admin/Excel To Firestore/DataParser";
 import MyComponent from "./components/MyComponent";
+import { ToolsContext, ToolsContextProvider } from "./context/ToolsContext";
 
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);
