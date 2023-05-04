@@ -235,8 +235,13 @@ const Home = () => {
 
                         <div>
                           <p className="text-gray-500" key={tool.Name}>
-                            {" "}
-                            {tool.Name}
+                            
+                           
+                            
+                              
+                               <Link to="/newtooldetails"> { tool.Name}</Link>
+                               
+                                                          
                           </p>
                         </div>
                       </li>
@@ -340,6 +345,7 @@ const Home = () => {
             <div>
               {!isFiltering ? (
                 <div className="tools-section-ngu">
+                  <h1>Top tools</h1>
                   {!TopTools ? (
                     <h1 style={{ color: "#fff" }}>Loading...</h1>
                   ) : (

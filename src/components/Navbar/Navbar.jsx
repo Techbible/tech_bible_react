@@ -100,15 +100,16 @@ function Navbar() {
                     Resources
                   </li>
 
-                  <Link to="community">
-                    {" "}
+                 
+                    
                     <li
                       className="tracking-wider hover:tracking-widest"
                       style={{ transition: "0.3s", cursor: "pointer" }}
                     >
-                      Community
+                       <Link to="/community"> Community</Link>
+                     
                     </li>
-                  </Link>
+                  
                 </div>
 
                 <li
@@ -276,11 +277,11 @@ function Navbar() {
                   </div>
                 </Link>
                 <div className="border-[1px] text-white "></div>
-                {/* <Link to="/community"> */}
-                  <div onClick={()=>{navigate('/')}} className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
+                 <Link to="/community"> 
+                  <div  className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
                     Community
                   </div>
-                {/* </Link> */}
+                </Link>
               </div>
             </div>
           </div>
