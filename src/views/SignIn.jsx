@@ -25,8 +25,8 @@ const SignIn = () => {
   // const [passwordError, setPasswordError] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
 
@@ -49,24 +49,24 @@ const SignIn = () => {
         console.log(userCredential);
         navigate("/");
       })
-      .catch((error) => {
+      .catch((err) => {
         // console.log(error);
-        switch (e.code) {
-          case 'auth/user-not-found':
-            setEmailError('User not found');
-            setIsEmailValid(false)
+        switch (err.code) {
+          case "auth/user-not-found":
+            setEmailError("The email address does not exist");
+            setIsEmailValid(false);
             break;
-            case 'auth/invalid-email':
-              setEmailError('Invalid email');
-              setIsEmailValid(false)
-              break;
-              case 'auth/wrong-password':
-                setPasswordError('Wrong password');
-                setIsPasswordValid(false)
+          case "auth/invalid-email":
+            setEmailError("The email address does not exist");
+            setIsEmailValid(false);
+            break;
+          case "auth/wrong-password":
+            setPasswordError("Wrong password");
+            setIsPasswordValid(false);
             break;
           default:
-            setEmailError(e.message);
-            setPasswordError(e.message);
+            setEmailError('this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your email or you can try again later');
+            setPasswordError('this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later');
         }
       });
     handlePasswordChange();
@@ -85,7 +85,7 @@ const SignIn = () => {
       return false;
     }
   };
-  
+
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -112,6 +112,8 @@ const SignIn = () => {
       console.log(error);
     }
   };
+
+  
 
   return (
     <div className="sign-in h-full bg-[#0D0C12] w-full h-[100%] py-16 px-4">
@@ -190,13 +192,11 @@ const SignIn = () => {
               className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
             />
           </div>
-          
+
           {!isEmailValid ? (
             <div className="text-danger my-2">{emailError}</div>
-          ) : (
-            null
-          )}
-          
+          ) : null}
+
           <div className="mt-6  w-full">
             <lable className="text-sm font-medium leading-none text-white">
               Password
@@ -229,6 +229,9 @@ const SignIn = () => {
               </div>
             </div>
           </div>
+              {!isPasswordValid ? (
+                <div className="text-danger my-2">{passwordError}</div>
+              ) : null}
           <div className="mt-8">
             <button
               onClick={(e) => handleSignIn(e)}
