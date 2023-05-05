@@ -130,8 +130,6 @@ const Home = () => {
       <main className="layoutMain " onMouseLeave={() => setIsFocused(false)}>
         <div className="flex direction-column " >
           <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
-            {/* <div className="max-w-2xl mx-auto flex flex-column py-2 lg:h-[198px] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-500 md:mt-5 sm:mt-5 mb-[30px] "> */}
-
             <h2 className="text-white fontWeight-500 text-[18px] mt-2">
               The Largest Saas Tools directory
             </h2>

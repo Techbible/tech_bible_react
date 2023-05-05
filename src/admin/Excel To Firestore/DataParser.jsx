@@ -27,15 +27,15 @@ function DataParser() {
     });
   };
 
-  useEffect(() => {
-    if (!isAdmin) {
-      notify("x");
-      navigate("/");
-    }
-    else{
-        notify("Welcome to the Admin Space");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!isAdmin) {
+  //     notify("x");
+  //     navigate("/");
+  //   }
+  //   else{
+  //       notify("Welcome to the Admin Space");
+  //   }
+  // }, []);
   // State to store parsed data
   const [ParsedData, setParsedData] = useState([]);
 
@@ -102,7 +102,7 @@ function DataParser() {
         name="file"
         onChange={changeHandler}
         accept=".csv"
-        className="block mt-10 p-2 w-full text-blue-700 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="block mt-10 p-2 w-full text-blue-700 bg-black rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-dark-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       />
       {tableRows?.length > 0 ? (
         <button className="bg-blue-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" onClick={() => DataInserter()}>
@@ -125,7 +125,7 @@ function DataParser() {
           {values.map((value, index) => {
             return (
               <tr
-                className="border border-black hover:bg-grey-100 hover:[&:nth-child(odd)]:bg-blue-200 hover:[&:nth-child(even)]:bg-blue-200 [&:nth-child(odd)]:bg-gray-300 "
+                className="border border-black hover:bg-grey-100 hover:[&:nth-child(odd)]:bg-blue-200 hover:[&:nth-child(even)]:bg-blue-200 [&:nth-child(odd)]:bg-dark-300 "
                 key={index}
               >
                 {value.map((val, i) => {

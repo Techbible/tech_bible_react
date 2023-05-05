@@ -31,9 +31,9 @@ function App() {
     return children;
   };
   const AdminVerif = ({ children }) => {
-    if (!isAdmin) {
-      return <Navigate to="/" />;
-    }
+    // if (!isAdmin) {
+    //   return <Navigate to="/" />;
+    // }
     return children;
   };
 

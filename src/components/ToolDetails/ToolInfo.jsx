@@ -27,19 +27,9 @@ const ToolInfo = ({ toolData }) => {
           <div className="flex direction-column flex-1 mt-2">
             <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-600 mb-3 noOfLines-2 styles_format__w0VVk">
               {toolData?.Name}
+              <a href={toolData?.URL} target="_blank" rel="noreferrer">
               <i className="ml-3 text-sm text-white hover:text-gray-600 transition-colors duration-300 fas fa-share"></i>
-
-                <svg width="13" height="14" viewBox="0 0 13 14">
-                  <g
-                    stroke="#4B587C"
-                    stroke-width="1.5"
-                    fill="none"
-                    fillRule="evenodd"
-                  >
-                    <path d="M9.6 4H4.2a2.4 2.4 0 0 0-2.4 2.4V10"></path>
-                    <path d="M6.6 7l3-3-3-3M12 10v3H0"></path>
-                  </g>
-                </svg>
+              </a>
             </div>
             <div className="fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2">
               <span className="styles_tagline__j29pO text-gray-300">
