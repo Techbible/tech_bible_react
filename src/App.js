@@ -21,6 +21,7 @@ import { AddTool, DataParser } from "./admin";
 //importing the App's context
 import { NewsContextProvider } from "./context/NewsContext";
 import { AuthContext } from "./context/AuthContext";
+import GettingData from "./GettingData";
 
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);
@@ -85,6 +86,7 @@ function App() {
 
         <Route path="/addTool" element=<AddTool /> />
         <Route path="/tools" element={<Tools />} />
+        <Route path="/mongo" element={<GettingData />} />
         <Route path="/DataParser" element={
           <AdminVerif>
             <DataParser />

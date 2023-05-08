@@ -137,9 +137,7 @@ const Profile = () => {
 
   /**************** Editing username and Profile PIC *****************/
   const [profilePicture, setProfilePicture] = useState(null);
-  const [editedUsername, setEditedUsername] = useState(
-    currentUserData?.username
-  );
+  const [editedUsername, setEditedUsername] = useState(currentUserData?.username);
 
   const uploadImage = () => {
     if (profilePicture === null) return;

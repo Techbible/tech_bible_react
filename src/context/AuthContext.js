@@ -37,7 +37,7 @@ export const AuthContextProvider = ({ children }) => {
     });
     // console.log(isAdmin);
     return listen();
-  }, []);
+  }, [currentUser]);
 
 
   
