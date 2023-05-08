@@ -26,18 +26,16 @@ const Toolitem = ({ toolData, forceRender }) => {
         className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
         data-test="post-item-390145"
       >
-        <div
-          className="styles_thumbnail__Rmwk5 styles_thumbnail__E2_pB mr-3"
-          data-test="post-thumbnail"
-        >
-          <img
-            loading="lazy"
-            src={toolData?.Icon}
-            style={{ width: "81px", height: "79px" }}
-            alt="Adobe XD"
-            className="styles_mediaThumbnail__LDCQN"
-          />
-        </div>
+        <Link to={`/newtooldetails/${toolData.id}`}>
+          <div className="" data-test="post-thumbnail">
+            <img
+              loading="lazy"
+              src={toolData?.Icon}
+              alt="Tool not found"
+              className=" rounded-[6px] lg:rounded-[10px] md:rounded-[6px] sm:rounded-[6px] lg:w-[81px] md:w-[61px] sm:w-[51px] w-[51px] "
+            />
+          </div>
+        </Link>
         <div className="flex direction-column flex-1">
           <Link to={`/newtooldetails/${toolData.id}`}>
             <div className="color-white font-700 text-[15px] font-bold mb-1">
