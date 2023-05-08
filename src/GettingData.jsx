@@ -16,8 +16,8 @@ function GettingData() {
       <ul>
         {tools.map(tool => (
           <li key={tool._id}>
-            <h2>{tool.description}</h2>
-            <p>Completed: {tool.completed ? 'Yes' : 'No'}</p>
+            <h2>{tool.Name}</h2>
+            <h2>{tool.Description}</h2>
           </li>
         ))}
       </ul>
