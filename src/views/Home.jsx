@@ -265,7 +265,7 @@ const Home = () => {
 
           <div
             style={
-              !isFiltering
+              isFiltering
                 ? {
                     display: "block",
                     transition: "transform ease-out .5s, opacity ease-out .5s",
