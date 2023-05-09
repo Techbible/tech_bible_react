@@ -137,7 +137,9 @@ const Profile = () => {
 
   /**************** Editing username and Profile PIC *****************/
   const [profilePicture, setProfilePicture] = useState(null);
-  const [editedUsername, setEditedUsername] = useState(currentUserData?.username);
+  const [editedUsername, setEditedUsername] = useState(
+    currentUserData?.username
+  );
 
   const uploadImage = () => {
     if (profilePicture === null) return;
@@ -188,7 +190,6 @@ const Profile = () => {
         LikedOnes.push(doc.data());
         setLikedTools(LikedOnes);
         forceRender();
-
       });
     } catch (error) {
       console.log(error);
@@ -197,7 +198,6 @@ const Profile = () => {
 
   useEffect(() => {
     LoadLikedTools();
-
   }, [reducerValue]);
 
   //Verifying Sign in and loading users infos on load
@@ -243,7 +243,9 @@ const Profile = () => {
     <div className="pt-[6rem]">
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
         <main className="layoutMain pl-desktop-5 pl-mobile-4 ">
-            <div className="text-[16px] fontWeight-500 ml-[2.5rem] " >WELCOME,</div>
+          <div className="text-[16px] fontWeight-500 ml-[2.5rem] ">
+            WELCOME,
+          </div>
           {/* Profile Info Component */}
           {/* <div className="relative max-w-[711px] w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-[#18151D] to-[#27242E] rounded-xl p-10"> */}
           <div className="relative max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
@@ -309,14 +311,22 @@ const Profile = () => {
           </div>
           {/* END Profile Info Component */}
 
-          <div style={{ paddingLeft: "3rem", borderLeft: "1px solid white", maxWidth: '710px' }}>
+          <div
+            style={{
+              paddingLeft: "3rem",
+              borderLeft: "1px solid white",
+              maxWidth: "710px",
+            }}
+          >
             {/* BIO components */}
             {currentUserData.bio ? (
               <div>
                 {updateBio ? (
                   <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
                     <div className="mb-4 md:mb-0">
-                      <p className="font-bold text-lg leading-tight mb-3">Bio</p>
+                      <p className="font-bold text-lg leading-tight mb-3">
+                        Bio
+                      </p>
                       <input
                         className="h-7 p-2 w-full text-sm leading-tight text-black border-gray-400 border rounded-lg"
                         placeholder={currentUserData.bio}
@@ -331,7 +341,10 @@ const Profile = () => {
                       >
                         Cancel
                       </button>
-                      <button onClick={() => UpdatingBio()} className="update-btn">
+                      <button
+                        onClick={() => UpdatingBio()}
+                        className="update-btn"
+                      >
                         Update
                       </button>
                     </div>
@@ -339,7 +352,9 @@ const Profile = () => {
                 ) : (
                   <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
                     <div className="mb-4 md:mb-0">
-                      <p className="font-bold text-lg leading-tight mb-3">Bio</p>
+                      <p className="font-bold text-lg leading-tight mb-3">
+                        Bio
+                      </p>
                       <p className="text-sm">{currentUserData.bio}</p>
                     </div>
                     <div>
@@ -373,10 +388,16 @@ const Profile = () => {
                 </div>
                 {addBio ? (
                   <div>
-                    <button onClick={() => setAddBio(false)} className="cancel-btn">
+                    <button
+                      onClick={() => setAddBio(false)}
+                      className="cancel-btn"
+                    >
                       Cancel
                     </button>
-                    <button onClick={() => UpdatingBio()} className="submit-btn">
+                    <button
+                      onClick={() => UpdatingBio()}
+                      className="submit-btn"
+                    >
                       Submit
                     </button>
                   </div>
@@ -394,7 +415,9 @@ const Profile = () => {
             {/* Interests components */}
             <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]">
               <div className="mb-4 md:mb-0">
-                <p className="font-bold text-lg leading-tight mb-3">Interests</p>
+                <p className="font-bold text-lg leading-tight mb-3">
+                  Interests
+                </p>
                 {currentUserData?.interests?.map((i, index) => (
                   <p className="text-sm leading-tight d-inline" key={index}>
                     {i},&nbsp;
