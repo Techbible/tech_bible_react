@@ -61,20 +61,29 @@ const Home = () => {
       theme: "dark",
     });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const ToolsArray = [];
-      const q = query(collection(db, "Tools"));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        ToolsArray.push(doc.data());
-      });
-      setAllTools(ToolsArray);
-    };
 
-    const listen = onAuthStateChanged(auth, fetchData);
-    return listen();
-  }, [reducerValue]);
+  //this is mongoose 
+    useEffect(() => {
+      fetch('http://localhost:5000/mongo-tools')
+        .then(response => response.json())
+        .then(data =>  setAllTools(data))
+        .catch(error => console.error(error));
+    }, []);
+//this is firebase
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const ToolsArray = [];
+  //     const q = query(collection(db, "Tools"));
+  //     const querySnapshot = await getDocs(q);
+  //     querySnapshot.forEach((doc) => {
+  //       ToolsArray.push(doc.data());
+  //     });
+  //     setAllTools(ToolsArray);
+  //   };
+
+  //   const listen = onAuthStateChanged(auth, fetchData);
+  //   return listen();
+  // }, [reducerValue]);
 
   //Searching for tools by name (fulltext search)
 
@@ -150,7 +159,6 @@ const Home = () => {
                   </svg>
                 </div>
                  <input
-
                   type="text"
                   id="voice-search"
                   className="bg-white h-[36px] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -222,7 +230,7 @@ const Home = () => {
                         <div>
                           <p className="text-gray-500" key={tool.Name}>
                             <Link to={`/newtooldetails/${tool.id}`}>
-                              {" "}
+                              
                               {tool.Name}
                             </Link>
                           </p>
