@@ -205,7 +205,7 @@ const Home = () => {
             {isFocused && (
               <div className="bg-white p-4 rounded-lg shadow-md ">
                 <ul>
-                  {AllTools.filter((tool) => {
+                  {allTools.filter((tool) => {
                     const searchTerm = value.toLowerCase();
                     const name = tool?.Name?.toLowerCase();
                     return searchTerm && name?.startsWith(searchTerm);
@@ -259,7 +259,7 @@ const Home = () => {
 
           <div
             style={
-              isFiltering
+              !isFiltering
                 ? {
                     display: "block",
                     transition: "transform ease-out .5s, opacity ease-out .5s",
