@@ -26,7 +26,7 @@ const Toolitem = ({ toolData, forceRender }) => {
         className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
         data-test="post-item-390145"
       >
-        <Link to={`/newtooldetails/${toolData.id}`}>
+        <Link to={`/newtooldetails/${toolData._id}`}>
           <div className="" data-test="post-thumbnail">
             <img
               loading="lazy"
@@ -37,9 +37,9 @@ const Toolitem = ({ toolData, forceRender }) => {
           </div>
         </Link>
         <div className="flex direction-column flex-1">
-          <Link to={`/newtooldetails/${toolData.id}`}>
+          <Link to={`/newtooldetails/${toolData._id}`}>
             <div className="color-white font-700 text-[15px] font-bold mb-1">
-              <Link to={`/newtooldetails/${toolData.id}`}>
+              <Link to={`/newtooldetails/${toolData._id}`}>
                 {toolData?.Name}{" "}
               </Link>
             </div>

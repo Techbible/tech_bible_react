@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { collection, query, limit, getDocs, where } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import axios from 'axios';
+
 
 import "../assets/styles/home/home.css";
 import "../assets/styles/home/global.css";
@@ -18,11 +20,17 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { allToolsAtom, toolState } from "../recoil/tool";
 
 const toolsdata = require("../config/data.json");
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
+
+  const allTools = useRecoilValue(allToolsAtom);
+
+
   const { data } = useContext(NewsContext);
   // const { toolsdata } = useContext(ToolsContext)
 
@@ -61,33 +69,10 @@ const Home = () => {
       theme: "dark",
     });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      //this is firebase
-      // const ToolsArray = [];
-      // const q = query(collection(db, "Tools"));
-      // const querySnapshot = await getDocs(q);
-      // querySnapshot.forEach((doc) => {
-      //   ToolsArray.push(doc.data());
-      // });
 
-      // setAllTools(ToolsArray);
 
-      //this is mongoose
-      fetch("http://localhost:5000/mongo-tools")
-        .then((response) => response.json())
-        .then((data) => setAllTools(data))
-        .catch((error) => console.error(error));
 
-      console.log(AllTools);
-    };
-
-    const listen = onAuthStateChanged(auth, fetchData);
-    return listen();
-  }, [reducerValue]);
-
-  //Searching for tools by name (fulltext search)
-
+//Searching for tools by name (fulltext search)
   const SearchTool = async () => {
     const SearchedTools = [];
     const q = query(collection(db, "Tools"), where("Name", "==", Search));
@@ -119,7 +104,6 @@ const Home = () => {
       SearchedTools.push(doc.data());
     });
     setSearchedTool(SearchedTools);
-    // console.log(SearchedTool);
   };
 
   useEffect(() => {
@@ -134,6 +118,7 @@ const Home = () => {
   const onChange = (event) => {
     setValue(event.target.value);
   };
+ 
 
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
@@ -230,7 +215,7 @@ const Home = () => {
                       <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer pl-6">
                         <div>
                           <p className="text-gray-500" key={tool.Name}>
-                            <Link to={`/newtooldetails/${tool.id}`}>
+                            <Link to={`/newtooldetails/${tool._id}`}>
                               {" "}
                               {tool.Name}
                             </Link>
@@ -342,10 +327,10 @@ const Home = () => {
                 {!isFiltering ? (
                   <div className="tools-section-ngu">
                     <h1>Top tools</h1>
-                    {!AllTools ? (
+                    {!allTools ? (
                       <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (
-                      AllTools.slice(0, 50).map((tool, index) => (
+                      allTools.slice(0, 50).map((tool, index) => (
                         <Toolitem
                           key={index}
                           toolData={tool}
