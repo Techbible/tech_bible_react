@@ -18,6 +18,8 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
+import axios from "axios";
+import { BASE_URL } from "../config/mongo";
 
 const toolsdata = require("../config/data.json");
 
@@ -61,15 +63,13 @@ const Home = () => {
       theme: "dark",
     });
 
-
-//this is firebase
+  //this is firebase
   useEffect(() => {
     const fetchData = async () => {
-      fetch('http://localhost:5000/mongo-tools')
-      .then(response => response.json())
-      .then(data =>  setAllTools(data))
-      .catch(error => console.error(error));
-
+      fetch("http://localhost:5000/mongo-tools")
+        .then((response) => response.json())
+        .then((data) => setAllTools(data))
+        .catch((error) => console.error(error));
     };
 
     const listen = onAuthStateChanged(auth, fetchData);
@@ -78,15 +78,29 @@ const Home = () => {
 
   //Searching for tools by name (fulltext search)
 
+  // const SearchTool = async () => {
+  //   const SearchedTools = [];
+  //   const q = query(collection(db, "Tools"), where("Name", "==", Search));
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach((doc) => {
+  //     SearchedTools.push(doc.data());
+  //   });
+  //   setSearchedTool(SearchedTools);
+  //   console.log(SearchedTool);
+  // };
+
+  //this is mongo
   const SearchTool = async () => {
-    const SearchedTools = [];
-    const q = query(collection(db, "Tools"), where("Name", "==", Search));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      SearchedTools.push(doc.data());
-    });
-    setSearchedTool(SearchedTools);
-    console.log(SearchedTool);
+    try {
+      const response = await axios.get("/api/tools", {
+        params: { Name: Search },
+      });
+      const SearchedTools = response.data;
+      setSearchedTool(SearchedTools);
+      console.log(SearchedTool);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //keeping track on what's the user is searching for
@@ -101,15 +115,28 @@ const Home = () => {
   }, [Search]);
 
   // handling  by price
+  // const handleFilter = async () => {
+  //   const SearchedTools = [];
+  //   const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach((doc) => {
+  //     SearchedTools.push(doc.data());
+  //   });
+  //   setSearchedTool(SearchedTools);
+  //   // console.log(SearchedTool);
+  // };
+
+  //this is mongo
   const handleFilter = async () => {
-    const SearchedTools = [];
-    const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      SearchedTools.push(doc.data());
-    });
-    setSearchedTool(SearchedTools);
-    // console.log(SearchedTool);
+    try {
+      const response = await axios.get(`${BASE_URL}/mongo-tools`, {
+        params: { Price: Pricing },
+      });
+      const SearchedTools = response.data;
+      setSearchedTool(SearchedTools);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -151,7 +178,6 @@ const Home = () => {
                 </div>
 
                 <input
-
                   type="text"
                   id="voice-search"
                   className="bg-white h-[36px] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -223,7 +249,6 @@ const Home = () => {
                         <div>
                           <p className="text-gray-500" key={tool.Name}>
                             <Link to={`/newtooldetails/${tool.id}`}>
-                              
                               {tool.Name}
                             </Link>
                           </p>

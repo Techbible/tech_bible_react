@@ -24,6 +24,7 @@ import Toolitem from "../components/Tools/Toolitem";
 
 import "../assets/styles/profile/profile.css";
 import "../assets/styles/Modal/modal.css";
+import axios from "axios";
 
 export const ModalcustomStyles = {
   content: {
@@ -176,23 +177,40 @@ const Profile = () => {
   //************************END Inserting Changes*********************************
 
   //loading the liked tools by the currentUser
+  // const LoadLikedTools = async () => {
+  //   const ToolsRef = collection(db, "Tools");
+  //   const LikedOnes = [];
+  //   const q = query(
+  //     ToolsRef,
+  //     where("LikedBy", "array-contains", currentUser?.uid),
+  //     limit(10)
+  //   );
+  //   try {
+  //     const querySnapshot = await getDocs(q);
+  //     querySnapshot.forEach((doc) => {
+  //       LikedOnes.push(doc.data());
+  //       setLikedTools(LikedOnes);
+  //       forceRender();
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  //this is mongo
   const LoadLikedTools = async () => {
-    const ToolsRef = collection(db, "Tools");
-    const LikedOnes = [];
-    const q = query(
-      ToolsRef,
-      where("LikedBy", "array-contains", currentUser?.uid),
-      limit(10)
-    );
     try {
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        LikedOnes.push(doc.data());
-        setLikedTools(LikedOnes);
-        forceRender();
+      const response = await axios.get("/api/tools", {
+        params: {
+          LikedBy: currentUser?.uid,
+          limit: 10,
+        },
       });
+      const LikedOnes = response.data;
+      setLikedTools(LikedOnes);
+      forceRender();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

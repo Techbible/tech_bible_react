@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useRef } from "react";
@@ -18,6 +18,10 @@ const Toolitem = ({ toolData, forceRender }) => {
     forceRender();
   };
 
+  useEffect(() => {
+    console.log("Toold Id" + toolData._id);
+  }, []);
+
   return (
     <div className="px-mobile-1 max-w-[680px] px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
       <LikeMethods ref={LikeMethodsRef} />
@@ -26,7 +30,7 @@ const Toolitem = ({ toolData, forceRender }) => {
         className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
         data-test="post-item-390145"
       >
-        <Link to={`/newtooldetails/${toolData.id}`}>
+        <Link to={`/newtooldetails/${toolData._id}`}>
           <div className="" data-test="post-thumbnail">
             <img
               loading="lazy"
@@ -37,9 +41,9 @@ const Toolitem = ({ toolData, forceRender }) => {
           </div>
         </Link>
         <div className="flex direction-column flex-1">
-          <Link to={`/newtooldetails/${toolData.id}`}>
+          <Link to={`/newtooldetails/${toolData._id}`}>
             <div className="color-white font-700 text-[15px] font-bold mb-1">
-              <Link to={`/newtooldetails/${toolData.id}`}>
+              <Link to={`/newtooldetails/${toolData._id}`}>
                 {toolData?.Name}{" "}
               </Link>
             </div>
@@ -82,8 +86,8 @@ const Toolitem = ({ toolData, forceRender }) => {
                 }
                 onClick={() => {
                   toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                    ? handleUnLikes(toolData.id)
-                    : handleLikes(toolData.id);
+                    ? handleUnLikes(toolData._id)
+                    : handleLikes(toolData._id);
                 }}
               />
               <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
