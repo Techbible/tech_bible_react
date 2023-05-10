@@ -20,11 +20,16 @@ import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
 import axios from "axios";
 import { BASE_URL } from "../config/mongo";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { allToolsAtom, toolState } from "../recoil/tool";
 
 const toolsdata = require("../config/data.json");
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
+
+  const allTools = useRecoilValue(allToolsAtom);
+
   const { data } = useContext(NewsContext);
   // const { toolsdata } = useContext(ToolsContext)
 
@@ -64,17 +69,17 @@ const Home = () => {
     });
 
   //this is firebase
-  useEffect(() => {
-    const fetchData = async () => {
-      fetch("http://localhost:5000/mongo-tools")
-        .then((response) => response.json())
-        .then((data) => setAllTools(data))
-        .catch((error) => console.error(error));
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     fetch("http://localhost:5000/mongo-tools")
+  //       .then((response) => response.json())
+  //       .then((data) => setAllTools(data))
+  //       .catch((error) => console.error(error));
+  //   };
 
-    const listen = onAuthStateChanged(auth, fetchData);
-    return listen();
-  }, [reducerValue]);
+  //   const listen = onAuthStateChanged(auth, fetchData);
+  //   return listen();
+  // }, [reducerValue]);
 
   //Searching for tools by name (fulltext search)
 
@@ -90,6 +95,8 @@ const Home = () => {
   // };
 
   //this is mongo
+
+  //Searching for tools by name (fulltext search)
   const SearchTool = async () => {
     try {
       const response = await axios.get("/api/tools", {
@@ -238,17 +245,18 @@ const Home = () => {
             {isFocused && (
               <div className="bg-white p-4 rounded-lg shadow-md ">
                 <ul>
-                  {AllTools.filter((tool) => {
-                    const searchTerm = value.toLowerCase();
-                    const name = tool?.Name?.toLowerCase();
-                    return searchTerm && name?.startsWith(searchTerm);
-                  })
+                  {allTools
+                    .filter((tool) => {
+                      const searchTerm = value.toLowerCase();
+                      const name = tool?.Name?.toLowerCase();
+                      return searchTerm && name?.startsWith(searchTerm);
+                    })
                     .slice(0, 10)
                     .map((tool, index) => (
                       <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer pl-6">
                         <div>
                           <p className="text-gray-500" key={tool.Name}>
-                            <Link to={`/newtooldetails/${tool.id}`}>
+                            <Link to={`/newtooldetails/${tool._id}`}>
                               {tool.Name}
                             </Link>
                           </p>
@@ -291,7 +299,7 @@ const Home = () => {
 
           <div
             style={
-              isFiltering
+              !isFiltering
                 ? {
                     display: "block",
                     transition: "transform ease-out .5s, opacity ease-out .5s",
@@ -359,16 +367,18 @@ const Home = () => {
                 {!isFiltering ? (
                   <div className="tools-section-ngu">
                     <h1>Top tools</h1>
-                    {!AllTools ? (
+                    {!allTools ? (
                       <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (
-                      AllTools.slice(0, 50).map((tool, index) => (
-                        <Toolitem
-                          key={index}
-                          toolData={tool}
-                          forceRender={forceRender}
-                        />
-                      ))
+                      allTools
+                        .slice(0, 50)
+                        .map((tool, index) => (
+                          <Toolitem
+                            key={index}
+                            toolData={tool}
+                            forceRender={forceRender}
+                          />
+                        ))
                     )}
                   </div>
                 ) : (
