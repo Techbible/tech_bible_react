@@ -225,7 +225,7 @@ function Navbar() {
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
-              tabindex="-1"
+              tabIndex="-1"
             >
               {!authUser ? (
                 <div>

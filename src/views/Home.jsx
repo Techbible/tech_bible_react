@@ -26,7 +26,7 @@ import { allToolsAtom, toolState } from "../recoil/tool";
 const toolsdata = require("../config/data.json");
 
 const Home = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, currentUserData } = useContext(AuthContext);
 
   const allTools = useRecoilValue(allToolsAtom);
 
@@ -161,6 +161,7 @@ const Home = () => {
 
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
+      <input type="hidden" name="interests" value={currentUserData} />
       <main className="layoutMain " onMouseLeave={() => setIsFocused(false)}>
         <div className="flex direction-column ">
           <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
@@ -179,7 +180,7 @@ const Home = () => {
                     <path
                       fillRule="evenodd"
                       d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     ></path>
                   </svg>
                 </div>
@@ -207,7 +208,7 @@ const Home = () => {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g clip-path="url(#clip0_3_252)">
+                  <g clipath="url(#clip0_3_252)">
                     <path
                       d="M2.79855 20.9446V20.4649C2.79855 14.2308 2.79855 7.9941 2.79855 1.76005C2.79855 1.55181 2.80337 1.33302 2.85163 1.13532C2.97468 0.637127 3.40173 0.286544 3.87945 0.278636C4.34269 0.270728 4.80594 0.270728 5.26677 0.278636C5.93751 0.286544 6.40317 0.800557 6.40558 1.54126C6.41041 3.51033 6.40558 5.47939 6.40558 7.44846C6.40558 11.8083 6.40558 16.1682 6.40558 20.5281V20.9446C6.85676 20.9446 7.28623 20.9551 7.71569 20.942C8.039 20.9314 8.34059 20.9578 8.50466 21.3215C8.6832 21.7169 8.68561 22.115 8.46605 22.4919C8.33818 22.7133 8.18859 22.9216 8.04865 23.1351C7.07873 24.6165 6.10881 26.0953 5.1389 27.5767C4.78422 28.1171 4.41749 28.1197 4.06282 27.5767C2.97226 25.9187 1.88895 24.2554 0.798394 22.5974C0.581248 22.2679 0.506453 21.9173 0.619852 21.5271C0.738075 21.1107 0.940745 20.9472 1.33885 20.9472C1.80933 20.9472 2.28222 20.9472 2.79855 20.9472V20.9446Z"
                       fill="white"
@@ -245,8 +246,7 @@ const Home = () => {
             {isFocused && (
               <div className="bg-white p-4 rounded-lg shadow-md ">
                 <ul>
-                  {allTools
-                    .filter((tool) => {
+                  {allTools?.filter((tool) => {
                       const searchTerm = value.toLowerCase();
                       const name = tool?.Name?.toLowerCase();
                       return searchTerm && name?.startsWith(searchTerm);
@@ -328,18 +328,20 @@ const Home = () => {
             >
               <AppOfTheDay />
               {/************You might also like***********/}
-              <div className="you-might-like-apps-container">
-                {/* <div className="you-might-like-apps-container"> */}
-                <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
-                  YOU MIGHT ALSO LIKE
-                </p>
-                <div
-                  className="flex flex-col sm:flex-row"
-                  style={{ display: "flex" }}>
-                  <YouMightLikeApp />
+                <div className="you-might-like-apps-container">
+                  {/* <div className="you-might-like-apps-container"> */}
+                  <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
+                    YOU MIGHT ALSO LIKE
+                  </p>
+                  <div
+                    className="flex flex-col sm:flex-row"
+                    style={{ display: "flex" }}
+                  >
+                    <YouMightLikeApp />
+                  </div>
+                  {/***********END You might also like********/}
                 </div>
-                {/***********END You might also like********/}
-              </div>
+
             </div>
             {!isFiltering ? (
               <div></div>
@@ -368,13 +370,12 @@ const Home = () => {
                     <h1>Top tools</h1>
                     {!allTools ? (
                       <div class="three-body">
-<div class="three-body__dot"></div>
-<div class="three-body__dot"></div>
-<div class="three-body__dot"></div>
-</div>
+                        <div class="three-body__dot"></div>
+                        <div class="three-body__dot"></div>
+                        <div class="three-body__dot"></div>
+                      </div>
                     ) : (
-                      allTools
-                        .slice(0, 50)
+                      allTools?.slice(0, 50)
                         .map((tool, index) => (
                           <Toolitem
                             key={index}

@@ -30,7 +30,7 @@ const NewToolDetails = () => {
 //this is JS LOGIC
 useEffect(()=>{
    // Use the find() method to search for a tool by ID
-   const foundTool = allTools.find((tool) => tool._id === id);
+   const foundTool = allTools?.find((tool) => tool._id === id);
    setToolData(foundTool);
 },[])
 
@@ -60,7 +60,6 @@ useEffect(()=>{
             <Post />
             <Post />
           </div>
-
           {/* End of Community Thoughts  */}
         </main>
 

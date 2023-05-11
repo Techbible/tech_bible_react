@@ -3,40 +3,66 @@ import { AuthContext } from "../../../context/AuthContext";
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import YouMightLikeItem from "./YouMightLikeItem";
+import { useRecoilValue } from "recoil";
+import { allToolsAtom } from "../../../recoil/tool";
 
 const YouMightLikeApp = () => {
   const { currentUserData } = useContext(AuthContext);
   const [Tools, setTools] = useState();
 
-  const LoadingMightLike = async () => {
-    const ToolsRef = collection(db, "Tools");
-    const tools = [];
-    const q = query(
-      ToolsRef,
-      where("Category", "in", currentUserData?.interests),
-      limit(3)
-    );
-    try {
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        tools.push(doc.data());
-        setTools(tools);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+  const allTools = useRecoilValue(allToolsAtom);
 
   useEffect(() => {
-    let isMounted = true;
-    if (isMounted) {
-      LoadingMightLike();
-    }
+    console.log("level 0")
+    if (Array.isArray(allTools) && currentUserData && currentUserData.interests) {
+      console.log("level 1")
+      // Filter the tools based on the currentUserData's interests
+      const filteredTools = allTools.find((tool) =>
+        {
+          currentUserData.interests.includes(tool.Category);
+        }
+      );
+      setTools(filteredTools ? [filteredTools] : []);
 
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  // Update the state with the filtered tools
+      setTools(filteredTools);
+      console.log(Tools);
+
+    }
+  }, [allTools, currentUserData]);
+
+
+//to firebase
+  // const LoadingMightLike = async () => {
+  //   const ToolsRef = collection(db, "Tools");
+  //   const tools = [];
+  //   const q = query(
+  //     ToolsRef,
+  //     where("Category", "in", currentUserData?.interests),
+  //     limit(3)
+  //   );
+  //   try {
+  //     const querySnapshot = await getDocs(q);
+  //     querySnapshot.forEach((doc) => {
+  //       tools.push(doc.data());
+  //       setTools(tools);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   if (isMounted) {
+  //     LoadingMightLike();
+  //   }
+
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, []);
 
   return (
     <div>
@@ -44,7 +70,7 @@ const YouMightLikeApp = () => {
         {Tools?.map((tool) => (
          <a href={tool.URL} target="_blank" rel="noreferrer">
           <YouMightLikeItem
-            id={tool.id}
+            id={tool._id}
             title={tool.Name}
             description={tool.Description}
             icon={tool.Icon}

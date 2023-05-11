@@ -24,8 +24,11 @@ app.get("/mongo-tools", async (req, res) => {
     });
     console.log("Connected to MongoDB");
     const tools = await Tools.find();
-    // console.log("Tools:", tools);
-    res.send(tools);
+
+    console.log("TOOLS : ",tools);
+    res.send(tools); // Send an object containing both variables
+
+
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching tools data");
@@ -44,6 +47,8 @@ app.get("/mongo-tools", async (req, res) => {
 //   }
 //   console.log("tool has been liked succefuly!!!!!");
 // });
+
+
 
 app.post("/like/:id/:uid", async (req, res) => {
   let { id, uid } = req.params;
@@ -78,6 +83,28 @@ app.post("/unlike/:id/:uid", async (req, res) => {
   }
   console.log("tool has been unliked succefuly!!!!!");
 });
+
+
+
+app.post("", async (req, res) => {
+  try {
+    const tools = await Tools
+      .find({ Category: { $in: res.interests } })
+      .limit(3)
+      .toArray();
+
+    console.log('Tools:', tools);
+    // Do something with the tools array
+
+    // Close the MongoDB connection when finished
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

@@ -10,6 +10,7 @@ export const allToolsAtom = atom({
     get: async () => {
       try {
         const response = await axios.get('http://localhost:5000/mongo-tools');
+        console.log(response.data);
         return response.data;
       } catch (error) {
         console.error(error);
