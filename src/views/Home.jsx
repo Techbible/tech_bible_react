@@ -35,7 +35,7 @@ const Home = () => {
 
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
-  const [AllTools, setAllTools] = useState([]);
+  // const [AllTools, setAllTools] = useState([]);
 
   //To store the searched value
   const [Search, setSearch] = useState("");
@@ -375,10 +375,10 @@ const Home = () => {
                     <h1>Top tools</h1>
                     {!allTools ? (
                       <div class="three-body">
-<div class="three-body__dot"></div>
-<div class="three-body__dot"></div>
-<div class="three-body__dot"></div>
-</div>
+                        <div class="three-body__dot"></div>
+                        <div class="three-body__dot"></div>
+                        <div class="three-body__dot"></div>
+                      </div>
                     ) : (
                       allTools
                         .slice(0, 50)
