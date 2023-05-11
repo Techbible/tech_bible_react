@@ -24,7 +24,7 @@ app.get("/mongo-tools", async (req, res) => {
     });
     console.log("Connected to MongoDB");
     const tools = await Tools.find();
-    console.log("Tools:", tools);
+    // console.log("Tools:", tools);
     res.send(tools);
   } catch (error) {
     console.error(error);
@@ -32,16 +32,51 @@ app.get("/mongo-tools", async (req, res) => {
   }
 });
 
-app.post("/update/:id/:uid", async (req, res) => {
+//add a user to a tool likedBy array
+// app.post("/like/:id/:uid", async (req, res) => {
+//   let { id, uid } = req.params;
+//   try {
+//     await Tools.findByIdAndUpdate(id, {
+//       LikedBy: { ...uid },
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   console.log("tool has been liked succefuly!!!!!");
+// });
+
+app.post("/like/:id/:uid", async (req, res) => {
   let { id, uid } = req.params;
   try {
     await Tools.findByIdAndUpdate(id, {
-      LikedBy: { ...uid },
+      $push: { LikedBy: uid },
     });
   } catch (error) {
     console.log(error);
   }
-  console.log("tool has been liked succefuly!!!!!");
+  console.log("tool has been liked successfully!!!!!");
+});
+
+//remove a user from a tool likedBy array
+app.post("/unlike/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
+  try {
+    const tool = await Tools.findById(id);
+    // Remove the uid from the LikedBy array using the filter method
+    const updatedLikedBy = tool.LikedBy.filter(
+      (likedByUid) => likedByUid !== uid
+    );
+
+    // Update the tool document with the updated LikedBy array
+    const updatedTool = await Tools.findByIdAndUpdate(id, {
+      LikedBy: updatedLikedBy,
+    });
+
+    return res.send(updatedTool);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log("tool has been unliked succefuly!!!!!");
 });
 
 app.listen(port, () => {

@@ -29,25 +29,38 @@ const LikeMethods = forwardRef((props, ref) => {
   const handleLikes = async (ToolId) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/update/${ToolId}/${currentUser.uid}`
+        `${BASE_URL}/like/${ToolId}/${currentUser.uid}`
       );
       console.log(response.data); // The message "tool has been liked successfully!!!!!"
+      console.log("tool has been liked successfully!!!!!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUnLike = async (ToolId) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/unlike/${ToolId}/${currentUser.uid}`
+      );
+      console.log(response.data); // The message "tool has been unliked successfully!!!!!"
+      console.log("tool has been unliked successfully!!!!!");
     } catch (error) {
       console.log(error);
     }
   };
 
   //handling unfollow logic
-  const handleUnLike = async (ToolId) => {
-    try {
-      const ToolRef = doc(db, "Tools", ToolId);
-      await updateDoc(ToolRef, {
-        LikedBy: arrayRemove(currentUser.uid),
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleUnLike = async (ToolId) => {
+  //   try {
+  //     const ToolRef = doc(db, "Tools", ToolId);
+  //     await updateDoc(ToolRef, {
+  //       LikedBy: arrayRemove(currentUser.uid),
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   /********************************Malking the methods exportable START***************************** */
   // create our ref object
   const publicRef = {
