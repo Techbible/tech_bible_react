@@ -127,7 +127,7 @@ const SignIn = () => {
             Login to your account
           </p>
           <p className="text-sm mt-4 font-medium leading-none text-gray-200">
-            Dont have account?{" "}
+            Don't have an account?{" "}
             <Link to="/signup">
               <span
                 tabIndex={0}
