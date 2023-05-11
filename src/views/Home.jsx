@@ -368,7 +368,11 @@ const Home = () => {
                   <div className="tools-section-ngu">
                     <h1>Top tools</h1>
                     {!allTools ? (
-                      <h1 style={{ color: "#fff" }}>Loading...</h1>
+                      <div class="three-body">
+<div class="three-body__dot"></div>
+<div class="three-body__dot"></div>
+<div class="three-body__dot"></div>
+</div>
                     ) : (
                       allTools
                         .slice(0, 50)
