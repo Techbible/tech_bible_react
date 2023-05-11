@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useRef } from "react";
 import { useReducer } from "react";
 import { LikeMethods } from "../../lib";
+import axios from "axios";
+import { BASE_URL } from "../../config/mongo";
 
 const Toolitem = ({ toolData, forceRender }) => {
   const { currentUser, isAdmin } = useContext(AuthContext);
@@ -21,6 +23,12 @@ const Toolitem = ({ toolData, forceRender }) => {
   useEffect(() => {
     console.log("Toold Id" + toolData._id);
   }, []);
+
+  const [testTools, setTestTools] = useState();
+  const testToolLikedBy = () => {
+    // console.log("tool  :   " + JSON.stringify(toolData.LikedBy));
+    console.log("tool  :   " + JSON.stringify(toolData.LikedBy));
+  };
 
   return (
     <div className="px-mobile-1 max-w-[680px] px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
@@ -89,6 +97,7 @@ const Toolitem = ({ toolData, forceRender }) => {
                     ? handleUnLikes(toolData._id)
                     : handleLikes(toolData._id);
                 }}
+                // onClick={testToolLikedBy}
               />
               <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
                 {toolData.LikedBy?.length}
