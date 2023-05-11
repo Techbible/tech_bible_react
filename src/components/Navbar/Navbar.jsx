@@ -165,9 +165,9 @@ function Navbar() {
           ) : (
             <div className="user-info-container" style={{ display: screenWidth<768?"none":"flex" }}>
               <Link to="/profile">
-                <div className="user-info">
+                <div className="user-info ">
                   <img src={currentUserData?.photo} className="pfp" alt="pfp" />
-                  <div className="username">{currentUserData?.username}</div>
+                  <div className="username  ">{currentUserData?.username}</div>
                 </div>
               </Link>
               <span className="signout cursor-pointer" onClick={UserSignOut}>
@@ -242,13 +242,13 @@ function Navbar() {
                   <div className="text-[15px] px-4 py-2 bg-black transition duration-300 hover:bg-white hover:text-black">
                     <div className="user-info-container">
                       <Link to="/profile">
-                        <div className="user-info" onClick={()=>{navigate("/profile")}}>
+                        <div className="user-info hover:text-black" onClick={()=>{navigate("/profile")}}>
                           <img
                             src={currentUserData.photo}
                             className="pfp"
                             alt="pfp"
                           />
-                          <div className="username">
+                          <div className="username ">
                             {currentUserData.username}
                           </div>
                         </div>
