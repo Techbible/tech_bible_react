@@ -20,7 +20,7 @@ app.get("/mongo-tools", async (req, res) => {
   try {
     await mongoose.connect(uri, {
       useNewUrlParser: true,
-      useUnifiedTopology: true, 
+      useUnifiedTopology: true,
     });
     console.log("Connected to MongoDB");
     const tools = await Tools.find();
@@ -32,28 +32,28 @@ app.get("/mongo-tools", async (req, res) => {
   }
 });
 
-//add a user to a tool likedBy array
 // app.post("/like/:id/:uid", async (req, res) => {
 //   let { id, uid } = req.params;
 //   try {
 //     await Tools.findByIdAndUpdate(id, {
-//       LikedBy: { ...uid },
+//       $push: { LikedBy: uid },
 //     });
 //   } catch (error) {
 //     console.log(error);
 //   }
-//   console.log("tool has been liked succefuly!!!!!");
+//   console.log("tool has been liked successfully!!!!!");
 // });
 
 app.post("/like/:id/:uid", async (req, res) => {
   let { id, uid } = req.params;
   try {
     await Tools.findByIdAndUpdate(id, {
-      $push: { LikedBy: uid },
+      $addToSet: { LikedBy: uid },
     });
   } catch (error) {
     console.log(error);
   }
+
   console.log("tool has been liked successfully!!!!!");
 });
 
@@ -66,12 +66,10 @@ app.post("/unlike/:id/:uid", async (req, res) => {
     const updatedLikedBy = tool.LikedBy.filter(
       (likedByUid) => likedByUid !== uid
     );
-
     // Update the tool document with the updated LikedBy array
     const updatedTool = await Tools.findByIdAndUpdate(id, {
       LikedBy: updatedLikedBy,
     });
-
     return res.send(updatedTool);
   } catch (error) {
     console.log(error);

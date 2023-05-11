@@ -6,16 +6,20 @@ import { useReducer } from "react";
 import { LikeMethods } from "../../lib";
 import axios from "axios";
 import { BASE_URL } from "../../config/mongo";
+import { render } from "react-dom";
 
 const Toolitem = ({ toolData, forceRender }) => {
   const { currentUser, isAdmin } = useContext(AuthContext);
   const LikeMethodsRef = useRef(null);
 
-  const handleUnLikes = (toolID) => {
+  const [isToolLiked, setIsToolLiked] = useState();
+  const handleUnLikes = async (toolID) => {
+    setIsToolLiked(true);
     LikeMethodsRef.current.Unlike(toolID);
     forceRender();
   };
-  const handleLikes = (toolID) => {
+  const handleLikes = async (toolID) => {
+    setIsToolLiked(false);
     LikeMethodsRef.current.Like(toolID);
     forceRender();
   };
@@ -91,6 +95,9 @@ const Toolitem = ({ toolData, forceRender }) => {
                   toolData.LikedBy?.find((user) => user === currentUser?.uid)
                     ? process.env.PUBLIC_URL + "/assets/liked.png"
                     : process.env.PUBLIC_URL + "/assets/like.png"
+                  // isToolLiked
+                  //   ? process.env.PUBLIC_URL + "/assets/liked.png"
+                  //   : process.env.PUBLIC_URL + "/assets/like.png"
                 }
                 onClick={() => {
                   toolData.LikedBy?.find((user) => user === currentUser?.uid)

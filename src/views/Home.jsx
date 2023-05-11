@@ -18,24 +18,19 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
-import axios from "axios";
-import { BASE_URL } from "../config/mongo";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { allToolsAtom, toolState } from "../recoil/tool";
+import { useRecoilState } from "recoil";
+import { allToolsAtom } from "../recoil/tool";
 
 const toolsdata = require("../config/data.json");
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
-
-  const allTools = useRecoilValue(allToolsAtom);
-
   const { data } = useContext(NewsContext);
   // const { toolsdata } = useContext(ToolsContext)
 
   const [authUser, setAuthUser] = useState(null);
   //To store the fetched trending tools
-  // const [AllTools, setAllTools] = useState([]);
+  const [AllTools, setAllTools] = useRecoilState(allToolsAtom);
 
   //To store the searched value
   const [Search, setSearch] = useState("");
@@ -69,45 +64,29 @@ const Home = () => {
     });
 
   //this is firebase
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     fetch("http://localhost:5000/mongo-tools")
-  //       .then((response) => response.json())
-  //       .then((data) => setAllTools(data))
-  //       .catch((error) => console.error(error));
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      fetch("http://localhost:5000/mongo-tools")
+        .then((response) => response.json())
+        .then((data) => setAllTools(data))
+        .catch((error) => console.error(error));
+    };
 
-  //   const listen = onAuthStateChanged(auth, fetchData);
-  //   return listen();
-  // }, [reducerValue]);
-
-  //Searching for tools by name (fulltext search)
-
-  // const SearchTool = async () => {
-  //   const SearchedTools = [];
-  //   const q = query(collection(db, "Tools"), where("Name", "==", Search));
-  //   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach((doc) => {
-  //     SearchedTools.push(doc.data());
-  //   });
-  //   setSearchedTool(SearchedTools);
-  //   console.log(SearchedTool);
-  // };
-
-  //this is mongo
+    const listen = onAuthStateChanged(auth, fetchData);
+    return listen();
+  }, [reducerValue]);
 
   //Searching for tools by name (fulltext search)
+
   const SearchTool = async () => {
-    try {
-      const response = await axios.get("/api/tools", {
-        params: { Name: Search },
-      });
-      const SearchedTools = response.data;
-      setSearchedTool(SearchedTools);
-      console.log(SearchedTool);
-    } catch (error) {
-      console.error(error);
-    }
+    const SearchedTools = [];
+    const q = query(collection(db, "Tools"), where("Name", "==", Search));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      SearchedTools.push(doc.data());
+    });
+    setSearchedTool(SearchedTools);
+    console.log(SearchedTool);
   };
 
   //keeping track on what's the user is searching for
@@ -122,28 +101,15 @@ const Home = () => {
   }, [Search]);
 
   // handling  by price
-  // const handleFilter = async () => {
-  //   const SearchedTools = [];
-  //   const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
-  //   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach((doc) => {
-  //     SearchedTools.push(doc.data());
-  //   });
-  //   setSearchedTool(SearchedTools);
-  //   // console.log(SearchedTool);
-  // };
-
-  //this is mongo
   const handleFilter = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/mongo-tools`, {
-        params: { Price: Pricing },
-      });
-      const SearchedTools = response.data;
-      setSearchedTool(SearchedTools);
-    } catch (error) {
-      console.error(error);
-    }
+    const SearchedTools = [];
+    const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      SearchedTools.push(doc.data());
+    });
+    setSearchedTool(SearchedTools);
+    // console.log(SearchedTool);
   };
 
   useEffect(() => {
@@ -245,18 +211,17 @@ const Home = () => {
             {isFocused && (
               <div className="bg-white p-4 rounded-lg shadow-md ">
                 <ul>
-                  {allTools
-                    .filter((tool) => {
-                      const searchTerm = value.toLowerCase();
-                      const name = tool?.Name?.toLowerCase();
-                      return searchTerm && name?.startsWith(searchTerm);
-                    })
+                  {AllTools.filter((tool) => {
+                    const searchTerm = value.toLowerCase();
+                    const name = tool?.Name?.toLowerCase();
+                    return searchTerm && name?.startsWith(searchTerm);
+                  })
                     .slice(0, 10)
                     .map((tool, index) => (
                       <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer pl-6">
                         <div>
                           <p className="text-gray-500" key={tool.Name}>
-                            <Link to={`/newtooldetails/${tool._id}`}>
+                            <Link to={`/newtooldetails/${tool.id}`}>
                               {tool.Name}
                             </Link>
                           </p>
@@ -299,7 +264,7 @@ const Home = () => {
 
           <div
             style={
-              !isFiltering
+              isFiltering
                 ? {
                     display: "block",
                     transition: "transform ease-out .5s, opacity ease-out .5s",
@@ -335,7 +300,8 @@ const Home = () => {
                 </p>
                 <div
                   className="flex flex-col sm:flex-row"
-                  style={{ display: "flex" }}>
+                  style={{ display: "flex" }}
+                >
                   <YouMightLikeApp />
                 </div>
                 {/***********END You might also like********/}
@@ -350,7 +316,7 @@ const Home = () => {
                   <div>
                     {SearchedTool.map((tool, index) => (
                       <Toolitem
-                        key={tool.id}
+                        key={tool._id}
                         toolData={tool}
                         forceRender={forceRender}
                       />
@@ -366,22 +332,16 @@ const Home = () => {
                 {!isFiltering ? (
                   <div className="tools-section-ngu">
                     <h1>Top tools</h1>
-                    {!allTools ? (
-                      <div class="three-body">
-                        <div class="three-body__dot"></div>
-                        <div class="three-body__dot"></div>
-                        <div class="three-body__dot"></div>
-                      </div>
+                    {!AllTools ? (
+                      <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (
-                      allTools
-                        .slice(0, 50)
-                        .map((tool, index) => (
-                          <Toolitem
-                            key={index}
-                            toolData={tool}
-                            forceRender={forceRender}
-                          />
-                        ))
+                      AllTools.slice(0, 50).map((tool, index) => (
+                        <Toolitem
+                          key={index}
+                          toolData={tool}
+                          forceRender={forceRender}
+                        />
+                      ))
                     )}
                   </div>
                 ) : (
