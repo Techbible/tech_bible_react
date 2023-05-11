@@ -335,8 +335,7 @@ const Home = () => {
                 </p>
                 <div
                   className="flex flex-col sm:flex-row"
-                  style={{ display: "flex" }}
-                >
+                  style={{ display: "flex" }}>
                   <YouMightLikeApp />
                 </div>
                 {/***********END You might also like********/}

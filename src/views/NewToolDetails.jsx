@@ -4,21 +4,36 @@ import { useParams } from "react-router-dom";
 import { useEffect,useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { allToolsAtom } from "../recoil/tool";
+import { useRecoilValue } from "recoil";
+
+
 
 const NewToolDetails = () => {
   let { id } = useParams();
 
+  const allTools = useRecoilValue(allToolsAtom);
+
+
   const [ToolData, setToolData] = useState();
 
-  useEffect(() => {
-    console.log(id);
-    const ToolRef = doc(db, "Tools", id);
-    onSnapshot(ToolRef, (doc) => {
-      // console.log(" data: ", doc.data());
-      setToolData(doc.data());
-      // console.log(ToolData);
-    });
-  }, []);
+
+//this is firebase
+  // useEffect(() => {
+  //   console.log(id);
+  //   const ToolRef = doc(db, "Tools", id);
+  //   onSnapshot(ToolRef, (doc) => {
+  //     setToolData(doc.data());
+  //   });
+  // }, []);
+
+//this is JS LOGIC
+useEffect(()=>{
+   // Use the find() method to search for a tool by ID
+   const foundTool = allTools.find((tool) => tool._id === id);
+   setToolData(foundTool);
+},[])
+
 
   return (
     <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">

@@ -20,7 +20,7 @@ app.get("/mongo-tools", async (req, res) => {
   try {
     await mongoose.connect(uri, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
+      useUnifiedTopology: true, 
     });
     console.log("Connected to MongoDB");
     const tools = await Tools.find();
