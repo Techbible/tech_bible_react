@@ -18,10 +18,8 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
-import axios from "axios";
-import { BASE_URL } from "../config/mongo";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { allToolsAtom, toolState } from "../recoil/tool";
+import { allToolsAtom } from "../recoil/tool";
 
 const toolsdata = require("../config/data.json");
 
@@ -30,12 +28,11 @@ const Home = () => {
 
   const allTools = useRecoilValue(allToolsAtom);
 
+
   const { data } = useContext(NewsContext);
   // const { toolsdata } = useContext(ToolsContext)
 
   const [authUser, setAuthUser] = useState(null);
-  //To store the fetched trending tools
-  // const [AllTools, setAllTools] = useState([]);
 
   //To store the searched value
   const [Search, setSearch] = useState("");
@@ -68,46 +65,18 @@ const Home = () => {
       theme: "dark",
     });
 
-  //this is firebase
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     fetch("http://localhost:5000/mongo-tools")
-  //       .then((response) => response.json())
-  //       .then((data) => setAllTools(data))
-  //       .catch((error) => console.error(error));
-  //   };
-
-  //   const listen = onAuthStateChanged(auth, fetchData);
-  //   return listen();
-  // }, [reducerValue]);
 
   //Searching for tools by name (fulltext search)
 
-  // const SearchTool = async () => {
-  //   const SearchedTools = [];
-  //   const q = query(collection(db, "Tools"), where("Name", "==", Search));
-  //   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach((doc) => {
-  //     SearchedTools.push(doc.data());
-  //   });
-  //   setSearchedTool(SearchedTools);
-  //   console.log(SearchedTool);
-  // };
-
-  //this is mongo
-
-  //Searching for tools by name (fulltext search)
   const SearchTool = async () => {
-    try {
-      const response = await axios.get("/api/tools", {
-        params: { Name: Search },
-      });
-      const SearchedTools = response.data;
-      setSearchedTool(SearchedTools);
-      console.log(SearchedTool);
-    } catch (error) {
-      console.error(error);
-    }
+    const SearchedTools = [];
+    const q = query(collection(db, "Tools"), where("Name", "==", Search));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      SearchedTools.push(doc.data());
+    });
+    setSearchedTool(SearchedTools);
+    console.log(SearchedTool);
   };
 
   //keeping track on what's the user is searching for
@@ -122,28 +91,15 @@ const Home = () => {
   }, [Search]);
 
   // handling  by price
-  // const handleFilter = async () => {
-  //   const SearchedTools = [];
-  //   const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
-  //   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach((doc) => {
-  //     SearchedTools.push(doc.data());
-  //   });
-  //   setSearchedTool(SearchedTools);
-  //   // console.log(SearchedTool);
-  // };
-
-  //this is mongo
   const handleFilter = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/mongo-tools`, {
-        params: { Price: Pricing },
-      });
-      const SearchedTools = response.data;
-      setSearchedTool(SearchedTools);
-    } catch (error) {
-      console.error(error);
-    }
+    const SearchedTools = [];
+    const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      SearchedTools.push(doc.data());
+    });
+    setSearchedTool(SearchedTools);
+    // console.log(SearchedTool);
   };
 
   useEffect(() => {
@@ -157,10 +113,9 @@ const Home = () => {
   const [value, setValue] = useState("");
   const onChange = (event) => {
     setValue(event.target.value);
-    if(value===null){
-            setIsFocused(false);
-    }
-    else setIsFocused(true);
+    if (value === null) {
+      setIsFocused(false);
+    } else setIsFocused(true);
   };
 
   return (
@@ -191,14 +146,12 @@ const Home = () => {
 
                 <input
                   type="text"
-                  
                   id="voice-search"
-                  className="bg-white h-[36px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-white h-[36px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Search your tool..."
                   value={value}
                   onChange={(e) => {
                     onChange(e);
-                    
                   }}
                   required
                 />
@@ -256,18 +209,20 @@ const Home = () => {
                       const name = tool?.Name?.toLowerCase();
                       return searchTerm && name?.startsWith(searchTerm);
                     })
+
                     .slice(0, 10)
                     .map((tool, index) => (
-                      <Link to={`/newtooldetails/${tool._id}`} className="hover:text-black font-bold">
-                      <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6">
-                        <div>
-                          <p className="text-gray-500" key={tool.Name}>
-                            
+                      <Link
+                        to={`/newtooldetails/${tool._id}`}
+                        className="hover:text-black font-bold"
+                      >
+                        <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6">
+                          <div>
+                            <p className="text-gray-500" key={tool.Name}>
                               {tool.Name}
-                            
-                          </p>
-                        </div>
-                      </li>
+                            </p>
+                          </div>
+                        </li>
                       </Link>
                     ))}
                 </ul>
@@ -359,7 +314,7 @@ const Home = () => {
                   <div>
                     {SearchedTool.map((tool, index) => (
                       <Toolitem
-                        key={tool.id}
+                        key={tool._id}
                         toolData={tool}
                         forceRender={forceRender}
                       />
@@ -376,11 +331,7 @@ const Home = () => {
                   <div className="tools-section-ngu">
                     <h1>Top tools</h1>
                     {!allTools ? (
-                      <div class="three-body">
-                        <div class="three-body__dot"></div>
-                        <div class="three-body__dot"></div>
-                        <div class="three-body__dot"></div>
-                      </div>
+                      <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (
                       allTools?.slice(0, 50)
                         .map((tool, index) => (
