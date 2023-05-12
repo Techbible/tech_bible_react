@@ -26,12 +26,10 @@ const SignUp = () => {
   const [generatedImgURL, setGenratedImgURL] = useState();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-  
-
 
   //it's basically just the description of the image that you want to be generated
   // const [userPrompt,setUserPrompt] = useState("profile picture on avatar format");
@@ -52,46 +50,46 @@ const SignUp = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
     // generateImage();
-    createUserWithEmailAndPassword(auth, email, password).then(
-      async (result) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (result) => {
         const docData = {
           uid: result.user.uid,
           username: FullName,
           bio: "",
           interests: [],
           folders: [],
-          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnyuq5iI30Yo3TwJF-Sr5PJz0KZLImVddlRw&usqp=CAU",
+          photo:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnyuq5iI30Yo3TwJF-Sr5PJz0KZLImVddlRw&usqp=CAU",
           isAdmin: false,
           timestamp: Timestamp.now(),
         };
         await setDoc(doc(db, "Users", result.user.uid), docData);
         navigate("/");
-      }
-    ).catch((e)=>{
-   switch (e.code) {
-        case 'auth/email-already-in-use':
-          setEmailError('Email already in use');
-          setIsEmailValid(false)
-          break;
-          case 'auth/invalid-email':
-            setEmailError('Invalid email');
-            setIsEmailValid(false)
+      })
+      .catch((e) => {
+        switch (e.code) {
+          case "auth/email-already-in-use":
+            setEmailError("Email already in use");
+            setIsEmailValid(false);
             break;
-            case 'auth/weak-password':
-              setPasswordError('Password should be at least 6 characters');
-              setIsPasswordValid(false)
-          break;
-        default:
-          setEmailError(e.message);
-          setPasswordError(e.message);
-      }
-      // alert(error)
-    });
+          case "auth/invalid-email":
+            setEmailError("Invalid email");
+            setIsEmailValid(false);
+            break;
+          case "auth/weak-password":
+            setPasswordError("Password should be at least 6 characters");
+            setIsPasswordValid(false);
+            break;
+          default:
+            setEmailError(e.message);
+            setPasswordError(e.message);
+        }
+        // alert(error)
+      });
   };
 
   const handleGoogleSignUp = () => {
     signInWithPopup(auth, provider).then(async (data) => {
-      
       const GoogleData = {
         uid: data.user.uid,
         username: data.user.displayName,
@@ -107,7 +105,6 @@ const SignUp = () => {
       navigate("/");
     });
   };
-
 
   return (
     <div className="h-full sign-up bg-[#0D0C12] w-full py-16 px-4">
@@ -172,6 +169,7 @@ const SignUp = () => {
               role="input"
               type="email"
               className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
+              placeholder="Enter your full name"
             />
           </div>
           <div>
@@ -190,9 +188,7 @@ const SignUp = () => {
           </div>
           {!isEmailValid ? (
             <div className="text-danger my-2">{emailError}</div>
-          ) : (
-            null
-          )}          
+          ) : null}
           <div className="mt-6  w-full">
             <lable className="text-sm font-medium leading-none text-white">
               Password*
@@ -202,7 +198,7 @@ const SignUp = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 type={isPasswordVisible ? "text" : "password"}
                 value={password}
-                placeholder="Should be at least 6"
+                placeholder="At least 6 characters"
                 aria-label="enter Password"
                 role="input"
                 className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
@@ -230,9 +226,7 @@ const SignUp = () => {
           </div>
           {!isPasswordValid ? (
             <div className="text-danger my-2">{passwordError}</div>
-          ) : (
-            null
-          )}
+          ) : null}
           <div className="mt-8">
             <button
               onClick={handleSignUp}

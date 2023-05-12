@@ -154,15 +154,15 @@ const Home = () => {
     if (event.key === "ArrowDown") {
       event.preventDefault();
       setSelectedSuggestion((prev) =>
-        prev === allTools?.length - 1 ? 0 : prev + 1
+        prev === allTools.length - 1 ? 0 : prev + 1
       );
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
       setSelectedSuggestion((prev) =>
-        prev === 0 ? allTools?.length - 1 : prev - 1
+        prev === 0 ? allTools.length - 1 : prev - 1
       );
     } else if (event.key === "Enter") {
-      if (selectedSuggestion >= 0 && selectedSuggestion < allTools?.length) {
+      if (selectedSuggestion >= 0 && selectedSuggestion < allTools.length) {
         window.location.href = `/newtooldetails/${allTools[selectedSuggestion]._id}`;
       }
     }
