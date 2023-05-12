@@ -127,10 +127,33 @@ const Home = () => {
     } else setIsFocused(true);
   };
 
+  const [selectedSuggestion, setSelectedSuggestion] = useState(-1);
+  const suggestionContainerRef = useRef(null);
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setSelectedSuggestion((prev) =>
+        prev === allTools.length - 1 ? 0 : prev + 1
+      );
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setSelectedSuggestion((prev) =>
+        prev === 0 ? allTools.length - 1 : prev - 1
+      );
+    } else if (event.key === "Enter") {
+      if (selectedSuggestion >= 0 && selectedSuggestion < allTools.length) {
+        window.location.href = `/newtooldetails/${allTools[selectedSuggestion]._id}`;
+      }
+    }
+  };
   useEffect(() => {
-    forceRender();
-  }, [allTools]);
-
+    if (isFocused && value !== "") {
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+  }, [selectedSuggestion]);
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
       <input type="hidden" name="interests" value={currentUserData} />
@@ -165,8 +188,10 @@ const Home = () => {
                   value={value}
                   onChange={(e) => {
                     onChange(e);
+                    setSelectedSuggestion(0);
                   }}
                   required
+                  autoComplete="off"
                 />
               </div>
               <div className="ml-2">
@@ -215,7 +240,10 @@ const Home = () => {
               </div>
             </form>
             {isFocused && value !== "" && (
-              <div className="bg-white p-4 rounded-lg shadow-md ">
+              <div
+                ref={suggestionContainerRef}
+                className="bg-white p-4 rounded-lg shadow-md "
+              >
                 <ul>
                   {allTools
                     ?.filter((tool) => {
@@ -229,8 +257,17 @@ const Home = () => {
                       <Link
                         to={`/newtooldetails/${tool._id}`}
                         className="hover:text-black font-bold"
+                        key={tool._id}
                       >
-                        <li className="flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6">
+                        <li
+                          key={tool._id}
+                          className={`flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6 ${
+                            index === selectedSuggestion ? "bg-blue-100" : ""
+                          }`}
+                          onMouseEnter={() => {
+                            setSelectedSuggestion(index);
+                          }}
+                        >
                           <div>
                             <p className="text-gray-500" key={tool.Name}>
                               {tool.Name}
