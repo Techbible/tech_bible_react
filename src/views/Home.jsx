@@ -127,6 +127,10 @@ const Home = () => {
     } else setIsFocused(true);
   };
 
+  useEffect(() => {
+    forceRender();
+  }, [allTools]);
+
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
       <input type="hidden" name="interests" value={currentUserData} />
