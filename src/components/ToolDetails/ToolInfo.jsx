@@ -31,7 +31,7 @@ const ToolInfo = ({ toolData }) => {
               <i className="ml-3 text-sm text-white hover:text-gray-600 transition-colors duration-300 fas fa-share"></i>
               </a>
             </div>
-            <div className="fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2">
+            <div className="fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400">
               <span className="styles_tagline__j29pO text-gray-300">
                 {toolData?.Description}
               </span>

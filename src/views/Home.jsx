@@ -18,7 +18,7 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { allToolsAtom } from "../recoil/tool";
 import axios from "axios";
 import { BASE_URL } from "../config/mongo";
@@ -26,9 +26,15 @@ import { BASE_URL } from "../config/mongo";
 const toolsdata = require("../config/data.json");
 
 const Home = () => {
+  //CONTEXT
   const { currentUser, currentUserData } = useContext(AuthContext);
 
-  const allTools = useRecoilValue(allToolsAtom);
+  //RECOIL
+  const allToolsLoadable = useRecoilValueLoadable(allToolsAtom);
+  const allTools = allToolsLoadable.contents;
+
+  //LOADING
+  const [isLoading, setLoading] = useState(false);
 
   const { data } = useContext(NewsContext);
   // const { toolsdata } = useContext(ToolsContext)
@@ -37,6 +43,7 @@ const Home = () => {
 
   //To store the searched value
   const [Search, setSearch] = useState("");
+  const [AppOfTheDayData, setAppOfTheDayData] = useState();
 
   //to keep track either if the user is searching or not
   const [isSearching, setIsSearching] = useState(false);
@@ -103,13 +110,27 @@ const Home = () => {
 
     //this is mongo
     const response = await axios.get(`${BASE_URL}/mongo-tools`);
-    const toolsWithMatchingPrice = response.data.filter(
+    const toolsWithMatchingPrice = response.data?.filter(
       (tool) => tool.Price === Pricing
     );
     setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
     console.log(typeof SearchedTool);
     console.log(typeof SearchedTools);
   };
+
+  //APP OF THE DAY
+  useEffect(() => {
+    if (Array.isArray(allTools)) {
+      const topTool = allTools
+        .filter((tool) => tool.LikedBy?.length >= 1)
+        .reduce(
+          (maxTool, tool) =>
+            maxTool.LikedBy?.length > tool.LikedBy?.length ? maxTool : tool,
+          {}
+        );
+      setAppOfTheDayData(topTool);
+    }
+  }, [allTools]);
 
   useEffect(() => {
     handleFilter();
@@ -126,29 +147,48 @@ const Home = () => {
       setIsFocused(false);
     } else setIsFocused(true);
   };
+
   const [selectedSuggestion, setSelectedSuggestion] = useState(-1);
   const suggestionContainerRef = useRef(null);
   const handleKeyDown = (event) => {
-    if (event.key === 'ArrowDown') {
+    if (event.key === "ArrowDown") {
       event.preventDefault();
-      setSelectedSuggestion((prev) => (prev === allTools.length - 1 ? 0 : prev + 1));
-    } else if (event.key === 'ArrowUp') {
+      setSelectedSuggestion((prev) =>
+        prev === allTools?.length - 1 ? 0 : prev + 1
+      );
+    } else if (event.key === "ArrowUp") {
       event.preventDefault();
-      setSelectedSuggestion((prev) => (prev === 0 ? allTools.length - 1 : prev - 1));
-    } else if (event.key === 'Enter') {
-      if (selectedSuggestion >= 0 && selectedSuggestion < allTools.length) {
+      setSelectedSuggestion((prev) =>
+        prev === 0 ? allTools?.length - 1 : prev - 1
+      );
+    } else if (event.key === "Enter") {
+      if (selectedSuggestion >= 0 && selectedSuggestion < allTools?.length) {
         window.location.href = `/newtooldetails/${allTools[selectedSuggestion]._id}`;
       }
-    } 
+    }
   };
   useEffect(() => {
-    if (isFocused && value !== '') {
-      window.addEventListener('keydown', handleKeyDown);
+    if (isFocused && value !== "") {
+      window.addEventListener("keydown", handleKeyDown);
       return () => {
-        window.removeEventListener('keydown', handleKeyDown);
+        window.removeEventListener("keydown", handleKeyDown);
       };
     }
   }, [selectedSuggestion]);
+
+  if (allToolsLoadable?.state === "loading") {
+    return (
+      <div className="loader-wrapper">
+        <div className="loader-container">
+          <div className="loader"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (allToolsLoadable?.state === "hasError") {
+    return <div>Error: {allTools?.contents.message}</div>;
+  }
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
       <input type="hidden" name="interests" value={currentUserData} />
@@ -175,9 +215,9 @@ const Home = () => {
                   </svg>
                 </div>
 
-               <input
+                <input
                   type="text"
-                  id ="voice-search"
+                  id="voice-search"
                   className="bg-white h-[36px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Search your tool..."
                   value={value}
@@ -187,7 +227,6 @@ const Home = () => {
                   }}
                   required
                   autoComplete="off"
-                
                 />
               </div>
               <div className="ml-2">
@@ -235,30 +274,31 @@ const Home = () => {
                 </svg>
               </div>
             </form>
-            {isFocused && value !== '' && (
-              <div ref={suggestionContainerRef} className="bg-white p-4 rounded-lg shadow-md ">
+            {isFocused && value !== "" && (
+              <div
+                ref={suggestionContainerRef}
+                className="bg-white p-4 rounded-lg shadow-md "
+              >
                 <ul>
-                  {allTools
-                    ?.filter((tool) => {
-                      const searchTerm = value.toLowerCase();
-                      const name = tool?.Name?.toLowerCase();
-                      return searchTerm && name?.startsWith(searchTerm);
-                    })
-
-                    .slice(0, 10)
-                    .map((tool, index) => (
+                  {allTools?.filter((tool) => {
+                    const searchTerm = value.toLowerCase();
+                    const name = tool?.Name?.toLowerCase();
+                    return searchTerm && name?.startsWith(searchTerm);
+                  }) ??
+                    [].slice(0, 10).map((tool, index) => (
                       <Link
                         to={`/newtooldetails/${tool._id}`}
                         className="hover:text-black font-bold"
                         key={tool._id}
                       >
-                        <li  key={tool._id} 
-                       className={`flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6 ${
-                        index === selectedSuggestion ? "bg-blue-100" : ""
-                      }`}
-                        onMouseEnter={() => {
-                          setSelectedSuggestion(index);
-                        }}
+                        <li
+                          key={tool._id}
+                          className={`flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6 ${
+                            index === selectedSuggestion ? "bg-blue-100" : ""
+                          }`}
+                          onMouseEnter={() => {
+                            setSelectedSuggestion(index);
+                          }}
                         >
                           <div>
                             <p className="text-gray-500" key={tool.Name}>
@@ -331,7 +371,7 @@ const Home = () => {
                     }
               }
             >
-              <AppOfTheDay />
+              <AppOfTheDay tool={AppOfTheDayData} />
               {/************You might also like***********/}
               <div className="you-might-like-apps-container">
                 {/* <div className="you-might-like-apps-container"> */}
@@ -375,6 +415,7 @@ const Home = () => {
                     {!allTools ? (
                       <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (
+                      Array.isArray(allTools) &&
                       allTools
                         ?.slice(0, 50)
                         .map((tool, index) => (
