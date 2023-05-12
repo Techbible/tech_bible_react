@@ -25,6 +25,7 @@ import Toolitem from "../components/Tools/Toolitem";
 import "../assets/styles/profile/profile.css";
 import "../assets/styles/Modal/modal.css";
 import axios from "axios";
+import { BASE_URL } from "../config/mongo";
 
 export const ModalcustomStyles = {
   content: {
@@ -202,13 +203,17 @@ const Profile = () => {
   //this is mongo
   const LoadLikedTools = async () => {
     try {
-      const response = await axios.get("/api/tools", {
-        params: {
-          LikedBy: currentUser?.uid,
-          limit: 10,
-        },
-      });
-      const LikedOnes = response.data;
+      // const response = await axios.get("/api/tools", {
+      //   params: {
+      //     LikedBy: currentUser?.uid,
+      //     limit: 10,
+      //   },
+      // });
+      // const LikedOnes = response.data;
+      const response = await axios.get(`${BASE_URL}/mongo-tools`);
+      const LikedOnes = response.data.filter((tool) =>
+        tool.LikedBy.includes(currentUser.uid)
+      );
       setLikedTools(LikedOnes);
       forceRender();
     } catch (error) {

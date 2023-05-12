@@ -20,6 +20,8 @@ import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { allToolsAtom } from "../recoil/tool";
+import axios from "axios";
+import { BASE_URL } from "../config/mongo";
 
 const toolsdata = require("../config/data.json");
 
@@ -27,7 +29,6 @@ const Home = () => {
   const { currentUser, currentUserData } = useContext(AuthContext);
 
   const allTools = useRecoilValue(allToolsAtom);
-
 
   const { data } = useContext(NewsContext);
   // const { toolsdata } = useContext(ToolsContext)
@@ -65,25 +66,25 @@ const Home = () => {
       theme: "dark",
     });
 
-
   //Searching for tools by name (fulltext search)
 
-  const SearchTool = async () => {
-    const SearchedTools = [];
-    const q = query(collection(db, "Tools"), where("Name", "==", Search));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      SearchedTools.push(doc.data());
-    });
-    setSearchedTool(SearchedTools);
-    console.log(SearchedTool);
-  };
+  //this is firebase
+  // const SearchTool = async () => {
+  //   const SearchedTools = [];
+  //   const q = query(collection(db, "Tools"), where("Name", "==", Search));
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach((doc) => {
+  //     SearchedTools.push(doc.data());
+  //   });
+  //   setSearchedTool(SearchedTools);
+  //   console.log(SearchedTool);
+  // };
 
   //keeping track on what's the user is searching for
   useEffect(() => {
     if (Search.length > 0) {
       setIsSearching(true);
-      SearchTool();
+      // SearchTool();
     } else {
       setIsSearching(false);
       setSearchedTool([]);
@@ -93,13 +94,21 @@ const Home = () => {
   // handling  by price
   const handleFilter = async () => {
     const SearchedTools = [];
-    const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      SearchedTools.push(doc.data());
-    });
-    setSearchedTool(SearchedTools);
-    // console.log(SearchedTool);
+    //this is firebase
+    // const q = query(collection(db, "Tools"), where("Price", "==", Pricing));
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) => {
+    //   SearchedTools.push(doc.data());
+    // });
+
+    //this is mongo
+    const response = await axios.get(`${BASE_URL}/mongo-tools`);
+    const toolsWithMatchingPrice = response.data.filter(
+      (tool) => tool.Price === Pricing
+    );
+    setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
+    console.log(typeof SearchedTool);
+    console.log(typeof SearchedTools);
   };
 
   useEffect(() => {
@@ -201,10 +210,11 @@ const Home = () => {
                 </svg>
               </div>
             </form>
-            {isFocused && value !== '' && (
+            {isFocused && value !== "" && (
               <div className="bg-white p-4 rounded-lg shadow-md ">
                 <ul>
-                  {allTools?.filter((tool) => {
+                  {allTools
+                    ?.filter((tool) => {
                       const searchTerm = value.toLowerCase();
                       const name = tool?.Name?.toLowerCase();
                       return searchTerm && name?.startsWith(searchTerm);
@@ -266,13 +276,13 @@ const Home = () => {
                     display: "block",
                     transition: "transform ease-out .5s, opacity ease-out .5s",
                     transform: "scale(1)",
-                    opacity: 1,
+                    opacity: 0.8,
                   }
                 : {
-                    display: "hidden",
+                    display: "block",
                     transition: "transform ease-in .5s, opacity ease-in .5s",
                     transform: "scale(1)",
-                    opacity: 0,
+                    opacity: 1,
                   }
             }
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
@@ -290,26 +300,25 @@ const Home = () => {
             >
               <AppOfTheDay />
               {/************You might also like***********/}
-                <div className="you-might-like-apps-container">
-                  {/* <div className="you-might-like-apps-container"> */}
-                  <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
-                    YOU MIGHT ALSO LIKE
-                  </p>
-                  <div
-                    className="flex flex-col sm:flex-row"
-                    style={{ display: "flex" }}
-                  >
-                    <YouMightLikeApp />
-                  </div>
-                  {/***********END You might also like********/}
+              <div className="you-might-like-apps-container">
+                {/* <div className="you-might-like-apps-container"> */}
+                <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
+                  YOU MIGHT ALSO LIKE
+                </p>
+                <div
+                  className="flex flex-col sm:flex-row"
+                  style={{ display: "flex" }}
+                >
+                  <YouMightLikeApp />
                 </div>
-
+              </div>
+              {/***********END You might also like********/}
             </div>
             {!isFiltering ? (
               <div></div>
             ) : (
               // {/* End Filtering container */}
-              <div data-test="homepage-section-0">
+              <div data-test="homepage-section-0" style={{ diplay: "block" }}>
                 <div>
                   <div>
                     {SearchedTool.map((tool, index) => (
@@ -333,7 +342,8 @@ const Home = () => {
                     {!allTools ? (
                       <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (
-                      allTools?.slice(0, 50)
+                      allTools
+                        ?.slice(0, 50)
                         .map((tool, index) => (
                           <Toolitem
                             key={index}

@@ -108,7 +108,7 @@ function AddTool() {
   };
 
   return (
-    <div className="addtool-page">
+    <div className="addtool-page mt-[4rem] ">
       <div className="addTools-wrapper">
         {isAdmin ? (
           <div className="form">
