@@ -4,15 +4,40 @@ import "../assets/styles/home/global.css";
 import Comment from '../components/Community/Comment';
 import Topic from '../components/Community/Topic';
 import Discussion from '../components/Community/Discussion';
+import { useEffect } from "react";
+import { collection, doc, getDocs, onSnapshot } from "firebase/firestore";
+import { db } from "../config/firebase";
+import { Link } from "react-router-dom";
 
 
 
 function Community() {
   const [isOpen, setIsOpen] = useState(false);
+  const [Users, setUsers] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+  const usersRef = collection(db, "Users");
+
+  const getUsers = async () => {
+    try {
+      const querySnapshot = await getDocs(usersRef);
+      const usersData = [];
+      querySnapshot.forEach((doc) => {
+        usersData.push(doc.data());
+      });
+      setUsers(usersData);
+      console.log(usersData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  getUsers();
+}, []);
   
     return (
         <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer ">
@@ -136,9 +161,9 @@ function Community() {
             </div>
 
             <div>
-          <Comment/>
-          <Comment/>
-          <Comment/>
+          {Users && Users?.map(user =>(
+            <Link to={`/profile/${user.username}`}><Comment User={user}/></Link>
+          ))}
         </div>
           </div>
         </main>

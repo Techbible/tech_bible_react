@@ -6,7 +6,7 @@ import { storage } from "../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import React, { useEffect, useState, useRef, useReducer } from "react";
 import { auth, db } from "../config/firebase";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   collection,
   doc,
@@ -48,6 +48,8 @@ export const ModalcustomStyles = {
 };
 
 const Profile = () => {
+  let { name } = useParams();
+
   const { currentUser, currentUserData } = useContext(AuthContext);
 
   const [authUser, setAuthUser] = useState(null);
@@ -283,13 +285,18 @@ const Profile = () => {
                     <p className="fontWeight-500">{currentUserData.username}</p>
                   </div>
                   <div className="col">
-                    <button
-                      onClick={openEditProfileModal}
-                      className="edit-profile-btn mb-3 transition duration-250 "
-                      type="button"
-                    >
-                      Edit
-                    </button>
+                    {name?.length === 0 ? (
+                      <button
+                        onClick={openEditProfileModal}
+                        className="edit-profile-btn mb-3 transition duration-250 "
+                        type="button"
+                      >
+                        Edit
+                      </button>
+                    ) : (
+                      <div></div>
+                    )}
+
                     <button className="absolute top-[44px] right-[10px] text-[12px]  bg-[#7869e6] px-[15px] py-[1.5px] rounded-[4px] transition duration-300 hover:bg-[#604fe7] active:bg-[#4635ca]">
                       Share
                     </button>

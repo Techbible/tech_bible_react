@@ -10,30 +10,25 @@ const YouMightLikeApp = () => {
   const { currentUserData } = useContext(AuthContext);
   const [Tools, setTools] = useState();
 
-
   const allTools = useRecoilValue(allToolsAtom);
-
   useEffect(() => {
-    console.log("level 0")
-    if (Array.isArray(allTools) && currentUserData && currentUserData.interests) {
-      console.log("level 1")
-      // Filter the tools based on the currentUserData's interests
-      const filteredTools = allTools.find((tool) =>
-        {
-          currentUserData.interests.includes(tool.Category);
-        }
-      );
-      setTools(filteredTools ? [filteredTools] : []);
+  console.log("level 0");
+  if (Array.isArray(allTools) && currentUserData && currentUserData.interests) {
+    console.log("Current User Interests:", currentUserData.interests);
 
-  // Update the state with the filtered tools
-      setTools(filteredTools);
-      console.log(Tools);
+    const filteredTools = allTools.filter((tool) =>
+      currentUserData?.interests.some((interest) =>
+        tool.Category.toLowerCase() === interest.toLowerCase()
+      )
+    );
 
-    }
-  }, [allTools, currentUserData]);
+    console.log("Filtered Tools:", filteredTools);
 
-
-//to firebase
+    // Update the state with the filtered tools
+    setTools(filteredTools.slice(0, 3));
+  }
+}, [allTools, currentUserData]);
+  //to firebase
   // const LoadingMightLike = async () => {
   //   const ToolsRef = collection(db, "Tools");
   //   const tools = [];
@@ -68,15 +63,15 @@ const YouMightLikeApp = () => {
     <div>
       <div className="flex flex-col sm:flex-row" style={{ display: "flex" }}>
         {Tools?.map((tool) => (
-         <a href={tool.URL} target="_blank" rel="noreferrer">
-          <YouMightLikeItem
-            id={tool._id}
-            title={tool.Name}
-            description={tool.Description}
-            icon={tool.Icon}
-            url={tool.URL}
-            category={tool.category}
-          />
+          <a href={tool.URL} target="_blank" rel="noreferrer">
+            <YouMightLikeItem
+              id={tool._id}
+              title={tool.Name}
+              description={tool.Description}
+              icon={tool.Icon}
+              url={tool.URL}
+              category={tool.category}
+            />
           </a>
         ))}
       </div>
