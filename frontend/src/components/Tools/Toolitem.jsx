@@ -78,7 +78,7 @@ const Toolitem = ({ toolData, forceRender }) => {
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
           <div className="flex direction-row align-center mt-3">
-            <div className="flex direction-column align-items-center gap-2 mx-3 ">
+            {currentUser?          <div className="flex direction-column align-items-center gap-2 mx-3 ">
               <img
                 alt="tech bible"
                 className="follow_unfollow"
@@ -101,6 +101,10 @@ const Toolitem = ({ toolData, forceRender }) => {
                 {toolData.LikedBy?.length}
               </div>
             </div>
+              :
+            <div></div>
+          }
+
             <div>
               {/* <span className="bi bi-plus-lg fw-bold text-[25px] text-gray-400 transition duration-500 hover:text-white hover:text-[27px] "></span> */}
             </div>
