@@ -22,45 +22,41 @@ app.get("/mongo-tools", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB");
+    // console.log("Connected to MongoDB");
     const tools = await Tools.find();
 
-    console.log("TOOLS : ",tools);
+    // console.log("TOOLS : ",tools);
     res.send(tools); // Send an object containing both variables
-
-
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching tools data");
   }
 });
 
-// app.post("/like/:id/:uid", async (req, res) => {
-//   let { id, uid } = req.params;
-//   try {
-//     await Tools.findByIdAndUpdate(id, {
-//       $push: { LikedBy: uid },
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-//   console.log("tool has been liked successfully!!!!!");
-// });
-
-
-
 app.post("/like/:id/:uid", async (req, res) => {
   let { id, uid } = req.params;
   try {
     await Tools.findByIdAndUpdate(id, {
-      $addToSet: { LikedBy: uid },
+      $push: { LikedBy: uid },
     });
   } catch (error) {
     console.log(error);
   }
-
   console.log("tool has been liked successfully!!!!!");
 });
+
+// app.post("/like/:id/:uid", async (req, res) => {
+//   let { id, uid } = req.params;
+//   try {
+//     await Tools.findByIdAndUpdate(id, {
+//       $addToSet: { LikedBy: uid },
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+
+//   console.log("tool has been liked successfully!!!!!");
+// });
 
 //remove a user from a tool likedBy array
 app.post("/unlike/:id/:uid", async (req, res) => {
@@ -82,16 +78,13 @@ app.post("/unlike/:id/:uid", async (req, res) => {
   console.log("tool has been unliked succefuly!!!!!");
 });
 
-
-
 app.post("", async (req, res) => {
   try {
-    const tools = await Tools
-      .find({ Category: { $in: res.interests } })
+    const tools = await Tools.find({ Category: { $in: res.interests } })
       .limit(3)
       .toArray();
 
-    console.log('Tools:', tools);
+    console.log("Tools:", tools);
     // Do something with the tools array
 
     // Close the MongoDB connection when finished
@@ -99,10 +92,6 @@ app.post("", async (req, res) => {
     console.log(error);
   }
 });
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
