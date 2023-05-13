@@ -102,7 +102,7 @@ const Toolitem = ({ toolData, forceRender }) => {
               </div>
             </div>
             <div>
-              <span className="bi bi-plus-lg fw-bold text-[25px] text-gray-400 transition duration-500 hover:text-white hover:text-[27px] "></span>
+              {/* <span className="bi bi-plus-lg fw-bold text-[25px] text-gray-400 transition duration-500 hover:text-white hover:text-[27px] "></span> */}
             </div>
           </div>
         </div>

@@ -87,31 +87,7 @@ function Navbar() {
                     </Link>
                   ) : (
                     <div></div>
-                  )}
-                  <li
-                    className="tracking-wider hover:tracking-widest"
-                    style={{ transition: "0.3s", cursor: "pointer" }}
-                  >
-                    <Link to="/addTool">Submit your Tool</Link>
-                  </li>
-
-                  <li
-                    className="tracking-wider hover:tracking-widest"
-                    style={{ transition: "0.3s", cursor: "pointer" }}
-                  >
-                    Resources
-                  </li>
-
-                 
-                    
-                    <li
-                      className="tracking-wider hover:tracking-widest"
-                      style={{ transition: "0.3s", cursor: "pointer" }}
-                    >
-                       <Link to="/community"> Community</Link>
-                     
-                    </li>
-                  
+                  )}         
                 </div>
 
                 <li
