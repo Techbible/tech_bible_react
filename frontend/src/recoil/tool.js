@@ -3,10 +3,10 @@ import axios from "axios";
 
 export const allToolsAtom = selector({
   key: "allTools",
-  default:[],
+  default: [],
   get: async ({ get }) => {
     try {
-      const response = await axios.get("http://localhost:5000/mongo-tools");
+      let response = await axios.get("http://localhost:5000/mongo-tools");
       return response.data;
     } catch (error) {
       console.error(error);

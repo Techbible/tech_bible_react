@@ -22,6 +22,7 @@ import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { allToolsAtom } from "../recoil/tool";
 import axios from "axios";
 import { BASE_URL } from "../config/mongo";
+import { render } from "react-dom";
 
 const toolsdata = require("../config/data.json");
 
@@ -30,9 +31,27 @@ const Home = () => {
   const { currentUser, currentUserData } = useContext(AuthContext);
 
   //RECOIL
-  const allToolsLoadable = useRecoilValueLoadable(allToolsAtom);
-  const allTools = allToolsLoadable.contents;
+  // const allToolsLoadable = useRecoilValueLoadable(allToolsAtom);
+  // const allTools = allToolsLoadable.contents;
 
+  //to force Re-render
+  const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
+  const [allToolsLoadable, setAllToolsLoadable] = useState(false);
+
+  const [allTools, setAllTools] = useState([]);
+  useEffect(() => {
+    setAllToolsLoadable(false);
+    const fetchData = async () => {
+      fetch("http://localhost:5000/mongo-tools")
+        .then((response) => response.json())
+        .then((data) => setAllTools(data))
+        .catch((error) => console.error(error));
+    };
+
+    const listen = onAuthStateChanged(auth, fetchData);
+    setAllToolsLoadable(true);
+    return listen();
+  }, [allTools]);
   //LOADING
   const [isLoading, setLoading] = useState(false);
 
@@ -54,9 +73,6 @@ const Home = () => {
 
   //storing the pricing choice
   const [Pricing, setPricing] = useState("");
-
-  //to force Re-render
-  const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
 
   const navigate = useNavigate();
 
@@ -176,7 +192,7 @@ const Home = () => {
     }
   }, [selectedSuggestion]);
 
-  if (allToolsLoadable?.state === "loading") {
+  if (!allToolsLoadable) {
     return (
       <div className="loader-wrapper">
         <div className="loader-container">
@@ -186,14 +202,25 @@ const Home = () => {
     );
   }
 
-  if (allToolsLoadable?.state === "hasError") {
-    return <div>Error: {allTools?.contents.message}</div>;
-  }
+  // if (allToolsLoadable?.state === "loading") {
+  //   return (
+  //     <div className="loader-wrapper">
+  //       <div className="loader-container">
+  //         <div className="loader"></div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+  // if (allToolsLoadable?.state === "hasError") {
+  //   return <div>Error: {allTools?.contents.message}</div>;
+  // }
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
       <main className="layoutMain " onMouseLeave={() => setIsFocused(false)}>
         <div className="flex direction-column ">
-          <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]">
+          {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
+          <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-[#27242E]">
             <h2 className="text-white fontWeight-500 text-[18px] mt-2">
               The Largest Saas Tools directory
             </h2>
@@ -273,8 +300,11 @@ const Home = () => {
                 </svg>
               </div>
             </form>
-            {isFocused && value !== '' && (
-              <div ref={suggestionContainerRef} className="bg-white p-4 rounded-lg shadow-md ">
+            {isFocused && value !== "" && (
+              <div
+                ref={suggestionContainerRef}
+                className="bg-white p-4 rounded-lg shadow-md "
+              >
                 <ul>
                   {allTools
                     ?.filter((tool) => {
@@ -290,12 +320,12 @@ const Home = () => {
                         key={tool._id}
                       >
                         <li
-                        className={`flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6 ${
-                        index === selectedSuggestion ? "bg-blue-100" : ""
-                      }`}
-                        onMouseEnter={() => {
-                          setSelectedSuggestion(index);
-                        }}
+                          className={`flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6 ${
+                            index === selectedSuggestion ? "bg-blue-100" : ""
+                          }`}
+                          onMouseEnter={() => {
+                            setSelectedSuggestion(index);
+                          }}
                         >
                           <div>
                             <p className="text-gray-500" key={tool.Name}>

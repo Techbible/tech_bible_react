@@ -221,24 +221,40 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    LoadLikedTools();
-  }, [reducerValue]);
+  const getTools = async () => {
+    const response = await axios.get(`${BASE_URL}/mongo-tools`);
+    const LikedOnes = response.data.filter((tool) =>
+      tool.LikedBy.includes(currentUser.uid)
+    );
+    setLikedTools(LikedOnes);
+  };
+  // useEffect(() => {
+  //   getTools();
+  // }, []);
+
+  // useEffect(() => {
+  //   LoadLikedTools();
+  // }, []);
 
   //Verifying Sign in and loading users infos on load
   useEffect(() => {
-    LoadLikedTools();
-    const listen = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthUser(user);
-        currentUserData.interests.length > 0
-          ? setAddInterests(false)
-          : setAddInterests(false);
-      } else {
-        navigate("/signin");
-        setAuthUser(null);
-      }
-    });
+    // LoadLikedTools();
+    getTools();
+    const listen = onAuthStateChanged(
+      auth,
+      (user) => {
+        if (user) {
+          setAuthUser(user);
+          currentUserData.interests.length > 0
+            ? setAddInterests(false)
+            : setAddInterests(false);
+        } else {
+          navigate("/signin");
+          setAuthUser(null);
+        }
+      },
+      []
+    );
 
     //getting the available categories
     const dbRef = collection(db, "Categories");

@@ -12,18 +12,47 @@ const Toolitem = ({ toolData, forceRender }) => {
   const { currentUser, isAdmin } = useContext(AuthContext);
   const LikeMethodsRef = useRef(null);
 
-  const [isToolLiked, setIsToolLiked] = useState();
-  const handleUnLikes = async (toolID) => {
-    setIsToolLiked(true);
-    LikeMethodsRef.current.Unlike(toolID);
-    forceRender();
+  //MY UPDATE
+  const [isToolLiked, setIsToolLiked] = useState(true);
+  useEffect(() => {
+    toolData?.LikedBy.includes(currentUser.uid)
+      ? setIsToolLiked(true)
+      : setIsToolLiked(false);
+  }, []);
+
+  const like = async (toolId) => {
+    const response = await axios.post(
+      `${BASE_URL}/like/${toolId}/${currentUser.uid}`
+    );
   };
-  const handleLikes = async (toolID) => {
-    setIsToolLiked(false);
-    LikeMethodsRef.current.Like(toolID);
-    forceRender();
+  const unlike = async (toolId) => {
+    const response = await axios.post(
+      `${BASE_URL}/unlike/${toolId}/${currentUser.uid}`
+    );
   };
 
+  const handleLikes = async (toolID) => {
+    setIsToolLiked(true);
+    like(toolID);
+  };
+  const handleUnLikes = async (toolID) => {
+    setIsToolLiked(false);
+    unlike(toolID);
+  };
+
+  // END OF MY UPDATE
+
+  // const handleLikes = async (toolID) => {
+  //   setIsToolLiked(false);
+  //   LikeMethodsRef.current.Like(toolID);
+  //   forceRender();
+  // };
+
+  // const handleUnLikes = async (toolID) => {
+  //   setIsToolLiked(true);
+  //   LikeMethodsRef.current.Unlike(toolID);
+  //   forceRender();
+  // };
 
   return (
     <div className="px-mobile-1 max-w-[680px] px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
@@ -83,15 +112,17 @@ const Toolitem = ({ toolData, forceRender }) => {
                 alt="tech bible"
                 className="follow_unfollow"
                 src={
-                  toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                    ? process.env.PUBLIC_URL + "/assets/liked.png"
-                    : process.env.PUBLIC_URL + "/assets/like.png"
-                  // isToolLiked
+                  // toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                  // toolData.LikedBy?.includes(currentUser.uid)
                   //   ? process.env.PUBLIC_URL + "/assets/liked.png"
                   //   : process.env.PUBLIC_URL + "/assets/like.png"
+                  isToolLiked
+                    ? process.env.PUBLIC_URL + "/assets/liked.png"
+                    : process.env.PUBLIC_URL + "/assets/like.png"
                 }
                 onClick={() => {
-                  toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                  // toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                  toolData.LikedBy?.includes(currentUser.uid)
                     ? handleUnLikes(toolData._id)
                     : handleLikes(toolData._id);
                 }}
