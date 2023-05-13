@@ -18,7 +18,7 @@ const LikeMethods = forwardRef((props, ref) => {
   //   try {
   //     const ToolRef = doc(db, "Tools", ToolId);
   //     await updateDoc(ToolRef, {
-  //       LikedBy: arrayUnion(currentUser.uid),
+  //       LikedBy: arrayUnion(currentUser?.uid),
   //     });
   //   } catch (error) {
   //     console.log(error);
@@ -29,7 +29,7 @@ const LikeMethods = forwardRef((props, ref) => {
   const handleLikes = async (ToolId) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/like/${ToolId}/${currentUser.uid}`
+        `${BASE_URL}/like/${ToolId}/${currentUser?.uid}`
       );
       console.log(response.data.Name); // The message "tool has been liked successfully!!!!!"
       console.log("tool has been liked successfully!!!!!");
@@ -41,7 +41,7 @@ const LikeMethods = forwardRef((props, ref) => {
   const handleUnLike = async (ToolId) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/unlike/${ToolId}/${currentUser.uid}`
+        `${BASE_URL}/unlike/${ToolId}/${currentUser?.uid}`
       );
       console.log(response.data); // The message "tool has been unliked successfully!!!!!"
       console.log("tool has been unliked successfully!!!!!");
@@ -55,7 +55,7 @@ const LikeMethods = forwardRef((props, ref) => {
   //   try {
   //     const ToolRef = doc(db, "Tools", ToolId);
   //     await updateDoc(ToolRef, {
-  //       LikedBy: arrayRemove(currentUser.uid),
+  //       LikedBy: arrayRemove(currentUser?.uid),
   //     });
   //   } catch (error) {
   //     console.log(error);

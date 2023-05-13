@@ -15,19 +15,19 @@ const Toolitem = ({ toolData, forceRender }) => {
   //MY UPDATE
   const [isToolLiked, setIsToolLiked] = useState(true);
   useEffect(() => {
-    toolData?.LikedBy.includes(currentUser.uid)
+    toolData?.LikedBy.includes(currentUser?.uid)
       ? setIsToolLiked(true)
       : setIsToolLiked(false);
   }, []);
 
   const like = async (toolId) => {
     const response = await axios.post(
-      `${BASE_URL}/like/${toolId}/${currentUser.uid}`
+      `${BASE_URL}/like/${toolId}/${currentUser?.uid}`
     );
   };
   const unlike = async (toolId) => {
     const response = await axios.post(
-      `${BASE_URL}/unlike/${toolId}/${currentUser.uid}`
+      `${BASE_URL}/unlike/${toolId}/${currentUser?.uid}`
     );
   };
 
@@ -113,7 +113,7 @@ const Toolitem = ({ toolData, forceRender }) => {
                 className="follow_unfollow"
                 src={
                   // toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                  // toolData.LikedBy?.includes(currentUser.uid)
+                  // toolData.LikedBy?.includes(currentUser?.uid)
                   //   ? process.env.PUBLIC_URL + "/assets/liked.png"
                   //   : process.env.PUBLIC_URL + "/assets/like.png"
                   isToolLiked
@@ -122,7 +122,7 @@ const Toolitem = ({ toolData, forceRender }) => {
                 }
                 onClick={() => {
                   // toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                  toolData.LikedBy?.includes(currentUser.uid)
+                  toolData.LikedBy?.includes(currentUser?.uid)
                     ? handleUnLikes(toolData._id)
                     : handleLikes(toolData._id);
                 }}

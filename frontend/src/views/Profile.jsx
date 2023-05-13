@@ -149,10 +149,10 @@ const Profile = () => {
     if (profilePicture === null) return;
     const imageRef = ref(
       storage,
-      `profile-pictures/${profilePicture.name + currentUser.uid}`
+      `profile-pictures/${profilePicture.name + currentUser?.uid}`
     );
     const usersRef = collection(db, "Users");
-    const userDocRef = doc(usersRef, currentUser.uid);
+    const userDocRef = doc(usersRef, currentUser?.uid);
     uploadBytes(imageRef, profilePicture).then((snapshot) => {
       console.log("Image uploaded");
       getDownloadURL(snapshot.ref)
@@ -212,7 +212,7 @@ const Profile = () => {
       // const LikedOnes = response.data;
       const response = await axios.get(`${BASE_URL}/mongo-tools`);
       const LikedOnes = response.data.filter((tool) =>
-        tool.LikedBy.includes(currentUser.uid)
+        tool.LikedBy.includes(currentUser?.uid)
       );
       setLikedTools(LikedOnes);
       forceRender();
@@ -224,7 +224,7 @@ const Profile = () => {
   const getTools = async () => {
     const response = await axios.get(`${BASE_URL}/mongo-tools`);
     const LikedOnes = response.data.filter((tool) =>
-      tool.LikedBy.includes(currentUser.uid)
+      tool.LikedBy.includes(currentUser?.uid)
     );
     setLikedTools(LikedOnes);
   };
