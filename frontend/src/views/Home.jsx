@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { collection, query, limit, getDocs, where } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { BASE_URL } from "../config/mongo";
 
 import "../assets/styles/home/home.css";
 import "../assets/styles/home/global.css";
@@ -21,7 +22,6 @@ import { NewsContext, NewsContextProvider } from "../context/NewsContext";
 import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { allToolsAtom } from "../recoil/tool";
 import axios from "axios";
-import { BASE_URL } from "../config/mongo";
 import { render } from "react-dom";
 
 const toolsdata = require("../config/data.json");
@@ -42,7 +42,7 @@ const Home = () => {
   useEffect(() => {
     setAllToolsLoadable(false);
     const fetchData = async () => {
-      fetch("http://localhost:5000/mongo-tools")
+      fetch(`${BASE_URL}/mongo-tools`)
         .then((response) => response.json())
         .then((data) => setAllTools(data))
         .catch((error) => console.error(error));

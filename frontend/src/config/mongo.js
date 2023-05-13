@@ -1,1 +1,1 @@
-export const BASE_URL = process.env.REACT_APP_BASE_URL || "https://techbible-backend.onrender.com";
+export const BASE_URL ="https://techbible-backend.onrender.com" || "http://localhost:5000/mongo-tools";
