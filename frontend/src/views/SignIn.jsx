@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { auth, db, provider } from "../config/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { Link } from "react-router-dom";
@@ -30,6 +30,20 @@ const SignIn = () => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
 
+  const signInRef = useRef(null);
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.code === "Enter") {
+        signInRef.current.click();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
   // useEffect(() => {
   //   // console.log("message");
   // }, [passwordError]);
@@ -53,11 +67,11 @@ const SignIn = () => {
         // console.log(error);
         switch (err.code) {
           case "auth/user-not-found":
-            setEmailError("The email address does not exist");
+            setEmailError("This email address does not exist");
             setIsEmailValid(false);
             break;
           case "auth/invalid-email":
-            setEmailError("The email address does not exist");
+            setEmailError("This email address does not exist");
             setIsEmailValid(false);
             break;
           case "auth/wrong-password":
@@ -241,6 +255,7 @@ const SignIn = () => {
               onClick={(e) => handleSignIn(e)}
               aria-label="create my account"
               className="focus:ring-2 focus:ring-offset-2 text-[18px] transition .5s focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-[#7869E6] border rounded hover:bg-[#604fe7] py-4 w-full"
+              ref={signInRef}
             >
               Sign in
             </button>

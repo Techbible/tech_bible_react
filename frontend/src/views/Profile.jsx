@@ -33,7 +33,8 @@ export const ModalcustomStyles = {
     left: "50%",
     right: "auto",
     bottom: "auto",
-    marginRight: "-50%",
+    // marginRight: "-50%",
+    marginRight: "-20%",
     transform: "translate(-50%, -50%)",
     backgroundColor: "rgba(0,0,0,0.8)",
     color: "#fff",
@@ -228,18 +229,9 @@ const Profile = () => {
     );
     setLikedTools(LikedOnes);
   };
-  // useEffect(() => {
-  //   getTools();
-  // }, []);
-
-  // useEffect(() => {
-  //   LoadLikedTools();
-  // }, []);
 
   //Verifying Sign in and loading users infos on load
   useEffect(() => {
-    // LoadLikedTools();
-    getTools();
     const listen = onAuthStateChanged(
       auth,
       (user) => {
@@ -256,6 +248,9 @@ const Profile = () => {
       []
     );
 
+    return listen();
+  }, []);
+  useEffect(() => {
     //getting the available categories
     const dbRef = collection(db, "Categories");
     onSnapshot(dbRef, (docsSnap) => {
@@ -265,16 +260,19 @@ const Profile = () => {
       });
       setCategories(CategoriesArray);
     });
-    return listen();
-  }, []);
+  }, [categories]);
 
   //To add/Update a Bio
   const UpdatingBio = async () => {
     try {
-      const UserRef = doc(db, "Users", currentUserData.uid);
-      await updateDoc(UserRef, { bio: bio });
-      setAddBio(false);
-      setUpdateBio(false);
+      if (bio.length > 50) {
+        alert("Your bio is more than 50 characters");
+      } else {
+        const UserRef = doc(db, "Users", currentUserData.uid);
+        await updateDoc(UserRef, { bio: bio });
+        setAddBio(false);
+        setUpdateBio(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -401,7 +399,9 @@ const Profile = () => {
                       <p className="font-bold text-lg leading-tight mb-3">
                         Bio
                       </p>
-                      <p className="text-sm">{currentUserData.bio}</p>
+                      <div className="max-w-[10rem]">
+                        <p className="text-sm">{currentUserData.bio}</p>
+                      </div>
                     </div>
                     <div>
                       <button
@@ -464,11 +464,13 @@ const Profile = () => {
                 <p className="font-bold text-lg leading-tight mb-3">
                   Interests
                 </p>
-                {currentUserData?.interests?.map((i, index) => (
-                  <p className="text-sm leading-tight d-inline" key={index}>
-                    {i},&nbsp;
-                  </p>
-                ))}
+                <div>
+                  {currentUserData?.interests?.map((i, index) => (
+                    <p className="text-sm leading-tight d-inline" key={index}>
+                      {i},&nbsp;
+                    </p>
+                  ))}
+                </div>
               </div>
               {updateInterests ? (
                 <button onClick={editInterests} className="edit-btn">
@@ -510,35 +512,67 @@ const Profile = () => {
             style={ModalcustomStyles}
             contentLabel="Example Modal"
           >
-            <h2 ref={(_subtitle) => (subtitle = _subtitle)} className="mb-4">
-              Please choose your interests :
-            </h2>
-            <span id="close-button" onClick={closeModal}>
-              X
-            </span>
-            <div className="modal-flex inner-modal">
-              {categories?.map((categorie) => (
-                <div className="flex interests-wrapper">
-                  <span className="Interest">
-                    <input
-                      type={"checkbox"}
-                      value={`${categorie.Category}`}
-                      onChange={(e) => handleInterestCheck(e)}
-                      checked={
-                        checkedInterests.includes(`${categorie.Category}`)
-                          ? true
-                          : null
-                      }
-                    />
-                    &nbsp;
-                    {categorie.Category}
-                  </span>
-                </div>
-              ))}
+            <div className="mx-16">
+              <h2
+                ref={(_subtitle) => (subtitle = _subtitle)}
+                className="mb-4 text-xl font-bold"
+              >
+                Please choose your interests:
+              </h2>
+              <span
+                id="close-button"
+                className="text-gray-600 hover:text-black hovet:text-white cursor-pointer px-3 transition duration-250"
+                onClick={closeModal}
+              >
+                X
+              </span>
+              <div className="flex flex-wrap justify-start gap-4">
+                {categories?.map((categorie) => (
+                  <label
+                    key={categorie.Category}
+                    className="flex items-center bg-gray-300 max-w-lg rounded-full py-1 px-3 transition duration-250 hover:bg-white cursor-pointer"
+                    htmlFor={categorie.Category}
+                    style={
+                      checkedInterests.includes(categorie.Category)
+                        ? { backgroundColor: "#7869e6", color: "white" }
+                        : {}
+                    }
+                  >
+                    <div
+                      className="flex items-center w-full"
+                      // htmlFor={categorie.Category}
+                    >
+                      <input
+                        type="checkbox"
+                        id={categorie.Category}
+                        value={categorie.Category}
+                        onChange={(e) => handleInterestCheck(e)}
+                        checked={checkedInterests.includes(categorie.Category)}
+                        className="form-checkbox h-4 w-4 text-primary"
+                        style={{ display: "none" }}
+                      />
+
+                      <span
+                        className="ml-2 text-lg font-medium text-gray-700 w-full"
+                        style={
+                          checkedInterests.includes(categorie.Category)
+                            ? { color: "white" }
+                            : {}
+                        }
+                      >
+                        {categorie.Category}
+                      </span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+              <span
+                className="inline-block mt-4 px-4 py-2 bg-white text-black transition duration-250 hover:bg-black hover:fontWeight-bold rounded-lg cursor-pointer"
+                onClick={handleInterestsChange}
+              >
+                Save
+              </span>
             </div>
-            <span className="save-btn" onClick={handleInterestsChange}>
-              Save
-            </span>
           </Modal>
         </div>
       ) : (

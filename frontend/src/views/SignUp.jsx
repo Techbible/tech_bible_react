@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, provider, db } from "../config/firebase";
@@ -30,6 +30,21 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
+
+  const signUpRef = useRef(null);
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.code === "Enter") {
+        signUpRef.current.click();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   //it's basically just the description of the image that you want to be generated
   // const [userPrompt,setUserPrompt] = useState("profile picture on avatar format");
@@ -233,6 +248,7 @@ const SignUp = () => {
               role="button"
               aria-label="create my account"
               className="focus:ring-2 focus:ring-offset-2 text-[18px] transition .5s focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-[#7869E6] border rounded hover:bg-[#604fe7] py-4 w-full"
+              ref={signUpRef}
             >
               Create my account
             </button>

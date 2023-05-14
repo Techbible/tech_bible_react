@@ -110,7 +110,7 @@ const Toolitem = ({ toolData, forceRender }) => {
             <div className="flex direction-column align-items-center gap-2 mx-3 ">
               <img
                 alt="tech bible"
-                className="follow_unfollow"
+                className="w-[30px] transition duration-300 hover:w-[32px] "
                 src={
                   // toolData.LikedBy?.find((user) => user === currentUser?.uid)
                   // toolData.LikedBy?.includes(currentUser.uid)
@@ -121,13 +121,13 @@ const Toolitem = ({ toolData, forceRender }) => {
                     : process.env.PUBLIC_URL + "/assets/like.png"
                 }
                 onClick={() => {
-                  // toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                  toolData.LikedBy?.includes(currentUser.uid)
-                    ? handleUnLikes(toolData._id)
+                  toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                    ? // toolData.LikedBy?.includes(currentUser.uid)
+                      handleUnLikes(toolData._id)
                     : handleLikes(toolData._id);
                 }}
-                // onClick={testToolLikedBy}
               />
+
               <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
                 {toolData.LikedBy?.length}
               </div>

@@ -1,24 +1,23 @@
 import ToolInfo from "../components/ToolDetails/ToolInfo";
 import Post from "../components/ToolDetails/Post";
 import { useParams } from "react-router-dom";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { allToolsAtom } from "../recoil/tool";
 import { useRecoilValue } from "recoil";
-
-
 
 const NewToolDetails = () => {
   let { id } = useParams();
 
   const allTools = useRecoilValue(allToolsAtom);
 
-
   const [ToolData, setToolData] = useState();
 
+  const [AddCommentClicked, setAddCommentClicked] = useState(false);
+  const [comment, setComment] = useState("");
 
-//this is firebase
+  //this is firebase
   // useEffect(() => {
   //   console.log(id);
   //   const ToolRef = doc(db, "Tools", id);
@@ -27,13 +26,12 @@ const NewToolDetails = () => {
   //   });
   // }, []);
 
-//this is JS LOGIC
-useEffect(()=>{
-   // Use the find() method to search for a tool by ID
-   const foundTool = allTools?.find((tool) => tool._id === id);
-   setToolData(foundTool);
-},[])
-
+  //this is JS LOGIC
+  useEffect(() => {
+    // Use the find() method to search for a tool by ID
+    const foundTool = allTools?.find((tool) => tool._id === id);
+    setToolData(foundTool);
+  }, []);
 
   return (
     <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">
@@ -42,6 +40,29 @@ useEffect(()=>{
           {/* ToolItem Tooldetails */}
           <ToolInfo toolData={ToolData} />
           {/* END ToolItem Tooldetails */}
+
+          {/* TOOL COMMENT SECTION */}
+          <button
+            className="bg-green-900 rounded-[5px] p-2 hover:bg-green-500 text-white"
+            onClick={() => {
+              setAddCommentClicked(!AddCommentClicked);
+            }}
+          >
+            Add your comment
+          </button>
+
+          {AddCommentClicked ? (
+            <div className="flex">
+              <textarea
+                type="text"
+                className="text-black bg-white px-3  rounded-[5px] h-[100px] w-[500px] "
+              />
+            </div>
+          ) : (
+            <div></div>
+          )}
+
+          {/* END TOOL COMMENT SECTION */}
 
           {/* Community Thoughts  */}
           <div className="community-toughts-container">

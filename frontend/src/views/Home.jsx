@@ -39,16 +39,16 @@ const Home = () => {
   const [allToolsLoadable, setAllToolsLoadable] = useState(false);
 
   const [allTools, setAllTools] = useState([]);
+
+  const getTools = async () => {
+    let response = axios.get(`${BASE_URL}/mongo-tools`);
+    let tools = (await response).data;
+    setAllTools(tools);
+  };
   useEffect(() => {
     setAllToolsLoadable(false);
-    const fetchData = async () => {
-      fetch("http://localhost:5000/mongo-tools")
-        .then((response) => response.json())
-        .then((data) => setAllTools(data))
-        .catch((error) => console.error(error));
-    };
-
-    const listen = onAuthStateChanged(auth, fetchData);
+    getTools();
+    const listen = onAuthStateChanged(auth, getTools);
     setAllToolsLoadable(true);
     return listen();
   }, [allTools]);
@@ -399,6 +399,7 @@ const Home = () => {
               }
             >
               <AppOfTheDay tool={AppOfTheDayData} />
+
               {/************You might also like***********/}
               <div className="you-might-like-apps-container">
                 {/* <div className="you-might-like-apps-container"> */}
