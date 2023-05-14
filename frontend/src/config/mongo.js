@@ -1,1 +1,1 @@
-export const BASE_URL = "https://techbible-backend.onrender.com"; // Change this to your server URL
+export const BASE_URL ="https://techbible-backend.onrender.com" || "http://localhost:5000/mongo-tools";

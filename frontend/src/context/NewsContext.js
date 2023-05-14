@@ -32,9 +32,8 @@ const fetchNews = async() =>{
     safeSearch: 'Off'
   },
   headers: {
-    'content-type': 'application/octet-stream',
     'X-BingApis-SDK': 'true',
-    'X-RapidAPI-Key': '4fdd11b1acmshaed225e4e2eb771p1bd40fjsn9cb4eb706ffa',
+    'X-RapidAPI-Key': '7ff7e98c00msh04dbdf7ebeaf70ap1699e7jsn264ccf613bd0',
     'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
   }
 };

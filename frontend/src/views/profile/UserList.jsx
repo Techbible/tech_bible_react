@@ -75,7 +75,7 @@ const UserList = () => {
   const createFolder = () => {
   
     const usersRef = collection(db, "Users");
-    const userDocRef = doc(usersRef, currentUser.uid);
+    const userDocRef = doc(usersRef, currentUser?.uid);
 updateDoc(userDocRef, {
             folders: arrayUnion({
               name: Name,

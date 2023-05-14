@@ -13,7 +13,7 @@ const AppOfTheDay = ({tool}) => {
         /> 
         <div>
           <h2 className="font-bold text-[15px] mb-2">{tool?.Name}</h2>
-          <p className="text-sm text-[#FFFFFF] text-[12px] w-[274px] ">
+          <p className="text-sm text-[#FFFFFF] text-[12px] w-[274px] noOfLines-2">
           {tool?.Description}
              </p>
         </div>

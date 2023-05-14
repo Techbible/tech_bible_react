@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { collection, query, limit, getDocs, where } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { BASE_URL } from "../config/mongo";
 
 import "../assets/styles/home/home.css";
 import "../assets/styles/home/global.css";
@@ -21,7 +22,6 @@ import { NewsContext, NewsContextProvider } from "../context/NewsContext";
 import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { allToolsAtom } from "../recoil/tool";
 import axios from "axios";
-import { BASE_URL } from "../config/mongo";
 import { render } from "react-dom";
 
 const toolsdata = require("../config/data.json");
@@ -48,9 +48,17 @@ const Home = () => {
   useEffect(() => {
     setAllToolsLoadable(false);
     getTools();
-    const listen = onAuthStateChanged(auth, getTools);
+    // const listen = onAuthStateChanged(auth, getTools);
+    // const fetchData = async () => {
+    //   fetch(`${BASE_URL}/mongo-tools`)
+    //     .then((response) => response.json())
+    //     .then((data) => setAllTools(data))
+    //     .catch((error) => console.error(error));
+    // };
+
+    // const listen = onAuthStateChanged(auth, fetchData);
     setAllToolsLoadable(true);
-    return listen();
+    // return listen();
   }, [allTools]);
   //LOADING
   const [isLoading, setLoading] = useState(false);
@@ -166,20 +174,33 @@ const Home = () => {
 
   const [selectedSuggestion, setSelectedSuggestion] = useState(-1);
   const suggestionContainerRef = useRef(null);
+  const filteredSuggestions = allTools.filter((tool) => {
+    const searchTerm = value.toLowerCase();
+    const name = tool?.Name?.toLowerCase();
+    return searchTerm && name?.startsWith(searchTerm);
+  });
+
   const handleKeyDown = (event) => {
+    event.preventDefault();
     if (event.key === "ArrowDown") {
       event.preventDefault();
       setSelectedSuggestion((prev) =>
-        prev === allTools.length - 1 ? 0 : prev + 1
+        prev === filteredSuggestions.length - 1 ? 0 : prev + 1
       );
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
       setSelectedSuggestion((prev) =>
-        prev === 0 ? allTools.length - 1 : prev - 1
+        prev === 0 ? filteredSuggestions.length - 1 : prev - 1
       );
     } else if (event.key === "Enter") {
-      if (selectedSuggestion >= 0 && selectedSuggestion < allTools.length) {
-        window.location.href = `/newtooldetails/${allTools[selectedSuggestion]._id}`;
+      event.preventDefault();
+      setIsSearching(true);
+      if (
+        selectedSuggestion >= 0 &&
+        selectedSuggestion < filteredSuggestions.length
+      ) {
+        const selectedTool = filteredSuggestions[selectedSuggestion];
+        window.location.href = `/tech_bible_react/newtooldetails/${selectedTool._id}`;
       }
     }
   };
@@ -242,6 +263,7 @@ const Home = () => {
                 </div>
 
                 <input
+                  onSubmit={handleKeyDown}
                   type="text"
                   id="voice-search"
                   className="bg-white h-[36px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -249,7 +271,7 @@ const Home = () => {
                   value={value}
                   onChange={(e) => {
                     onChange(e);
-                    setSelectedSuggestion(0);
+                    setSelectedSuggestion(-1);
                   }}
                   required
                   autoComplete="off"
@@ -387,6 +409,33 @@ const Home = () => {
             }
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
           >
+            {/* keyword test             */}
+            {isSearching ? (
+              <div>
+                heyy
+                {allTools
+                  ?.filter((tool) => {
+                    const keywords = tool.keywords?.split(",") ?? [];
+                    const searchTerm = value.toLowerCase();
+
+                    return (
+                      searchTerm &&
+                      keywords.some((keyword) =>
+                        keyword.toLowerCase().startsWith(searchTerm)
+                      )
+                    );
+                  })
+                  .slice(0, 10)
+                  .map((tool) => (
+                    <Toolitem
+                      key={tool._id}
+                      toolData={tool}
+                      forceRender={forceRender}
+                    />
+                  ))}
+              </div>
+            ) : null}
+            {/* end keyword test             */}
             <div
               style={
                 !isFiltering
