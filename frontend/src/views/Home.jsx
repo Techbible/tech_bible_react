@@ -448,18 +448,29 @@ const Home = () => {
               <AppOfTheDay tool={AppOfTheDayData} />
 
               {/************You might also like***********/}
-              <div className="you-might-like-apps-container">
-                {/* <div className="you-might-like-apps-container"> */}
-                <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
-                  YOU MIGHT ALSO LIKE
-                </p>
-                <div
-                  className="flex flex-col sm:flex-row"
-                  style={{ display: "flex" }}
-                >
-                  <YouMightLikeApp />
+              {auth.currentUser ? (
+                <div className="you-might-like-apps-container">
+                  {/* <div className="you-might-like-apps-container"> */}
+                  <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
+                    YOU MIGHT ALSO LIKE
+                  </p>
+                  <div
+                    className="flex flex-col sm:flex-row"
+                    style={{ display: "flex" }}
+                  >
+                    <YouMightLikeApp />
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <p className="text-white m-3">
+                  <Link to={"/signup"}>
+                    {" "}
+                    <u>Sign up</u>
+                  </Link>
+                  &nbsp; and discover personalized tool recommendations and more
+                  by selecting your profile interests.
+                </p>
+              )}
               {/***********END You might also like********/}
             </div>
             {!isFiltering ? (
