@@ -187,13 +187,15 @@ const Home = () => {
       );
     } else if (event.key === "Enter") {
       event.preventDefault();
-      setIsSearching(true);
+      
       if (selectedSuggestion >= 0 && selectedSuggestion < filteredSuggestions.length) {
         
         const selectedTool = filteredSuggestions[selectedSuggestion];
         window.location.href = `/tech_bible_react/newtooldetails/${selectedTool._id}`;
        
       }
+       
+      
       
     }
   };
@@ -254,9 +256,9 @@ const Home = () => {
                     ></path>
                   </svg>
                 </div>
-
+                
                 <input
-                onSubmit={handleKeyDown}
+              
                   type="text"
                   id="voice-search"
                   className="bg-white h-[36px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -268,6 +270,12 @@ const Home = () => {
                   }}
                   required
                   autoComplete="off"
+                  onKeyDown={(e) => {
+                    if (e.keyCode === 13) {
+                      e.preventDefault();
+                      setIsSearching(true);
+                    }
+                  }}
                 />
               </div>
               <div className="ml-2">
@@ -404,16 +412,16 @@ const Home = () => {
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
           >
                {/* keyword test             */}
-               { isSearching  ?  (
+               { 
+                  isSearching ?  (
              <div>
-                    heyy
+                    <h1>Search Results</h1>
                     {allTools
                     ?.filter((tool) => {
-                      const keywords=tool.keywords?.split(',') ?? [];  
-                      const searchTerm = value.toLowerCase();
                       
+                      return tool.Keywords.includes(value);
                      
-                      return searchTerm && keywords.some(keyword => keyword.toLowerCase().startsWith(searchTerm));
+                     
                     })
                     .slice(0, 10)
                     .map((tool) => (
