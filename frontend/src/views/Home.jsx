@@ -194,7 +194,7 @@ const Home = () => {
       );
     } else if (event.key === "Enter") {
       event.preventDefault();
-      setIsSearching(true);
+
       if (
         selectedSuggestion >= 0 &&
         selectedSuggestion < filteredSuggestions.length
@@ -275,6 +275,12 @@ const Home = () => {
                   }}
                   required
                   autoComplete="off"
+                  onKeyDown={(e) => {
+                    if (e.keyCode === 13) {
+                      e.preventDefault();
+                      setIsSearching(true);
+                    }
+                  }}
                 />
               </div>
               <div className="ml-2">
@@ -412,18 +418,10 @@ const Home = () => {
             {/* keyword test             */}
             {isSearching ? (
               <div>
-                heyy
+                <h1>Search Results</h1>
                 {allTools
                   ?.filter((tool) => {
-                    const keywords = tool.keywords?.split(",") ?? [];
-                    const searchTerm = value.toLowerCase();
-
-                    return (
-                      searchTerm &&
-                      keywords.some((keyword) =>
-                        keyword.toLowerCase().startsWith(searchTerm)
-                      )
-                    );
+                    return tool.Keywords.includes(value);
                   })
                   .slice(0, 10)
                   .map((tool) => (
