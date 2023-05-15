@@ -95,7 +95,7 @@ function Navbar() {
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
                   <span className="text-white rounded-full p-1">
-                    <a href="https://www.tiktok.com/@tech.bible">
+                    <a href="https://www.tiktok.com/@tech.bible" target="_blank" rel="noopener noreferrer">
                        <i className="fab fa-tiktok text-white text-xl"></i>
                      </a>
                    
@@ -106,7 +106,7 @@ function Navbar() {
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
                   <span className="text-white rounded-full p-1">
-                  <a href="https://youtube.com/@MyTechBible">
+                  <a href="https://youtube.com/@MyTechBible" target="_blank" rel="noopener noreferrer">
                     <i className="fab fa-youtube text-white text-xl"></i>
                     </a>
                   </span>
@@ -116,7 +116,7 @@ function Navbar() {
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
                   <span className="text-white rounded-full p-1">
-                    <a href="https://www.instagram.com/my.techbible">
+                    <a href="https://www.instagram.com/my.techbible" target="_blank" rel="noopener noreferrer">
                     <i className="fab fa-instagram text-white text-xl"></i>
                     </a>
                   </span>
@@ -249,7 +249,7 @@ function Navbar() {
 
                 </div>
               )}
-              <div className="py-1 bg-black" role="none">
+              {/* <div className="py-1 bg-black" role="none">
                 <Link to="/addTool">
                   <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
                     Submit your tool
@@ -267,7 +267,7 @@ function Navbar() {
                     Community
                   </div>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
