@@ -31,12 +31,17 @@ const NewToolDetails = () => {
 
   const fetchComments = async () => {
     const response = await axios.get(`${BASE_URL}/mongo-toolComments/${id}`);
-
     const data = response.data;
-    setComments(data);
 
+    // Sort the comments by updatedAt field in descending order
+    const sortedComments = data.sort((a, b) => {
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
+    });
+
+    setComments(sortedComments);
     console.log(comments);
   };
+
   const handlePostComment = async () => {
     // alert(comment);
     try {
