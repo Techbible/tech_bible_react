@@ -82,7 +82,7 @@ const Post = ({ commentText, commentUser, toolName, toolCategory }) => {
           </div> */}
 
           <div className="flex flex-row justify-between mt-4">
-            <div></div>
+            {/* <div></div> */}
             <div className="flex flex-row gap-2">
               <i className="text-red-500 fas fa-heart text-[25px]"></i>
               <div className="text-[14px]">23</div>
