@@ -13,7 +13,7 @@ const Toolitem = ({ toolData, forceRender }) => {
   const LikeMethodsRef = useRef(null);
 
   //MY UPDATE
-  const [isToolLiked, setIsToolLiked] = useState(true);
+  const [isToolLiked, setIsToolLiked] = useState(false);
   useEffect(() => {
     toolData?.LikedBy.includes(currentUser?.uid)
       ? setIsToolLiked(true)
@@ -111,7 +111,7 @@ const Toolitem = ({ toolData, forceRender }) => {
               <div className="flex direction-column align-items-center gap-2 mx-3 ">
                 <img
                   alt="tech bible"
-                  className="w-[30px] transition duration-300 hover:w-[32px] "
+                  className="follow w-[30px] transition duration-300 hover:w-[32px] "
                   src={
                     // toolData.LikedBy?.find((user) => user === currentUser?.uid)
                     // toolData.LikedBy?.includes(currentUser?.uid)

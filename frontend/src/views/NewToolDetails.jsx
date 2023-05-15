@@ -111,6 +111,7 @@ const NewToolDetails = () => {
         console.log("Comment added succesfuly");
         inputCommentRef.current.value = "";
         setRefresh(!refresh);
+        setAddCommentClicked(false);
       } else {
         alert("the Comment should be longer");
       }
@@ -214,6 +215,8 @@ const NewToolDetails = () => {
             </div>
             {comments.map((comment) => (
               <Post
+                commentId={comment._id}
+                likedBy={comment.likedby}
                 key={comment._id}
                 commentText={comment.text}
                 commentUser={comment.userId}

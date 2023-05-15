@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebase";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
+import { BASE_URL } from "../../config/mongo";
 
 const Post = ({
+  commentId,
+  likedBy,
   commentText,
   commentUser,
   toolName,
@@ -16,8 +21,31 @@ const Post = ({
     setIsAddCommentClick(!IsAddCommentClick);
   };
 
+  const { currentUser } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState("");
+
+  const [isCommentLiked, setIsCommentLiked] = useState(false);
+
+  const likeToolComment = async (toolCommentId) => {
+    const response = await axios.post(
+      `${BASE_URL}/likeToolComment/${toolCommentId}/${currentUser?.uid}`
+    );
+  };
+  const unlikeToolComment = async (toolCommentId) => {
+    const response = await axios.post(
+      `${BASE_URL}/unlikeToolComment/${toolCommentId}/${currentUser?.uid}`
+    );
+  };
+
+  const handleCommentLikes = async (toolCommentId) => {
+    setIsCommentLiked(true);
+    likeToolComment(toolCommentId);
+  };
+  const handleCommentUnLikes = async (toolCommentId) => {
+    setIsCommentLiked(false);
+    unlikeToolComment(toolCommentId);
+  };
 
   const getUserInfo = async () => {
     try {
@@ -32,6 +60,10 @@ const Post = ({
       console.log("Error checking user credentials:", error);
     }
   };
+
+  useEffect(() => {
+    console.log(typeof likedBy);
+  }, []);
 
   useEffect(() => {
     getUserInfo();
@@ -79,13 +111,44 @@ const Post = ({
           <div className="flex flex-row justify-between mt-4">
             {/* <div></div> */}
             <div className="flex flex-row gap-2">
-              <i className="text-red-500 fas fa-heart text-[25px]"></i>
+              {/* To See the Like Methods  */}
+              {/* <img
+                  alt="tech bible"
+                  className="follow-unfollow w-[30px] transition duration-300 hover:w-[32px] "
+                  src={
+                    // toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                    // toolData.LikedBy?.includes(currentUser?.uid)
+                    //   ? process.env.PUBLIC_URL + "/assets/liked.png"
+                    //   : process.env.PUBLIC_URL + "/assets/like.png"
+                    isToolLiked
+                      ? process.env.PUBLIC_URL + "/assets/liked.png"
+                      : process.env.PUBLIC_URL + "/assets/like.png"
+                  }
+                  onClick={() => {
+                    toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                      ? // toolData.LikedBy?.includes(currentUser.uid)
+                        handleUnLikes(toolData._id)
+                      : handleLikes(toolData._id);
+                  }}
+                /> */}
+              {/* {isCommentLiked ? ( */}
+              <i
+                // onClick={handleCommentUnLikes(commentId)}
+                className="text-red-500 fas fa-heart text-[25px]"
+              ></i>
+              {/* ) : ( */}
+              {/* <i
+                  onClick={handleCommentLikes(commentId)}
+                  className="text-white border-white text-[25px] far fa-heart"
+                ></i> */}
+              {/* )} */}
+
               <div className="text-[14px]">23</div>
-              <button
+              {/* <button
                 onClick={handleIsAddCommentClick}
                 className=" bi bi-chat-left-dots text-[18px] hover:text-[19px] active:text-[18px]"
               ></button>
-              <div className="text-[14px]">10</div>
+              <div className="text-[14px]">10</div> */}
             </div>
           </div>
           {IsAddCommentClick ? (

@@ -216,7 +216,7 @@ const Profile = () => {
         tool.LikedBy.includes(currentUser?.uid)
       );
       setLikedTools(LikedOnes);
-      forceRender();
+      // forceRender();
     } catch (error) {
       console.error(error);
     }

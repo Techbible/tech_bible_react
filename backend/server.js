@@ -124,6 +124,43 @@ app.post("/addToolComment/:toolId/:userId/:commentText", async (req, res) => {
   }
 });
 
+// LIKE A TOOL COMMENT
+app.post("/likeToolComment/:toolCommentId/:userId", async (req, res) => {
+  let { toolCommentId, userId } = req.params;
+  try {
+    await ToolsComments.findByIdAndUpdate(toolCommentId, {
+      $addToSet: { likedBy: userId },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  console.log("Tool comment has been liked successfully!!!!!");
+});
+
+// UNLIKE A TOOL COMMENT
+app.post("/unlikeToolComment/:toolCommentId/:userId", async (req, res) => {
+  let { toolCommentId, userId } = req.params;
+  try {
+    const toolComment = await ToolsComments.findById(toolCommentId);
+    // Remove the uid from the LikedBy array using the filter method
+    const updatedLikedBy = toolComment.likedBy.filter(
+      (likedByUid) => likedByUid !== userId
+    );
+    // Update the tool document with the updated LikedBy array
+    const updatedToolComment = await ToolsComments.findByIdAndUpdate(
+      toolCommentId,
+      {
+        likedBy: updatedLikedBy,
+      }
+    );
+    return res.send(updatedToolComment);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log("tool Comment has been unliked succefuly!!!!!");
+});
+
 app.post("", async (req, res) => {
   try {
     const tools = await Tools.find({ Category: { $in: res.interests } })
