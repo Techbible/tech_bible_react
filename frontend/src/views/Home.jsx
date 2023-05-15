@@ -240,7 +240,7 @@ const Home = () => {
       <main className="layoutMain " onMouseLeave={() => setIsFocused(false)}>
         <div className="flex direction-column ">
           {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
-          <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-[#27242E]">
+          <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-[#18151D]">
             <h2 className="text-white fontWeight-500 text-[18px] mt-2">
               The Largest Saas Tools directory
             </h2>
@@ -520,11 +520,11 @@ const Home = () => {
           </div>
         </div>
       </main>
-      <aside className="sidebarWithSeparator right">
+      <aside className="sidebarWithSeparator right ">
         <Link to="/News">
-          <h1 className="poppins" style={{ fontWeight: "300px" }}>
+          <p className="medium text-[16px] " style={{ fontWeight: "300px" }}>
             News
-          </h1>{" "}
+          </p>{" "}
         </Link>
         {data?.slice(0, 3).map((article, index) => (
           <NewsHomePage

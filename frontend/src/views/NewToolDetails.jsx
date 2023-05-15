@@ -31,12 +31,17 @@ const NewToolDetails = () => {
 
   const fetchComments = async () => {
     const response = await axios.get(`${BASE_URL}/mongo-toolComments/${id}`);
-
     const data = response.data;
-    setComments(data);
 
+    // Sort the comments by updatedAt field in descending order
+    const sortedComments = data.sort((a, b) => {
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
+    });
+
+    setComments(sortedComments);
     console.log(comments);
   };
+
   const handlePostComment = async () => {
     // alert(comment);
     try {
@@ -89,11 +94,10 @@ const NewToolDetails = () => {
       </div>
     );
   }
-
   return (
     <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">
       <div className="home-container mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer">
-        <main className="layoutMain">
+        <main className=" lg:w-[900px] ">
           {/* ToolItem Tooldetails */}
           <ToolInfo toolData={toolData} />
           {/* END ToolItem Tooldetails */}
@@ -165,7 +169,7 @@ const NewToolDetails = () => {
           {/* End of Community Thoughts  */}
         </main>
 
-        <aside className="sidebarWithSeparator right">
+        <aside className="sidebarWithSeparator right max-w-[300px] ">
           <div className="news-letter-container flex flex-column gap-3 bt-white bt-white">
             <div className="text-[16px] fontWeight-700">News Letter</div>
             <div className="text-[12px] fontWeight-500 ">
