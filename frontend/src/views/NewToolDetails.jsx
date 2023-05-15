@@ -29,6 +29,32 @@ const NewToolDetails = () => {
   const [refresh, setRefresh] = useState(false);
   const inputCommentRef = useRef(null);
 
+  // const fetchComments = async () => {
+  //   const response = await axios.get(`${BASE_URL}/mongo-toolComments/${id}`);
+  //   const data = response.data;
+
+  //   // Sort the comments by updatedAt field in descending order
+  //   const sortedComments = data.sort((a, b) => {
+  //     return new Date(b.updatedAt) - new Date(a.updatedAt);
+  //   });
+
+  //   // Calculate the time difference in minutes for each comment
+  //   const commentsWithTimeAgo = sortedComments.map((comment) => {
+  //     const updatedAtDate = new Date(comment.updatedAt);
+  //     const currentDate = new Date();
+  //     const timeDifferenceInMinutes = Math.floor(
+  //       (currentDate - updatedAtDate) / (1000 * 60)
+  //     );
+  //     return {
+  //       ...comment,
+  //       timeAgoInMinutes: timeDifferenceInMinutes,
+  //     };
+  //   });
+
+  //   setComments(commentsWithTimeAgo);
+  //   console.log(commentsWithTimeAgo);
+  // };
+
   const fetchComments = async () => {
     const response = await axios.get(`${BASE_URL}/mongo-toolComments/${id}`);
     const data = response.data;
@@ -38,8 +64,38 @@ const NewToolDetails = () => {
       return new Date(b.updatedAt) - new Date(a.updatedAt);
     });
 
-    setComments(sortedComments);
-    console.log(comments);
+    // Calculate the time difference in minutes for each comment and format it
+    const commentsWithTimeAgo = sortedComments.map((comment) => {
+      const updatedAtDate = new Date(comment.updatedAt);
+      const currentDate = new Date();
+      const timeDifferenceInMinutes = Math.floor(
+        (currentDate - updatedAtDate) / (1000 * 60)
+      );
+
+      let formattedTimeAgo;
+      if (timeDifferenceInMinutes < 1) {
+        formattedTimeAgo = "Now";
+      } else if (timeDifferenceInMinutes < 60) {
+        formattedTimeAgo = `${timeDifferenceInMinutes}min ago`;
+      } else if (timeDifferenceInMinutes < 1440) {
+        const hours = Math.floor(timeDifferenceInMinutes / 60);
+        formattedTimeAgo = `${hours}h ago`;
+      } else if (timeDifferenceInMinutes < 525600) {
+        const days = Math.floor(timeDifferenceInMinutes / 1440);
+        formattedTimeAgo = `${days}d ago`;
+      } else {
+        const years = Math.floor(timeDifferenceInMinutes / 525600);
+        formattedTimeAgo = `${years}y ago`;
+      }
+
+      return {
+        ...comment,
+        timeAgo: formattedTimeAgo,
+      };
+    });
+
+    setComments(commentsWithTimeAgo);
+    console.log(commentsWithTimeAgo);
   };
 
   const handlePostComment = async () => {
@@ -161,6 +217,7 @@ const NewToolDetails = () => {
                 key={comment._id}
                 commentText={comment.text}
                 commentUser={comment.userId}
+                timeAgo={comment.timeAgo}
                 toolName={toolData.Name}
                 toolCategory={toolData?.Category}
               />
