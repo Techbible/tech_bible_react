@@ -9,6 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 const Tools = require("./models/Tool");
+const ToolsComments = require("./models/ToolComment");
 
 const uri =
   "mongodb+srv://techbible:nRgcJ2M8O6DRoznj@techbible.eggj9te.mongodb.net/techbible";
@@ -33,30 +34,54 @@ app.get("/mongo-tools", async (req, res) => {
   }
 });
 
-app.post("/like/:id/:uid", async (req, res) => {
-  let { id, uid } = req.params;
+// To GET TOOL COMMENTS
+app.get("/mongo-toolComments/:toolId", async (req, res) => {
+  let { toolId } = req.params;
+
   try {
-    await Tools.findByIdAndUpdate(id, {
-      $push: { LikedBy: uid },
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
+
+    const toolsComments = await ToolsComments.find({ toolId: toolId });
+
+    res.send(toolsComments);
+    console.log("toolsComments :" + toolsComments);
+    console.log(typeof toolsComments);
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).send("Error fetching tools data");
   }
-  console.log("tool has been liked successfully!!!!!");
+  // finally {
+  //   mongoose.connection.close();
+  // }
 });
 
 // app.post("/like/:id/:uid", async (req, res) => {
 //   let { id, uid } = req.params;
 //   try {
 //     await Tools.findByIdAndUpdate(id, {
-//       $addToSet: { LikedBy: uid },
+//       $push: { LikedBy: uid },
 //     });
 //   } catch (error) {
 //     console.log(error);
 //   }
-
 //   console.log("tool has been liked successfully!!!!!");
 // });
+
+app.post("/like/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
+  try {
+    await Tools.findByIdAndUpdate(id, {
+      $addToSet: { LikedBy: uid },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  console.log("tool has been liked successfully!!!!!");
+});
 
 //remove a user from a tool likedBy array
 app.post("/unlike/:id/:uid", async (req, res) => {
@@ -76,6 +101,27 @@ app.post("/unlike/:id/:uid", async (req, res) => {
     console.log(error);
   }
   console.log("tool has been unliked succefuly!!!!!");
+});
+
+// Add a Tool Comment
+app.post("/addToolComment/:toolId/:userId/:commentText", async (req, res) => {
+  try {
+    const { toolId, userId, commentText } = req.params;
+    const newComment = await ToolsComments.create({
+      text: commentText,
+      userId: userId,
+      toolId: toolId,
+    });
+    // assuming that `Tools` is the model for the tools collection
+    const tool = await Tools.findById(toolId);
+    tool.comments.push(newComment._id);
+    await tool.save();
+    res.status(201).json(newComment);
+    console.log("comment added");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error adding tool comment");
+  }
 });
 
 app.post("", async (req, res) => {

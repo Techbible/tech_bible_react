@@ -1,21 +1,68 @@
 import ToolInfo from "../components/ToolDetails/ToolInfo";
 import Post from "../components/ToolDetails/Post";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { allToolsAtom } from "../recoil/tool";
 import { useRecoilValue } from "recoil";
+import "../assets/styles/home/global.css";
+import axios from "axios";
+import { BASE_URL } from "../config/mongo";
+import { AuthContext } from "../context/AuthContext";
 
 const NewToolDetails = () => {
   let { id } = useParams();
 
+  const { currentUser } = useContext(AuthContext);
+
   const allTools = useRecoilValue(allToolsAtom);
 
-  const [ToolData, setToolData] = useState();
+  const [toolData, setToolData] = useState();
 
   const [AddCommentClicked, setAddCommentClicked] = useState(false);
   const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+  const [isCommentsLoadalbe, setIsCommentsLoadalbe] = useState(false);
+  const [postCommentClicked, setPostCommentClicked] = useState(false);
+  //to refrech comments in every add
+  const [refresh, setRefresh] = useState(false);
+  const inputCommentRef = useRef(null);
+
+  const fetchComments = async () => {
+    const response = await axios.get(`${BASE_URL}/mongo-toolComments/${id}`);
+
+    const data = response.data;
+    setComments(data);
+
+    console.log(comments);
+  };
+  const handlePostComment = async () => {
+    // alert(comment);
+    try {
+      if (comment.length > 0) {
+        const response = await axios.post(
+          `${BASE_URL}/addToolComment/${id}/${currentUser.uid}/${comment}`
+        );
+
+        setPostCommentClicked(true);
+
+        console.log("Comment added succesfuly");
+        inputCommentRef.current.value = "";
+        setRefresh(!refresh);
+      } else {
+        alert("the Comment should be longer");
+      }
+    } catch (error) {
+      console.log("error" + error);
+    }
+  };
+
+  useEffect(() => {
+    setIsCommentsLoadalbe(false);
+    fetchComments();
+    setIsCommentsLoadalbe(true);
+  }, [refresh]);
 
   //this is firebase
   // useEffect(() => {
@@ -28,22 +75,32 @@ const NewToolDetails = () => {
 
   //this is JS LOGIC
   useEffect(() => {
-    // Use the find() method to search for a tool by ID
     const foundTool = allTools?.find((tool) => tool._id === id);
     setToolData(foundTool);
+    console.log(toolData);
   }, []);
+
+  if (!isCommentsLoadalbe) {
+    return (
+      <div className="loader-wrapper">
+        <div className="loader-container">
+          <div className="loader"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">
       <div className="home-container mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer">
         <main className="layoutMain">
           {/* ToolItem Tooldetails */}
-          <ToolInfo toolData={ToolData} />
+          <ToolInfo toolData={toolData} />
           {/* END ToolItem Tooldetails */}
 
           {/* TOOL COMMENT SECTION */}
           <button
-            className="bg-green-900 rounded-[5px] p-2 hover:bg-green-500 text-white"
+            className="text-black text-[14px] hover:bg-black fontWeight-500 bg-white mb-4 rounded-[8px] p-2 "
             onClick={() => {
               setAddCommentClicked(!AddCommentClicked);
             }}
@@ -52,11 +109,29 @@ const NewToolDetails = () => {
           </button>
 
           {AddCommentClicked ? (
-            <div className="flex">
-              <textarea
-                type="text"
-                className="text-black bg-white px-3  rounded-[5px] h-[100px] w-[500px] "
-              />
+            <div class="mb-6">
+              <div class=" px-4 mb-4 bg-[#0D0C12] rounded-lg rounded-t-lg border border-gray-200">
+                <label for="comment" class="sr-only">
+                  Your comment
+                </label>
+                <textarea
+                  ref={inputCommentRef}
+                  id="comment"
+                  rows="6"
+                  class="px-0 w-full text-sm text-gray-900 rounded-[8px] px-3 py-3 border-0 focus:ring-0 focus:outline-none dark:text-white bg-[#27242E] "
+                  placeholder="Write a comment..."
+                  value={comment}
+                  onChange={(e) => {
+                    setComment(e.target.value);
+                  }}
+                ></textarea>
+              </div>
+              <button
+                onClick={handlePostComment}
+                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-[#604FE7] rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+              >
+                Post comment
+              </button>
             </div>
           ) : (
             <div></div>
@@ -77,9 +152,15 @@ const NewToolDetails = () => {
                 <i className=" bi bi-chat-left-dots text-[18px]"></i>
               </div>
             </div>
-            <Post />
-            <Post />
-            <Post />
+            {comments.map((comment) => (
+              <Post
+                key={comment._id}
+                commentText={comment.text}
+                commentUser={comment.userId}
+                toolName={toolData.Name}
+                toolCategory={toolData?.Category}
+              />
+            ))}
           </div>
           {/* End of Community Thoughts  */}
         </main>

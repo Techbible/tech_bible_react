@@ -457,10 +457,13 @@ const Profile = () => {
                 <p className="font-bold text-lg leading-tight mb-3">
                   Interests
                 </p>
-                <div>
+                <div className="flex flex-wrap">
                   {currentUserData?.interests?.map((i, index) => (
-                    <p className="text-sm leading-tight d-inline" key={index}>
-                      {i},&nbsp;
+                    <p
+                      className="text-sm leading-tight d-inline mr-1 mb-1"
+                      key={index}
+                    >
+                      {i},
                     </p>
                   ))}
                 </div>
@@ -477,6 +480,7 @@ const Profile = () => {
                 </div>
               )}
             </div>
+
             {/* End Of Interests components */}
           </div>
 
@@ -531,10 +535,7 @@ const Profile = () => {
                         : {}
                     }
                   >
-                    <div
-                      className="flex items-center w-full"
-                      // htmlFor={categorie.Category}
-                    >
+                    <div className="flex items-center w-full">
                       <input
                         type="checkbox"
                         id={categorie.Category}
