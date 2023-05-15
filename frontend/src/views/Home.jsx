@@ -16,7 +16,6 @@ import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Toolitem from "../components/Tools/Toolitem";
 import YouMightLikeApp from "../components/home components/Filtering-container/YouMightLikeApp";
 import AppOfTheDay from "../components/home components/Filtering-container/AppOfTheDay";
-
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
 import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
@@ -263,7 +262,6 @@ const Home = () => {
                 </div>
 
                 <input
-                  onSubmit={handleKeyDown}
                   type="text"
                   id="voice-search"
                   className="bg-white h-[36px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -271,7 +269,7 @@ const Home = () => {
                   value={value}
                   onChange={(e) => {
                     onChange(e);
-                    setSelectedSuggestion(-1);
+                    
                   }}
                   required
                   autoComplete="off"
@@ -280,7 +278,9 @@ const Home = () => {
                       e.preventDefault();
                       setIsSearching(true);
                     }
+                    
                   }}
+                 
                 />
               </div>
               <div className="ml-2">
@@ -354,6 +354,9 @@ const Home = () => {
                           onMouseEnter={() => {
                             setSelectedSuggestion(index);
                           }}
+                          onMouseLeave={()=>{
+                            setSelectedSuggestion(-1);
+                          }}
                         >
                           <div>
                             <p className="text-gray-500" key={tool.Name}>
@@ -415,8 +418,8 @@ const Home = () => {
             }
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
           >
-            {/* keyword test             */}
-            {isSearching ? (
+            {/* keyword filter            */}
+            {isSearching  && value !== "" ? (
               <div>
                 <h1>Search Results</h1>
                 {allTools
@@ -433,7 +436,7 @@ const Home = () => {
                   ))}
               </div>
             ) : null}
-            {/* end keyword test             */}
+            {/* end keyword filter              */}
             <div
               style={
                 !isFiltering

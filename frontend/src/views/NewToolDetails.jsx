@@ -207,9 +207,9 @@ const NewToolDetails = () => {
                 Community Thoughts
               </div>
               <div className="flex flex-row gap-2">
-                <div className="text-[15px] sm-hidden">
+                {/* <div className="text-[15px] sm-hidden">
                   Ask a question about this tool
-                </div>
+                </div> */}
                 <i className=" bi bi-chat-left-dots text-[18px]"></i>
               </div>
             </div>
