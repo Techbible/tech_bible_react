@@ -16,7 +16,6 @@ import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Toolitem from "../components/Tools/Toolitem";
 import YouMightLikeApp from "../components/home components/Filtering-container/YouMightLikeApp";
 import AppOfTheDay from "../components/home components/Filtering-container/AppOfTheDay";
-
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
 import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
@@ -271,7 +270,7 @@ const Home = () => {
                   value={value}
                   onChange={(e) => {
                     onChange(e);
-                    setSelectedSuggestion(-1);
+                    
                   }}
                   required
                   autoComplete="off"
