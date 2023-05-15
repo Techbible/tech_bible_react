@@ -1,6 +1,6 @@
 import ToolInfo from "../components/ToolDetails/ToolInfo";
 import Post from "../components/ToolDetails/Post";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState, useRef } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../config/firebase";
@@ -19,6 +19,8 @@ const NewToolDetails = () => {
   const allTools = useRecoilValue(allToolsAtom);
 
   const [toolData, setToolData] = useState();
+
+  const navigate = useNavigate();
 
   const [AddCommentClicked, setAddCommentClicked] = useState(false);
   const [comment, setComment] = useState("");
@@ -61,15 +63,15 @@ const NewToolDetails = () => {
 
     // Sort the comments by updatedAt field in descending order
     const sortedComments = data.sort((a, b) => {
-      return new Date(b.updatedAt) - new Date(a.updatedAt);
+      return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
     // Calculate the time difference in minutes for each comment and format it
     const commentsWithTimeAgo = sortedComments.map((comment) => {
-      const updatedAtDate = new Date(comment.updatedAt);
+      const createdAt = new Date(comment.createdAt);
       const currentDate = new Date();
       const timeDifferenceInMinutes = Math.floor(
-        (currentDate - updatedAtDate) / (1000 * 60)
+        (currentDate - createdAt) / (1000 * 60)
       );
 
       let formattedTimeAgo;
@@ -109,8 +111,8 @@ const NewToolDetails = () => {
         setPostCommentClicked(true);
 
         console.log("Comment added succesfuly");
-        inputCommentRef.current.value = "";
         setRefresh(!refresh);
+        setComment("");
         setAddCommentClicked(false);
       } else {
         alert("the Comment should be longer");
@@ -162,9 +164,15 @@ const NewToolDetails = () => {
           {/* TOOL COMMENT SECTION */}
           <button
             className="text-black text-[14px] hover:bg-black fontWeight-500 bg-white mb-4 rounded-[8px] p-2 "
-            onClick={() => {
-              setAddCommentClicked(!AddCommentClicked);
-            }}
+            onClick={
+              currentUser
+                ? () => {
+                    setAddCommentClicked(!AddCommentClicked);
+                  }
+                : () => {
+                    navigate("/signup");
+                  }
+            }
           >
             Add your comment
           </button>
@@ -215,14 +223,14 @@ const NewToolDetails = () => {
             </div>
             {comments.map((comment) => (
               <Post
-                commentId={comment._id}
-                likedBy={comment.likedby}
                 key={comment._id}
+                commentId={comment._id}
+                likedBy={comment.likedBy}
                 commentText={comment.text}
                 commentUser={comment.userId}
-                timeAgo={comment.timeAgo}
                 toolName={toolData.Name}
                 toolCategory={toolData?.Category}
+                timeAgo={comment.timeAgo}
               />
             ))}
           </div>
@@ -231,7 +239,7 @@ const NewToolDetails = () => {
 
         <aside className="sidebarWithSeparator right max-w-[300px] ">
           <div className="news-letter-container flex flex-column gap-3 bt-white bt-white">
-            <div className="text-[16px] fontWeight-700">News Letter</div>
+            <div className="text-[16px] fontWeight-700">Newsletter</div>
             <div className="text-[12px] fontWeight-500 ">
               Get the latest Saas products news directly to your inbox!
             </div>

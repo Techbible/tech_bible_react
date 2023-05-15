@@ -193,7 +193,7 @@ const Home = () => {
       );
     } else if (event.key === "Enter") {
       event.preventDefault();
-
+      setIsFocused(false);
       if (
         selectedSuggestion >= 0 &&
         selectedSuggestion < filteredSuggestions.length
@@ -237,7 +237,7 @@ const Home = () => {
   // }
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
-      <main className="layoutMain " onMouseLeave={() => setIsFocused(false)}>
+      <main className="layoutMain ">
         <div className="flex direction-column ">
           {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
           <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-[#18151D]">
@@ -269,7 +269,6 @@ const Home = () => {
                   value={value}
                   onChange={(e) => {
                     onChange(e);
-                    
                   }}
                   required
                   autoComplete="off"
@@ -278,9 +277,7 @@ const Home = () => {
                       e.preventDefault();
                       setIsSearching(true);
                     }
-                    
                   }}
-                 
                 />
               </div>
               <div className="ml-2">
@@ -354,7 +351,7 @@ const Home = () => {
                           onMouseEnter={() => {
                             setSelectedSuggestion(index);
                           }}
-                          onMouseLeave={()=>{
+                          onMouseLeave={() => {
                             setSelectedSuggestion(-1);
                           }}
                         >
@@ -419,7 +416,7 @@ const Home = () => {
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
           >
             {/* keyword filter            */}
-            {isSearching  && value !== "" ? (
+            {isSearching && value !== "" ? (
               <div>
                 <h1>Search Results</h1>
                 {allTools
@@ -465,7 +462,7 @@ const Home = () => {
                   </div>
                 </div>
               ) : (
-                <p className="text-white m-3">
+                <p className="text[#FFFFFF] fw-bold mb-[3rem] ">
                   <Link to={"/signup"}>
                     {" "}
                     <u>Sign up</u>
@@ -500,7 +497,9 @@ const Home = () => {
               <div>
                 {!isFiltering ? (
                   <div className="tools-section-ngu">
-                    <h1>Top tools</h1>
+                    <p className="fw-600 lg:text-[30px] md:text-[25px] sm:text-[20px] mb-10 ">
+                      Top tools
+                    </p>
                     {!allTools ? (
                       <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (

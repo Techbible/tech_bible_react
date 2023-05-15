@@ -61,14 +61,18 @@ const Post = ({
     }
   };
 
+  // const getComment = async () => {};
   useEffect(() => {
+    likedBy?.includes(currentUser.uid)
+      ? setIsCommentLiked(true)
+      : setIsCommentLiked(false);
     console.log(typeof likedBy);
-  }, []);
+  }, [likedBy]);
 
   useEffect(() => {
     getUserInfo();
-    console.log(name);
-    console.log(photo);
+    // console.log(name);
+    // console.log(photo);
   }, [commentUser]);
 
   return (
@@ -131,19 +135,23 @@ const Post = ({
                       : handleLikes(toolData._id);
                   }}
                 /> */}
-              {/* {isCommentLiked ? ( */}
-              <i
-                // onClick={handleCommentUnLikes(commentId)}
-                className="text-red-500 fas fa-heart text-[25px]"
-              ></i>
-              {/* ) : ( */}
-              {/* <i
-                  onClick={handleCommentLikes(commentId)}
+              {isCommentLiked ? (
+                <i
+                  onClick={() => {
+                    handleCommentUnLikes(commentId);
+                  }}
+                  className="text-red-500 fas fa-heart text-[25px]"
+                ></i>
+              ) : (
+                <i
+                  onClick={() => {
+                    handleCommentLikes(commentId);
+                  }}
                   className="text-white border-white text-[25px] far fa-heart"
-                ></i> */}
-              {/* )} */}
+                ></i>
+              )}
 
-              <div className="text-[14px]">23</div>
+              <div className="text-[14px]">{likedBy.length}</div>
               {/* <button
                 onClick={handleIsAddCommentClick}
                 className=" bi bi-chat-left-dots text-[18px] hover:text-[19px] active:text-[18px]"
