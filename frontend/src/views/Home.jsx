@@ -471,12 +471,16 @@ const Home = () => {
                   <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
                     YOU MIGHT ALSO LIKE
                   </p>
-                  <div
-                    className="flex flex-col sm:flex-row"
-                    style={{ display: "flex" }}
-                  >
-                    <YouMightLikeApp />
-                  </div>
+                  {currentUserData?.interests?.length === 0 ? (
+                    <div>Check you interests to see the suggestion tools</div>
+                  ) : (
+                    <div
+                      className="flex flex-col sm:flex-row"
+                      style={{ display: "flex" }}
+                    >
+                      <YouMightLikeApp />
+                    </div>
+                  )}
                 </div>
               ) : (
                 <p className="text[#FFFFFF] fw-500 ml-[90px] mb-[3rem]">
