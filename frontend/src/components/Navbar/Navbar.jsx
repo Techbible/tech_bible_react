@@ -159,12 +159,12 @@ function Navbar() {
                   <div className="username  ">{currentUserData?.username}</div>
                 </div>
               </Link>
-              <span
-                className="signout cursor-pointer border-[1px] text-white px-2 py-1 rounded-md fontWeight-500 "
+              <div
+                className="signout cursor-pointer border-[1px] text-white px-2 py-1 rounded-md fontWeight-500 transition duration-200 hover:bg-white hover:text-black "
                 onClick={UserSignOut}
               >
                 Sign out
-              </span>
+              </div>
             </div>
           )}
 
