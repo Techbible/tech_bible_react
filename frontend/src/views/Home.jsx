@@ -166,8 +166,10 @@ const Home = () => {
   //input value
   const [value, setValue] = useState("");
   const inputRef = useRef(null);
+
   const onChange = (event) => {
-    setValue(event.target.value);
+    const inputValue = event.target.value;
+    setValue(inputValue);
     if (value === null) {
       setisSuggestionsVisible(false);
       setIsSearching(false);
@@ -185,17 +187,14 @@ const Home = () => {
   const handleKeyDown = (event) => {
     event.preventDefault();
     if (event.key === "ArrowDown") {
-      event.preventDefault();
       setSelectedSuggestion((prev) =>
         prev === filteredSuggestions.length - 1 ? 0 : prev + 1
       );
     } else if (event.key === "ArrowUp") {
-      event.preventDefault();
       setSelectedSuggestion((prev) =>
         prev === 0 ? filteredSuggestions.length - 1 : prev - 1
       );
     } else if (event.key === "Enter") {
-      event.preventDefault();
       setIsSearching(true);
       if (
         selectedSuggestion >= 0 &&
@@ -275,6 +274,7 @@ const Home = () => {
                   value={value}
                   onChange={(e) => {
                     onChange(e);
+                    setIsSearching(false);
                   }}
                   ref={inputRef}
                   required
@@ -283,6 +283,8 @@ const Home = () => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       setIsSearching(true);
+
+                      setisSuggestionsVisible(false);
                     }
                   }}
                 />
@@ -339,9 +341,6 @@ const Home = () => {
                 onMouseLeave={() => {
                   setSelectedSuggestion(-1);
                   inputRef.current.focus();
-                  console.log(
-                    "on mouse leave the index is" + selectedSuggestion
-                  );
                 }}
               >
                 <ul>
@@ -432,7 +431,7 @@ const Home = () => {
             {/* keyword filter            */}
             {isSearching && value !== "" ? (
               <div>
-                <h1>Search Results</h1>
+                <h1>Search results for : {value} </h1>
                 {allTools
                   ?.filter((tool) => {
                     return tool.Keywords.includes(value);
@@ -445,6 +444,10 @@ const Home = () => {
                       forceRender={forceRender}
                     />
                   ))}
+                {allTools &&
+                  allTools.length > 0 &&
+                  allTools.filter((tool) => tool.Keywords.includes(value))
+                    .length === 0 && <p>Nothing found.</p>}
               </div>
             ) : null}
             {/* end keyword filter              */}
