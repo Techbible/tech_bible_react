@@ -38,6 +38,7 @@ const Home = () => {
   const [allToolsLoadable, setAllToolsLoadable] = useState(false);
 
   const [allTools, setAllTools] = useState([]);
+  const [toolsNumber, setToolsNumber] = useState(30);
 
   const getTools = async () => {
     let response = axios.get(`${BASE_URL}/mongo-tools`);
@@ -169,7 +170,7 @@ const Home = () => {
     setValue(event.target.value);
     if (value === null) {
       setisSuggestionsVisible(false);
-      setIsSearching(false)
+      setIsSearching(false);
     } else setisSuggestionsVisible(true);
   };
 
@@ -239,7 +240,10 @@ const Home = () => {
   // }
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
-      <main className="layoutMain " onMouseLeave={() => setisSuggestionsVisible(false)}>
+      <main
+        className="layoutMain "
+        onMouseLeave={() => setisSuggestionsVisible(false)}
+      >
         <div className="flex direction-column ">
           {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
           <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-[#18151D]">
@@ -279,7 +283,6 @@ const Home = () => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       setIsSearching(true);
-
                     }
                   }}
                 />
@@ -333,10 +336,12 @@ const Home = () => {
               <div
                 ref={suggestionContainerRef}
                 className="bg-white p-4 rounded-lg shadow-md "
-                onMouseLeave={()=>{
+                onMouseLeave={() => {
                   setSelectedSuggestion(-1);
                   inputRef.current.focus();
-                  console.log("on mouse leave the index is"+selectedSuggestion)
+                  console.log(
+                    "on mouse leave the index is" + selectedSuggestion
+                  );
                 }}
               >
                 <ul>
@@ -359,9 +364,10 @@ const Home = () => {
                           }`}
                           onMouseEnter={() => {
                             setSelectedSuggestion(index);
-                            console.log("on mouse enter the index is"+selectedSuggestion)
+                            console.log(
+                              "on mouse enter the index is" + selectedSuggestion
+                            );
                           }}
-                         
                         >
                           <div>
                             <p className="text-gray-500" key={tool.Name}>
@@ -512,15 +518,25 @@ const Home = () => {
                       <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (
                       Array.isArray(allTools) &&
-                      allTools
-                        ?.slice(0, 50)
-                        .map((tool, index) => (
+                      allTools?.slice(0, toolsNumber).map((tool, index) => (
+                        <div>
                           <Toolitem
                             key={index}
                             toolData={tool}
                             forceRender={forceRender}
                           />
-                        ))
+                        </div>
+                      ))
+                    )}
+                    {allToolsLoadable && toolsNumber < 290 ? (
+                      <div
+                        className="mt-4 mb-[4rem] cursor-pointer hover:tracking-[.5px] transition duration-300 "
+                        onClick={() => setToolsNumber(toolsNumber + 30)}
+                      >
+                        <u>See more tools...</u>
+                      </div>
+                    ) : (
+                      <div></div>
                     )}
                   </div>
                 ) : (

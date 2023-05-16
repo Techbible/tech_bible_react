@@ -63,12 +63,15 @@ const Toolitem = ({ toolData, forceRender }) => {
         data-test="post-item-390145"
       >
         <Link to={`/newtooldetails/${toolData._id}`}>
-          <div className="" data-test="post-thumbnail">
+          <div
+            className="rounded-[6px]  lg:w-[81px] md:w-[61px] sm:w-[51px] w-[51px]  "
+            data-test="post-thumbnail"
+          >
             <img
               loading="lazy"
               src={toolData?.Icon}
               alt="Tool not found"
-              className=" rounded-[6px] lg:rounded-[10px] md:rounded-[6px] sm:rounded-[6px] lg:w-[81px] md:w-[61px] sm:w-[51px] w-[51px] "
+              className="lg:rounded-[6px] md:rounded-[6px] sm:rounded-[6px]"
             />
           </div>
         </Link>
@@ -140,7 +143,7 @@ const Toolitem = ({ toolData, forceRender }) => {
 
               {isToolLiked ? (
                 <i
-                  className="text-red-500 fas fa-heart text-[25px]"
+                  className="text-red-500 fas fa-heart text-[25px] hover:text-[26px] "
                   onClick={
                     currentUser
                       ? () => {
@@ -153,7 +156,7 @@ const Toolitem = ({ toolData, forceRender }) => {
                 ></i>
               ) : (
                 <i
-                  className="text-white border-white text-[25px] far fa-heart"
+                  className="text-white border-white text-[25px] far fa-heart hover:text-[27px]"
                   onClick={
                     currentUser
                       ? () => {
