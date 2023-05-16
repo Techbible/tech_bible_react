@@ -246,7 +246,7 @@ const Home = () => {
           {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
           <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-[#18151D]">
             <h2 className="text-white fontWeight-500 text-[18px] mt-2">
-              The Largest Saas Tools directory
+              The Largestx Saas Tools directory
             </h2>
             <form className="flex items-center mt-5">
               <div className="relative w-full">
