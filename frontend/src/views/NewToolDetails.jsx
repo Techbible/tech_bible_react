@@ -1,6 +1,6 @@
 import ToolInfo from "../components/ToolDetails/ToolInfo";
 import Post from "../components/ToolDetails/Post";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState, useRef } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../config/firebase";
@@ -20,6 +20,8 @@ const NewToolDetails = () => {
 
   const [toolData, setToolData] = useState();
 
+  const navigate = useNavigate();
+
   const [AddCommentClicked, setAddCommentClicked] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
@@ -29,17 +31,73 @@ const NewToolDetails = () => {
   const [refresh, setRefresh] = useState(false);
   const inputCommentRef = useRef(null);
 
+  // const fetchComments = async () => {
+  //   const response = await axios.get(`${BASE_URL}/mongo-toolComments/${id}`);
+  //   const data = response.data;
+
+  //   // Sort the comments by updatedAt field in descending order
+  //   const sortedComments = data.sort((a, b) => {
+  //     return new Date(b.updatedAt) - new Date(a.updatedAt);
+  //   });
+
+  //   // Calculate the time difference in minutes for each comment
+  //   const commentsWithTimeAgo = sortedComments.map((comment) => {
+  //     const updatedAtDate = new Date(comment.updatedAt);
+  //     const currentDate = new Date();
+  //     const timeDifferenceInMinutes = Math.floor(
+  //       (currentDate - updatedAtDate) / (1000 * 60)
+  //     );
+  //     return {
+  //       ...comment,
+  //       timeAgoInMinutes: timeDifferenceInMinutes,
+  //     };
+  //   });
+
+  //   setComments(commentsWithTimeAgo);
+  //   console.log(commentsWithTimeAgo);
+  // };
+
   const fetchComments = async () => {
     const response = await axios.get(`${BASE_URL}/mongo-toolComments/${id}`);
     const data = response.data;
 
     // Sort the comments by updatedAt field in descending order
     const sortedComments = data.sort((a, b) => {
-      return new Date(b.updatedAt) - new Date(a.updatedAt);
+      return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    setComments(sortedComments);
-    console.log(comments);
+    // Calculate the time difference in minutes for each comment and format it
+    const commentsWithTimeAgo = sortedComments.map((comment) => {
+      const createdAt = new Date(comment.createdAt);
+      const currentDate = new Date();
+      const timeDifferenceInMinutes = Math.floor(
+        (currentDate - createdAt) / (1000 * 60)
+      );
+
+      let formattedTimeAgo;
+      if (timeDifferenceInMinutes < 1) {
+        formattedTimeAgo = "Now";
+      } else if (timeDifferenceInMinutes < 60) {
+        formattedTimeAgo = `${timeDifferenceInMinutes}min ago`;
+      } else if (timeDifferenceInMinutes < 1440) {
+        const hours = Math.floor(timeDifferenceInMinutes / 60);
+        formattedTimeAgo = `${hours}h ago`;
+      } else if (timeDifferenceInMinutes < 525600) {
+        const days = Math.floor(timeDifferenceInMinutes / 1440);
+        formattedTimeAgo = `${days}d ago`;
+      } else {
+        const years = Math.floor(timeDifferenceInMinutes / 525600);
+        formattedTimeAgo = `${years}y ago`;
+      }
+
+      return {
+        ...comment,
+        timeAgo: formattedTimeAgo,
+      };
+    });
+
+    setComments(commentsWithTimeAgo);
+    console.log(commentsWithTimeAgo);
   };
 
   const handlePostComment = async () => {
@@ -53,8 +111,9 @@ const NewToolDetails = () => {
         setPostCommentClicked(true);
 
         console.log("Comment added succesfuly");
-        inputCommentRef.current.value = "";
         setRefresh(!refresh);
+        setComment("");
+        setAddCommentClicked(false);
       } else {
         alert("the Comment should be longer");
       }
@@ -105,9 +164,15 @@ const NewToolDetails = () => {
           {/* TOOL COMMENT SECTION */}
           <button
             className="text-black text-[14px] hover:bg-black fontWeight-500 bg-white mb-4 rounded-[8px] p-2 "
-            onClick={() => {
-              setAddCommentClicked(!AddCommentClicked);
-            }}
+            onClick={
+              currentUser
+                ? () => {
+                    setAddCommentClicked(!AddCommentClicked);
+                  }
+                : () => {
+                    navigate("/signup");
+                  }
+            }
           >
             Add your comment
           </button>
@@ -156,13 +221,17 @@ const NewToolDetails = () => {
                 <i className=" bi bi-chat-left-dots text-[18px]"></i>
               </div>
             </div>
-            {comments.map((comment) => (
+            {comments.map((comment, index) => (
               <Post
-                key={comment._id}
+                key={index}
+                commentId={comment._id}
+                LikedBy={comment.likedBy}
                 commentText={comment.text}
                 commentUser={comment.userId}
                 toolName={toolData.Name}
                 toolCategory={toolData?.Category}
+                timeAgo={comment.timeAgo}
+                toolId={toolData._id}
               />
             ))}
           </div>
@@ -171,7 +240,7 @@ const NewToolDetails = () => {
 
         <aside className="sidebarWithSeparator right max-w-[300px] ">
           <div className="news-letter-container flex flex-column gap-3 bt-white bt-white">
-            <div className="text-[16px] fontWeight-700">News Letter</div>
+            <div className="text-[16px] fontWeight-700">Newsletter</div>
             <div className="text-[12px] fontWeight-500 ">
               Get the latest Saas products news directly to your inbox!
             </div>

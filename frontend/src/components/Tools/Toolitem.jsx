@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useRef } from "react";
 import { useReducer } from "react";
@@ -11,9 +11,9 @@ import { render } from "react-dom";
 const Toolitem = ({ toolData, forceRender }) => {
   const { currentUser, isAdmin } = useContext(AuthContext);
   const LikeMethodsRef = useRef(null);
-
+  const navigate = useNavigate();
   //MY UPDATE
-  const [isToolLiked, setIsToolLiked] = useState(true);
+  const [isToolLiked, setIsToolLiked] = useState(false);
   useEffect(() => {
     toolData?.LikedBy.includes(currentUser?.uid)
       ? setIsToolLiked(true)
@@ -90,9 +90,9 @@ const Toolitem = ({ toolData, forceRender }) => {
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                   <span className="bi bi-chat-left-dots"></span>
                 </div>
-                <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
+                {/* <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                   {toolData?.LikedBy?.length}
-                </div>
+                </div> */}
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                   {toolData.Price}
                 </div>
@@ -107,35 +107,69 @@ const Toolitem = ({ toolData, forceRender }) => {
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
           <div className="flex direction-row align-center mt-3">
-            {currentUser ? (
-              <div className="flex direction-column align-items-center gap-2 mx-3 ">
-                <img
-                  alt="tech bible"
-                  className="w-[30px] transition duration-300 hover:w-[32px] "
-                  src={
-                    // toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                    // toolData.LikedBy?.includes(currentUser?.uid)
-                    //   ? process.env.PUBLIC_URL + "/assets/liked.png"
-                    //   : process.env.PUBLIC_URL + "/assets/like.png"
-                    isToolLiked
-                      ? process.env.PUBLIC_URL + "/assets/liked.png"
-                      : process.env.PUBLIC_URL + "/assets/like.png"
-                  }
-                  onClick={() => {
-                    toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                      ? // toolData.LikedBy?.includes(currentUser.uid)
-                        handleUnLikes(toolData._id)
-                      : handleLikes(toolData._id);
-                  }}
-                />
+            <div className="flex direction-column align-items-center gap-2 mx-3 ">
+              {/* like/unlike logic with images */}
 
-                <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
-                  {toolData.LikedBy?.length}
-                </div>
+              {/* <img
+                alt="tech bible"
+                className="follow w-[30px] transition duration-300 hover:w-[32px] "
+                src={
+                  // toolData.LikedBy?.find((user) => user === currentUser?.uid)
+                  // toolData.LikedBy?.includes(currentUser?.uid)
+                  //   ? process.env.PUBLIC_URL + "/assets/liked.png"
+                  //   : process.env.PUBLIC_URL + "/assets/like.png"
+                  isToolLiked
+                    ? process.env.PUBLIC_URL + "/assets/liked.png"
+                    : process.env.PUBLIC_URL + "/assets/like.png"
+                }
+                onClick={
+                  currentUser
+                    ? () => {
+                        toolData.LikedBy?.find(
+                          (user) => user === currentUser?.uid
+                        )
+                          ? // toolData.LikedBy?.includes(currentUser.uid)
+                            handleUnLikes(toolData._id)
+                          : handleLikes(toolData._id);
+                      }
+                    : () => {
+                        navigate("/signup");
+                      }
+                }
+              /> */}
+
+              {isToolLiked ? (
+                <i
+                  className="text-red-500 fas fa-heart text-[25px]"
+                  onClick={
+                    currentUser
+                      ? () => {
+                          handleUnLikes(toolData._id);
+                        }
+                      : () => {
+                          navigate("/signup");
+                        }
+                  }
+                ></i>
+              ) : (
+                <i
+                  className="text-white border-white text-[25px] far fa-heart"
+                  onClick={
+                    currentUser
+                      ? () => {
+                          handleLikes(toolData._id);
+                        }
+                      : () => {
+                          navigate("/signup");
+                        }
+                  }
+                ></i>
+              )}
+
+              <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
+                {toolData.LikedBy?.length}
               </div>
-            ) : (
-              <div></div>
-            )}
+            </div>
 
             <div>
               {/* <span className="bi bi-plus-lg fw-bold text-[25px] text-gray-400 transition duration-500 hover:text-white hover:text-[27px] "></span> */}

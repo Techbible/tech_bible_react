@@ -271,7 +271,6 @@ const Home = () => {
                   value={value}
                   onChange={(e) => {
                     onChange(e);
-                    
                   }}
                   ref={inputRef}
                   required
@@ -283,7 +282,6 @@ const Home = () => {
 
                     }
                   }}
-                 
                 />
               </div>
               <div className="ml-2">
@@ -414,7 +412,7 @@ const Home = () => {
                     display: "block",
                     transition: "transform ease-out .5s, opacity ease-out .5s",
                     transform: "scale(1)",
-                    opacity: 0.8,
+                    opacity: 1,
                   }
                 : {
                     display: "block",
@@ -426,7 +424,7 @@ const Home = () => {
             className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
           >
             {/* keyword filter            */}
-            {isSearching  && value !== "" ? (
+            {isSearching && value !== "" ? (
               <div>
                 <h1>Search Results</h1>
                 {allTools
@@ -472,7 +470,7 @@ const Home = () => {
                   </div>
                 </div>
               ) : (
-                <p className="text-white m-3">
+                <p className="text[#FFFFFF] fw-500 ml-[90px] mb-[3rem]">
                   <Link to={"/signup"}>
                     {" "}
                     <u>Sign up</u>
@@ -507,7 +505,9 @@ const Home = () => {
               <div>
                 {!isFiltering ? (
                   <div className="tools-section-ngu">
-                    <h1>Top tools</h1>
+                    <p className="fw-600 lg:text-[30px] md:text-[25px] sm:text-[20px] mb-10 ">
+                      Top tools
+                    </p>
                     {!allTools ? (
                       <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (
