@@ -472,7 +472,14 @@ const Home = () => {
                     YOU MIGHT ALSO LIKE
                   </p>
                   {currentUserData?.interests?.length === 0 ? (
-                    <div>Check you interests to see the suggestion tools</div>
+                    <div>
+                      Add your{" "}
+                      <u>
+                        {" "}
+                        <Link to={"/profile"}>interests</Link>
+                      </u>{" "}
+                      to discover personalized tool suggestions.
+                    </div>
                   ) : (
                     <div
                       className="flex flex-col sm:flex-row"
