@@ -404,7 +404,7 @@ const Home = () => {
                     display: "block",
                     transition: "transform ease-out .5s, opacity ease-out .5s",
                     transform: "scale(1)",
-                    opacity: 0.8,
+                    opacity: 1,
                   }
                 : {
                     display: "block",
@@ -462,7 +462,7 @@ const Home = () => {
                   </div>
                 </div>
               ) : (
-                <p className="text[#FFFFFF] fw-bold mb-[3rem] ">
+                <p className="text[#FFFFFF] fw-500 ml-[90px] mb-[3rem]">
                   <Link to={"/signup"}>
                     {" "}
                     <u>Sign up</u>
