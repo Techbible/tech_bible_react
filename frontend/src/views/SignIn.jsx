@@ -257,7 +257,7 @@ const SignIn = () => {
               className="focus:ring-2 focus:ring-offset-2 text-[18px] transition .5s focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-[#7869E6] border rounded hover:bg-[#604fe7] py-4 w-full"
               ref={signInRef}
             >
-              Sign in
+              Log in
             </button>
           </div>
         </div>

@@ -141,16 +141,28 @@ const Toolitem = ({ toolData, forceRender }) => {
               {isToolLiked ? (
                 <i
                   className="text-red-500 fas fa-heart text-[25px]"
-                  onClick={() => {
-                    handleUnLikes(toolData._id);
-                  }}
+                  onClick={
+                    currentUser
+                      ? () => {
+                          handleUnLikes(toolData._id);
+                        }
+                      : () => {
+                          navigate("/signup");
+                        }
+                  }
                 ></i>
               ) : (
                 <i
                   className="text-white border-white text-[25px] far fa-heart"
-                  onClick={() => {
-                    handleLikes(toolData._id);
-                  }}
+                  onClick={
+                    currentUser
+                      ? () => {
+                          handleLikes(toolData._id);
+                        }
+                      : () => {
+                          navigate("/signup");
+                        }
+                  }
                 ></i>
               )}
 
