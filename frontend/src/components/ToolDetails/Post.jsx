@@ -127,14 +127,14 @@ const Post = ({
                   onClick={() => {
                     handleCommentUnLikes(commentId);
                   }}
-                  className="text-red-500 fas fa-heart text-[25px]"
+                  className="text-red-500 fas fa-heart text-[20px]"
                 ></i>
               ) : (
                 <i
                   onClick={() => {
                     handleCommentLikes(commentId);
                   }}
-                  className="text-white border-white text-[25px] far fa-heart"
+                  className="text-white border-white text-[20px] far fa-heart"
                 ></i>
               )}
               <div className="text-[14px]">{likedBy.length}</div>

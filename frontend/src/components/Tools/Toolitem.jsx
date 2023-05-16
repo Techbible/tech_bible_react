@@ -108,7 +108,9 @@ const Toolitem = ({ toolData, forceRender }) => {
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
           <div className="flex direction-row align-center mt-3">
             <div className="flex direction-column align-items-center gap-2 mx-3 ">
-              <img
+              {/* like/unlike logic with images */}
+
+              {/* <img
                 alt="tech bible"
                 className="follow w-[30px] transition duration-300 hover:w-[32px] "
                 src={
@@ -134,7 +136,23 @@ const Toolitem = ({ toolData, forceRender }) => {
                         navigate("/signup");
                       }
                 }
-              />
+              /> */}
+
+              {isToolLiked ? (
+                <i
+                  className="text-red-500 fas fa-heart text-[25px]"
+                  onClick={() => {
+                    handleUnLikes(toolData._id);
+                  }}
+                ></i>
+              ) : (
+                <i
+                  className="text-white border-white text-[25px] far fa-heart"
+                  onClick={() => {
+                    handleLikes(toolData._id);
+                  }}
+                ></i>
+              )}
 
               <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
                 {toolData.LikedBy?.length}
