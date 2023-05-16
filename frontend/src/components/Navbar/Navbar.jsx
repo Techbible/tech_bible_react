@@ -25,7 +25,7 @@ function Navbar() {
   }, []);
 
   const [isMenuClicked, setIsMenuClicked] = useState(false);
-  const { currentUser,currentUserData, isAdmin } = useContext(AuthContext);
+  const { currentUser, currentUserData, isAdmin } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ function Navbar() {
 
   useEffect(() => {
     setIsMenuClicked(false);
-    
+
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
@@ -44,7 +44,6 @@ function Navbar() {
       }
     });
     return listen();
-
   }, [currentUser]);
   //Sign out
   const UserSignOut = () => {
@@ -87,7 +86,7 @@ function Navbar() {
                     </Link>
                   ) : (
                     <div></div>
-                  )}         
+                  )}
                 </div>
 
                 <li
@@ -95,19 +94,12 @@ function Navbar() {
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
                   <span className="text-white rounded-full p-1">
-                    <a href="https://www.tiktok.com/@tech.bible" target="_blank" rel="noopener noreferrer">
-                       <i className="fab fa-tiktok text-white text-xl"></i>
-                     </a>
-                   
-                  </span>
-                </li>
-                <li
-                  className="tracking-wider hover:tracking-widest"
-                  style={{ transition: "0.3s", cursor: "pointer" }}
-                >
-                  <span className="text-white rounded-full p-1">
-                  <a href="https://youtube.com/@MyTechBible" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-youtube text-white text-xl"></i>
+                    <a
+                      href="https://www.tiktok.com/@tech.bible"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-tiktok text-white text-xl"></i>
                     </a>
                   </span>
                 </li>
@@ -116,8 +108,26 @@ function Navbar() {
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
                   <span className="text-white rounded-full p-1">
-                    <a href="https://www.instagram.com/my.techbible" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-instagram text-white text-xl"></i>
+                    <a
+                      href="https://youtube.com/@MyTechBible"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-youtube text-white text-xl"></i>
+                    </a>
+                  </span>
+                </li>
+                <li
+                  className="tracking-wider hover:tracking-widest"
+                  style={{ transition: "0.3s", cursor: "pointer" }}
+                >
+                  <span className="text-white rounded-full p-1">
+                    <a
+                      href="https://www.instagram.com/my.techbible"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-instagram text-white text-xl"></i>
                     </a>
                   </span>
                 </li>
@@ -128,7 +138,7 @@ function Navbar() {
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4 lg:mr-[30px]">
                 <Link to="/signin">
-                  <div className="signin-btn">Sign in</div>
+                  <div className="signin-btn">Log in</div>
                 </Link>
 
                 <div className="hidden sm:flex">
@@ -139,19 +149,22 @@ function Navbar() {
               </div>
             </div>
           ) : (
-            <div className="user-info-container" style={{ display: screenWidth<768?"none":"flex" }}>
+            <div
+              className="user-info-container"
+              style={{ display: screenWidth < 768 ? "none" : "flex" }}
+            >
               <Link to="/profile">
                 <div className="user-info ">
                   <img src={currentUserData?.photo} className="pfp" alt="pfp" />
                   <div className="username  ">{currentUserData?.username}</div>
                 </div>
               </Link>
-              <span className="signout cursor-pointer" onClick={UserSignOut}>
-                <img
-                  src={`${process.env.PUBLIC_URL}/assets/logout.png`}
-                  alt="sign out"
-                />
-              </span>
+              <div
+                className="signout cursor-pointer border-[1px] text-white px-2 py-1 rounded-md fontWeight-500 transition duration-200 hover:bg-white hover:text-black "
+                onClick={UserSignOut}
+              >
+                Sign out
+              </div>
             </div>
           )}
 
@@ -182,7 +195,7 @@ function Navbar() {
               style={
                 !isMenuClicked
                   ? {
-                      display:"hidden",
+                      display: "hidden",
                       pointerEvents: "none",
                       transition:
                         "transform ease-out .3ms, opacity ease-out .3s",
@@ -191,7 +204,7 @@ function Navbar() {
                     }
                   : {
                       display: "block",
-                     
+
                       transition: "transform ease-in .3s, opacity ease-in .3s",
                       transform: "scale(1)",
                       opacity: 1,
@@ -208,7 +221,7 @@ function Navbar() {
                   <div className="border-[1px] text-white "></div>
                   <Link to="/signin">
                     <div className="text-[15px] px-4 py-2 bg-black transition duration-300 hover:bg-white hover:text-black">
-                      Sign in
+                      Log in
                     </div>
                   </Link>
                   <div className="border-[1px] text-white "></div>
@@ -218,7 +231,12 @@ function Navbar() {
                   <div className="text-[15px] px-4 py-2 bg-black transition duration-300 hover:bg-white hover:text-black">
                     <div className="user-info-container">
                       <Link to="/profile">
-                        <div className="user-info hover:text-black" onClick={()=>{navigate("/profile")}}>
+                        <div
+                          className="user-info hover:text-black"
+                          onClick={() => {
+                            navigate("/profile");
+                          }}
+                        >
                           <img
                             src={currentUserData.photo}
                             className="pfp"
@@ -246,7 +264,6 @@ function Navbar() {
                     </span>
                   </div>
                   <div className="border-[1px] text-white "></div>
-
                 </div>
               )}
               {/* <div className="py-1 bg-black" role="none">

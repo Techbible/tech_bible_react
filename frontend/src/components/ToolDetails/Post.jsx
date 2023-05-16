@@ -8,12 +8,13 @@ import { BASE_URL } from "../../config/mongo";
 
 const Post = ({
   commentId,
-  likedBy,
+  LikedBy,
   commentText,
   commentUser,
   toolName,
   toolCategory,
   timeAgo,
+  toolId,
 }) => {
   const [IsAddCommentClick, setIsAddCommentClick] = useState(false);
 
@@ -26,6 +27,7 @@ const Post = ({
   const [photo, setPhoto] = useState("");
 
   const [isCommentLiked, setIsCommentLiked] = useState(false);
+  const [likedBy, setLikedBy] = useState(LikedBy);
 
   const likeToolComment = async (toolCommentId) => {
     const response = await axios.post(
@@ -61,11 +63,16 @@ const Post = ({
     }
   };
 
-  // const getComment = async () => {};
+  const getCommentLikedBy = async () => {
+    const response = axios.get(`${BASE_URL}/mongo-toolComments/${toolId}`);
+    const comment = response.filter((comment) => comment._id === commentId);
+    setLikedBy(comment.likedBy);
+  };
   useEffect(() => {
     likedBy?.includes(currentUser.uid)
       ? setIsCommentLiked(true)
       : setIsCommentLiked(false);
+    getCommentLikedBy();
     console.log(typeof likedBy);
   }, [likedBy]);
 
@@ -115,42 +122,21 @@ const Post = ({
           <div className="flex flex-row justify-between mt-4">
             {/* <div></div> */}
             <div className="flex flex-row gap-2">
-              {/* To See the Like Methods  */}
-              {/* <img
-                  alt="tech bible"
-                  className="follow-unfollow w-[30px] transition duration-300 hover:w-[32px] "
-                  src={
-                    // toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                    // toolData.LikedBy?.includes(currentUser?.uid)
-                    //   ? process.env.PUBLIC_URL + "/assets/liked.png"
-                    //   : process.env.PUBLIC_URL + "/assets/like.png"
-                    isToolLiked
-                      ? process.env.PUBLIC_URL + "/assets/liked.png"
-                      : process.env.PUBLIC_URL + "/assets/like.png"
-                  }
-                  onClick={() => {
-                    toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                      ? // toolData.LikedBy?.includes(currentUser.uid)
-                        handleUnLikes(toolData._id)
-                      : handleLikes(toolData._id);
-                  }}
-                /> */}
               {isCommentLiked ? (
                 <i
                   onClick={() => {
                     handleCommentUnLikes(commentId);
                   }}
-                  className="text-red-500 fas fa-heart text-[25px]"
+                  className="text-red-500 fas fa-heart text-[20px]"
                 ></i>
               ) : (
                 <i
                   onClick={() => {
                     handleCommentLikes(commentId);
                   }}
-                  className="text-white border-white text-[25px] far fa-heart"
+                  className="text-white border-white text-[20px] far fa-heart"
                 ></i>
               )}
-
               <div className="text-[14px]">{likedBy.length}</div>
               {/* <button
                 onClick={handleIsAddCommentClick}

@@ -221,16 +221,17 @@ const NewToolDetails = () => {
                 <i className=" bi bi-chat-left-dots text-[18px]"></i>
               </div>
             </div>
-            {comments.map((comment) => (
+            {comments.map((comment, index) => (
               <Post
-                key={comment._id}
+                key={index}
                 commentId={comment._id}
-                likedBy={comment.likedBy}
+                LikedBy={comment.likedBy}
                 commentText={comment.text}
                 commentUser={comment.userId}
                 toolName={toolData.Name}
                 toolCategory={toolData?.Category}
                 timeAgo={comment.timeAgo}
+                toolId={toolData._id}
               />
             ))}
           </div>
