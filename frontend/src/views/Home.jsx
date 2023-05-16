@@ -160,15 +160,17 @@ const Home = () => {
   }, [Pricing]);
 
   //search bar suggestions
-  const [isFocused, setIsFocused] = useState(false);
+  const [isSuggestionsVisible, setisSuggestionsVisible] = useState(false);
 
   //input value
   const [value, setValue] = useState("");
+  const inputRef = useRef(null);
   const onChange = (event) => {
     setValue(event.target.value);
     if (value === null) {
-      setIsFocused(false);
-    } else setIsFocused(true);
+      setisSuggestionsVisible(false);
+      setIsSearching(false)
+    } else setisSuggestionsVisible(true);
   };
 
   const [selectedSuggestion, setSelectedSuggestion] = useState(-1);
@@ -193,7 +195,7 @@ const Home = () => {
       );
     } else if (event.key === "Enter") {
       event.preventDefault();
-
+      setIsSearching(true);
       if (
         selectedSuggestion >= 0 &&
         selectedSuggestion < filteredSuggestions.length
@@ -204,7 +206,7 @@ const Home = () => {
     }
   };
   useEffect(() => {
-    if (isFocused && value !== "") {
+    if (isSuggestionsVisible && value !== "") {
       window.addEventListener("keydown", handleKeyDown);
       return () => {
         window.removeEventListener("keydown", handleKeyDown);
@@ -237,7 +239,7 @@ const Home = () => {
   // }
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
-      <main className="layoutMain " onMouseLeave={() => setIsFocused(false)}>
+      <main className="layoutMain " onMouseLeave={() => setisSuggestionsVisible(false)}>
         <div className="flex direction-column ">
           {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
           <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-[#18151D]">
@@ -271,14 +273,15 @@ const Home = () => {
                     onChange(e);
                     
                   }}
+                  ref={inputRef}
                   required
                   autoComplete="off"
                   onKeyDown={(e) => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       setIsSearching(true);
+
                     }
-                    
                   }}
                  
                 />
@@ -328,10 +331,15 @@ const Home = () => {
                 </svg>
               </div>
             </form>
-            {isFocused && value !== "" && (
+            {isSuggestionsVisible && value !== "" && (
               <div
                 ref={suggestionContainerRef}
                 className="bg-white p-4 rounded-lg shadow-md "
+                onMouseLeave={()=>{
+                  setSelectedSuggestion(-1);
+                  inputRef.current.focus();
+                  console.log("on mouse leave the index is"+selectedSuggestion)
+                }}
               >
                 <ul>
                   {allTools
@@ -353,10 +361,9 @@ const Home = () => {
                           }`}
                           onMouseEnter={() => {
                             setSelectedSuggestion(index);
+                            console.log("on mouse enter the index is"+selectedSuggestion)
                           }}
-                          onMouseLeave={()=>{
-                            setSelectedSuggestion(-1);
-                          }}
+                         
                         >
                           <div>
                             <p className="text-gray-500" key={tool.Name}>
