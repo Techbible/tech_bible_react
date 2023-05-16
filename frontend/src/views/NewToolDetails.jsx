@@ -66,27 +66,30 @@ const NewToolDetails = () => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    // Calculate the time difference in minutes for each comment and format it
+    // Calculate the time difference in seconds, minutes, hours, days, or years for each comment and format it
     const commentsWithTimeAgo = sortedComments.map((comment) => {
       const createdAt = new Date(comment.createdAt);
       const currentDate = new Date();
-      const timeDifferenceInMinutes = Math.floor(
-        (currentDate - createdAt) / (1000 * 60)
+      const timeDifferenceInSeconds = Math.floor(
+        (currentDate - createdAt) / 1000
       );
 
       let formattedTimeAgo;
-      if (timeDifferenceInMinutes < 1) {
+      if (timeDifferenceInSeconds < 1) {
         formattedTimeAgo = "Now";
-      } else if (timeDifferenceInMinutes < 60) {
-        formattedTimeAgo = `${timeDifferenceInMinutes}min ago`;
-      } else if (timeDifferenceInMinutes < 1440) {
-        const hours = Math.floor(timeDifferenceInMinutes / 60);
+      } else if (timeDifferenceInSeconds < 60) {
+        formattedTimeAgo = `${timeDifferenceInSeconds}s ago`;
+      } else if (timeDifferenceInSeconds < 3600) {
+        const minutes = Math.floor(timeDifferenceInSeconds / 60);
+        formattedTimeAgo = `${minutes}m ago`;
+      } else if (timeDifferenceInSeconds < 86400) {
+        const hours = Math.floor(timeDifferenceInSeconds / 3600);
         formattedTimeAgo = `${hours}h ago`;
-      } else if (timeDifferenceInMinutes < 525600) {
-        const days = Math.floor(timeDifferenceInMinutes / 1440);
+      } else if (timeDifferenceInSeconds < 31536000) {
+        const days = Math.floor(timeDifferenceInSeconds / 86400);
         formattedTimeAgo = `${days}d ago`;
       } else {
-        const years = Math.floor(timeDifferenceInMinutes / 525600);
+        const years = Math.floor(timeDifferenceInSeconds / 31536000);
         formattedTimeAgo = `${years}y ago`;
       }
 
