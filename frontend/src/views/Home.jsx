@@ -246,7 +246,7 @@ const Home = () => {
       >
         <div className="flex direction-column ">
           {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
-          <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-[#18151D]">
+          <div className="flex flex-column max-w-[750px] py-2 my-4 md:mb-[2rem]  p-[30px] rounded-xl bg-[#18151D]">
             <h2 className="text-white fontWeight-500 text-[18px] mt-2">
               The Largestx Saas Tools directory
             </h2>
@@ -277,7 +277,7 @@ const Home = () => {
                     onChange(e);
                     setIsSearching(false);
                   }}
-                  disabled={allTools===null ? true : false}
+                  disabled={allTools === null ? true : false}
                   ref={inputRef}
                   required
                   autoComplete="off"
@@ -288,7 +288,6 @@ const Home = () => {
 
                       setisSuggestionsVisible(false);
                     }
-            
                   }}
                 />
               </div>
@@ -366,7 +365,6 @@ const Home = () => {
                           }`}
                           onMouseEnter={() => {
                             setSelectedSuggestion(index);
-                            
                           }}
                         >
                           <div>
@@ -564,9 +562,7 @@ const Home = () => {
       </main>
       <aside className="sidebarWithSeparator right ">
         <Link to="/News">
-          <p className="text-[16px] fontWeight-700 "  >
-            News
-          </p>{" "}
+          <p className="text-[16px] fontWeight-700 ">News</p>{" "}
         </Link>
         {data?.slice(0, 3).map((article, index) => (
           <NewsHomePage
@@ -582,7 +578,7 @@ const Home = () => {
           </div>
         </Link>
         <hr className="my-20 border-white" />
-        <NewsLetter ></NewsLetter>
+        <NewsLetter></NewsLetter>
       </aside>
     </div>
   );
