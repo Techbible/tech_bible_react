@@ -8,10 +8,8 @@ import { collection, query, limit, getDocs, where } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../config/mongo";
-
 import "../assets/styles/home/home.css";
 import "../assets/styles/home/global.css";
-
 import NewsHomePage from "../components/News Scraper/NewsHomePage";
 import Toolitem from "../components/Tools/Toolitem";
 import YouMightLikeApp from "../components/home components/Filtering-container/YouMightLikeApp";
@@ -23,7 +21,6 @@ import { allToolsAtom } from "../recoil/tool";
 import axios from "axios";
 import { render } from "react-dom";
 import NewsLetter from "../components/home components/NewsLetter";
-
 const toolsdata = require("../config/data.json");
 
 const Home = () => {
@@ -430,10 +427,12 @@ const Home = () => {
             {/* keyword filter            */}
             {isSearching && value !== "" ? (
               <div>
-                <h1>Search results for : {value} </h1>
+                <h1 className="mb-8">Search results for : {value} </h1>
                 {allTools
                   ?.filter((tool) => {
-                    return tool.Keywords.includes(value);
+                    const lowercasedKeywords = tool.Keywords.toLowerCase();
+                    const lowercasedValue = value.toLowerCase();
+                    return lowercasedKeywords.includes(lowercasedValue);
                   })
                   .slice(0, 10)
                   .map((tool) => (
@@ -447,6 +446,7 @@ const Home = () => {
                   allTools.length > 0 &&
                   allTools.filter((tool) => tool.Keywords.includes(value))
                     .length === 0 && <p>Nothing found.</p>}
+                    <hr className="my-20 border-white" />
               </div>
             ) : null}
             {/* end keyword filter              */}
