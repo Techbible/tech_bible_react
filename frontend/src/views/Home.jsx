@@ -570,6 +570,7 @@ const Home = () => {
             title={article.name}
             date={article.datePublished}
             provider={article?.provider[0]?.name}
+            url={article?.url}
           />
         ))}
         <Link to="/News">
