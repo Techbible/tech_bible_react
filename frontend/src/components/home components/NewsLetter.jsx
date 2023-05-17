@@ -3,7 +3,7 @@
 const NewsLetter = () => {
   
   return (
-    <div className="news-letter-container flex flex-column gap-3 bt-white bt-white">
+    <div className="news-letter-container flex flex-column gap-3 bt-white bt-white mb-12">
     <div className="text-[16px] fontWeight-700">Newsletter</div>
     <div className="text-[12px] fontWeight-500 ">
       Get the latest Saas products news directly to your inbox!
