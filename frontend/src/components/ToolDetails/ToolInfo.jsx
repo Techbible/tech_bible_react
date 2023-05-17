@@ -19,7 +19,7 @@ const ToolInfo = ({ toolData }) => {
                 loading="lazy"
                 src={toolData?.Icon}
                 style={{ width: "140px", height: "140px" }}
-                alt="Adobe XD"
+                alt="Image Icon"
                 className="w-full md:w-140 rounded-sm"
               />
             </div>
@@ -38,9 +38,13 @@ const ToolInfo = ({ toolData }) => {
             </div>
             <div className="flex direction-row flex-row-gap-6 mt-3 align-center">
               <div className="flex direction-row flex-row-gap-3">
-                <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined border-1 border-white rounded-md px-3 bg-gradient">
-                  {toolData?.Price}
-                </div>
+                {toolData?.Price ? (
+                  <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined border-1 border-white rounded-md px-3 bg-gradient">
+                    {toolData?.Price}
+                  </div>
+                ) : (
+                  <div></div>
+                )}
                 <Link
                   className="styles_postTopicLink__wDe_p"
                   href="/topics/art"
@@ -53,7 +57,7 @@ const ToolInfo = ({ toolData }) => {
                   <span className="bi bi-chat-left-dots"></span>
                 </div>
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                  20
+                  {toolData.comments.length}
                 </div>
               </div>
             </div>

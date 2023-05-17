@@ -39,6 +39,7 @@ const Home = () => {
   const [allToolsLoadable, setAllToolsLoadable] = useState(false);
 
   const [allTools, setAllTools] = useState([]);
+  const [toolsNumber, setToolsNumber] = useState(30);
 
   const getTools = async () => {
     let response = axios.get(`${BASE_URL}/mongo-tools`);
@@ -247,7 +248,7 @@ const Home = () => {
           {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
           <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-[#18151D]">
             <h2 className="text-white fontWeight-500 text-[18px] mt-2">
-              The Largest Saas Tools directory
+              The Largestx Saas Tools directory
             </h2>
             <form className="flex items-center mt-5">
               <div className="relative w-full">
@@ -284,6 +285,7 @@ const Home = () => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       setIsSearching(true);
+
                       setisSuggestionsVisible(false);
                     }
             
@@ -341,7 +343,7 @@ const Home = () => {
                 className="bg-white p-4 rounded-lg shadow-md "
                 onMouseLeave={() => {
                   setSelectedSuggestion(-1);
-                  inputRef.current.focus();                 
+                  inputRef.current.focus();
                 }}
               >
                 <ul>
@@ -470,12 +472,23 @@ const Home = () => {
                   <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
                     YOU MIGHT ALSO LIKE
                   </p>
-                  <div
-                    className="flex flex-col sm:flex-row"
-                    style={{ display: "flex" }}
-                  >
-                    <YouMightLikeApp />
-                  </div>
+                  {currentUserData?.interests?.length === 0 ? (
+                    <div>
+                      Add your{" "}
+                      <u>
+                        {" "}
+                        <Link to={"/profile"}>interests</Link>
+                      </u>{" "}
+                      to discover personalized tool suggestions.
+                    </div>
+                  ) : (
+                    <div
+                      className="flex flex-col sm:flex-row"
+                      style={{ display: "flex" }}
+                    >
+                      <YouMightLikeApp />
+                    </div>
+                  )}
                 </div>
               ) : (
                 <p className="text[#FFFFFF] fw-500 ml-[90px] mb-[3rem]">
@@ -520,15 +533,25 @@ const Home = () => {
                       <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (
                       Array.isArray(allTools) &&
-                      allTools
-                        ?.slice(0, 50)
-                        .map((tool, index) => (
+                      allTools?.slice(0, toolsNumber).map((tool, index) => (
+                        <div>
                           <Toolitem
                             key={index}
                             toolData={tool}
                             forceRender={forceRender}
                           />
-                        ))
+                        </div>
+                      ))
+                    )}
+                    {allToolsLoadable && toolsNumber < 290 ? (
+                      <div
+                        className="mt-4 mb-[4rem] cursor-pointer hover:tracking-[.5px] transition duration-300 "
+                        onClick={() => setToolsNumber(toolsNumber + 30)}
+                      >
+                        <u>See more tools...</u>
+                      </div>
+                    ) : (
+                      <div></div>
                     )}
                   </div>
                 ) : (
