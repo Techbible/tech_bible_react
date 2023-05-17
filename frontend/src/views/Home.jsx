@@ -22,6 +22,7 @@ import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { allToolsAtom } from "../recoil/tool";
 import axios from "axios";
 import { render } from "react-dom";
+import NewsLetter from "../components/home components/NewsLetter";
 
 const toolsdata = require("../config/data.json");
 
@@ -247,7 +248,7 @@ const Home = () => {
           {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
           <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-[#18151D]">
             <h2 className="text-white fontWeight-500 text-[18px] mt-2">
-              The Largest Saas Tools directory
+              The Largestx Saas Tools directory
             </h2>
             <form className="flex items-center mt-5">
               <div className="relative w-full">
@@ -276,6 +277,7 @@ const Home = () => {
                     onChange(e);
                     setIsSearching(false);
                   }}
+                  disabled={allTools===null ? true : false}
                   ref={inputRef}
                   required
                   autoComplete="off"
@@ -286,6 +288,7 @@ const Home = () => {
 
                       setisSuggestionsVisible(false);
                     }
+            
                   }}
                 />
               </div>
@@ -363,9 +366,7 @@ const Home = () => {
                           }`}
                           onMouseEnter={() => {
                             setSelectedSuggestion(index);
-                            console.log(
-                              "on mouse enter the index is" + selectedSuggestion
-                            );
+                            
                           }}
                         >
                           <div>
@@ -563,7 +564,7 @@ const Home = () => {
       </main>
       <aside className="sidebarWithSeparator right ">
         <Link to="/News">
-          <p className="medium text-[16px] " style={{ fontWeight: "300px" }}>
+          <p className="text-[16px] fontWeight-700 "  >
             News
           </p>{" "}
         </Link>
@@ -576,10 +577,12 @@ const Home = () => {
           />
         ))}
         <Link to="/News">
-          <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer ">
+          <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer mb-20">
             See more...
           </div>
         </Link>
+        <hr className="my-20 border-white" />
+        <NewsLetter ></NewsLetter>
       </aside>
     </div>
   );

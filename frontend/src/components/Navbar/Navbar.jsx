@@ -160,7 +160,7 @@ function Navbar() {
                 </div>
               </Link>
               <button
-                className="signout cursor-pointer border-[1px] px-2 py-1 rounded-md fontWeight-500 transition duration-200 hover:tracking-[.3px] text-white"
+                className="signout cursor-pointer border-[1px] text-white px-2 py-1 rounded-md fontWeight-500 transition duration-200 hover:bg-[#ef4823] hover:text-black "
                 onClick={UserSignOut}
               >
                 Sign out

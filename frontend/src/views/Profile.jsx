@@ -309,7 +309,7 @@ const Profile = () => {
                       <div></div>
                     )}
 
-                    <button className="absolute top-[44px] right-[10px] text-[12px]  bg-[#7869e6] px-[15px] py-[1.5px] rounded-[4px] transition duration-300 hover:bg-[#604fe7] active:bg-[#4635ca]">
+                    <button className="absolute top-[44px] right-[10px] text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]">
                       Share
                     </button>
                   </div>
