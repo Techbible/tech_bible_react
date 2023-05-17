@@ -1255,18 +1255,18 @@ input {
 }
 .signup-btn {
   color: white;
-  background-color: #7869e6;
-  border: 1px solid #7869e6;
+  background-color: #ef4823;
+  border: 1px solid #ef4823;
   padding: 5px 12px;
   border-radius: 5px;
   font-weight: 500;
   transition: 0.35s;
 }
 .signup-btn:hover {
-  background-color: #604fe7;
+  background-color: #ca391c;
 }
 .signup-btn:active {
-  background-color: #4635ca;
+  background-color: #b32712;
 }
 
 .filter-icon {

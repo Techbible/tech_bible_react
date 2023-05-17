@@ -22,6 +22,7 @@ import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { allToolsAtom } from "../recoil/tool";
 import axios from "axios";
 import { render } from "react-dom";
+import NewsLetter from "../components/home components/NewsLetter";
 
 const toolsdata = require("../config/data.json");
 
@@ -275,6 +276,7 @@ const Home = () => {
                     onChange(e);
                     setIsSearching(false);
                   }}
+                  disabled={allTools===null ? true : false}
                   ref={inputRef}
                   required
                   autoComplete="off"
@@ -284,6 +286,7 @@ const Home = () => {
                       setIsSearching(true);
                       setisSuggestionsVisible(false);
                     }
+            
                   }}
                 />
               </div>
@@ -361,9 +364,7 @@ const Home = () => {
                           }`}
                           onMouseEnter={() => {
                             setSelectedSuggestion(index);
-                            console.log(
-                              "on mouse enter the index is" + selectedSuggestion
-                            );
+                            
                           }}
                         >
                           <div>
@@ -540,7 +541,7 @@ const Home = () => {
       </main>
       <aside className="sidebarWithSeparator right ">
         <Link to="/News">
-          <p className="medium text-[16px] " style={{ fontWeight: "300px" }}>
+          <p className="text-[16px] fontWeight-700 "  >
             News
           </p>{" "}
         </Link>
@@ -553,10 +554,12 @@ const Home = () => {
           />
         ))}
         <Link to="/News">
-          <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer ">
+          <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer mb-20">
             See more...
           </div>
         </Link>
+        <hr className="my-20 border-white" />
+        <NewsLetter ></NewsLetter>
       </aside>
     </div>
   );

@@ -10,6 +10,7 @@ import "../assets/styles/home/global.css";
 import axios from "axios";
 import { BASE_URL } from "../config/mongo";
 import { AuthContext } from "../context/AuthContext";
+import NewsLetter from "../components/home components/NewsLetter";
 
 const NewToolDetails = () => {
   let { id } = useParams();
@@ -239,23 +240,7 @@ const NewToolDetails = () => {
         </main>
 
         <aside className="sidebarWithSeparator right max-w-[300px] ">
-          <div className="news-letter-container flex flex-column gap-3 bt-white bt-white">
-            <div className="text-[16px] fontWeight-700">Newsletter</div>
-            <div className="text-[12px] fontWeight-500 ">
-              Get the latest Saas products news directly to your inbox!
-            </div>
-            <input
-              type="text"
-              className="text-black lg:w-[278px] lg:h-[36px] md:w-[300px] md:h-[36px] rounded-[6px] px-[10px] py-[5px] "
-              placeholder="Your Email"
-            />
-            <button
-              type="text"
-              className="text-white fontWeight-500 lg:w-[278px] lg:h-[36px] md:w-[300px] md:h-[36px] rounded-[6px] px-[10px] py-[5px] bg-[#7869E6] transition duration-250 hover:bg-[#604fe7] active:bg-[#4635ca] "
-            >
-              Subscribe to news letter
-            </button>
-          </div>
+          <NewsLetter></NewsLetter>
         </aside>
       </div>
     </div>
