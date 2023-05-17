@@ -65,26 +65,30 @@ const SignIn = () => {
       })
       .catch((err) => {
         // console.log(error);
-        switch (err.code) {
-          case "auth/user-not-found":
-            setEmailError("This email address does not exist");
-            setIsEmailValid(false);
-            break;
-          case "auth/invalid-email":
-            setEmailError("This email address does not exist");
-            setIsEmailValid(false);
-            break;
-          case "auth/wrong-password":
-            setPasswordError("Wrong password");
-            setIsPasswordValid(false);
-            break;
-          default:
-            setEmailError(
-              "this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your email or you can try again later"
-            );
-            setPasswordError(
-              "this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later"
-            );
+        if (email === "") {
+          setEmailError("Field is empty");
+        } else {
+          switch (err.code) {
+            case "auth/user-not-found":
+              setEmailError("This email address does not exist");
+              setIsEmailValid(false);
+              break;
+            case "auth/invalid-email":
+              setEmailError("This email address does not exist");
+              setIsEmailValid(false);
+              break;
+            case "auth/wrong-password":
+              setPasswordError("Wrong password");
+              setIsPasswordValid(false);
+              break;
+            default:
+              setEmailError(
+                "this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your email or you can try again later"
+              );
+              setPasswordError(
+                "this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later"
+              );
+          }
         }
       });
     handlePasswordChange();
@@ -134,7 +138,7 @@ const SignIn = () => {
   return (
     <div className="sign-in h-full bg-[#] w-full h-[100%] py-16 px-6">
       <div className="flex flex-col items-center justify-center">
-        <div className="bg-[#1A1B1F] shadow rounded-[15px] h-[443px]  max-h-[500px] max-w-[505px] w-full py-10 px-[68px]">
+        <div className=" bg-[#1A1B1F] shadow rounded-[15px] max-h-[900px] max-w-[505px] w-full py-10 px-[60px]">
           <div className="flex flex-column mb-6 align-items-center ">
             <div
               tabIndex={0}
@@ -239,7 +243,7 @@ const SignIn = () => {
                     />
                   </svg>
                   <p className="text-[15px] ml-3 light text-white">
-                    Sign in with Google
+                    Log in with Google
                   </p>
                 </button>
               </div>
