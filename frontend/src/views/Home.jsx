@@ -241,14 +241,14 @@ const Home = () => {
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
       <main
-        className="layoutMain "
+        className="layoutMain xl:mt-20 lg:mt-20 "
         onMouseLeave={() => setisSuggestionsVisible(false)}
       >
         <div className="flex direction-column ">
           {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
-          <div className="flex flex-column max-w-[750px] py-2 my-4 md:mb-[2rem]  p-[30px] rounded-xl bg-[#18151D]">
-            <h2 className="text-white fontWeight-500 text-[18px] mt-2">
-              The Largestx Saas Tools directory
+          <div className="flex flex-column max-w-[600px]  my-4 ml-3 md:mb-[2rem] rounded-xl ">
+            <h2 className="text-white medium text-[18px] mt-2">
+              The Largest Saas Tools directory
             </h2>
             <form className="flex items-center mt-5">
               <div className="relative w-full">
@@ -461,7 +461,11 @@ const Home = () => {
                     }
               }
             >
-              <AppOfTheDay tool={AppOfTheDayData} />
+              {currentUser ? (
+                <AppOfTheDay tool={AppOfTheDayData} />
+              ) : (
+                <div> </div>
+              )}
 
               {/************You might also like***********/}
               {auth.currentUser ? (
@@ -524,7 +528,7 @@ const Home = () => {
               <div>
                 {!isFiltering ? (
                   <div className="tools-section-ngu">
-                    <p className="fw-600 lg:text-[30px] md:text-[25px] sm:text-[20px] mb-10 ">
+                    <p className="medium lg:text-[18px] md:text-[17px] sm:text-[16px] mb-[1rem] ">
                       Top tools
                     </p>
                     {!allTools ? (
@@ -578,7 +582,7 @@ const Home = () => {
             See more...
           </div>
         </Link>
-        <hr className="my-20 border-white" />
+        <hr className="my-5 border-white" />
         <NewsLetter></NewsLetter>
       </aside>
     </div>

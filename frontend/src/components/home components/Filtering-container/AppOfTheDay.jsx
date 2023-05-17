@@ -4,7 +4,7 @@ const AppOfTheDay = ({ tool }) => {
   return (
     <div className="appOfTheDay-container duration-500 ease-in-out transform hover:scale-105 my-4">
       {/********** App of the day **********/}
-      <h2 className="fw-bold mb-5 mb-lg-5 text-[16px] ">App of the day</h2>
+      <h2 className="medium text-[18px] mb-5 mb-lg-5  ">App of the day</h2>
       <div className="flex flex-col md:flex-row items-center mb-4">
         {tool ? (
           <img

@@ -138,12 +138,12 @@ function Navbar() {
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4 lg:mr-[30px]">
                 <Link to="/signin">
-                  <div className="signin-btn">Log in</div>
+                  <div className="signin-btn light">Log in</div>
                 </Link>
 
                 <div className="hidden sm:flex">
                   <Link to="/signup">
-                    <button className="signup-btn">Sign up</button>
+                    <button className="signup-btn light ">Sign up</button>
                   </Link>
                 </div>
               </div>
