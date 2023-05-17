@@ -241,7 +241,7 @@ const Home = () => {
   return (
     <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
       <main
-        className="layoutMain xl:mt-20 lg:mt-20 "
+        className="layoutMain xl:mt-15 lg:mt-15 ml:mt-15 sm:mt-12 "
         onMouseLeave={() => setisSuggestionsVisible(false)}
       >
         <div className="flex direction-column ">
