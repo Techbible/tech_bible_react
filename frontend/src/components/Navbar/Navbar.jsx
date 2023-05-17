@@ -63,9 +63,9 @@ function Navbar() {
           <div className="md:flex md:items-center md:gap-12 lg:ml-[30px]">
             <Link to="/">
               <img
-                width={"51px"}
-                height={"52px"}
-                src={`${process.env.PUBLIC_URL}/logo.svg`}
+                width={"90px"}
+                // height={"30px"}
+                src={`${process.env.PUBLIC_URL}/TechBibleLogoV2.svg`}
                 alt=""
               />
             </Link>

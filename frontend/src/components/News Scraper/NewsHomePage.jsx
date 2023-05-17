@@ -1,6 +1,6 @@
 import React from "react";
 
-const NewsHomePage = ({ title, date, provider }) => {
+const NewsHomePage = ({ title, date, provider, url }) => {
   // Parse the date string
   const formattedDate = new Date(date).toLocaleDateString("en-US", {
     month: "long",
@@ -13,11 +13,14 @@ const NewsHomePage = ({ title, date, provider }) => {
       <div className="md:flex">
         <div className="md:pt-4">
           <a
-            href="www"
+            href={url}
             className="block text-[15px] light text-white leading-tight text-gray-900 hover:text-[#7869E6] w-[311px]"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             {title}
           </a>
+
           <p className="mt-2 poppins fw-[50px] text-gray-500 text-sm">
             By {provider} | {formattedDate}
           </p>
