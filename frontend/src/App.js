@@ -1,24 +1,28 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { NewsList } from "./components";
 import { useContext } from "react";
 
-
-//Importing the views
+// Importing the views
 import {
-  Home, Profile, SignIn,
-  SignUp, Tools, UserList,
-  Community, DiscussionReply,
-  LikedTools, NewToolDetails
+  Home,
+  Profile,
+  SignIn,
+  SignUp,
+  Tools,
+  UserList,
+  Community,
+  DiscussionReply,
+  LikedTools,
+  NewToolDetails,
 } from "./views";
 
-//impoting the components
+// Importing the components
 import { Navbar, MyComponent, UpdatePassword } from "./components";
 
-
-//importing the admin components
+// Importing the admin components
 import { AddTool, DataParser } from "./admin";
 
-//importing the App's context
+// Importing the App's context
 import { NewsContextProvider } from "./context/NewsContext";
 import { AuthContext } from "./context/AuthContext";
 import GettingData from "./GettingData";
@@ -38,26 +42,32 @@ function App() {
     return children;
   };
 
+  const location = useLocation();
+
   return (
     <div>
       <Navbar />
-      <Routes>
-        <Route index path="/" element={
-          <NewsContextProvider>
-            <Home />
-          </NewsContextProvider>
-        } />
-        <Route path="/signup" element=<SignUp /> />
-        <Route path="/signin" element=<SignIn /> />
-        <Route path="/profile" element=<Profile /> />
-        <Route path="/profile/:name" element=<Profile /> />
-        <Route path="/folders" element=<UserList /> />
-        <Route path="/community" element=<Community /> />
-        <Route path="/newtooldetails/:id" element=<NewToolDetails /> />
-        <Route path="/DiscussionReply" element=<DiscussionReply /> />
-        <Route path="/detect" element=<MyComponent /> />
+      <Routes location={location}>
+        <Route
+          index
+          path="/"
+          element={
+            <NewsContextProvider>
+              <Home />
+            </NewsContextProvider>
+          }
+        />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:name" element={<Profile />} />
+        <Route path="/folders" element={<UserList />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/newtooldetails/:id" element={<NewToolDetails />} />
+        <Route path="/DiscussionReply" element={<DiscussionReply />} />
+        <Route path="/detect" element={<MyComponent />} />
 
-        <Route path="/liked-tools" element=<LikedTools /> />
+        <Route path="/liked-tools" element={<LikedTools />} />
 
         <Route
           path="/tools"
@@ -85,16 +95,20 @@ function App() {
           }
         />
 
-        <Route path="/addTool" element=<AddTool /> />
+        <Route path="/addTool" element={<AddTool />} />
         <Route path="/tools" element={<Tools />} />
         <Route path="/mongo" element={<GettingData />} />
-        <Route path="/DataParser" element={
-          <AdminVerif>
-            <DataParser />
-          </AdminVerif>
-        } />
+        <Route
+          path="/DataParser"
+          element={
+            <AdminVerif>
+              <DataParser />
+            </AdminVerif>
+          }
+        />
       </Routes>
     </div>
   );
 }
+
 export default App;
