@@ -282,7 +282,6 @@ const Home = () => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       setIsSearching(true);
-
                       setisSuggestionsVisible(false);
                     }
                   }}
@@ -583,7 +582,7 @@ const Home = () => {
           </div>
         </Link>
         <hr className="my-5 border-white" />
-        <NewsLetter />
+        {/* <NewsLetter /> */}
       </aside>
     </div>
   );
