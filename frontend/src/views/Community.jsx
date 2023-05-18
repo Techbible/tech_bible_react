@@ -39,6 +39,12 @@ function Community() {
 
   return (
     <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer ">
+      <aside className="sidebarWithSeparator left">
+        <p>Categories</p>
+        <Topic />
+        <Topic />
+        <Topic />
+      </aside>
       <main className="layoutMain">
         <div className="flex flex-col mb-12 p-5 text-white">
           <p className="text-lg font-bold mb-2">Discussions</p>

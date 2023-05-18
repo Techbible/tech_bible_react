@@ -272,7 +272,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="pt-[6rem]">
+    <div className="flex flex-column align-items-center pt-[6rem]">
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
         <main className="layoutMain pl-desktop-5 pl-mobile-4 ">
           <div className="text-[16px] fontWeight-500 ml-[2.5rem] ">
