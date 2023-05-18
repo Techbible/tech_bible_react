@@ -272,7 +272,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="pt-[6rem]">
+    <div className="flex flex-column align-items-center pt-[6rem]">
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
         <main className="layoutMain pl-desktop-5 pl-mobile-4 ">
           <div className="text-[16px] fontWeight-500 ml-[2.5rem] ">
@@ -524,6 +524,41 @@ const Profile = () => {
                 X
               </span>
               <div className="flex flex-wrap justify-start gap-4">
+                {categories?.map((categorie) => (
+                  <label
+                    key={categorie.Category}
+                    className="flex items-center bg-gray-300 max-w-lg rounded-full py-1 px-3 transition duration-250 hover:bg-white cursor-pointer"
+                    htmlFor={categorie.Category}
+                    style={
+                      checkedInterests.includes(categorie.Category)
+                        ? { backgroundColor: "#7869e6", color: "white" }
+                        : {}
+                    }
+                  >
+                    <div className="flex items-center w-full">
+                      <input
+                        type="checkbox"
+                        id={categorie.Category}
+                        value={categorie.Category}
+                        onChange={(e) => handleInterestCheck(e)}
+                        checked={checkedInterests.includes(categorie.Category)}
+                        className="form-checkbox h-4 w-4 text-primary"
+                        style={{ display: "none" }}
+                      />
+
+                      <span
+                        className="ml-2 text-lg font-medium text-gray-700 w-full"
+                        style={
+                          checkedInterests.includes(categorie.Category)
+                            ? { color: "white" }
+                            : {}
+                        }
+                      >
+                        {categorie.Category}
+                      </span>
+                    </div>
+                  </label>
+                ))}
                 {categories?.map((categorie) => (
                   <label
                     key={categorie.Category}

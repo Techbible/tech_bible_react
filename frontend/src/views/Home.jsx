@@ -187,7 +187,7 @@ const Home = () => {
         selectedSuggestion < filteredSuggestions.length
       ) {
         const selectedTool = filteredSuggestions[selectedSuggestion];
-        window.location.href = `/tech_bible_react/newtooldetails/${selectedTool._id}`;
+        window.location.href = `/newtooldetails/${selectedTool._id}`;
       }
     }
   };
@@ -270,7 +270,6 @@ const Home = () => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       setIsSearching(true);
-
                       setisSuggestionsVisible(false);
                     }
                   }}
@@ -417,24 +416,25 @@ const Home = () => {
               <div>
                 <h1 className="mb-8">Search results for : {value} </h1>
                 {allTools
-                  ?.filter((tool) => {
-                    const lowercasedKeywords = tool.Keywords.toLowerCase();
-                    const lowercasedValue = value.toLowerCase();
-                    return lowercasedKeywords.includes(lowercasedValue);
-                  })
-                  .slice(0, 10)
-                  .map((tool) => (
-                    <Toolitem
-                      key={tool._id}
-                      toolData={tool}
-                      forceRender={forceRender}
-                    />
-                  ))}
+  ?.filter((tool) => {
+    const lowercasedKeywords = tool.Keywords.toLowerCase();
+    const lowercasedValues = value.toLowerCase().split(' '); // Split input value into an array of words
+    return lowercasedValues.some((word) => lowercasedKeywords.includes(word)); // Check if any word matches a tool keyword
+  })
+  .slice(0, 10)
+  .map((tool) => (
+    <Toolitem
+      key={tool._id}
+      toolData={tool}
+      forceRender={forceRender}
+    />
+  ))}
+
                 {allTools &&
                   allTools.length > 0 &&
                   allTools.filter((tool) => tool.Keywords.includes(value))
                     .length === 0 && <p>Nothing found.</p>}
-                    <hr className="my-20 border-white" />
+                <hr className="my-20 border-white" />
               </div>
             ) : null}
             {/* end keyword filter              */}
@@ -486,8 +486,7 @@ const Home = () => {
                     {" "}
                     <u>Sign up</u>
                   </Link>
-                  &nbsp; and discover personalized tool recommendations and more
-                  by selecting your profile interests.
+                  &nbsp;and get personalised recommendations
                 </p>
               )}
               {/***********END You might also like********/}
@@ -571,7 +570,7 @@ const Home = () => {
           </div>
         </Link>
         <hr className="my-5 border-white" />
-        <NewsLetter></NewsLetter>
+        {/* <NewsLetter /> */}
       </aside>
     </div>
   );

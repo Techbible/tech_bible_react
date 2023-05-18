@@ -70,7 +70,6 @@ const Toolitem = ({ toolData, forceRender }) => {
             <img
               loading="lazy"
               src={toolData?.Icon}
-              alt="Tool not found"
               className="lg:rounded-[6px] md:rounded-[6px] sm:rounded-[6px]"
             />
           </div>
