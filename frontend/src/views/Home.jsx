@@ -447,7 +447,7 @@ const Home = () => {
                   allTools.length > 0 &&
                   allTools.filter((tool) => tool.Keywords.includes(value))
                     .length === 0 && <p>Nothing found.</p>}
-                    <hr className="my-20 border-white" />
+                <hr className="my-20 border-white" />
               </div>
             ) : null}
             {/* end keyword filter              */}
@@ -583,7 +583,7 @@ const Home = () => {
           </div>
         </Link>
         <hr className="my-5 border-white" />
-        <NewsLetter></NewsLetter>
+        <NewsLetter />
       </aside>
     </div>
   );

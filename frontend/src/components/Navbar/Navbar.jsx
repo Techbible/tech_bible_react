@@ -63,7 +63,7 @@ function Navbar() {
           <div className="md:flex md:items-center md:gap-12 lg:ml-[30px]">
             <Link to="/">
               <img
-                className="xl:w-[170px] lg:w-[160px] md:w-[135px] sm:w-[130px] w-[130px] "
+                className="xl:w-[150px] lg:w-[140px] md:w-[135px] sm:w-[130px] w-[130px] "
                 src={`${process.env.PUBLIC_URL}/TechBibleLogoV2.svg`}
                 alt=""
               />
@@ -80,7 +80,7 @@ function Navbar() {
                         className="tracking-wider hover:tracking-widest"
                         style={{ transition: "0.3s", cursor: "pointer" }}
                       >
-                        All Tools
+                        Admin Space
                       </li>
                     </Link>
                   ) : (
