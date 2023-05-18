@@ -199,7 +199,7 @@ const Home = () => {
         selectedSuggestion < filteredSuggestions.length
       ) {
         const selectedTool = filteredSuggestions[selectedSuggestion];
-        window.location.href = `/tech_bible_react/newtooldetails/${selectedTool._id}`;
+        window.location.href = `/newtooldetails/${selectedTool._id}`;
       }
     }
   };
@@ -432,15 +432,12 @@ const Home = () => {
   ?.filter((tool) => {
     const lowercasedKeywords = tool.Keywords.toLowerCase();
     const lowercasedValues = value.toLowerCase().split(' '); // Split input value into an array of words
-    return lowercasedValues.some((word) => {
-      const wordsInKeyword = lowercasedKeywords.split(' ');
-      return wordsInKeyword.some((keyword) => word.includes(keyword));
-    });
+    return lowercasedValues.some((word) => lowercasedKeywords.includes(word)); // Check if any word matches a tool keyword
   })
   .slice(0, 10)
   .map((tool) => (
     <Toolitem
-      key={tool._id} 
+      key={tool._id}
       toolData={tool}
       forceRender={forceRender}
     />
@@ -502,8 +499,7 @@ const Home = () => {
                     {" "}
                     <u>Sign up</u>
                   </Link>
-                  &nbsp; and discover personalized tool recommendations and more
-                  by selecting your profile interests.
+                  &nbsp;and get personalised recommendations
                 </p>
               )}
               {/***********END You might also like********/}

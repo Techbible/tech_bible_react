@@ -1,6 +1,6 @@
 const NewsLetter = () => {
   return (
-    <div className="news-letter-container flex flex-column gap-3 bt-white bt-white">
+    <div className="news-letter-container flex flex-column gap-3 bt-white bt-white mb-8">
       <div className="text-[16px] medium fontWeight-500 opacity-[.98] ">
         Newsletter
       </div>
@@ -17,7 +17,7 @@ const NewsLetter = () => {
         type="text"
         className="text-white light lg:w-[278px] lg:h-[36px] md:w-[300px] md:h-[36px] rounded-[6px] px-[10px] py-[5px] bg-[#ef4823] transition duration-250 hover:bg-[#ca391c] active:bg-[#b32712] "
       >
-        Subscribe to news letter
+        Subscribe to newsletter
       </button>
     </div>
   );
