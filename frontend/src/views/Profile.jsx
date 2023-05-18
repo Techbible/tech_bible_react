@@ -559,6 +559,41 @@ const Profile = () => {
                     </div>
                   </label>
                 ))}
+                {categories?.map((categorie) => (
+                  <label
+                    key={categorie.Category}
+                    className="flex items-center bg-gray-300 max-w-lg rounded-full py-1 px-3 transition duration-250 hover:bg-white cursor-pointer"
+                    htmlFor={categorie.Category}
+                    style={
+                      checkedInterests.includes(categorie.Category)
+                        ? { backgroundColor: "#7869e6", color: "white" }
+                        : {}
+                    }
+                  >
+                    <div className="flex items-center w-full">
+                      <input
+                        type="checkbox"
+                        id={categorie.Category}
+                        value={categorie.Category}
+                        onChange={(e) => handleInterestCheck(e)}
+                        checked={checkedInterests.includes(categorie.Category)}
+                        className="form-checkbox h-4 w-4 text-primary"
+                        style={{ display: "none" }}
+                      />
+
+                      <span
+                        className="ml-2 text-lg font-medium text-gray-700 w-full"
+                        style={
+                          checkedInterests.includes(categorie.Category)
+                            ? { color: "white" }
+                            : {}
+                        }
+                      >
+                        {categorie.Category}
+                      </span>
+                    </div>
+                  </label>
+                ))}
               </div>
               <span
                 className="inline-block mt-4 px-4 py-2 bg-white text-black transition duration-250 hover:bg-black hover:fontWeight-bold rounded-lg cursor-pointer"
