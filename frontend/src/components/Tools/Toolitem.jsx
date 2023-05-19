@@ -76,10 +76,13 @@ const Toolitem = ({ toolData, forceRender }) => {
         </Link>
         <div className="flex direction-column flex-1">
           <Link to={`/newtooldetails/${toolData._id}`}>
-            <div className="color-white font-700 text-[15px] font-bold mb-1">
-              <Link to={`/newtooldetails/${toolData._id}`}>
-                {toolData?.Name}{" "}
-              </Link>
+            <div
+              onClick={() => {
+                navigate(`/newtooldetails/${toolData._id}`);
+              }}
+              className="color-white font-700 text-[15px] font-bold mb-1"
+            >
+              {toolData?.Name}{" "}
             </div>
             {/* <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2"> */}
             <div className="text-gray-300 text-[12px] ">
