@@ -10,6 +10,7 @@ app.use(express.json());
 
 const Tools = require("./models/Tool");
 const ToolsComments = require("./models/ToolComment");
+const Subscribers = require("./models/Subscribers");
 
 const uri =
   "mongodb+srv://techbible:nRgcJ2M8O6DRoznj@techbible.eggj9te.mongodb.net/techbible";
@@ -178,4 +179,22 @@ app.post("", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
+});
+
+
+//add newsletter subscribers 
+app.post("/addSubscriber/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const newSubscriber = await Subscribers.create({
+      email: email,
+    });
+    
+   
+    res.status(201).json(newSubscriber);
+    console.log("comment added");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error adding tool comment");
+  }
 });
