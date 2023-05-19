@@ -21,6 +21,7 @@ import Modal from "react-modal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Toolitem from "../components/Tools/Toolitem";
+import { CategoriesData } from "../dataJson/CtegoriesData";
 
 import "../assets/styles/profile/profile.css";
 import "../assets/styles/Modal/modal.css";
@@ -106,7 +107,15 @@ const Profile = () => {
   const handleInterestsChange = async () => {
     try {
       const UserRef = doc(db, "Users", currentUserData.uid);
-      const data = { interests: checkedInterests };
+      const userCategories = [];
+      CategoriesData.map((group) => {
+        if (checkedInterests.includes(group.groupName)) {
+          group.categories.map((category) => {
+            userCategories.push(category);
+          });
+        }
+      });
+      const data = { interests: userCategories };
       await updateDoc(UserRef, data)
         .then((UserRef) => {
           console.log(
@@ -126,7 +135,15 @@ const Profile = () => {
 
   //Edit interests
   const editInterests = () => {
-    let userInterests = currentUserData.interests;
+    let userCategories = currentUserData.interests;
+    let userInterests = [];
+    CategoriesData.map((group) => {
+      if (
+        userCategories.some((element) => group.categories.includes(element))
+      ) {
+        userInterests.push(group.groupName);
+      }
+    });
     setcheckedInterests(userInterests);
     console.log("User Interests " + checkedInterests);
     setEditProfileClicked(false);
@@ -243,16 +260,26 @@ const Profile = () => {
 
     return listen();
   }, [LikedTools]);
+
+  // useEffect(() => {
+  //   //getting the available categories
+  //   const dbRef = collection(db, "Categories");
+  //   onSnapshot(dbRef, (docsSnap) => {
+  //     const CategoriesArray = [];
+  //     docsSnap.forEach((doc) => {
+  //       CategoriesArray.push(doc.data());
+  //     });
+  //     setCategories(CategoriesArray);
+  //   });
+  // }, [categories]);
+
+  // New useEffect locic
   useEffect(() => {
-    //getting the available categories
-    const dbRef = collection(db, "Categories");
-    onSnapshot(dbRef, (docsSnap) => {
-      const CategoriesArray = [];
-      docsSnap.forEach((doc) => {
-        CategoriesArray.push(doc.data());
-      });
-      setCategories(CategoriesArray);
+    const CategoriesArray = [];
+    CategoriesData.map((group) => {
+      group.categories.map((category) => CategoriesArray.push(category));
     });
+    setCategories(CategoriesArray);
   }, [categories]);
 
   //To add/Update a Bio
@@ -524,7 +551,43 @@ const Profile = () => {
                 X
               </span>
               <div className="flex flex-wrap justify-start gap-4">
-                {categories?.map((categorie) => (
+                {CategoriesData?.map((group) => (
+                  <label
+                    key={group.groupName}
+                    className="flex items-center bg-gray-300 max-w-lg rounded-full py-1 px-3 transition duration-250 hover:bg-white cursor-pointer"
+                    htmlFor={group.groupName}
+                    style={
+                      checkedInterests.includes(group.groupName)
+                        ? { backgroundColor: "#7869e6", color: "white" }
+                        : {}
+                    }
+                  >
+                    <div className="flex items-center w-full">
+                      <input
+                        type="checkbox"
+                        id={group.groupName}
+                        value={group.groupName}
+                        onChange={(e) => handleInterestCheck(e)}
+                        checked={checkedInterests.includes(group.groupName)}
+                        className="form-checkbox h-4 w-4 text-primary"
+                        style={{ display: "none" }}
+                      />
+
+                      <span
+                        className="ml-2 text-lg font-medium text-gray-700 w-full"
+                        style={
+                          checkedInterests.includes(group.groupName)
+                            ? { color: "white" }
+                            : {}
+                        }
+                      >
+                        {group.groupName}
+                      </span>
+                    </div>
+                  </label>
+                ))}
+
+                {/* {categories?.map((categorie) => (
                   <label
                     key={categorie.Category}
                     className="flex items-center bg-gray-300 max-w-lg rounded-full py-1 px-3 transition duration-250 hover:bg-white cursor-pointer"
@@ -558,7 +621,7 @@ const Profile = () => {
                       </span>
                     </div>
                   </label>
-                ))}
+                ))} */}
               </div>
               <span
                 className="inline-block mt-4 px-4 py-2 bg-white text-black transition duration-250 hover:bg-black hover:fontWeight-bold rounded-lg cursor-pointer"

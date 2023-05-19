@@ -46,23 +46,12 @@ const Home = () => {
   useEffect(() => {
     setAllToolsLoadable(false);
     getTools();
-    // const listen = onAuthStateChanged(auth, getTools);
-    // const fetchData = async () => {
-    //   fetch(`${BASE_URL}/mongo-tools`)
-    //     .then((response) => response.json())
-    //     .then((data) => setAllTools(data))
-    //     .catch((error) => console.error(error));
-    // };
-
-    // const listen = onAuthStateChanged(auth, fetchData);
     setAllToolsLoadable(true);
-    // return listen();
   }, [allTools]);
   //LOADING
   const [isLoading, setLoading] = useState(false);
 
   const { data } = useContext(NewsContext);
-  // const { toolsdata } = useContext(ToolsContext)
 
   const [authUser, setAuthUser] = useState(null);
 
@@ -96,7 +85,6 @@ const Home = () => {
     });
 
   //Searching for tools by name (fulltext search)
-
   //this is firebase
   // const SearchTool = async () => {
   //   const SearchedTools = [];
@@ -572,7 +560,7 @@ const Home = () => {
             key={index}
             title={article.name}
             date={article.datePublished}
-            provider={article?.provider[0]?.name}
+            provider={article?.provider?.[0]?.name || "Unknown Provider"}
             url={article?.url}
           />
         ))}

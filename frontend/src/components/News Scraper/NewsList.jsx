@@ -8,6 +8,7 @@ import { NewsContext } from "../../context/NewsContext";
 
 const NewsList = () => {
   const { data } = useContext(NewsContext);
+  
 
   // useEffect(()=>{console.log(data)},[])
   return (
@@ -30,9 +31,11 @@ const NewsList = () => {
         ))}
       </div>
       {!data && (
-        <div className="flex justify-center items-center mt-8">
-          <img src="/assets/loader-white.gif" alt="Loading..." />
+        <div className="loader-wrapper">
+        <div className="loader-container">
+          <div className="loader"></div>
         </div>
+      </div>
       )}
     </div>
   );
