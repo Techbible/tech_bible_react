@@ -239,7 +239,7 @@ function Navbar() {
                           <img
                             src={currentUserData.photo}
                             className="pfp"
-                            alt="pfp"
+                            alt=""
                           />
                           <div className="username ">
                             {currentUserData.username}

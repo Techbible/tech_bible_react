@@ -34,7 +34,6 @@ export const ModalcustomStyles = {
     left: "50%",
     right: "auto",
     bottom: "auto",
-    // marginRight: "-50%",
     marginRight: "-20%",
     transform: "translate(-50%, -50%)",
     backgroundColor: "rgba(0,0,0,0.8)",
@@ -44,6 +43,8 @@ export const ModalcustomStyles = {
     flexDirection: "column",
     justifyContent: "space-between",
     flexWrap: "wrap",
+    maxHeight: "70vh", // Set maximum height to 90% of viewport height
+    overflow: "auto", // Enable scrolling if content overflows the modal
   },
   overlay: {
     backgroundColor: "rgba(0,0,0,0.8)",
@@ -139,7 +140,7 @@ const Profile = () => {
     let userInterests = [];
     CategoriesData.map((group) => {
       if (
-        userCategories.some((element) => group.categories.includes(element))
+        userCategories?.some((element) => group.categories.includes(element))
       ) {
         userInterests.push(group.groupName);
       }
@@ -307,14 +308,14 @@ const Profile = () => {
           </div>
           {/* Profile Info Component */}
           {/* <div className="relative max-w-[711px] w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-[#18151D] to-[#27242E] rounded-xl p-10"> */}
-          <div className="relative max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
+          <div className="relative xl:w-[711px] lg:xl:w-[711px] max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
             <div className="row">
               <div className="col-md-2">
                 <div className="mb-3">
                   <img
                     src={currentUserData.photo}
                     className="w-[80px] h-[80px] sm:w-[80px] sm:h-[80px] md:w-[80px] md:h-[80px] border-2 border-gray-300 rounded-full"
-                    alt="pfp"
+                    alt=""
                   />
                 </div>
               </div>
@@ -349,12 +350,18 @@ const Profile = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-12">
-                      {currentUserData?.interests?.map((interest) => {
-                        return (
-                          <p className="text-[12] d-inline-block">
-                            {interest}&nbsp;&nbsp;
-                          </p>
-                        );
+                      {CategoriesData?.map((group) => {
+                        if (
+                          currentUserData?.interests?.some((interest) =>
+                            group.categories.includes(interest)
+                          )
+                        ) {
+                          return (
+                            <p className="text-[12] d-inline-block">
+                              {group.groupName}&nbsp;&nbsp;
+                            </p>
+                          );
+                        }
                       })}
                     </div>
                   </div>
@@ -485,14 +492,27 @@ const Profile = () => {
                   Interests
                 </p>
                 <div className="flex flex-wrap">
-                  {currentUserData?.interests?.map((i, index) => (
+                  {/* {currentUserData?.interests?.map((i, index) => (
                     <p
                       className="text-sm leading-tight d-inline mr-1 mb-1"
                       key={index}
                     >
                       {i},
                     </p>
-                  ))}
+                  ))} */}
+                  {CategoriesData?.map((group) => {
+                    if (
+                      currentUserData?.interests?.some((interest) =>
+                        group.categories.includes(interest)
+                      )
+                    ) {
+                      return (
+                        <p className="text-sm leading-tight d-inline mr-1 mb-1">
+                          {group.groupName}&nbsp;&nbsp;
+                        </p>
+                      );
+                    }
+                  })}
                 </div>
               </div>
               {currentUserData?.interests?.length === 0 ? (
@@ -539,7 +559,7 @@ const Profile = () => {
             <div className="mx-16">
               <h2
                 ref={(_subtitle) => (subtitle = _subtitle)}
-                className="mb-4 text-xl font-bold"
+                className="mb-4 text-white xl:text-[30px] lg:text-[28px] md:text-[26px] sm:text-[24px] light fontWeight-500"
               >
                 Please choose your interests:
               </h2>
@@ -550,11 +570,14 @@ const Profile = () => {
               >
                 X
               </span>
-              <div className="flex flex-wrap justify-start gap-4">
+              <div
+                className="flex flex-wrap justify-start gap-4 h-[40vh] "
+                style={{ maxHeight: "300px", overflowY: "auto" }}
+              >
                 {CategoriesData?.map((group) => (
                   <label
                     key={group.groupName}
-                    className="flex items-center bg-gray-300 max-w-lg rounded-full py-1 px-3 transition duration-250 hover:bg-white cursor-pointer"
+                    className="flex items-center bg-gray-300 max-w-lg rounded-full py-1 px-3 transition duration-250 hover:bg-white cursor-pointer mr-3"
                     htmlFor={group.groupName}
                     style={
                       checkedInterests.includes(group.groupName)
@@ -574,7 +597,7 @@ const Profile = () => {
                       />
 
                       <span
-                        className="ml-2 text-lg font-medium text-gray-700 w-full"
+                        className="ml-2 text-black xl:text-[15px] lg:text-[15px] md:text-[12px] sm:text-[12px] text-[12px]  font-medium w-full"
                         style={
                           checkedInterests.includes(group.groupName)
                             ? { color: "white" }
@@ -586,42 +609,6 @@ const Profile = () => {
                     </div>
                   </label>
                 ))}
-
-                {/* {categories?.map((categorie) => (
-                  <label
-                    key={categorie.Category}
-                    className="flex items-center bg-gray-300 max-w-lg rounded-full py-1 px-3 transition duration-250 hover:bg-white cursor-pointer"
-                    htmlFor={categorie.Category}
-                    style={
-                      checkedInterests.includes(categorie.Category)
-                        ? { backgroundColor: "#7869e6", color: "white" }
-                        : {}
-                    }
-                  >
-                    <div className="flex items-center w-full">
-                      <input
-                        type="checkbox"
-                        id={categorie.Category}
-                        value={categorie.Category}
-                        onChange={(e) => handleInterestCheck(e)}
-                        checked={checkedInterests.includes(categorie.Category)}
-                        className="form-checkbox h-4 w-4 text-primary"
-                        style={{ display: "none" }}
-                      />
-
-                      <span
-                        className="ml-2 text-lg font-medium text-gray-700 w-full"
-                        style={
-                          checkedInterests.includes(categorie.Category)
-                            ? { color: "white" }
-                            : {}
-                        }
-                      >
-                        {categorie.Category}
-                      </span>
-                    </div>
-                  </label>
-                ))} */}
               </div>
               <span
                 className="inline-block mt-4 px-4 py-2 bg-white text-black transition duration-250 hover:bg-black hover:fontWeight-bold rounded-lg cursor-pointer"

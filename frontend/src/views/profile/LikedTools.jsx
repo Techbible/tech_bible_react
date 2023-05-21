@@ -32,22 +32,24 @@ function LikedTools() {
     }
   };
 
-  useEffect(()=>{LoadLikedTools()},[])
+  useEffect(() => {
+    LoadLikedTools();
+  }, []);
 
   return (
     <div className="liked-tools w-[500px] mt-[10rem] mx-auto">
-    <h1 className="mb-10">All your liked tools</h1>
-    <div className="lists-container">
-      <div className="tools-list-container">
-        {LikedTools ? (
-          LikedTools?.map((LikedTool) => (
-            <Toolitem toolData={LikedTool} forceRender={forceRender} />
-          ))
-        ) : (
-          <div>you didn't like any tools yet</div>
-        )}
+      <h1 className="mb-10">All your liked tools</h1>
+      <div className="lists-container">
+        <div className="tools-list-container">
+          {LikedTools ? (
+            LikedTools?.map((LikedTool) => (
+              <Toolitem toolData={LikedTool} forceRender={forceRender} />
+            ))
+          ) : (
+            <div>you didn't like any tools yet</div>
+          )}
+        </div>
       </div>
-    </div>
     </div>
   );
 }

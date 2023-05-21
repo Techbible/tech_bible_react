@@ -12,7 +12,7 @@ const Toolitem = ({ toolData, forceRender }) => {
   const { currentUser, isAdmin } = useContext(AuthContext);
   const LikeMethodsRef = useRef(null);
   const navigate = useNavigate();
-  //MY UPDATE
+
   const [isToolLiked, setIsToolLiked] = useState(false);
   useEffect(() => {
     toolData?.LikedBy.includes(currentUser?.uid)
@@ -30,29 +30,17 @@ const Toolitem = ({ toolData, forceRender }) => {
       `${BASE_URL}/unlike/${toolId}/${currentUser?.uid}`
     );
   };
-
+  const [LikeUnlikeClicked, setLikeUnlikeClicked] = useState();
   const handleLikes = async (toolID) => {
     setIsToolLiked(true);
+    setLikeUnlikeClicked(true);
     like(toolID);
   };
   const handleUnLikes = async (toolID) => {
     setIsToolLiked(false);
+    setLikeUnlikeClicked(false);
     unlike(toolID);
   };
-
-  // END OF MY UPDATE
-
-  // const handleLikes = async (toolID) => {
-  //   setIsToolLiked(false);
-  //   LikeMethodsRef.current.Like(toolID);
-  //   forceRender();
-  // };
-
-  // const handleUnLikes = async (toolID) => {
-  //   setIsToolLiked(true);
-  //   LikeMethodsRef.current.Unlike(toolID);
-  //   forceRender();
-  // };
 
   return (
     <div className="px-mobile-1 max-w-[680px] px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
@@ -113,36 +101,7 @@ const Toolitem = ({ toolData, forceRender }) => {
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
           <div className="flex direction-row align-center mt-3">
             <div className="flex direction-column align-items-center gap-2 mx-3 ">
-              {/* like/unlike logic with images */}
-
-              {/* <img
-                alt="tech bible"
-                className="follow w-[30px] transition duration-300 hover:w-[32px] "
-                src={
-                  // toolData.LikedBy?.find((user) => user === currentUser?.uid)
-                  // toolData.LikedBy?.includes(currentUser?.uid)
-                  //   ? process.env.PUBLIC_URL + "/assets/liked.png"
-                  //   : process.env.PUBLIC_URL + "/assets/like.png"
-                  isToolLiked
-                    ? process.env.PUBLIC_URL + "/assets/liked.png"
-                    : process.env.PUBLIC_URL + "/assets/like.png"
-                }
-                onClick={
-                  currentUser
-                    ? () => {
-                        toolData.LikedBy?.find(
-                          (user) => user === currentUser?.uid
-                        )
-                          ? // toolData.LikedBy?.includes(currentUser.uid)
-                            handleUnLikes(toolData._id)
-                          : handleLikes(toolData._id);
-                      }
-                    : () => {
-                        navigate("/signup");
-                      }
-                }
-              /> */}
-
+              {/* like/unlike logic*/}
               {isToolLiked ? (
                 <i
                   className="text-red-500 fas fa-heart text-[25px] hover:text-[26px] "
@@ -170,7 +129,12 @@ const Toolitem = ({ toolData, forceRender }) => {
                   }
                 ></i>
               )}
-
+              {/* if(LikeUnlikeClicked )
+              {
+                <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
+                  {toolData.LikedBy?.length}
+                </div>
+              } */}
               <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
                 {toolData.LikedBy?.length}
               </div>
