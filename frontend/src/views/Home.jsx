@@ -613,7 +613,56 @@ const Home = () => {
           </div>
         </Link>
         <hr className="my-5 border-white" />
-        {/* <NewsLetter /> */}
+        <NewsLetter />
+        <hr className="my-5 border-white" />
+        
+        <ul className="flex flex-row lg:gap-[64px] gap-4">
+        <h3>
+          Follow us
+        </h3>
+        <li
+                  className="tracking-wider hover:tracking-widest"
+                  style={{ transition: "0.3s", cursor: "pointer" }}
+                >
+                  <span className="text-white rounded-full p-1">
+                    <a
+                      href="https://www.tiktok.com/@tech.bible"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-tiktok text-white text-xl"></i>
+                    </a>
+                  </span>
+                </li>
+                <li
+                  className="tracking-wider hover:tracking-widest"
+                  style={{ transition: "0.3s", cursor: "pointer" }}
+                >
+                  <span className="text-white rounded-full p-1">
+                    <a
+                      href="https://youtube.com/@MyTechBible"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-youtube text-white text-xl"></i>
+                    </a>
+                  </span>
+                </li>
+                <li
+                  className="tracking-wider hover:tracking-widest"
+                  style={{ transition: "0.3s", cursor: "pointer" }}
+                >
+                  <span className="text-white rounded-full p-1">
+                    <a
+                      href="https://www.instagram.com/my.techbible"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-instagram text-white text-xl"></i>
+                    </a>
+                  </span>
+                </li>
+        </ul>
       </aside>
     </div>
   );
