@@ -21,6 +21,7 @@ import { allToolsAtom } from "../recoil/tool";
 import axios from "axios";
 import { render } from "react-dom";
 import NewsLetter from "../components/home components/NewsLetter";
+import NewsLetterSubscribe from "../components/home components/NewsLetterSubscribe";
 import { CategoriesData } from "../dataJson/CtegoriesData";
 const toolsdata = require("../config/data.json");
 
@@ -617,7 +618,7 @@ const Home = () => {
           </div>
         </Link>
         <hr className="my-5 border-white" />
-        <NewsLetter />
+        <NewsLetterSubscribe />
         <hr className="my-5 border-white" />
 
         <ul className="flex flex-row lg:gap-[64px] gap-4">
