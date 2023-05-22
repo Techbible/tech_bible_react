@@ -6,8 +6,12 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { BASE_URL } from "../../config/mongo";
 
-const Post = ({ comment, toolData, replies }) => {
+const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
   const [IsAddCommentClick, setIsAddCommentClick] = useState(false);
+  const [replyText, setReplyText] = useState("");
+  const [isAddReplyEnabled, setIsAddReplyEnabled] = useState(true);
+  const [currentReplies, setCurrentReplies] = useState(replies);
+  const [repliesNumberShowed, setRepliesNumberShowed] = useState(0);
 
   const handleIsAddCommentClick = () => {
     setIsAddCommentClick(!IsAddCommentClick);
@@ -73,6 +77,11 @@ const Post = ({ comment, toolData, replies }) => {
     // console.log(photo);
   }, [comment.userId]);
 
+  useEffect(() => {
+    if (replyText === "") setIsAddReplyEnabled(false);
+    else setIsAddReplyEnabled(true);
+  }, [replyText]);
+
   // const getLikesNumber = async () => {
   //   const response = await axios.get(
   //     `${BASE_URL}/mongo-toolComments/${toolData._id}`
@@ -88,6 +97,30 @@ const Post = ({ comment, toolData, replies }) => {
   // useEffect(() => {
   //   getLikesNumber();
   // }, [isCommentLiked]);
+  const fetchReplies = async () => {
+    const response = await axios.get(
+      `${BASE_URL}/mongo-toolComments/${toolData._id}`
+    );
+    const data = response.data;
+    const replies = data.filter((reply) => reply.parentId === comment._id);
+    // Sort the replies by createdAt field in descending order
+    const sortedReplies = replies.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+    setCurrentReplies(sortedReplies);
+  };
+  const [replyAdded, setReplyAdded] = useState(false);
+  const addReply = () => {
+    handleSubmit(replyText, comment._id);
+    setReplyText("");
+    fetchReplies();
+    setReplyAdded(!replyAdded);
+  };
+
+  useEffect(() => {
+    console.log("replies fetched");
+    fetchReplies();
+  }, [replyAdded]);
 
   return (
     <div className="post">
@@ -175,33 +208,62 @@ const Post = ({ comment, toolData, replies }) => {
                 onClick={handleIsAddCommentClick}
                 className=" bi bi-chat-left-dots text-[18px] hover:text-[19px] active:text-[18px]"
               ></button>
-              <div className="text-[14px]">10</div>
+              {currentReplies === 0 ? (
+                <div className="text-[12px]">Comments</div>
+              ) : (
+                <div className="text-[12px]">
+                  {currentReplies.length} Comments
+                </div>
+              )}
             </div>
           </div>
           {IsAddCommentClick ? (
-            <div className="flex flex-row align-items-center gap-2 ">
-              <div className="py-3">
-                <input
-                  type="text"
-                  className="flex flex-wrap text-black  rounded-[4px] px-[10px] py-[5px] "
-                  placeholder="Add your reply"
-                />
-              </div>
-              <div>
-                <svg
-                  className="h-5 w-5 hover:h-6 hover:w-6 text-orange-500"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  {" "}
-                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                  <line x1="10" y1="14" x2="21" y2="3" />{" "}
-                  <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" />
-                </svg>
+            <div>
+              {replies?.length > 0 && (
+                <div>
+                  <div className="h-[30px] opacity-[.9] w-[1.5px] bg-white ml-[5.8vh] mt-1 "></div>
+                  <div className="replies ml-[2vh] ">
+                    {currentReplies?.map((reply, index) => (
+                      <Post
+                        key={index}
+                        comment={reply}
+                        toolData={toolData}
+                        replies={[]}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div className="flex flex-row align-items-center gap-2 ">
+                <div className="py-3">
+                  <input
+                    type="text"
+                    className="flex flex-wrap text-black  rounded-[4px] px-[10px] py-[5px] "
+                    placeholder="Add your reply"
+                    onChange={(e) => setReplyText(e.target.value)}
+                    value={replyText}
+                  />
+                </div>
+                <button onClick={isAddReplyEnabled ? addReply : null}>
+                  <svg
+                    className={
+                      isAddReplyEnabled
+                        ? "h-5 w-5 hover:h-6 hover:w-6 text-orange-500"
+                        : "h-5 w-5 hover:h-6 hover:w-6 text-gray-500"
+                    }
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    {" "}
+                    <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                    <line x1="10" y1="14" x2="21" y2="3" />{" "}
+                    <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" />
+                  </svg>
+                </button>
               </div>
             </div>
           ) : (
@@ -210,21 +272,6 @@ const Post = ({ comment, toolData, replies }) => {
 
           {/* REPLIES  */}
 
-          {replies?.length > 0 && (
-            <div>
-              <div className="h-[30px] opacity-[.9] w-[1.5px] bg-white ml-[5.8vh] mt-1 "></div>
-              <div className="replies ml-[2vh] ">
-                {replies?.map((reply, index) => (
-                  <Post
-                    key={index}
-                    comment={reply}
-                    toolData={toolData}
-                    replies={[]}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
           {/* END REPLIES  */}
         </div>
       </div>

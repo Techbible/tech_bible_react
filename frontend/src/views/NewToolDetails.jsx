@@ -32,31 +32,13 @@ const NewToolDetails = () => {
   const [refresh, setRefresh] = useState(false);
   const inputCommentRef = useRef(null);
 
-  // const fetchComments = async () => {
-  //   const response = await axios.get(`${BASE_URL}/mongo-toolComments/${id}`);
-  //   const data = response.data;
-
-  //   // Sort the comments by updatedAt field in descending order
-  //   const sortedComments = data.sort((a, b) => {
-  //     return new Date(b.updatedAt) - new Date(a.updatedAt);
-  //   });
-
-  //   // Calculate the time difference in minutes for each comment
-  //   const commentsWithTimeAgo = sortedComments.map((comment) => {
-  //     const updatedAtDate = new Date(comment.updatedAt);
-  //     const currentDate = new Date();
-  //     const timeDifferenceInMinutes = Math.floor(
-  //       (currentDate - updatedAtDate) / (1000 * 60)
-  //     );
-  //     return {
-  //       ...comment,
-  //       timeAgoInMinutes: timeDifferenceInMinutes,
-  //     };
-  //   });
-
-  //   setComments(commentsWithTimeAgo);
-  //   console.log(commentsWithTimeAgo);
-  // };
+  const addReply = async (text, parentId) => {
+    console.log("addReply : " + text + " " + parentId);
+    const response = await axios.post(
+      `${BASE_URL}/addToolComment/${id}/${currentUser.uid}/${text}/${parentId}`
+    );
+    console.log("Reply added succesfuly");
+  };
 
   const fetchComments = async () => {
     const response = await axios.get(`${BASE_URL}/mongo-toolComments/${id}`);
@@ -243,6 +225,8 @@ const NewToolDetails = () => {
                   comment={comment}
                   toolData={toolData}
                   replies={getReplies(comment._id)}
+                  submitLabel="addReply"
+                  handleSubmit={addReply}
                 />
               ) : null;
             })}
