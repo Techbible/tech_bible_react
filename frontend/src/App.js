@@ -20,7 +20,7 @@ import {
 import { Navbar, MyComponent, UpdatePassword } from "./components";
 
 // Importing the admin components
-import { AddTool, DataParser } from "./admin";
+import { AddNewsArticle, AddTool, DataParser } from "./admin";
 
 // Importing the App's context
 import { NewsContextProvider } from "./context/NewsContext";
@@ -66,6 +66,7 @@ function App() {
         <Route path="/newtooldetails/:id" element={<NewToolDetails />} />
         <Route path="/DiscussionReply" element={<DiscussionReply />} />
         <Route path="/detect" element={<MyComponent />} />
+        <Route path="/AddNewsArticle" element={<AddNewsArticle />} />
 
         <Route path="/liked-tools" element={<LikedTools />} />
 
