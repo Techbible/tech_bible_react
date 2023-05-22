@@ -69,7 +69,8 @@ const Home = () => {
 
   //storing the pricing choice
   const [Pricing, setPricing] = useState("");
-
+  const [category, setCategory] = useState("all categories");
+  const [resultFilter, setResultFilter] = useState("");
   const navigate = useNavigate();
 
   //Pop up Welcome Notification
@@ -122,6 +123,7 @@ const Home = () => {
     //this is mongo
     const response = await axios.get(`${BASE_URL}/mongo-tools`);
 
+
     if (category === "all categories") {
       const toolsWithMatchingPrice = response.data?.filter(
         (tool) => tool.Price === Pricing
@@ -143,6 +145,7 @@ const Home = () => {
         );
       else setResultFilter("");
     }
+
     console.log(typeof SearchedTool);
     console.log(typeof SearchedTools);
   };
