@@ -6,16 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { BASE_URL } from "../../config/mongo";
 
-const Post = ({
-  commentId,
-  LikedBy,
-  commentText,
-  commentUser,
-  toolName,
-  toolCategory,
-  timeAgo,
-  toolId,
-}) => {
+const Post = ({ comment, toolData, replies }) => {
   const [IsAddCommentClick, setIsAddCommentClick] = useState(false);
 
   const handleIsAddCommentClick = () => {
@@ -27,7 +18,7 @@ const Post = ({
   const [photo, setPhoto] = useState("");
 
   const [isCommentLiked, setIsCommentLiked] = useState(false);
-  const [likedBy, setLikedBy] = useState(LikedBy);
+  const [likes, setLikes] = useState(comment?.likedBy?.length);
 
   const likeToolComment = async (toolCommentId) => {
     const response = await axios.post(
@@ -52,7 +43,7 @@ const Post = ({
   const getUserInfo = async () => {
     try {
       const userData = await onSnapshot(
-        doc(db, "Users", commentUser),
+        doc(db, "Users", comment.userId),
         (doc) => {
           setName(doc.data().username);
           setPhoto(doc.data().photo);
@@ -63,30 +54,58 @@ const Post = ({
     }
   };
 
-  const getCommentLikedBy = async () => {
-    const response = axios.get(`${BASE_URL}/mongo-toolComments/${toolId}`);
-    const comment = response.filter((comment) => comment._id === commentId);
-    setLikedBy(comment.likedBy);
-  };
+  // const getCommentLikedBy = async () => {
+  //   const response = axios.get(`${BASE_URL}/mongo-toolComments/${toolId}`);
+  //   const comment = response.filter((comment) => comment._id === comment._id);
+  //   setLikedBy(comment.likedBy);
+  // };
   useEffect(() => {
-    likedBy?.includes(currentUser.uid)
+    comment.likedBy?.includes(currentUser.uid)
       ? setIsCommentLiked(true)
       : setIsCommentLiked(false);
-    getCommentLikedBy();
-    console.log(typeof likedBy);
-  }, [likedBy]);
+    // getCommentLikedBy();
+    console.log(typeof comment.likedBy);
+  }, [comment.likedBy]);
 
   useEffect(() => {
     getUserInfo();
     // console.log(name);
     // console.log(photo);
-  }, [commentUser]);
+  }, [comment.userId]);
+
+  // const getLikesNumber = async () => {
+  //   const response = await axios.get(
+  //     `${BASE_URL}/mongo-toolComments/${toolData._id}`
+  //   );
+  //   const data = response.data;
+  //   const Comment = data?.filter(
+  //     (toolComment) => toolComment._id === comment._id
+  //   );
+  //   const likesNumber = Comment?.likedBy?.length;
+  //   console.log(Comment?.likedBy);
+  //   setLikes(likesNumber);
+  // };
+  // useEffect(() => {
+  //   getLikesNumber();
+  // }, [isCommentLiked]);
 
   return (
     <div className="post">
-      <div className="max-w-[632px] px-5 my-4 py-6 bg-[#18151D] rounded-lg shadow-md flex flex-row">
+      <div
+        className={
+          comment?.parentId === "null"
+            ? "max-w-[632px] px-5 my-4 py-6 bg-[#18151D] rounded-lg shadow-md flex flex-row"
+            : "max-w-[500px] px-5 my-4 py-[0px] bg-[#18151D] rounded-lg shadow-md flex flex-row mb-6"
+        }
+      >
         <div>
-          <div className="w-10 h-10 rounded-full overflow-hidden mr-[1rem]">
+          <div
+            className={
+              comment?.parentId === "null"
+                ? "w-10 h-10 rounded-full overflow-hidden mr-[1rem]"
+                : "w-6 h-6 rounded-full overflow-hidden mr-[1rem]"
+            }
+          >
             <img
               className="w-full h-full object-cover rounded-full"
               // src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
@@ -99,12 +118,26 @@ const Post = ({
         <div className="flex flex-column">
           <div className="flex flex-wrap sm:flex-no-wrap w-full max-w-[600px]">
             {/* <div className="text-white text-base sm:text-lg">User78-&nbsp;</div> */}
-            <div className="text-white text-base sm:text-lg">{name}-&nbsp;</div>
+            <div
+              className={
+                comment?.parentId === "null"
+                  ? "text-white text-base sm:text-lg"
+                  : "text-white light text-[14px]"
+              }
+            >
+              {name}&nbsp;
+            </div>
             <div className="flex flex-row mt-1 sm:mt-2">
-              <div className="text-gray-300 text-xs sm:text-sm">
-                Posted in-&nbsp;{toolCategory} &nbsp;-&nbsp; {toolName}{" "}
-                &nbsp;-&nbsp;{timeAgo}
-              </div>
+              {comment.parentId === "null" ? (
+                <div className="text-gray-300 text-xs sm:text-sm">
+                  -Posted in-&nbsp;{toolData?.Category} &nbsp;-&nbsp;{" "}
+                  {toolData.Name} &nbsp;-&nbsp;{comment.timeAgo}
+                </div>
+              ) : (
+                <div className="text-gray-300 text-[12px]">
+                  -&nbsp;{comment.timeAgo}
+                </div>
+              )}
             </div>
           </div>
 
@@ -115,7 +148,7 @@ const Post = ({
           </div> */}
           <div className="mt-2">
             <p className="flex mt-2 text-gray-300 text-[15px] font-sans max-w-[452px]">
-              {commentText}
+              {comment.text}
             </p>
           </div>
 
@@ -125,37 +158,74 @@ const Post = ({
               {isCommentLiked ? (
                 <i
                   onClick={() => {
-                    handleCommentUnLikes(commentId);
+                    handleCommentUnLikes(comment._id);
                   }}
                   className="text-red-500 fas fa-heart text-[20px]"
                 ></i>
               ) : (
                 <i
                   onClick={() => {
-                    handleCommentLikes(commentId);
+                    handleCommentLikes(comment._id);
                   }}
                   className="text-white border-white text-[20px] far fa-heart"
                 ></i>
               )}
-              <div className="text-[14px]">{likedBy.length}</div>
-              {/* <button
+              <div className="text-[14px]">{comment?.likedBy?.length}</div>
+              <button
                 onClick={handleIsAddCommentClick}
                 className=" bi bi-chat-left-dots text-[18px] hover:text-[19px] active:text-[18px]"
               ></button>
-              <div className="text-[14px]">10</div> */}
+              <div className="text-[14px]">10</div>
             </div>
           </div>
           {IsAddCommentClick ? (
-            <div className="flex justify-content-center py-3">
-              <input
-                type="text"
-                className="text-black lg:w-[451px] lg:h-[36px] md:w-[300px] md:h-[26px] rounded-[4px] px-[10px] py-[5px] "
-                placeholder="Add comment"
-              />
+            <div className="flex flex-row align-items-center gap-2 ">
+              <div className="py-3">
+                <input
+                  type="text"
+                  className="flex flex-wrap text-black  rounded-[4px] px-[10px] py-[5px] "
+                  placeholder="Add your reply"
+                />
+              </div>
+              <div>
+                <svg
+                  className="h-5 w-5 hover:h-6 hover:w-6 text-orange-500"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  {" "}
+                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                  <line x1="10" y1="14" x2="21" y2="3" />{" "}
+                  <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" />
+                </svg>
+              </div>
             </div>
           ) : (
             <div></div>
           )}
+
+          {/* REPLIES  */}
+
+          {replies?.length > 0 && (
+            <div>
+              <div className="h-[30px] opacity-[.9] w-[1.5px] bg-white ml-[5.8vh] mt-1 "></div>
+              <div className="replies ml-[2vh] ">
+                {replies?.map((reply, index) => (
+                  <Post
+                    key={index}
+                    comment={reply}
+                    toolData={toolData}
+                    replies={[]}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+          {/* END REPLIES  */}
         </div>
       </div>
     </div>

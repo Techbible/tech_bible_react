@@ -105,25 +105,29 @@ app.post("/unlike/:id/:uid", async (req, res) => {
 });
 
 // Add a Tool Comment
-app.post("/addToolComment/:toolId/:userId/:commentText", async (req, res) => {
-  try {
-    const { toolId, userId, commentText } = req.params;
-    const newComment = await ToolsComments.create({
-      text: commentText,
-      userId: userId,
-      toolId: toolId,
-    });
-    // assuming that `Tools` is the model for the tools collection
-    const tool = await Tools.findById(toolId);
-    tool.comments.push(newComment._id);
-    await tool.save();
-    res.status(201).json(newComment);
-    console.log("comment added");
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Error adding tool comment");
+app.post(
+  "/addToolComment/:toolId/:userId/:commentText/:parentId",
+  async (req, res) => {
+    try {
+      const { toolId, userId, commentText, parentId } = req.params;
+      const newComment = await ToolsComments.create({
+        text: commentText,
+        userId: userId,
+        toolId: toolId,
+        parentId: parentId,
+      });
+      // assuming that `Tools` is the model for the tools collection
+      const tool = await Tools.findById(toolId);
+      tool.comments.push(newComment._id);
+      await tool.save();
+      res.status(201).json(newComment);
+      console.log("comment added");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error adding tool comment");
+    }
   }
-});
+);
 
 // LIKE A TOOL COMMENT
 app.post("/likeToolComment/:toolCommentId/:userId", async (req, res) => {
@@ -181,16 +185,14 @@ app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
 
-
-//add newsletter subscribers 
+//add newsletter subscribers
 app.post("/addSubscriber/:email", async (req, res) => {
   try {
     const { email } = req.params;
     const newSubscriber = await Subscribers.create({
       email: email,
     });
-    
-   
+
     res.status(201).json(newSubscriber);
     console.log("comment added");
   } catch (err) {

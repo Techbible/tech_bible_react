@@ -104,12 +104,23 @@ const NewToolDetails = () => {
     console.log(commentsWithTimeAgo);
   };
 
+  const getReplies = (commentId) => {
+    return comments
+      ?.filter((comment) => comment.parentId === commentId)
+      .sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      );
+  };
+
   const handlePostComment = async () => {
     // alert(comment);
     try {
       if (comment.length > 0) {
         const response = await axios.post(
-          `${BASE_URL}/addToolComment/${id}/${currentUser.uid}/${comment}`
+          `${BASE_URL}/addToolComment/${id}/${
+            currentUser.uid
+          }/${comment}/${"null"}`
         );
 
         setPostCommentClicked(true);
@@ -225,19 +236,16 @@ const NewToolDetails = () => {
                 <i className=" bi bi-chat-left-dots text-[18px]"></i>
               </div>
             </div>
-            {comments.map((comment, index) => (
-              <Post
-                key={index}
-                commentId={comment._id}
-                LikedBy={comment.likedBy}
-                commentText={comment.text}
-                commentUser={comment.userId}
-                toolName={toolData.Name}
-                toolCategory={toolData?.Category}
-                timeAgo={comment.timeAgo}
-                toolId={toolData._id}
-              />
-            ))}
+            {comments.map((comment, index) => {
+              return comment?.parentId === "null" ? (
+                <Post
+                  key={index}
+                  comment={comment}
+                  toolData={toolData}
+                  replies={getReplies(comment._id)}
+                />
+              ) : null;
+            })}
           </div>
           {/* End of Community Thoughts  */}
         </main>
