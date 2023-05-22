@@ -21,7 +21,7 @@ import { allToolsAtom } from "../recoil/tool";
 import axios from "axios";
 import { render } from "react-dom";
 import NewsLetter from "../components/home components/NewsLetter";
-import { CategoriesData } from "../dataJson/CtegoriesData";
+import NewsLetterSubscribe from "../components/home components/NewsLetterSubscribe";
 const toolsdata = require("../config/data.json");
 
 const Home = () => {
@@ -69,8 +69,6 @@ const Home = () => {
 
   //storing the pricing choice
   const [Pricing, setPricing] = useState("");
-  const [category, setCategory] = useState("all categories");
-  const [resultFilter, setResultFilter] = useState("");
 
   const navigate = useNavigate();
 
@@ -166,9 +164,6 @@ const Home = () => {
   useEffect(() => {
     handleFilter();
   }, [Pricing]);
-  useEffect(() => {
-    handleFilter();
-  }, [category]);
 
   //search bar suggestions
   const [isSuggestionsVisible, setisSuggestionsVisible] = useState(false);
@@ -371,9 +366,7 @@ const Home = () => {
                           className={`flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6 ${
                             index === selectedSuggestion ? "bg-blue-100" : ""
                           }`}
-                          onMouseEnter={() => {
-                            setSelectedSuggestion(index);
-                          }}
+                          
                         >
                           <div>
                             <p className="text-gray-500" key={tool.Name}>
@@ -387,7 +380,7 @@ const Home = () => {
               </div>
             )}
 
-            <div className="flex flex-wrap logo-search-container">
+            <div className="logo-search-container">
               <div className="my-0 mr-4">
                 <img
                   className="w-[100px]"
@@ -404,7 +397,7 @@ const Home = () => {
                     <option selected disabled>
                       Pricing
                     </option>
-                    <option value="Freemium">Freemium</option>
+                    <option value="Freemium">Preemium</option>
                     <option value="Free">Free</option>
                     <option value="Paid">Paid</option>
                   </select>
@@ -412,25 +405,6 @@ const Home = () => {
               ) : (
                 <div className="fontWeight-500 text-[#F5F5F7] text-[12px] w-[274px]">
                   Browse 1000+ of the latest tech tools per task Updated daily
-                </div>
-              )}
-              {isFiltering && (
-                <div className="ml-2">
-                  <select
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="combo-box bg-white text-black px-1 rounded-[4px] "
-                  >
-                    <option value="all categories">All Categories</option>
-                    {CategoriesData?.map((group) => {
-                      return group.categories.map((category) => {
-                        return (
-                          <option className="text-black" value={category}>
-                            {category}{" "}
-                          </option>
-                        );
-                      });
-                    })}
-                  </select>
                 </div>
               )}
             </div>
@@ -459,22 +433,19 @@ const Home = () => {
               <div>
                 <h1 className="mb-8">Search results for : {value} </h1>
                 {allTools
-                  ?.filter((tool) => {
-                    // const lowercasedKeywords = tool.Keywords.toLowerCase();
-                    // const lowercasedValues = value.toLowerCase().split(' '); // Split input value into an array of words
-                    // return lowercasedValues.some((word) => lowercasedKeywords.includes(word)); // Check if any word matches a tool keyword
-                    const lowercasedKeywords = tool.Keywords.toLowerCase();
-                    const lowercasedValues = value.toLowerCase();
-                    return lowercasedKeywords.includes(lowercasedValues);
-                  })
-                  .slice(0, 10)
-                  .map((tool) => (
-                    <Toolitem
-                      key={tool._id}
-                      toolData={tool}
-                      forceRender={forceRender}
-                    />
-                  ))}
+  ?.filter((tool) => {
+    const lowercasedKeywords = tool.Keywords.toLowerCase();
+    const lowercasedValues = value.toLowerCase().split(' '); // Split input value into an array of words
+    return lowercasedValues.some((word) => lowercasedKeywords.includes(word)); // Check if any word matches a tool keyword
+  })
+  .slice(0, 10)
+  .map((tool) => (
+    <Toolitem
+      key={tool._id}
+      toolData={tool}
+      forceRender={forceRender}
+    />
+  ))}
 
                 {allTools &&
                   allTools.length > 0 &&
@@ -542,7 +513,6 @@ const Home = () => {
             ) : (
               // {/* End Filtering container */}
               <div data-test="homepage-section-0" style={{ diplay: "block" }}>
-                <div className="ml-4">{resultFilter}</div>
                 <div>
                   <div>
                     {SearchedTool.map((tool, index) => (
@@ -617,7 +587,7 @@ const Home = () => {
           </div>
         </Link>
         <hr className="my-5 border-white" />
-        <NewsLetter />
+        <NewsLetterSubscribe/>
         <hr className="my-5 border-white" />
 
         <ul className="flex flex-row lg:gap-[64px] gap-4">
