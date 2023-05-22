@@ -69,8 +69,8 @@ const Home = () => {
 
   //storing the pricing choice
   const [Pricing, setPricing] = useState("");
-  const [category, setCategory] = useState("all categories");
   const [resultFilter, setResultFilter] = useState("");
+  const [category, setCategory] = useState("all categories");
 
   const navigate = useNavigate();
 
