@@ -40,6 +40,7 @@ const Home = () => {
 
   const [allTools, setAllTools] = useState([]);
   const [toolsNumber, setToolsNumber] = useState(30);
+  const [limitedTools, setLimitedTools] = useState([]);
 
   const getTools = async () => {
     let response = axios.get(`${BASE_URL}/mongo-tools`);
@@ -51,9 +52,19 @@ const Home = () => {
     getTools();
     setAllToolsLoadable(true);
   }, [allTools]);
+
+  const getLimitedTools = async () => {
+    let response = axios.get(`${BASE_URL}/mongo-tools/${40}`);
+    let tools = (await response).data;
+    setLimitedTools(tools);
+  };
+  useEffect(() => {
+    setAllToolsLoadable(false);
+    getLimitedTools();
+    setAllToolsLoadable(true);
+  }, [limitedTools]);
   //LOADING
   const [isLoading, setLoading] = useState(false);
-
 
   const [authUser, setAuthUser] = useState(null);
 
@@ -372,7 +383,6 @@ const Home = () => {
                           className={`flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6 ${
                             index === selectedSuggestion ? "bg-blue-100" : ""
                           }`}
-                         
                         >
                           <div>
                             <p className="text-gray-500" key={tool.Name}>
@@ -567,8 +577,18 @@ const Home = () => {
                     {!allTools ? (
                       <h1 style={{ color: "#fff" }}>Loading...</h1>
                     ) : (
+                      // Array.isArray(allTools) &&
+                      // allTools?.slice(0, toolsNumber).map((tool, index) => (
+                      //   <div>
+                      //     <Toolitem
+                      //       key={index}
+                      //       toolData={tool}
+                      //       forceRender={forceRender}
+                      //     />
+                      //   </div>
+                      // ))
                       Array.isArray(allTools) &&
-                      allTools?.slice(0, toolsNumber).map((tool, index) => (
+                      limitedTools?.map((tool, index) => (
                         <div>
                           <Toolitem
                             key={index}
@@ -578,7 +598,7 @@ const Home = () => {
                         </div>
                       ))
                     )}
-                    {allToolsLoadable && toolsNumber < 290 ? (
+                    {/* {allToolsLoadable && toolsNumber < 290 ? (
                       <div
                         className="mt-4 mb-[4rem] cursor-pointer hover:tracking-[.5px] transition duration-300 "
                         onClick={() => setToolsNumber(toolsNumber + 30)}
@@ -587,7 +607,7 @@ const Home = () => {
                       </div>
                     ) : (
                       <div></div>
-                    )}
+                    )} */}
                   </div>
                 ) : (
                   <div style={{ display: "none" }}></div>
@@ -601,26 +621,25 @@ const Home = () => {
         <Link to="/News">
           <p className="text-[16px] fontWeight-700 ">News</p>
         </Link>
-        {DataAPI?.length > 0?
-          DataAPI.slice(0, 3).map((article, index) => (
-          <NewsHomePage
-            key={index}
-            title={article.name}
-            date={article.datePublished}
-            provider={article?.provider?.[0]?.name || "Unknown Provider"}
-            url={article?.url}
-          />
-        )):
-        MongoDBData?.slice(0, 3).map((article, index) => (
-          <NewsHomePage
-            key={index}
-            title={article.name}
-            date={article.datePublished}
-            provider={article?.provider?.[0]?.name || "Unknown Provider"}
-            url={article?.url}
-          />
-        ))
-      }
+        {DataAPI?.length > 0
+          ? DataAPI.slice(0, 3).map((article, index) => (
+              <NewsHomePage
+                key={index}
+                title={article.name}
+                date={article.datePublished}
+                provider={article?.provider?.[0]?.name || "Unknown Provider"}
+                url={article?.url}
+              />
+            ))
+          : MongoDBData?.slice(0, 3).map((article, index) => (
+              <NewsHomePage
+                key={index}
+                title={article.name}
+                date={article.datePublished}
+                provider={article?.provider?.[0]?.name || "Unknown Provider"}
+                url={article?.url}
+              />
+            ))}
         <Link to="/News">
           <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer mb-20">
             See more...

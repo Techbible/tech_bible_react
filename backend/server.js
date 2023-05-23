@@ -35,6 +35,27 @@ app.get("/mongo-tools", async (req, res) => {
   }
 });
 
+// get a specific number of tools
+app.get("/mongo-tools/:limit", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    const limit = parseInt(req.params.limit);
+
+    const tools = await Tools.find()
+      .sort({ likedBy: -1 }) // Sort by the 'likedBy' field in descending order
+      .limit(limit);
+
+    res.send(tools);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching tools data");
+  }
+});
+
 // To GET TOOL COMMENTS
 app.get("/mongo-toolComments/:toolId", async (req, res) => {
   let { toolId } = req.params;
