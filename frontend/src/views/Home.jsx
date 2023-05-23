@@ -124,9 +124,9 @@ const Home = () => {
 
     //this is mongo
     const response = await axios.get(`${BASE_URL}/mongo-tools`);
-    const toolsWithMatchingPrice=null
+
     if (category === "all categories") {
-       toolsWithMatchingPrice = response.data?.filter(
+      const toolsWithMatchingPrice = response.data?.filter(
         (tool) => tool.Price === Pricing
       );
       setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
@@ -136,18 +136,9 @@ const Home = () => {
         );
       else setResultFilter("");
     } else {
-      if (Pricing === "All"){
-         toolsWithMatchingPrice = response.data?.filter((tool) => {
-          return  tool.Category === category;
-        });
-
-      }
-      else{
-         toolsWithMatchingPrice = response.data?.filter((tool) => {
-          return tool.Price === Pricing && tool.Category === category;
-        });
-      }
-      
+      const toolsWithMatchingPrice = response.data?.filter((tool) => {
+        return tool.Price === Pricing && tool.Category === category;
+      });
       setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
       if (toolsWithMatchingPrice.length === 0)
         setResultFilter(
@@ -409,8 +400,8 @@ const Home = () => {
                     className="combo-box bg-white text-black rounded-[4px] "
                     onChange={(e) => setPricing(e.target.value)}
                   >
-                    <option value="All" selected disabled>
-                      All
+                    <option selected disabled>
+                      Pricing
                     </option>
                     <option value="Freemium">Freemium</option>
                     <option value="Free">Free</option>
@@ -555,10 +546,10 @@ const Home = () => {
                   <div>
                     {SearchedTool.map((tool, index) => (
                       <Toolitem
-                      key={tool._id}
-                      toolData={tool}
-                      forceRender={forceRender}
-                    />
+                        key={tool._id}
+                        toolData={tool}
+                        forceRender={forceRender}
+                      />
                     ))}
                   </div>
                 </div>
