@@ -8,14 +8,17 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
+//MODELS
 const Tools = require("./models/Tool");
 const ToolsComments = require("./models/ToolComment");
 const Subscribers = require("./models/Subscribers");
+const NewsArticle = require("./models/NewsArticle");
+
+//CONNECTING TO DATABASE
 
 const uri =
   "mongodb+srv://techbible:nRgcJ2M8O6DRoznj@techbible.eggj9te.mongodb.net/techbible";
 
-// Connect to the database and fetch the tools data on startup
 
 // Define your routes here
 app.get("/mongo-tools", async (req, res) => {
@@ -24,7 +27,7 @@ app.get("/mongo-tools", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    // console.log("Connected to MongoDB");
+    console.log("Connected to MongoDB");
     const tools = await Tools.find();
 
     // console.log("TOOLS : ",tools);
@@ -75,22 +78,9 @@ app.get("/mongo-toolComments/:toolId", async (req, res) => {
     console.error(error);
     res.status(500).send("Error fetching tools data");
   }
-  // finally {
-  //   mongoose.connection.close();
-  // }
+
 });
 
-// app.post("/like/:id/:uid", async (req, res) => {
-//   let { id, uid } = req.params;
-//   try {
-//     await Tools.findByIdAndUpdate(id, {
-//       $push: { LikedBy: uid },
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-//   console.log("tool has been liked successfully!!!!!");
-// });
 
 app.post("/like/:id/:uid", async (req, res) => {
   let { id, uid } = req.params;
@@ -124,6 +114,56 @@ app.post("/unlike/:id/:uid", async (req, res) => {
   }
   console.log("tool has been unliked succefuly!!!!!");
 });
+
+//NEWS START
+app.get("/news", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+    const news = await NewsArticle.find();
+    console.log("news : ",news);
+    res.send(news); // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching news data");
+  }
+});
+//NEWS END
+
+// Add a News Article START
+app.post("/addArticle", async (req, res) => {
+  try {
+    const { Description, Title, URL, ImageURL, Provider } = req.body; // Access request body instead of params
+    const newArticle = await NewsArticle.create({
+      name: Title,
+      description: Description,
+      url: URL,
+      image: {
+        contentUrl: ImageURL,
+      },
+      provider: [
+        {
+          name: Provider,
+          image: {
+            contentUrl: "https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg",
+          },
+        },
+      ],
+      datePublished: new Date(),
+    });
+  
+    res.status(201).json(newArticle);
+    console.log("Article added");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error adding News Article");
+  }
+});
+
+// Add a News Article END
 
 // Add a Tool Comment
 app.post(
