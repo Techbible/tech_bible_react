@@ -88,48 +88,7 @@ function Navbar() {
                   )}
                 </div>
 
-                <li
-                  className="tracking-wider hover:tracking-widest"
-                  style={{ transition: "0.3s", cursor: "pointer" }}
-                >
-                  <span className="text-white rounded-full p-1">
-                    <a
-                      href="https://www.tiktok.com/@tech.bible"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="fab fa-tiktok text-white text-xl"></i>
-                    </a>
-                  </span>
-                </li>
-                <li
-                  className="tracking-wider hover:tracking-widest"
-                  style={{ transition: "0.3s", cursor: "pointer" }}
-                >
-                  <span className="text-white rounded-full p-1">
-                    <a
-                      href="https://youtube.com/@MyTechBible"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="fab fa-youtube text-white text-xl"></i>
-                    </a>
-                  </span>
-                </li>
-                <li
-                  className="tracking-wider hover:tracking-widest"
-                  style={{ transition: "0.3s", cursor: "pointer" }}
-                >
-                  <span className="text-white rounded-full p-1">
-                    <a
-                      href="https://www.instagram.com/my.techbible"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="fab fa-instagram text-white text-xl"></i>
-                    </a>
-                  </span>
-                </li>
+                
               </ul>
             </nav>
           </div>

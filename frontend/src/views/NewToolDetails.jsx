@@ -11,6 +11,7 @@ import axios from "axios";
 import { BASE_URL } from "../config/mongo";
 import { AuthContext } from "../context/AuthContext";
 import NewsLetter from "../components/home components/NewsLetter";
+import NewsLetterSubscribe from "../components/home components/NewsLetterSubscribe";
 
 const NewToolDetails = () => {
   let { id } = useParams();
@@ -235,7 +236,7 @@ const NewToolDetails = () => {
         </main>
 
         <aside className="sidebarWithSeparator right max-w-[300px] ">
-          <NewsLetter></NewsLetter>
+          <NewsLetterSubscribe/>
         </aside>
       </div>
     </div>
