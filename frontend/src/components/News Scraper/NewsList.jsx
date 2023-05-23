@@ -10,6 +10,18 @@ import { AuthContext } from "../../context/AuthContext";
 const NewsList = () => {
   const { DataAPI, MongoDBData } = useContext(NewsContext);
   const { isAdmin } = useContext(AuthContext);
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/deleteArticle/${id}`);
+      console.log("Article deleted:", response.data);
+      // Handle successful deletion, such as updating the UI or showing a success message
+    } catch (error) {
+      console.error("Error deleting article:", error);
+      // Handle error, such as displaying an error message or performing necessary error handling
+    }
+  };
+
   useEffect(() => {
     (async () => {
       try {
@@ -53,6 +65,20 @@ const NewsList = () => {
           : MongoDBData?.map((article, index) => (
               <div className="w-full my-5" key={index}>
                 <div className="lg:ml-[15%] rounded-lg shadow-lg overflow-hidden">
+                {isAdmin?
+                  <div
+                    className="m-25 mr-3"
+                    onClick={() => handleDelete(article._id)}
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/assets/bin.png`}
+                      alt="delete"
+                      className="cursor-pointer w-[32px] h-[32px] m-2"
+                    />
+                  </div>
+                :<div></div>}  
+   
+                  
                   <NewsItem
                     _id={article._id}
                     title={article.name}
@@ -60,6 +86,7 @@ const NewsList = () => {
                     url={article.url}
                     urlToImage={article?.image?.contentUrl}
                   />
+       
                 </div>
               </div>
             ))}

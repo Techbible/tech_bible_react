@@ -28,6 +28,7 @@ const toolsdata = require("../config/data.json");
 const Home = () => {
   //CONTEXT
   const { currentUser, currentUserData } = useContext(AuthContext);
+  const { DataAPI, MongoDBData } = useContext(NewsContext);
 
   //RECOIL
   // const allToolsLoadable = useRecoilValueLoadable(allToolsAtom);
@@ -601,9 +602,10 @@ const Home = () => {
       </main>
       <aside className="sidebarWithSeparator right ">
         <Link to="/News">
-          <p className="text-[16px] fontWeight-700 ">News</p>{" "}
+          <p className="text-[16px] fontWeight-700 ">News</p>
         </Link>
-        {data?.slice(0, 3).map((article, index) => (
+        {DataAPI?.length > 0?
+          DataAPI.slice(0, 3).map((article, index) => (
           <NewsHomePage
             key={index}
             title={article.name}
@@ -611,7 +613,17 @@ const Home = () => {
             provider={article?.provider?.[0]?.name || "Unknown Provider"}
             url={article?.url}
           />
-        ))}
+        )):
+        MongoDBData?.slice(0, 3).map((article, index) => (
+          <NewsHomePage
+            key={index}
+            title={article.name}
+            date={article.datePublished}
+            provider={article?.provider?.[0]?.name || "Unknown Provider"}
+            url={article?.url}
+          />
+        ))
+      }
         <Link to="/News">
           <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer mb-20">
             See more...
