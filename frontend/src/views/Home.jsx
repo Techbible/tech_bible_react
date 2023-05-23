@@ -54,7 +54,6 @@ const Home = () => {
   //LOADING
   const [isLoading, setLoading] = useState(false);
 
-  const { data } = useContext(NewsContext);
 
   const [authUser, setAuthUser] = useState(null);
 
@@ -125,9 +124,9 @@ const Home = () => {
 
     //this is mongo
     const response = await axios.get(`${BASE_URL}/mongo-tools`);
-
+    const toolsWithMatchingPrice=null
     if (category === "all categories") {
-      const toolsWithMatchingPrice = response.data?.filter(
+       toolsWithMatchingPrice = response.data?.filter(
         (tool) => tool.Price === Pricing
       );
       setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
@@ -137,9 +136,18 @@ const Home = () => {
         );
       else setResultFilter("");
     } else {
-      const toolsWithMatchingPrice = response.data?.filter((tool) => {
-        return tool.Price === Pricing && tool.Category === category;
-      });
+      if (Pricing === "All"){
+         toolsWithMatchingPrice = response.data?.filter((tool) => {
+          return  tool.Category === category;
+        });
+
+      }
+      else{
+         toolsWithMatchingPrice = response.data?.filter((tool) => {
+          return tool.Price === Pricing && tool.Category === category;
+        });
+      }
+      
       setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
       if (toolsWithMatchingPrice.length === 0)
         setResultFilter(
@@ -373,9 +381,7 @@ const Home = () => {
                           className={`flex items-center space-x-4 py-2 hover:bg-gray-100 hover:cursor-pointer  pl-6 ${
                             index === selectedSuggestion ? "bg-blue-100" : ""
                           }`}
-                          onMouseEnter={() => {
-                            setSelectedSuggestion(index);
-                          }}
+                         
                         >
                           <div>
                             <p className="text-gray-500" key={tool.Name}>
@@ -403,8 +409,8 @@ const Home = () => {
                     className="combo-box bg-white text-black rounded-[4px] "
                     onChange={(e) => setPricing(e.target.value)}
                   >
-                    <option selected disabled>
-                      Pricing
+                    <option value="All" selected disabled>
+                      All
                     </option>
                     <option value="Freemium">Freemium</option>
                     <option value="Free">Free</option>
@@ -549,10 +555,10 @@ const Home = () => {
                   <div>
                     {SearchedTool.map((tool, index) => (
                       <Toolitem
-                        key={tool._id}
-                        toolData={tool}
-                        forceRender={forceRender}
-                      />
+                      key={tool._id}
+                      toolData={tool}
+                      forceRender={forceRender}
+                    />
                     ))}
                   </div>
                 </div>
@@ -633,7 +639,7 @@ const Home = () => {
         <NewsLetterSubscribe />
         <hr className="my-5 border-white" />
 
-        <ul className="flex flex-row lg:gap-[64px] gap-4">
+        <ul className="flex flex-row lg:gap-[64px] gap-3">
           <h3>Follow us</h3>
           <li
             className="tracking-wider hover:tracking-widest"

@@ -19,7 +19,7 @@ const ToolInfo = ({ toolData }) => {
                 loading="lazy"
                 src={toolData?.Icon}
                 style={{ width: "140px", height: "140px" }}
-                alt="Image Icon"
+                alt=""
                 className="w-full md:w-140 rounded-sm"
               />
             </div>
