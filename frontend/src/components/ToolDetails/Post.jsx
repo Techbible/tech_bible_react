@@ -11,7 +11,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
   const [replyText, setReplyText] = useState("");
   const [isAddReplyEnabled, setIsAddReplyEnabled] = useState(true);
   const [currentReplies, setCurrentReplies] = useState(replies);
-  const [repliesNumberShowed, setRepliesNumberShowed] = useState(0);
+  const [showedReplies, setShowedReplies] = useState(0);
 
   const handleIsAddCommentClick = () => {
     setIsAddCommentClick(!IsAddCommentClick);
@@ -105,7 +105,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
     const replies = data.filter((reply) => reply.parentId === comment._id);
     // Sort the replies by createdAt field in descending order
     const sortedReplies = replies.sort((a, b) => {
-      return new Date(b.createdAt) - new Date(a.createdAt);
+      return new Date(a.createdAt) - new Date(b.createdAt);
     });
     setCurrentReplies(sortedReplies);
   };
@@ -222,18 +222,38 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
               {replies?.length > 0 && (
                 <div>
                   <div className="h-[30px] opacity-[.9] w-[1.5px] bg-white ml-[5.8vh] mt-1 "></div>
-                  <div className="replies ml-[2vh] ">
-                    {currentReplies?.map((reply, index) => (
-                      <Post
-                        key={index}
-                        comment={reply}
-                        toolData={toolData}
-                        replies={[]}
-                      />
-                    ))}
+                  <div className="replies ml-[2vh]">
+                    {currentReplies
+                      ?.slice(0, showedReplies)
+                      .map((reply, index) => (
+                        <Post
+                          key={index}
+                          comment={reply}
+                          toolData={toolData}
+                          replies={[]}
+                        />
+                      ))}
+                  </div>
+                  <div
+                    className="text-12 light cursor-pointer"
+                    onClick={() => setShowedReplies(showedReplies + 2)}
+                  >
+                    {showedReplies === 0 ? (
+                      <u>Show replies...</u>
+                    ) : (
+                      <>
+                        {currentReplies?.length - showedReplies > 0 && (
+                          <u>
+                            Show {currentReplies?.length - showedReplies} more
+                            replies...
+                          </u>
+                        )}
+                      </>
+                    )}
                   </div>
                 </div>
               )}
+
               <div className="flex flex-row align-items-center gap-2 ">
                 <div className="py-3">
                   <input
