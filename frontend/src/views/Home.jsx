@@ -80,7 +80,7 @@ const Home = () => {
   const [SearchedTool, setSearchedTool] = useState([]);
 
   //storing the pricing choice
-  const [Pricing, setPricing] = useState("");
+  const [Pricing, setPricing] = useState("all");
   const [resultFilter, setResultFilter] = useState("");
   const [category, setCategory] = useState("all categories");
 
@@ -136,7 +136,13 @@ const Home = () => {
     //this is mongo
     const response = await axios.get(`${BASE_URL}/mongo-tools`);
 
-    if (category === "all categories") {
+    if (Pricing === "all" && category === "all categories") {
+      const toolsWithMatchingPrice = response?.data;
+      setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
+      if (toolsWithMatchingPrice.length === 0)
+        setResultFilter(`There is no tool in '${category}'`);
+      else setResultFilter("");
+    } else if (category === "all categories") {
       const toolsWithMatchingPrice = response.data?.filter(
         (tool) => tool.Price === Pricing
       );
@@ -145,6 +151,14 @@ const Home = () => {
         setResultFilter(
           `There is no tool in '${category}' that is '${Pricing}'`
         );
+      else setResultFilter("");
+    } else if (Pricing === "all") {
+      const toolsWithMatchingPrice = response.data?.filter((tool) => {
+        return tool.Category === category;
+      });
+      setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
+      if (toolsWithMatchingPrice.length === 0)
+        setResultFilter(`There is no tool in '${category}'`);
       else setResultFilter("");
     } else {
       const toolsWithMatchingPrice = response.data?.filter((tool) => {
@@ -410,9 +424,7 @@ const Home = () => {
                     className="combo-box bg-white text-black rounded-[4px] "
                     onChange={(e) => setPricing(e.target.value)}
                   >
-                    <option selected disabled>
-                      Pricing
-                    </option>
+                    <option value="all">All</option>
                     <option value="Freemium">Freemium</option>
                     <option value="Free">Free</option>
                     <option value="Paid">Paid</option>
@@ -648,52 +660,53 @@ const Home = () => {
         <hr className="my-5 border-white" />
         <NewsLetterSubscribe />
         <hr className="my-5 border-white" />
-
-        <ul className="flex flex-row lg:gap-[64px] gap-3">
-          <h3>Follow us</h3>
-          <li
-            className="tracking-wider hover:tracking-widest"
-            style={{ transition: "0.3s", cursor: "pointer" }}
-          >
-            <span className="text-white rounded-full p-1">
-              <a
-                href="https://www.tiktok.com/@tech.bible"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-tiktok text-white text-xl"></i>
-              </a>
-            </span>
-          </li>
-          <li
-            className="tracking-wider hover:tracking-widest"
-            style={{ transition: "0.3s", cursor: "pointer" }}
-          >
-            <span className="text-white rounded-full p-1">
-              <a
-                href="https://youtube.com/@MyTechBible"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-youtube text-white text-xl"></i>
-              </a>
-            </span>
-          </li>
-          <li
-            className="tracking-wider hover:tracking-widest"
-            style={{ transition: "0.3s", cursor: "pointer" }}
-          >
-            <span className="text-white rounded-full p-1">
-              <a
-                href="https://www.instagram.com/my.techbible"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-instagram text-white text-xl"></i>
-              </a>
-            </span>
-          </li>
-        </ul>
+        <div className=" flex flex-column align-items-center ">
+          <ul className="flex flex-row lg:gap-[64px] gap-3 mb-5 ">
+            <h3>Follow us</h3>
+            <li
+              className="tracking-wider hover:tracking-widest"
+              style={{ transition: "0.3s", cursor: "pointer" }}
+            >
+              <span className="text-white rounded-full p-1">
+                <a
+                  href="https://www.tiktok.com/@tech.bible"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-tiktok text-white text-xl"></i>
+                </a>
+              </span>
+            </li>
+            <li
+              className="tracking-wider hover:tracking-widest"
+              style={{ transition: "0.3s", cursor: "pointer" }}
+            >
+              <span className="text-white rounded-full p-1">
+                <a
+                  href="https://youtube.com/@MyTechBible"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-youtube text-white text-xl"></i>
+                </a>
+              </span>
+            </li>
+            <li
+              className="tracking-wider hover:tracking-widest"
+              style={{ transition: "0.3s", cursor: "pointer" }}
+            >
+              <span className="text-white rounded-full p-1">
+                <a
+                  href="https://www.instagram.com/my.techbible"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-instagram text-white text-xl"></i>
+                </a>
+              </span>
+            </li>
+          </ul>
+        </div>
       </aside>
     </div>
   );

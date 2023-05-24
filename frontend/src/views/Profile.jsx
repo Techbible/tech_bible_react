@@ -165,35 +165,58 @@ const Profile = () => {
   );
 
   const uploadImage = () => {
-    if (profilePicture === null) return;
+    const usersRef = collection(db, "Users");
+    const userDocRef = doc(usersRef, currentUser?.uid);
+
+    if (profilePicture === null) {
+      // Photo is not selected for upload, update only the username
+      updateDoc(userDocRef, {
+        username: editedUsername,
+      })
+        .then(() => {
+          console.log("Username updated");
+          closeModal();
+        })
+        .catch((error) => {
+          console.log("Error updating username:", error);
+          closeModal();
+        });
+      return;
+    }
+
     const imageRef = ref(
       storage,
       `profile-pictures/${profilePicture.name + currentUser?.uid}`
     );
-    const usersRef = collection(db, "Users");
-    const userDocRef = doc(usersRef, currentUser?.uid);
-    uploadBytes(imageRef, profilePicture).then((snapshot) => {
-      console.log("Image uploaded");
-      getDownloadURL(snapshot.ref)
-        .then((url) => {
-          updateDoc(userDocRef, {
-            username: editedUsername,
-            photo: url,
-          })
-            .then(() => {
-              console.log("Photo updated");
-            })
-            .catch((error) => {
-              console.log("Error updating photo:", error);
-            });
-        })
-        .catch((error) => {
-          console.log("Error getting download URL:", error);
-        });
-      closeModal();
-    });
 
-    closeModal();
+    uploadBytes(imageRef, profilePicture)
+      .then((snapshot) => {
+        console.log("Image uploaded");
+        getDownloadURL(snapshot.ref)
+          .then((url) => {
+            // Photo has changed, update both username and photo
+            updateDoc(userDocRef, {
+              username: editedUsername,
+              photo: url,
+            })
+              .then(() => {
+                console.log("Username and photo updated");
+                closeModal();
+              })
+              .catch((error) => {
+                console.log("Error updating username and photo:", error);
+                closeModal();
+              });
+          })
+          .catch((error) => {
+            console.log("Error getting download URL:", error);
+            closeModal();
+          });
+      })
+      .catch((error) => {
+        console.log("Error uploading image:", error);
+        closeModal();
+      });
   };
 
   //************************END Inserting Changes*********************************
@@ -339,6 +362,19 @@ const Profile = () => {
 
                     <button className="absolute top-[44px] right-[10px] text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]">
                       Share
+                    </button>
+                    {/* <button
+                      onClick={() => setEditProfileClicked(true)}
+                      className="text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] my-3 rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]"
+                    >
+                      Edit
+                    </button> */}
+                    <button
+                      onClick={openEditProfileModal}
+                      className="text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] my-3 rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]"
+                      type="button"
+                    >
+                      Edit
                     </button>
                   </div>
                 </div>
@@ -627,30 +663,35 @@ const Profile = () => {
             style={ModalcustomStyles}
             contentLabel="Example Modal"
           >
-            <label className="form-label">
-              Username:
+            <div className="flex flex-col items-center">
+              <label className="form-label text-[14px] text-[#FF6700] poppins">
+                Username
+              </label>
               <input
-                className="form-input"
+                className=" w-[235px] form-input text-black bg-white rounded-md py-1 px-2 ml-2 light text-[12px]  "
                 value={editedUsername}
                 onChange={(e) => {
                   setEditedUsername(e.target.value);
                 }}
               />
-            </label>
-            <br />
-            <br />
-            <label className="form-label">
-              Select a photo:
+
+              <label className="form-label text-[14px] text-[#FF6700] poppins mt-2">
+                Select a photo:
+              </label>
               <input
-                className="form-input"
+                className="form-input text-black bg-white rounded-md py-1 px-2 ml-2 light text-[12px] max-w-[400px] "
                 type="file"
                 accept="image/*"
                 onChange={(event) => setProfilePicture(event.target.files[0])}
               />
-              <button className="upload-button" onClick={uploadImage}>
+
+              <button
+                className="bg-[#EF4823] w-[10vh] py-[2px] rounded-md text-[14px] poppins transition duration-250 hover:bg-[#FF6700] mt-2"
+                onClick={uploadImage}
+              >
                 Upload
               </button>
-            </label>
+            </div>
           </Modal>
         </div>
       )}
