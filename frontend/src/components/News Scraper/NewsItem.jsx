@@ -6,6 +6,7 @@ const NewsItem = ({ _id, title, description, url, urlToImage }) => {
   return (
     <div className="news-app">
       <div className="flex flex-row shadow-lg rounded-lg overflow-hidden bg-[#18151D] max-w-[1000px]">
+        
         <img
           className="news-img rounded-lg object-cover w-24 h-24 sm:w-32 sm:h-32"
           src={

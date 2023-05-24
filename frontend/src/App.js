@@ -26,6 +26,7 @@ import { AddNewsArticle, AddTool, DataParser } from "./admin";
 import { NewsContextProvider } from "./context/NewsContext";
 import { AuthContext } from "./context/AuthContext";
 import GettingData from "./GettingData";
+import Footer from "./components/home components/Footer";
 
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);

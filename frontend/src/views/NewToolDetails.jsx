@@ -185,7 +185,7 @@ const NewToolDetails = () => {
                   ref={inputCommentRef}
                   id="comment"
                   rows="6"
-                  class="px-0 w-full text-sm text-gray-900 rounded-[8px] px-3 py-3 border-0 focus:ring-0 focus:outline-none dark:text-white bg-[#27242E] "
+                  class="px-0 w-full text-sm text-gray-900 rounded-[8px] px-3 py-3 border-0 focus:ring-0 focus:outline-none text-white dark:text-white bg-[#27242E] "
                   placeholder="Write a comment..."
                   value={comment}
                   onChange={(e) => {
@@ -236,7 +236,7 @@ const NewToolDetails = () => {
         </main>
 
         <aside className="sidebarWithSeparator right max-w-[300px] ">
-          <NewsLetterSubscribe/>
+          <NewsLetterSubscribe />
         </aside>
       </div>
     </div>
