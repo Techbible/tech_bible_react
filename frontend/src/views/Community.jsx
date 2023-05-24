@@ -179,9 +179,7 @@ function Community() {
           <div>
             {Users &&
               Users?.map((user) => (
-                <Link to={`/profile/${user.username}`}>
                   <Comment User={user} />
-                </Link>
               ))}
           </div>
         </div>

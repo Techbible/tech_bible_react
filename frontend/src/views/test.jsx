@@ -1,4 +1,4 @@
-import { CategoriesData } from "../dataJson/CtegoriesData";
+import { CategoriesData } from "../dataJson/CategoriesData";
 
 const [categories, setCategories] = useState();
 

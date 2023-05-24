@@ -50,7 +50,7 @@ const Toolitem = ({ toolData, forceRender }) => {
         className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
         data-test="post-item-390145"
       >
-        <Link to={`/newtooldetails/${toolData._id}`}>
+        <Link to={`/tooldetails/${toolData._id}`}>
           <div
             className="rounded-[6px]  lg:w-[81px] md:w-[61px] sm:w-[51px] w-[51px]  "
             data-test="post-thumbnail"
@@ -59,14 +59,15 @@ const Toolitem = ({ toolData, forceRender }) => {
               loading="lazy"
               src={toolData?.Icon}
               className="lg:rounded-[6px] md:rounded-[6px] sm:rounded-[6px]"
+              alt="tool"
             />
           </div>
         </Link>
         <div className="flex direction-column flex-1">
-          <Link to={`/newtooldetails/${toolData._id}`}>
+          <Link to={`/tooldetails/${toolData._id}`}>
             <div
               onClick={() => {
-                navigate(`/newtooldetails/${toolData._id}`);
+                navigate(`/tooldetails/${toolData._id}`);
               }}
               className="color-white font-700 text-[15px] font-bold mb-1"
             >

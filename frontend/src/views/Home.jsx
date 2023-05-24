@@ -22,7 +22,7 @@ import axios from "axios";
 import { render } from "react-dom";
 import NewsLetter from "../components/home components/NewsLetter";
 import NewsLetterSubscribe from "../components/home components/NewsLetterSubscribe";
-import { CategoriesData } from "../dataJson/CtegoriesData";
+import { CategoriesData } from "../dataJson/CategoriesData";
 const toolsdata = require("../config/data.json");
 
 const Home = () => {
@@ -223,7 +223,7 @@ const Home = () => {
         selectedSuggestion < filteredSuggestions.length
       ) {
         const selectedTool = filteredSuggestions[selectedSuggestion];
-        window.location.href = `/newtooldetails/${selectedTool._id}`;
+        window.location.href = `/tooldetails/${selectedTool._id}`;
       }
     }
   };
@@ -375,7 +375,7 @@ const Home = () => {
                     .slice(0, 10)
                     .map((tool, index) => (
                       <Link
-                        to={`/newtooldetails/${tool._id}`}
+                        to={`/tooldetails/${tool._id}`}
                         className="hover:text-black font-bold"
                         key={tool._id}
                       >

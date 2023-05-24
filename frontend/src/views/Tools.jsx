@@ -127,7 +127,7 @@ function Tools() {
                           <span className="read-more">
                             <Link
                               className="text-uppercase read-more-2"
-                              to={`/newtooldetails/${tool.id}`}
+                              to={`/tooldetails/${tool.id}`}
                             >
                               Read more{" "}
                             </Link>

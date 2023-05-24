@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { NewsList } from "./components";
+import { NewsList, UserProfile } from "./components";
 import { useContext } from "react";
 
 // Importing the views
@@ -63,7 +63,7 @@ function App() {
         <Route path="/profile/:name" element={<Profile />} />
         <Route path="/folders" element={<UserList />} />
         <Route path="/community" element={<Community />} />
-        <Route path="/newtooldetails/:id" element={<NewToolDetails />} />
+        <Route path="/tooldetails/:id" element={<NewToolDetails />} />
         <Route path="/DiscussionReply" element={<DiscussionReply />} />
         <Route path="/detect" element={<MyComponent />} />
         <Route path="/AddNewsArticle" element={<AddNewsArticle />} />
@@ -99,6 +99,7 @@ function App() {
         <Route path="/addTool" element={<AddTool />} />
         <Route path="/tools" element={<Tools />} />
         <Route path="/mongo" element={<GettingData />} />
+        <Route path="/UserProfile/:id" element={<UserProfile />} />
         <Route
           path="/DataParser"
           element={

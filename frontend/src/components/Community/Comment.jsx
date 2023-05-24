@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 
 const Comment = ({User}) => {
+  useEffect(()=>{
+console.log(User);
+  },[])
   return (
     <div className="px-mobile-1 px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
       <div
@@ -10,7 +13,7 @@ const Comment = ({User}) => {
         data-test="post-item-390145"
       >
         
-        <Link to="/Profile">
+        <Link to={`/UserProfile/${User.uid}`}>
         <div
             
             >

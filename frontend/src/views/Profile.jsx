@@ -21,7 +21,7 @@ import Modal from "react-modal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Toolitem from "../components/Tools/Toolitem";
-import { CategoriesData } from "../dataJson/CtegoriesData";
+import { CategoriesData } from "../dataJson/CategoriesData";
 
 import "../assets/styles/profile/profile.css";
 import "../assets/styles/Modal/modal.css";
@@ -306,8 +306,6 @@ const Profile = () => {
           <div className="text-[16px] fontWeight-500 ml-[2.5rem] ">
             WELCOME,
           </div>
-          {/* Profile Info Component */}
-          {/* <div className="relative max-w-[711px] w-widescreen-5 mb-[4rem] profile-info-container bg-gradient-to-r from-[#18151D] to-[#27242E] rounded-xl p-10"> */}
           <div className="relative xl:w-[711px] lg:xl:w-[711px] max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
             <div className="row">
               <div className="col-md-2">
