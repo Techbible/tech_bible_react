@@ -5,8 +5,9 @@ import { BASE_URL } from "../../config/mongo";
 const NewsLetter = ({status,message,onValidated}) => {
   let email;
   const [isValideFormat,setIsValidFormat]=useState(false);
+  const [isSubscribedClicked,setIsSubscribedClicked]=useState(false)
   const submit = () => {
-   
+     setIsSubscribedClicked(true); 
      if(email &&
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)){
         
@@ -22,10 +23,7 @@ const NewsLetter = ({status,message,onValidated}) => {
      
      console.log(status)
 
-     }
-       
-        
-        
+     }  
     
   };
   
@@ -41,7 +39,7 @@ const NewsLetter = ({status,message,onValidated}) => {
       </div>
      
 
-      
+      {!isValideFormat && isSubscribedClicked && <div  style={{ color: "red" }}> email format is not valid</div>}
       {status === "sending" && <div style={{ color: "blue" }}>sending...</div>}
       {status === "error" && (
         <div

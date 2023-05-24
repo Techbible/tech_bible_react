@@ -75,6 +75,7 @@ const Home = () => {
   //to keep track either if the user is searching or not
   const [isSearching, setIsSearching] = useState(false);
   const [isFiltering, setIsFiltering] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   //To store the results of the research
   const [SearchedTool, setSearchedTool] = useState([]);
@@ -325,9 +326,17 @@ const Home = () => {
                   }}
                 />
               </div>
-              <div className="ml-2">
+              <div className="ml-2 flex-row">
                 <svg
                   className="filter-icon"
+                  onMouseEnter={() => {
+                    setIsHovered(true);
+                    console.log('Mouse entered. isHovered:', isHovered);
+                  }}
+                  onMouseLeave={() => {
+                    setIsHovered(false);
+                    console.log('Mouse left. isHovered:', isHovered);
+                  }}
                   onClick={() => setIsFiltering(!isFiltering)}
                   width="30"
                   height="28"
@@ -368,6 +377,12 @@ const Home = () => {
                     </clipPath>
                   </defs>
                 </svg>
+                {isHovered && (
+                <div className="absolute text-white rounded-lg py-3 px-5 ">
+                 Filter Tools
+                </div>
+         )}
+        
               </div>
             </form>
             {isSuggestionsVisible && value !== "" && (
