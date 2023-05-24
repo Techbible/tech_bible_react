@@ -76,6 +76,7 @@ const Home = () => {
   //to keep track either if the user is searching or not
   const [isSearching, setIsSearching] = useState(false);
   const [isFiltering, setIsFiltering] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   //To store the results of the research
   const [SearchedTool, setSearchedTool] = useState([]);
