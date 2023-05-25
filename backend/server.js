@@ -19,7 +19,6 @@ const NewsArticle = require("./models/NewsArticle");
 const uri =
   "mongodb+srv://techbible:nRgcJ2M8O6DRoznj@techbible.eggj9te.mongodb.net/techbible";
 
-
 // Define your routes here
 app.get("/mongo-tools", async (req, res) => {
   try {
@@ -35,6 +34,23 @@ app.get("/mongo-tools", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching tools data");
+  }
+});
+
+//DELETE a Tool
+app.delete("/delete-tool/:id", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+    const tool = await Tools.deleteOne({ _id: req.params.id });
+
+    res.send(tool); // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting tool data");
   }
 });
 
@@ -78,9 +94,7 @@ app.get("/mongo-toolComments/:toolId", async (req, res) => {
     console.error(error);
     res.status(500).send("Error fetching tools data");
   }
-
 });
-
 
 app.post("/like/:id/:uid", async (req, res) => {
   let { id, uid } = req.params;
@@ -124,7 +138,7 @@ app.get("/news", async (req, res) => {
     });
     console.log("Connected to MongoDB");
     const news = await NewsArticle.find();
-    console.log("news : ",news);
+    console.log("news : ", news);
     res.send(news); // Send an object containing both variables
   } catch (error) {
     console.error(error);
@@ -148,13 +162,14 @@ app.post("/addArticle", async (req, res) => {
         {
           name: Provider,
           image: {
-            contentUrl: "https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg",
+            contentUrl:
+              "https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg",
           },
         },
       ],
       datePublished: new Date(),
     });
-  
+
     res.status(201).json(newArticle);
     console.log("Article added");
   } catch (err) {

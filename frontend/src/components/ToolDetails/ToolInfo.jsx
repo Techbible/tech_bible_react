@@ -15,13 +15,14 @@ const ToolInfo = ({ toolData }) => {
               className="styles_thumbnail__Rmwk5 styles_thumbnail__E2_pB"
               data-test="post-thumbnail"
             >
-              <img
-                loading="lazy"
-                src={toolData?.Icon}
-                style={{ width: "140px", height: "140px" }}
-                alt=""
-                className="w-full md:w-140 rounded-sm"
-              />
+              <div className="rounded-[6px]  lg:w-[140px] md:w-[140px] sm:w-[120px] w-[100px] ">
+                <img
+                  loading="lazy"
+                  src={toolData?.Icon}
+                  alt=""
+                  className="w-full md:w-140 rounded-sm"
+                />
+              </div>
             </div>
           </a>
           <div className="flex direction-column flex-1 mt-2">
