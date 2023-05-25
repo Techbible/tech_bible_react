@@ -51,7 +51,7 @@ const Toolitem = ({ toolData, forceRender }) => {
         data-test="post-item-390145"
       >
         <div
-          className="rounded-[6px]  lg:w-[81px] md:w-[61px] sm:w-[51px] w-[51px]  "
+          className="rounded-[6px]  lg:w-[81px] md:w-[61px] sm:w-[51px] w-[51px] cursor-pointer  "
           data-test="post-thumbnail"
           onClick={
             currentUser
@@ -77,7 +77,7 @@ const Toolitem = ({ toolData, forceRender }) => {
                   navigate("/signin");
                 }
           }
-          className="flex direction-column flex-1"
+          className="flex direction-column flex-1 cursor-pointer"
         >
           <div className="color-white font-700 text-[15px] font-bold mb-1">
             {toolData?.Name}{" "}
@@ -113,7 +113,7 @@ const Toolitem = ({ toolData, forceRender }) => {
               {/* like/unlike logic*/}
               {isToolLiked ? (
                 <i
-                  className="text-red-500 fas fa-heart text-[25px] hover:text-[26px] "
+                  className="text-red-500 fas fa-heart text-[25px] hover:text-[26px] cursor-pointer "
                   onClick={
                     currentUser
                       ? () => {
@@ -126,7 +126,7 @@ const Toolitem = ({ toolData, forceRender }) => {
                 ></i>
               ) : (
                 <i
-                  className="text-white border-white text-[25px] far fa-heart hover:text-[27px]"
+                  className="text-white border-white text-[25px] far fa-heart hover:text-[27px] cursor-pointer"
                   onClick={
                     currentUser
                       ? () => {
