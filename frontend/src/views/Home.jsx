@@ -55,7 +55,7 @@ const Home = () => {
   }, [allTools]);
 
   const getLimitedTools = async () => {
-    let response = axios.get(`${BASE_URL}/mongo-tools/${40}`);
+    let response = axios.get(`${BASE_URL}/mongo-tools/${20}`);
     let tools = (await response).data;
     setLimitedTools(tools);
   };
@@ -315,7 +315,7 @@ const Home = () => {
                       onChange(e);
                       setIsSearching(false);
                     }}
-                    disabled={allTools === null ? true : false}
+                    disabled={allTools !== null ? false : true}
                     ref={inputRef}
                     required
                     autoComplete="off"

@@ -54,8 +54,25 @@ const Footer = () => {
           <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-bold xl:mb-5 lg:mb-5 mb-2">
             Contact Us
           </div>
-          <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
-            Email: info@example.com
+          <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-bold mb-2">
+            <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] text-[#EF4823] poppins gap-2 fontWeight-500 ">
+              London
+            </div>
+            <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
+              Hello@mytechbible.com
+            </div>
+            <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
+              ‭+44 7307 497023
+            </div>
+            <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] text-[#EF4823] poppins gap-2 fontWeight-500 ">
+              Fes
+            </div>
+            <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
+              Salut@mytechbible.com{" "}
+            </div>
+            <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
+              +212 (0) 808674809{" "}
+            </div>
           </div>
         </div>
       </div>

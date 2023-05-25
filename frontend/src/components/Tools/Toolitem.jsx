@@ -50,54 +50,62 @@ const Toolitem = ({ toolData, forceRender }) => {
         className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
         data-test="post-item-390145"
       >
-        <Link to={`/tooldetails/${toolData._id}`}>
-          <div
-            className="rounded-[6px]  lg:w-[81px] md:w-[61px] sm:w-[51px] w-[51px]  "
-            data-test="post-thumbnail"
-          >
-            <img
-              loading="lazy"
-              src={toolData?.Icon}
-              className="lg:rounded-[6px] md:rounded-[6px] sm:rounded-[6px]"
-              alt="tool"
-            />
+        <div
+          className="rounded-[6px]  lg:w-[81px] md:w-[61px] sm:w-[51px] w-[51px]  "
+          data-test="post-thumbnail"
+          onClick={
+            currentUser
+              ? () => navigate(`/tooldetails/${toolData?._id}`)
+              : () => {
+                  navigate("/signin");
+                }
+          }
+        >
+          <img
+            loading="lazy"
+            src={toolData?.Icon}
+            className="lg:rounded-[6px] md:rounded-[6px] sm:rounded-[6px]"
+            alt="tool"
+          />
+        </div>
+
+        <div
+          onClick={
+            currentUser
+              ? () => navigate(`/tooldetails/${toolData?._id}`)
+              : () => {
+                  navigate("/signin");
+                }
+          }
+          className="flex direction-column flex-1"
+        >
+          <div className="color-white font-700 text-[15px] font-bold mb-1">
+            {toolData?.Name}{" "}
           </div>
-        </Link>
-        <div className="flex direction-column flex-1">
-          <Link to={`/tooldetails/${toolData._id}`}>
-            <div
-              onClick={() => {
-                navigate(`/tooldetails/${toolData._id}`);
-              }}
-              className="color-white font-700 text-[15px] font-bold mb-1"
-            >
-              {toolData?.Name}{" "}
-            </div>
-            {/* <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2"> */}
-            <div className="text-gray-300 text-[12px] ">
-              <span className="styles_tagline__j29pO fontWeight-100 poppins noOfLines-2">
-                {toolData.Description}
-              </span>
-            </div>
-            <div className="flex direction-row flex-row-gap-6 mt-3 align-center">
-              <div className="flex direction-row flex-row-gap-3">
-                <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                  <span className="bi bi-chat-left-dots"></span>
-                </div>
-                {/* <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
+          {/* <div className="color-white fontSize-mobile-12 fontSize-desktop-16 fontSize-tablet-16 fontSize-widescreen-16 fontWeight-400 noOfLines-2"> */}
+          <div className="text-gray-300 text-[12px] ">
+            <span className="styles_tagline__j29pO fontWeight-100 poppins noOfLines-2">
+              {toolData.Description}
+            </span>
+          </div>
+          <div className="flex direction-row flex-row-gap-6 mt-3 align-center">
+            <div className="flex direction-row flex-row-gap-3">
+              <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
+                <span className="bi bi-chat-left-dots"></span>
+              </div>
+              {/* <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                   {toolData?.LikedBy?.length}
                 </div> */}
-                <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                  {toolData.Price}
-                </div>
-                <Link to="/" className="styles_postTopicLink__wDe_p">
-                  <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                    {toolData.Category}
-                  </div>
-                </Link>
+              <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
+                {toolData.Price}
               </div>
+              <Link to="/" className="styles_postTopicLink__wDe_p">
+                <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
+                  {toolData.Category}
+                </div>
+              </Link>
             </div>
-          </Link>
+          </div>
         </div>
         <div className="flex direction-column mr-mobile-0 mr-desktop-2 mr-tablet-2 mr-widescreen-2 mt-2 mb-2 ml-mobile-2 ml-desktop-0 ml-tablet-0">
           <div className="flex direction-row align-center mt-3">
@@ -112,7 +120,7 @@ const Toolitem = ({ toolData, forceRender }) => {
                           handleUnLikes(toolData._id);
                         }
                       : () => {
-                          navigate("/signup");
+                          navigate("/signin");
                         }
                   }
                 ></i>
@@ -125,7 +133,7 @@ const Toolitem = ({ toolData, forceRender }) => {
                           handleLikes(toolData._id);
                         }
                       : () => {
-                          navigate("/signup");
+                          navigate("/signin");
                         }
                   }
                 ></i>

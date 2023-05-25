@@ -12,6 +12,7 @@ import { BASE_URL } from "../config/mongo";
 import { AuthContext } from "../context/AuthContext";
 import NewsLetter from "../components/home components/NewsLetter";
 import NewsLetterSubscribe from "../components/home components/NewsLetterSubscribe";
+import { startTransition } from "react";
 
 const NewToolDetails = () => {
   let { id } = useParams();
@@ -29,6 +30,8 @@ const NewToolDetails = () => {
   const [comments, setComments] = useState([]);
   const [isCommentsLoadalbe, setIsCommentsLoadalbe] = useState(false);
   const [postCommentClicked, setPostCommentClicked] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
   //to refrech comments in every add
   const [refresh, setRefresh] = useState(false);
   const inputCommentRef = useRef(null);
@@ -97,26 +100,25 @@ const NewToolDetails = () => {
   };
 
   const handlePostComment = async () => {
-    // alert(comment);
     try {
       if (comment.length > 0) {
+        startTransition(() => {
+          setPostCommentClicked(true);
+          setRefresh(!refresh);
+          setComment("");
+          setAddCommentClicked(false);
+        });
         const response = await axios.post(
           `${BASE_URL}/addToolComment/${id}/${
             currentUser.uid
           }/${comment}/${"null"}`
         );
-
-        setPostCommentClicked(true);
-
-        console.log("Comment added succesfuly");
-        setRefresh(!refresh);
-        setComment("");
-        setAddCommentClicked(false);
+        console.log("Comment added successfully");
       } else {
-        alert("the Comment should be longer");
+        alert("The comment should be longer");
       }
     } catch (error) {
-      console.log("error" + error);
+      console.log("Error: " + error);
     }
   };
 
@@ -142,6 +144,14 @@ const NewToolDetails = () => {
     console.log(toolData);
   }, []);
 
+  useEffect(() => {
+    if (currentUser && currentUser.uid) {
+      setIsUserLoggedIn(true);
+    } else {
+      setIsUserLoggedIn(false);
+    }
+  }, [currentUser]);
+
   if (!isCommentsLoadalbe) {
     return (
       <div className="loader-wrapper">
@@ -151,6 +161,7 @@ const NewToolDetails = () => {
       </div>
     );
   }
+
   return (
     <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">
       <div className="home-container mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer">
@@ -163,7 +174,7 @@ const NewToolDetails = () => {
           <button
             className="text-black text-[14px] hover:bg-black fontWeight-500 bg-white mb-4 rounded-[8px] p-2 "
             onClick={
-              currentUser
+              isUserLoggedIn
                 ? () => {
                     setAddCommentClicked(!AddCommentClicked);
                   }
@@ -175,7 +186,7 @@ const NewToolDetails = () => {
             Add your comment
           </button>
 
-          {AddCommentClicked ? (
+          {AddCommentClicked && isUserLoggedIn ? (
             <div class="mb-6">
               <div class=" px-4 mb-4 bg-[#0D0C12] rounded-lg rounded-t-lg border border-gray-200">
                 <label for="comment" class="sr-only">
@@ -200,9 +211,7 @@ const NewToolDetails = () => {
                 Post comment
               </button>
             </div>
-          ) : (
-            <div></div>
-          )}
+          ) : null}
 
           {/* END TOOL COMMENT SECTION */}
 
