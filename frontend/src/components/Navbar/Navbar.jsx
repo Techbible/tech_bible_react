@@ -75,7 +75,7 @@ function Navbar() {
               <ul className="flex items-center gap-6 text-sm mr-6">
                 <div className="flex flex-row lg:gap-[64px] gap-6">
                   {isAdmin ? (
-                    <Link to="/tools">
+                    <Link to="/AdminSpace">
                       <li
                         className="tracking-wider hover:tracking-widest"
                         style={{ transition: "0.3s", cursor: "pointer" }}

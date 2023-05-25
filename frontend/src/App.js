@@ -27,6 +27,7 @@ import { NewsContextProvider } from "./context/NewsContext";
 import { AuthContext } from "./context/AuthContext";
 import GettingData from "./GettingData";
 import Footer from "./components/home components/Footer";
+import AdminSpace from "./views/AdminSpace";
 
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);
@@ -96,7 +97,7 @@ function App() {
             </NewsContextProvider>
           }
         />
-
+        <Route path="/AdminSpace" element={<AdminSpace />} />
         <Route path="/addTool" element={<AddTool />} />
         <Route path="/tools" element={<Tools />} />
         <Route path="/mongo" element={<GettingData />} />

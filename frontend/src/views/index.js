@@ -8,6 +8,7 @@ import Community from "./Community";
 import DiscussionReply from "./DiscussionReply";
 import LikedTools from "./profile/LikedTools";
 import NewToolDetails from "./NewToolDetails";
+import AdminSpace from "./AdminSpace";
 
 
 export {
@@ -20,5 +21,6 @@ export {
     Community,
     DiscussionReply,
     LikedTools,
-    NewToolDetails
+    NewToolDetails,
+    AdminSpace
 }
