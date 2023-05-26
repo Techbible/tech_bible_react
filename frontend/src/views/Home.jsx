@@ -55,9 +55,39 @@ const Home = () => {
   }, [allTools]);
 
   const getLimitedTools = async () => {
-    let response = axios.get(`${BASE_URL}/mongo-tools/${20}`);
+    let response = axios.get(`${BASE_URL}/mongo-tools`);
     let tools = (await response).data;
-    setLimitedTools(tools);
+
+    const filtredTools = tools.filter((tool) => {
+      const toolNames = [
+        "Bright Data",
+        "Chatbase",
+        "ZoomInfo",
+        "Synthesia",
+        "BeeFree",
+        "AirFocus",
+        "Brand24",
+        "Dripify",
+        "Firstbase",
+        "Fiverr Business",
+        "Landbot",
+        "Ocoya",
+        "Outseta",
+        "Pensight",
+        "PhantomBusters",
+        "Quartile",
+        "Skylead",
+        "Softr",
+        "Soon",
+        "SurveySparrow",
+        "Tolstoy",
+        "Vidyard",
+        "Webflow",
+        "Weglot",
+      ];
+      return toolNames.includes(tool.Name);
+    });
+    setLimitedTools(filtredTools);
   };
   useEffect(() => {
     setAllToolsLoadable(false);
@@ -240,6 +270,7 @@ const Home = () => {
       ) {
         const selectedTool = filteredSuggestions[selectedSuggestion];
         window.location.href = `/tooldetails/${selectedTool._id}`;
+        // navigate(`/tooldetails/${selectedTool._id}`);
       }
     }
   };
@@ -392,7 +423,7 @@ const Home = () => {
                       .slice(0, 10)
                       .map((tool, index) => (
                         <Link
-                          to={`/newtooldetails/${tool._id}`}
+                          to={`/tooldetails/${tool._id}`}
                           className="hover:text-black font-bold"
                           key={tool._id}
                         >
@@ -590,40 +621,49 @@ const Home = () => {
                       <p className="medium lg:text-[18px] md:text-[17px] sm:text-[16px] mb-[1rem] ">
                         Top tools
                       </p>
-                      {!allTools ? (
-                        <h1 style={{ color: "#fff" }}>Loading...</h1>
+                      {!allToolsLoadable ? (
+                        <h1 className="text-white">Loading...</h1>
                       ) : (
-                        // Array.isArray(allTools) &&
-                        // allTools?.slice(0, toolsNumber).map((tool, index) => (
-                        //   <div>
-                        //     <Toolitem
-                        //       key={index}
-                        //       toolData={tool}
-                        //       forceRender={forceRender}
-                        //     />
-                        //   </div>
-                        // ))
                         Array.isArray(allTools) &&
-                        limitedTools?.map((tool, index) => (
-                          <div>
-                            <Toolitem
-                              key={index}
-                              toolData={tool}
-                              forceRender={forceRender}
-                            />
-                          </div>
-                        ))
+                        limitedTools
+                          // .filter((tool) => {
+                          //   const toolNames = [
+                          //     "Bright Data",
+                          //     "Chatbase",
+                          //     "ZoomInfo",
+                          //     "Synthesia",
+                          //     "BeeFree",
+                          //     "AirFocus",
+                          //     "Brand24",
+                          //     "Dripify",
+                          //     "Firstbase",
+                          //     "Fiverr Business",
+                          //     "Landbot",
+                          //     "Ocoya",
+                          //     "Outseta",
+                          //     "Pensight",
+                          //     "PhantomBusters",
+                          //     "Quartile",
+                          //     "Skylead",
+                          //     "Softr",
+                          //     "Soon",
+                          //     "SurveySparrow",
+                          //     "Tolstoy",
+                          //     "Vidyard",
+                          //     "Webflow",
+                          //     "Weglot",
+                          //   ];
+                          //   return toolNames.includes(tool.Name);
+                          // })
+                          .map((tool, index) => (
+                            <div key={index}>
+                              <Toolitem
+                                toolData={tool}
+                                forceRender={forceRender}
+                              />
+                            </div>
+                          ))
                       )}
-                      {/* {allToolsLoadable && toolsNumber < 290 ? (
-                      <div
-                        className="mt-4 mb-[4rem] cursor-pointer hover:tracking-[.5px] transition duration-300 "
-                        onClick={() => setToolsNumber(toolsNumber + 30)}
-                      >
-                        <u>See more tools...</u>
-                      </div>
-                    ) : (
-                      <div></div>
-                    )} */}
                     </div>
                   ) : (
                     <div style={{ display: "none" }}></div>
