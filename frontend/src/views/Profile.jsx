@@ -54,6 +54,9 @@ export const ModalcustomStyles = {
 const Profile = () => {
   let { name } = useParams();
 
+  const [copied, setCopied] = useState(false);
+
+
   const { currentUser, currentUserData } = useContext(AuthContext);
 
   const [authUser, setAuthUser] = useState(null);
@@ -94,6 +97,7 @@ const Profile = () => {
 
   Modal.setAppElement("#root");
   let subtitle;
+  const [modalIsOpen2, setIsOpen2] = React.useState(false);
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -101,6 +105,12 @@ const Profile = () => {
   }
   function closeModal() {
     setIsOpen(false);
+  }
+  function openModal2() {
+    setIsOpen2(true);
+  }
+  function closeModal2() {
+    setIsOpen2(false);
   }
   //*************************END Modal Configs*********************************
 
@@ -132,6 +142,16 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+  const copyToClipboard = () => {
+    const link = `https://techbible.ai/#/UserProfile/${currentUserData?.uid}`;
+    navigator.clipboard.writeText(link)
+      .then(() => {
+        setCopied(true);
+      })
+      .catch((error) => {
+        console.error('Failed to copy link: ', error);
+      });
   };
 
   //Edit interests
@@ -358,7 +378,8 @@ const Profile = () => {
                       <div></div>
                     )}
 
-                    <button className="absolute top-[44px] right-[10px] text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]">
+                    <button className="absolute top-[44px] right-[10px] text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]"
+                    onClick={()=>openModal2()}>
                       Share
                     </button>
                     {/* <button
@@ -694,6 +715,34 @@ const Profile = () => {
         </div>
       )}
       {/* END View of Profile Modals */}
+      <Modal
+      isOpen={modalIsOpen2}
+      onRequestClose={closeModal}
+      style={ModalcustomStyles}
+      contentLabel="Example Modal-LINK"
+    >
+      <div className="p-6">
+        <button
+          onClick={closeModal2}
+          className="absolute top-2 right-2 text-gray-400 hover:text-gray-200 focus:outline-none"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <p className="mb-4 font-bold">Profile link:</p>
+        <code>{`UserProfile/${currentUserData?.uid}`}</code>
+        <br/>
+        <button
+          onClick={copyToClipboard}
+          className={`mt-4 px-4 py-2 rounded ${
+            copied ? 'bg-green-500 text-white' : 'bg-blue-500 text-white'
+          }`}
+        >
+          {copied ? 'Copied!' : 'Copy Link'}
+        </button>
+      </div>
+    </Modal>
     </div>
   );
 };

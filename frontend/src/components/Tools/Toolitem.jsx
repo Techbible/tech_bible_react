@@ -6,12 +6,12 @@ import { useReducer } from "react";
 import { LikeMethods } from "../../lib";
 import axios from "axios";
 import { BASE_URL } from "../../config/mongo";
-import { render } from "react-dom";
 
-const Toolitem = ({ toolData, forceRender }) => {
+const Toolitem = ({ toolData, index, setIsOpen, setToolToFolder }) => {
   const { currentUser, isAdmin } = useContext(AuthContext);
   const LikeMethodsRef = useRef(null);
   const navigate = useNavigate();
+
 
   const [isToolLiked, setIsToolLiked] = useState(false);
   useEffect(() => {
@@ -148,6 +148,11 @@ const Toolitem = ({ toolData, forceRender }) => {
                 {toolData.LikedBy?.length}
               </div>
             </div>
+            <div className="cursor-pointer ml-2 text-center" onClick={()=>{
+              setToolToFolder(toolData._id);
+              setIsOpen(true);
+            }}>
+            <h1>+</h1></div>
 
             <div>
               {/* <span className="bi bi-plus-lg fw-bold text-[25px] text-gray-400 transition duration-500 hover:text-white hover:text-[27px] "></span> */}
