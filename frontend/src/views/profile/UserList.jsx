@@ -19,6 +19,7 @@ import Modal from "react-modal";
 import Toolitem from "../../components/Tools/Toolitem";
 import { useReducer } from "react";
 import { ModalcustomStyles } from "../Profile";
+import { CategoriesData } from "../../dataJson/CategoriesData";
 
 import "../../assets/styles/profile/profile.css";
 import "../../assets/styles/Modal/modal.css";
@@ -72,11 +73,11 @@ const UserList = () => {
     }
   };
 
-  const createFolder = () => {
+const createFolder = () => {
   
     const usersRef = collection(db, "Users");
     const userDocRef = doc(usersRef, currentUser?.uid);
-updateDoc(userDocRef, {
+    updateDoc(userDocRef, {
             folders: arrayUnion({
               name: Name,
               category: Category,
@@ -210,18 +211,23 @@ updateDoc(userDocRef, {
           </div>
           <div className="flex m-5">
             <h4>Folder Category : </h4>
+            <div className="ml-2">
             <select
-              className="folder-input"
-              name="categories"
               onChange={(e) => setCategory(e.target.value)}
+              className="combo-box bg-white text-black px-1 rounded-[4px] "
             >
-              <option>Select a Category</option>
-              {categories?.map((c, index) => (
-                <option value={c.Category} ket={index}>
-                  {c.Category}
-                </option>
-              ))}
+              <option value="all categories">All Categories</option>
+              {CategoriesData?.map((group) => {
+                return group.categories.map((category) => {
+                  return (
+                    <option className="text-black" value={category}>
+                      {category}{" "}
+                    </option>
+                  );
+                });
+              })}
             </select>
+          </div>
           </div>
         </div>
         <span className="save-btn" onClick={createFolder}>

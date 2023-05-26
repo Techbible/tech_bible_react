@@ -97,17 +97,17 @@ const Profile = () => {
 
   Modal.setAppElement("#root");
   let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
   const [modalIsOpen2, setIsOpen2] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
-  function openModal2() {
-    setIsOpen2(true);
-  }
   function closeModal() {
     setIsOpen(false);
+  }
+  function openModal2() {
+    setIsOpen2(true);
   }
   function closeModal2() {
     setIsOpen2(false);

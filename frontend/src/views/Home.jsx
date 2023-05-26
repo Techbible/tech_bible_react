@@ -4,7 +4,9 @@ import { auth, db } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { collection, query, limit, getDocs, where } from "firebase/firestore";
+import { collection, query, limit, getDocs, where,updateDoc, getDoc,doc } from "firebase/firestore";
+import Modal from "react-modal";
+import Folder from "./profile/Folder";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../config/mongo";
@@ -16,10 +18,9 @@ import YouMightLikeApp from "../components/home components/Filtering-container/Y
 import AppOfTheDay from "../components/home components/Filtering-container/AppOfTheDay";
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext, NewsContextProvider } from "../context/NewsContext";
-import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
-import { allToolsAtom } from "../recoil/tool";
+import { ModalcustomStyles } from "./Profile";
+
 import axios from "axios";
-import { render } from "react-dom";
 import NewsLetter from "../components/home components/NewsLetter";
 import NewsLetterSubscribe from "../components/home components/NewsLetterSubscribe";
 import { CategoriesData } from "../dataJson/CategoriesData";
@@ -40,6 +41,8 @@ const Home = () => {
   const [allToolsLoadable, setAllToolsLoadable] = useState(false);
 
   const [allTools, setAllTools] = useState([]);
+  const [ToolToFolder, setToolToFolder] = useState("");
+  const [ToolToFolderIndex, setToolToFolderIndex] = useState();
   const [toolsNumber, setToolsNumber] = useState(30);
   const [limitedTools, setLimitedTools] = useState([]);
 
@@ -54,12 +57,30 @@ const Home = () => {
     setAllToolsLoadable(true);
   }, [allTools]);
 
+  // LOADING FOLDERS START
+const LoadFolders = async () => {
+    const UserRef = collection(db, "Users");
+    const q = query(UserRef, where("uid", "==", currentUser?.uid));
+
+    try {
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setUserFolders(doc.data().folders);
+      });
+    } catch (error) {
+      alert('error')
+      console.log(error);
+    }
+  };
+  // LOADING FOLDERS END
+
   const getLimitedTools = async () => {
     let response = axios.get(`${BASE_URL}/mongo-tools/${20}`);
     let tools = (await response).data;
     setLimitedTools(tools);
   };
   useEffect(() => {
+    LoadFolders();
     setAllToolsLoadable(false);
     getLimitedTools();
     setAllToolsLoadable(true);
@@ -68,6 +89,9 @@ const Home = () => {
   const [isLoading, setLoading] = useState(false);
 
   const [authUser, setAuthUser] = useState(null);
+  //USERS FOLDERS
+  const [UserFolders, setUserFolders] = useState([]);
+
 
   //To store the searched value
   const [Search, setSearch] = useState("");
@@ -124,6 +148,54 @@ const Home = () => {
       setSearchedTool([]);
     }
   }, [Search]);
+
+  // useEffect(()=>{alert(ToolToFolder)},[ToolToFolder])
+
+  //HANDLE ADDING A TOOL TO A FOLDER START
+  const handleAddToFolder = () => {
+    const usersRef = collection(db, "Users");
+    const userDocRef = doc(usersRef, currentUser?.uid);
+  
+    // Get the current user document
+    getDoc(userDocRef)
+      .then((doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
+          let folders = userData.folders;
+  
+          if (!folders) {
+            // Initialize the folders array if it doesn't exist
+            folders = [];
+          }
+  
+          // Update the specific folder's tools array
+          if (folders[ToolToFolderIndex] && Array.isArray(folders[ToolToFolderIndex].tools)) {
+            folders[ToolToFolderIndex].tools.push(ToolToFolder);
+          } else {
+            // Initialize the tools array for the specific folder if it doesn't exist
+            folders[ToolToFolderIndex].tools = [ToolToFolder];
+          }
+  
+          // Update the user document with the modified folders array
+          updateDoc(userDocRef, { folders })
+            .then(() => {
+              console.log("Tool added to folder!");
+            })
+            .catch((error) => {
+              console.log("Error updating folder:", error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting user document:", error);
+      });
+  
+    closeModal();
+    forceRender();
+  };
+  
+  //HANDLE ADDING A TOOL TO A FOLDER END
+
 
   // handling  by price
   const handleFilter = async () => {
@@ -222,7 +294,21 @@ const Home = () => {
     return searchTerm && name?.startsWith(searchTerm);
   });
 
-  const handleKeyDown = (event) => {
+
+    //Modal Styles
+    Modal.setAppElement("#root");
+    let subtitle;
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+  
+    function openModal() {
+      setIsOpen(true);
+    }
+    function closeModal() {
+      setIsOpen(false);
+    }
+
+
+const handleKeyDown = (event) => {
     event.preventDefault();
     if (event.key === "ArrowDown") {
       setSelectedSuggestion((prev) =>
@@ -439,7 +525,7 @@ const Home = () => {
                   </div>
                 )}
                 {isFiltering && (
-                  <div className="ml-2">
+                <div className="ml-2">
                     <select
                       onChange={(e) => setCategory(e.target.value)}
                       className="combo-box bg-white text-black px-1 rounded-[4px] "
@@ -609,7 +695,9 @@ const Home = () => {
                             <Toolitem
                               key={index}
                               toolData={tool}
-                              forceRender={forceRender}
+                              index={index}
+                              setIsOpen={setIsOpen}
+                              setToolToFolder={setToolToFolder}
                             />
                           </div>
                         ))
@@ -712,6 +800,19 @@ const Home = () => {
             </ul>
           </div>
         </aside>
+        <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={ModalcustomStyles}
+            contentLabel="Example Modal">
+          <div>
+           <div className={`space-x-4 grid grid-cols-3 gap-4`}>
+            {UserFolders.map((item, index) => (
+              <div className="cursor-pointer" onClick={()=>{handleAddToFolder();setToolToFolderIndex(index)}}><Folder key={index} isRowsView={false} item={item} /></div>
+            ))}
+          </div>
+        </div>
+          </Modal>
       </div>
       <Footer />
     </div>
