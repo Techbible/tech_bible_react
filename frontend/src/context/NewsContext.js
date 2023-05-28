@@ -17,7 +17,7 @@ export const NewsContextProvider = (props) => {
       },
       headers: {
         "X-BingApis-SDK": "true",
-        "X-RapidAPI-Key": "ce4c0a583fmsh239831e4c4f9cb6p1a2f1cjsnb464fa3848e6",
+        "X-RapidAPI-Key": "ce4c0a583fm<sh239831e4c4f9cb6p1a2f1cjsnb464fa3848e6",
         "X-RapidAPI-Host": "bing-news-search1.p.rapidapi.com",
       },
     };
