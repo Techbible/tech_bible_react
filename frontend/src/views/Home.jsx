@@ -75,9 +75,11 @@ const Home = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUserFolders(doc.data().folders);
+        // console.log(doc.data().folders);
       });
+      // console.log(UserFolders);
     } catch (error) {
-      alert("error");
+      alert("something went wrong");
       console.log(error);
     }
   };
@@ -119,11 +121,11 @@ const Home = () => {
     setLimitedTools(filtredTools);
   };
   useEffect(() => {
-    LoadFolders();
     setAllToolsLoadable(false);
     getLimitedTools();
     setAllToolsLoadable(true);
   }, []);
+
   //LOADING
   const [isLoading, setLoading] = useState(false);
 
@@ -288,6 +290,10 @@ const Home = () => {
     console.log(typeof SearchedTool);
     console.log(typeof SearchedTools);
   };
+
+  useEffect(()=>{
+    LoadFolders();
+},[UserFolders]);
 
   //APP OF THE DAY
   useEffect(() => {
@@ -725,6 +731,8 @@ const Home = () => {
                             <Toolitem
                               toolData={tool}
                               forceRender={forceRender}
+                              setToolToFolder={setToolToFolder}
+                              setIsOpen={setIsOpen}
                             />
                           </div>
                         ))
@@ -824,13 +832,15 @@ const Home = () => {
           contentLabel="Example Modal"
         >
           <div>
-            {/* <div className={`space-x-4 grid grid-cols-3 gap-4`}>
-            {UserFolders.map((item, index) => (
-              <div className="cursor-pointer" onClick={()=>{handleAddToFolder();setToolToFolderIndex(index)}}><Folder key={index} isRowsView={false} item={item} /></div>
+            { <div className={`space-x-4 grid grid-cols-3 gap-4`}>
+            {UserFolders?.map((item, index) => (
+              <div className="cursor-pointer" onClick={()=>{setToolToFolderIndex(index);handleAddToFolder();}}>
+              <Folder key={index} isRowsView={false} item={item} />
+              </div>
             ))}
-          </div> */}
+          </div> }
           </div>
-        </Modal>
+      </Modal>
       </div>
       <Footer />
     </div>
