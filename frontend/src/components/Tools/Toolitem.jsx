@@ -154,7 +154,7 @@ const Toolitem = ({
                 setIsOpen(true);
               }}
             >
-              <h1>+</h1>
+              {!homeTool && <h1>+</h1>}
             </div>
 
             <div>
