@@ -417,7 +417,7 @@ const Home = () => {
             {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
             <div className="flex flex-column max-w-[600px]  my-4 ml-3 md:mb-[2rem] rounded-xl ">
               <h2 className="text-white medium text-[18px] mt-2">
-                The Largest Saas Tools directory
+              The Largest Tech Directory To Help You Get The Job Done 
               </h2>
               <form className="flex items-center mt-5">
                 <div className="relative w-full">
@@ -566,7 +566,7 @@ const Home = () => {
                   </div>
                 ) : (
                   <div className="fontWeight-500 text-[#F5F5F7] text-[12px] w-[274px]">
-                    Browse 1000+ of the latest tech tools per task Updated daily
+                    Browse +1890 software tools per task  Updated daily
                   </div>
                 )}
                 {isFiltering && (
@@ -689,7 +689,7 @@ const Home = () => {
                       {" "}
                       <u>Sign up</u>
                     </Link>
-                    &nbsp;and get personalised recommendations
+                    &nbsp;to save tools, share lists and get personalised recommendations. 
                   </p>
                 )}
                 {/***********END You might also like********/}
@@ -748,7 +748,7 @@ const Home = () => {
         </main>
         <aside className="sidebarWithSeparator right ">
           <Link to="/News">
-            <p className="text-[16px] fontWeight-700 ">News</p>
+            <p className="text-[16px] fontWeight-700 ">Happening in Tech</p>
           </Link>
           {DataAPI?.length > 0
             ? DataAPI.slice(0, 3).map((article, index) => (
@@ -771,7 +771,7 @@ const Home = () => {
               ))}
           <Link to="/News">
             <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer mb-20">
-              See more...
+              See all News
             </div>
           </Link>
           <hr className="my-5 border-white" />
@@ -814,7 +814,7 @@ const Home = () => {
               >
                 <span className="text-white rounded-full p-1">
                   <a
-                    href="https://www.instagram.com/my.techbible"
+                    href="https://www.instagram.com/techbible.ai/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

@@ -4,6 +4,7 @@ import { db } from "../../config/firebase";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { BASE_URL } from "../../config/mongo";
 
 const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
@@ -20,6 +21,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
   const { currentUser } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState("");
+  const [id, setId] = useState("");
 
   const [isCommentLiked, setIsCommentLiked] = useState();
   const [simulatedLikesNumber, setSimulatedLikesNumber] = useState(
@@ -56,6 +58,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
         (doc) => {
           setName(doc.data().username);
           setPhoto(doc.data().photo);
+          setId(doc.data().uid)
         }
       );
     } catch (error) {
@@ -142,12 +145,16 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                 : "w-6 h-6 rounded-full overflow-hidden mr-[1rem]"
             }
           >
-            <img
+             <Link to={`/UserProfile/${id}`}>
+             <img
               className="w-full h-full object-cover rounded-full"
               // src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
               src={photo}
               alt="Profile picture"
             />
+
+             </Link>
+           
           </div>
         </div>
 
@@ -161,7 +168,10 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                   : "text-white light text-[14px]"
               }
             >
-              {name}&nbsp;
+               <Link to={`/UserProfile/${id}`}>
+               {name}&nbsp;
+               </Link>
+             
             </div>
             <div className="flex flex-row mt-1 sm:mt-2">
               {comment.parentId === "null" ? (

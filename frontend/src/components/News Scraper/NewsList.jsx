@@ -10,6 +10,7 @@ import { AuthContext } from "../../context/AuthContext";
 const NewsList = () => {
   const { DataAPI, MongoDBData } = useContext(NewsContext);
   const { isAdmin } = useContext(AuthContext);
+  
 
   const handleDelete = async (id) => {
     try {

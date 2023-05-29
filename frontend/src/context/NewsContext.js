@@ -35,7 +35,13 @@ export const NewsContextProvider = (props) => {
       const response = await axios.get(`${BASE_URL}/news`);
       console.log(response.data);
       // return response.data;
-      setMongoDBData(response.data);
+       // Sort the news articles by the datePublished field in descending order
+       const sortedData = response.data.sort((a, b) => {
+        const dateA = new Date(a.datePublished);
+        const dateB = new Date(b.datePublished);
+        return dateB - dateA;
+      });
+      setMongoDBData(sortedData);
     } catch (error) {
       console.error(error);
       return [];
