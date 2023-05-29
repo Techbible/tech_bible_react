@@ -28,6 +28,9 @@ import { AuthContext } from "./context/AuthContext";
 import GettingData from "./GettingData";
 import Footer from "./components/home components/Footer";
 import AdminSpace from "./views/AdminSpace";
+import { homeToolsAtom } from "./recoil/homePageTools";
+import { useRecoilValue } from "recoil";
+import { allToolsAtom } from "./recoil/tool";
 
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);
@@ -45,6 +48,9 @@ function App() {
   };
 
   const location = useLocation();
+  const allTools = useRecoilValue(allToolsAtom);
+
+  const limitedTools = useRecoilValue(homeToolsAtom);
 
   return (
     <div>
@@ -55,7 +61,7 @@ function App() {
           path="/"
           element={
             <NewsContextProvider>
-              <Home />
+              <Home limitedTools={limitedTools} allTools={allTools} />
             </NewsContextProvider>
           }
         />

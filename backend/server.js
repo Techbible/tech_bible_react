@@ -13,6 +13,7 @@ const Tools = require("./models/Tool");
 const ToolsComments = require("./models/ToolComment");
 const Subscribers = require("./models/Subscribers");
 const NewsArticle = require("./models/NewsArticle");
+const HomePageTool = require("./models/HomePageTool");
 
 //CONNECTING TO DATABASE
 
@@ -31,6 +32,23 @@ app.get("/mongo-tools", async (req, res) => {
 
     // console.log("TOOLS : ",tools);
     res.send(tools); // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching tools data");
+  }
+});
+//HOMETOOLS
+app.get("/homePageTools", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+
+    const tools = await HomePageTool.find({});
+    console.log("Home TOOLS: ", tools);
+    res.send(tools);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching tools data");

@@ -36,7 +36,7 @@ import { CategoriesData } from "../dataJson/CategoriesData";
 import Footer from "../components/home components/Footer";
 const toolsdata = require("../config/data.json");
 
-const Home = () => {
+const Home = ({ allTools, limitedTools }) => {
   //CONTEXT
   const { currentUser, currentUserData } = useContext(AuthContext);
   const { DataAPI, MongoDBData } = useContext(NewsContext);
@@ -49,22 +49,22 @@ const Home = () => {
   const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
   const [allToolsLoadable, setAllToolsLoadable] = useState(false);
 
-  const [allTools, setAllTools] = useState([]);
+  // const [allTools, setAllTools] = useState([]);
   const [ToolToFolder, setToolToFolder] = useState("");
   const [ToolToFolderIndex, setToolToFolderIndex] = useState();
   const [toolsNumber, setToolsNumber] = useState(30);
-  const [limitedTools, setLimitedTools] = useState([]);
+  // const [limitedTools, setLimitedTools] = useState([]);
 
-  const getTools = async () => {
-    let response = axios.get(`${BASE_URL}/mongo-tools`);
-    let tools = (await response).data;
-    setAllTools(tools);
-  };
-  useEffect(() => {
-    setAllToolsLoadable(false);
-    getTools();
-    setAllToolsLoadable(true);
-  }, [allTools]);
+  // const getTools = async () => {
+  //   let response = axios.get(`${BASE_URL}/mongo-tools`);
+  //   let tools = (await response).data;
+  //   setAllTools(tools);
+  // };
+  // useEffect(() => {
+  //   setAllToolsLoadable(false);
+  //   getTools();
+  //   setAllToolsLoadable(true);
+  // }, [allTools]);
 
   // LOADING FOLDERS START
   const LoadFolders = async () => {
@@ -83,46 +83,46 @@ const Home = () => {
   };
   // LOADING FOLDERS END
 
-  const getLimitedTools = async () => {
-    let response = axios.get(`${BASE_URL}/mongo-tools`);
-    let tools = (await response).data;
+  // const getLimitedTools = async () => {
+  //   let response = axios.get(`${BASE_URL}/mongo-tools`);
+  //   let tools = (await response).data;
 
-    const filtredTools = tools.filter((tool) => {
-      const toolNames = [
-        "Bright Data",
-        "Chatbase",
-        "ZoomInfo",
-        "Synthesia",
-        "BeeFree",
-        "AirFocus",
-        "Brand24",
-        "Dripify",
-        "Firstbase",
-        "Fiverr Business",
-        "Landbot",
-        "Ocoya",
-        "Outseta",
-        "Pensight",
-        "PhantomBusters",
-        "Quartile",
-        "Skylead",
-        "Softr",
-        "Soon",
-        "SurveySparrow",
-        "Tolstoy",
-        "Vidyard",
-        "Webflow",
-        "Weglot",
-      ];
-      return toolNames.includes(tool.Name);
-    });
-    setLimitedTools(filtredTools);
-  };
+  //   const filtredTools = tools.filter((tool) => {
+  //     const toolNames = [
+  //       "Bright Data",
+  //       "Chatbase",
+  //       "ZoomInfo",
+  //       "Synthesia",
+  //       "BeeFree",
+  //       "AirFocus",
+  //       "Brand24",
+  //       "Dripify",
+  //       "Firstbase",
+  //       "Fiverr Business",
+  //       "Landbot",
+  //       "Ocoya",
+  //       "Outseta",
+  //       "Pensight",
+  //       "PhantomBusters",
+  //       "Quartile",
+  //       "Skylead",
+  //       "Softr",
+  //       "Soon",
+  //       "SurveySparrow",
+  //       "Tolstoy",
+  //       "Vidyard",
+  //       "Webflow",
+  //       "Weglot",
+  //     ];
+  //     return toolNames.includes(tool.Name);
+  //   });
+  //   setLimitedTools(filtredTools);
+  // };
   useEffect(() => {
-    LoadFolders();
     setAllToolsLoadable(false);
-    getLimitedTools();
-    setAllToolsLoadable(true);
+    LoadFolders();
+    // getLimitedTools();
+    if (limitedTools) setAllToolsLoadable(true);
   }, []);
   //LOADING
   const [isLoading, setLoading] = useState(false);
@@ -624,6 +624,7 @@ const Home = () => {
                         key={tool._id}
                         toolData={tool}
                         forceRender={forceRender}
+                        homeTool={false}
                       />
                     ))}
 
@@ -701,6 +702,7 @@ const Home = () => {
                           key={tool._id}
                           toolData={tool}
                           forceRender={forceRender}
+                          homeTool={false}
                         />
                       ))}
                     </div>
@@ -716,7 +718,7 @@ const Home = () => {
                       <p className="medium lg:text-[18px] md:text-[17px] sm:text-[16px] mb-[1rem] ">
                         Top tools
                       </p>
-                      {!allToolsLoadable ? (
+                      {!limitedTools ? (
                         <h1 className="text-white">Loading...</h1>
                       ) : (
                         Array.isArray(allTools) &&
@@ -725,6 +727,7 @@ const Home = () => {
                             <Toolitem
                               toolData={tool}
                               forceRender={forceRender}
+                              homeTool={true}
                             />
                           </div>
                         ))
