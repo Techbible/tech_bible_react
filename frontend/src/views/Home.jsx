@@ -4,7 +4,16 @@ import { auth, db } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { collection, query, limit, getDocs, where,updateDoc, getDoc,doc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  limit,
+  getDocs,
+  where,
+  updateDoc,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 import Modal from "react-modal";
 import Folder from "./profile/Folder";
 import { useContext } from "react";
@@ -58,7 +67,7 @@ const Home = () => {
   }, [allTools]);
 
   // LOADING FOLDERS START
-const LoadFolders = async () => {
+  const LoadFolders = async () => {
     const UserRef = collection(db, "Users");
     const q = query(UserRef, where("uid", "==", currentUser?.uid));
 
@@ -68,7 +77,7 @@ const LoadFolders = async () => {
         setUserFolders(doc.data().folders);
       });
     } catch (error) {
-      alert('error')
+      alert("error");
       console.log(error);
     }
   };
@@ -114,14 +123,13 @@ const LoadFolders = async () => {
     setAllToolsLoadable(false);
     getLimitedTools();
     setAllToolsLoadable(true);
-  }, [limitedTools]);
+  }, []);
   //LOADING
   const [isLoading, setLoading] = useState(false);
 
   const [authUser, setAuthUser] = useState(null);
   //USERS FOLDERS
   const [UserFolders, setUserFolders] = useState([]);
-
 
   //To store the searched value
   const [Search, setSearch] = useState("");
@@ -185,27 +193,30 @@ const LoadFolders = async () => {
   const handleAddToFolder = () => {
     const usersRef = collection(db, "Users");
     const userDocRef = doc(usersRef, currentUser?.uid);
-  
+
     // Get the current user document
     getDoc(userDocRef)
       .then((doc) => {
         if (doc.exists()) {
           const userData = doc.data();
           let folders = userData.folders;
-  
+
           if (!folders) {
             // Initialize the folders array if it doesn't exist
             folders = [];
           }
-  
+
           // Update the specific folder's tools array
-          if (folders[ToolToFolderIndex] && Array.isArray(folders[ToolToFolderIndex].tools)) {
+          if (
+            folders[ToolToFolderIndex] &&
+            Array.isArray(folders[ToolToFolderIndex].tools)
+          ) {
             folders[ToolToFolderIndex].tools.push(ToolToFolder);
           } else {
             // Initialize the tools array for the specific folder if it doesn't exist
             folders[ToolToFolderIndex].tools = [ToolToFolder];
           }
-  
+
           // Update the user document with the modified folders array
           updateDoc(userDocRef, { folders })
             .then(() => {
@@ -219,13 +230,12 @@ const LoadFolders = async () => {
       .catch((error) => {
         console.log("Error getting user document:", error);
       });
-  
+
     closeModal();
     forceRender();
   };
-  
-  //HANDLE ADDING A TOOL TO A FOLDER END
 
+  //HANDLE ADDING A TOOL TO A FOLDER END
 
   // handling  by price
   const handleFilter = async () => {
@@ -238,16 +248,16 @@ const LoadFolders = async () => {
     // });
 
     //this is mongo
-    const response = await axios.get(`${BASE_URL}/mongo-tools`);
+    // const response = await axios.get(`${BASE_URL}/mongo-tools`);
 
     if (Pricing === "all" && category === "all categories") {
-      const toolsWithMatchingPrice = response?.data;
-      setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
+      const toolsWithMatchingPrice = allTools;
+      setSearchedTool(SearchedTools.concat(allTools));
       if (toolsWithMatchingPrice.length === 0)
         setResultFilter(`There is no tool in '${category}'`);
       else setResultFilter("");
     } else if (category === "all categories") {
-      const toolsWithMatchingPrice = response.data?.filter(
+      const toolsWithMatchingPrice = allTools?.filter(
         (tool) => tool.Price === Pricing
       );
       setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
@@ -257,7 +267,7 @@ const LoadFolders = async () => {
         );
       else setResultFilter("");
     } else if (Pricing === "all") {
-      const toolsWithMatchingPrice = response.data?.filter((tool) => {
+      const toolsWithMatchingPrice = allTools?.filter((tool) => {
         return tool.Category === category;
       });
       setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
@@ -265,7 +275,7 @@ const LoadFolders = async () => {
         setResultFilter(`There is no tool in '${category}'`);
       else setResultFilter("");
     } else {
-      const toolsWithMatchingPrice = response.data?.filter((tool) => {
+      const toolsWithMatchingPrice = allTools?.filter((tool) => {
         return tool.Price === Pricing && tool.Category === category;
       });
       setSearchedTool(SearchedTools.concat(toolsWithMatchingPrice));
@@ -324,21 +334,19 @@ const LoadFolders = async () => {
     return searchTerm && name?.startsWith(searchTerm);
   });
 
+  //Modal Styles
+  Modal.setAppElement("#root");
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = React.useState(false);
 
-    //Modal Styles
-    Modal.setAppElement("#root");
-    let subtitle;
-    const [modalIsOpen, setIsOpen] = React.useState(false);
-  
-    function openModal() {
-      setIsOpen(true);
-    }
-    function closeModal() {
-      setIsOpen(false);
-    }
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
-
-const handleKeyDown = (event) => {
+  const handleKeyDown = (event) => {
     event.preventDefault();
     if (event.key === "ArrowDown") {
       setSelectedSuggestion((prev) =>
@@ -556,7 +564,7 @@ const handleKeyDown = (event) => {
                   </div>
                 )}
                 {isFiltering && (
-                <div className="ml-2">
+                  <div className="ml-2">
                     <select
                       onChange={(e) => setCategory(e.target.value)}
                       className="combo-box bg-white text-black px-1 rounded-[4px] "
@@ -607,6 +615,7 @@ const handleKeyDown = (event) => {
                       // return lowercasedValues.some((word) => lowercasedKeywords.includes(word)); // Check if any word matches a tool keyword
                       const lowercasedKeywords = tool.Keywords.toLowerCase();
                       const lowercasedValues = value.toLowerCase();
+
                       return lowercasedKeywords.includes(lowercasedValues);
                     })
                     .slice(0, 10)
@@ -711,16 +720,14 @@ const handleKeyDown = (event) => {
                         <h1 className="text-white">Loading...</h1>
                       ) : (
                         Array.isArray(allTools) &&
-                        limitedTools
-                         
-                          .map((tool, index) => (
-                            <div key={index}>
-                              <Toolitem
-                                toolData={tool}
-                                forceRender={forceRender}
-                              />
-                            </div>
-                          ))
+                        limitedTools.map((tool, index) => (
+                          <div key={index}>
+                            <Toolitem
+                              toolData={tool}
+                              forceRender={forceRender}
+                            />
+                          </div>
+                        ))
                       )}
                     </div>
                   ) : (
@@ -811,18 +818,19 @@ const handleKeyDown = (event) => {
           </div>
         </aside>
         <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={ModalcustomStyles}
-            contentLabel="Example Modal">
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={ModalcustomStyles}
+          contentLabel="Example Modal"
+        >
           <div>
-           <div className={`space-x-4 grid grid-cols-3 gap-4`}>
+            {/* <div className={`space-x-4 grid grid-cols-3 gap-4`}>
             {UserFolders.map((item, index) => (
               <div className="cursor-pointer" onClick={()=>{handleAddToFolder();setToolToFolderIndex(index)}}><Folder key={index} isRowsView={false} item={item} /></div>
             ))}
+          </div> */}
           </div>
-        </div>
-          </Modal>
+        </Modal>
       </div>
       <Footer />
     </div>

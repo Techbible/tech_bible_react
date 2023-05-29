@@ -1,7 +1,59 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
+import { BASE_URL } from "../../config/mongo";
 
 const ToolInfo = ({ toolData }) => {
+  const { currentUser, isAdmin } = useContext(AuthContext);
+
+  const [isToolLiked, setIsToolLiked] = useState(false);
+  // const [likesNumber, setLikesNumber] = useState(
+  //   toolData?.LikedBy?.length || 0
+  // );
+  const [simulatedLikesNumber, setSimulatedLikesNumber] = useState(
+    toolData?.LikedBy?.length || 0
+  );
+
+  useEffect(() => {
+    setIsToolLiked(toolData?.LikedBy?.includes(currentUser?.uid) || false);
+    // setLikesNumber(toolData?.LikedBy?.length || 0);
+    setSimulatedLikesNumber(toolData?.LikedBy?.length || 0);
+  }, [toolData, currentUser]);
+
+  const likeTool = async () => {
+    try {
+      setIsToolLiked(true);
+      // Simulate increment visually
+      setSimulatedLikesNumber((prevLikes) => prevLikes + 1);
+      await axios.post(`${BASE_URL}/like/${toolData._id}/${currentUser?.uid}`);
+      // setLikesNumber((prevLikes) => prevLikes + 1);
+    } catch (error) {
+      console.error("Failed to like tool:", error);
+    }
+  };
+
+  const unlikeTool = async () => {
+    try {
+      setIsToolLiked(false);
+      setSimulatedLikesNumber((prevLikes) => Math.max(prevLikes - 1, 0));
+      await axios.post(
+        `${BASE_URL}/unlike/${toolData._id}/${currentUser?.uid}`
+      );
+      // setLikesNumber((prevLikes) => Math.max(prevLikes - 1, 0));
+    } catch (error) {
+      console.error("Failed to unlike tool:", error);
+    }
+  };
+
+  const handleLikeUnlike = async () => {
+    if (isToolLiked) {
+      unlikeTool();
+    } else {
+      likeTool();
+    }
+  };
+
   return (
     <div>
       <p className="font-bold">{toolData?.Category}</p>
@@ -58,7 +110,19 @@ const ToolInfo = ({ toolData }) => {
                   <span className="bi bi-chat-left-dots"></span>
                 </div>
                 <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                  {toolData.comments.length}
+                  {toolData?.comments?.length}
+                </div>
+                <i
+                  className={`${
+                    isToolLiked ? "text-red-500" : "text-white border-white"
+                  } text-[25px] fas fa-heart hover:text-[26px] cursor-pointer`}
+                  onClick={handleLikeUnlike}
+                ></i>
+                {/* <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
+                  {likesNumber}
+                </div> */}
+                <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
+                  {simulatedLikesNumber}
                 </div>
               </div>
             </div>
