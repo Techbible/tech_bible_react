@@ -123,7 +123,7 @@ const Home = () => {
     setAllToolsLoadable(false);
     getLimitedTools();
     setAllToolsLoadable(true);
-  }, [limitedTools]);
+  }, []);
   //LOADING
   const [isLoading, setLoading] = useState(false);
 

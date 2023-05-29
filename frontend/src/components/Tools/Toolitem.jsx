@@ -9,42 +9,56 @@ import { BASE_URL } from "../../config/mongo";
 
 const Toolitem = ({ toolData, index, setIsOpen, setToolToFolder }) => {
   const { currentUser, isAdmin } = useContext(AuthContext);
-  const LikeMethodsRef = useRef(null);
+  // const LikeMethodsRef = useRef(null);
   const navigate = useNavigate();
 
-
   const [isToolLiked, setIsToolLiked] = useState(false);
+  // const [LikeUnlikeClicked, setLikeUnlikeClicked] = useState();
+  const [simulatedLikesNumber, setSimulatedLikesNumber] = useState(
+    toolData?.LikedBy?.length || 0
+  );
   useEffect(() => {
-    toolData?.LikedBy.includes(currentUser?.uid)
-      ? setIsToolLiked(true)
-      : setIsToolLiked(false);
-  }, []);
+    setIsToolLiked(toolData?.LikedBy?.includes(currentUser?.uid) || false);
+    // setLikesNumber(toolData?.LikedBy?.length || 0);
+    setSimulatedLikesNumber(toolData?.LikedBy?.length || 0);
+  }, [toolData, currentUser]);
 
-  const like = async (toolId) => {
-    const response = await axios.post(
-      `${BASE_URL}/like/${toolId}/${currentUser?.uid}`
-    );
+  const likeTool = async () => {
+    try {
+      setIsToolLiked(true);
+      // Simulate increment visually
+      setSimulatedLikesNumber((prevLikes) => prevLikes + 1);
+      await axios.post(`${BASE_URL}/like/${toolData._id}/${currentUser?.uid}`);
+      // setLikesNumber((prevLikes) => prevLikes + 1);
+    } catch (error) {
+      console.error("Failed to like tool:", error);
+    }
   };
-  const unlike = async (toolId) => {
-    const response = await axios.post(
-      `${BASE_URL}/unlike/${toolId}/${currentUser?.uid}`
-    );
+
+  const unlikeTool = async () => {
+    try {
+      setIsToolLiked(false);
+      setSimulatedLikesNumber((prevLikes) => Math.max(prevLikes - 1, 0));
+      await axios.post(
+        `${BASE_URL}/unlike/${toolData._id}/${currentUser?.uid}`
+      );
+      // setLikesNumber((prevLikes) => Math.max(prevLikes - 1, 0));
+    } catch (error) {
+      console.error("Failed to unlike tool:", error);
+    }
   };
-  const [LikeUnlikeClicked, setLikeUnlikeClicked] = useState();
-  const handleLikes = async (toolID) => {
-    setIsToolLiked(true);
-    setLikeUnlikeClicked(true);
-    like(toolID);
-  };
-  const handleUnLikes = async (toolID) => {
-    setIsToolLiked(false);
-    setLikeUnlikeClicked(false);
-    unlike(toolID);
+
+  const handleLikeUnlike = async () => {
+    if (isToolLiked) {
+      unlikeTool();
+    } else {
+      likeTool();
+    }
   };
 
   return (
     <div className="px-mobile-1 max-w-[680px] px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
-      <LikeMethods ref={LikeMethodsRef} />
+      {/* <LikeMethods ref={LikeMethodsRef} /> */}
 
       <div
         className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
@@ -111,33 +125,12 @@ const Toolitem = ({ toolData, index, setIsOpen, setToolToFolder }) => {
           <div className="flex direction-row align-center mt-3">
             <div className="flex direction-column align-items-center gap-2 mx-3 ">
               {/* like/unlike logic*/}
-              {isToolLiked ? (
-                <i
-                  className="text-red-500 fas fa-heart text-[25px] hover:text-[26px] cursor-pointer "
-                  onClick={
-                    currentUser
-                      ? () => {
-                          handleUnLikes(toolData._id);
-                        }
-                      : () => {
-                          navigate("/signin");
-                        }
-                  }
-                ></i>
-              ) : (
-                <i
-                  className="text-white border-white text-[25px] far fa-heart hover:text-[27px] cursor-pointer"
-                  onClick={
-                    currentUser
-                      ? () => {
-                          handleLikes(toolData._id);
-                        }
-                      : () => {
-                          navigate("/signin");
-                        }
-                  }
-                ></i>
-              )}
+              <i
+                className={`${
+                  isToolLiked ? "text-red-500" : "text-white border-white"
+                } text-[25px] fas fa-heart hover:text-[26px] cursor-pointer`}
+                onClick={handleLikeUnlike}
+              ></i>
               {/* if(LikeUnlikeClicked )
               {
                 <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
@@ -145,14 +138,18 @@ const Toolitem = ({ toolData, index, setIsOpen, setToolToFolder }) => {
                 </div>
               } */}
               <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
-                {toolData.LikedBy?.length}
+                {simulatedLikesNumber}
               </div>
             </div>
-            <div className="cursor-pointer ml-2 text-center" onClick={()=>{
-              setToolToFolder(toolData._id);
-              setIsOpen(true);
-            }}>
-            <h1>+</h1></div>
+            <div
+              className="cursor-pointer ml-2 text-center"
+              onClick={() => {
+                setToolToFolder(toolData._id);
+                setIsOpen(true);
+              }}
+            >
+              <h1>+</h1>
+            </div>
 
             <div>
               {/* <span className="bi bi-plus-lg fw-bold text-[25px] text-gray-400 transition duration-500 hover:text-white hover:text-[27px] "></span> */}
