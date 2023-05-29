@@ -69,7 +69,7 @@ const NewsLetter = ({status,message,onValidated}) => {
         onClick={submit }
         
       >
-        Subscribe to newsletter
+        Join 4K TechBiblers
       </button>
     </div>
   );
