@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { collection, doc, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { Link } from "react-router-dom";
+import { CategoriesData } from "../dataJson/CategoriesData";
 
 function Community() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,9 +42,13 @@ function Community() {
     <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer ">
       <aside className="sidebarWithSeparator left">
         <p>Categories</p>
-        <Topic />
-        <Topic />
-        <Topic />
+        <div className="flex flex-wrap justify-start gap-4">
+                {CategoriesData?.map((group) => (
+                    <div className="flex items-center w-full">
+                        {group.groupName}
+                    </div>
+                ))}
+          </div>
       </aside>
       <main className="layoutMain">
         <div className="flex flex-col mb-12 p-5 text-white">
@@ -51,6 +56,7 @@ function Community() {
           <p className="text-base">
             Ask questions, find support, and connect with the community
           </p>
+          <button>StarT</button>
         </div>
         <div className="flex direction-column">
           <div className="flex direction-row">
@@ -187,9 +193,13 @@ function Community() {
 
       <aside className="sidebarWithSeparator right">
         <p>TOPICS </p>
-        <Topic />
-        <Topic />
-        <Topic />
+        <div className="flex flex-wrap justify-start gap-4 my-5">
+                {CategoriesData?.map((group) => (
+                    <div className="flex items-center w-full">
+                        {group.groupName}
+                    </div>
+                ))}
+          </div>
 
         <aside className="sidebarWithSeparator bottom">
           <p>NEW DISCUSSIONS</p>
