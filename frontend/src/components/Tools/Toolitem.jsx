@@ -12,7 +12,7 @@ const Toolitem = ({ toolData, index, setIsOpen, setToolToFolder }) => {
   // const LikeMethodsRef = useRef(null);
   const navigate = useNavigate();
 
-  const [isToolLiked, setIsToolLiked] = useState(false);
+  const [isToolLiked, setIsToolLiked] = useState();
   // const [LikeUnlikeClicked, setLikeUnlikeClicked] = useState();
   const [simulatedLikesNumber, setSimulatedLikesNumber] = useState(
     toolData?.LikedBy?.length || 0

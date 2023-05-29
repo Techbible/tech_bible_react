@@ -21,9 +21,10 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState("");
 
-  const [isCommentLiked, setIsCommentLiked] = useState(false);
-  const [likes, setLikes] = useState(comment?.likedBy?.length);
-
+  const [isCommentLiked, setIsCommentLiked] = useState();
+  const [simulatedLikesNumber, setSimulatedLikesNumber] = useState(
+    comment?.likedBy?.length || 0
+  );
   const likeToolComment = async (toolCommentId) => {
     const response = await axios.post(
       `${BASE_URL}/likeToolComment/${toolCommentId}/${currentUser?.uid}`
@@ -37,10 +38,14 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
 
   const handleCommentLikes = async (toolCommentId) => {
     setIsCommentLiked(true);
+    setSimulatedLikesNumber((prevLikes) => prevLikes + 1);
+
     likeToolComment(toolCommentId);
   };
   const handleCommentUnLikes = async (toolCommentId) => {
     setIsCommentLiked(false);
+    setSimulatedLikesNumber((prevLikes) => Math.max(prevLikes - 1, 0));
+
     unlikeToolComment(toolCommentId);
   };
 
@@ -64,12 +69,10 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
   //   setLikedBy(comment.likedBy);
   // };
   useEffect(() => {
-    comment.likedBy?.includes(currentUser.uid)
-      ? setIsCommentLiked(true)
-      : setIsCommentLiked(false);
-    // getCommentLikedBy();
-    console.log(typeof comment.likedBy);
-  }, [comment.likedBy]);
+    // setIsToolLiked(toolData?.LikedBy?.includes(currentUser?.uid) || false);
+    setIsCommentLiked(comment?.likedBy?.includes(currentUser?.uid) || false);
+    setSimulatedLikesNumber(comment?.likedBy?.length || 0);
+  }, [comment, currentUser]);
 
   useEffect(() => {
     getUserInfo();
@@ -203,7 +206,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                   className="text-white border-white text-[20px] far fa-heart"
                 ></i>
               )}
-              <div className="text-[14px]">{comment?.likedBy?.length}</div>
+              <div className="text-[14px]">{simulatedLikesNumber}</div>
               <button
                 onClick={handleIsAddCommentClick}
                 className=" bi bi-chat-left-dots text-[18px] hover:text-[19px] active:text-[18px]"
