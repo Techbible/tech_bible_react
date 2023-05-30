@@ -86,6 +86,14 @@ function Navbar() {
                   ) : (
                     <div></div>
                   )}
+                  {/* <Link to="/contactus">
+                    <li
+                      className="tracking-wider hover:tracking-widest"
+                      style={{ transition: "0.3s", cursor: "pointer" }}
+                    >
+                      Contact us
+                    </li>
+                  </Link> */}
                 </div>
               </ul>
             </nav>
@@ -222,8 +230,13 @@ function Navbar() {
                   <div className="border-[1px] text-white "></div>
                 </div>
               )}
-              {/* <div className="py-1 bg-black" role="none">
-                <Link to="/addTool">
+              <div className="py-1 bg-black" role="none">
+                {/* <Link to="/contactus">
+                  <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
+                    Contact us
+                  </div>
+                </Link> */}
+                {/* <Link to="/addTool">
                   <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
                     Submit your tool
                   </div>
@@ -239,8 +252,8 @@ function Navbar() {
                   <div  className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
                     Community
                   </div>
-                </Link>
-              </div> */}
+                </Link> */}
+              </div>
             </div>
           </div>
         </div>

@@ -131,7 +131,7 @@ const Toolitem = ({
           <div className="flex direction-row align-center mt-3">
             <div className="flex direction-column align-items-center gap-2 mx-3 ">
               {/* like/unlike logic*/}
-              {homeTool === false && (
+              {homeTool === false ? (
                 <>
                   <i
                     className={`${
@@ -145,6 +145,12 @@ const Toolitem = ({
                     {simulatedLikesNumber}
                   </div>
                 </>
+              ) : (
+                <Link to={`/tooldetails/${toolData?._id}`}>
+                  <div className="light text-[14px] border-[1px] px-[8px] py-[1px] rounded-[5px] ">
+                    Visit
+                  </div>
+                </Link>
               )}
             </div>
             <div
