@@ -150,59 +150,15 @@ const NewToolDetails = () => {
     );
   }
   return (
-    <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer mt-[6rem]">
-      <div className="home-container mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 layoutContainer">
+    <div className="mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 toolDetailLayoutContainer mt-[8vh] ">
+      <div className="home-container mt-desktop-30 mt-mobile-8 mt-tablet-8 mt-widescreen-20 toolDetailLayoutContainer">
         <main className=" lg:w-[900px] ">
+          <div className="flex flex-column align-items-center"></div>
+
+          <div className=" xl:w-[1400px] lg:w-[1000px] md:w-[1000px] sm:w-[900px] w-[300px]"></div>
           {/* ToolItem Tooldetails */}
           <ToolInfo toolData={toolData} />
           {/* END ToolItem Tooldetails */}
-
-          {/* TOOL COMMENT SECTION */}
-          <button
-            className="text-black text-[14px] hover:bg-black fontWeight-500 bg-white mb-4 rounded-[8px] p-2 "
-            onClick={
-              currentUser
-                ? () => {
-                    setAddCommentClicked(!AddCommentClicked);
-                  }
-                : () => {
-                    navigate("/signup");
-                  }
-            }
-          >
-            Add your comment
-          </button>
-
-          {AddCommentClicked ? (
-            <div class="mb-6">
-              <div class=" px-4 mb-4 bg-[#0D0C12] rounded-lg rounded-t-lg border border-gray-200">
-                <label for="comment" class="sr-only">
-                  Your comment
-                </label>
-                <textarea
-                  ref={inputCommentRef}
-                  id="comment"
-                  rows="6"
-                  class="px-0 w-full text-sm text-gray-900 rounded-[8px] px-3 py-3 border-0 focus:ring-0 focus:outline-none text-white dark:text-white bg-[#27242E] "
-                  placeholder="Write a comment..."
-                  value={comment}
-                  onChange={(e) => {
-                    setComment(e.target.value);
-                  }}
-                ></textarea>
-              </div>
-              <button
-                onClick={handlePostComment}
-                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-[#604FE7] rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
-              >
-                Post comment
-              </button>
-            </div>
-          ) : (
-            <div></div>
-          )}
-
-          {/* END TOOL COMMENT SECTION */}
 
           {/* Community Thoughts  */}
           <div className="community-toughts-container">
@@ -214,9 +170,55 @@ const NewToolDetails = () => {
                 {/* <div className="text-[15px] sm-hidden">
                   Ask a question about this tool
                 </div> */}
-                <i className=" bi bi-chat-left-dots text-[18px]"></i>
+                {/* <i className=" bi bi-chat-left-dots text-[18px]"></i> */}
               </div>
             </div>
+            {/* TOOL COMMENT SECTION */}
+            <button
+              className="text-black text-[14px] hover:bg-black fontWeight-500 bg-white mb-4 rounded-[8px] p-2 "
+              onClick={
+                currentUser
+                  ? () => {
+                      setAddCommentClicked(!AddCommentClicked);
+                    }
+                  : () => {
+                      navigate("/signup");
+                    }
+              }
+            >
+              Add your comment
+            </button>
+
+            {AddCommentClicked ? (
+              <div class="mb-6">
+                <div class=" px-4 mb-4 bg-[#0D0C12] rounded-lg rounded-t-lg border border-gray-200">
+                  <label for="comment" class="sr-only">
+                    Your comment
+                  </label>
+                  <textarea
+                    ref={inputCommentRef}
+                    id="comment"
+                    rows="6"
+                    class="px-0 w-full text-sm text-gray-900 rounded-[8px] px-3 py-3 border-0 focus:ring-0 focus:outline-none text-white dark:text-white bg-[#27242E] "
+                    placeholder="Write a comment..."
+                    value={comment}
+                    onChange={(e) => {
+                      setComment(e.target.value);
+                    }}
+                  ></textarea>
+                </div>
+                <button
+                  onClick={handlePostComment}
+                  class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-[#604FE7] rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+                >
+                  Post comment
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
+
+            {/* END TOOL COMMENT SECTION */}
             {comments.map((comment, index) => {
               return comment?.parentId === "null" ? (
                 <Post

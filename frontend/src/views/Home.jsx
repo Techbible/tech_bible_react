@@ -3,12 +3,7 @@ import { auth, db } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  collection,
-  updateDoc,
-  getDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, updateDoc, getDoc, doc } from "firebase/firestore";
 import Modal from "react-modal";
 import Folder from "./profile/Folder";
 import { useContext } from "react";
@@ -43,6 +38,10 @@ const Home = ({ allTools, limitedTools }) => {
   const [ToolToFolder, setToolToFolder] = useState("");
   const [ToolToFolderIndex, setToolToFolderIndex] = useState();
   const [toolsNumber, setToolsNumber] = useState(30);
+  const [topic, setTopic] = useState("");
+  const [isTopicChosen, setIsTopicChosen] = useState(false);
+
+  // const [limitedTools, setLimitedTools] = useState([]);
 
   useEffect(() => {
     setAllToolsLoadable(false);
@@ -308,6 +307,11 @@ const Home = ({ allTools, limitedTools }) => {
     }
   }, [selectedSuggestion]);
 
+  const chooseTopic = (topic) => {
+    setTopic(topic);
+    setIsTopicChosen(true);
+  };
+
   if (!allToolsLoadable) {
     return (
       <div className="loader-wrapper">
@@ -333,7 +337,7 @@ const Home = ({ allTools, limitedTools }) => {
   // }
   return (
     <div>
-      <div className="home-container mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
+      <div className="homeContainer mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
         <main
           className="layoutMain xl:mt-15 lg:mt-15 ml:mt-15 sm:mt-12 "
           onMouseLeave={() => setisSuggestionsVisible(false)}
@@ -343,10 +347,8 @@ const Home = ({ allTools, limitedTools }) => {
 
             <div className="flex direction-column align-items-center">
               <div className="flex flex-column max-w-[500px]  my-4 ml-3 md:mb-[2rem] rounded-xl ">
-                <h2 className="text-white poppins xl:text-[25px] lg:text-[25px] md:text-[22px] sm:text-[20px] text-[20px] fontWeight-700 mt-2">
-                  The Largest Tech Directory To Help
-                  <br />
-                  You Get The Job Done
+                <h2 className="text-white poppins xl:text-[20px] lg:text-[20px] md:text-[20px] sm:text-[18px] text-[18px] fontWeight-700 mt-2">
+                  The Largest Tech Directory To Help You Get The Job Done
                 </h2>
 
                 <div className="flex flex-wrap logo-search-container">
@@ -370,7 +372,7 @@ const Home = ({ allTools, limitedTools }) => {
                       </select>
                     </div>
                   ) : (
-                    <div className="fontWeight-300 poppins text-[#F5F5F7] xl:text-[20px] lg:text-[20px] md:text-[18px] sm:text-[16px] text-[16px] w-[290px] opacity-[.9]">
+                    <div className="fontWeight-300 poppins text-[#F5F5F7] xl:text-[16px] lg:text-[16px] md:text-[14px] sm:text-[12px] text-[12px] w-[290px] opacity-[.9]">
                       Browse +1890 software tools per task Updated daily
                     </div>
                   )}
@@ -523,25 +525,7 @@ const Home = ({ allTools, limitedTools }) => {
               </div>
             </div>
 
-            <div
-              style={
-                !isFiltering
-                  ? {
-                      display: "block",
-                      transition:
-                        "transform ease-out .5s, opacity ease-out .5s",
-                      transform: "scale(1)",
-                      opacity: 1,
-                    }
-                  : {
-                      display: "block",
-                      transition: "transform ease-in .5s, opacity ease-in .5s",
-                      transform: "scale(1)",
-                      opacity: 1,
-                    }
-              }
-              className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out"
-            >
+            <div className="flex direction-column align-items-center">
               {/* keyword filter            */}
               {isSearching && value !== "" ? (
                 <div>
@@ -584,55 +568,16 @@ const Home = ({ allTools, limitedTools }) => {
                         display: "none",
                       }
                 }
-              >
-                {currentUser ? (
-                  <AppOfTheDay tool={AppOfTheDayData} />
-                ) : (
-                  <div> </div>
-                )}
-
-                {/************You might also like***********/}
-                {auth.currentUser ? (
-                  <div className="you-might-like-apps-container">
-                    {/* <div className="you-might-like-apps-container"> */}
-                    <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
-                      YOU MIGHT ALSO LIKE
-                    </p>
-                    {currentUserData?.interests?.length === 0 ? (
-                      <div>
-                        Add your{" "}
-                        <u>
-                          {" "}
-                          <Link to={"/profile"}>interests</Link>
-                        </u>{" "}
-                        to discover personalized tool suggestions.
-                      </div>
-                    ) : (
-                      <div
-                        className="flex flex-col sm:flex-row"
-                        style={{ display: "flex" }}
-                      >
-                        <YouMightLikeApp />
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <p className="text[#FFFFFF] fw-500 ml-[90px] mb-[3rem]">
-                    <Link to={"/signup"}>
-                      {" "}
-                      <u>Sign up</u>
-                    </Link>
-                    &nbsp;to save tools, share lists and get personalised
-                    recommendations.
-                  </p>
-                )}
-                {/***********END You might also like********/}
-              </div>
+              ></div>
               {!isFiltering ? (
                 <div></div>
               ) : (
                 // {/* End Filtering container */}
-                <div data-test="homepage-section-0" style={{ diplay: "block" }}>
+                <div
+                  data-test="homepage-section-0"
+                  className="flex flex-column align-items-center"
+                  style={{ diplay: "block" }}
+                >
                   <div className="ml-4">{resultFilter}</div>
                   <div>
                     <div>
@@ -649,14 +594,147 @@ const Home = ({ allTools, limitedTools }) => {
                 </div>
               )}
             </div>
+            {/************You might also like***********/}
+            <div className="flex direction-column align-items-center mt-[6vh] ">
+              {auth.currentUser ? (
+                <div className="you-might-like-apps-container">
+                  {/* <div className="you-might-like-apps-container"> */}
+                  <p className="fontWeight-500 text-[#15C988] mb-4 text-[11px]">
+                    YOU MIGHT ALSO LIKE
+                  </p>
+                  {currentUserData?.interests?.length === 0 ? (
+                    <div>
+                      Add your{" "}
+                      <u>
+                        {" "}
+                        <Link to={"/profile"}>interests</Link>
+                      </u>{" "}
+                      to discover personalized tool suggestions.
+                    </div>
+                  ) : (
+                    <div
+                      className="flex flex-col sm:flex-row"
+                      style={{ display: "flex" }}
+                    >
+                      <YouMightLikeApp />
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="text[#FFFFFF] fw-500 ml-[90px] mb-[3rem]">
+                  <Link to={"/signup"}>
+                    {" "}
+                    <u>Sign up</u>
+                  </Link>
+                  &nbsp;to save tools, share lists and get personalised
+                  recommendations.
+                </p>
+              )}
+            </div>
+
+            {/***********END You might also like********/}
+            {!isFiltering && (
+              <div
+                className={
+                  topic === ""
+                    ? "text-[#DD5434] xl:w-[1100px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px] my-10 border-b border-b-[.5px]  border-white py-3"
+                    : " xl:w-[1100px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px] my-10 border-b border-white py-3"
+                }
+              >
+                <div className="flex flex-row ml-[10%] gap-[6vh] ">
+                  <div
+                    className="text-[16px] fontWeight-700 poppins cursor-pointer"
+                    onClick={() => {
+                      setIsTopicChosen(false);
+                      setTopic("");
+                    }}
+                  >
+                    Popular Topics
+                  </div>
+
+                  <div
+                    className={
+                      topic === "Graphic Design"
+                        ? "text-[15px] text-[#DD5434] fontWeight-500 poppins cursor-pointer"
+                        : "text-[15px] text-white fontWeight-500 poppins cursor-pointer"
+                    }
+                    onClick={(topic) => chooseTopic("Graphic Design")}
+                  >
+                    Graphic Design
+                  </div>
+                  <div
+                    className={
+                      topic === "DevOps Tools"
+                        ? "text-[15px] text-[#DD5434] fontWeight-500 poppins cursor-pointer"
+                        : "text-[15px] text-white fontWeight-500 poppins cursor-pointer"
+                    }
+                    onClick={(topic) => chooseTopic("DevOps Tools")}
+                  >
+                    DevOps Tools
+                  </div>
+                  <div
+                    className={
+                      topic === "No-code"
+                        ? "text-[15px] text-[#DD5434] fontWeight-500 poppins cursor-pointer"
+                        : "text-[15px] text-white fontWeight-500 poppins cursor-pointer"
+                    }
+                    onClick={(topic) => chooseTopic("No-code")}
+                  >
+                    No Code
+                  </div>
+                </div>
+              </div>
+            )}
+            <div className=" xl:w-[1100px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px]"></div>
+            <div
+              style={
+                !isFiltering
+                  ? {
+                      display: "block",
+                      transition:
+                        "transform ease-out .5s, opacity ease-out .5s",
+                      transform: "scale(1)",
+                      opacity: 1,
+                    }
+                  : {
+                      display: "block",
+                      transition: "transform ease-in .5s, opacity ease-in .5s",
+                      transform: "scale(1)",
+                      opacity: 1,
+                    }
+              }
+              className="transform opacity-0 scale-105 opacity-100 scale-100 transition-opacity duration-500 ease-in-out flex flex-column align-items-center"
+            ></div>
+            {/* Choosing Topics */}
+            <div className="flex flex-column align-items-center">
+              {isTopicChosen &&
+                allTools?.map((tool, index) => {
+                  if (tool?.Category === topic) {
+                    return (
+                      <Toolitem
+                        key={tool._id}
+                        toolData={tool}
+                        forceRender={forceRender}
+                        homeTool={false}
+                      />
+                    );
+                  }
+                })}
+            </div>
+
             <div data-test="homepage-section-0">
               <div>
-                <div>
-                  {!isFiltering ? (
+                <div className="flex flex-column align-items-center">
+                  {!isFiltering && topic === "" ? (
                     <div className="tools-section-ngu">
-                      <p className="medium lg:text-[18px] md:text-[17px] sm:text-[16px] mb-[1rem] ">
+                      {/* <p className="medium lg:text-[18px] md:text-[17px] sm:text-[16px] mb-[1rem] ">
                         Top tools
-                      </p>
+                      </p> */}
+                      {currentUser ? (
+                        <AppOfTheDay tool={AppOfTheDayData} />
+                      ) : (
+                        <div> </div>
+                      )}
                       {!limitedTools ? (
                         <h1 className="text-white">Loading...</h1>
                       ) : (
@@ -680,9 +758,11 @@ const Home = ({ allTools, limitedTools }) => {
             </div>
           </div>
         </main>
-        <aside className="sidebarWithSeparator right ">
+        <aside className="sidebarWithSeparator right ml-4 ">
           <Link to="/News">
-            <p className="text-[16px] fontWeight-700 ">Happening in Tech</p>
+            <p className="text-[16px] fontWeight-700 mt-16 ">
+              Happening in Tech
+            </p>
           </Link>
           {DataAPI?.length > 0
             ? DataAPI.slice(0, 3).map((article, index) => (
