@@ -31,6 +31,7 @@ import AdminSpace from "./views/AdminSpace";
 import { homeToolsAtom } from "./recoil/homePageTools";
 import { useRecoilValue } from "recoil";
 import { allToolsAtom } from "./recoil/tool";
+import ContactUs from "./views/ContactUs";
 
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);
@@ -68,6 +69,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/contactus" element={<ContactUs />} />
         <Route path="/profile/:name" element={<Profile />} />
         <Route path="/folders" element={<UserList />} />
         <Route path="/community" element={<Community />} />
