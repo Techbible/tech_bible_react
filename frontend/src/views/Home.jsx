@@ -1,24 +1,13 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useReducer, useState, useRef } from "react";
 import { auth, db } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  collection,
-  query,
-  limit,
-  getDocs,
-  where,
-  updateDoc,
-  getDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, updateDoc, getDoc, doc } from "firebase/firestore";
 import Modal from "react-modal";
 import Folder from "./profile/Folder";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { BASE_URL } from "../config/mongo";
 import "../assets/styles/home/home.css";
 import "../assets/styles/home/global.css";
 import NewsHomePage from "../components/News Scraper/NewsHomePage";
@@ -26,16 +15,12 @@ import Toolitem from "../components/Tools/Toolitem";
 import YouMightLikeApp from "../components/home components/Filtering-container/YouMightLikeApp";
 import AppOfTheDay from "../components/home components/Filtering-container/AppOfTheDay";
 import "../assets/styles/search-container/search-container.css";
-import { NewsContext, NewsContextProvider } from "../context/NewsContext";
+import { NewsContext } from "../context/NewsContext";
 import { ModalcustomStyles } from "./Profile";
 
-import axios from "axios";
-import NewsLetter from "../components/home components/NewsLetter";
 import NewsLetterSubscribe from "../components/home components/NewsLetterSubscribe";
 import { CategoriesData } from "../dataJson/CategoriesData";
 import Footer from "../components/home components/Footer";
-import Topic from "../components/Community/Topic";
-const toolsdata = require("../config/data.json");
 
 const Home = ({ allTools, limitedTools }) => {
   //CONTEXT
@@ -50,7 +35,6 @@ const Home = ({ allTools, limitedTools }) => {
   const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
   const [allToolsLoadable, setAllToolsLoadable] = useState(false);
 
-  // const [allTools, setAllTools] = useState([]);
   const [ToolToFolder, setToolToFolder] = useState("");
   const [ToolToFolderIndex, setToolToFolderIndex] = useState();
   const [toolsNumber, setToolsNumber] = useState(30);
@@ -59,71 +43,6 @@ const Home = ({ allTools, limitedTools }) => {
 
   // const [limitedTools, setLimitedTools] = useState([]);
 
-  // const getTools = async () => {
-  //   let response = axios.get(`${BASE_URL}/mongo-tools`);
-  //   let tools = (await response).data;
-  //   setAllTools(tools);
-  // };
-  // useEffect(() => {
-  //   setAllToolsLoadable(false);
-  //   getTools();
-  //   setAllToolsLoadable(true);
-  // }, [allTools]);
-
-  // LOADING FOLDERS START
-  // const LoadFolders = async () => {
-  //   const UserRef = collection(db, "Users");
-  //   const q = query(UserRef, where("uid", "==", currentUser?.uid));
-
-  //   try {
-  //     const querySnapshot = await getDocs(q);
-  //     querySnapshot.forEach((doc) => {
-  //       setUserFolders(doc.data().folders);
-  //       // console.log(doc.data().folders);
-  //     });
-  //     // console.log(UserFolders);
-  //   } catch (error) {
-  //     alert("something went wrong");
-  //     console.log(error);
-  //   }
-  // };
-  // LOADING FOLDERS END
-
-  // const getLimitedTools = async () => {
-  //   let response = axios.get(`${BASE_URL}/mongo-tools`);
-  //   let tools = (await response).data;
-
-  //   const filtredTools = tools.filter((tool) => {
-  //     const toolNames = [
-  //       "Bright Data",
-  //       "Chatbase",
-  //       "ZoomInfo",
-  //       "Synthesia",
-  //       "BeeFree",
-  //       "AirFocus",
-  //       "Brand24",
-  //       "Dripify",
-  //       "Firstbase",
-  //       "Fiverr Business",
-  //       "Landbot",
-  //       "Ocoya",
-  //       "Outseta",
-  //       "Pensight",
-  //       "PhantomBusters",
-  //       "Quartile",
-  //       "Skylead",
-  //       "Softr",
-  //       "Soon",
-  //       "SurveySparrow",
-  //       "Tolstoy",
-  //       "Vidyard",
-  //       "Webflow",
-  //       "Weglot",
-  //     ];
-  //     return toolNames.includes(tool.Name);
-  //   });
-  //   setLimitedTools(filtredTools);
-  // };
   useEffect(() => {
     setAllToolsLoadable(false);
     // LoadFolders();
