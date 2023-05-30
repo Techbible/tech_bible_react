@@ -10,12 +10,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   collection,
   doc,
-  getDocs,
-  limit,
-  onSnapshot,
-  query,
   updateDoc,
-  where,
 } from "firebase/firestore";
 import Modal from "react-modal";
 import { useContext } from "react";
@@ -241,37 +236,10 @@ const Profile = () => {
 
   //************************END Inserting Changes*********************************
 
-  //loading the liked tools by the currentUser
-  // const LoadLikedTools = async () => {
-  //   const ToolsRef = collection(db, "Tools");
-  //   const LikedOnes = [];
-  //   const q = query(
-  //     ToolsRef,
-  //     where("LikedBy", "array-contains", currentUser?.uid),
-  //     limit(10)
-  //   );
-  //   try {
-  //     const querySnapshot = await getDocs(q);
-  //     querySnapshot.forEach((doc) => {
-  //       LikedOnes.push(doc.data());
-  //       setLikedTools(LikedOnes);
-  //       forceRender();
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   //this is mongo
   const LoadLikedTools = async () => {
     try {
-      // const response = await axios.get("/api/tools", {
-      //   params: {
-      //     LikedBy: currentUser?.uid,
-      //     limit: 10,
-      //   },
-      // });
-      // const LikedOnes = response.data;
       const response = await axios.get(`${BASE_URL}/mongo-tools`);
       const LikedOnes = response.data.filter((tool) =>
         tool.LikedBy.includes(currentUser?.uid)
