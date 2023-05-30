@@ -39,16 +39,14 @@ function Community() {
   }, []);
 
   return (
-    <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 layoutContainer ">
+    <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 toolDetailLayoutContainer ">
       <aside className="sidebarWithSeparator left">
         <p>Categories</p>
         <div className="flex flex-wrap justify-start gap-4">
-                {CategoriesData?.map((group) => (
-                    <div className="flex items-center w-full">
-                        {group.groupName}
-                    </div>
-                ))}
-          </div>
+          {CategoriesData?.map((group) => (
+            <div className="flex items-center w-full">{group.groupName}</div>
+          ))}
+        </div>
       </aside>
       <main className="layoutMain">
         <div className="flex flex-col mb-12 p-5 text-white">
@@ -182,24 +180,17 @@ function Community() {
             </form>
           </div>
 
-          <div>
-            {Users &&
-              Users?.map((user) => (
-                  <Comment User={user} />
-              ))}
-          </div>
+          <div>{Users && Users?.map((user) => <Comment User={user} />)}</div>
         </div>
       </main>
 
       <aside className="sidebarWithSeparator right">
         <p>TOPICS </p>
         <div className="flex flex-wrap justify-start gap-4 my-5">
-                {CategoriesData?.map((group) => (
-                    <div className="flex items-center w-full">
-                        {group.groupName}
-                    </div>
-                ))}
-          </div>
+          {CategoriesData?.map((group) => (
+            <div className="flex items-center w-full">{group.groupName}</div>
+          ))}
+        </div>
 
         <aside className="sidebarWithSeparator bottom">
           <p>NEW DISCUSSIONS</p>

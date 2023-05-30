@@ -73,7 +73,6 @@
   position: relative;
 }
 
-
 .styles_voteButton__WtFrY {
   cursor: pointer;
   text-transform: none !important;
@@ -1175,7 +1174,7 @@ input {
   background-color: none;
   border-left: 1px solid rgb(188, 185, 185);
   padding-left: 1rem;
-  margin-bottom: 10vh;
+  margin-bottom: 2vh;
   margin-left: 5vh;
 }
 
