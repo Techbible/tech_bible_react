@@ -122,6 +122,7 @@ function Tools() {
                             className="delete-btn"
                             onClick={() => deleteTool(tool._id)}
                           >
+                            
                             <span className="material-symbols-outlined">
                               delete
                             </span>
@@ -134,6 +135,9 @@ function Tools() {
                           <h3 className="card-title" key={index}>
                             {tool.Name}
                           </h3>
+                          <h3 className="card-title" key={index}>
+                            {tool._id}
+                          </h3>
                         </Link>
                         <div className="text-left my-2">
                           <div className="sub-cat text-truncate">
@@ -143,6 +147,7 @@ function Tools() {
                             >
                               {tool.Price}
                             </span>{" "}
+                            <span>{tool._id}</span>
                           </div>
                         </div>
                         <p className="card-text description" key={index}>

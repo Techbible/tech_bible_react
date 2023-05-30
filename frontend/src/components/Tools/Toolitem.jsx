@@ -7,7 +7,13 @@ import { LikeMethods } from "../../lib";
 import axios from "axios";
 import { BASE_URL } from "../../config/mongo";
 
-const Toolitem = ({ toolData, index, setIsOpen, setToolToFolder }) => {
+const Toolitem = ({
+  toolData,
+  index,
+  setIsOpen,
+  setToolToFolder,
+  homeTool,
+}) => {
   const { currentUser, isAdmin } = useContext(AuthContext);
   // const LikeMethodsRef = useRef(null);
   const navigate = useNavigate();
@@ -125,21 +131,21 @@ const Toolitem = ({ toolData, index, setIsOpen, setToolToFolder }) => {
           <div className="flex direction-row align-center mt-3">
             <div className="flex direction-column align-items-center gap-2 mx-3 ">
               {/* like/unlike logic*/}
-              <i
-                className={`${
-                  isToolLiked ? "text-red-500" : "text-white border-white"
-                } text-[25px] fas fa-heart hover:text-[26px] cursor-pointer`}
-                onClick={handleLikeUnlike}
-              ></i>
-              {/* if(LikeUnlikeClicked )
-              {
-                <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
-                  {toolData.LikedBy?.length}
-                </div>
-              } */}
-              <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
-                {simulatedLikesNumber}
-              </div>
+              {homeTool === false && (
+                <>
+                  <i
+                    className={`${
+                      isToolLiked ? "text-red-500" : "text-white border-white"
+                    } text-[25px] fas fa-heart hover:text-[26px] cursor-pointer`}
+                    onClick={
+                      currentUser ? handleLikeUnlike : () => navigate("/signin")
+                    }
+                  ></i>
+                  <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
+                    {simulatedLikesNumber}
+                  </div>
+                </>
+              )}
             </div>
             <div
               className="cursor-pointer ml-2 text-center"
@@ -148,7 +154,7 @@ const Toolitem = ({ toolData, index, setIsOpen, setToolToFolder }) => {
                 setIsOpen(true);
               }}
             >
-              <h1>+</h1>
+              {!homeTool && <h1>+</h1>}
             </div>
 
             <div>

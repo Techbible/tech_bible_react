@@ -16,21 +16,22 @@ const Footer = () => {
           </Link>
         </div>
         <div className="flex flex-col justify-center">
-          <div className="xl:max-w-[361px] lg:max-w-[361px] max-w-[100px] poppins xl:text-[16px] lg:text-[16px] text-[13px] font-light opacity-[.9] mt-8">
-            TechBible is a company registered in England and Wales (Company No.
-            12731987).
-          </div>
+          <div className="xl:max-w-[361px] lg:max-w-[361px] max-w-[100px] poppins xl:text-[16px] lg:text-[16px] text-[13px] font-light opacity-[.9] mt-8"></div>
         </div>
       </div>
       <div className="flex flex-col sm:flex-row justify-center sm:justify-start mr-5 xl:gap-x-[12vh] lg:gap-x-[12vh] gap-x-[8vh] xl:mt-3 xl:mt-3">
         <div className="flex flex-col xl:gap-y-3 lg:gap-y-3 gap-y-1 mb-4">
-          <div className="xl:text-[15px] lg:sm:text-[15px] text-[#EF4823] text-[12px] poppins font-bold xl:mb-5 lg:mb-5 mb-2">
+          {/* <div className="xl:text-[15px] lg:sm:text-[15px] text-[#EF4823] text-[12px] poppins font-bold xl:mb-5 lg:mb-5 mb-2">
             Studio
-          </div>
+          </div> */}
           <a href="https://www.mytechbible.com/" target="_blank">
-            <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
-              MyTechbible
+            <div className="xl:text-[15px] text-white lg:sm:text-[15px] text-[12px] poppins font-bold opacity-[.95] ">
+              Visit myTechbible
+              <div className="text-[#EF4823]">Growth Studio</div>
             </div>
+            {/* <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light ">
+              Growth Studio
+            </div> */}
           </a>
           {/* <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
             Our Story
@@ -40,30 +41,33 @@ const Footer = () => {
           </div> */}
         </div>
         <div className="flex flex-col xl:gap-y-3 lg:gap-y-3 gap-y-1 mb-4">
-          <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-bold xl:mb-5 lg:mb-5 mb-2">
-            Services
-          </div>
-          <Link to={"/"}>
-            <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
-              Browse Computer Tools
+          <Link to={"/news"}>
+            <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-bold xl:mb-5 lg:mb-5 mb-2 opacity-[.95]">
+              Latest AI Tech News
             </div>
+            {/* <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
+              Browse Computer Tools
+            </div> */}
           </Link>
-
+          {/* 
           <Link to={"/news"}>
             <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
               Latest AI Tech News
             </div>
-          </Link>
+          </Link> */}
           {/* <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
             Discuss Topics
           </div> */}
         </div>
         <div className="flex flex-col xl:gap-y-3 lg:gap-y-3 gap-y-1 mb-4">
-          <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-bold xl:mb-5 lg:mb-5 mb-2">
-            Contact Us
+          <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins  xl:mb-5 lg:mb-5 mb-2 opacity-[.95]">
+            <div className="font-bold">Get In Touch at</div>
+            <a className="text-white" href="mailto:Hello@techbible.ai">
+              <u>Hello@techbible.ai</u>
+            </a>{" "}
           </div>
           <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-bold mb-2">
-            <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] text-[#EF4823] poppins gap-2 fontWeight-500 ">
+            {/* <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] text-[#EF4823] poppins gap-2 fontWeight-500 ">
               London
             </div>
             <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
@@ -80,7 +84,13 @@ const Footer = () => {
             </div>
             <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
               +212 (0) 808674809{" "}
-            </div>
+            </div> */}
+            {/* <div className="xl:text-[15px] lg:sm:text-[15px] text-[12px] poppins font-light opacity-[.9]">
+              Get In Touch at{" "}
+              <a className="text-white" href="mailto:Hello@techbible.ai">
+                <u>Hello@techbible.ai</u>
+              </a>
+            </div> */}
           </div>
         </div>
       </div>

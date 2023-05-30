@@ -36,7 +36,7 @@ import { CategoriesData } from "../dataJson/CategoriesData";
 import Footer from "../components/home components/Footer";
 const toolsdata = require("../config/data.json");
 
-const Home = () => {
+const Home = ({ allTools, limitedTools }) => {
   //CONTEXT
   const { currentUser, currentUserData } = useContext(AuthContext);
   const { DataAPI, MongoDBData } = useContext(NewsContext);
@@ -49,12 +49,13 @@ const Home = () => {
   const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
   const [allToolsLoadable, setAllToolsLoadable] = useState(false);
 
-  const [allTools, setAllTools] = useState([]);
+  // const [allTools, setAllTools] = useState([]);
   const [ToolToFolder, setToolToFolder] = useState("");
   const [ToolToFolderIndex, setToolToFolderIndex] = useState();
   const [toolsNumber, setToolsNumber] = useState(30);
-  const [limitedTools, setLimitedTools] = useState([]);
+  // const [limitedTools, setLimitedTools] = useState([]);
 
+<<<<<<< HEAD
   const getTools = async () => {
     let response = axios.get(`${BASE_URL}/mongo-tools`);
     let tools = (await response).data;
@@ -67,6 +68,18 @@ const Home = () => {
     getTools();
     setAllToolsLoadable(true);
   }, [allTools]);
+=======
+  // const getTools = async () => {
+  //   let response = axios.get(`${BASE_URL}/mongo-tools`);
+  //   let tools = (await response).data;
+  //   setAllTools(tools);
+  // };
+  // useEffect(() => {
+  //   setAllToolsLoadable(false);
+  //   getTools();
+  //   setAllToolsLoadable(true);
+  // }, [allTools]);
+>>>>>>> 91e9254544d152e3bbe7201cbd9bca1e7ec2037f
 
   // LOADING FOLDERS START
   const LoadFolders = async () => {
@@ -87,45 +100,46 @@ const Home = () => {
   };
   // LOADING FOLDERS END
 
-  const getLimitedTools = async () => {
-    let response = axios.get(`${BASE_URL}/mongo-tools`);
-    let tools = (await response).data;
+  // const getLimitedTools = async () => {
+  //   let response = axios.get(`${BASE_URL}/mongo-tools`);
+  //   let tools = (await response).data;
 
-    const filtredTools = tools.filter((tool) => {
-      const toolNames = [
-        "Bright Data",
-        "Chatbase",
-        "ZoomInfo",
-        "Synthesia",
-        "BeeFree",
-        "AirFocus",
-        "Brand24",
-        "Dripify",
-        "Firstbase",
-        "Fiverr Business",
-        "Landbot",
-        "Ocoya",
-        "Outseta",
-        "Pensight",
-        "PhantomBusters",
-        "Quartile",
-        "Skylead",
-        "Softr",
-        "Soon",
-        "SurveySparrow",
-        "Tolstoy",
-        "Vidyard",
-        "Webflow",
-        "Weglot",
-      ];
-      return toolNames.includes(tool.Name);
-    });
-    setLimitedTools(filtredTools);
-  };
+  //   const filtredTools = tools.filter((tool) => {
+  //     const toolNames = [
+  //       "Bright Data",
+  //       "Chatbase",
+  //       "ZoomInfo",
+  //       "Synthesia",
+  //       "BeeFree",
+  //       "AirFocus",
+  //       "Brand24",
+  //       "Dripify",
+  //       "Firstbase",
+  //       "Fiverr Business",
+  //       "Landbot",
+  //       "Ocoya",
+  //       "Outseta",
+  //       "Pensight",
+  //       "PhantomBusters",
+  //       "Quartile",
+  //       "Skylead",
+  //       "Softr",
+  //       "Soon",
+  //       "SurveySparrow",
+  //       "Tolstoy",
+  //       "Vidyard",
+  //       "Webflow",
+  //       "Weglot",
+  //     ];
+  //     return toolNames.includes(tool.Name);
+  //   });
+  //   setLimitedTools(filtredTools);
+  // };
   useEffect(() => {
     setAllToolsLoadable(false);
-    getLimitedTools();
-    setAllToolsLoadable(true);
+    LoadFolders();
+    // getLimitedTools();
+    if (limitedTools) setAllToolsLoadable(true);
   }, []);
 
   //LOADING
@@ -293,9 +307,9 @@ const Home = () => {
     console.log(typeof SearchedTools);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     LoadFolders();
-},[UserFolders]);
+  }, [UserFolders]);
 
   //APP OF THE DAY
   useEffect(() => {
@@ -419,7 +433,7 @@ const Home = () => {
             {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
             <div className="flex flex-column max-w-[600px]  my-4 ml-3 md:mb-[2rem] rounded-xl ">
               <h2 className="text-white medium text-[18px] mt-2">
-              The Largest Tech Directory To Help You Get The Job Done 
+                The Largest Tech Directory To Help You Get The Job Done
               </h2>
               <form className="flex items-center mt-5">
                 <div className="relative w-full">
@@ -568,7 +582,7 @@ const Home = () => {
                   </div>
                 ) : (
                   <div className="fontWeight-500 text-[#F5F5F7] text-[12px] w-[274px]">
-                    Browse +1890 software tools per task  Updated daily
+                    Browse +1890 software tools per task Updated daily
                   </div>
                 )}
                 {isFiltering && (
@@ -632,6 +646,7 @@ const Home = () => {
                         key={tool._id}
                         toolData={tool}
                         forceRender={forceRender}
+                        homeTool={false}
                       />
                     ))}
 
@@ -691,7 +706,8 @@ const Home = () => {
                       {" "}
                       <u>Sign up</u>
                     </Link>
-                    &nbsp;to save tools, share lists and get personalised recommendations. 
+                    &nbsp;to save tools, share lists and get personalised
+                    recommendations.
                   </p>
                 )}
                 {/***********END You might also like********/}
@@ -709,6 +725,7 @@ const Home = () => {
                           key={tool._id}
                           toolData={tool}
                           forceRender={forceRender}
+                          homeTool={false}
                         />
                       ))}
                     </div>
@@ -724,7 +741,7 @@ const Home = () => {
                       <p className="medium lg:text-[18px] md:text-[17px] sm:text-[16px] mb-[1rem] ">
                         Top tools
                       </p>
-                      {!allToolsLoadable ? (
+                      {!limitedTools ? (
                         <h1 className="text-white">Loading...</h1>
                       ) : (
                         Array.isArray(allTools) &&
@@ -733,8 +750,7 @@ const Home = () => {
                             <Toolitem
                               toolData={tool}
                               forceRender={forceRender}
-                              setToolToFolder={setToolToFolder}
-                              setIsOpen={setIsOpen}
+                              homeTool={true}
                             />
                           </div>
                         ))
@@ -834,15 +850,23 @@ const Home = () => {
           contentLabel="Example Modal"
         >
           <div>
-            { <div className={`space-x-4 grid grid-cols-3 gap-4`}>
-            {UserFolders?.map((item, index) => (
-              <div className="cursor-pointer" onClick={()=>{setToolToFolderIndex(index);handleAddToFolder();}}>
-              <Folder key={index} isRowsView={false} item={item} />
+            {
+              <div className={`space-x-4 grid grid-cols-3 gap-4`}>
+                {UserFolders?.map((item, index) => (
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => {
+                      setToolToFolderIndex(index);
+                      handleAddToFolder();
+                    }}
+                  >
+                    <Folder key={index} isRowsView={false} item={item} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div> }
+            }
           </div>
-      </Modal>
+        </Modal>
       </div>
       <Footer />
     </div>

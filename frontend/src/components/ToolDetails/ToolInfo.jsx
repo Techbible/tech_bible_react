@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { BASE_URL } from "../../config/mongo";
 
 const ToolInfo = ({ toolData }) => {
+  const navigate = useNavigate();
   const { currentUser, isAdmin } = useContext(AuthContext);
 
   const [isToolLiked, setIsToolLiked] = useState(false);
@@ -116,7 +117,9 @@ const ToolInfo = ({ toolData }) => {
                   className={`${
                     isToolLiked ? "text-red-500" : "text-white border-white"
                   } text-[25px] fas fa-heart hover:text-[26px] cursor-pointer`}
-                  onClick={handleLikeUnlike}
+                  onClick={
+                    currentUser ? handleLikeUnlike : () => navigate("/signin")
+                  }
                 ></i>
                 {/* <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                   {likesNumber}
