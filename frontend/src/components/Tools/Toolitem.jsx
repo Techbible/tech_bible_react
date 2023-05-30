@@ -35,7 +35,6 @@ const Toolitem = ({
       // Simulate increment visually
       setSimulatedLikesNumber((prevLikes) => prevLikes + 1);
       await axios.post(`${BASE_URL}/like/${toolData._id}/${currentUser?.uid}`);
-      // setLikesNumber((prevLikes) => prevLikes + 1);
     } catch (error) {
       console.error("Failed to like tool:", error);
     }
@@ -64,7 +63,6 @@ const Toolitem = ({
 
   return (
     <div className="px-mobile-1 max-w-[680px] px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
-      {/* <LikeMethods ref={LikeMethodsRef} /> */}
 
       <div
         className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"

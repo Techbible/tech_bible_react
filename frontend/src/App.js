@@ -31,6 +31,7 @@ import { homeToolsAtom } from "./recoil/homePageTools";
 import { useRecoilValue } from "recoil";
 import { allToolsAtom } from "./recoil/tool";
 import ContactUs from "./views/ContactUs";
+import NewDiscussion from "./components/Community/NewDiscussion";
 
 function App() {
   const { currentUser, isAdmin } = useContext(AuthContext);
@@ -76,6 +77,7 @@ function App() {
         <Route path="/DiscussionReply" element={<DiscussionReply />} />
         <Route path="/detect" element={<MyComponent />} />
         <Route path="/AddNewsArticle" element={<AddNewsArticle />} />
+        <Route path="/create-discussion" element={<NewDiscussion />} />
 
         <Route path="/liked-tools" element={<LikedTools />} />
 

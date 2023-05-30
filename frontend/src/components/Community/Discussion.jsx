@@ -1,12 +1,11 @@
 import React from 'react'
 
 
-const Discussion = () => {
+const Discussion = ({discussion}) => {
   return (
     <div className="px-mobile-1 px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
-      <p>Are you product-led ?</p>
-      <div className="flex direction-row flex-row-gap-3 mt-2">
-              
+      <p>{discussion?.Title}</p>
+      <div className="flex direction-row flex-row-gap-3 mt-2">             
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
               <button className="p-2 border rounded-full hover:bg-white hover:text-black" >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2  hover:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
