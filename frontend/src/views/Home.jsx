@@ -55,20 +55,6 @@ const Home = ({ allTools, limitedTools }) => {
   const [toolsNumber, setToolsNumber] = useState(30);
   // const [limitedTools, setLimitedTools] = useState([]);
 
-<<<<<<< HEAD
-  const getTools = async () => {
-    let response = axios.get(`${BASE_URL}/mongo-tools`);
-    let tools = (await response).data;
-    setAllTools(tools);
-  };
-
-  
-  useEffect(() => {
-    setAllToolsLoadable(false);
-    getTools();
-    setAllToolsLoadable(true);
-  }, [allTools]);
-=======
   // const getTools = async () => {
   //   let response = axios.get(`${BASE_URL}/mongo-tools`);
   //   let tools = (await response).data;
@@ -79,7 +65,6 @@ const Home = ({ allTools, limitedTools }) => {
   //   getTools();
   //   setAllToolsLoadable(true);
   // }, [allTools]);
->>>>>>> 91e9254544d152e3bbe7201cbd9bca1e7ec2037f
 
   // LOADING FOLDERS START
   // const LoadFolders = async () => {
