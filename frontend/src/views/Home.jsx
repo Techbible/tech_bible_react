@@ -654,24 +654,15 @@ const Home = ({ allTools, limitedTools }) => {
 
                   <div
                     className={
-                      topic === "Graphic Design"
+                      topic === "Marketing Automation"
                         ? "text-[15px] text-[#DD5434] fontWeight-500 poppins cursor-pointer"
                         : "text-[15px] text-white fontWeight-500 poppins cursor-pointer"
                     }
-                    onClick={(topic) => chooseTopic("Graphic Design")}
+                    onClick={(topic) => chooseTopic("Marketing Automation")}
                   >
-                    Graphic Design
+                    Marketing Automation
                   </div>
-                  <div
-                    className={
-                      topic === "DevOps Tools"
-                        ? "text-[15px] text-[#DD5434] fontWeight-500 poppins cursor-pointer"
-                        : "text-[15px] text-white fontWeight-500 poppins cursor-pointer"
-                    }
-                    onClick={(topic) => chooseTopic("DevOps Tools")}
-                  >
-                    DevOps Tools
-                  </div>
+
                   <div
                     className={
                       topic === "No-code"
@@ -681,6 +672,20 @@ const Home = ({ allTools, limitedTools }) => {
                     onClick={(topic) => chooseTopic("No-code")}
                   >
                     No Code
+                  </div>
+                  <div
+                    className={
+                      topic === "Artificial Intelligence and Machine Learning"
+                        ? "text-[15px] text-[#DD5434] fontWeight-500 poppins cursor-pointer"
+                        : "text-[15px] text-white fontWeight-500 poppins cursor-pointer"
+                    }
+                    onClick={(topic) =>
+                      chooseTopic(
+                        "Artificial Intelligence and Machine Learning"
+                      )
+                    }
+                  >
+                    AI
                   </div>
                 </div>
               </div>
