@@ -60,6 +60,8 @@ const Home = () => {
     let tools = (await response).data;
     setAllTools(tools);
   };
+
+  
   useEffect(() => {
     setAllToolsLoadable(false);
     getTools();
