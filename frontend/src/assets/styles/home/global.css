@@ -5820,7 +5820,7 @@ body.search-mode {
 
 @media (max-width: 1439px) {
   .layoutContainer {
-    max-width: 988px;
+    /* max-width: 988px; */
   }
 }
 
