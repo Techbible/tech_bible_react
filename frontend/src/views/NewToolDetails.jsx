@@ -2,8 +2,6 @@ import ToolInfo from "../components/ToolDetails/ToolInfo";
 import Post from "../components/ToolDetails/Post";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState, useRef } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
-import { db } from "../config/firebase";
 import { allToolsAtom } from "../recoil/tool";
 import { useRecoilValue } from "recoil";
 import "../assets/styles/home/global.css";

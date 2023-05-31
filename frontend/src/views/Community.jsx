@@ -9,14 +9,19 @@ import { collection, doc, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { Link } from "react-router-dom";
 import { CategoriesData } from "../dataJson/CategoriesData";
+import axios from "axios";
+import { BASE_URL } from "../config/mongo";
 
 function Community() {
   const [isOpen, setIsOpen] = useState(false);
   const [Users, setUsers] = useState(false);
+  const [Discussions, setDiscussions] = useState();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+
 
   useEffect(() => {
     const usersRef = collection(db, "Users");
@@ -34,8 +39,20 @@ function Community() {
         console.error(error);
       }
     };
+    const GetDiscussions = async()=>{
+      try {
+        const response = await axios.get(`${BASE_URL}/discussions`);
+        console.log(response.data);
+        setDiscussions(response.data);
+        return response.data;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    }
 
     getUsers();
+    GetDiscussions();
   }, []);
 
   return (
@@ -54,7 +71,11 @@ function Community() {
           <p className="text-base">
             Ask questions, find support, and connect with the community
           </p>
-          <button>StarT</button>
+
+        <div className="light text-[14px] border-[1px] px-[8px] py-[1px] rounded-[5px]">
+          <Link to="/create-discussion">Create New Discussion</Link>
+        </div>
+
         </div>
         <div className="flex direction-column">
           <div className="flex direction-row">
@@ -180,7 +201,12 @@ function Community() {
             </form>
           </div>
 
-          <div>{Users && Users?.map((user) => <Comment User={user} />)}</div>
+          <div>
+            {Discussions &&
+              Discussions?.map((discussion) => (
+                  <Discussion discussion={discussion} />
+              ))}
+          </div>
         </div>
       </main>
 
