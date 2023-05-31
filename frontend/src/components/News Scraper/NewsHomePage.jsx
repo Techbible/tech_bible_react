@@ -9,9 +9,9 @@ const NewsHomePage = ({ title, date, provider, url }) => {
   });
 
   return (
-    <div className="max-w-xl mx-auto mb-5 mt-10 rounded-xl shadow-md md:max-w-2xl">
+    <div className="max-w-xl mx-auto mb-5  rounded-xl shadow-md md:max-w-2xl">
       <div className="md:flex">
-        <div className="md:pt-4">
+        <div className="md:pt-2">
           <a
             href={url}
             className="block text-[15px] light text-white leading-tight text-gray-900 hover:text-[#7869E6] w-[311px]"

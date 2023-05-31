@@ -346,11 +346,11 @@ const Home = ({ allTools, limitedTools }) => {
             {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
 
             <div className="flex direction-column align-items-center">
-              <div className="flex flex-column max-w-[600px]  my-4  md:mb-[2rem] rounded-xl ">
-                <h2 className="text-white poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 mt-2">
-                  The Largest Tech Directory To Help{" "}
-                  <div>You Get The Job Done</div>
-                </h2>
+              <div className="flex flex-column  max-w-[600px]  my-4  md:mb-[2rem] rounded-xl ">
+                <div className="text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 mt-2">
+                  <div>The Largest Tech Directory To Help You </div>
+                  <div> Get The Job Done</div>
+                </div>
 
                 <div className="flex flex-wrap logo-search-container">
                   <div className="my-0 mr-4">
@@ -397,7 +397,7 @@ const Home = ({ allTools, limitedTools }) => {
                     </div>
                   )}
                 </div>
-                <form className="flex items-center mt-5">
+                <form className="flex items-center ">
                   <div className="relative w-full">
                     <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                       <svg
@@ -597,16 +597,15 @@ const Home = ({ allTools, limitedTools }) => {
                     </div>
                   )}
                 </div>
-              ) : (
-                <p className="text[#FFFFFF] fw-500 ml-[90px] mb-[3rem]">
-                  <Link to={"/signup"}>
-                    {" "}
-                    <u>Sign up</u>
-                  </Link>
-                  &nbsp;to save tools, share lists and get personalised
-                  recommendations.
-                </p>
-              )}
+              ) : // <p className="text[#FFFFFF] fw-500 ml-[90px] mb-[3rem]">
+              //   <Link to={"/signup"}>
+              //     {" "}
+              //     <u>Sign up</u>
+              //   </Link>
+              //   &nbsp;to save tools, share lists and get personalised
+              //   recommendations.
+              // </p>
+              null}
             </div>
 
             {/***********END You might also like********/}
@@ -614,8 +613,8 @@ const Home = ({ allTools, limitedTools }) => {
               <div
                 className={
                   topic === ""
-                    ? "text-[#DD5434] xl:w-[1100px] xxl:w-[1300px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px] my-10 border-b border-b-[.5px]  border-white py-3"
-                    : " xl:w-[1100px] xxl:w-[1300px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px] my-10 border-b border-white py-3"
+                    ? "xxl:w-[1300px] xl:w-[1000px]  lg:w-[950px] md:w-[900px] sm:w-[800px] w-[300px] mb-6 border-b border-b-[.5px]  border-white py-3 px-16"
+                    : " xl:w-[1000px] xxl:w-[1300px] lg:w-[950px] md:w-[900px] sm:w-[800px] w-[300px] mb-6 border-b border-white py-3 px-16"
                 }
               >
                 <div className="flex flex-row ml-[10%] gap-[6vh] ">
@@ -677,7 +676,7 @@ const Home = ({ allTools, limitedTools }) => {
                 </div>
               </div>
             )}
-            <div className=" xl:w-[1100px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px]"></div>
+            {/* <div className=" xl:w-[1000px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px]"></div> */}
             <div
               style={
                 !isFiltering
@@ -752,7 +751,7 @@ const Home = ({ allTools, limitedTools }) => {
         </main>
         <aside className="sidebarWithSeparator right ml-4 ">
           <Link to="/News">
-            <p className="text-[16px] fontWeight-700 mt-16 ">
+            <p className="text-[16px] fontWeight-700 mt-16 mb-4 ">
               Happening in Tech
             </p>
           </Link>
@@ -775,14 +774,15 @@ const Home = ({ allTools, limitedTools }) => {
                   url={article?.url}
                 />
               ))}
-          <Link to="/News">
+          {/* <Link to="/News">
             <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer mb-20">
               See all News
             </div>
-          </Link>
-          <hr className="my-5 border-white" />
+          </Link> */}
+          <div className="my-[46px] w-[300px] h-[1px] bg-white "></div>
           <NewsLetterSubscribe />
-          <hr className="my-5 border-white" />
+
+          <div className="my-[50px] w-[300px] h-[1px] bg-white "></div>
           <div className=" flex flex-column align-items-center ">
             <ul className="flex flex-row lg:gap-[64px] gap-3 mb-5 ">
               <h3>Follow us</h3>

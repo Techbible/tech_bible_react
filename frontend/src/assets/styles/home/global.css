@@ -5972,7 +5972,7 @@ body.search-mode {
 
 .sidebarWithSeparator.right {
   border-left: 1px solid #d9e1ec;
-  margin-left: 64px;
+  /* margin-left: 64px; */
   padding-left: 71px;
 }
 
