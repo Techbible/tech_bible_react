@@ -346,9 +346,10 @@ const Home = ({ allTools, limitedTools }) => {
             {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
 
             <div className="flex direction-column align-items-center">
-              <div className="flex flex-column max-w-[500px]  my-4  md:mb-[2rem] rounded-xl ">
-                <h2 className="text-white poppins xl:text-[20px] lg:text-[20px] md:text-[20px] sm:text-[18px] text-[18px] fontWeight-700 mt-2">
-                  The Largest Tech Directory To Help You Get The Job Done
+              <div className="flex flex-column max-w-[600px]  my-4  md:mb-[2rem] rounded-xl ">
+                <h2 className="text-white poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 mt-2">
+                  The Largest Tech Directory To Help{" "}
+                  <div>You Get The Job Done</div>
                 </h2>
 
                 <div className="flex flex-wrap logo-search-container">
@@ -372,7 +373,7 @@ const Home = ({ allTools, limitedTools }) => {
                       </select>
                     </div>
                   ) : (
-                    <div className="fontWeight-300 poppins text-[#F5F5F7] xl:text-[16px] lg:text-[16px] md:text-[14px] sm:text-[12px] text-[12px] w-[290px] opacity-[.9]">
+                    <div className="fontWeight-300 poppins text-[#F5F5F7] xl:text-[20px] lg:text-[18px] md:text-[16px] sm:text-[14px] text-[14px] w-[290px] opacity-[.9]">
                       Browse +1890 software tools per task Updated daily
                     </div>
                   )}
@@ -631,8 +632,8 @@ const Home = ({ allTools, limitedTools }) => {
                   <div
                     className={
                       topic === "Marketing Automation"
-                        ? "text-[15px] text-[#DD5434] fontWeight-500 poppins cursor-pointer"
-                        : "text-[15px] text-white fontWeight-500 poppins cursor-pointer"
+                        ? "text-[15px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
+                        : "text-[15px] text-white fontWeight-300 poppins cursor-pointer"
                     }
                     onClick={(topic) => chooseTopic("Marketing Automation")}
                   >
@@ -642,8 +643,8 @@ const Home = ({ allTools, limitedTools }) => {
                   <div
                     className={
                       topic === "No-code"
-                        ? "text-[15px] text-[#DD5434] fontWeight-500 poppins cursor-pointer"
-                        : "text-[15px] text-white fontWeight-500 poppins cursor-pointer"
+                        ? "text-[15px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
+                        : "text-[15px] text-white fontWeight-300 poppins cursor-pointer"
                     }
                     onClick={(topic) => chooseTopic("No-code")}
                   >
@@ -652,8 +653,8 @@ const Home = ({ allTools, limitedTools }) => {
                   <div
                     className={
                       topic === "Artificial Intelligence and Machine Learning"
-                        ? "text-[15px] text-[#DD5434] fontWeight-500 poppins cursor-pointer"
-                        : "text-[15px] text-white fontWeight-500 poppins cursor-pointer"
+                        ? "text-[15px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
+                        : "text-[15px] text-white fontWeight-300 poppins cursor-pointer"
                     }
                     onClick={(topic) =>
                       chooseTopic(
@@ -666,8 +667,8 @@ const Home = ({ allTools, limitedTools }) => {
                   <div
                     className={
                       topic === "Productivity tools"
-                        ? "text-[15px] text-[#DD5434] fontWeight-500 poppins cursor-pointer"
-                        : "text-[15px] text-white fontWeight-500 poppins cursor-pointer"
+                        ? "text-[15px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
+                        : "text-[15px] text-white fontWeight-300 poppins cursor-pointer"
                     }
                     onClick={(topic) => chooseTopic("Productivity tools")}
                   >

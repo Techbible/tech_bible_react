@@ -62,10 +62,9 @@ const Toolitem = ({
   };
 
   return (
-    <div className="px-mobile-1 max-w-[680px] px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6">
-
+    <div className="px-mobile-1 max-w-[680px] xl:min-w-[680px] lg:min-w-[680px] md:min-w-[680px] sm:min-w-[600px] px-tablet-1 pt-mobile-0 pt-desktop-6 pt-tablet-6 pt-widescreen-6 pb-mobile-7 pb-desktop-6 pb-tablet-6 pb-widescreen-6 mx-4 ">
       <div
-        className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1"
+        className="flex direction-row flex-row-gap-4 flex-row-gap-mobile-2 flex-row-gap-widescreen-undefined flex-1  "
         data-test="post-item-390145"
       >
         <div
@@ -95,7 +94,7 @@ const Toolitem = ({
                   navigate("/signin");
                 }
           }
-          className="flex direction-column flex-1 cursor-pointer"
+          className="flex direction-column flex-1 cursor-pointer "
         >
           <div className="color-white font-700 text-[15px] font-bold mb-1">
             {toolData?.Name}{" "}
