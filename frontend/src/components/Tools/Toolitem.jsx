@@ -74,7 +74,7 @@ const Toolitem = ({
             currentUser
               ? () => navigate(`/tooldetails/${toolData?._id}`)
               : () => {
-                  navigate("/signin");
+                  navigate(`/tooldetails/${toolData?._id}`);
                 }
           }
         >
@@ -91,7 +91,7 @@ const Toolitem = ({
             currentUser
               ? () => navigate(`/tooldetails/${toolData?._id}`)
               : () => {
-                  navigate("/signin");
+                  navigate(`/tooldetails/${toolData?._id}`);
                 }
           }
           className="flex direction-column flex-1 cursor-pointer "
