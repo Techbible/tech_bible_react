@@ -614,8 +614,8 @@ const Home = ({ allTools, limitedTools }) => {
               <div
                 className={
                   topic === ""
-                    ? "xxl:w-[1300px] xl:w-[1000px]  lg:w-[950px] md:w-[900px] sm:w-[800px] w-[300px] mb-6 border-b border-b-[.5px]  border-white py-3 px-16"
-                    : " xl:w-[1000px] xxl:w-[1300px] lg:w-[950px] md:w-[900px] sm:w-[800px] w-[300px] mb-6 border-b border-white py-3 px-16"
+                    ? "xxl:w-[1300px] xl:w-[1050px]   w-[100%] mb-6 border-b border-b-[.5px]  border-white py-3 px-16"
+                    : " xl:w-[1050px] xxl:w-[1300px]  w-[100%] mb-6 border-b border-white py-3 px-16"
                 }
               >
                 <div className="flex flex-row ml-[10%] gap-[6vh] ">
@@ -673,6 +673,16 @@ const Home = ({ allTools, limitedTools }) => {
                     onClick={(topic) => chooseTopic("Productivity tools")}
                   >
                     Productivity
+                  </div>
+                  <div
+                    className={
+                      topic === "Graphic Design"
+                        ? "text-[15px] text-[#DD5434] fontWeight-300 poppins cursor-pointer  "
+                        : "text-[15px] text-white fontWeight-300 poppins cursor-pointer  "
+                    }
+                    onClick={(topic) => chooseTopic("Graphic Design")}
+                  >
+                    Design
                   </div>
                 </div>
               </div>

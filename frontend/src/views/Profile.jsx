@@ -375,7 +375,7 @@ const Profile = () => {
                 </div>
                 <div className="bio-interests-texts">
                   <div className="row">
-                    <div className="col">
+                    <div className="col mb-4">
                       <p>{currentUserData.bio}</p>
                     </div>
                   </div>
@@ -538,9 +538,11 @@ const Profile = () => {
                       )
                     ) {
                       return (
-                        <p className="text-sm leading-tight d-inline mr-1 mb-1">
-                          {group.groupName}&nbsp;&nbsp;
-                        </p>
+                        <div className="bg-[#535353] rounded-md py-[2px] px-[4px] mr-2 mb-2">
+                          <p className="text-sm leading-tight d-inline mr-1 mb-1">
+                            {group.groupName}&nbsp;&nbsp;
+                          </p>
+                        </div>
                       );
                     }
                   })}
@@ -607,12 +609,12 @@ const Profile = () => {
               </span>
               <div
                 className="flex flex-wrap justify-start gap-4 h-[40vh] "
-                style={{ maxHeight: "300px", overflowY: "auto" }}
+                style={{ maxHeight: "200px", overflowY: "auto" }}
               >
                 {CategoriesData?.map((group) => (
                   <label
                     key={group.groupName}
-                    className="flex items-center bg-gray-300 max-w-lg rounded-full py-1 px-3 transition duration-250 hover:bg-white cursor-pointer mr-3"
+                    className="flex items-center bg-gray-300 max-w-lg rounded-md py-1 px-3 transition duration-250 hover:bg-white cursor-pointer mr-3"
                     htmlFor={group.groupName}
                     style={
                       checkedInterests.includes(group.groupName)
@@ -627,7 +629,7 @@ const Profile = () => {
                         value={group.groupName}
                         onChange={(e) => handleInterestCheck(e)}
                         checked={checkedInterests.includes(group.groupName)}
-                        className="form-checkbox h-4 w-4 text-primary"
+                        className="form-checkbox  w-4 text-primary"
                         style={{ display: "none" }}
                       />
 
@@ -646,7 +648,7 @@ const Profile = () => {
                 ))}
               </div>
               <span
-                className="inline-block mt-4 px-4 py-2 bg-white text-black transition duration-250 hover:bg-black hover:fontWeight-bold rounded-lg cursor-pointer"
+                className="inline-block mt-4 px-4 py-1 bg-white text-black transition duration-250 hover:bg-black hover:fontWeight-bold rounded-lg cursor-pointer"
                 onClick={handleInterestsChange}
               >
                 Save

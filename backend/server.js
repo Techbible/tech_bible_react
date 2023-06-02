@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const app = express();
-const port = 4000;
+const port = 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -344,7 +344,7 @@ app.post("/create-discussion", async (req, res) => {
 app.post("/signup", async (req, res) => {
   try {
     const { FullName, uid, photo } = req.body;
-    //console.log(req.params, req.body);
+    console.log(req.params, req.body);
     const newUser = await User.create({
       uid: uid,
       username: FullName,
@@ -356,9 +356,9 @@ app.post("/signup", async (req, res) => {
     });
 
     res.status(201).json(newUser);
-    ////console.log("user added");
+    console.log("user added");
   } catch (err) {
-    ////console.error(err);
+    console.error(err);
     res.status(500).send("Error adding user");
   }
 });
@@ -371,13 +371,13 @@ app.get("/check-user/:uid", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    ////console.log("Connected to MongoDB");
+    console.log("Connected to MongoDB");
     const user = await User.findOne({ uid: uid });
     console.log("USER UID Sent : " + user);
 
     res.send(user); // Send an object containing both variables
   } catch (error) {
-    ////console.error(error);
+    console.error(error);
     res.status(500).send("Error fetching tools data");
   }
 });
