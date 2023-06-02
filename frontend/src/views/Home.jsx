@@ -447,7 +447,7 @@ const Home = ({ allTools, limitedTools }) => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-7 h-7 hover:w-8 hover:h-8"
+                      className="w-7 h-7 hover:w-8 hover:h-8 cursor-pointer"
                     >
                       <path
                         strokeLinecap="round"

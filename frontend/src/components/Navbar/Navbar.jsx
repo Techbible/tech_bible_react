@@ -33,7 +33,9 @@ function Navbar() {
   const handleIsMenuClicked = () => {
     setIsMenuClicked(!isMenuClicked);
   };
-
+ useEffect(()=>{
+   console.log('navbar : '+ typeof currentUserData);
+ },[])
   useEffect(() => {
     setIsMenuClicked(false);
 

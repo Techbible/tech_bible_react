@@ -3,7 +3,7 @@ import NewsLetter from './NewsLetter';
 import React from 'react';
 const NewsLetterSubscribe = ()=>{
 
-    const MAILCHIMP_URL = "https://techbible.us21.list-manage.com/subscribe/post?u=a4c0ecb1c96b3943c5951a86a&amp;id=a42f1faad9&amp;f_id=004e54e1f0"
+    const MAILCHIMP_URL = "https://mytechbible.us20.list-manage.com/subscribe/post?u=514819d0faeb47c146cc29d6e&amp;id=f90a15fd1b&amp;f_id=00a84fe6f0"
     return(
       <div>
    
