@@ -65,7 +65,7 @@ export const CategoriesData = [
       "Mobile App Development Platforms",
       "E-commerce Platforms",
       "DevOps Tools",
-      "Continuous Integration and Deployment (CI/CD) tools",
+      "Continuous Integration and Deployment (CI-CD) tools",
       "Infrastructure as Code (IaC) tools",
       "Configuration Management tools",
       "Monitoring and Alerting tools",

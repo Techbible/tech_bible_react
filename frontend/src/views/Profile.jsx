@@ -106,8 +106,7 @@ const Profile = () => {
   }
   //************************END Modal Configs********************************
 
-  //______________________________Inserting Changes____________________________________________
-  const handleInterestsChange = async () => {
+  const fetchUserCategories = async () => {
     const userCategories = [];
     CategoriesData?.map((group) => {
       if (checkedInterests?.includes(group.groupName)) {
@@ -117,37 +116,26 @@ const Profile = () => {
       }
     });
     try {
-      // const UserRef = doc(db, "Users", currentUserData.uid);
       const res = await axios.post(
         `${BASE_URL}/addCategories/${currentUserData.uid}/${userCategories}`
       );
-      // const data = { interests: userCategories };
-      // await updateDoc(UserRef, data)
-      //   .then((UserRef) => {
-      //     console.log(
-      //       "A New Document Field has been added to an existing document"
-      //     );
-
-      //   })
-      // .catch((error) => {
-      //   console.log(error);
-      // });
-
       updateUserData();
       closeModal();
-      console.log(
-        "current user data type : " + typeof currentUserData?.interests
-      );
-    } catch (error) {
-      console.log("EMPTY Categories : " + typeof userCategories);
-      const res = await axios.post(
-        `${BASE_URL}/clearInterests/${currentUserData.uid}`
-      );
+    } catch (e) {
+      clearUserCategories();
       closeModal();
-      updateUserData();
-
-      console.log("CLOSE SAVE ERROR : " + error);
     }
+  };
+
+  const clearUserCategories = async () => {
+    const res = await axios.post(
+      `${BASE_URL}/clearInterests/${currentUserData.uid}`
+    );
+    updateUserData();
+  };
+  //______________________________Inserting Changes____________________________________________
+  const handleInterestsChange = async () => {
+    fetchUserCategories();
   };
 
   const copyToClipboard = () => {
@@ -335,7 +323,7 @@ const Profile = () => {
           <div className="text-[16px] fontWeight-500 ml-[2.5rem] ">
             WELCOME,
           </div>
-          <div className="relative xl:w-[711px] lg:xl:w-[711px] max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
+          <div className="relative xl:w-[711px] lg:w-[711px] max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
             <div className="row">
               <div className="col-md-2">
                 <div className="mb-3">

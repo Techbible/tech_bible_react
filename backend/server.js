@@ -399,14 +399,11 @@ app.post("/addBio/:uid/:bio", async (req, res) => {
 app.post("/addCategories/:uid/:categories", async (req, res) => {
   console.log;
   try {
-    const { uid, categories } = req.params;
-    const categoriesArray = categories?.split(","); // Split categories string into an array
+    const { uid } = req.params;
+    const categories = req.params.categories?.split(","); // Split categories string into an array
 
     // Update the user document
-    await User.updateOne(
-      { uid: uid },
-      { $set: { interests: categoriesArray } }
-    );
+    await User.updateOne({ uid: uid }, { $set: { interests: categories } });
 
     res.status(200).json({ message: "User bio updated successfully" });
   } catch (error) {
