@@ -1,18 +1,15 @@
 const mongoose = require("mongoose");
-
 const userSchema = new mongoose.Schema(
   {
-    bio: { type: String, required: true },
-    folders: [{ type: String }],
-    interests: [{ type: String }],
-    isAdmin: { type: Boolean, required: true },
-    photo: { type: String, required: true },
     uid: { type: String, required: true },
     username: { type: String, required: true },
+    bio: { type: String, required: false },
+    interests: { type: Array, required: false },
+    folders: { type: Array, required: false },
+    photo: { type: String, required: false },
+    isAdmin: { type: Boolean, required: false },
   },
   { timestamps: true }
 );
-
 const User = mongoose.model("User", userSchema, "Users");
-
 module.exports = User;

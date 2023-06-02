@@ -16,6 +16,8 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
+import axios from "axios";
+import { BASE_URL } from "../config/mongo";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -96,8 +98,9 @@ const SignIn = () => {
 
   const checkUserCredentials = async (user) => {
     try {
-      const userDoc = await getDoc(doc(db, "Users", user.uid));
-      if (userDoc.exists()) {
+      // const userDoc = await getDoc(doc(db, "Users", user.uid));
+      const response = await axios.get(`${BASE_URL}/check-user/${user.uid}`);
+      if (response.data) {
         return true;
       } else {
         return false;
@@ -115,18 +118,24 @@ const SignIn = () => {
       console.log("USER", user);
       const userExists = await checkUserCredentials(user);
       if (!userExists) {
-        const GoogleData = {
-          uid: user.uid,
-          username: user.displayName,
-          bio: "",
-          interests: [],
-          folders: [],
-          photo: user.photoURL,
-          isAdmin: false,
-          timestamp: Timestamp.now(),
-        };
-        await setDoc(doc(db, "Users", user.uid), GoogleData);
-        navigate("/");
+        // const GoogleData = {
+        //   uid: user.uid,
+        //   username: user.displayName,
+        //   bio: "",
+        //   interests: [],
+        //   folders: [],
+        //   photo: user.photoURL,
+        //   isAdmin: false,
+        //   timestamp: Timestamp.now(),
+        // };
+        const FullName = user.displayName;
+        const uid = user.uid;
+        const photo = user.photoURL;
+        const response = await axios.post(`${BASE_URL}/signup`, {
+          FullName,
+          uid,
+          photo,
+        });
       } else {
         navigate("/");
       }

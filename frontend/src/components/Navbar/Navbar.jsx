@@ -9,10 +9,12 @@ import { AuthContext } from "../../context/AuthContext";
 
 function Navbar() {
   const [authUser, setAuthUser] = useState(null);
+  const { currentUser, currentUserData, isAdmin } = useContext(AuthContext);
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    console.log("Navbar User Data" + typeof JSON.stringify(currentUserData));
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };
@@ -25,7 +27,6 @@ function Navbar() {
   }, []);
 
   const [isMenuClicked, setIsMenuClicked] = useState(false);
-  const { currentUser, currentUserData, isAdmin } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -119,7 +120,7 @@ function Navbar() {
             >
               <Link to="/profile">
                 <div className="user-info ">
-                  <img src={currentUserData?.photo} className="pfp" alt="pfp" />
+                  <img src={currentUserData?.photo} className="pfp" />
                   <div className="username  ">{currentUserData?.username}</div>
                 </div>
               </Link>
@@ -201,13 +202,9 @@ function Navbar() {
                             navigate("/profile");
                           }}
                         >
-                          <img
-                            src={currentUserData.photo}
-                            className="pfp"
-                            alt=""
-                          />
+                          <img src={currentUserData?.photo} className="pfp" />
                           <div className="username ">
-                            {currentUserData.username}
+                            {currentUserData?.sername}
                           </div>
                         </div>
                       </Link>

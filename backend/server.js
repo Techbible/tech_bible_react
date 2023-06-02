@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const app = express();
-const port = 5000;
+const port = 4000;
 
 app.use(cors());
 app.use(express.json());
@@ -15,6 +15,7 @@ const Subscribers = require("./models/Subscribers");
 const NewsArticle = require("./models/NewsArticle");
 const HomePageTool = require("./models/HomePageTool");
 const Discussion = require("./models/Discussion");
+const User = require("./models/User");
 
 //CONNECTING TO DATABASE
 
@@ -28,7 +29,7 @@ app.get("/mongo-tools", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB");
+    // console.log("Connected to MongoDB");
     const tools = await Tools.find();
 
     // console.log("TOOLS : ",tools);
@@ -46,7 +47,7 @@ app.get("/homePageTools", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB");
+    // console.log("Connected to MongoDB");
 
     const tools = await HomePageTool.find({});
     console.log("Home TOOLS: ", tools);
@@ -57,8 +58,6 @@ app.get("/homePageTools", async (req, res) => {
   }
 });
 
-
-
 //DELETE a Tool
 app.delete("/delete-tool/:id", async (req, res) => {
   try {
@@ -66,7 +65,7 @@ app.delete("/delete-tool/:id", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB");
+    // console.log("Connected to MongoDB");
     const tool = await Tools.deleteOne({ _id: req.params.id });
 
     res.send(tool); // Send an object containing both variables
@@ -299,8 +298,6 @@ app.post("/addSubscriber/:email", async (req, res) => {
   }
 });
 
-
-
 //GETTING ALL THE DISCUSSIONS
 
 app.get("/discussions", async (req, res) => {
@@ -321,26 +318,114 @@ app.get("/discussions", async (req, res) => {
 });
 
 // Create New Discussion
-app.post(
-  "/create-discussion",
-  async (req, res) => {
-    try {
-      const { userId, title, description, category } = req.body;
+app.post("/create-discussion", async (req, res) => {
+  try {
+    const { userId, title, description, category } = req.body;
 
-      const newDiscussion = await Discussion.create({
-        Title: title,
-        ParentId: null,
-        UserId: userId,
-        Description: description,
-        Category: category,
-        LikedBy: []
-      });
-      
-      res.status(201).json(newDiscussion);
-      console.log("comment added");
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Error adding tool comment");
-    }
+    const newDiscussion = await Discussion.create({
+      Title: title,
+      ParentId: null,
+      UserId: userId,
+      Description: description,
+      Category: category,
+      LikedBy: [],
+    });
+
+    res.status(201).json(newDiscussion);
+    console.log("comment added");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error adding tool comment");
   }
-);
+});
+
+//USERS
+// Create User
+app.post("/signup", async (req, res) => {
+  try {
+    const { FullName, uid, photo } = req.body;
+    //console.log(req.params, req.body);
+    const newUser = await User.create({
+      uid: uid,
+      username: FullName,
+      bio: "",
+      interests: [],
+      folders: [],
+      photo: photo,
+      isAdmin: false,
+    });
+
+    res.status(201).json(newUser);
+    ////console.log("user added");
+  } catch (err) {
+    ////console.error(err);
+    res.status(500).send("Error adding user");
+  }
+});
+//checking user credentials
+app.get("/check-user/:uid", async (req, res) => {
+  const { uid } = req.params;
+  try {
+    console.log("USER UID" + uid);
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    ////console.log("Connected to MongoDB");
+    const user = await User.findOne({ uid: uid });
+    console.log("USER UID Sent : " + user);
+
+    res.send(user); // Send an object containing both variables
+  } catch (error) {
+    ////console.error(error);
+    res.status(500).send("Error fetching tools data");
+  }
+});
+//ADD USER BIO
+app.post("/addBio/:uid/:bio", async (req, res) => {
+  try {
+    const { uid, bio } = req.params;
+
+    // Update the user document
+    await User.updateOne({ uid: uid }, { $set: { bio: bio } });
+
+    res.status(200).json({ message: "User bio updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error updating user bio" });
+  }
+});
+//ADD USER CATEGORIES
+app.post("/addCategories/:uid/:categories", async (req, res) => {
+  console.log;
+  try {
+    const { uid, categories } = req.params;
+    const categoriesArray = categories?.split(","); // Split categories string into an array
+
+    // Update the user document
+    await User.updateOne(
+      { uid: uid },
+      { $set: { interests: categoriesArray } }
+    );
+
+    res.status(200).json({ message: "User bio updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error updating user bio" });
+  }
+});
+
+//CLEAN USER INTERESTS
+app.post("/clearInterests/:uid", async (req, res) => {
+  try {
+    const { uid } = req.params;
+
+    // Update the user document to set interests field as an empty array
+    await User.updateOne({ uid: uid }, { $set: { interests: [] } });
+
+    res.status(200).json({ message: "Interests cleared successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error clearing interests" });
+  }
+});

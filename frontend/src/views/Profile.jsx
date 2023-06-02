@@ -7,11 +7,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import React, { useEffect, useState, useRef, useReducer } from "react";
 import { auth, db } from "../config/firebase";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  collection,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, doc, updateDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -51,7 +47,8 @@ const Profile = () => {
 
   const [copied, setCopied] = useState(false);
 
-  const { currentUser, currentUserData } = useContext(AuthContext);
+  const { currentUser, currentUserData, updateUserData } =
+    useContext(AuthContext);
 
   const [authUser, setAuthUser] = useState(null);
   const [addBio, setAddBio] = useState(false);
@@ -74,9 +71,10 @@ const Profile = () => {
   //Handling Interests with Checkbox
   const handleInterestCheck = (event) => {
     const { value, checked } = event.target;
-
+    updateUserData();
     let interests = checkedInterests;
     if (checked) {
+      updateUserData();
       interests = checkedInterests;
       interests.push(value);
       setcheckedInterests(interests);
@@ -86,7 +84,7 @@ const Profile = () => {
       setcheckedInterests(interests);
     }
   };
-  //_______________________________Modal Configs_____________________________________________
+  //______________________________Modal Configs____________________________________________
   //Modal Styles
 
   Modal.setAppElement("#root");
@@ -106,37 +104,52 @@ const Profile = () => {
   function closeModal2() {
     setIsOpen2(false);
   }
-  //*************************END Modal Configs*********************************
+  //************************END Modal Configs********************************
 
-  //_______________________________Inserting Changes_____________________________________________
+  //______________________________Inserting Changes____________________________________________
   const handleInterestsChange = async () => {
-    try {
-      const UserRef = doc(db, "Users", currentUserData.uid);
-      const userCategories = [];
-      CategoriesData.map((group) => {
-        if (checkedInterests.includes(group.groupName)) {
-          group.categories.map((category) => {
-            userCategories.push(category);
-          });
-        }
-      });
-      const data = { interests: userCategories };
-      await updateDoc(UserRef, data)
-        .then((UserRef) => {
-          console.log(
-            "A New Document Field has been added to an existing document"
-          );
-          closeModal();
-        })
-        .catch((error) => {
-          console.log(error);
+    const userCategories = [];
+    CategoriesData?.map((group) => {
+      if (checkedInterests?.includes(group.groupName)) {
+        group?.categories?.map((category) => {
+          userCategories?.push(category);
         });
+      }
+    });
+    try {
+      // const UserRef = doc(db, "Users", currentUserData.uid);
+      const res = await axios.post(
+        `${BASE_URL}/addCategories/${currentUserData.uid}/${userCategories}`
+      );
+      // const data = { interests: userCategories };
+      // await updateDoc(UserRef, data)
+      //   .then((UserRef) => {
+      //     console.log(
+      //       "A New Document Field has been added to an existing document"
+      //     );
 
+      //   })
+      // .catch((error) => {
+      //   console.log(error);
+      // });
+
+      updateUserData();
       closeModal();
+      console.log(
+        "current user data type : " + typeof currentUserData?.interests
+      );
     } catch (error) {
-      console.log(error);
+      console.log("EMPTY Categories : " + typeof userCategories);
+      const res = await axios.post(
+        `${BASE_URL}/clearInterests/${currentUserData.uid}`
+      );
+      closeModal();
+      updateUserData();
+
+      console.log("CLOSE SAVE ERROR : " + error);
     }
   };
+
   const copyToClipboard = () => {
     const link = `https://techbible.ai/#/UserProfile/${currentUserData?.uid}`;
     navigator.clipboard
@@ -160,6 +173,7 @@ const Profile = () => {
         userInterests.push(group.groupName);
       }
     });
+
     setcheckedInterests(userInterests);
     console.log("User Interests " + checkedInterests);
     setEditProfileClicked(false);
@@ -234,8 +248,7 @@ const Profile = () => {
       });
   };
 
-  //************************END Inserting Changes*********************************
-
+  //***********************END Inserting Changes********************************
 
   //this is mongo
   const LoadLikedTools = async () => {
@@ -285,14 +298,15 @@ const Profile = () => {
   //   });
   // }, [categories]);
 
-  // New useEffect locic
+  // New useEffect logic
   useEffect(() => {
     const CategoriesArray = [];
     CategoriesData.map((group) => {
       group.categories.map((category) => CategoriesArray.push(category));
     });
     setCategories(CategoriesArray);
-  }, [categories]);
+  }, []);
+  // }, [categories]);
 
   //To add/Update a Bio
   const UpdatingBio = async () => {
@@ -300,8 +314,12 @@ const Profile = () => {
       if (bio.length > 50) {
         alert("Your bio is more than 50 characters");
       } else {
-        const UserRef = doc(db, "Users", currentUserData.uid);
-        await updateDoc(UserRef, { bio: bio });
+        // const UserRef = doc(db, "Users", currentUserData.uid);
+        // await updateDoc(UserRef, { bio: bio });
+        const res = await axios.post(
+          `${BASE_URL}/addBio/${currentUserData.uid}/${bio}`
+        );
+        updateUserData();
         setAddBio(false);
         setUpdateBio(false);
       }
@@ -610,7 +628,7 @@ const Profile = () => {
                     htmlFor={group.groupName}
                     style={
                       checkedInterests.includes(group.groupName)
-                        ? { backgroundColor: "#7869e6", color: "white" }
+                        ? { backgroundColor: "#EF4823", color: "white" }
                         : {}
                     }
                   >

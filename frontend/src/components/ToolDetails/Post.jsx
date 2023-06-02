@@ -53,14 +53,18 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
 
   const getUserInfo = async () => {
     try {
-      const userData = await onSnapshot(
-        doc(db, "Users", comment.userId),
-        (doc) => {
-          setName(doc.data().username);
-          setPhoto(doc.data().photo);
-          setId(doc.data().uid)
-        }
-      );
+      // const userData = await onSnapshot(
+      //   doc(db, "Users", comment.userId),
+      //   (doc) => {
+      //     setName(doc.data().username);
+      //     setPhoto(doc.data().photo);
+      //     setId(doc.data().uid)
+      //   }
+      // );
+      const res = await axios.get(`${BASE_URL}/check-user/${comment.userId}`);
+      setName(res.data.username);
+      setPhoto(res.data.photo);
+      setId(res.data.uid);
     } catch (error) {
       console.log("Error checking user credentials:", error);
     }
@@ -145,16 +149,14 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                 : "w-6 h-6 rounded-full overflow-hidden mr-[1rem]"
             }
           >
-             <Link to={`/UserProfile/${id}`}>
-             <img
-              className="w-full h-full object-cover rounded-full"
-              // src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
-              src={photo}
-              alt="Profile picture"
-            />
-
-             </Link>
-           
+            <Link to={`/UserProfile/${id}`}>
+              <img
+                className="w-full h-full object-cover rounded-full"
+                // src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
+                src={photo}
+                alt="Profile picture"
+              />
+            </Link>
           </div>
         </div>
 
@@ -168,10 +170,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                   : "text-white light text-[14px]"
               }
             >
-               <Link to={`/UserProfile/${id}`}>
-               {name}&nbsp;
-               </Link>
-             
+              <Link to={`/UserProfile/${id}`}>{name}&nbsp;</Link>
             </div>
             <div className="flex flex-row mt-1 sm:mt-2">
               {comment.parentId === "null" ? (

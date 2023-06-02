@@ -21,6 +21,7 @@ import { ModalcustomStyles } from "./Profile";
 import NewsLetterSubscribe from "../components/home components/NewsLetterSubscribe";
 import { CategoriesData } from "../dataJson/CategoriesData";
 import Footer from "../components/home components/Footer";
+import { Navbar } from "../components";
 
 const Home = ({ allTools, limitedTools }) => {
   //CONTEXT

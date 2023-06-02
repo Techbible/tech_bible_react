@@ -10,6 +10,8 @@ import "../assets/styles/signin_signup/signin_signup.css";
 
 //integrating open AI in order to generate auto profiles pictures for the users
 import { Configuration, OpenAIApi } from "openai";
+import { BASE_URL } from "../config/mongo";
+import axios from "axios";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -20,6 +22,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
+  const [uid, setUID] = useState("");
   const [password, setPassword] = useState("");
   const [FullName, setFullName] = useState("");
   // const [passwordError, setPasswordError] = useState("");
@@ -62,66 +65,137 @@ const SignUp = () => {
 
   // }
 
-  const handleSignUp = (e) => {
+  // const handleSignUp = (e) => {
+  //   e.preventDefault();
+  //   // generateImage();
+  //   createUserWithEmailAndPassword(auth, email, password)
+  //     .then(async (result) => {
+  //       const docData = {
+  //         uid: result.user.uid,
+  //         username: FullName,
+  //         bio: "",
+  //         interests: [],
+  //         folders: [],
+  //         photo:
+  //           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnyuq5iI30Yo3TwJF-Sr5PJz0KZLImVddlRw&usqp=CAU",
+  //         isAdmin: false,
+  //         timestamp: Timestamp.now(),
+  //       };
+  //       await setDoc(doc(db, "Users", result.user.uid), docData);
+  //       navigate("/");
+  //     })
+  //     .catch((e) => {
+  //       if (email === "") {
+  //         setEmailError("Field is empty");
+  //       } else {
+  //         switch (e.code) {
+  //           case "auth/email-already-in-use":
+  //             setEmailError("Email already in use");
+  //             setIsEmailValid(false);
+  //             break;
+  //           case "auth/invalid-email":
+  //             setEmailError("Invalid email");
+  //             setIsEmailValid(false);
+  //             break;
+  //           case "auth/weak-password":
+  //             setPasswordError("Password should be at least 6 characters");
+  //             setIsPasswordValid(false);
+  //             break;
+  //           default:
+  //             setEmailError("Enter an email");
+  //             setPasswordError(e.message);
+  //         }
+  //       }
+  //       // alert(error)
+  //     });
+  // };
+
+  const handleSignUp = async (e) => {
     e.preventDefault();
     // generateImage();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async (result) => {
-        const docData = {
-          uid: result.user.uid,
-          username: FullName,
-          bio: "",
-          interests: [],
-          folders: [],
-          photo:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnyuq5iI30Yo3TwJF-Sr5PJz0KZLImVddlRw&usqp=CAU",
-          isAdmin: false,
-          timestamp: Timestamp.now(),
-        };
-        await setDoc(doc(db, "Users", result.user.uid), docData);
-        navigate("/");
-      })
-      .catch((e) => {
-        if (email === "") {
-          setEmailError("Field is empty");
-        } else {
-          switch (e.code) {
-            case "auth/email-already-in-use":
-              setEmailError("Email already in use");
-              setIsEmailValid(false);
-              break;
-            case "auth/invalid-email":
-              setEmailError("Invalid email");
-              setIsEmailValid(false);
-              break;
-            case "auth/weak-password":
-              setPasswordError("Password should be at least 6 characters");
-              setIsPasswordValid(false);
-              break;
-            default:
-              setEmailError("Enter an email");
-              setPasswordError(e.message);
-          }
-        }
-        // alert(error)
+    try {
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      // const docData = {
+      //   uid: result.user.uid,
+      //   username: FullName,
+      //   bio: "",
+      //   interests: [],
+      //   folders: [],
+      //   photo:
+      //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnyuq5iI30Yo3TwJF-Sr5PJz0KZLImVddlRw&usqp=CAU",
+      //   isAdmin: false,
+      //   timestamp: Timestamp.now(),
+      // };
+      // await setDoc(doc(db, "Users", result.user.uid), docData);
+
+      // setUID(result.user.uid);
+      const uid = result.user.uid;
+      const photo =
+        "https://media.istockphoto.com/id/1422221682/vector/3d-default-profile-wallpaper-8k.jpg?s=170667a&w=0&k=20&c=kHxXnwKP_ApQxSmCBr1qFc6gMclmRlXso7rWOL2Pj04=";
+      const response = await axios.post(`${BASE_URL}/signup`, {
+        FullName,
+        uid,
+        photo,
       });
+      // Handle successful response
+      console.log("User created successfully:", response.data);
+      // navigate("/");
+      window.location.href = `/`;
+    } catch (e) {
+      if (email === "") {
+        setEmailError("Field is empty");
+      } else {
+        switch (e.code) {
+          case "auth/email-already-in-use":
+            setEmailError("Email already in use");
+            setIsEmailValid(false);
+            break;
+          case "auth/invalid-email":
+            setEmailError("Invalid email");
+            setIsEmailValid(false);
+            break;
+          case "auth/weak-password":
+            setPasswordError("Password should be at least 6 characters");
+            setIsPasswordValid(false);
+            break;
+          default:
+            setEmailError("Enter an email");
+            setPasswordError(e.message);
+        }
+      }
+      // alert(error)
+    }
   };
 
   const handleGoogleSignUp = () => {
     signInWithPopup(auth, provider).then(async (data) => {
-      const GoogleData = {
-        uid: data.user.uid,
-        username: data.user.displayName,
-        bio: "",
-        interests: [],
-        folders: [],
-        photo: data.user.photoURL,
-        isAdmin: false,
-        timestamp: Timestamp.now(),
-      };
+      // const GoogleData = {
+      //   uid: data.user.uid,
+      //   username: data.user.displayName,
+      //   bio: "",
+      //   interests: [],
+      //   folders: [],
+      //   photo: data.user.photoURL,
+      //   isAdmin: false,
+      //   timestamp: Timestamp.now(),
+      // };
       // console.log(data);
-      await setDoc(doc(db, "Users", data.user.uid), GoogleData);
-      navigate("/");
+      // await setDoc(doc(db, "Users", data.user.uid), GoogleData);
+      const FullName = data.user.displayName;
+      const uid = data.user.uid;
+      const photo = data.user.photoURL;
+
+      const response = await axios.post(`${BASE_URL}/signup`, {
+        FullName,
+        uid,
+        photo,
+      });
+      window.location.href = `/`;
     });
   };
 
@@ -148,7 +222,6 @@ const SignUp = () => {
             />
           </div>
           <div className="flex flex-column mb-5">
-            {" "}
             <lable className="text-[15px] light leading-none text-white">
               E-mail*
             </lable>
