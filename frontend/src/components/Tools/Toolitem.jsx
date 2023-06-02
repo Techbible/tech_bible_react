@@ -138,15 +138,13 @@ const Toolitem = ({
                       currentUser ? handleLikeUnlike : () => navigate("/signin")
                     }
                   ></i>
-                  <div className="color-white fontSize-12 fontWeight-600 noOfLines-undefined">
+                  <div className="text-red-500 color-white fontSize-12 fontWeight-600 noOfLines-undefined">
                     {simulatedLikesNumber}
                   </div>
                 </>
               ) : (
                 <Link to={`/tooldetails/${toolData?._id}`}>
-                  <div className="light text-[14px] border-[1px] px-[8px] py-[1px] rounded-[5px] ">
-                    Visit
-                  </div>
+                  <i className="text-white-500 text-[25px] fas fa-heart hover:text-[26px] cursor-pointe"></i>
                 </Link>
               )}
             </div>
