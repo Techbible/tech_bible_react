@@ -453,6 +453,38 @@ app.post("/addBio/:uid/:bio", async (req, res) => {
     res.status(500).json({ message: "Error updating user bio" });
   }
 });
+//Update USERNAME
+app.post("/updateUsername/:uid/:username", async (req, res) => {
+  try {
+    const { uid, username } = req.params;
+
+    // Update the user document
+    await User.updateOne({ uid: uid }, { $set: { username: username } });
+
+    res.status(200).json({ message: "User bio updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error updating user bio" });
+  }
+});
+//Update USERNAME AND PHOTO
+app.post("/updateUsernameAndPhoto/:uid/:username/:photo", async (req, res) => {
+  try {
+    const { uid, username, photo } = req.params;
+
+    // Update the user document
+    await User.updateOne(
+      { uid: uid },
+      { $set: { username: username, photo: photo } }
+    );
+
+    res.status(200).json({ message: "User bio updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error updating user bio" });
+  }
+});
+
 //ADD USER CATEGORIES
 app.post("/addCategories/:uid/:categories", async (req, res) => {
   console.log;
