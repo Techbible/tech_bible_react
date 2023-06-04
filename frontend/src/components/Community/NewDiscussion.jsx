@@ -1,50 +1,92 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CategoriesData } from "../../dataJson/CategoriesData";
-import axios from "axios";
+// import axios from "axios";
 import { BASE_URL } from "../../config/mongo";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 function NewDiscussion() {
-  const { currentUser} = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
-  const [title,setTitle] = useState("");
-  const [description,setDescription] = useState("");
-  const [category,setCategory] = useState("");
-  const [userId,setUserID] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [userId, setUserID] = useState("");
+  const axios = require("axios");
 
-  useEffect(()=>{
-setUserID(currentUser?.uid)
-  },[currentUser])
+  async function checkMoralImplications(inputText) {
+    const apiKey = "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";
+    const apiUrl =
+      "https://api.openai.com/v1/engines/davinci-codex/completions";
 
+    try {
+      const response = await axios.post(
+        apiUrl,
+        {
+          prompt: `Is the following text morally acceptable? "${inputText}"`,
+          max_tokens: 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const completion = response.data.choices[0].text.trim();
+      return completion === "Yes";
+    } catch (error) {
+      console.error("Error:", error);
+      return null;
+    }
+  }
+
+  useEffect(() => {
+    setUserID(currentUser?.uid);
+  }, [currentUser]);
+  const createDiscussion = async () => {
+    const response = await axios.post(`${BASE_URL}/create-discussion`, {
+      userId,
+      title,
+      description,
+      category,
+    });
+    // Handle successful response
+    console.log("Discussion Created successfully:", response.data);
+    navigate("/community");
+  };
   const navigate = useNavigate();
   const handleCreateDiscussion = async (e) => {
     e.preventDefault();
-  
+
     if (!title || !description || !category || !userId) {
-      console.error('Missing required fields');
-      console.log(title,description,category,userId);
+      console.error("Missing required fields");
+      console.log(title, description, category, userId);
       return;
     }
-  
-    try {
-      console.log(title,description,category,userId);
 
-      const response = await axios.post(`${BASE_URL}/create-discussion`, {
-        userId,
-        title,
-        description,
-        category,
+    try {
+      console.log(title, description, category, userId);
+
+      const inputText = { description };
+      checkMoralImplications(inputText).then((result) => {
+        if (result === null) {
+          alert("The result is null.");
+        } else if (result) {
+          console.log("The text is morally acceptable.");
+          createDiscussion();
+        } else {
+          alert("The text is morally unacceptable.");
+        }
       });
-      // Handle successful response
-      console.log('Discussion Created successfully:', response.data);
-      navigate('/community');
+
       // You can perform additional actions here, such as displaying a success message or redirecting to another page
     } catch (error) {
       // Handle error
-      console.error('Error creating discussion:', error);
+      console.error("Error creating discussion:", error);
     }
   };
-  
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black">
       <div className="w-full max-w-sm p-6 bg-gray-800 rounded shadow-md">
@@ -93,14 +135,19 @@ setUserID(currentUser?.uid)
             >
               Category
             </label>
-            <select name="Category" value={category} onChange={(e)=>setCategory(e.target.value)}>
-            <option disabled selected>- Select a Category -</option>
-                {CategoriesData?.map((group) => (
-                  <option value={group.groupName}>{group.groupName}</option>
-                ))}
+            <select
+              name="Category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option disabled selected>
+                - Select a Category -
+              </option>
+              {CategoriesData?.map((group) => (
+                <option value={group.groupName}>{group.groupName}</option>
+              ))}
             </select>
           </div>
-
 
           <div className="flex justify-center mt-10">
             <button

@@ -17,42 +17,71 @@ function Community() {
   const [Users, setUsers] = useState(false);
   const [Discussions, setDiscussions] = useState();
 
+  //Fetch Disscutions
+  const fetchDiscussions = async () => {
+    const response = await axios.get(`${BASE_URL}/discussions`);
+    const data = response.data;
+
+    // Sort the discussions by updatedAt field in descending order
+    const sortedDiscussions = data.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+
+    // Calculate the time difference in seconds, minutes, hours, days, or years for each comment and format it
+    const discussionsWithTimeAgo = sortedDiscussions.map((discussion) => {
+      const createdAt = new Date(discussion.createdAt);
+      const currentDate = new Date();
+      const timeDifferenceInSeconds = Math.floor(
+        (currentDate - createdAt) / 1000
+      );
+
+      let formattedTimeAgo;
+      if (timeDifferenceInSeconds < 1) {
+        formattedTimeAgo = "Now";
+      } else if (timeDifferenceInSeconds < 60) {
+        formattedTimeAgo = `${timeDifferenceInSeconds}s ago`;
+      } else if (timeDifferenceInSeconds < 3600) {
+        const minutes = Math.floor(timeDifferenceInSeconds / 60);
+        formattedTimeAgo = `${minutes}m ago`;
+      } else if (timeDifferenceInSeconds < 86400) {
+        const hours = Math.floor(timeDifferenceInSeconds / 3600);
+        formattedTimeAgo = `${hours}h ago`;
+      } else if (timeDifferenceInSeconds < 31536000) {
+        const days = Math.floor(timeDifferenceInSeconds / 86400);
+        formattedTimeAgo = `${days}d ago`;
+      } else {
+        const years = Math.floor(timeDifferenceInSeconds / 31536000);
+        formattedTimeAgo = `${years}y ago`;
+      }
+
+      return {
+        ...discussion,
+        timeAgo: formattedTimeAgo,
+      };
+    });
+
+    setDiscussions(discussionsWithTimeAgo);
+    console.log(discussionsWithTimeAgo);
+  };
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-
-
   useEffect(() => {
-    const usersRef = collection(db, "Users");
-
-    const getUsers = async () => {
-      try {
-        const querySnapshot = await getDocs(usersRef);
-        const usersData = [];
-        querySnapshot.forEach((doc) => {
-          usersData.push(doc.data());
-        });
-        setUsers(usersData);
-        console.log(usersData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    const GetDiscussions = async()=>{
-      try {
-        const response = await axios.get(`${BASE_URL}/discussions`);
-        console.log(response.data);
-        setDiscussions(response.data);
-        return response.data;
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
-    }
-
-    getUsers();
-    GetDiscussions();
+    // const GetDiscussions = async () => {
+    //   try {
+    //     const response = await axios.get(`${BASE_URL}/discussions`);
+    //     console.log(response.data);
+    //     setDiscussions(response.data);
+    //     return response.data;
+    //   } catch (error) {
+    //     console.error(error);
+    //     return [];
+    //   }
+    // };
+    // GetDiscussions();
+    fetchDiscussions();
   }, []);
 
   return (
@@ -72,10 +101,9 @@ function Community() {
             Ask questions, find support, and connect with the community
           </p>
 
-        <div className="light text-[14px] border-[1px] px-[8px] py-[1px] rounded-[5px]">
-          <Link to="/create-discussion">Create New Discussion</Link>
-        </div>
-
+          <div className="light text-[14px] border-[1px] px-[8px] py-[1px] rounded-[5px]">
+            <Link to="/create-discussion">Create New Discussion</Link>
+          </div>
         </div>
         <div className="flex direction-column">
           <div className="flex direction-row">
@@ -204,7 +232,7 @@ function Community() {
           <div>
             {Discussions &&
               Discussions?.map((discussion) => (
-                  <Discussion discussion={discussion} />
+                <Discussion discussion={discussion} />
               ))}
           </div>
         </div>
