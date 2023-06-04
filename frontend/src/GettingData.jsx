@@ -15,10 +15,10 @@ function GettingData() {
       <h1>Tools List</h1>
       <ul>
         {tools.map((tool) => (
-          <li key={tool._id}>
-            <h2>{tool.Name}</h2>
+          <li key={tool?._id}>
+            <h2>{tool?.Name}</h2>
             <br />
-            <h2>{tool.Description}</h2>
+            <h2>{tool?.Description}</h2>
             <br />
             <br />
             <br />

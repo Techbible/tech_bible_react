@@ -12,7 +12,7 @@ import NewsLetter from "../components/home components/NewsLetter";
 import NewsLetterSubscribe from "../components/home components/NewsLetterSubscribe";
 
 const NewToolDetails = () => {
-  let { id } = useParams();
+  let { id, homeTool } = useParams();
 
   const { currentUser } = useContext(AuthContext);
 
@@ -33,9 +33,15 @@ const NewToolDetails = () => {
 
   const addReply = async (text, parentId) => {
     console.log("addReply : " + text + " " + parentId);
-    const response = await axios.post(
-      `${BASE_URL}/addToolComment/${id}/${currentUser.uid}/${text}/${parentId}`
-    );
+    if (homeTool === "1") {
+      const response = await axios.post(
+        `${BASE_URL}/addHomeToolComment/${id}/${currentUser.uid}/${text}/${parentId}`
+      );
+    } else {
+      const response = await axios.post(
+        `${BASE_URL}/addToolComment/${id}/${currentUser.uid}/${text}/${parentId}`
+      );
+    }
     console.log("Reply added succesfuly");
   };
 
@@ -98,11 +104,19 @@ const NewToolDetails = () => {
     // alert(comment);
     try {
       if (comment.length > 0) {
-        const response = await axios.post(
-          `${BASE_URL}/addToolComment/${id}/${
-            currentUser.uid
-          }/${comment}/${"null"}`
-        );
+        if (homeTool === 1) {
+          const response = await axios.post(
+            `${BASE_URL}/addHomeToolComment/${id}/${
+              currentUser.uid
+            }/${comment}/${"null"}`
+          );
+        } else {
+          const response = await axios.post(
+            `${BASE_URL}/addToolComment/${id}/${
+              currentUser.uid
+            }/${comment}/${"null"}`
+          );
+        }
 
         setPostCommentClicked(true);
 
@@ -119,6 +133,7 @@ const NewToolDetails = () => {
   };
 
   useEffect(() => {
+    console.log("TOOL DATA : " + toolData);
     setIsCommentsLoadalbe(false);
     fetchComments();
     setIsCommentsLoadalbe(true);
@@ -135,9 +150,20 @@ const NewToolDetails = () => {
 
   //this is JS LOGIC
   useEffect(() => {
-    const foundTool = allTools?.find((tool) => tool._id === id);
-    setToolData(foundTool);
-    console.log(toolData);
+    const getTool = async () => {
+      if (homeTool === "1") {
+        const res = await axios.get(`${BASE_URL}/homePageTools`);
+        const foundHomeTool = res?.data?.find((tool) => tool._id === id);
+        setToolData(foundHomeTool);
+        console.log("HomeTool Data : " + toolData);
+      } else {
+        const foundTool = allTools?.find((tool) => tool._id === id);
+        setToolData(foundTool);
+        console.log(toolData);
+        console.log("Tool Data" + toolData);
+      }
+    };
+    getTool();
   }, []);
 
   if (!isCommentsLoadalbe) {
@@ -157,7 +183,7 @@ const NewToolDetails = () => {
 
           <div className=" xl:w-[1400px] lg:w-[1000px] md:w-[1000px] sm:w-[900px] w-[300px]"></div>
           {/* ToolItem Tooldetails */}
-          <ToolInfo toolData={toolData} />
+          <ToolInfo toolData={toolData} homeTool={homeTool} />
           {/* END ToolItem Tooldetails */}
 
           {/* Community Thoughts  */}

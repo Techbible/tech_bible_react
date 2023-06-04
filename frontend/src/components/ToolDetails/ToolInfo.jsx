@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { BASE_URL } from "../../config/mongo";
 
-const ToolInfo = ({ toolData }) => {
+const ToolInfo = ({ toolData, homeTool }) => {
   const navigate = useNavigate();
   const { currentUser, isAdmin } = useContext(AuthContext);
 
@@ -27,7 +27,19 @@ const ToolInfo = ({ toolData }) => {
       setIsToolLiked(true);
       // Simulate increment visually
       setSimulatedLikesNumber((prevLikes) => prevLikes + 1);
-      await axios.post(`${BASE_URL}/like/${toolData._id}/${currentUser?.uid}`);
+      if (homeTool === "1") {
+        await axios.post(
+          `${BASE_URL}/likeHomeTool/${toolData._id}/${currentUser?.uid}`
+        );
+      }
+      // else {
+
+      if (homeTool === "0") {
+        await axios.post(
+          `${BASE_URL}/like/${toolData._id}/${currentUser?.uid}`
+        );
+      }
+      // }
       // setLikesNumber((prevLikes) => prevLikes + 1);
     } catch (error) {
       console.error("Failed to like tool:", error);
@@ -38,9 +50,22 @@ const ToolInfo = ({ toolData }) => {
     try {
       setIsToolLiked(false);
       setSimulatedLikesNumber((prevLikes) => Math.max(prevLikes - 1, 0));
-      await axios.post(
-        `${BASE_URL}/unlike/${toolData._id}/${currentUser?.uid}`
-      );
+      if (homeTool === "1") {
+        try {
+          await axios.post(
+            `${BASE_URL}/unlikeHomeTool/${toolData._id}/${currentUser?.uid}`
+          );
+          console.log("UNLIKE home TOOL Succesfuly");
+        } catch (e) {
+          console.log("UNLIKE home TOOL ERROR t-info : " + e);
+        }
+      }
+      // else {
+      if (homeTool === "0g") {
+        await axios.post(
+          `${BASE_URL}/unlike/${toolData._id}/${currentUser?.uid}`
+        );
+      }
       // setLikesNumber((prevLikes) => Math.max(prevLikes - 1, 0));
     } catch (error) {
       console.error("Failed to unlike tool:", error);

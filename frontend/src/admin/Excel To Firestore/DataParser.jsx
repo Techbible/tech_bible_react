@@ -77,10 +77,10 @@ function DataParser() {
 
   const DataInserter = () => {
     ParsedData?.map(async (toolData) => {
-        const uid = uuid();
+      const uid = uuid();
       await setDoc(doc(db, "Tools", uid), {
         id: uid,
-        Name: toolData.Name,
+        Name: toolData?.Name,
         Description: toolData.Description,
         Price: toolData.Price,
         VideoURL: "",
@@ -105,7 +105,10 @@ function DataParser() {
         className="block mt-10 p-2 w-full text-blue-700 bg-black rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-dark-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       />
       {tableRows?.length > 0 ? (
-        <button className="bg-blue-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" onClick={() => DataInserter()}>
+        <button
+          className="bg-blue-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => DataInserter()}
+        >
           Import
         </button>
       ) : null}

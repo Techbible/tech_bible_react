@@ -66,7 +66,7 @@ const YouMightLikeApp = () => {
           <a href={tool.URL} target="_blank" rel="noreferrer">
             <YouMightLikeItem
               id={tool._id}
-              title={tool.Name}
+              title={tool?.Name}
               description={tool.Description}
               icon={tool.Icon}
               url={tool.URL}

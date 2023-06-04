@@ -22,8 +22,14 @@ import NewsLetterSubscribe from "../components/home components/NewsLetterSubscri
 import { CategoriesData } from "../dataJson/CategoriesData";
 import Footer from "../components/home components/Footer";
 import { Navbar } from "../components";
+import { useRecoilValue } from "recoil";
+import { allToolsAtom } from "../recoil/tool";
+import { homeToolsAtom } from "../recoil/homePageTools";
 
-const Home = ({ allTools, limitedTools }) => {
+const Home = () => {
+  const allTools = useRecoilValue(allToolsAtom);
+
+  const limitedTools = useRecoilValue(homeToolsAtom);
   //CONTEXT
   const { currentUser, currentUserData } = useContext(AuthContext);
   const { DataAPI, MongoDBData } = useContext(NewsContext);
@@ -294,7 +300,7 @@ const Home = ({ allTools, limitedTools }) => {
         selectedSuggestion < filteredSuggestions.length
       ) {
         const selectedTool = filteredSuggestions[selectedSuggestion];
-        window.location.href = `/tooldetails/${selectedTool._id}`;
+        window.location.href = `/tooldetails/${selectedTool._id}/${"0"}`;
         // navigate(`/tooldetails/${selectedTool._id}`);
       }
     }
@@ -478,7 +484,7 @@ const Home = ({ allTools, limitedTools }) => {
                         .slice(0, 10)
                         .map((tool, index) => (
                           <Link
-                            to={`/tooldetails/${tool._id}`}
+                            to={`/tooldetails/${tool._id}/${"0"}`}
                             className="hover:text-black font-bold"
                             key={tool._id}
                           >
@@ -490,8 +496,8 @@ const Home = ({ allTools, limitedTools }) => {
                               }`}
                             >
                               <div>
-                                <p className="text-gray-500" key={tool.Name}>
-                                  {tool.Name}
+                                <p className="text-gray-500" key={tool._id}>
+                                  {tool?.Name}
                                 </p>
                               </div>
                             </li>

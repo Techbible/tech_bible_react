@@ -176,7 +176,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
               {comment.parentId === "null" ? (
                 <div className="text-gray-300 text-xs sm:text-sm">
                   -Posted in-&nbsp;{toolData?.Category} &nbsp;-&nbsp;{" "}
-                  {toolData.Name} &nbsp;-&nbsp;{comment.timeAgo}
+                  {toolData?.Name} &nbsp;-&nbsp;{comment.timeAgo}
                 </div>
               ) : (
                 <div className="text-gray-300 text-[12px]">
