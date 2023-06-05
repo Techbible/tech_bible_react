@@ -43,7 +43,11 @@ function LikedTools() {
         <div className="tools-list-container">
           {LikedTools ? (
             LikedTools?.map((LikedTool) => (
-              <Toolitem toolData={LikedTool} forceRender={forceRender} />
+              <Toolitem
+                toolData={LikedTool}
+                forceRender={forceRender}
+                homeTool={false}
+              />
             ))
           ) : (
             <div>you didn't like any tools yet</div>

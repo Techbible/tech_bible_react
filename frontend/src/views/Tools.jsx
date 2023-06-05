@@ -122,7 +122,6 @@ function Tools() {
                             className="delete-btn"
                             onClick={() => deleteTool(tool._id)}
                           >
-                            
                             <span className="material-symbols-outlined">
                               delete
                             </span>
@@ -160,7 +159,7 @@ function Tools() {
                           <span className="read-more">
                             <Link
                               className="text-uppercase read-more-2"
-                              to={`/tooldetails/${tool._id}`}
+                              to={`/tooldetails/${tool._id}/${"0"}`}
                             >
                               Read more{" "}
                             </Link>

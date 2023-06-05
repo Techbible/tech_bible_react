@@ -24,6 +24,7 @@ const Toolitem = ({
     toolData?.LikedBy?.length || 0
   );
   useEffect(() => {
+    console.log("TOOLITEM DATA : " + toolData);
     setIsToolLiked(toolData?.LikedBy?.includes(currentUser?.uid) || false);
     // setLikesNumber(toolData?.LikedBy?.length || 0);
     setSimulatedLikesNumber(toolData?.LikedBy?.length || 0);
@@ -34,7 +35,15 @@ const Toolitem = ({
       setIsToolLiked(true);
       // Simulate increment visually
       setSimulatedLikesNumber((prevLikes) => prevLikes + 1);
-      await axios.post(`${BASE_URL}/like/${toolData._id}/${currentUser?.uid}`);
+      if (homeTool) {
+        const res = await axios.post(
+          `${BASE_URL}/likeHomeTool/${toolData._id}/${currentUser?.uid}`
+        );
+      } else {
+        const res = await axios.post(
+          `${BASE_URL}/like/${toolData._id}/${currentUser?.uid}`
+        );
+      }
     } catch (error) {
       console.error("Failed to like tool:", error);
     }
@@ -44,9 +53,20 @@ const Toolitem = ({
     try {
       setIsToolLiked(false);
       setSimulatedLikesNumber((prevLikes) => Math.max(prevLikes - 1, 0));
-      await axios.post(
-        `${BASE_URL}/unlike/${toolData._id}/${currentUser?.uid}`
-      );
+      if (homeTool) {
+        try {
+          const res = await axios.post(
+            `${BASE_URL}/unlikeHomeTool/${toolData._id}/${currentUser?.uid}`
+          );
+          console.log("UNLIKE home TOOL Succesfuly");
+        } catch (e) {
+          console.log("UNLIKE TOOL ERROR t-item: " + e);
+        }
+      } else {
+        const res = await axios.post(
+          `${BASE_URL}/unlike/${toolData._id}/${currentUser?.uid}`
+        );
+      }
       // setLikesNumber((prevLikes) => Math.max(prevLikes - 1, 0));
     } catch (error) {
       console.error("Failed to unlike tool:", error);
@@ -71,11 +91,14 @@ const Toolitem = ({
           className="rounded-[6px]  lg:w-[81px] md:w-[61px] sm:w-[51px] w-[51px] cursor-pointer  "
           data-test="post-thumbnail"
           onClick={
-            currentUser
-              ? () => navigate(`/tooldetails/${toolData?._id}`)
-              : () => {
-                  navigate(`/tooldetails/${toolData?._id}`);
-                }
+            // currentUser
+            //   ? () => navigate(`/tooldetails/${toolData?._id}`)
+            //   : () => {
+            //       navigate(`/tooldetails/${toolData?._id}`);
+            //     }
+            homeTool
+              ? () => navigate(`/tooldetails/${toolData?._id}/${"1"}`)
+              : () => navigate(`/tooldetails/${toolData?._id}/${"0"}`)
           }
         >
           <img
@@ -88,11 +111,14 @@ const Toolitem = ({
 
         <div
           onClick={
-            currentUser
-              ? () => navigate(`/tooldetails/${toolData?._id}`)
-              : () => {
-                  navigate(`/tooldetails/${toolData?._id}`);
-                }
+            // currentUser
+            //   ? () => navigate(`/tooldetails/${toolData?._id}`)
+            //   : () => {
+            //       navigate(`/tooldetails/${toolData?._id}`);
+            //     }
+            homeTool
+              ? () => navigate(`/tooldetails/${toolData?._id}/${"1"}`)
+              : () => navigate(`/tooldetails/${toolData?._id}/${"0"}`)
           }
           className="flex direction-column flex-1 cursor-pointer "
         >
@@ -128,25 +154,25 @@ const Toolitem = ({
           <div className="flex direction-row align-center mt-3">
             <div className="flex direction-column align-items-center gap-2 mx-3 ">
               {/* like/unlike logic*/}
-              {homeTool === false ? (
-                <>
-                  <i
-                    className={`${
-                      isToolLiked ? "text-red-500" : "text-white border-white"
-                    } text-[25px] fas fa-heart hover:text-[26px] cursor-pointer`}
-                    onClick={
-                      currentUser ? handleLikeUnlike : () => navigate("/signin")
-                    }
-                  ></i>
-                  <div className="text-red-500 color-white fontSize-12 fontWeight-600 noOfLines-undefined">
-                    {simulatedLikesNumber}
-                  </div>
-                </>
-              ) : (
+              {/* {homeTool === false ? ( */}
+              <>
+                <i
+                  className={`${
+                    isToolLiked ? "text-red-500" : "text-white border-white"
+                  } text-[25px] fas fa-heart hover:text-[26px] cursor-pointer`}
+                  onClick={
+                    currentUser ? handleLikeUnlike : () => navigate("/signin")
+                  }
+                ></i>
+                <div className="text-red-500 color-white fontSize-12 fontWeight-600 noOfLines-undefined">
+                  {simulatedLikesNumber}
+                </div>
+              </>
+              {/* ) : (
                 <Link to={`/tooldetails/${toolData?._id}`}>
                   <i className="text-white-500 text-[25px] fas fa-heart hover:text-[26px] cursor-pointe"></i>
                 </Link>
-              )}
+              )} */}
             </div>
             <div
               className="cursor-pointer ml-2 text-center"

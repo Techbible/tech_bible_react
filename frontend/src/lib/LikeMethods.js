@@ -31,7 +31,7 @@ const LikeMethods = forwardRef((props, ref) => {
       const response = await axios.post(
         `${BASE_URL}/like/${ToolId}/${currentUser?.uid}`
       );
-      console.log(response.data.Name); // The message "tool has been liked successfully!!!!!"
+      console.log(response?.data?.Name); // The message "tool has been liked successfully!!!!!"
       console.log("tool has been liked successfully!!!!!");
     } catch (error) {
       console.log(error);

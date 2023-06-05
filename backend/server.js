@@ -116,7 +116,7 @@ app.get("/mongo-toolComments/:toolId", async (req, res) => {
     res.status(500).send("Error fetching tools data");
   }
 });
-
+//LIKE TOOL
 app.post("/like/:id/:uid", async (req, res) => {
   let { id, uid } = req.params;
   try {
@@ -141,6 +141,39 @@ app.post("/unlike/:id/:uid", async (req, res) => {
     );
     // Update the tool document with the updated LikedBy array
     const updatedTool = await Tools.findByIdAndUpdate(id, {
+      LikedBy: updatedLikedBy,
+    });
+    return res.send(updatedTool);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log("tool has been unliked succefuly!!!!!");
+});
+//LIKE HomePageTOOL
+app.post("/likeHomeTool/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
+  try {
+    await HomePageTool.findByIdAndUpdate(id, {
+      $addToSet: { LikedBy: uid },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  console.log("tool has been liked successfully!!!!!");
+});
+
+//remove a user from a HomePageTool likedBy array
+app.post("/unlikeHomeTool/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
+  try {
+    const homeTool = await HomePageTool.findById(id);
+    // Remove the uid from the LikedBy array using the filter method
+    const updatedLikedBy = homeTool.LikedBy.filter(
+      (likedByUid) => likedByUid !== uid
+    );
+    // Update the tool document with the updated LikedBy array
+    const updatedTool = await HomePageTool.findByIdAndUpdate(id, {
       LikedBy: updatedLikedBy,
     });
     return res.send(updatedTool);
@@ -262,6 +295,31 @@ app.post("/unlikeToolComment/:toolCommentId/:userId", async (req, res) => {
     console.log(error);
   }
 });
+
+//  Add a HomeTool Comment
+app.post(
+  "/addHomeToolComment/:toolId/:userId/:commentText/:parentId",
+  async (req, res) => {
+    try {
+      const { toolId, userId, commentText, parentId } = req.params;
+      const newComment = await ToolsComments.create({
+        text: commentText,
+        userId: userId,
+        toolId: toolId,
+        parentId: parentId,
+      });
+      // assuming that `Tools` is the model for the tools collection
+      const homeTool = await HomePageTool.findById(toolId);
+      homeTool.comments.push(newComment._id);
+      await homeTool.save();
+      res.status(201).json(newComment);
+      console.log("comment added");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error adding tool comment");
+    }
+  }
+);
 
 app.post("", async (req, res) => {
   try {
@@ -395,6 +453,38 @@ app.post("/addBio/:uid/:bio", async (req, res) => {
     res.status(500).json({ message: "Error updating user bio" });
   }
 });
+//Update USERNAME
+app.post("/updateUsername/:uid/:username", async (req, res) => {
+  try {
+    const { uid, username } = req.params;
+
+    // Update the user document
+    await User.updateOne({ uid: uid }, { $set: { username: username } });
+
+    res.status(200).json({ message: "User bio updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error updating user bio" });
+  }
+});
+//Update USERNAME AND PHOTO
+app.post("/updateUsernameAndPhoto/:uid/:username/:photo", async (req, res) => {
+  try {
+    const { uid, username, photo } = req.params;
+
+    // Update the user document
+    await User.updateOne(
+      { uid: uid },
+      { $set: { username: username, photo: photo } }
+    );
+
+    res.status(200).json({ message: "User bio updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error updating user bio" });
+  }
+});
+
 //ADD USER CATEGORIES
 app.post("/addCategories/:uid/:categories", async (req, res) => {
   console.log;

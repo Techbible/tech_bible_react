@@ -181,49 +181,69 @@ const Profile = () => {
     currentUserData?.username
   );
 
-  const uploadImage = () => {
-    const usersRef = collection(db, "Users");
-    const userDocRef = doc(usersRef, currentUser?.uid);
-
+  const uploadImage = async () => {
+    // const usersRef = collection(db, "Users");
+    // const userDocRef = doc(usersRef, currentUser?.uid);
     if (profilePicture === null) {
+      try {
+        const updateUserName = await axios.post(
+          `${BASE_URL}/updateUsername/${currentUserData?.uid}/${editedUsername}`
+        );
+        updateUserData();
+      } catch (e) {
+        console.log("Update username error : " + e);
+      }
+      closeModal();
       // Photo is not selected for upload, update only the username
-      updateDoc(userDocRef, {
-        username: editedUsername,
-      })
-        .then(() => {
-          console.log("Username updated");
-          closeModal();
-        })
-        .catch((error) => {
-          console.log("Error updating username:", error);
-          closeModal();
-        });
-      return;
+      // updateDoc(userDocRef, {
+      //   username: editedUsername,
+      // })
+      //   .then(() => {
+      //     console.log("Username updated");
+      //     closeModal();
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error updating username:", error);
+      //     closeModal();
+      //   });
+      // return;
     }
 
     const imageRef = ref(
       storage,
-      `profile-pictures/${profilePicture.name + currentUser?.uid}`
+      `profile-pictures/${profilePicture.name + currentUserData?.uid}`
     );
 
     uploadBytes(imageRef, profilePicture)
       .then((snapshot) => {
         console.log("Image uploaded");
         getDownloadURL(snapshot.ref)
-          .then((url) => {
+          .then(async (url) => {
+            try {
+              const updateUserNameAndPhoto = await axios.post(
+                `${BASE_URL}/updateUsernameAndPhoto/${currentUserData?.uid}/${editedUsername}/${url}`
+              );
+              console.log("IMAGE URL try  : " + url);
+
+              updateUserData();
+            } catch (e) {
+              console.log("Update username and photo error : " + e);
+              console.log("IMAGE URL catch  : " + url);
+            }
+            closeModal();
             // Photo has changed, update both username and photo
-            updateDoc(userDocRef, {
-              username: editedUsername,
-              photo: url,
-            })
-              .then(() => {
-                console.log("Username and photo updated");
-                closeModal();
-              })
-              .catch((error) => {
-                console.log("Error updating username and photo:", error);
-                closeModal();
-              });
+            // updateDoc(userDocRef, {
+            //   username: editedUsername,
+            //   photo: url,
+            // })
+            //   .then(() => {
+            //     console.log("Username and photo updated");
+            //     closeModal();
+            //   })
+            //   .catch((error) => {
+            //     console.log("Error updating username and photo:", error);
+            //     closeModal();
+            //   });
           })
           .catch((error) => {
             console.log("Error getting download URL:", error);
@@ -234,6 +254,7 @@ const Profile = () => {
         console.log("Error uploading image:", error);
         closeModal();
       });
+    updateUserData();
   };
 
   //***********************END Inserting Changes********************************
