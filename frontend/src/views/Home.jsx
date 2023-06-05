@@ -48,7 +48,22 @@ const Home = () => {
   const [topic, setTopic] = useState("");
   const [isTopicChosen, setIsTopicChosen] = useState(false);
 
-  // const [limitedTools, setLimitedTools] = useState([]);
+  // Handle Screen Sizing
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    // Attach the event listener on component mount
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // The empty dependency array ensures the effect runs only once on mount
 
   useEffect(() => {
     setAllToolsLoadable(false);
@@ -353,10 +368,11 @@ const Home = () => {
             {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
 
             <div className="flex direction-column align-items-center">
-              <div className="flex flex-column  max-w-[600px]  my-4  md:mb-[2rem] rounded-xl ">
+              <div className="flex flex-column  max-w-[560px]  my-4 mx-4  md:mb-[2rem] rounded-xl ">
                 <div className="text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 mt-2">
-                  <div>The Largest Tech Directory To Help You </div>
-                  <div> Get The Job Done</div>
+                  <div>
+                    The Largest Tech Directory To Help You Get The Job Done
+                  </div>
                 </div>
 
                 <div className="flex flex-wrap logo-search-container">
@@ -404,7 +420,7 @@ const Home = () => {
                     </div>
                   )}
                 </div>
-                <form className="flex items-center ">
+                <form className="flex items-center my-2 ">
                   <div className="relative w-full">
                     <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                       <svg
@@ -614,19 +630,27 @@ const Home = () => {
               // </p>
               null}
             </div>
+            {/* <div className="text-white text-[25px]">{screenWidth}</div> */}
 
             {/***********END You might also like********/}
             {!isFiltering && (
-              <div
-                className={
-                  topic === ""
-                    ? "xxl:w-[1300px] xl:w-[1050px]   w-[100%] mb-6 border-b border-b-[.5px]  border-white py-3 px-16"
-                    : " xl:w-[1050px] xxl:w-[1300px]  w-[100%] mb-6 border-b border-white py-3 px-16"
-                }
-              >
-                <div className="flex flex-row ml-[10%] gap-[6vh] ">
+              // <div
+              //   className={
+              //     topic === ""
+              //       ? "xxl:w-[1300px] xl:w-[1050px]   w-[100%] mb-6 border-b border-b-[.5px]  border-white py-3 px-16"
+              //       : " xl:w-[1050px] xxl:w-[1300px]  w-[100%] mb-6 border-b border-white py-3 px-16"
+              //   }
+              // >
+              <div className="container xxl:w-[1300px] xl:w-[1050px] max-w-full mb-6 border-b-[.5px]  border-white py-3">
+                <div
+                  className={
+                    screenWidth > 1100
+                      ? "flex flex-row ml-[12%] gap-[6%] "
+                      : "flex flex-row ml-[8%] gap-[6%] "
+                  }
+                >
                   <div
-                    className="text-[16px] fontWeight-700 poppins cursor-pointer"
+                    className="xxl:text-[16px] xl:text-[16px] lg:text-[15px] md:text-[14px] sm:text-[13px] text-[14px] fontWeight-700 poppins cursor-pointer"
                     onClick={() => {
                       setIsTopicChosen(false);
                       setTopic("");
@@ -638,29 +662,30 @@ const Home = () => {
                   <div
                     className={
                       topic === "Marketing Automation"
-                        ? "text-[15px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                        : "text-[15px] text-white fontWeight-300 poppins cursor-pointer"
+                        ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
+                        : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
                     }
                     onClick={(topic) => chooseTopic("Marketing Automation")}
                   >
                     Automation
                   </div>
-
-                  <div
-                    className={
-                      topic === "No-code"
-                        ? "text-[15px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                        : "text-[15px] text-white fontWeight-300 poppins cursor-pointer"
-                    }
-                    onClick={(topic) => chooseTopic("No-code")}
-                  >
-                    No Code
-                  </div>
+                  {screenWidth >= 700 && (
+                    <div
+                      className={
+                        topic === "No-code"
+                          ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
+                          : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
+                      }
+                      onClick={(topic) => chooseTopic("No-code")}
+                    >
+                      No Code
+                    </div>
+                  )}
                   <div
                     className={
                       topic === "Artificial Intelligence and Machine Learning"
-                        ? "text-[15px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                        : "text-[15px] text-white fontWeight-300 poppins cursor-pointer"
+                        ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
+                        : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
                     }
                     onClick={(topic) =>
                       chooseTopic(
@@ -673,23 +698,26 @@ const Home = () => {
                   <div
                     className={
                       topic === "Productivity tools"
-                        ? "text-[15px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                        : "text-[15px] text-white fontWeight-300 poppins cursor-pointer"
+                        ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
+                        : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
                     }
                     onClick={(topic) => chooseTopic("Productivity tools")}
                   >
                     Productivity
                   </div>
-                  <div
-                    className={
-                      topic === "Graphic Design"
-                        ? "text-[15px] text-[#DD5434] fontWeight-300 poppins cursor-pointer  "
-                        : "text-[15px] text-white fontWeight-300 poppins cursor-pointer  "
-                    }
-                    onClick={(topic) => chooseTopic("Graphic Design")}
-                  >
-                    Design
-                  </div>
+
+                  {screenWidth >= 810 && (
+                    <div
+                      className={
+                        topic === "Graphic Design"
+                          ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer  "
+                          : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer  "
+                      }
+                      onClick={(topic) => chooseTopic("Graphic Design")}
+                    >
+                      Design
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -766,7 +794,7 @@ const Home = () => {
             </div>
           </div>
         </main>
-        <aside className="sidebarWithSeparator right ml-4 ">
+        <aside className="sidebarWithSeparator right ">
           <Link to="/News">
             <p className="text-[16px] fontWeight-700 mt-16 mb-4 ">
               Happening in Tech
