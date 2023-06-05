@@ -4,7 +4,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import axios from "axios";
 import { BASE_URL } from "../config/mongo";
-import Cookies from "js-cookie";
 
 export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {

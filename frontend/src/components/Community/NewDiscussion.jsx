@@ -4,6 +4,7 @@ import { CategoriesData } from "../../dataJson/CategoriesData";
 import { BASE_URL } from "../../config/mongo";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 function NewDiscussion() {
   const { currentUser } = useContext(AuthContext);
 
@@ -11,35 +12,35 @@ function NewDiscussion() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [userId, setUserID] = useState("");
-  const axios = require("axios");
+  //const axios = require("axios");
 
-  async function checkMoralImplications(inputText) {
-    const apiKey = "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";
-    const apiUrl =
-      "https://api.openai.com/v1/engines/davinci-codex/completions";
+  // async function checkMoralImplications(inputText) {
+  //   const apiKey = "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";
+  //   const apiUrl =
+  //     "https://api.openai.com/v1/engines/davinci-codex/completions";
 
-    try {
-      const response = await axios.post(
-        apiUrl,
-        {
-          prompt: `Is the following text morally acceptable? "${inputText}"`,
-          max_tokens: 1,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  //   try {
+  //     const response = await axios.post(
+  //       apiUrl,
+  //       {
+  //         prompt: `Is the following text morally acceptable? "${inputText}"`,
+  //         max_tokens: 1,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${apiKey}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
 
-      const completion = response.data.choices[0].text.trim();
-      return completion === "Yes";
-    } catch (error) {
-      console.error("Error:", error);
-      return null;
-    }
-  }
+  //     const completion = response.data.choices[0].text.trim();
+  //     return completion === "Yes";
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     return null;
+  //   }
+  // }
 
   useEffect(() => {
     setUserID(currentUser?.uid);
@@ -68,17 +69,17 @@ function NewDiscussion() {
     try {
       console.log(title, description, category, userId);
 
-      const inputText = { description };
-      checkMoralImplications(inputText).then((result) => {
-        if (result === null) {
-          alert("The result is null.");
-        } else if (result) {
-          console.log("The text is morally acceptable.");
-          createDiscussion();
-        } else {
-          alert("The text is morally unacceptable.");
-        }
-      });
+      // const inputText = { description };
+      // checkMoralImplications(inputText).then((result) => {
+      //   if (result === null) {
+      //     alert("The result is null.");
+      //   } else if (result) {
+      //     console.log("The text is morally acceptable.");
+         createDiscussion();
+      //   } else {
+      //     alert("The text is morally unacceptable.");
+      //   }
+      // });
 
       // You can perform additional actions here, such as displaying a success message or redirecting to another page
     } catch (error) {
