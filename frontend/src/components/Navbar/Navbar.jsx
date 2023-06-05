@@ -33,9 +33,9 @@ function Navbar() {
   const handleIsMenuClicked = () => {
     setIsMenuClicked(!isMenuClicked);
   };
- useEffect(()=>{
-   console.log('navbar : '+ typeof currentUserData);
- },[])
+  useEffect(() => {
+    console.log("navbar : " + typeof currentUserData);
+  }, []);
   useEffect(() => {
     setIsMenuClicked(false);
 
@@ -205,8 +205,8 @@ function Navbar() {
                           }}
                         >
                           <img src={currentUserData?.photo} className="pfp" />
-                          <div className="username ">
-                            {currentUserData?.sername}
+                          <div className="username text-white ">
+                            {currentUserData?.username}
                           </div>
                         </div>
                       </Link>
