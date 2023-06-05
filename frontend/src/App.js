@@ -134,8 +134,6 @@ function App() {
             </Suspense>
           }
         />
-        {/* <Route path="/profile/:name" element={<Profile />} /> */}
-
         <Route
           path="/folders"
           element={

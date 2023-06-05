@@ -33,7 +33,8 @@ app.get("/mongo-tools", async (req, res) => {
     const tools = await Tools.find();
 
     // console.log("TOOLS : ",tools);
-    res.send(tools); // Send an object containing both variables
+    res.send(tools); 
+    // Send an object containing both variables
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching tools data");

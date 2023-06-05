@@ -334,29 +334,6 @@ const Home = () => {
     setIsTopicChosen(true);
   };
 
-  if (!allToolsLoadable) {
-    return (
-      <div className="loader-wrapper">
-        <div className="loader-container">
-          <div className="loader"></div>
-        </div>
-      </div>
-    );
-  }
-
-  // if (allToolsLoadable?.state === "loading") {
-  //   return (
-  //     <div className="loader-wrapper">
-  //       <div className="loader-container">
-  //         <div className="loader"></div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // if (allToolsLoadable?.state === "hasError") {
-  //   return <div>Error: {allTools?.contents.message}</div>;
-  // }
   return (
     <div>
       <div className="homeContainer mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
