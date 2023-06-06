@@ -771,97 +771,110 @@ const Home = () => {
             </div>
           </div>
         </main>
-        <aside className="sidebarWithSeparator right ">
-          <Link to="/News">
-            <p className="text-[16px] fontWeight-700 mt-16 mb-4 ">
-              Happening in Tech
-            </p>
-          </Link>
-          {DataAPI?.length > 0
-            ? DataAPI.slice(0, 3).map((article, index) => (
-                <NewsHomePage
-                  key={index}
-                  title={article.name}
-                  date={article.datePublished}
-                  provider={article?.provider?.[0]?.name || "Unknown Provider"}
-                  url={article?.url}
-                />
-              ))
-            : MongoDBData?.slice(0, 3).map((article, index) => (
-                <NewsHomePage
-                  key={index}
-                  title={article.name}
-                  date={article.datePublished}
-                  provider={article?.provider?.[0]?.name || "Unknown Provider"}
-                  url={article?.url}
-                />
-              ))}
-          {/* <Link to="/News">
+        <aside className="sidebarWithSeparator right pl-6 ">
+          <div className="flex flex-column align-items-center ml-16">
+            <div>
+              <Link to="/News">
+                <p className="text-[16px] fontWeight-700 mt-16 mb-4 ">
+                  Happening in Tech
+                </p>
+              </Link>
+              {DataAPI?.length > 0
+                ? DataAPI.slice(0, 3).map((article, index) => (
+                    <NewsHomePage
+                      key={index}
+                      title={article.name}
+                      date={article.datePublished}
+                      provider={
+                        article?.provider?.[0]?.name || "Unknown Provider"
+                      }
+                      url={article?.url}
+                    />
+                  ))
+                : MongoDBData?.slice(0, 3).map((article, index) => (
+                    <NewsHomePage
+                      key={index}
+                      title={article.name}
+                      date={article.datePublished}
+                      provider={
+                        article?.provider?.[0]?.name || "Unknown Provider"
+                      }
+                      url={article?.url}
+                    />
+                  ))}
+              {/* <Link to="/News">
             <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer mb-20">
               See all News
             </div>
           </Link> */}
-          <div className="my-[46px] w-[300px] h-[1px] bg-white "></div>
-          <NewsLetterSubscribe />
+              <div className="my-[46px] w-[300px] h-[1px] bg-white "></div>
+              <NewsLetterSubscribe />
 
-          <div className="my-[50px] w-[300px] h-[1px] bg-white "></div>
-          <div className=" flex flex-column align-items-center ">
-            <ul className="flex flex-row lg:gap-[64px] gap-3 mb-5 ">
-              <h3>Follow us</h3>
-              <li
-                className="tracking-wider hover:tracking-widest"
-                style={{ transition: "0.3s", cursor: "pointer" }}
-              >
-                <span className="text-white rounded-full p-1">
-                  <a
-                    href="https://www.tiktok.com/@tech.bible"
-                    target="_blank"
-                    rel="noopener noreferrer"
+              <div className="my-[50px] w-[300px] h-[1px] bg-white "></div>
+              <div className=" flex flex-column ">
+                <ul className="flex flex-row lg:gap-[64px] gap-3 mb-5 ">
+                  <h3>Follow us</h3>
+                  <li
+                    className="tracking-wider hover:tracking-widest"
+                    style={{ transition: "0.3s", cursor: "pointer" }}
                   >
-                    <i className="fab fa-tiktok text-white text-xl"></i>
-                  </a>
-                </span>
-              </li>
-              <li
-                className="tracking-wider hover:tracking-widest"
-                style={{ transition: "0.3s", cursor: "pointer" }}
-              >
-                <span className="text-white rounded-full p-1">
-                  <a
-                    href="https://youtube.com/@MyTechBible"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    <span className="text-white rounded-full p-1">
+                      <a
+                        href="https://www.tiktok.com/@tech.bible"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="fab fa-tiktok text-white text-xl"></i>
+                      </a>
+                    </span>
+                  </li>
+                  <li
+                    className="tracking-wider hover:tracking-widest"
+                    style={{ transition: "0.3s", cursor: "pointer" }}
                   >
-                    <i className="fab fa-youtube text-white text-xl"></i>
-                  </a>
-                </span>
-              </li>
-              <li
-                className="tracking-wider hover:tracking-widest"
-                style={{ transition: "0.3s", cursor: "pointer" }}
-              >
-                <span className="text-white rounded-full p-1">
-                  <a
-                    href="https://www.instagram.com/techbible.ai/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    <span className="text-white rounded-full p-1">
+                      <a
+                        href="https://youtube.com/@MyTechBible"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="fab fa-youtube text-white text-xl"></i>
+                      </a>
+                    </span>
+                  </li>
+                  <li
+                    className="tracking-wider hover:tracking-widest"
+                    style={{ transition: "0.3s", cursor: "pointer" }}
                   >
-                    <i className="fab fa-instagram text-white text-xl"></i>
-                  </a>
-                </span>
-              </li>
-            </ul>
-            <a href="https://www.mytechbible.com/" target="_blank">
-              <div className="text-[14px] fontWeight-500 poppins mb-4 ">
-                Made by{" "}
-                <div className="text-[#EF4823] inline-block ">
-                  Mytechbible Studio
-                </div>
+                    <span className="text-white rounded-full p-1">
+                      <a
+                        href="https://www.instagram.com/techbible.ai/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="fab fa-instagram text-white text-xl"></i>
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+                <a href="https://www.mytechbible.com/" target="_blank">
+                  <div className="text-[14px] fontWeight-500 poppins mb-4 ">
+                    Made by{" "}
+                    <div className="text-[#EF4823] inline-block ">
+                      Mytechbible Studio
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="https://www.mytechbible.com/blogs-page"
+                  target="_blank"
+                >
+                  <div className="text-[14px] fontWeight-500 poppins ">
+                    Blogs
+                  </div>
+                </a>
               </div>
-            </a>
-            <a href="https://www.mytechbible.com/blogs-page" target="_blank">
-              <div className="text-[14px] fontWeight-500 poppins ">Blogs</div>
-            </a>
+            </div>
           </div>
         </aside>
         <Modal

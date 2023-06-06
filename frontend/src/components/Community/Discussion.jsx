@@ -2,7 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../config/mongo";
 
-const Discussion = ({ discussion }) => {
+const Discussion = ({
+  discussion,
+  setDiscussion,
+  setIsRepliesClicked,
+  setUserInfo,
+}) => {
   const [userData, setUserData] = useState();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -11,6 +16,7 @@ const Discussion = ({ discussion }) => {
 
     setUserData(res.data);
   };
+
   useEffect(() => {
     getUserData();
   }, []);
@@ -105,6 +111,11 @@ const Discussion = ({ discussion }) => {
           <button
             type="button"
             className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400"
+            onClick={() => {
+              setDiscussion(discussion);
+              setIsRepliesClicked(true);
+              setUserInfo(userData);
+            }}
           >
             <svg
               aria-hidden="true"
