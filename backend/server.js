@@ -517,3 +517,31 @@ app.post("/clearInterests/:uid", async (req, res) => {
     res.status(500).json({ message: "Error clearing interests" });
   }
 });
+
+
+//Add tools
+app.post("/addTools", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      socketTimeoutMS: 30000,
+    });
+
+    const { Name, Description, URL, Icon, Keywords, Category } = req.body;
+    const tools = await Tools.insertMany({
+      Name,
+      Description,
+      URL,
+      Icon,
+      Keywords,
+      Category,
+    });
+
+    res.status(201).json(tools);
+    console.log("Tools added");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error adding Tools");
+  }
+});

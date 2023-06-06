@@ -68,7 +68,6 @@ const UserList = () => {
         setUserFolders(doc.data().folders);
       });
     } catch (error) {
-      alert("4");
       console.log(error);
     }
   };

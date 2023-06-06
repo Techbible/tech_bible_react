@@ -305,8 +305,7 @@ function App() {
                 <div className="text-[50px] text-white font-bold ">
                   Sign up Loading...
                 </div>
-              }
-            >
+              }>
               <GettingData />
             </Suspense>
           }
@@ -328,9 +327,7 @@ function App() {
         <Route
           path="/DataParser"
           element={
-            <AdminVerif>
               <DataParser />
-            </AdminVerif>
           }
         />
         <Route path="/LoadingHomePage" element={<LoadingHomePage />} />

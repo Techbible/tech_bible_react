@@ -17,6 +17,7 @@ function AddNewsArticle() {
       navigate("/news");
     }
   }, []);
+  
   const handleAddArticle = async (e) => {
     e.preventDefault();
     try {
