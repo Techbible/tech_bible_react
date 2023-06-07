@@ -20,6 +20,12 @@ const AdminSpace = () => {
         </Link>
       </div>
       <div className="flex items-center justify-center p-8 bg-gray-800 rounded-lg w-full lg:w-1/3">
+        <Link to="/DataParser" className="text-white hover:text-gray-200">
+          <img src="https://sunitcdev.files.wordpress.com/2021/07/csv-db.png?w=462" alt="CSV To Database" className="w-32 h-32" />
+          <h1 className="text-2xl font-semibold ml-8">CSV To Database</h1>
+        </Link>
+      </div>
+      <div className="flex items-center justify-center p-8 bg-gray-800 rounded-lg w-full lg:w-1/3">
         <Link to="/users" className="text-white hover:text-gray-200">
           <img src="https://zahiraccounting.com/en-my/wp-content/uploads/2015/10/zahir-accounting-software-have-more-than-60.000-users.png" alt="Users" className="w-32 h-32" />
           <h1 className="text-2xl font-semibold ml-8">Users</h1>

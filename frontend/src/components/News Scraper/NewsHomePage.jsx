@@ -9,7 +9,7 @@ const NewsHomePage = ({ title, date, provider, url }) => {
   });
 
   return (
-    <div className="max-w-xl mx-auto mb-5  rounded-xl shadow-md md:max-w-2xl">
+    <div className=" mx-auto mb-5  rounded-xl shadow-md ">
       <div className="md:flex">
         <div className="md:pt-2">
           <a

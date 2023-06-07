@@ -2,7 +2,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../config/mongo";
 
-const Discussion = ({ discussion,fetchDiscussions }) => {
+
+const Discussion = ({
+  discussion,
+  setDiscussion,
+  setIsRepliesClicked,
+  setUserInfo,
+  fetchDiscussions,
+}) => {
+
   const [userData, setUserData] = useState();
   const [upvoteClicked, setUpvoteClicked] = useState(false);
   const [downvoteClicked, setDownvoteClicked] = useState(false);
@@ -168,6 +176,11 @@ const Discussion = ({ discussion,fetchDiscussions }) => {
           <button
             type="button"
             className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400"
+            onClick={() => {
+              setDiscussion(discussion);
+              setIsRepliesClicked(true);
+              setUserInfo(userData);
+            }}
           >
             <svg
               aria-hidden="true"
