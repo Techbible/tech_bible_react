@@ -2,17 +2,75 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../config/mongo";
 
-const Discussion = ({ discussion }) => {
+const Discussion = ({ discussion,fetchDiscussions }) => {
   const [userData, setUserData] = useState();
+  const [upvoteClicked, setUpvoteClicked] = useState(false);
+  const [downvoteClicked, setDownvoteClicked] = useState(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [newValue, setNewValue] = useState(discussion.Votes);
+
+
+  const handleVoteNumber = async () => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/updateDiscussionVotes/${discussion._id}/${newValue}`
+      );
+  
+      console.log("handlevotenumber try " + newValue); 
+      console.log(discussion._id);
+    } catch (error) {
+      console.error("error of handle vote number : " + error);
+      console.log(newValue); 
+      console.log(discussion._id);
+    }
+  };
+
+  const handleUpvoteClick = async () => {
+    if (upvoteClicked) {
+      setNewValue(newValue - 1); // Subtract one from newValue
+    } else {
+      if (downvoteClicked) {
+        setNewValue(newValue + 2); // Add two to newValue (transition from downvote to upvote)
+        setDownvoteClicked(false); // Unclick the downvote button
+      } else {
+        setNewValue(newValue + 1); // Add one to newValue
+      }
+    }
+    setUpvoteClicked(!upvoteClicked); // Toggle the upvote button
+    await handleVoteNumber();
+    fetchDiscussions();
+   
+  };
+
+  const handleDownvoteClick = async () => {
+    if (downvoteClicked) {
+      setNewValue(newValue + 1); // Add one to newValue
+    } else {
+      if (upvoteClicked) {
+        setNewValue(newValue - 2); // Subtract two from newValue (transition from upvote to downvote)
+        setUpvoteClicked(false); // Unclick the upvote button
+      } else {
+        setNewValue(newValue - 1); // Subtract one from newValue
+      }
+    }
+    setDownvoteClicked(!downvoteClicked); // Toggle the downvote button
+    await handleVoteNumber();
+    fetchDiscussions();
+
+  };
 
   const getUserData = async () => {
     const res = await axios.get(`${BASE_URL}/check-user/${discussion.UserId}`);
 
     setUserData(res.data);
   };
+
+
   useEffect(() => {
     getUserData();
+    handleVoteNumber();
+   
+    
   }, []);
 
   return (
@@ -22,7 +80,7 @@ const Discussion = ({ discussion }) => {
           <div className="flex items-center">
             <div className="flex items-center">
               <img
-                className="mr-2 w-6 h-6 rounded-full"
+                className="mr-2 w-12 h-12 rounded-full"
                 src={userData?.photo}
                 alt={userData?.username}
               />
@@ -40,7 +98,7 @@ const Discussion = ({ discussion }) => {
             <button
               id="dropdownComment1Button"
               data-dropdown-toggle="dropdownComment1"
-              className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-[#1c1c1c] rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               type="button"
               onClick={() => setDropdownVisible(!isDropdownVisible)}
             >
@@ -62,10 +120,10 @@ const Discussion = ({ discussion }) => {
               id="dropdownComment1"
               className={`${
                 isDropdownVisible ? "block" : "hidden"
-              } z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute right-0`}
+              } z-10 w15 bg-[#1c1c1c] rounded divide-y divide-gray-100 shadow  absolute right-0`}
             >
               <ul
-                className="py-1 text-sm text-black "
+                className="py-1 text-sm text-white "
                 aria-labelledby="dropdownMenuIconHorizontalButton"
               >
                 <li>
@@ -99,8 +157,13 @@ const Discussion = ({ discussion }) => {
         </footer>
 
         <div className="flex flex-column"></div>
-        <p className="text-white fontWeight-500 ">{discussion?.Title}</p>
-        <p className="text-white">{discussion?.Description}</p>
+        <div className="">
+          <p className="text-white fontWeight-500 text-lg mb-4">
+            {discussion?.Title}
+          </p>
+          <p className="text-white text-sm">{discussion?.Description}</p>
+        </div>
+
         <div className="flex items-center mt-4 space-x-4">
           <button
             type="button"
@@ -124,26 +187,42 @@ const Discussion = ({ discussion }) => {
             Reply
           </button>
           {/* <!-- Up/down vote --> */}
-          <button className="p-2 border rounded-full hover:bg-white hover:text-black ">
+          {/*upvote*/}
+          <button
+            className={`p-2 border rounded-full ${
+              upvoteClicked
+                ? "bg-white text-black"
+                : "hover:bg-white hover:text-black"
+            }`}
+            onClick={handleUpvoteClick}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-2 w-2  hover:text-black"
+              className="h-2 w-2 hover:text-black"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 strokeWidth="2"
                 d="M5 15l7-7 7 7"
               />
             </svg>
           </button>
           <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-            42
+            {discussion?.Votes} and   {newValue}
           </div>
-          <button className="p-2 border rounded-full hover:bg-gray-100 hover:text-black">
+          {/* downvote */}
+          <button
+            className={`p-2 border rounded-full ${
+              downvoteClicked
+                ? "bg-white text-black"
+                : "hover:bg-gray-100 hover:text-black"
+            }`}
+            onClick={handleDownvoteClick}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-2 w-2 text-current hover:text-black"
@@ -152,8 +231,8 @@ const Discussion = ({ discussion }) => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 strokeWidth="2"
                 d="M19 9l-7 7-7-7"
               />
