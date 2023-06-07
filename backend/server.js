@@ -356,7 +356,7 @@ app.post("/addSubscriber/:email", async (req, res) => {
     res.status(500).send("Error adding tool comment");
   }
 });
-
+//DISCUSSIONS SECTION
 //GETTING ALL THE DISCUSSIONS
 
 app.get("/discussions", async (req, res) => {
@@ -388,6 +388,7 @@ app.post("/create-discussion", async (req, res) => {
       Description: description,
       Category: category,
       LikedBy: [],
+      Votes: 0,
     });
 
     res.status(201).json(newDiscussion);
@@ -397,6 +398,22 @@ app.post("/create-discussion", async (req, res) => {
     res.status(500).send("Error adding tool comment");
   }
 });
+// update discussion vote number
+app.post("/updateDiscussionVotes/:_id/:newValue", async (req, res) => {
+  try {
+    const { _id,newValue } = req.params;
+
+    // Update the discussion document
+    await Discussion.updateOne({ _id: _id }, { $set: {Votes: newValue } });
+    console.log("update succesfull");
+
+    res.status(200).json({ message: "votes  updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error updating votes" });
+  }
+});
+
 
 //USERS
 // Create User

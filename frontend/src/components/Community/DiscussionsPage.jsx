@@ -13,6 +13,7 @@ const DiscussionsPage = ({
   setUserInfo,
   selectedFilter,
   setSelectedFilter,
+  setReplies,
 }) => {
   return (
     <div>
@@ -155,14 +156,20 @@ const DiscussionsPage = ({
 
             <div className="mr-16">
               {Discussions &&
-                Discussions?.map((discussion) => (
-                  <Discussion
-                    discussion={discussion}
-                    setDiscussion={setDiscussion}
-                    setIsRepliesClicked={setIsRepliesClicked}
-                    setUserInfo={setUserInfo}
-                  />
-                ))}
+                Discussions?.map((discussion) => {
+                  if (discussion?.ParentId === null) {
+                    return (
+                      <Discussion
+                        discussion={discussion}
+                        setDiscussion={setDiscussion}
+                        setIsRepliesClicked={setIsRepliesClicked}
+                        setUserInfo={setUserInfo}
+                        setReplies={setReplies}
+                        Discussions={Discussions}
+                      />
+                    );
+                  }
+                })}
             </div>
           </div>
         </main>

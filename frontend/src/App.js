@@ -48,7 +48,7 @@ function App() {
   const NewToolDetails = lazy(() => import("./views/NewToolDetails"));
   const UserList = lazy(() => import("./views/profile/UserList"));
   const ContactUs = lazy(() => import("./views/ContactUs"));
-  const AddNewsArticle = lazy(() => import("./admin"));
+  const AddNewsArticle = lazy(() => import("./admin/AddNewsArticle/AddNewsArticle"));
   const AddTool = lazy(() => import("./admin/Add Tool/AddTool"));
   const NewDiscussion = lazy(() =>
     import("./components/Community/NewDiscussion")
