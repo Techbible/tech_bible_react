@@ -48,7 +48,7 @@ function App() {
   const NewToolDetails = lazy(() => import("./views/NewToolDetails"));
   const UserList = lazy(() => import("./views/profile/UserList"));
   const ContactUs = lazy(() => import("./views/ContactUs"));
-  const AddNewsArticle = lazy(() => import("./admin"));
+  const AddNewsArticle = lazy(() => import("./admin/AddNewsArticle/AddNewsArticle"));
   const AddTool = lazy(() => import("./admin/Add Tool/AddTool"));
   const NewDiscussion = lazy(() =>
     import("./components/Community/NewDiscussion")
@@ -305,8 +305,7 @@ function App() {
                 <div className="text-[50px] text-white font-bold ">
                   Sign up Loading...
                 </div>
-              }
-            >
+              }>
               <GettingData />
             </Suspense>
           }
@@ -328,9 +327,7 @@ function App() {
         <Route
           path="/DataParser"
           element={
-            <AdminVerif>
               <DataParser />
-            </AdminVerif>
           }
         />
         <Route path="/LoadingHomePage" element={<LoadingHomePage />} />

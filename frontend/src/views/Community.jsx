@@ -34,7 +34,6 @@ function Community() {
     });
 
     // Apply the selected filter option
-
     if (selectedFilter === "Week") {
       const oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
@@ -97,6 +96,7 @@ function Community() {
   };
 
   useEffect(() => {
+
     fetchDiscussions();
   }, [selectedFilter]);
 

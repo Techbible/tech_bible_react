@@ -8,6 +8,8 @@ import { AuthContext } from "../../context/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../../config/mongo";
 
 function DataParser() {
   const { isAdmin } = useContext(AuthContext);
@@ -36,6 +38,7 @@ function DataParser() {
   //       notify("Welcome to the Admin Space");
   //   }
   // }, []);
+
   // State to store parsed data
   const [ParsedData, setParsedData] = useState([]);
 
@@ -75,24 +78,46 @@ function DataParser() {
     });
   };
 
-  const DataInserter = () => {
-    ParsedData?.map(async (toolData) => {
-      const uid = uuid();
-      await setDoc(doc(db, "Tools", uid), {
-        id: uid,
-        Name: toolData?.Name,
-        Description: toolData.Description,
-        Price: toolData.Price,
-        VideoURL: "",
-        URL: toolData.URL,
-        Category: toolData.Category,
-        LikedBy: [],
-        Icon: toolData.Icon,
-        Keywords: toolData.Keywords,
-      });
-      // console.log(toolData);
-    });
-  };
+  // const DataInserter = () => {
+  //   ParsedData?.map(async (toolData) => {
+  //     const uid = uuid();
+  //     await setDoc(doc(db, "Tools", uid), {
+  //       id: uid,
+  //       Name: toolData?.Name,
+  //       Description: toolData.Description,
+  //       Price: toolData.Price,
+  //       VideoURL: "",
+  //       URL: toolData.URL,
+  //       Category: toolData.Category,
+  //       LikedBy: [],
+  //       Icon: toolData.Icon,
+  //       Keywords: toolData.Keywords,
+  //     });
+  //     // console.log(toolData);
+  //   });
+  // };
+
+  const DataInserterHandler = ()=>{
+    ParsedData.map((toolData)=>DataInserter(toolData))
+  }
+
+  const DataInserter = async(toolData)=>{
+    try {
+      console.log(ParsedData);
+
+      const response = await axios.post(`${BASE_URL}/addTools`, toolData);
+      // Handle successful response
+      console.log("Tools Added successfully:", response.data);
+      navigate("/Tools");
+      // You can perform additional actions here, such as displaying a success message or redirecting to another page
+    } 
+    catch (error) {
+      // Handle error
+      console.error("Error sharing post:", error);
+      // You can display an error message or perform any necessary error handling
+    }
+
+  }
 
   return (
     <div>
@@ -107,7 +132,7 @@ function DataParser() {
       {tableRows?.length > 0 ? (
         <button
           className="bg-blue-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => DataInserter()}
+          onClick={() => DataInserterHandler()}
         >
           Import
         </button>
