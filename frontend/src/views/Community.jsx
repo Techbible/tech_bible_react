@@ -21,6 +21,7 @@ function Community() {
   const [isRepliesClicked, setIsRepliesClicked] = useState(false);
   const [discussion, setDiscussion] = useState();
   const [userInfo, setUserInfo] = useState();
+  const [replies, setReplies] = useState();
 
   //Fetch Disscutions
   const fetchDiscussions = async () => {
@@ -113,6 +114,7 @@ function Community() {
           setUserInfo={setUserInfo}
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
+          setReplies={setReplies}
         />
       ) : (
         <div>
@@ -121,7 +123,7 @@ function Community() {
               onClick={() => {
                 setIsRepliesClicked(false);
               }}
-              className="flex flex-row ml-6 mt-14 gap-2 transition duration-250 text-[18px] hover:tracking-[.3px] cursor-pointer"
+              className="flex flex-row ml-6 mb-6 mt-14 gap-2 transition duration-250 text-[18px] hover:tracking-[.3px] cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +144,12 @@ function Community() {
             </div>
           )}
 
-          <DiscussionReply discussion={discussion} userInfo={userInfo} />
+          <DiscussionReply
+            discussion={discussion}
+            userInfo={userInfo}
+            replies={replies}
+            Discussions={Discussions}
+          />
         </div>
       )}
     </div>

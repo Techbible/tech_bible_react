@@ -7,6 +7,8 @@ const Discussion = ({
   setDiscussion,
   setIsRepliesClicked,
   setUserInfo,
+  setReplies,
+  Discussions,
 }) => {
   const [userData, setUserData] = useState();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -19,6 +21,10 @@ const Discussion = ({
 
   useEffect(() => {
     getUserData();
+    const Replies = Discussions?.filter(
+      (disc) => disc?.ParentId === discussion?.ParentId
+    );
+    setReplies(Replies);
   }, []);
 
   return (
