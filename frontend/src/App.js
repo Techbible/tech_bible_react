@@ -33,6 +33,7 @@ import GettingData from "./GettingData";
 import { homeToolsAtom } from "./recoil/homePageTools";
 import { useRecoilValue } from "recoil";
 import { allToolsAtom } from "./recoil/tool";
+import LoadingCommunity from "./components/pageLoaders/LoadingCommunity";
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
 
@@ -48,7 +49,9 @@ function App() {
   const NewToolDetails = lazy(() => import("./views/NewToolDetails"));
   const UserList = lazy(() => import("./views/profile/UserList"));
   const ContactUs = lazy(() => import("./views/ContactUs"));
-  const AddNewsArticle = lazy(() => import("./admin/AddNewsArticle/AddNewsArticle"));
+  const AddNewsArticle = lazy(() =>
+    import("./admin/AddNewsArticle/AddNewsArticle")
+  );
   const AddTool = lazy(() => import("./admin/Add Tool/AddTool"));
   const NewDiscussion = lazy(() =>
     import("./components/Community/NewDiscussion")
@@ -151,13 +154,7 @@ function App() {
         <Route
           path="/community"
           element={
-            <Suspense
-              fallback={
-                <div className="text-[50px] text-white font-bold ">
-                  Community Loading...
-                </div>
-              }
-            >
+            <Suspense fallback={<LoadingCommunity />}>
               <Community />
             </Suspense>
           }
@@ -305,7 +302,8 @@ function App() {
                 <div className="text-[50px] text-white font-bold ">
                   Sign up Loading...
                 </div>
-              }>
+              }
+            >
               <GettingData />
             </Suspense>
           }
@@ -324,13 +322,9 @@ function App() {
             </Suspense>
           }
         />
-        <Route
-          path="/DataParser"
-          element={
-              <DataParser />
-          }
-        />
+        <Route path="/DataParser" element={<DataParser />} />
         <Route path="/LoadingHomePage" element={<LoadingHomePage />} />
+        <Route path="/LoadingCommunity" element={<LoadingCommunity />} />
       </Routes>
     </div>
   );

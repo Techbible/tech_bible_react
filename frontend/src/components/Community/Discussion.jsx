@@ -13,6 +13,12 @@ const Discussion = ({ discussion, Discussions }) => {
   const [showReplies, setShowReplies] = useState(false);
   const [AddReply, setAddReply] = useState(false);
   const [reply, setReply] = useState("");
+  const [isEdditDiscussionClicked, setIsEdditDiscussionClicked] =
+    useState(false);
+  const [edditedTitle, setEdditedTitle] = useState(discussion?.Title);
+  const [edditedDescription, setEdditedDescription] = useState(
+    discussion?.Description
+  );
   const { currentUser } = useContext(AuthContext);
 
   const fetchReplies = async () => {
@@ -137,6 +143,57 @@ const Discussion = ({ discussion, Discussions }) => {
         }
       }
     }
+    if (discussion?.ParentId !== null) {
+      if (window.confirm("Are you sure that you want to delete your reply?")) {
+        try {
+          //delete reply
+          const response = await axios.delete(
+            `${BASE_URL}/deleteDiscussion/${discussion?._id}`
+          );
+          window.location.reload();
+
+          console.log("reply deleted succesfuly");
+          fetchReplies();
+        } catch (error) {
+          console.log("Delete reply error : " + error);
+        }
+      }
+    }
+  };
+
+  const handleEdditDiscussion = () => {
+    setIsEdditDiscussionClicked(true);
+    setEdditedTitle(discussion?.Title);
+    setEdditedDescription(discussion?.Description);
+  };
+
+  const edditDiscussion = async () => {
+    console.log("DISCUSSION EDDITED title : " + edditedTitle);
+    if (discussion?.ParentId === null) {
+      try {
+        const res = await axios.post(
+          `${BASE_URL}/updateDiscussion/${discussion?._id}/${edditedTitle}/${edditedDescription}`
+        );
+        console.log("discussion updated succesfuly");
+        setIsEdditDiscussionClicked(false);
+        window.location.reload();
+      } catch (error) {
+        console.log("Update discussion error : " + error);
+      }
+    } else {
+      try {
+        const res = await axios.post(
+          `${BASE_URL}/updateDiscussion/${
+            discussion?._id
+          }/${"0"}/${edditedDescription}`
+        );
+        console.log("discussion updated succesfuly");
+        setIsEdditDiscussionClicked(false);
+        window.location.reload();
+      } catch (error) {
+        console.log("Update discussion error : " + error);
+      }
+    }
   };
 
   return (
@@ -207,16 +264,16 @@ const Discussion = ({ discussion, Discussions }) => {
                     aria-labelledby="dropdownMenuIconHorizontalButton"
                   >
                     <li>
-                      <a
-                        href="#"
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      <div
+                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+                        onClick={handleEdditDiscussion}
                       >
                         Edit
-                      </a>
+                      </div>
                     </li>
                     <li>
                       <div
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                         onClick={handleRemoveDiscussion}
                       >
                         Remove
@@ -225,7 +282,7 @@ const Discussion = ({ discussion, Discussions }) => {
                     <li>
                       <a
                         href="#"
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                       >
                         Report
                       </a>
@@ -260,12 +317,51 @@ const Discussion = ({ discussion, Discussions }) => {
           >
             <div className="flex flex-column"></div>
             <div className="">
-              <p className="text-white fontWeight-500 opacity-[.9] text-[16px] mb-4">
-                {discussion?.Title}
-              </p>
-              <p className="text-white text-sm opacity-[.8] ">
-                {discussion?.Description}
-              </p>
+              {isEdditDiscussionClicked ? (
+                <div>
+                  {discussion?.ParentId === null && (
+                    <textarea
+                      className="text-white rounded-md"
+                      type="text"
+                      value={edditedTitle}
+                      onChange={(e) => {
+                        setEdditedTitle(e.target.value);
+                      }}
+                    />
+                  )}
+                  <textarea
+                    className="text-white rounded-md"
+                    type="text"
+                    value={edditedDescription}
+                    onChange={(e) => {
+                      setEdditedDescription(e.target.value);
+                    }}
+                  />
+                  <div className="flex flex-row">
+                    <div
+                      className="bg-white rounded-md text-black px-2 py-[2px] mr-2 cursor-pointer "
+                      onClick={() => setIsEdditDiscussionClicked(false)}
+                    >
+                      Cancel
+                    </div>
+                    <div
+                      onClick={edditDiscussion}
+                      className="bg-[#EF4823] rounded-md px-2 py-[2px] text-white cursor-pointer "
+                    >
+                      Submit
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <p className="text-white fontWeight-500 opacity-[.9] text-[16px] mb-4">
+                    {discussion?.Title}
+                  </p>
+                  <p className="text-white text-sm opacity-[.8] ">
+                    {discussion?.Description}
+                  </p>
+                </div>
+              )}
             </div>
             <div className="flex items-center mt-4 space-x-4">
               <button
@@ -353,7 +449,7 @@ const Discussion = ({ discussion, Discussions }) => {
             <Discussion discussion={reply} Discussions={Discussions} />
           ))}
           {discussion?.ParentId === null && (
-            <div class="mb-2">
+            <div class="mb-10">
               <input
                 type="text"
                 id="comment"
