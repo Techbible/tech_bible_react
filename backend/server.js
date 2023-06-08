@@ -33,7 +33,7 @@ app.get("/mongo-tools", async (req, res) => {
     const tools = await Tools.find();
 
     // console.log("TOOLS : ",tools);
-    res.send(tools); 
+    res.send(tools);
     // Send an object containing both variables
   } catch (error) {
     console.error(error);
@@ -379,11 +379,11 @@ app.get("/discussions", async (req, res) => {
 // Create New Discussion
 app.post("/create-discussion", async (req, res) => {
   try {
-    const { userId, title, description, category } = req.body;
+    const { userId, title, description, category, parentId } = req.body;
 
     const newDiscussion = await Discussion.create({
       Title: title,
-      ParentId: null,
+      ParentId: parentId,
       UserId: userId,
       Description: description,
       Category: category,
@@ -401,10 +401,10 @@ app.post("/create-discussion", async (req, res) => {
 // update discussion vote number
 app.post("/updateDiscussionVotes/:_id/:newValue", async (req, res) => {
   try {
-    const { _id,newValue } = req.params;
+    const { _id, newValue } = req.params;
 
     // Update the discussion document
-    await Discussion.updateOne({ _id: _id }, { $set: {Votes: newValue } });
+    await Discussion.updateOne({ _id: _id }, { $set: { Votes: newValue } });
     console.log("update succesfull");
 
     res.status(200).json({ message: "votes  updated successfully" });
@@ -413,7 +413,6 @@ app.post("/updateDiscussionVotes/:_id/:newValue", async (req, res) => {
     res.status(500).json({ message: "Error updating votes" });
   }
 });
-
 
 //USERS
 // Create User
@@ -534,7 +533,6 @@ app.post("/clearInterests/:uid", async (req, res) => {
     res.status(500).json({ message: "Error clearing interests" });
   }
 });
-
 
 //Add tools
 app.post("/addTools", async (req, res) => {

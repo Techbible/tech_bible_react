@@ -6,14 +6,13 @@ const DiscussionsPage = ({
   toggleDropdown,
   isOpen,
   Discussions,
-  discussion,
+
   CategoriesData,
-  setDiscussion,
-  setIsRepliesClicked,
-  setUserInfo,
+
   selectedFilter,
   setSelectedFilter,
-  setReplies,
+
+  fetchDiscussions,
 }) => {
   return (
     <div>
@@ -161,11 +160,8 @@ const DiscussionsPage = ({
                     return (
                       <Discussion
                         discussion={discussion}
-                        setDiscussion={setDiscussion}
-                        setIsRepliesClicked={setIsRepliesClicked}
-                        setUserInfo={setUserInfo}
-                        setReplies={setReplies}
                         Discussions={Discussions}
+                        fetchDiscussions={fetchDiscussions}
                       />
                     );
                   }

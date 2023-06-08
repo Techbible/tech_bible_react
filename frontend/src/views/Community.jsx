@@ -21,18 +21,9 @@ function Community() {
   const [isRepliesClicked, setIsRepliesClicked] = useState(false);
   const [discussion, setDiscussion] = useState();
   const [userInfo, setUserInfo] = useState();
-  const [replies, setReplies] = useState();
 
   //Fetch Disscutions
   const fetchDiscussions = async () => {
-    const response = await axios.get(`${BASE_URL}/discussions`);
-    const data = response.data;
-
-    // Sort the discussions by updatedAt field in descending order
-    const sortedDiscussions = data.sort((a, b) => {
-      return new Date(b.createdAt) - new Date(a.createdAt);
-    });
-
     // Apply the selected filter option
     if (selectedFilter === "Week") {
       const oneWeekAgo = new Date();
@@ -53,6 +44,13 @@ function Community() {
         return new Date(discussion.createdAt) >= oneYearAgo;
       });
     }
+    const response = await axios.get(`${BASE_URL}/discussions`);
+    const data = response.data;
+
+    // Sort the discussions by updatedAt field in descending order
+    const sortedDiscussions = data.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
 
     // Calculate the time difference in seconds, minutes, hours, days, or years for each comment and format it
     const discussionsWithTimeAgo = sortedDiscussions.map((discussion) => {
@@ -96,7 +94,6 @@ function Community() {
   };
 
   useEffect(() => {
-
     fetchDiscussions();
   }, [selectedFilter]);
 
@@ -114,7 +111,6 @@ function Community() {
           setUserInfo={setUserInfo}
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
-          setReplies={setReplies}
         />
       ) : (
         <div>
@@ -144,12 +140,12 @@ function Community() {
             </div>
           )}
 
-          <DiscussionReply
+          {/* <DiscussionReply
             discussion={discussion}
             userInfo={userInfo}
-            replies={replies}
             Discussions={Discussions}
-          />
+            fetchDiscussions={fetchDiscussions}
+          /> */}
         </div>
       )}
     </div>
