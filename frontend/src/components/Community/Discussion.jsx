@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../../config/mongo";
 import { AuthContext } from "../../context/AuthContext";
 
-const Discussion = ({ discussion, fetchDiscussions, Discussions }) => {
+const Discussion = ({ discussion, Discussions }) => {
   const [userData, setUserData] = useState();
   const [upvoteClicked, setUpvoteClicked] = useState(false);
   const [downvoteClicked, setDownvoteClicked] = useState(false);
@@ -38,18 +38,21 @@ const Discussion = ({ discussion, fetchDiscussions, Discussions }) => {
         "parentId : " +
         parentId
     );
-
-    const response = await axios.post(`${BASE_URL}/create-discussion`, {
-      userId,
-      title,
-      description,
-      category,
-      parentId,
-    });
+    try {
+      const response = await axios.post(`${BASE_URL}/create-discussion`, {
+        userId,
+        title,
+        description,
+        category,
+        parentId,
+      });
+      console.log("Reply to discussion Created successfully:", response.data);
+    } catch (error) {
+      console.log("Erreur create disc" + error);
+    }
     // Handle successful response
     // fetchDiscussions();
     fetchReplies();
-    console.log("Reply to discussion Created successfully:", response.data);
     setReply("");
     // setAddReply(false);
   };
@@ -80,8 +83,6 @@ const Discussion = ({ discussion, fetchDiscussions, Discussions }) => {
       }
     }
     setUpvoteClicked(!upvoteClicked); // Toggle the upvote button
-    await handleVoteNumber();
-    fetchDiscussions();
   };
 
   const handleDownvoteClick = async () => {
@@ -96,8 +97,6 @@ const Discussion = ({ discussion, fetchDiscussions, Discussions }) => {
       }
     }
     setDownvoteClicked(!downvoteClicked); // Toggle the downvote button
-    await handleVoteNumber();
-    fetchDiscussions();
   };
 
   const getUserData = async () => {
@@ -112,6 +111,10 @@ const Discussion = ({ discussion, fetchDiscussions, Discussions }) => {
     getUserData();
     fetchReplies();
     handleVoteNumber();
+    const Replies = Discussions?.filter(
+      (disc) => disc?.ParentId === discussion?.ParentId
+    );
+    setReplies(Replies);
   }, []);
 
   return (
@@ -324,11 +327,7 @@ const Discussion = ({ discussion, fetchDiscussions, Discussions }) => {
       {showReplies && (
         <div className={discussion?.ParentId === null && "ml-8"}>
           {replies?.map((reply) => (
-            <Discussion
-              discussion={reply}
-              fetchDiscussions={fetchDiscussions}
-              Discussions={Discussions}
-            />
+            <Discussion discussion={reply} Discussions={Discussions} />
           ))}
           {discussion?.ParentId === null && (
             <div class="mb-2">

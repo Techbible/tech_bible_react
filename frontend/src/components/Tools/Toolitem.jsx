@@ -136,7 +136,7 @@ const Toolitem = ({
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
                 <span className="bi bi-chat-left-dots"></span>
               </div>
-              {/* <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
+              {/* <div className="fontSize-12 fontWeight-400 noOfLines-undefined">
                   {toolData?.LikedBy?.length}
                 </div> */}
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
@@ -164,15 +164,10 @@ const Toolitem = ({
                     currentUser ? handleLikeUnlike : () => navigate("/signin")
                   }
                 ></i>
-                <div className="text-red-500 color-white fontSize-12 fontWeight-600 noOfLines-undefined">
+                <div style={{color:"#fff !important"}} className="text-red-500 color-white fontSize-12 fontWeight-600 noOfLines-undefined">
                   {simulatedLikesNumber}
                 </div>
               </>
-              {/* ) : (
-                <Link to={`/tooldetails/${toolData?._id}`}>
-                  <i className="text-white-500 text-[25px] fas fa-heart hover:text-[26px] cursor-pointe"></i>
-                </Link>
-              )} */}
             </div>
             <div
               className="cursor-pointer ml-2 text-center"

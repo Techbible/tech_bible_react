@@ -1,7 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext';
 
 const AdminSpace = () => {
+  const { isAdmin } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAdmin) {
+      alert("Access denied!");
+      navigate("/");
+    }
+    else{
+        alert("Welcome to the Admin Space");
+    }
+  }, []);
+
+
   return (
     <div>
      <div className="bg-black min-h-screen flex items-center justify-center">

@@ -529,8 +529,8 @@ const Home = () => {
 
                   {allTools &&
                     allTools.length > 0 &&
-                    allTools.filter((tool) => tool.Keywords.includes(value))
-                      .length === 0 && <p>Nothing found.</p>}
+                    allTools.filter((tool) => tool.Keywords.toLowerCase().includes(value.toLowerCase()))
+                      .length === 0 && <p>Nothing found for {value}.</p>}
                   <hr className="my-20 border-white" />
                 </div>
               ) : null}
