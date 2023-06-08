@@ -560,3 +560,38 @@ app.post("/addTools", async (req, res) => {
     res.status(500).send("Error adding Tools");
   }
 });
+
+//Delete Discussion
+app.delete("/deleteDiscussion/:id", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    // console.log("Connected to MongoDB");
+    const discussion = await Discussion.deleteOne({ _id: req.params.id });
+
+    res.send(discussion); // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting tool data");
+  }
+});
+//Delete Discussion replies
+app.delete("/deleteReplies/:parentId", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    // console.log("Connected to MongoDB");
+    const discussion = await Discussion.deleteMany({
+      ParentId: req.params.parentId,
+    });
+
+    res.send(discussion); // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting tool data");
+  }
+});

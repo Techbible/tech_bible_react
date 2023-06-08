@@ -18,8 +18,19 @@ const DiscussionsPage = ({
   const [isnewClicked, setIsNewClicked] = useState(false);
   const [isPopularClicked, setIsPopularClicked] = useState(false);
   const [isAllClicked, setIsAllClicked] = useState(true);
+  const [category, setCategory] = useState("");
+  const [isCategoryClicked, setIsCategoryClicked] = useState(false);
 
   const [searchResultVisible, setsearchResultVisible] = useState(false);
+
+  const handleCategoryFilter = (cat) => {
+    setCategory(cat);
+    setIsNewClicked(false);
+    setIsPopularClicked(false);
+    setIsAllClicked(false);
+    setsearchResultVisible(false);
+    setIsCategoryClicked(true);
+  };
 
   return (
     <div>
@@ -88,6 +99,7 @@ const DiscussionsPage = ({
                     setIsNewClicked(false);
                     setIsPopularClicked(false);
                     setIsAllClicked(true);
+                    setIsCategoryClicked(false);
                   }}
                 >
                   All
@@ -99,6 +111,7 @@ const DiscussionsPage = ({
                     setIsNewClicked(true);
                     setIsPopularClicked(false);
                     setIsAllClicked(false);
+                    setIsCategoryClicked(false);
                   }}
                 >
                   New
@@ -111,6 +124,7 @@ const DiscussionsPage = ({
                     setIsPopularClicked(true);
                     setIsNewClicked(false);
                     setIsAllClicked(false);
+                    setIsCategoryClicked(false);
                   }}
                 >
                   Popular
@@ -248,6 +262,18 @@ const DiscussionsPage = ({
               </div>
             ) : isPopularClicked ? (
               <div>Popular</div>
+            ) : isCategoryClicked && category !== "" ? (
+              <div className="mr-16">
+                {Discussions?.filter((disc) => {
+                  return disc?.Category === category;
+                }).map((disc) => (
+                  <Discussion
+                    key={disc._id}
+                    discussion={disc}
+                    Discussions={Discussions}
+                  />
+                ))}
+              </div>
             ) : (
               <div className="mr-16">
                 {Discussions &&
@@ -270,7 +296,12 @@ const DiscussionsPage = ({
           <p className="">TOPICS </p>
           <div className="flex flex-wrap justify-start gap-4 my-5">
             {CategoriesData?.map((group) => (
-              <div className="flex items-center w-full">{group.groupName}</div>
+              <div
+                onClick={() => handleCategoryFilter(group.groupName)}
+                className="flex items-center w-full cursor-pointer"
+              >
+                {group.groupName}
+              </div>
             ))}
           </div>
 

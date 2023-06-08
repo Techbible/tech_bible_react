@@ -117,6 +117,28 @@ const Discussion = ({ discussion, Discussions }) => {
     setReplies(Replies);
   }, []);
 
+  const handleRemoveDiscussion = async () => {
+    if (discussion?.ParentId === null) {
+      if (
+        window.confirm("Are you sure that you want to delete this dicussion?")
+      ) {
+        try {
+          //delete discussion + their replies
+          const response = await axios.delete(
+            `${BASE_URL}/deleteDiscussion/${discussion?._id}`
+          );
+          const res = await axios.delete(
+            `${BASE_URL}/deleteReplies/${discussion?._id}`
+          );
+          console.log("Discussion deleted succesfuly");
+          window.location.reload();
+        } catch (error) {
+          console.log("Delete Discussion error : " + error);
+        }
+      }
+    }
+  };
+
   return (
     <div>
       <div>
@@ -152,66 +174,67 @@ const Discussion = ({ discussion, Discussions }) => {
                 </div>
               )}
             </div>
-            <div className="relative">
-              <button
-                id="dropdownComment1Button"
-                data-dropdown-toggle="dropdownComment1"
-                className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-[#1C1C1C] rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-white dark:focus:ring-gray-600"
-                type="button"
-                onClick={() => setDropdownVisible(!isDropdownVisible)}
-              >
-                <svg
-                  className="w-5 h-5"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
+            {discussion?.UserId === currentUser?.uid && (
+              <div className="relative">
+                <button
+                  id="dropdownComment1Button"
+                  data-dropdown-toggle="dropdownComment1"
+                  className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-[#1C1C1C] rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-white dark:focus:ring-gray-600"
+                  type="button"
+                  onClick={() => setDropdownVisible(!isDropdownVisible)}
                 >
-                  <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                </svg>
-                <span className="sr-only">Comment settings</span>
-              </button>
+                  <svg
+                    className="w-5 h-5"
+                    aria-hidden="true"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                  </svg>
+                  <span className="sr-only">Comment settings</span>
+                </button>
 
-              {/* <!-- Dropdown menu --> */}
-
-              <div
-                id="dropdownComment1"
-                className={`${
-                  isDropdownVisible ? "block" : "hidden"
-                } z-10 w15 bg-[#1c1c1c] rounded divide-y divide-gray-100 shadow  absolute right-0`}
-              >
-                <ul
-                  className="py-1 text-sm text-white "
-                  aria-labelledby="dropdownMenuIconHorizontalButton"
+                {/* <!-- Dropdown menu --> */}
+                <div
+                  id="dropdownComment1"
+                  className={`${
+                    isDropdownVisible ? "block" : "hidden"
+                  } z-10 w15 bg-[#1c1c1c] rounded divide-y divide-gray-100 shadow  absolute right-0`}
                 >
-                  <li>
-                    <a
-                      href="#"
-                      className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Edit
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Remove
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Report
-                    </a>
-                  </li>
-                </ul>
+                  <ul
+                    className="py-1 text-sm text-white "
+                    aria-labelledby="dropdownMenuIconHorizontalButton"
+                  >
+                    <li>
+                      <a
+                        href="#"
+                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Edit
+                      </a>
+                    </li>
+                    <li>
+                      <div
+                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        onClick={handleRemoveDiscussion}
+                      >
+                        Remove
+                      </div>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Report
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                {/* <!--End Dropdown menu --> */}
               </div>
-              {/* <!--End Dropdown menu --> */}
-            </div>
+            )}
           </footer>
 
           <div className="flex flex-column align-items-center my-4 ">
