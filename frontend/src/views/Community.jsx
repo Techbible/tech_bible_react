@@ -21,7 +21,6 @@ function Community() {
   const [isRepliesClicked, setIsRepliesClicked] = useState(false);
   const [discussion, setDiscussion] = useState();
   const [userInfo, setUserInfo] = useState();
-  const [replies, setReplies] = useState();
 
   //Fetch Disscutions
   const fetchDiscussions = async () => {
@@ -77,7 +76,6 @@ function Community() {
   };
 
   useEffect(() => {
-
     fetchDiscussions();
   }, [selectedFilter]);
 
@@ -95,7 +93,6 @@ function Community() {
           setUserInfo={setUserInfo}
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
-          setReplies={setReplies}
         />
       ) : (
         <div>
@@ -125,12 +122,12 @@ function Community() {
             </div>
           )}
 
-          <DiscussionReply
+          {/* <DiscussionReply
             discussion={discussion}
             userInfo={userInfo}
-            replies={replies}
             Discussions={Discussions}
-          />
+            fetchDiscussions={fetchDiscussions}
+          /> */}
         </div>
       )}
     </div>

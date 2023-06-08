@@ -46,11 +46,13 @@ function NewDiscussion() {
     setUserID(currentUser?.uid);
   }, [currentUser]);
   const createDiscussion = async () => {
+    const parentId = null;
     const response = await axios.post(`${BASE_URL}/create-discussion`, {
       userId,
       title,
       description,
       category,
+      parentId,
     });
     // Handle successful response
     console.log("Discussion Created successfully:", response.data);
@@ -75,7 +77,7 @@ function NewDiscussion() {
       //     alert("The result is null.");
       //   } else if (result) {
       //     console.log("The text is morally acceptable.");
-         createDiscussion();
+      createDiscussion();
       //   } else {
       //     alert("The text is morally unacceptable.");
       //   }

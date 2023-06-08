@@ -33,7 +33,7 @@ app.get("/mongo-tools", async (req, res) => {
     const tools = await Tools.find();
 
     // console.log("TOOLS : ",tools);
-    res.send(tools); 
+    res.send(tools);
     // Send an object containing both variables
   } catch (error) {
     console.error(error);
@@ -379,11 +379,11 @@ app.get("/discussions", async (req, res) => {
 // Create New Discussion
 app.post("/create-discussion", async (req, res) => {
   try {
-    const { userId, title, description, category } = req.body;
+    const { userId, title, description, category, parentId } = req.body;
 
     const newDiscussion = await Discussion.create({
       Title: title,
-      ParentId: null,
+      ParentId: parentId,
       UserId: userId,
       Description: description,
       Category: category,
@@ -401,10 +401,10 @@ app.post("/create-discussion", async (req, res) => {
 // update discussion vote number
 app.post("/updateDiscussionVotes/:_id/:newValue", async (req, res) => {
   try {
-    const { _id,newValue } = req.params;
+    const { _id, newValue } = req.params;
 
     // Update the discussion document
-    await Discussion.updateOne({ _id: _id }, { $set: {Votes: newValue } });
+    await Discussion.updateOne({ _id: _id }, { $set: { Votes: newValue } });
     console.log("update succesfull");
 
     res.status(200).json({ message: "votes  updated successfully" });
@@ -413,7 +413,6 @@ app.post("/updateDiscussionVotes/:_id/:newValue", async (req, res) => {
     res.status(500).json({ message: "Error updating votes" });
   }
 });
-
 
 //USERS
 // Create User
@@ -535,7 +534,6 @@ app.post("/clearInterests/:uid", async (req, res) => {
   }
 });
 
-
 //Add tools
 app.post("/addTools", async (req, res) => {
   try {
@@ -560,5 +558,40 @@ app.post("/addTools", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Error adding Tools");
+  }
+});
+
+//Delete Discussion
+app.delete("/deleteDiscussion/:id", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    // console.log("Connected to MongoDB");
+    const discussion = await Discussion.deleteOne({ _id: req.params.id });
+
+    res.send(discussion); // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting tool data");
+  }
+});
+//Delete Discussion replies
+app.delete("/deleteReplies/:parentId", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    // console.log("Connected to MongoDB");
+    const discussion = await Discussion.deleteMany({
+      ParentId: req.params.parentId,
+    });
+
+    res.send(discussion); // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting tool data");
   }
 });

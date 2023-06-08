@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const discussionSchema = new mongoose.Schema(
   {
-    Title: { type: String, required: true },
+    Title: { type: String, required: false },
     ParentId: { type: String, required: false },
     UserId: { type: String, required: true },
     Description: { type: String, required: true },

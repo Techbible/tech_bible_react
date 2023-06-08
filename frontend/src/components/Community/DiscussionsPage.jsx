@@ -6,14 +6,13 @@ const DiscussionsPage = ({
   toggleDropdown,
   isOpen,
   Discussions,
-  discussion,
+
   CategoriesData,
-  setDiscussion,
-  setIsRepliesClicked,
-  setUserInfo,
+
   selectedFilter,
   setSelectedFilter,
-  setReplies,
+
+  fetchDiscussions,
 }) => {
   const [search, setSearch] = useState("");
   const [isnewClicked, setIsNewClicked] = useState(false);
@@ -115,6 +114,7 @@ const DiscussionsPage = ({
                     setIsNewClicked(false);
                     setIsPopularClicked(false);
                     setIsAllClicked(true);
+                    setIsCategoryClicked(false);
                   }}
                 >
                   All
@@ -126,6 +126,7 @@ const DiscussionsPage = ({
                     setIsNewClicked(true);
                     setIsPopularClicked(false);
                     setIsAllClicked(false);
+                    setIsCategoryClicked(false);
                   }}
                 >
                   New
@@ -138,6 +139,7 @@ const DiscussionsPage = ({
                     setIsPopularClicked(true);
                     setIsNewClicked(false);
                     setIsAllClicked(false);
+                    setIsCategoryClicked(false);
                   }}
                 >
                   Popular
@@ -247,10 +249,6 @@ const DiscussionsPage = ({
                 }).map((discussion) => (
                   <Discussion
                     discussion={discussion}
-                    setDiscussion={setDiscussion}
-                    setIsRepliesClicked={setIsRepliesClicked}
-                    setUserInfo={setUserInfo}
-                    setReplies={setReplies}
                     Discussions={Discussions}
                   />
                 ))}
@@ -281,10 +279,6 @@ const DiscussionsPage = ({
                 }).map((discussion) => (
                   <Discussion
                     discussion={discussion}
-                    setDiscussion={setDiscussion}
-                    setIsRepliesClicked={setIsRepliesClicked}
-                    setUserInfo={setUserInfo}
-                    setReplies={setReplies}
                     Discussions={Discussions}
                   />
                 ))}
@@ -317,10 +311,6 @@ const DiscussionsPage = ({
                       return (
                         <Discussion
                           discussion={discussion}
-                          setDiscussion={setDiscussion}
-                          setIsRepliesClicked={setIsRepliesClicked}
-                          setUserInfo={setUserInfo}
-                          setReplies={setReplies}
                           Discussions={Discussions}
                         />
                       );
@@ -335,7 +325,12 @@ const DiscussionsPage = ({
           <p className="">TOPICS </p>
           <div className="flex flex-wrap justify-start gap-4 my-5">
             {CategoriesData?.map((group) => (
-              <div className="flex items-center w-full">{group.groupName}</div>
+              <div
+                onClick={() => handleCategoryFilter(group.groupName)}
+                className="flex items-center w-full cursor-pointer"
+              >
+                {group.groupName}
+              </div>
             ))}
           </div>
 

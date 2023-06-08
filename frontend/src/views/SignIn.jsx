@@ -136,6 +136,7 @@ const SignIn = () => {
           uid,
           photo,
         });
+        navigate("/");
       } else {
         navigate("/");
       }
