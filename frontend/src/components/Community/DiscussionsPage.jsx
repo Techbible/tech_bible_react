@@ -219,8 +219,7 @@ const DiscussionsPage = ({
             ) : isnewClicked ? <div>
                {Discussions?.filter((discussion) => {
                   const todayDate=new Date()
-
-                  return (lowercasedDiscussionTitle.includes(lowercasedSearch) || lowercasedDiscussionDescription.includes(lowercasedSearch)) && discussion.ParentId === null;
+                  return null;
                 }).map((discussion) => (
                   <Discussion
                     discussion={discussion}
