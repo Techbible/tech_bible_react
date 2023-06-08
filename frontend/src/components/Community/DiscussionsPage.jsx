@@ -18,10 +18,39 @@ const DiscussionsPage = ({
   const [isnewClicked, setIsNewClicked] = useState(false);
   const [isPopularClicked, setIsPopularClicked] = useState(false);
   const [isAllClicked, setIsAllClicked] = useState(true);
+  const [searchResultVisible, setsearchResultVisible] = useState(false);
   const [category, setCategory] = useState("");
   const [isCategoryClicked, setIsCategoryClicked] = useState(false);
+  const [isDateFilterClicked, setIsDateFilterClicked] = useState(false);
 
-  const [searchResultVisible, setsearchResultVisible] = useState(false);
+  const handleDateFilter = () => {
+    setIsNewClicked(false);
+    setIsPopularClicked(false);
+    setIsAllClicked(false);
+    setsearchResultVisible(false);
+    setIsCategoryClicked(false);
+    setIsDateFilterClicked(true);
+    // Apply the selected filter option
+    if (selectedFilter === "Week") {
+      const oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      Discussions.filter((discussion) => {
+        return new Date(discussion.createdAt) >= oneWeekAgo;
+      });
+    } else if (selectedFilter === "Month") {
+      const oneMonthAgo = new Date();
+      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+      Discussions.filter((discussion) => {
+        return new Date(discussion.createdAt) >= oneMonthAgo;
+      });
+    } else if (selectedFilter === "Year") {
+      const oneYearAgo = new Date();
+      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+      Discussions.filter((discussion) => {
+        return new Date(discussion.createdAt) >= oneYearAgo;
+      });
+    }
+  };
 
   const handleCategoryFilter = (cat) => {
     setCategory(cat);
@@ -30,6 +59,7 @@ const DiscussionsPage = ({
     setIsAllClicked(false);
     setsearchResultVisible(false);
     setIsCategoryClicked(true);
+    setIsDateFilterClicked(false);
   };
 
   return (
@@ -100,6 +130,7 @@ const DiscussionsPage = ({
                     setIsPopularClicked(false);
                     setIsAllClicked(true);
                     setIsCategoryClicked(false);
+                    setIsDateFilterClicked(false);
                   }}
                 >
                   All
@@ -112,6 +143,7 @@ const DiscussionsPage = ({
                     setIsPopularClicked(false);
                     setIsAllClicked(false);
                     setIsCategoryClicked(false);
+                    setIsDateFilterClicked(false);
                   }}
                 >
                   New
@@ -125,6 +157,7 @@ const DiscussionsPage = ({
                     setIsNewClicked(false);
                     setIsAllClicked(false);
                     setIsCategoryClicked(false);
+                    setIsDateFilterClicked(false);
                   }}
                 >
                   Popular
@@ -164,14 +197,18 @@ const DiscussionsPage = ({
                     className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-35 dark:bg-gray-700"
                   >
                     <ul
-                      className="py-2 text-sm text-black "
+                      className="py-2 text-sm text-black cursor-pointer"
                       aria-labelledby="dropdownDefaultButton"
+                      onClick={console.log(selectedFilter)}
                     >
                       <li
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Now" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("Now")}
+                        onClick={() => {
+                          setSelectedFilter("Now");
+                          handleDateFilter();
+                        }}
                       >
                         Now
                       </li>
@@ -179,7 +216,10 @@ const DiscussionsPage = ({
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Week" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("Week")}
+                        onClick={() => {
+                          setSelectedFilter("Week");
+                          handleDateFilter();
+                        }}
                       >
                         Week
                       </li>
@@ -187,7 +227,10 @@ const DiscussionsPage = ({
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Month" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("Month")}
+                        onClick={() => {
+                          setSelectedFilter("Month");
+                          handleDateFilter();
+                        }}
                       >
                         Month
                       </li>
@@ -195,7 +238,10 @@ const DiscussionsPage = ({
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Year" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("Year")}
+                        onClick={() => {
+                          setSelectedFilter("Year");
+                          handleDateFilter();
+                        }}
                       >
                         Year
                       </li>
@@ -203,7 +249,10 @@ const DiscussionsPage = ({
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "All" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("All")}
+                        onClick={() => {
+                          setSelectedFilter("All");
+                          handleDateFilter();
+                        }}
                       >
                         All
                       </li>
@@ -213,7 +262,7 @@ const DiscussionsPage = ({
               </div>
             </div>
             {isAllClicked && searchResultVisible && search !== "" ? (
-              <div lassName="mr-16">
+              <div className="mr-16">
                 {Discussions?.filter((discussion) => {
                   const lowercasedDiscussionTitle =
                     discussion.Title.toLowerCase();
@@ -249,10 +298,16 @@ const DiscussionsPage = ({
                   ).length === 0 && <p>Nothing found for {search}.</p>}
               </div>
             ) : isnewClicked ? (
-              <div>
+              <div className="mr-16">
                 {Discussions?.filter((discussion) => {
-                  const todayDate = new Date();
-                  return null;
+                  const twentyFourHoursAgo = new Date();
+                  twentyFourHoursAgo.setDate(twentyFourHoursAgo.getDate() - 1);
+                  const discussionDate = new Date(discussion.createdAt);
+
+                  return (
+                    discussionDate >= twentyFourHoursAgo &&
+                    discussion.ParentId === null
+                  );
                 }).map((discussion) => (
                   <Discussion
                     discussion={discussion}
@@ -261,7 +316,21 @@ const DiscussionsPage = ({
                 ))}
               </div>
             ) : isPopularClicked ? (
-              <div>Popular</div>
+              <div className="mr-16">
+                {Discussions?.sort((a, b) => b.votes - a.votes)?.map(
+                  (discussion) => {
+                    if (discussion.ParentId === null) {
+                      return (
+                        <Discussion
+                          discussion={discussion}
+                          Discussions={Discussions}
+                        />
+                      );
+                    }
+                    return null;
+                  }
+                )}
+              </div>
             ) : isCategoryClicked && category !== "" ? (
               <div className="mr-16">
                 {Discussions?.filter((disc) => {
@@ -274,6 +343,8 @@ const DiscussionsPage = ({
                   />
                 ))}
               </div>
+            ) : isDateFilterClicked && selectedFilter !== "" ? (
+              <div> date filter</div>
             ) : (
               <div className="mr-16">
                 {Discussions &&

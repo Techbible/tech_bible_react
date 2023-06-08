@@ -24,26 +24,6 @@ function Community() {
 
   //Fetch Disscutions
   const fetchDiscussions = async () => {
-    // Apply the selected filter option
-    if (selectedFilter === "Week") {
-      const oneWeekAgo = new Date();
-      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      sortedDiscussions.filter((discussion) => {
-        return new Date(discussion.createdAt) >= oneWeekAgo;
-      });
-    } else if (selectedFilter === "Month") {
-      const oneMonthAgo = new Date();
-      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-      sortedDiscussions.filter((discussion) => {
-        return new Date(discussion.createdAt) >= oneMonthAgo;
-      });
-    } else if (selectedFilter === "Year") {
-      const oneYearAgo = new Date();
-      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-      sortedDiscussions.filter((discussion) => {
-        return new Date(discussion.createdAt) >= oneYearAgo;
-      });
-    }
     const response = await axios.get(`${BASE_URL}/discussions`);
     const data = response.data;
 
@@ -51,6 +31,8 @@ function Community() {
     const sortedDiscussions = data.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
+
+   
 
     // Calculate the time difference in seconds, minutes, hours, days, or years for each comment and format it
     const discussionsWithTimeAgo = sortedDiscussions.map((discussion) => {
