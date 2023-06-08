@@ -16,11 +16,37 @@ const DiscussionsPage = ({
   setReplies,
 }) => {
   const [search, setSearch] = useState("");
-  const [isnewClicked,setIsNewClicked] =useState(false);
-  const [isPopularClicked,setIsPopularClicked] =useState(false);
-  const [isAllClicked,setIsAllClicked]= useState(false);
+  const [isnewClicked, setIsNewClicked] = useState(false);
+  const [isPopularClicked, setIsPopularClicked] = useState(false);
+  const [isAllClicked, setIsAllClicked] = useState(true);
 
   const [searchResultVisible, setsearchResultVisible] = useState(false);
+
+
+  const handleDateFilter= ()=>{
+ // Apply the selected filter option
+ if (selectedFilter === "Week") {
+  const oneWeekAgo = new Date();
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  Discussions.filter((discussion) => {
+    return new Date(discussion.createdAt) >= oneWeekAgo;
+  });
+} else if (selectedFilter === "Month") {
+  const oneMonthAgo = new Date();
+  oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+  Discussions.filter((discussion) => {
+    return new Date(discussion.createdAt) >= oneMonthAgo;
+  });
+} else if (selectedFilter === "Year") {
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+  Discussions.filter((discussion) => {
+    return new Date(discussion.createdAt) >= oneYearAgo;
+  });
+}
+
+
+  }
 
   return (
     <div>
@@ -83,27 +109,38 @@ const DiscussionsPage = ({
               </div>
             </form>
             <div className="flex direction-row">
-            <p className="mr-3 hover:cursor-pointer hover:font-bold">
-                <button onClick={()=> {setIsNewClicked(false)
-                setIsPopularClicked(false)
-                setIsAllClicked(true)}}>
-                All
+              <p className="mr-3 hover:cursor-pointer hover:font-bold">
+                <button
+                  onClick={() => {
+                    setIsNewClicked(false);
+                    setIsPopularClicked(false);
+                    setIsAllClicked(true);
+                  }}
+                >
+                  All
                 </button>
               </p>
-            <p className="mr-3 hover:cursor-pointer hover:font-bold">
-                <button onClick={()=> {setIsNewClicked(true)
-                setIsPopularClicked(false)
-                setIsAllClicked(false)}}>
-                New
+              <p className="mr-3 hover:cursor-pointer hover:font-bold">
+                <button
+                  onClick={() => {
+                    setIsNewClicked(true);
+                    setIsPopularClicked(false);
+                    setIsAllClicked(false);
+                  }}
+                >
+                  New
                 </button>
               </p>
 
-              
               <p className="mr-3 hover:cursor-pointer hover:font-bold">
-                <button onClick={()=>{setIsPopularClicked(true)
-                setIsNewClicked(false)
-                setIsAllClicked(false)}}>
-                Popular
+                <button
+                  onClick={() => {
+                    setIsPopularClicked(true);
+                    setIsNewClicked(false);
+                    setIsAllClicked(false);
+                  }}
+                >
+                  Popular
                 </button>
               </p>
 
@@ -140,14 +177,16 @@ const DiscussionsPage = ({
                     className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-35 dark:bg-gray-700"
                   >
                     <ul
-                      className="py-2 text-sm text-black "
+                      className="py-2 text-sm text-black cursor-pointer"
                       aria-labelledby="dropdownDefaultButton"
+                      onClick={ console.log(selectedFilter)}
                     >
                       <li
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Now" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("Now")}
+                        onClick={() => setSelectedFilter("Now")
+                     }
                       >
                         Now
                       </li>
@@ -189,17 +228,22 @@ const DiscussionsPage = ({
               </div>
             </div>
             {isAllClicked && searchResultVisible && search !== "" ? (
-              
-              <div lassName="mr-16">
+              <div className="mr-16">
                 {Discussions?.filter((discussion) => {
                   const lowercasedDiscussionTitle =
                     discussion.Title.toLowerCase();
 
                   const lowercasedDiscussionDescription =
                     discussion.Description.toLowerCase();
-                  const lowercasedSearch = search.toLowerCase(); 
+                  const lowercasedSearch = search.toLowerCase();
 
-                  return (lowercasedDiscussionTitle.includes(lowercasedSearch) || lowercasedDiscussionDescription.includes(lowercasedSearch)) && discussion.ParentId === null;
+                  return (
+                    (lowercasedDiscussionTitle.includes(lowercasedSearch) ||
+                      lowercasedDiscussionDescription.includes(
+                        lowercasedSearch
+                      )) &&
+                    discussion.ParentId === null
+                  );
                 }).map((discussion) => (
                   <Discussion
                     discussion={discussion}
@@ -210,16 +254,30 @@ const DiscussionsPage = ({
                     Discussions={Discussions}
                   />
                 ))}
-                 {Discussions &&
-                    Discussions.length > 0 &&
-                    Discussions.filter((discussion) =>  discussion.Title.toLowerCase().includes(search.toLowerCase()))
-                      .length === 0 && Discussions.filter((discussion) =>   discussion.Description.toLowerCase().includes(search.toLowerCase()))
-                      .length === 0  && <p>Nothing found for {search}.</p>}
+                {Discussions &&
+                  Discussions.length > 0 &&
+                  Discussions.filter((discussion) =>
+                    discussion.Title.toLowerCase().includes(
+                      search.toLowerCase()
+                    )
+                  ).length === 0 &&
+                  Discussions.filter((discussion) =>
+                    discussion.Description.toLowerCase().includes(
+                      search.toLowerCase()
+                    )
+                  ).length === 0 && <p>Nothing found for {search}.</p>}
               </div>
-            ) : isnewClicked ? <div>
-               {Discussions?.filter((discussion) => {
-                  const todayDate=new Date()
-                  return null;
+            ) : isnewClicked ? (
+              <div className="mr-16">
+                {Discussions?.filter((discussion) => {
+                  const twentyFourHoursAgo = new Date();
+                  twentyFourHoursAgo.setDate(twentyFourHoursAgo.getDate() - 1);
+                  const discussionDate = new Date(discussion.createdAt);
+
+                  return (
+                    discussionDate >= twentyFourHoursAgo &&
+                    discussion.ParentId === null
+                  );
                 }).map((discussion) => (
                   <Discussion
                     discussion={discussion}
@@ -230,7 +288,28 @@ const DiscussionsPage = ({
                     Discussions={Discussions}
                   />
                 ))}
-            </div> : isPopularClicked ? <div>Popular</div> : (
+              </div>
+            ) : isPopularClicked ? (
+              <div className="mr-16">
+                {Discussions?.sort((a, b) => b.votes - a.votes)?.map(
+                  (discussion) => {
+                    if (discussion.ParentId === null) {
+                      return (
+                        <Discussion
+                          discussion={discussion}
+                          setDiscussion={setDiscussion}
+                          setIsRepliesClicked={setIsRepliesClicked}
+                          setUserInfo={setUserInfo}
+                          setReplies={setReplies}
+                          Discussions={Discussions}
+                        />
+                      );
+                    }
+                    return null;
+                  }
+                )}
+              </div>
+            ) : (
               <div className="mr-16">
                 {Discussions &&
                   Discussions?.map((discussion) => {

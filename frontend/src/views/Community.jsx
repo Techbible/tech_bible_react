@@ -33,26 +33,7 @@ function Community() {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    // Apply the selected filter option
-    if (selectedFilter === "Week") {
-      const oneWeekAgo = new Date();
-      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      sortedDiscussions.filter((discussion) => {
-        return new Date(discussion.createdAt) >= oneWeekAgo;
-      });
-    } else if (selectedFilter === "Month") {
-      const oneMonthAgo = new Date();
-      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-      sortedDiscussions.filter((discussion) => {
-        return new Date(discussion.createdAt) >= oneMonthAgo;
-      });
-    } else if (selectedFilter === "Year") {
-      const oneYearAgo = new Date();
-      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-      sortedDiscussions.filter((discussion) => {
-        return new Date(discussion.createdAt) >= oneYearAgo;
-      });
-    }
+   
 
     // Calculate the time difference in seconds, minutes, hours, days, or years for each comment and format it
     const discussionsWithTimeAgo = sortedDiscussions.map((discussion) => {
