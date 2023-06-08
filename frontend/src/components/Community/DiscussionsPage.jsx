@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import Discussion from "./Discussion";
 
@@ -22,34 +22,41 @@ const DiscussionsPage = ({
   const [category, setCategory] = useState("");
   const [isCategoryClicked, setIsCategoryClicked] = useState(false);
   const [isDateFilterClicked, setIsDateFilterClicked] = useState(false);
+  const [sortedDiscussionByDate, setSortedDiscussionByDate] = useState(Discussions);
 
   const handleDateFilter = () => {
-    setIsNewClicked(false);
-    setIsPopularClicked(false);
-    setIsAllClicked(false);
-    setsearchResultVisible(false);
-    setIsCategoryClicked(false);
     setIsDateFilterClicked(true);
+
     // Apply the selected filter option
     if (selectedFilter === "Week") {
       const oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      Discussions.filter((discussion) => {
+
+      const filteredDiscussions = Discussions.filter((discussion) => {
         return new Date(discussion.createdAt) >= oneWeekAgo;
       });
+      setSortedDiscussionByDate(filteredDiscussions);
     } else if (selectedFilter === "Month") {
       const oneMonthAgo = new Date();
       oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-      Discussions.filter((discussion) => {
+
+      const filteredDiscussions = Discussions.filter((discussion) => {
         return new Date(discussion.createdAt) >= oneMonthAgo;
       });
+
+      setSortedDiscussionByDate(filteredDiscussions);
     } else if (selectedFilter === "Year") {
       const oneYearAgo = new Date();
       oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-      Discussions.filter((discussion) => {
+
+      const filteredDiscussions = Discussions.filter((discussion) => {
         return new Date(discussion.createdAt) >= oneYearAgo;
       });
+
+      setSortedDiscussionByDate(filteredDiscussions);
+      
     }
+    setSelectedFilter("");
   };
 
   const handleCategoryFilter = (cat) => {
@@ -61,7 +68,9 @@ const DiscussionsPage = ({
     setIsCategoryClicked(true);
     setIsDateFilterClicked(false);
   };
-
+  useEffect(() => {
+    setSortedDiscussionByDate(Discussions);
+  }, [Discussions]);
   return (
     <div>
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 toolDetailLayoutContainer ">
@@ -111,6 +120,7 @@ const DiscussionsPage = ({
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       setsearchResultVisible(true);
+                      setIsAllClicked(true);
                     }
                   }}
                   autoComplete="off"
@@ -168,7 +178,9 @@ const DiscussionsPage = ({
                 <button
                   id="dropdownDefaultButton"
                   data-dropdown-toggle="dropdown"
-                  onClick={toggleDropdown}
+                  onClick={()=>{toggleDropdown()
+                  setSelectedFilter("All");
+                  }}
                   className="text-white bg-[#ef4722] focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-sm px-3 py-0.5 text-center inline-flex items-center "
                   type="button"
                 >
@@ -177,6 +189,7 @@ const DiscussionsPage = ({
                     className={`w-4 h-4 ml-2 transition-transform ${
                       isOpen ? "rotate-180" : ""
                     }`}
+                    onClick={()=>setSelectedFilter("All")}
                     aria-hidden="true"
                     fill="none"
                     stroke="currentColor"
@@ -191,7 +204,7 @@ const DiscussionsPage = ({
                     />
                   </svg>
                 </button>
-                {isOpen && (
+                {isOpen && selectedFilter !=="" &&(
                   <div
                     id="dropdown"
                     className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-35 dark:bg-gray-700"
@@ -201,17 +214,7 @@ const DiscussionsPage = ({
                       aria-labelledby="dropdownDefaultButton"
                       onClick={console.log(selectedFilter)}
                     >
-                      <li
-                        className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
-                          selectedFilter === "Now" && "font-bold"
-                        }`}
-                        onClick={() => {
-                          setSelectedFilter("Now");
-                          handleDateFilter();
-                        }}
-                      >
-                        Now
-                      </li>
+                      
                       <li
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Week" && "font-bold"
@@ -219,6 +222,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Week");
                           handleDateFilter();
+                          console.log(sortedDiscussionByDate)
                         }}
                       >
                         Week
@@ -230,6 +234,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Month");
                           handleDateFilter();
+                          console.log(sortedDiscussionByDate)
                         }}
                       >
                         Month
@@ -241,6 +246,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Year");
                           handleDateFilter();
+                          console.log(sortedDiscussionByDate)
                         }}
                       >
                         Year
@@ -252,6 +258,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("All");
                           handleDateFilter();
+                          console.log(sortedDiscussionByDate)
                         }}
                       >
                         All
@@ -343,8 +350,20 @@ const DiscussionsPage = ({
                   />
                 ))}
               </div>
-            ) : isDateFilterClicked && selectedFilter !== "" ? (
-              <div> date filter</div>
+            ) : isDateFilterClicked && selectedFilter !=="" ? (
+              <div className="mr-16"> 
+              
+              { 
+                sortedDiscussionByDate.map((discussion) => {
+                  if (discussion?.ParentId === null) {
+                    return (
+                      <Discussion
+                        discussion={discussion}
+                        Discussions={Discussions}
+                      />
+                    );
+                  }
+                })}</div>
             ) : (
               <div className="mr-16">
                 {Discussions &&

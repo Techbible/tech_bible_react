@@ -21,6 +21,7 @@ function Community() {
   const [isRepliesClicked, setIsRepliesClicked] = useState(false);
   const [discussion, setDiscussion] = useState();
   const [userInfo, setUserInfo] = useState();
+  
 
   //Fetch Disscutions
   const fetchDiscussions = async () => {
@@ -68,7 +69,7 @@ function Community() {
     });
 
     setDiscussions(discussionsWithTimeAgo);
-    console.log(discussionsWithTimeAgo);
+    
   };
 
   const toggleDropdown = () => {
