@@ -595,3 +595,21 @@ app.delete("/deleteReplies/:parentId", async (req, res) => {
     res.status(500).send("Error deleting tool data");
   }
 });
+
+//Update discussion
+app.post("/updateDiscussion/:id/:title/:description", async (req, res) => {
+  try {
+    const { id, title, description } = req.params;
+
+    // Update the user document
+    await Discussion.updateOne(
+      { _id: id },
+      { $set: { Title: title, Description: description } }
+    );
+
+    res.status(200).json({ message: "User bio updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error updating user bio" });
+  }
+});
