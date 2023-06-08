@@ -18,34 +18,49 @@ const DiscussionsPage = ({
   const [isnewClicked, setIsNewClicked] = useState(false);
   const [isPopularClicked, setIsPopularClicked] = useState(false);
   const [isAllClicked, setIsAllClicked] = useState(true);
-
   const [searchResultVisible, setsearchResultVisible] = useState(false);
+  const [category, setCategory] = useState("");
+  const [isCategoryClicked, setIsCategoryClicked] = useState(false);
+  const [isDateFilterClicked, setIsDateFilterClicked] = useState(false);
 
+  const handleDateFilter = () => {
+    setIsNewClicked(false);
+    setIsPopularClicked(false);
+    setIsAllClicked(false);
+    setsearchResultVisible(false);
+    setIsCategoryClicked(false);
+    setIsDateFilterClicked(true);
+    // Apply the selected filter option
+    if (selectedFilter === "Week") {
+      const oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      Discussions.filter((discussion) => {
+        return new Date(discussion.createdAt) >= oneWeekAgo;
+      });
+    } else if (selectedFilter === "Month") {
+      const oneMonthAgo = new Date();
+      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+      Discussions.filter((discussion) => {
+        return new Date(discussion.createdAt) >= oneMonthAgo;
+      });
+    } else if (selectedFilter === "Year") {
+      const oneYearAgo = new Date();
+      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+      Discussions.filter((discussion) => {
+        return new Date(discussion.createdAt) >= oneYearAgo;
+      });
+    }
+  };
 
-  const handleDateFilter= ()=>{
- // Apply the selected filter option
- if (selectedFilter === "Week") {
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  Discussions.filter((discussion) => {
-    return new Date(discussion.createdAt) >= oneWeekAgo;
-  });
-} else if (selectedFilter === "Month") {
-  const oneMonthAgo = new Date();
-  oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-  Discussions.filter((discussion) => {
-    return new Date(discussion.createdAt) >= oneMonthAgo;
-  });
-} else if (selectedFilter === "Year") {
-  const oneYearAgo = new Date();
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-  Discussions.filter((discussion) => {
-    return new Date(discussion.createdAt) >= oneYearAgo;
-  });
-}
-
-
-  }
+  const handleCategoryFilter = (cat) => {
+    setCategory(cat);
+    setIsNewClicked(false);
+    setIsPopularClicked(false);
+    setIsAllClicked(false);
+    setsearchResultVisible(false);
+    setIsCategoryClicked(true);
+    setIsDateFilterClicked(false);
+  };
 
   return (
     <div>
@@ -115,6 +130,7 @@ const DiscussionsPage = ({
                     setIsPopularClicked(false);
                     setIsAllClicked(true);
                     setIsCategoryClicked(false);
+                    setIsDateFilterClicked(false);
                   }}
                 >
                   All
@@ -127,6 +143,7 @@ const DiscussionsPage = ({
                     setIsPopularClicked(false);
                     setIsAllClicked(false);
                     setIsCategoryClicked(false);
+                    setIsDateFilterClicked(false);
                   }}
                 >
                   New
@@ -140,6 +157,7 @@ const DiscussionsPage = ({
                     setIsNewClicked(false);
                     setIsAllClicked(false);
                     setIsCategoryClicked(false);
+                    setIsDateFilterClicked(false);
                   }}
                 >
                   Popular
@@ -181,14 +199,16 @@ const DiscussionsPage = ({
                     <ul
                       className="py-2 text-sm text-black cursor-pointer"
                       aria-labelledby="dropdownDefaultButton"
-                      onClick={ console.log(selectedFilter)}
+                      onClick={console.log(selectedFilter)}
                     >
                       <li
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Now" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("Now")
-                     }
+                        onClick={() => {
+                          setSelectedFilter("Now");
+                          handleDateFilter();
+                        }}
                       >
                         Now
                       </li>
@@ -196,7 +216,10 @@ const DiscussionsPage = ({
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Week" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("Week")}
+                        onClick={() => {
+                          setSelectedFilter("Week");
+                          handleDateFilter();
+                        }}
                       >
                         Week
                       </li>
@@ -204,7 +227,10 @@ const DiscussionsPage = ({
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Month" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("Month")}
+                        onClick={() => {
+                          setSelectedFilter("Month");
+                          handleDateFilter();
+                        }}
                       >
                         Month
                       </li>
@@ -212,7 +238,10 @@ const DiscussionsPage = ({
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Year" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("Year")}
+                        onClick={() => {
+                          setSelectedFilter("Year");
+                          handleDateFilter();
+                        }}
                       >
                         Year
                       </li>
@@ -220,7 +249,10 @@ const DiscussionsPage = ({
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "All" && "font-bold"
                         }`}
-                        onClick={() => setSelectedFilter("All")}
+                        onClick={() => {
+                          setSelectedFilter("All");
+                          handleDateFilter();
+                        }}
                       >
                         All
                       </li>
@@ -291,10 +323,6 @@ const DiscussionsPage = ({
                       return (
                         <Discussion
                           discussion={discussion}
-                          setDiscussion={setDiscussion}
-                          setIsRepliesClicked={setIsRepliesClicked}
-                          setUserInfo={setUserInfo}
-                          setReplies={setReplies}
                           Discussions={Discussions}
                         />
                       );
@@ -303,6 +331,20 @@ const DiscussionsPage = ({
                   }
                 )}
               </div>
+            ) : isCategoryClicked && category !== "" ? (
+              <div className="mr-16">
+                {Discussions?.filter((disc) => {
+                  return disc?.Category === category;
+                }).map((disc) => (
+                  <Discussion
+                    key={disc._id}
+                    discussion={disc}
+                    Discussions={Discussions}
+                  />
+                ))}
+              </div>
+            ) : isDateFilterClicked && selectedFilter !== "" ? (
+              <div> date filter</div>
             ) : (
               <div className="mr-16">
                 {Discussions &&
