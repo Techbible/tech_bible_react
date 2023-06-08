@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Discussion from "./Discussion";
 
@@ -15,6 +15,13 @@ const DiscussionsPage = ({
   setSelectedFilter,
   setReplies,
 }) => {
+  const [search, setSearch] = useState("");
+  const [isnewClicked,setIsNewClicked] =useState(false);
+  const [isPopularClicked,setIsPopularClicked] =useState(false);
+  const [isAllClicked,setIsAllClicked]= useState(false);
+
+  const [searchResultVisible, setsearchResultVisible] = useState(false);
+
   return (
     <div>
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-10 toolDetailLayoutContainer ">
@@ -57,6 +64,15 @@ const DiscussionsPage = ({
                   </svg>
                 </div>
                 <input
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.keyCode === 13) {
+                      e.preventDefault();
+                      setsearchResultVisible(true);
+                    }
+                  }}
                   autoComplete="off"
                   type="search"
                   id="default-search"
@@ -67,9 +83,28 @@ const DiscussionsPage = ({
               </div>
             </form>
             <div className="flex direction-row">
-              <p className="mr-3 hover:cursor-pointer hover:font-bold">New </p>
+            <p className="mr-3 hover:cursor-pointer hover:font-bold">
+                <button onClick={()=> {setIsNewClicked(false)
+                setIsPopularClicked(false)
+                setIsAllClicked(true)}}>
+                All
+                </button>
+              </p>
+            <p className="mr-3 hover:cursor-pointer hover:font-bold">
+                <button onClick={()=> {setIsNewClicked(true)
+                setIsPopularClicked(false)
+                setIsAllClicked(false)}}>
+                New
+                </button>
+              </p>
+
+              
               <p className="mr-3 hover:cursor-pointer hover:font-bold">
-                Popular{" "}
+                <button onClick={()=>{setIsPopularClicked(true)
+                setIsNewClicked(false)
+                setIsAllClicked(false)}}>
+                Popular
+                </button>
               </p>
 
               <div className="flex direction-column mb-20">
@@ -102,7 +137,7 @@ const DiscussionsPage = ({
                 {isOpen && (
                   <div
                     id="dropdown"
-                    className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                    className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-35 dark:bg-gray-700"
                   >
                     <ul
                       className="py-2 text-sm text-black "
@@ -153,24 +188,68 @@ const DiscussionsPage = ({
                 )}
               </div>
             </div>
+            {isAllClicked && searchResultVisible && search !== "" ? (
+              
+              <div lassName="mr-16">
+                {Discussions?.filter((discussion) => {
+                  const lowercasedDiscussionTitle =
+                    discussion.Title.toLowerCase();
 
-            <div className="mr-16">
-              {Discussions &&
-                Discussions?.map((discussion) => {
-                  if (discussion?.ParentId === null) {
-                    return (
-                      <Discussion
-                        discussion={discussion}
-                        setDiscussion={setDiscussion}
-                        setIsRepliesClicked={setIsRepliesClicked}
-                        setUserInfo={setUserInfo}
-                        setReplies={setReplies}
-                        Discussions={Discussions}
-                      />
-                    );
-                  }
-                })}
-            </div>
+                  const lowercasedDiscussionDescription =
+                    discussion.Description.toLowerCase();
+                  const lowercasedSearch = search.toLowerCase(); 
+
+                  return (lowercasedDiscussionTitle.includes(lowercasedSearch) || lowercasedDiscussionDescription.includes(lowercasedSearch)) && discussion.ParentId === null;
+                }).map((discussion) => (
+                  <Discussion
+                    discussion={discussion}
+                    setDiscussion={setDiscussion}
+                    setIsRepliesClicked={setIsRepliesClicked}
+                    setUserInfo={setUserInfo}
+                    setReplies={setReplies}
+                    Discussions={Discussions}
+                  />
+                ))}
+                 {Discussions &&
+                    Discussions.length > 0 &&
+                    Discussions.filter((discussion) =>  discussion.Title.toLowerCase().includes(search.toLowerCase()))
+                      .length === 0 && Discussions.filter((discussion) =>   discussion.Description.toLowerCase().includes(search.toLowerCase()))
+                      .length === 0  && <p>Nothing found for {search}.</p>}
+              </div>
+            ) : isnewClicked ? <div>
+               {Discussions?.filter((discussion) => {
+                  const todayDate=new Date()
+
+                  return (lowercasedDiscussionTitle.includes(lowercasedSearch) || lowercasedDiscussionDescription.includes(lowercasedSearch)) && discussion.ParentId === null;
+                }).map((discussion) => (
+                  <Discussion
+                    discussion={discussion}
+                    setDiscussion={setDiscussion}
+                    setIsRepliesClicked={setIsRepliesClicked}
+                    setUserInfo={setUserInfo}
+                    setReplies={setReplies}
+                    Discussions={Discussions}
+                  />
+                ))}
+            </div> : isPopularClicked ? <div>Popular</div> : (
+              <div className="mr-16">
+                {Discussions &&
+                  Discussions?.map((discussion) => {
+                    if (discussion?.ParentId === null) {
+                      return (
+                        <Discussion
+                          discussion={discussion}
+                          setDiscussion={setDiscussion}
+                          setIsRepliesClicked={setIsRepliesClicked}
+                          setUserInfo={setUserInfo}
+                          setReplies={setReplies}
+                          Discussions={Discussions}
+                        />
+                      );
+                    }
+                  })}
+              </div>
+            )}
           </div>
         </main>
 

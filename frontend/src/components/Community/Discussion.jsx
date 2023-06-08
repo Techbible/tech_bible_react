@@ -9,33 +9,22 @@ const Discussion = ({
   setUserInfo,
   setReplies,
   Discussions,
-  fetchDiscussions,
+  
 }) => {
   const [userData, setUserData] = useState();
   const [upvoteClicked, setUpvoteClicked] = useState(false);
   const [downvoteClicked, setDownvoteClicked] = useState(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [newValue, setNewValue] = useState(discussion.Votes);
+  const [newValue, setNewValue] = useState(0);
 
-  const handleVoteNumber = async () => {
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/updateDiscussionVotes/${discussion._id}/${newValue}`
-      );
-
-      console.log("handlevotenumber try " + newValue);
-      console.log(discussion._id);
-    } catch (error) {
-      console.error("error of handle vote number : " + error);
-      console.log(newValue);
-      console.log(discussion._id);
-    }
-  };
+  
 
   const handleUpvoteClick = async () => {
+    
     if (upvoteClicked) {
       setNewValue(newValue - 1); // Subtract one from newValue
-    } else {
+    } 
+    else {
       if (downvoteClicked) {
         setNewValue(newValue + 2); // Add two to newValue (transition from downvote to upvote)
         setDownvoteClicked(false); // Unclick the downvote button
@@ -44,8 +33,8 @@ const Discussion = ({
       }
     }
     setUpvoteClicked(!upvoteClicked); // Toggle the upvote button
-    await handleVoteNumber();
-    fetchDiscussions();
+  
+    
   };
 
   const handleDownvoteClick = async () => {
@@ -60,8 +49,8 @@ const Discussion = ({
       }
     }
     setDownvoteClicked(!downvoteClicked); // Toggle the downvote button
-    await handleVoteNumber();
-    fetchDiscussions();
+   
+    
   };
 
   const getUserData = async () => {
@@ -76,7 +65,7 @@ const Discussion = ({
       (disc) => disc?.ParentId === discussion?.ParentId
     );
     setReplies(Replies);
-    handleVoteNumber();
+    
   }, []);
 
   return (
@@ -223,7 +212,7 @@ const Discussion = ({
             </svg>
           </button>
           <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-            {discussion?.Votes} and {newValue}
+          {newValue}
           </div>
           {/* downvote */}
           <button

@@ -93,7 +93,7 @@ function DataParser() {
   //       Icon: toolData.Icon,
   //       Keywords: toolData.Keywords,
   //     });
-  //     // console.log(toolData);
+//     // console.log(toolData);
   //   });
   // };
 
