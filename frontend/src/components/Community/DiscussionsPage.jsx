@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Discussion from "./Discussion";
 import UserInDiscussion from "./UserInDiscussion";
+import NewDiscussion from "./NewDiscussion";
 
 const DiscussionsPage = ({
   toggleDropdown,
   isOpen,
-  setIsOpen,
   Discussions,
 
   CategoriesData,
@@ -29,6 +29,7 @@ const DiscussionsPage = ({
     useState(Discussions);
   const [showUserAside, setShowUserAside] = useState(false);
   const [categoryOfDiscussion, setCategoryOfDiscussion] = useState("");
+  const [createDiscussionClicked, setCreateDiscussionClicked] = useState(false);
 
   const handleDateFilter = () => {
     setIsDateFilterClicked(true);
@@ -75,7 +76,6 @@ const DiscussionsPage = ({
   };
   useEffect(() => {
     setSortedDiscussionByDate(Discussions);
-    
   }, [Discussions]);
   return (
     <div>
@@ -87,9 +87,15 @@ const DiscussionsPage = ({
               Ask questions, find support, and connect with the community
             </p>
 
-            <button className="light text-[14px] border-[1px] px-[8px] py-[1px] rounded-[5px] mt-2 mb-2 mx-auto bg-black hover:bg-gray-900 mt-10 ml-0">
-              <Link to="/create-discussion">Create New Discussion</Link>
+            <button
+              onClick={() =>
+                setCreateDiscussionClicked(!createDiscussionClicked)
+              }
+              className="light text-[14px]  px-[8px] py-[1px] rounded-[5px] mt-2 mb-2 mx-auto bg-[#EF4722] hover:bg-orange mt-10 ml-0"
+            >
+              <Link>Create New Discussion</Link>
             </button>
+            {createDiscussionClicked && <NewDiscussion />}
           </div>
 
           <div className="flex direction-column ">
@@ -132,8 +138,8 @@ const DiscussionsPage = ({
                   autoComplete="off"
                   type="search"
                   id="default-search"
-                  className="block w-full p-1 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Search discussions"
+                  className="bg-white h-[20px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Search discussions..."
                   required
                 />
               </div>
@@ -196,6 +202,7 @@ const DiscussionsPage = ({
                     className={`w-4 h-4 ml-2 transition-transform ${
                       isOpen ? "rotate-180" : ""
                     }`}
+                    onClick={() => setSelectedFilter("All")}
                     aria-hidden="true"
                     fill="none"
                     stroke="currentColor"
@@ -227,7 +234,6 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Week");
                           handleDateFilter();
-                          setIsOpen(false);
                           console.log(sortedDiscussionByDate);
                         }}
                       >
@@ -240,7 +246,6 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Month");
                           handleDateFilter();
-                          setIsOpen(false);
                           console.log(sortedDiscussionByDate);
                         }}
                       >
@@ -253,25 +258,12 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Year");
                           handleDateFilter();
-                          setIsOpen(false);
                           console.log(sortedDiscussionByDate);
                         }}
                       >
                         Year
                       </li>
-                      <li
-                        className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
-                          selectedFilter === "All" && "font-bold"
-                        }`}
-                        onClick={() => {
-                          setSelectedFilter("All");
-                          handleDateFilter();
-                          setIsOpen(false);
-                          console.log(sortedDiscussionByDate);
-                        }}
-                      >
-                        All
-                      </li>
+                    
                     </ul>
                   </div>
                 )}
@@ -339,7 +331,7 @@ const DiscussionsPage = ({
               </div>
             ) : isPopularClicked ? (
               <div className="mr-16">
-                {Discussions?.sort((a, b) => (b.LikedBy.length - b.DislikedBy.length) - (a.LikedBy.length - a.DislikedBy.length))?.map(
+                {Discussions?.sort((a, b) => b.votes - a.votes)?.map(
                   (discussion) => {
                     if (discussion.ParentId === null) {
                       return (
