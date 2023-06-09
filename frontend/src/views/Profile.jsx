@@ -381,12 +381,12 @@ const Profile = () => {
                       <div></div>
                     )}
 
-                    {/* <button
+                    <button
                       className="absolute top-[44px] right-[10px] text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]"
                       onClick={() => openModal2()}
                     >
                       Share
-                    </button> */}
+                    </button>
                     {/* <button
                       onClick={() => setEditProfileClicked(true)}
                       className="text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] my-3 rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]"
