@@ -15,8 +15,10 @@ const Discussion = ({
   const [userData, setUserData] = useState();
   const [upvoteClicked, setUpvoteClicked] = useState(false);
   const [downvoteClicked, setDownvoteClicked] = useState(false);
-  const [voteDifference, setVoteDifference] = useState(discussion?.LikedBy.length - discussion?.DislikedBy.length || 0); // State variable for vote difference
-  
+  const [voteDifference, setVoteDifference] = useState(
+    discussion?.LikedBy.length - discussion?.DislikedBy.length || 0
+  ); // State variable for vote difference
+
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
   const [replies, setReplies] = useState();
@@ -88,7 +90,6 @@ const Discussion = ({
   const handleVoteNumber = async () => {
     if (upvoteClicked) {
       try {
-       
         const res = await axios.post(
           `${BASE_URL}/addUpvote/${discussion._id}/${currentUser?.uid}`
         );
@@ -98,7 +99,6 @@ const Discussion = ({
       }
     } else {
       try {
-       
         const res = await axios.post(
           `${BASE_URL}/removeUpvote/${discussion._id}/${currentUser?.uid}`
         );
@@ -110,7 +110,6 @@ const Discussion = ({
 
     if (downvoteClicked) {
       try {
-       
         const res = await axios.post(
           `${BASE_URL}/addDownvote/${discussion._id}/${currentUser?.uid}`
         );
@@ -120,7 +119,6 @@ const Discussion = ({
       }
     } else {
       try {
-        
         const res = await axios.post(
           `${BASE_URL}/removeDownvote/${discussion._id}/${currentUser?.uid}`
         );
@@ -153,7 +151,7 @@ const Discussion = ({
     }
     setUpvoteClicked(!upvoteClicked);
   };
-  
+
   const handleDownvoteClick = async () => {
     if (downvoteClicked) {
       setUpvoteClicked(false);
@@ -168,7 +166,6 @@ const Discussion = ({
     }
     setDownvoteClicked(!downvoteClicked);
   };
-  
 
   const getUserData = async () => {
     const res = await axios.get(`${BASE_URL}/check-user/${discussion.UserId}`);
@@ -178,10 +175,14 @@ const Discussion = ({
 
   useEffect(() => {
     setUpvoteClicked(discussion?.LikedBy?.includes(currentUser?.uid) || false);
-    setDownvoteClicked(discussion?.DislikedBy?.includes(currentUser?.uid) || false);
-    setVoteDifference(discussion?.LikedBy.length - discussion?.DislikedBy.length || 0);
+    setDownvoteClicked(
+      discussion?.DislikedBy?.includes(currentUser?.uid) || false
+    );
+    setVoteDifference(
+      discussion?.LikedBy.length - discussion?.DislikedBy.length || 0
+    );
   }, [discussion, currentUser]);
-  
+
   useEffect(() => {
     handleVoteNumber();
   }, [upvoteClicked, downvoteClicked]);
@@ -242,7 +243,14 @@ const Discussion = ({
   };
 
   const edditDiscussion = async () => {
-    console.log("DISCUSSION EDDITED title : " + edditedTitle);
+    console.log(
+      "DISCUSSION EDDITED : " +
+        discussion?._id +
+        " " +
+        edditedTitle +
+        " " +
+        edditedDescription
+    );
     if (discussion?.ParentId === null) {
       try {
         const res = await axios.post(
@@ -524,7 +532,7 @@ const Discussion = ({
                 </svg>
               </button>
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                {voteDifference  }
+                {voteDifference}
               </div>
               {/* downvote */}
               <button
