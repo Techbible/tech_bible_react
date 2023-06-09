@@ -3,7 +3,7 @@ import { auth, db } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { collection, updateDoc, getDoc, doc } from "firebase/firestore";
+// import { collection, updateDoc, getDoc, doc } from "firebase/firestore";
 import Modal from "react-modal";
 import Folder from "./profile/Folder";
 import { useContext } from "react";
@@ -17,14 +17,13 @@ import AppOfTheDay from "../components/home components/Filtering-container/AppOf
 import "../assets/styles/search-container/search-container.css";
 import { NewsContext } from "../context/NewsContext";
 import { ModalcustomStyles } from "./Profile";
-
+import axios from "axios";
 import NewsLetterSubscribe from "../components/home components/NewsLetterSubscribe";
 import { CategoriesData } from "../dataJson/CategoriesData";
-import Footer from "../components/home components/Footer";
-import { Navbar } from "../components";
 import { useRecoilValue } from "recoil";
 import { allToolsAtom } from "../recoil/tool";
 import { homeToolsAtom } from "../recoil/homePageTools";
+import { BASE_URL } from "../config/mongo";
 
 const Home = () => {
   const allTools = useRecoilValue(allToolsAtom);
@@ -137,53 +136,77 @@ const Home = () => {
 
   // useEffect(()=>{alert(ToolToFolder)},[ToolToFolder])
 
-  //HANDLE ADDING A TOOL TO A FOLDER START
-  const handleAddToFolder = () => {
-    const usersRef = collection(db, "Users");
-    const userDocRef = doc(usersRef, currentUser?.uid);
+//HANDLE ADDING A TOOL TO A FOLDER START FIREBASE
+  // const handleAddToFolder = () => {
+  //   const usersRef = collection(db, "Users");
+  //   const userDocRef = doc(usersRef, currentUser?.uid);
 
-    // Get the current user document
-    getDoc(userDocRef)
-      .then((doc) => {
-        if (doc.exists()) {
-          const userData = doc.data();
-          let folders = userData.folders;
+  //   // Get the current user document
+  //   getDoc(userDocRef)
+  //     .then((doc) => {
+  //       if (doc.exists()) {
+  //         const userData = doc.data();
+  //         let folders = userData.folders;
 
-          if (!folders) {
-            // Initialize the folders array if it doesn't exist
-            folders = [];
-          }
+  //         if (!folders) {
+  //           // Initialize the folders array if it doesn't exist
+  //           folders = [];
+  //         }
 
-          // Update the specific folder's tools array
-          if (
-            folders[ToolToFolderIndex] &&
-            Array.isArray(folders[ToolToFolderIndex].tools)
-          ) {
-            folders[ToolToFolderIndex].tools.push(ToolToFolder);
-          } else {
-            // Initialize the tools array for the specific folder if it doesn't exist
-            folders[ToolToFolderIndex].tools = [ToolToFolder];
-          }
+  //         // Update the specific folder's tools array
+  //         if (
+  //           folders[ToolToFolderIndex] &&
+  //           Array.isArray(folders[ToolToFolderIndex].tools)
+  //         ) {
+  //           folders[ToolToFolderIndex].tools.push(ToolToFolder);
+  //         } else {
+  //           // Initialize the tools array for the specific folder if it doesn't exist
+  //           folders[ToolToFolderIndex].tools = [ToolToFolder];
+  //         }
 
-          // Update the user document with the modified folders array
-          updateDoc(userDocRef, { folders })
-            .then(() => {
-              console.log("Tool added to folder!");
-            })
-            .catch((error) => {
-              console.log("Error updating folder:", error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting user document:", error);
-      });
+  //         // Update the user document with the modified folders array
+  //         updateDoc(userDocRef, { folders })
+  //           .then(() => {
+  //             console.log("Tool added to folder!");
+  //           })
+  //           .catch((error) => {
+  //             console.log("Error updating folder:", error);
+  //           });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error getting user document:", error);
+  //     });
 
+  //   closeModal();
+  //   forceRender();
+  // };
+//HANDLE ADDING A TOOL TO A FOLDER END
+
+
+//HANDLE ADD TOOL TO FOLDER MONGODB START
+const handleAddToolToFolder = async (index) => {
+  // alert(index);
+  try {
+    const uid = currentUser.uid;
+    const requestBody = {
+      uid : uid,
+      index : index,
+      toolId : ToolToFolder
+    };
+
+    const response = await axios.post(`${BASE_URL}/addToolToFolder`, requestBody);
+    console.log(response.data); // Newly added tool object
+    // Handle any additional logic or UI updates upon successful response
     closeModal();
-    forceRender();
-  };
+  } catch (error) {
+    console.error(error);
+    // Handle error cases and display error messages to the user
+  }
+};
+//HANDLE ADD TOOL TO FOLDER MONGODB END
 
-  //HANDLE ADDING A TOOL TO A FOLDER END
+
 
   // handling  by price
   const handleFilter = async () => {
@@ -728,6 +751,8 @@ const Home = () => {
                         key={tool._id}
                         toolData={tool}
                         forceRender={forceRender}
+                        setToolToFolder ={setToolToFolder}
+                        setIsOpen={setIsOpen}
                         homeTool={false}
                       />
                     );
@@ -886,13 +911,11 @@ const Home = () => {
           <div>
             {
               <div className={`space-x-4 grid grid-cols-3 gap-4`}>
-                {UserFolders?.map((item, index) => (
+                {currentUserData?.folders?.map((item, index) => (
                   <div
                     className="cursor-pointer"
-                    onClick={() => {
-                      setToolToFolderIndex(index);
-                      handleAddToFolder();
-                    }}
+                    key={index}
+                    onClick={() => handleAddToolToFolder(index)}
                   >
                     <Folder key={index} isRowsView={false} item={item} />
                   </div>

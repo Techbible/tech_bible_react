@@ -25,6 +25,8 @@ import "../../assets/styles/profile/profile.css";
 import "../../assets/styles/Modal/modal.css";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Folder from "./Folder";
+import axios from "axios";
+import { BASE_URL } from "../../config/mongo";
 
 const UserList = () => {
   //to force re-render
@@ -57,42 +59,76 @@ const UserList = () => {
       console.log(error);
     }
   };
+// const createFolder = () => {
+  
+//     const usersRef = collection(db, "Users");
+//     const userDocRef = doc(usersRef, currentUser?.uid);
+//     updateDoc(userDocRef, {
+//             folders: arrayUnion({
+//               name: Name,
+//               category: Category,
+//               tools: [],
+//             }),
+//           })
+//             .then(() => {
+//               console.log("Photo uploaded!");
+//             })
+//             .catch((error) => {
+//               console.log("Error updating photo:", error);
+//             });
 
-  const LoadFolders = async () => {
-    const UserRef = collection(db, "Users");
-    const q = query(UserRef, where("uid", "==", currentUser?.uid));
+//     closeModal();
+//     forceRender();
+//   };
 
+  // const LoadFolders = async () => {
+  //   const UserRef = collection(db, "Users");
+  //   const q = query(UserRef, where("uid", "==", currentUser?.uid));
+
+  //   try {
+  //     const querySnapshot = await getDocs(q);
+  //     querySnapshot.forEach((doc) => {
+  //       setUserFolders(doc.data().folders);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  useEffect(() => {
+    const fetchUserFolders = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/userFolders/${currentUser.uid}`);
+        setUserFolders(response.data);
+      } catch (error) {
+        console.error(error);
+        // Handle error cases and display error messages to the user
+      }
+    };
+
+    fetchUserFolders();
+  }, []); 
+
+
+  const handleCreateFolder = async (e) => {
+    e.preventDefault();
     try {
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setUserFolders(doc.data().folders);
-      });
+      const uid = currentUser?.uid;
+      const requestBody = {
+        uid,
+        Name,
+        Category,
+      };
+
+      const response = await axios.post(`${BASE_URL}/createFolder`, requestBody);
+      console.log(response.data); // Newly created folder object
+      // Handle any additional logic or UI updates upon successful response
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      // Handle error cases and display error messages to the user
     }
   };
 
-const createFolder = () => {
-  
-    const usersRef = collection(db, "Users");
-    const userDocRef = doc(usersRef, currentUser?.uid);
-    updateDoc(userDocRef, {
-            folders: arrayUnion({
-              name: Name,
-              category: Category,
-              tools: [],
-            }),
-          })
-            .then(() => {
-              console.log("Photo uploaded!");
-            })
-            .catch((error) => {
-              console.log("Error updating photo:", error);
-            });
-
-    closeModal();
-    forceRender();
-  };
 
   const getCategories = () => {
     //getting the categories
@@ -109,14 +145,13 @@ const createFolder = () => {
   };
 
   useEffect(() => {
-    LoadFolders();
     LoadLikedTools();
     getCategories();
   }, []);
 
-  useEffect(() => {
-    LoadFolders();
-  }, [reducerValue]);
+  // useEffect(() => {
+  //   LoadFolders();
+  // }, [reducerValue]);
 
   //***************************Modal Configs*********************************/
 
@@ -180,7 +215,9 @@ const createFolder = () => {
 
         <div className={`space-x-4 grid grid-cols-${isRowsView ? "1" : "3"} gap-4`}>
           {UserFolders.map((item, index) => (
+            <Link to={`/folder/f/${index}`}>
             <Folder key={index} isRowsView={isRowsView} item={item} />
+            </Link>
           ))}
         </div>
       </div>
@@ -229,7 +266,7 @@ const createFolder = () => {
           </div>
           </div>
         </div>
-        <span className="save-btn" onClick={createFolder}>
+        <span className="save-btn" onClick={(e)=>handleCreateFolder(e)}>
           + create
         </span>
       </Modal>

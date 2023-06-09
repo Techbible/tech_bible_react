@@ -5,7 +5,16 @@ const userSchema = new mongoose.Schema(
     username: { type: String, required: true },
     bio: { type: String, required: false },
     interests: { type: Array, required: false },
-    folders: { type: Array, required: false },
+    folders: [
+      {
+        name: { type: String, required: false },
+        category: { type: String, required: false},
+        tools : [
+          {
+            toolId :  { type: String, required: false }
+          }
+        ]
+      }],
     photo: { type: String, required: false },
     isAdmin: { type: Boolean, required: false },
   },

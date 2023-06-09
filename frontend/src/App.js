@@ -5,16 +5,7 @@ import { Suspense, lazy, useContext } from "react";
 
 // Importing the views
 import {
-  //   // Home,
   Profile,
-  //   // SignIn,
-  //   // SignUp,
-  //   // Tools,
-  //   // UserList,
-  //   // Community,
-  //   // DiscussionReply,
-  //   // LikedTools,
-  //   // NewToolDetails,
 } from "./views";
 
 // Importing the components
@@ -33,6 +24,7 @@ import GettingData from "./GettingData";
 import { homeToolsAtom } from "./recoil/homePageTools";
 import { useRecoilValue } from "recoil";
 import { allToolsAtom } from "./recoil/tool";
+import FoldersContent from "./components/UserProfile/FoldersContent";
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
 
@@ -331,6 +323,7 @@ function App() {
           }
         />
         <Route path="/LoadingHomePage" element={<LoadingHomePage />} />
+        <Route path="/folder/f/:index" element={<FoldersContent />} />
       </Routes>
     </div>
   );
