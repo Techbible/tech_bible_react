@@ -12,6 +12,7 @@ const Toolitem = ({
   setIsOpen,
   setToolToFolder,
   homeTool,
+  FolderTool
 }) => {
   const { currentUser, isAdmin } = useContext(AuthContext);
   // const LikeMethodsRef = useRef(null);
@@ -178,7 +179,7 @@ const Toolitem = ({
                 setIsOpen(true);
               }}
             >
-              {!homeTool && <h1>+</h1>} 
+              {!homeTool && !FolderTool && <h1>+</h1>} 
             </div>
 
             <div>

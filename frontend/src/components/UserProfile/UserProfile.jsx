@@ -28,7 +28,7 @@ function UserProfile() {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
-    const link = `http://localhost:3000/#/UserProfile/${userData?.uid}`;
+    const link = `https://techbible.ai/#/UserProfile/${userData?.uid}`;
     navigator.clipboard
       .writeText(link)
       .then(() => {

@@ -30,7 +30,7 @@ const Home = () => {
 
   const limitedTools = useRecoilValue(homeToolsAtom);
   //CONTEXT
-  const { currentUser, currentUserData } = useContext(AuthContext);
+  const { currentUser, currentUserData, updateUserData } = useContext(AuthContext);
   const { DataAPI, MongoDBData } = useContext(NewsContext);
 
   //RECOIL
@@ -197,6 +197,7 @@ const handleAddToolToFolder = async (index) => {
 
     const response = await axios.post(`${BASE_URL}/addToolToFolder`, requestBody);
     console.log(response.data); // Newly added tool object
+    updateUserData();
     // Handle any additional logic or UI updates upon successful response
     closeModal();
   } catch (error) {
