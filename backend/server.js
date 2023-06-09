@@ -765,21 +765,27 @@ app.post("/addToolToFolder", async (req, res) => {
 
 
 // Get Tools in folder
-app.post("/getToolsInFolder", async (req, res) => {
+app.get("/getToolsInFolder", async (req, res) => {
   try {
-    const { toolIds } = req.body;
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      socketTimeoutMS: 30000,
+    });
+
+    const { toolIds } = req.query;
     console.log(toolIds);
 
-    let toolIdArray = [];
-    if (Array.isArray(toolIds)) {
-      toolIdArray = toolIds.map(tool => tool.toolId);
-    }
-    else{
-      console.error('toolIds is not an array')
-    }
+    // let toolIdArray = [];
+    // if (Array.isArray(toolIds)) {
+    //   toolIdArray = toolIds.map(tool => tool.toolId);
+    // }
+    // else{
+    //   console.error('toolIds is not an array')
+    // }
 
     // Search for tools with the specified toolIds
-    const foundTools = await Tools.find({ _id: { $in: toolIdArray } });
+    const foundTools = await Tools.find({ _id: { $in: toolIds } });
     console.log(foundTools)
 
     res.status(200).json(foundTools);

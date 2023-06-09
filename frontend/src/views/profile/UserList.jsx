@@ -32,7 +32,7 @@ const UserList = () => {
   //to force re-render
   const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser,updateUserData} = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
   const [Category, setCategory] = useState("");
   const [Name, setName] = useState("");
@@ -94,6 +94,15 @@ const UserList = () => {
   //     console.log(error);
   //   }
   // };
+  const fetchUserFolders = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/userFolders/${currentUser.uid}`);
+        setUserFolders(response.data);
+      } catch (error) {
+        console.error(error);
+        // Handle error cases and display error messages to the user
+      }
+    };
 
   useEffect(() => {
     const fetchUserFolders = async () => {
@@ -105,7 +114,6 @@ const UserList = () => {
         // Handle error cases and display error messages to the user
       }
     };
-
     fetchUserFolders();
   }, []); 
 
@@ -121,6 +129,8 @@ const UserList = () => {
       };
 
       const response = await axios.post(`${BASE_URL}/createFolder`, requestBody);
+      fetchUserFolders();
+      closeModal();
       console.log(response.data); // Newly created folder object
       // Handle any additional logic or UI updates upon successful response
     } catch (error) {

@@ -16,25 +16,22 @@ function FoldersContent() {
           try {
               const toolIds = currentUserData?.folders[index]?.tools.map(tool => tool.toolId);
               console.log(toolIds);
-            const response = await axios.get(`${BASE_URL}/getToolsInFolder`, { toolIds });
-            setFolderTools(response.data);
+              const response = await axios.get(`${BASE_URL}/getToolsInFolder`, {params: { toolIds: toolIds }});
+          setFolderTools(response.data);
             console.log(response.data);
           } catch (error) {
             console.error(error);
             // Handle error cases and display error messages to the user
           }
-        };
-    
+        };   
         fetchFolderTools();
-      }, [currentUserData,currentUserData?.folders]);
+      }, []);
 
   return (
-<div className='mt-[20em]'>
+<div className='m-[5em]'>
 <h1>Here'are you tools : </h1>
 {FolderTools?.map((item)=>(
-   <Toolitem
-   toolData = {item}
-    />
+   <Toolitem FolderTool={true} toolData = {item} />
 ))}
 </div>
   )
