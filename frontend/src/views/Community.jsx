@@ -86,6 +86,7 @@ function Community() {
         <DiscussionsPage
           toggleDropdown={toggleDropdown}
           isOpen={isOpen}
+          setIsOpen={setIsOpen}
           Discussions={Discussions}
           discussion={discussion}
           CategoriesData={CategoriesData}

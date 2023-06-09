@@ -8,7 +8,7 @@ const discussionSchema = new mongoose.Schema(
     Description: { type: String, required: true },
     Category: { type: String, required: false },
     LikedBy: { type: Array, required: false },
-    Votes: { type: Number, required: false },
+    DislikedBy: { type: Array, required: false },
   },
   { timestamps: true }
 );

@@ -388,7 +388,7 @@ app.post("/create-discussion", async (req, res) => {
       Description: description,
       Category: category,
       LikedBy: [],
-      Votes: 0,
+      DislikedBy: [],
     });
 
     res.status(201).json(newDiscussion);
@@ -398,20 +398,73 @@ app.post("/create-discussion", async (req, res) => {
     res.status(500).send("Error adding tool comment");
   }
 });
-// update discussion vote number
-app.post("/updateDiscussionVotes/:_id/:newValue", async (req, res) => {
+// update discussions likedby and dislikedby
+//upvote discussion
+app.post("/addUpvote/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
   try {
-    const { _id, newValue } = req.params;
-
-    // Update the discussion document
-    await Discussion.updateOne({ _id: _id }, { $set: { Votes: newValue } });
-    console.log("update succesfull");
-
-    res.status(200).json({ message: "votes  updated successfully" });
+    await Discussion.findByIdAndUpdate(id, {
+      $addToSet: { LikedBy: uid },
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error updating votes" });
+    console.log(error);
   }
+
+  console.log("discussion upvote has been added successfully!!!!!");
+});
+
+//remove a user from a discussiom likedBy array
+app.post("/removeUpvote/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
+  try {
+    const discussion = await Discussion.findById(id);
+    // Remove the uid from the LikedBy array using the filter method
+    const updatedLikedBy = discussion.LikedBy.filter(
+      (likedByUid) => likedByUid !== uid
+    );
+    // Update the discussion document with the updated LikedBy array
+    const updatedDiscussion = await Discussion.findByIdAndUpdate(id, {
+      LikedBy: updatedLikedBy,
+    });
+    return res.send(updatedDiscussion);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log("discussion upvote has been removed succefuly!!!!!");
+});
+
+//downvote discussion
+app.post("/addDownvote/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
+  try {
+    await Discussion.findByIdAndUpdate(id, {
+      $addToSet: { DislikedBy: uid },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  console.log("discussion Downvote has been added successfully!!!!!");
+});
+
+//remove a user from a discussiom DislikedBy array
+app.post("/removeDownvote/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
+  try {
+    const discussion = await Discussion.findById(id);
+    // Remove the uid from the LikedBy array using the filter method
+    const updatedDislikedBy = discussion.DislikedBy.filter(
+      (DislikedByUid) => DislikedByUid !== uid
+    );
+    // Update the Discussion document with the updated DislikedBy array
+    const updatedDiscussion = await Discussion.findByIdAndUpdate(id, {
+      DislikedBy: updatedDislikedBy,
+    });
+    return res.send(updatedDiscussion);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log("discussion downvote has been removed succefuly!!!!!");
 });
 
 //USERS

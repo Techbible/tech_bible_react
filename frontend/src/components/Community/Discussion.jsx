@@ -7,8 +7,10 @@ const Discussion = ({ discussion, Discussions }) => {
   const [userData, setUserData] = useState();
   const [upvoteClicked, setUpvoteClicked] = useState(false);
   const [downvoteClicked, setDownvoteClicked] = useState(false);
+  const [voteDifference, setVoteDifference] = useState(discussion?.LikedBy.length - discussion?.DislikedBy.length || 0); // State variable for vote difference
+  
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [newValue, setNewValue] = useState(discussion.Votes);
+
   const [replies, setReplies] = useState();
   const [showReplies, setShowReplies] = useState(false);
   const [AddReply, setAddReply] = useState(false);
@@ -63,47 +65,89 @@ const Discussion = ({ discussion, Discussions }) => {
     // setAddReply(false);
   };
   const handleVoteNumber = async () => {
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/updateDiscussionVotes/${discussion._id}/${newValue}`
-      );
+    if (upvoteClicked) {
+      try {
+       
+        const res = await axios.post(
+          `${BASE_URL}/addUpvote/${discussion._id}/${currentUser?.uid}`
+        );
+        console.log("Upvote added  Succesfuly");
+      } catch (e) {
+        console.log("Upvote add ERROR " + e);
+      }
+    } else {
+      try {
+       
+        const res = await axios.post(
+          `${BASE_URL}/removeUpvote/${discussion._id}/${currentUser?.uid}`
+        );
+        console.log("Upvote removed  Succesfuly");
+      } catch (e) {
+        console.log("Upvote remove ERROR " + e);
+      }
+    }
 
-      console.log("handlevotenumber try " + newValue);
-      console.log(discussion._id);
-    } catch (error) {
-      console.error("error of handle vote number : " + error);
-      console.log(newValue);
-      console.log(discussion._id);
+    if (downvoteClicked) {
+      try {
+       
+        const res = await axios.post(
+          `${BASE_URL}/addDownvote/${discussion._id}/${currentUser?.uid}`
+        );
+        console.log("dwonvote added  Succesfuly");
+      } catch (e) {
+        console.log("downvote add ERROR " + e);
+      }
+    } else {
+      try {
+        
+        const res = await axios.post(
+          `${BASE_URL}/removeDownvote/${discussion._id}/${currentUser?.uid}`
+        );
+        console.log("dwonvote removed  Succesfuly");
+      } catch (e) {
+        console.log("downvote remove ERROR " + e);
+      }
     }
   };
 
   const handleUpvoteClick = async () => {
     if (upvoteClicked) {
-      setNewValue(newValue - 1); // Subtract one from newValue
+      setDownvoteClicked(false);
+      setVoteDifference((prevDifference) => prevDifference - 1);
     } else {
       if (downvoteClicked) {
-        setNewValue(newValue + 2); // Add two to newValue (transition from downvote to upvote)
-        setDownvoteClicked(false); // Unclick the downvote button
+        try {
+          const res = await axios.post(
+            `${BASE_URL}/removeDownvote/${discussion._id}/${currentUser?.uid}`
+          );
+          console.log("Downvote removed successfully");
+        } catch (e) {
+          console.log("Downvote remove ERROR " + e);
+        }
+        setDownvoteClicked(false);
+        setVoteDifference((prevDifference) => prevDifference + 2);
       } else {
-        setNewValue(newValue + 1); // Add one to newValue
+        setVoteDifference((prevDifference) => prevDifference + 1);
       }
     }
-    setUpvoteClicked(!upvoteClicked); // Toggle the upvote button
+    setUpvoteClicked(!upvoteClicked);
   };
-
+  
   const handleDownvoteClick = async () => {
     if (downvoteClicked) {
-      setNewValue(newValue + 1); // Add one to newValue
+      setUpvoteClicked(false);
+      setVoteDifference((prevDifference) => prevDifference + 1);
     } else {
       if (upvoteClicked) {
-        setNewValue(newValue - 2); // Subtract two from newValue (transition from upvote to downvote)
-        setUpvoteClicked(false); // Unclick the upvote button
+        setUpvoteClicked(false);
+        setVoteDifference((prevDifference) => prevDifference - 2);
       } else {
-        setNewValue(newValue - 1); // Subtract one from newValue
+        setVoteDifference((prevDifference) => prevDifference - 1);
       }
     }
-    setDownvoteClicked(!downvoteClicked); // Toggle the downvote button
+    setDownvoteClicked(!downvoteClicked);
   };
+  
 
   const getUserData = async () => {
     const res = await axios.get(`${BASE_URL}/check-user/${discussion.UserId}`);
@@ -112,11 +156,20 @@ const Discussion = ({ discussion, Discussions }) => {
   };
 
   useEffect(() => {
+    setUpvoteClicked(discussion?.LikedBy?.includes(currentUser?.uid) || false);
+    setDownvoteClicked(discussion?.DislikedBy?.includes(currentUser?.uid) || false);
+    setVoteDifference(discussion?.LikedBy.length - discussion?.DislikedBy.length || 0);
+  }, [discussion, currentUser]);
+  
+  useEffect(() => {
+    handleVoteNumber();
+  }, [upvoteClicked, downvoteClicked]);
+
+  useEffect(() => {
     console.log("DISCUSSIONS : " + JSON.stringify(Discussions));
     console.log("REPLIES : " + JSON.stringify(replies));
     getUserData();
     fetchReplies();
-    handleVoteNumber();
     const Replies = Discussions?.filter(
       (disc) => disc?.ParentId === discussion?.ParentId
     );
@@ -412,7 +465,7 @@ const Discussion = ({ discussion, Discussions }) => {
                 </svg>
               </button>
               <div className="color-white fontSize-12 fontWeight-400 noOfLines-undefined">
-                {discussion?.Votes} and {newValue}
+                {voteDifference  }
               </div>
               {/* downvote */}
               <button
