@@ -21,7 +21,7 @@ function Community() {
   const [isRepliesClicked, setIsRepliesClicked] = useState(false);
   const [discussion, setDiscussion] = useState();
   const [userInfo, setUserInfo] = useState();
-  const [replies, setReplies] = useState();
+  
 
   //Fetch Disscutions
   const fetchDiscussions = async () => {
@@ -33,26 +33,7 @@ function Community() {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    // Apply the selected filter option
-    if (selectedFilter === "Week") {
-      const oneWeekAgo = new Date();
-      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      sortedDiscussions.filter((discussion) => {
-        return new Date(discussion.createdAt) >= oneWeekAgo;
-      });
-    } else if (selectedFilter === "Month") {
-      const oneMonthAgo = new Date();
-      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-      sortedDiscussions.filter((discussion) => {
-        return new Date(discussion.createdAt) >= oneMonthAgo;
-      });
-    } else if (selectedFilter === "Year") {
-      const oneYearAgo = new Date();
-      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-      sortedDiscussions.filter((discussion) => {
-        return new Date(discussion.createdAt) >= oneYearAgo;
-      });
-    }
+   
 
     // Calculate the time difference in seconds, minutes, hours, days, or years for each comment and format it
     const discussionsWithTimeAgo = sortedDiscussions.map((discussion) => {
@@ -88,7 +69,7 @@ function Community() {
     });
 
     setDiscussions(discussionsWithTimeAgo);
-    console.log(discussionsWithTimeAgo);
+    
   };
 
   const toggleDropdown = () => {
@@ -96,7 +77,6 @@ function Community() {
   };
 
   useEffect(() => {
-
     fetchDiscussions();
   }, [selectedFilter]);
 
@@ -106,6 +86,7 @@ function Community() {
         <DiscussionsPage
           toggleDropdown={toggleDropdown}
           isOpen={isOpen}
+          setIsOpen={setIsOpen}
           Discussions={Discussions}
           discussion={discussion}
           CategoriesData={CategoriesData}
@@ -114,7 +95,6 @@ function Community() {
           setUserInfo={setUserInfo}
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
-          setReplies={setReplies}
         />
       ) : (
         <div>
@@ -144,12 +124,12 @@ function Community() {
             </div>
           )}
 
-          <DiscussionReply
+          {/* <DiscussionReply
             discussion={discussion}
             userInfo={userInfo}
-            replies={replies}
             Discussions={Discussions}
-          />
+            fetchDiscussions={fetchDiscussions}
+          /> */}
         </div>
       )}
     </div>

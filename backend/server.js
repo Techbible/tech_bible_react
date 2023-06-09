@@ -29,10 +29,10 @@ app.get("/mongo-tools", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    // //console.log("Connected to MongoDB");
+    // console.log("Connected to MongoDB");
     const tools = await Tools.find();
 
-    // //console.log("TOOLS : ",tools);
+    // console.log("TOOLS : ",tools);
     res.send(tools);
     // Send an object containing both variables
   } catch (error) {
@@ -48,10 +48,10 @@ app.get("/homePageTools", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    // //console.log("Connected to MongoDB");
+    // console.log("Connected to MongoDB");
 
     const tools = await HomePageTool.find({});
-    //console.log("Home TOOLS: ", tools);
+    console.log("Home TOOLS: ", tools);
     res.send(tools);
   } catch (error) {
     console.error(error);
@@ -66,7 +66,7 @@ app.delete("/delete-tool/:id", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    // //console.log("Connected to MongoDB");
+    // console.log("Connected to MongoDB");
     const tool = await Tools.deleteOne({ _id: req.params.id });
 
     res.send(tool); // Send an object containing both variables
@@ -110,8 +110,8 @@ app.get("/mongo-toolComments/:toolId", async (req, res) => {
     const toolsComments = await ToolsComments.find({ toolId: toolId });
 
     res.send(toolsComments);
-    //console.log("toolsComments :" + toolsComments);
-    //console.log(typeof toolsComments);
+    console.log("toolsComments :" + toolsComments);
+    console.log(typeof toolsComments);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching tools data");
@@ -125,10 +125,10 @@ app.post("/like/:id/:uid", async (req, res) => {
       $addToSet: { LikedBy: uid },
     });
   } catch (error) {
-    //console.log(error);
+    console.log(error);
   }
 
-  //console.log("tool has been liked successfully!!!!!");
+  console.log("tool has been liked successfully!!!!!");
 });
 
 //remove a user from a tool likedBy array
@@ -146,9 +146,9 @@ app.post("/unlike/:id/:uid", async (req, res) => {
     });
     return res.send(updatedTool);
   } catch (error) {
-    //console.log(error);
+    console.log(error);
   }
-  //console.log("tool has been unliked succefuly!!!!!");
+  console.log("tool has been unliked succefuly!!!!!");
 });
 //LIKE HomePageTOOL
 app.post("/likeHomeTool/:id/:uid", async (req, res) => {
@@ -158,10 +158,10 @@ app.post("/likeHomeTool/:id/:uid", async (req, res) => {
       $addToSet: { LikedBy: uid },
     });
   } catch (error) {
-    //console.log(error);
+    console.log(error);
   }
 
-  //console.log("tool has been liked successfully!!!!!");
+  console.log("tool has been liked successfully!!!!!");
 });
 
 //remove a user from a HomePageTool likedBy array
@@ -179,9 +179,9 @@ app.post("/unlikeHomeTool/:id/:uid", async (req, res) => {
     });
     return res.send(updatedTool);
   } catch (error) {
-    //console.log(error);
+    console.log(error);
   }
-  //console.log("tool has been unliked succefuly!!!!!");
+  console.log("tool has been unliked succefuly!!!!!");
 });
 
 //NEWS START
@@ -191,9 +191,9 @@ app.get("/news", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    //console.log("Connected to MongoDB");
+    console.log("Connected to MongoDB");
     const news = await NewsArticle.find();
-    //console.log("news : ", news);
+    console.log("news : ", news);
     res.send(news); // Send an object containing both variables
   } catch (error) {
     console.error(error);
@@ -226,7 +226,7 @@ app.post("/addArticle", async (req, res) => {
     });
 
     res.status(201).json(newArticle);
-    //console.log("Article added");
+    console.log("Article added");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error adding News Article");
@@ -252,7 +252,7 @@ app.post(
       tool.comments.push(newComment._id);
       await tool.save();
       res.status(201).json(newComment);
-      //console.log("comment added");
+      console.log("comment added");
     } catch (err) {
       console.error(err);
       res.status(500).send("Error adding tool comment");
@@ -267,9 +267,9 @@ app.post("/likeToolComment/:toolCommentId/:userId", async (req, res) => {
     await ToolsComments.findByIdAndUpdate(toolCommentId, {
       $push: { likedBy: userId },
     });
-    //console.log("Tool comment has been liked successfully!!!!!");
+    console.log("Tool comment has been liked successfully!!!!!");
   } catch (error) {
-    //console.log(error);
+    console.log(error);
   }
 });
 
@@ -290,10 +290,10 @@ app.post("/unlikeToolComment/:toolCommentId/:userId", async (req, res) => {
       }
     );
 
-    //console.log("tool Comment has been unliked succefuly!!!!!");
+    console.log("tool Comment has been unliked succefuly!!!!!");
     return res.send(updatedToolComment);
   } catch (error) {
-    //console.log(error);
+    console.log(error);
   }
 });
 
@@ -314,7 +314,7 @@ app.post(
       homeTool.comments.push(newComment._id);
       await homeTool.save();
       res.status(201).json(newComment);
-      //console.log("comment added");
+      console.log("comment added");
     } catch (err) {
       console.error(err);
       res.status(500).send("Error adding tool comment");
@@ -328,12 +328,12 @@ app.post("", async (req, res) => {
       .limit(3)
       .toArray();
 
-    //console.log("Tools:", tools);
+    console.log("Tools:", tools);
     // Do something with the tools array
 
     // Close the MongoDB connection when finished
   } catch (error) {
-    //console.log(error);
+    console.log(error);
   }
 });
 
@@ -350,7 +350,7 @@ app.post("/addSubscriber/:email", async (req, res) => {
     });
 
     res.status(201).json(newSubscriber);
-    //console.log("comment added");
+    console.log("comment added");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error adding tool comment");
@@ -365,10 +365,10 @@ app.get("/discussions", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    //console.log("Connected to MongoDB");
+    console.log("Connected to MongoDB");
 
     const discussions = await Discussion.find({});
-    //console.log("Discussions: ", discussions);
+    console.log("Discussions: ", discussions);
     res.send(discussions);
   } catch (error) {
     console.error(error);
@@ -379,48 +379,100 @@ app.get("/discussions", async (req, res) => {
 // Create New Discussion
 app.post("/create-discussion", async (req, res) => {
   try {
-    const { userId, title, description, category } = req.body;
+    const { userId, title, description, category, parentId } = req.body;
 
     const newDiscussion = await Discussion.create({
       Title: title,
-      ParentId: null,
+      ParentId: parentId,
       UserId: userId,
       Description: description,
       Category: category,
       LikedBy: [],
-      Votes: 0,
+      DislikedBy: [],
     });
 
     res.status(201).json(newDiscussion);
-    //console.log("comment added");
+    console.log("comment added");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error adding tool comment");
   }
 });
-// update discussion vote number
-app.post("/updateDiscussionVotes/:_id/:newValue", async (req, res) => {
+// update discussions likedby and dislikedby
+//upvote discussion
+app.post("/addUpvote/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
   try {
-    const { _id, newValue } = req.params;
-
-    // Update the discussion document
-    await Discussion.updateOne({ _id: _id }, { $set: { Votes: newValue } });
-    //console.log("update succesfull");
-
-    res.status(200).json({ message: "votes  updated successfully" });
+    await Discussion.findByIdAndUpdate(id, {
+      $addToSet: { LikedBy: uid },
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error updating votes" });
+    console.log(error);
   }
+
+  console.log("discussion upvote has been added successfully!!!!!");
 });
 
+//remove a user from a discussiom likedBy array
+app.post("/removeUpvote/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
+  try {
+    const discussion = await Discussion.findById(id);
+    // Remove the uid from the LikedBy array using the filter method
+    const updatedLikedBy = discussion.LikedBy.filter(
+      (likedByUid) => likedByUid !== uid
+    );
+    // Update the discussion document with the updated LikedBy array
+    const updatedDiscussion = await Discussion.findByIdAndUpdate(id, {
+      LikedBy: updatedLikedBy,
+    });
+    return res.send(updatedDiscussion);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log("discussion upvote has been removed succefuly!!!!!");
+});
+
+//downvote discussion
+app.post("/addDownvote/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
+  try {
+    await Discussion.findByIdAndUpdate(id, {
+      $addToSet: { DislikedBy: uid },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  console.log("discussion Downvote has been added successfully!!!!!");
+});
+
+//remove a user from a discussiom DislikedBy array
+app.post("/removeDownvote/:id/:uid", async (req, res) => {
+  let { id, uid } = req.params;
+  try {
+    const discussion = await Discussion.findById(id);
+    // Remove the uid from the LikedBy array using the filter method
+    const updatedDislikedBy = discussion.DislikedBy.filter(
+      (DislikedByUid) => DislikedByUid !== uid
+    );
+    // Update the Discussion document with the updated DislikedBy array
+    const updatedDiscussion = await Discussion.findByIdAndUpdate(id, {
+      DislikedBy: updatedDislikedBy,
+    });
+    return res.send(updatedDiscussion);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log("discussion downvote has been removed succefuly!!!!!");
+});
 
 //USERS
 // Create User
 app.post("/signup", async (req, res) => {
   try {
     const { FullName, uid, photo } = req.body;
-    //console.log(req.params, req.body);
+    console.log(req.params, req.body);
     const newUser = await User.create({
       uid: uid,
       username: FullName,
@@ -432,7 +484,7 @@ app.post("/signup", async (req, res) => {
     });
 
     res.status(201).json(newUser);
-    //console.log("user added");
+    console.log("user added");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error adding user");
@@ -442,14 +494,14 @@ app.post("/signup", async (req, res) => {
 app.get("/check-user/:uid", async (req, res) => {
   const { uid } = req.params;
   try {
-    //console.log("USER UID" + uid);
+    console.log("USER UID" + uid);
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    //console.log("Connected to MongoDB");
+    console.log("Connected to MongoDB");
     const user = await User.findOne({ uid: uid });
-    //console.log("USER UID Sent : " + user);
+    console.log("USER UID Sent : " + user);
 
     res.send(user); // Send an object containing both variables
   } catch (error) {
@@ -505,7 +557,7 @@ app.post("/updateUsernameAndPhoto/:uid/:username/:photo", async (req, res) => {
 
 //ADD USER CATEGORIES
 app.post("/addCategories/:uid/:categories", async (req, res) => {
-  //console.log;
+  console.log;
   try {
     const { uid } = req.params;
     const categories = req.params.categories?.split(","); // Split categories string into an array
@@ -535,7 +587,6 @@ app.post("/clearInterests/:uid", async (req, res) => {
   }
 });
 
-
 //Add tools
 app.post("/addTools", async (req, res) => {
   try {
@@ -556,12 +607,66 @@ app.post("/addTools", async (req, res) => {
     });
 
     res.status(201).json(tools);
-    //console.log("Tools added");
+    console.log("Tools added");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error adding Tools");
   }
 });
+
+//Delete Discussion
+app.delete("/deleteDiscussion/:id", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    // console.log("Connected to MongoDB");
+    const discussion = await Discussion.deleteOne({ _id: req.params.id });
+
+    res.send(discussion); // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting tool data");
+  }
+});
+//Delete Discussion replies
+app.delete("/deleteReplies/:parentId", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    // console.log("Connected to MongoDB");
+    const discussion = await Discussion.deleteMany({
+      ParentId: req.params.parentId,
+    });
+
+    res.send(discussion); // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting tool data");
+  }
+});
+
+//Update discussion
+app.post("/updateDiscussion/:id/:title/:description", async (req, res) => {
+  try {
+    const { id, title, description } = req.params;
+
+    // Update the user document
+    await Discussion.updateOne(
+      { _id: id },
+      { $set: { Title: title, Description: description } }
+    );
+
+    res.status(200).json({ message: "User bio updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error updating user bio" });
+  }
+});
+
 
 
 // Get All User Folders
@@ -683,6 +788,3 @@ app.post("/getToolsInFolder", async (req, res) => {
     res.status(500).send("Error retrieving tools in folder");
   }
 });
-
-
-

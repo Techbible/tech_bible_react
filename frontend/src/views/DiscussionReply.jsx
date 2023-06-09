@@ -1,10 +1,118 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../config/mongo";
+import { AuthContext } from "../context/AuthContext";
 
-const DiscussionReply = ({ discussion, userInfo, replies, Discussions }) => {
+const DiscussionReply = ({
+  discussion,
+  userInfo,
+  Discussions,
+  fetchDiscussions,
+}) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [AddCommentClicked, setAddCommentClicked] = useState(false);
+  const [userData, setUserData] = useState();
+  const [reply, setReply] = useState();
+  const { currentUser } = useContext(AuthContext);
+  const [replies, setReplies] = useState();
+  const getUserData = async () => {
+    const res = await axios.get(`${BASE_URL}/check-user/${discussion.UserId}`);
+
+    setUserData(res.data);
+  };
+  // const fetchReplies = () => {
+  //   const Replies = Discussions?.filter(
+  //     (disc) => disc?.ParentId === discussion?._id
+  //   );
+  //   setReplies(Replies);
+  // };
+
+  //Fetch Replies
+  const fetchReplies = async () => {
+    const response = await axios.get(`${BASE_URL}/discussions`);
+    const data = response.data;
+
+    // Sort the discussions by updatedAt field in descending order
+    const sortedReplies = data.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+    sortedReplies = sortedReplies.filter(
+      (reply) => reply.ParentId === discussion?._id
+    );
+    console.log();
+    // Calculate the time difference in seconds, minutes, hours, days, or years for each comment and format it
+    const repliesWithTimeAgo = sortedReplies.map((reply) => {
+      const createdAt = new Date(reply.createdAt);
+      const currentDate = new Date();
+      const timeDifferenceInSeconds = Math.floor(
+        (currentDate - createdAt) / 1000
+      );
+
+      let formattedTimeAgo;
+      if (timeDifferenceInSeconds < 1) {
+        formattedTimeAgo = "Now";
+      } else if (timeDifferenceInSeconds < 60) {
+        formattedTimeAgo = `${timeDifferenceInSeconds}s ago`;
+      } else if (timeDifferenceInSeconds < 3600) {
+        const minutes = Math.floor(timeDifferenceInSeconds / 60);
+        formattedTimeAgo = `${minutes}m ago`;
+      } else if (timeDifferenceInSeconds < 86400) {
+        const hours = Math.floor(timeDifferenceInSeconds / 3600);
+        formattedTimeAgo = `${hours}h ago`;
+      } else if (timeDifferenceInSeconds < 31536000) {
+        const days = Math.floor(timeDifferenceInSeconds / 86400);
+        formattedTimeAgo = `${days}d ago`;
+      } else {
+        const years = Math.floor(timeDifferenceInSeconds / 31536000);
+        formattedTimeAgo = `${years}y ago`;
+      }
+
+      return {
+        ...reply,
+        timeAgo: formattedTimeAgo,
+      };
+    });
+
+    setReplies(repliesWithTimeAgo);
+    console.log(repliesWithTimeAgo);
+  };
+
+  const handleAddReply = async () => {
+    const userId = currentUser?.uid;
+    const title = "";
+    const description = reply;
+    const category = "";
+    const parentId = discussion?._id;
+    console.log(
+      "userId : " +
+        userId +
+        "title : " +
+        title +
+        "description : " +
+        description +
+        "parentId : " +
+        parentId
+    );
+
+    const response = await axios.post(`${BASE_URL}/create-discussion`, {
+      userId,
+      title,
+      description,
+      category,
+      parentId,
+    });
+    // Handle successful response
+    // fetchDiscussions();
+    console.log("Reply to discussion Created successfully:", response.data);
+    setReply("");
+    setAddCommentClicked(false);
+    // fetchReplies();
+  };
+
   useEffect(() => {
+    getUserData();
+    fetchReplies();
     console.log("Replies : " + replies);
   }, []);
 
@@ -30,12 +138,12 @@ const DiscussionReply = ({ discussion, userInfo, replies, Discussions }) => {
               <div>
                 <img
                   className="h-7 w-7 rounded-full"
-                  src={userInfo?.photo}
+                  src={userData?.photo}
                   alt=""
                 />
               </div>
               <div className="text-white text-lg font-bold text-slate-700">
-                {userInfo?.username}
+                {userData?.username}
               </div>
             </div>
             <div className="flex items-center space-x-8">
@@ -178,15 +286,15 @@ const DiscussionReply = ({ discussion, userInfo, replies, Discussions }) => {
                   rows="6"
                   class="px-0 w-full text-sm text-gray-900 rounded-[8px] px-3 py-3 border-0 focus:ring-0 focus:outline-none text-white dark:text-white bg-[#27242E] "
                   placeholder="Write a comment..."
-                  // value={comment}
-                  // onChange={(e) => {
-                  //   setComment(e.target.value);
-                  // }}
+                  value={reply}
+                  onChange={(e) => {
+                    setReply(e.target.value);
+                  }}
                 ></textarea>
               </div>
               <button
-                // onClick={handlePostComment}
-                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-[#604FE7] rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+                onClick={handleAddReply}
+                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-[#EF4823] rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
               >
                 Post comment
               </button>
@@ -197,7 +305,7 @@ const DiscussionReply = ({ discussion, userInfo, replies, Discussions }) => {
       </div>
 
       <div className="ml-[10%] mt-6 flex flex-column ">
-        {Discussions?.map((disc) => {
+        {/* {Discussions?.map((disc) => {
           console.log(
             "discussionId : " +
               discussion?._id +
@@ -213,7 +321,10 @@ const DiscussionReply = ({ discussion, userInfo, replies, Discussions }) => {
               />
             );
           }
-        })}
+        })} */}
+        {replies?.map((reply) => (
+          <DiscussionReply discussion={reply} replies={[]} />
+        ))}
       </div>
     </div>
   );

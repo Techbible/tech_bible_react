@@ -60,9 +60,9 @@ function UserProfile() {
     <div className="flex flex-column align-items-center pt-[6rem]">
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
         <main className="layoutMain pl-desktop-5 pl-mobile-4">
-          <div className="text-[16px] fontWeight-500 ml-[2.5rem]">
+          {/* <div className="text-[16px] fontWeight-500 ml-[2.5rem]">
             WELCOME TO,
-          </div>
+          </div> */}
           <div className="relative xl:w-[711px] lg:xl:w-[711px] max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
             <div className="row">
               <div className="col-md-2">

@@ -163,7 +163,10 @@ const Toolitem = ({
                     currentUser ? handleLikeUnlike : () => navigate("/signin")
                   }
                 ></i>
-                <div style={{color:"#fff !important"}} className="text-red-500 color-white fontSize-12 fontWeight-600 noOfLines-undefined">
+                <div
+                  style={{ color: "#fff !important" }}
+                  className="text-red-500 color-white fontSize-12 fontWeight-600 noOfLines-undefined"
+                >
                   {simulatedLikesNumber}
                 </div>
               </>
