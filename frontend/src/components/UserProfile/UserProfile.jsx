@@ -10,10 +10,10 @@ import axios from "axios";
 import { BASE_URL } from "../../config/mongo";
 
 function UserProfile() {
-  let { id } = useParams();
+  const [userData, setUserData] = useState();
+  const { id } = useParams();
 
-  //Modal Styles
-
+  // Modal Styles
   Modal.setAppElement("#root");
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -21,6 +21,7 @@ function UserProfile() {
   function openModal() {
     setIsOpen(true);
   }
+
   function closeModal() {
     setIsOpen(false);
   }
@@ -28,7 +29,7 @@ function UserProfile() {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
-    const link = `https://techbible.ai/#/UserProfile/${userData?.uid}`;
+    const link = `https://techbible.ai/#/UserProfile/${id}`;
     navigator.clipboard
       .writeText(link)
       .then(() => {
@@ -39,24 +40,19 @@ function UserProfile() {
       });
   };
 
-  const [userData, setUserData] = useState();
   useEffect(() => {
-    const listen = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // const userData = await onSnapshot(doc(db, "Users", id), (doc) => {
-        //   setUserData(doc.data());
-        // });
+    const fetchUserData = async () => {
+      try {
         const response = await axios.get(`${BASE_URL}/check-user/${id}`);
         setUserData(response.data);
+      } catch (error) {
+        console.error(error);
       }
-    });
-    // console.log(isAdmin);
-    return listen();
-  }, []);
+    };
 
-  //   const {username, photo,bio,interests} = userData;
-
-  return (
+    fetchUserData();
+  }, [id]);
+    return (
     <div className="flex flex-column align-items-center pt-[6rem]">
       <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
         <main className="layoutMain pl-desktop-5 pl-mobile-4">
