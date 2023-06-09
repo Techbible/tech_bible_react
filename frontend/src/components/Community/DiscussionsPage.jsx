@@ -138,7 +138,7 @@ const DiscussionsPage = ({
                   autoComplete="off"
                   type="search"
                   id="default-search"
-                  className="bg-white h-[20px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-white h-[15px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Search discussions..."
                   required
                 />
@@ -263,7 +263,6 @@ const DiscussionsPage = ({
                       >
                         Year
                       </li>
-                    
                     </ul>
                   </div>
                 )}
