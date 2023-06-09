@@ -99,7 +99,7 @@ export const CategoriesData = [
     categories: ["Translation and Localization", "Copywriting"],
   },
   {
-    groupName: "Miscellaneous",
+    groupName: "Productivity",
     categories: [
       "Virtualization and Containerization",
       "Productivity tools",
