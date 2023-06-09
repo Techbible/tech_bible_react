@@ -3,8 +3,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../../config/mongo";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import UserInDiscussion from "./UserInDiscussion";
 
-const Discussion = ({ discussion, Discussions, setUserDiscussionData }) => {
+const Discussion = ({
+  discussion,
+  Discussions,
+  setUserDiscussionData,
+  setShowUserAside,
+  setCategoryOfDiscussion,
+}) => {
   const [userData, setUserData] = useState();
   const [upvoteClicked, setUpvoteClicked] = useState(false);
   const [downvoteClicked, setDownvoteClicked] = useState(false);
@@ -21,6 +28,19 @@ const Discussion = ({ discussion, Discussions, setUserDiscussionData }) => {
     discussion?.Description
   );
   const { currentUser } = useContext(AuthContext);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const userCardStyle = {
+    display: isHovered ? "block" : "none",
+  };
 
   const fetchReplies = async () => {
     const response = await axios.get(`${BASE_URL}/discussions`);
@@ -178,6 +198,7 @@ const Discussion = ({ discussion, Discussions, setUserDiscussionData }) => {
         console.log("discussion updated succesfuly");
         setIsEdditDiscussionClicked(false);
         window.location.reload();
+        alert("Your discussion has been modified successfully.");
       } catch (error) {
         console.log("Update discussion error : " + error);
       }
@@ -191,6 +212,7 @@ const Discussion = ({ discussion, Discussions, setUserDiscussionData }) => {
         console.log("discussion updated succesfuly");
         setIsEdditDiscussionClicked(false);
         window.location.reload();
+        alert("Your reply has been modified successfully.");
       } catch (error) {
         console.log("Update discussion error : " + error);
       }
@@ -208,28 +230,50 @@ const Discussion = ({ discussion, Discussions, setUserDiscussionData }) => {
           }
         >
           <footer className="flex justify-between items-center">
-            <div className="flex items-center">
-              <div className="flex items-center">
-                <Link to={`/UserProfile/${userData?.uid}`}>
-                  <img
-                    className={
-                      discussion?.ParentId === null
-                        ? "mr-2 w-12 h-12 rounded-full"
-                        : "mr-2 w-8 h-8 rounded-full"
-                    }
-                    src={userData?.photo}
-                    alt={userData?.username}
-                  />
-                </Link>
-                <Link to={`/UserProfile/${userData?.uid}`}>
+            <div className="flex flex-row items-center">
+              <div className="flex flex-row align-items-center">
+                <div
+                  className="relative "
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Link to={`/UserProfile/${userData?.uid}`}>
+                    <div>
+                      <img
+                        className={
+                          discussion?.ParentId === null
+                            ? "mr-2 w-12 h-12 rounded-full"
+                            : "mr-2 w-8 h-8 rounded-full"
+                        }
+                        src={userData?.photo}
+                        alt={userData?.username}
+                      />
+                    </div>
+                  </Link>
+                  <div
+                    className="absolute z-[999] w-[300px] top-[-120px] left-[20px]"
+                    style={userCardStyle}
+                  >
+                    <UserInDiscussion
+                      userDiscussionData={userData}
+                      categoryOfDiscussion={discussion?.Category}
+                    />
+                  </div>
+                </div>
+                <div
+                  className="cursor-pointer"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
                   <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                     <p className="text-white">{userData?.username} </p>
                   </p>
-                </Link>
-
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  <time>{discussion?.timeAgo}</time>
-                </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <time>{discussion?.timeAgo}</time>
+                  </p>
+                </div>
               </div>
               {discussion?.ParentId === null && (
                 <div className="text-[12px] text-black bg-white px-[4px]  ml-14 py-[2px] rounded-md   ">
@@ -300,13 +344,13 @@ const Discussion = ({ discussion, Discussions, setUserDiscussionData }) => {
             )}
           </footer>
 
-          <div className="flex flex-column align-items-center my-4 ">
-            <div
+          <div className="flex flex-column align-items-center my-1 ">
+            {/* <div
               className={
                 discussion?.ParentId === null &&
                 "w-[70%] h-[.5px] opacity-[.6] bg-white "
               }
-            ></div>
+            ></div> */}
           </div>
           <div
             className={
@@ -360,9 +404,11 @@ const Discussion = ({ discussion, Discussions, setUserDiscussionData }) => {
                 </div>
               ) : (
                 <div>
-                  <p className="text-white fontWeight-500 opacity-[.9] text-[16px] mb-4">
-                    {discussion?.Title}
-                  </p>
+                  {!discussion?.ParentId && (
+                    <p className="text-white fontWeight-500 opacity-[.9] text-[16px] mb-4">
+                      {discussion?.Title}
+                    </p>
+                  )}
                   <p className="text-white text-sm opacity-[.8] ">
                     {discussion?.Description}
                   </p>
@@ -377,6 +423,8 @@ const Discussion = ({ discussion, Discussions, setUserDiscussionData }) => {
                   setShowReplies(!showReplies);
                   if (discussion?.ParentId === null) {
                     setUserDiscussionData(userData);
+                    setShowUserAside(true);
+                    setCategoryOfDiscussion(discussion?.Category);
                   }
                 }}
               >

@@ -510,7 +510,10 @@ app.post("/addCategories/:uid/:categories", async (req, res) => {
     const categories = req.params.categories?.split(","); // Split categories string into an array
 
     // Update the user document
-    await User.updateOne({ uid: uid }, { $set: { interests: categories } });
+    await User.findOneAndUpdate(
+      { uid: uid },
+      { $set: { interests: categories } }
+    );
 
     res.status(200).json({ message: "User bio updated successfully" });
   } catch (error) {

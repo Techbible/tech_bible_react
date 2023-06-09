@@ -220,8 +220,16 @@ const Profile = () => {
         getDownloadURL(snapshot.ref)
           .then(async (url) => {
             try {
-              const updateUserNameAndPhoto = await axios.post(
-                `${BASE_URL}/updateUsernameAndPhoto/${currentUserData?.uid}/${editedUsername}/${url}`
+              console.log(
+                "UPDATE name and photo : " +
+                  currentUserData?.uid +
+                  " " +
+                  editedUsername +
+                  " " +
+                  url
+              );
+              const res = await axios.post(
+                `${BASE_URL}/updateUsernameAndPhoto/${currentUser?.uid}/${editedUsername}/${url}`
               );
               console.log("IMAGE URL try  : " + url);
 

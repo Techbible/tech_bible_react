@@ -26,6 +26,8 @@ const DiscussionsPage = ({
   const [isDateFilterClicked, setIsDateFilterClicked] = useState(false);
   const [sortedDiscussionByDate, setSortedDiscussionByDate] =
     useState(Discussions);
+  const [showUserAside, setShowUserAside] = useState(false);
+  const [categoryOfDiscussion, setCategoryOfDiscussion] = useState("");
 
   const handleDateFilter = () => {
     setIsDateFilterClicked(true);
@@ -292,6 +294,8 @@ const DiscussionsPage = ({
                     discussion={discussion}
                     Discussions={Discussions}
                     setUserDiscussionData={setUserDiscussionData}
+                    setShowUserAside={setShowUserAside}
+                    setCategoryOfDiscussion={setCategoryOfDiscussion}
                   />
                 ))}
                 {Discussions &&
@@ -323,6 +327,8 @@ const DiscussionsPage = ({
                     discussion={discussion}
                     Discussions={Discussions}
                     setUserDiscussionData={setUserDiscussionData}
+                    setShowUserAside={setShowUserAside}
+                    setCategoryOfDiscussion={setCategoryOfDiscussion}
                   />
                 ))}
               </div>
@@ -336,6 +342,8 @@ const DiscussionsPage = ({
                           discussion={discussion}
                           Discussions={Discussions}
                           setUserDiscussionData={setUserDiscussionData}
+                          setShowUserAside={setShowUserAside}
+                          setCategoryOfDiscussion={setCategoryOfDiscussion}
                         />
                       );
                     }
@@ -353,6 +361,8 @@ const DiscussionsPage = ({
                     discussion={disc}
                     Discussions={Discussions}
                     setUserDiscussionData={setUserDiscussionData}
+                    setShowUserAside={setShowUserAside}
+                    setCategoryOfDiscussion={setCategoryOfDiscussion}
                   />
                 ))}
               </div>
@@ -365,6 +375,8 @@ const DiscussionsPage = ({
                         discussion={discussion}
                         Discussions={Discussions}
                         setUserDiscussionData={setUserDiscussionData}
+                        setShowUserAside={setShowUserAside}
+                        setCategoryOfDiscussion={setCategoryOfDiscussion}
                       />
                     );
                   }
@@ -380,6 +392,8 @@ const DiscussionsPage = ({
                           discussion={discussion}
                           Discussions={Discussions}
                           setUserDiscussionData={setUserDiscussionData}
+                          setShowUserAside={setShowUserAside}
+                          setCategoryOfDiscussion={setCategoryOfDiscussion}
                         />
                       );
                     }
@@ -390,7 +404,12 @@ const DiscussionsPage = ({
         </main>
 
         <aside className="sidebarWithSeparator right">
-          <UserInDiscussion userDiscussionData={userDiscussionData} />
+          {showUserAside && (
+            <UserInDiscussion
+              userDiscussionData={userDiscussionData}
+              categoryOfDiscussion={categoryOfDiscussion}
+            />
+          )}
           <p className="">TOPICS </p>
           <div className="flex flex-wrap justify-start gap-4 my-5">
             {CategoriesData?.map((group) => (
