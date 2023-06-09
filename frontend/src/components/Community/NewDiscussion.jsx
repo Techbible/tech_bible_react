@@ -10,7 +10,7 @@ function NewDiscussion() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Cybersecurity");
   const [userId, setUserID] = useState("");
   //const axios = require("axios");
 

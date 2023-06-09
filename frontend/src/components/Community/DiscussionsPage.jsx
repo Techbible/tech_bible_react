@@ -6,6 +6,7 @@ import UserInDiscussion from "./UserInDiscussion";
 const DiscussionsPage = ({
   toggleDropdown,
   isOpen,
+  setIsOpen,
   Discussions,
 
   CategoriesData,
@@ -74,6 +75,7 @@ const DiscussionsPage = ({
   };
   useEffect(() => {
     setSortedDiscussionByDate(Discussions);
+    
   }, [Discussions]);
   return (
     <div>
@@ -194,7 +196,6 @@ const DiscussionsPage = ({
                     className={`w-4 h-4 ml-2 transition-transform ${
                       isOpen ? "rotate-180" : ""
                     }`}
-                    onClick={() => setSelectedFilter("All")}
                     aria-hidden="true"
                     fill="none"
                     stroke="currentColor"
@@ -226,6 +227,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Week");
                           handleDateFilter();
+                          setIsOpen(false);
                           console.log(sortedDiscussionByDate);
                         }}
                       >
@@ -238,6 +240,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Month");
                           handleDateFilter();
+                          setIsOpen(false);
                           console.log(sortedDiscussionByDate);
                         }}
                       >
@@ -250,6 +253,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Year");
                           handleDateFilter();
+                          setIsOpen(false);
                           console.log(sortedDiscussionByDate);
                         }}
                       >
@@ -262,6 +266,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("All");
                           handleDateFilter();
+                          setIsOpen(false);
                           console.log(sortedDiscussionByDate);
                         }}
                       >
@@ -334,7 +339,7 @@ const DiscussionsPage = ({
               </div>
             ) : isPopularClicked ? (
               <div className="mr-16">
-                {Discussions?.sort((a, b) => b.votes - a.votes)?.map(
+                {Discussions?.sort((a, b) => (b.LikedBy.length - b.DislikedBy.length) - (a.LikedBy.length - a.DislikedBy.length))?.map(
                   (discussion) => {
                     if (discussion.ParentId === null) {
                       return (
