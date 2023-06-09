@@ -138,8 +138,8 @@ const DiscussionsPage = ({
                   autoComplete="off"
                   type="search"
                   id="default-search"
-                  className="block w-full p-1 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Search discussions"
+                  className="bg-white h-[20px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Search discussions..."
                   required
                 />
               </div>
@@ -263,18 +263,7 @@ const DiscussionsPage = ({
                       >
                         Year
                       </li>
-                      <li
-                        className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
-                          selectedFilter === "All" && "font-bold"
-                        }`}
-                        onClick={() => {
-                          setSelectedFilter("All");
-                          handleDateFilter();
-                          console.log(sortedDiscussionByDate);
-                        }}
-                      >
-                        All
-                      </li>
+                    
                     </ul>
                   </div>
                 )}

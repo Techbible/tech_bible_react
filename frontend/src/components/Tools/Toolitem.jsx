@@ -165,8 +165,7 @@ const Toolitem = ({
                   }
                 ></i>
                 <div
-                  style={{ color: "#fff !important" }}
-                  className="text-red-500 color-white fontSize-12 fontWeight-600 noOfLines-undefined"
+                  className="text-white fontSize-12 fontWeight-600 noOfLines-undefined"
                 >
                   {simulatedLikesNumber}
                 </div>
