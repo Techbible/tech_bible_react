@@ -1,6 +1,7 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Discussion from "./Discussion";
+import UserInDiscussion from "./UserInDiscussion";
 
 const DiscussionsPage = ({
   toggleDropdown,
@@ -21,8 +22,10 @@ const DiscussionsPage = ({
   const [searchResultVisible, setsearchResultVisible] = useState(false);
   const [category, setCategory] = useState("");
   const [isCategoryClicked, setIsCategoryClicked] = useState(false);
+  const [userDiscussionData, setUserDiscussionData] = useState();
   const [isDateFilterClicked, setIsDateFilterClicked] = useState(false);
-  const [sortedDiscussionByDate, setSortedDiscussionByDate] = useState(Discussions);
+  const [sortedDiscussionByDate, setSortedDiscussionByDate] =
+    useState(Discussions);
 
   const handleDateFilter = () => {
     setIsDateFilterClicked(true);
@@ -54,7 +57,6 @@ const DiscussionsPage = ({
       });
 
       setSortedDiscussionByDate(filteredDiscussions);
-      
     }
     setSelectedFilter("");
   };
@@ -178,8 +180,9 @@ const DiscussionsPage = ({
                 <button
                   id="dropdownDefaultButton"
                   data-dropdown-toggle="dropdown"
-                  onClick={()=>{toggleDropdown()
-                  setSelectedFilter("All");
+                  onClick={() => {
+                    toggleDropdown();
+                    setSelectedFilter("All");
                   }}
                   className="text-white bg-[#ef4722] focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-sm px-3 py-0.5 text-center inline-flex items-center "
                   type="button"
@@ -189,7 +192,7 @@ const DiscussionsPage = ({
                     className={`w-4 h-4 ml-2 transition-transform ${
                       isOpen ? "rotate-180" : ""
                     }`}
-                    onClick={()=>setSelectedFilter("All")}
+                    onClick={() => setSelectedFilter("All")}
                     aria-hidden="true"
                     fill="none"
                     stroke="currentColor"
@@ -204,7 +207,7 @@ const DiscussionsPage = ({
                     />
                   </svg>
                 </button>
-                {isOpen && selectedFilter !=="" &&(
+                {isOpen && selectedFilter !== "" && (
                   <div
                     id="dropdown"
                     className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-35 dark:bg-gray-700"
@@ -214,7 +217,6 @@ const DiscussionsPage = ({
                       aria-labelledby="dropdownDefaultButton"
                       onClick={console.log(selectedFilter)}
                     >
-                      
                       <li
                         className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                           selectedFilter === "Week" && "font-bold"
@@ -222,7 +224,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Week");
                           handleDateFilter();
-                          console.log(sortedDiscussionByDate)
+                          console.log(sortedDiscussionByDate);
                         }}
                       >
                         Week
@@ -234,7 +236,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Month");
                           handleDateFilter();
-                          console.log(sortedDiscussionByDate)
+                          console.log(sortedDiscussionByDate);
                         }}
                       >
                         Month
@@ -246,7 +248,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("Year");
                           handleDateFilter();
-                          console.log(sortedDiscussionByDate)
+                          console.log(sortedDiscussionByDate);
                         }}
                       >
                         Year
@@ -258,7 +260,7 @@ const DiscussionsPage = ({
                         onClick={() => {
                           setSelectedFilter("All");
                           handleDateFilter();
-                          console.log(sortedDiscussionByDate)
+                          console.log(sortedDiscussionByDate);
                         }}
                       >
                         All
@@ -289,6 +291,7 @@ const DiscussionsPage = ({
                   <Discussion
                     discussion={discussion}
                     Discussions={Discussions}
+                    setUserDiscussionData={setUserDiscussionData}
                   />
                 ))}
                 {Discussions &&
@@ -319,6 +322,7 @@ const DiscussionsPage = ({
                   <Discussion
                     discussion={discussion}
                     Discussions={Discussions}
+                    setUserDiscussionData={setUserDiscussionData}
                   />
                 ))}
               </div>
@@ -331,6 +335,7 @@ const DiscussionsPage = ({
                         <Discussion
                           discussion={discussion}
                           Discussions={Discussions}
+                          setUserDiscussionData={setUserDiscussionData}
                         />
                       );
                     }
@@ -347,23 +352,24 @@ const DiscussionsPage = ({
                     key={disc._id}
                     discussion={disc}
                     Discussions={Discussions}
+                    setUserDiscussionData={setUserDiscussionData}
                   />
                 ))}
               </div>
-            ) : isDateFilterClicked && selectedFilter !=="" ? (
-              <div className="mr-16"> 
-              
-              { 
-                sortedDiscussionByDate.map((discussion) => {
+            ) : isDateFilterClicked && selectedFilter !== "" ? (
+              <div className="mr-16">
+                {sortedDiscussionByDate.map((discussion) => {
                   if (discussion?.ParentId === null) {
                     return (
                       <Discussion
                         discussion={discussion}
                         Discussions={Discussions}
+                        setUserDiscussionData={setUserDiscussionData}
                       />
                     );
                   }
-                })}</div>
+                })}
+              </div>
             ) : (
               <div className="mr-16">
                 {Discussions &&
@@ -373,6 +379,7 @@ const DiscussionsPage = ({
                         <Discussion
                           discussion={discussion}
                           Discussions={Discussions}
+                          setUserDiscussionData={setUserDiscussionData}
                         />
                       );
                     }
@@ -383,14 +390,19 @@ const DiscussionsPage = ({
         </main>
 
         <aside className="sidebarWithSeparator right">
+          <UserInDiscussion userDiscussionData={userDiscussionData} />
           <p className="">TOPICS </p>
           <div className="flex flex-wrap justify-start gap-4 my-5">
             {CategoriesData?.map((group) => (
               <div
                 onClick={() => handleCategoryFilter(group.groupName)}
-                className="flex items-center w-full cursor-pointer"
+                className="flex items-center w-full cursor-pointer hover:text-gray-400"
               >
-                {group.groupName}
+                <img
+                  src={`${process.env.PUBLIC_URL}/assets/categories/${group.groupName}.png`}
+                  className="h-8 w-8 mr-2 transition duration-500 hover:w-9"
+                />
+                <div>{group.groupName}</div>
               </div>
             ))}
           </div>
