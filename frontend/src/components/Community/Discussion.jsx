@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../../config/mongo";
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
-const Discussion = ({ discussion, Discussions }) => {
+const Discussion = ({ discussion, Discussions, setUserDiscussionData }) => {
   const [userData, setUserData] = useState();
   const [upvoteClicked, setUpvoteClicked] = useState(false);
   const [downvoteClicked, setDownvoteClicked] = useState(false);
@@ -262,18 +263,23 @@ const Discussion = ({ discussion, Discussions }) => {
           <footer className="flex justify-between items-center">
             <div className="flex items-center">
               <div className="flex items-center">
-                <img
-                  className={
-                    discussion?.ParentId === null
-                      ? "mr-2 w-12 h-12 rounded-full"
-                      : "mr-2 w-8 h-8 rounded-full"
-                  }
-                  src={userData?.photo}
-                  alt={userData?.username}
-                />
-                <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                  <p className="text-white">{userData?.username} </p>
-                </p>
+                <Link to={`/UserProfile/${userData?.uid}`}>
+                  <img
+                    className={
+                      discussion?.ParentId === null
+                        ? "mr-2 w-12 h-12 rounded-full"
+                        : "mr-2 w-8 h-8 rounded-full"
+                    }
+                    src={userData?.photo}
+                    alt={userData?.username}
+                  />
+                </Link>
+                <Link to={`/UserProfile/${userData?.uid}`}>
+                  <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                    <p className="text-white">{userData?.username} </p>
+                  </p>
+                </Link>
+
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   <time>{discussion?.timeAgo}</time>
                 </p>
@@ -420,7 +426,12 @@ const Discussion = ({ discussion, Discussions }) => {
               <button
                 type="button"
                 className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400"
-                onClick={() => setShowReplies(!showReplies)}
+                onClick={() => {
+                  setShowReplies(!showReplies);
+                  if (discussion?.ParentId === null) {
+                    setUserDiscussionData(userData);
+                  }
+                }}
               >
                 <svg
                   aria-hidden="true"

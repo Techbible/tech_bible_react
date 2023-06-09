@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Discussion from "./Discussion";
+import UserInDiscussion from "./UserInDiscussion";
 
 const DiscussionsPage = ({
   toggleDropdown,
@@ -22,6 +23,7 @@ const DiscussionsPage = ({
   const [searchResultVisible, setsearchResultVisible] = useState(false);
   const [category, setCategory] = useState("");
   const [isCategoryClicked, setIsCategoryClicked] = useState(false);
+  const [userDiscussionData, setUserDiscussionData] = useState();
   const [isDateFilterClicked, setIsDateFilterClicked] = useState(false);
   const [sortedDiscussionByDate, setSortedDiscussionByDate] =
     useState(Discussions);
@@ -294,6 +296,7 @@ const DiscussionsPage = ({
                   <Discussion
                     discussion={discussion}
                     Discussions={Discussions}
+                    setUserDiscussionData={setUserDiscussionData}
                   />
                 ))}
                 {Discussions &&
@@ -324,6 +327,7 @@ const DiscussionsPage = ({
                   <Discussion
                     discussion={discussion}
                     Discussions={Discussions}
+                    setUserDiscussionData={setUserDiscussionData}
                   />
                 ))}
               </div>
@@ -336,6 +340,7 @@ const DiscussionsPage = ({
                         <Discussion
                           discussion={discussion}
                           Discussions={Discussions}
+                          setUserDiscussionData={setUserDiscussionData}
                         />
                       );
                     }
@@ -352,6 +357,7 @@ const DiscussionsPage = ({
                     key={disc._id}
                     discussion={disc}
                     Discussions={Discussions}
+                    setUserDiscussionData={setUserDiscussionData}
                   />
                 ))}
               </div>
@@ -363,6 +369,7 @@ const DiscussionsPage = ({
                       <Discussion
                         discussion={discussion}
                         Discussions={Discussions}
+                        setUserDiscussionData={setUserDiscussionData}
                       />
                     );
                   }
@@ -377,6 +384,7 @@ const DiscussionsPage = ({
                         <Discussion
                           discussion={discussion}
                           Discussions={Discussions}
+                          setUserDiscussionData={setUserDiscussionData}
                         />
                       );
                     }
@@ -387,14 +395,19 @@ const DiscussionsPage = ({
         </main>
 
         <aside className="sidebarWithSeparator right">
+          <UserInDiscussion userDiscussionData={userDiscussionData} />
           <p className="">TOPICS </p>
           <div className="flex flex-wrap justify-start gap-4 my-5">
             {CategoriesData?.map((group) => (
               <div
                 onClick={() => handleCategoryFilter(group.groupName)}
-                className="flex items-center w-full cursor-pointer"
+                className="flex items-center w-full cursor-pointer hover:text-gray-400"
               >
-                {group.groupName}
+                <img
+                  src={`${process.env.PUBLIC_URL}/assets/categories/${group.groupName}.png`}
+                  className="h-8 w-8 mr-2 transition duration-500 hover:w-9"
+                />
+                <div>{group.groupName}</div>
               </div>
             ))}
           </div>
