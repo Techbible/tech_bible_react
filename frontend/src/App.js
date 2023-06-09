@@ -24,11 +24,8 @@ import GettingData from "./GettingData";
 import { homeToolsAtom } from "./recoil/homePageTools";
 import { useRecoilValue } from "recoil";
 import { allToolsAtom } from "./recoil/tool";
-<<<<<<< HEAD
 import FoldersContent from "./components/UserProfile/FoldersContent";
-=======
 import LoadingCommunity from "./components/pageLoaders/LoadingCommunity";
->>>>>>> 4ec677aadd53846cd941ff33a8359e2a2e0d49cb
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
 
