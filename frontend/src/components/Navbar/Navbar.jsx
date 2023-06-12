@@ -77,14 +77,14 @@ function Navbar() {
             <nav aria-label="Site Nav">
               <ul className="flex items-center gap-6 text-sm mr-6">
                 <div className="flex flex-row lg:gap-[64px] gap-6">
-                  <Link to="/community">
+                  {/* <Link to="/community">
                   <li
                         className="tracking-wider hover:tracking-widest"
                         style={{ transition: "0.3s", cursor: "pointer" }}
                       >
                       Community
                       </li>
-                  </Link>
+                  </Link> */}
                   {isAdmin ? (
                     <Link to="/AdminSpace">
                       <li
@@ -256,11 +256,11 @@ function Navbar() {
                   </div>
                 </Link>
                 <div className="border-[1px] text-white "></div> */}
-                <Link to="/community">
+                {/* <Link to="/community">
                   <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-white hover:text-black">
                     Community
                   </div>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

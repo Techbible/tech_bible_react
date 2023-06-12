@@ -330,9 +330,9 @@ const DiscussionsPage = ({
               </div>
             ) : isPopularClicked ? (
               <div className="mr-16">
-                {Discussions?.sort((a, b) => (b.LikedBy.length-b.DislikedBy.length) -  (a.LikedBy.length-a.DislikedBy.length) )?.map(
-                  (discussion) => {
-                    if (discussion.ParentId === null) {
+               {Discussions &&
+                  Discussions?.map((discussion) => {
+                    if (discussion?.ParentId === null) {
                       return (
                         <Discussion
                           discussion={discussion}
@@ -343,9 +343,7 @@ const DiscussionsPage = ({
                         />
                       );
                     }
-                    return null;
-                  }
-                )}
+                  })}
               </div>
             ) : isCategoryClicked && category !== "" ? (
               <div className="mr-16">
