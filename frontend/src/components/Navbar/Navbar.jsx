@@ -79,9 +79,12 @@ function Navbar() {
               <ul className="flex items-center gap-6 text-sm mr-6">
                 <div className="flex flex-row lg:gap-[64px] gap-6">
                   <Link to="/community">
-                    <div className="text-[15px] px-4 py-2 transition text-white duration-300 hover:text-gray-800 ">
+                  <li
+                        className="tracking-wider hover:tracking-widest"
+                        style={{ transition: "0.3s", cursor: "pointer" }}
+                      >
                       Community
-                    </div>
+                      </li>
                   </Link>
                   {isAdmin && (
                     <Link to="/AdminSpace">

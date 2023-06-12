@@ -111,7 +111,7 @@ function NewDiscussion() {
             className="w-full px-3 py-2 border rounded bg-white text-black focus:outline-none focus:border-blue-500"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Description..."
+            placeholder="Write a title"
             required
           />
         </div>
@@ -127,7 +127,7 @@ function NewDiscussion() {
             name="Description"
             rows="3"
             className="w-full px-3 py-2 border rounded bg-white text-black focus:outline-none focus:border-blue-500"
-            placeholder="Write a title"
+            placeholder="Write a Description..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
