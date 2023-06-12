@@ -12,7 +12,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
   const [replyText, setReplyText] = useState("");
   const [isAddReplyEnabled, setIsAddReplyEnabled] = useState(true);
   const [currentReplies, setCurrentReplies] = useState(replies);
-  const [showedReplies, setShowedReplies] = useState(0);
+  const [showedReplies, setShowedReplies] = useState(3);
 
   const handleIsAddCommentClick = () => {
     setIsAddCommentClick(!IsAddCommentClick);
@@ -27,6 +27,8 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
   const [simulatedLikesNumber, setSimulatedLikesNumber] = useState(
     comment?.likedBy?.length || 0
   );
+  const [isDropdownVisible, setDropdownVisible] = useState("");
+
   const likeToolComment = async (toolCommentId) => {
     const response = await axios.post(
       `${BASE_URL}/likeToolComment/${toolCommentId}/${currentUser?.uid}`
@@ -49,6 +51,22 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
     setSimulatedLikesNumber((prevLikes) => Math.max(prevLikes - 1, 0));
 
     unlikeToolComment(toolCommentId);
+  };
+  const handleDeleteComment = async () => {
+    if (window.confirm("Are you sure that you want to delete your comment?")) {
+      try {
+        const res = await axios.delete(
+          `${BASE_URL}/deleteToolComment/${comment?._id}`
+        );
+        const res2 = await axios.post(
+          `${BASE_URL}/removeCommentIdFromTool/${comment?.toolId}/${comment?._id}`
+        );
+
+        window.location.reload();
+      } catch (error) {
+        console.log("DELETE TOOL COMMENGT ERROR : " + error);
+      }
+    }
   };
 
   const getUserInfo = async () => {
@@ -145,7 +163,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
           <div
             className={
               comment?.parentId === "null"
-                ? "w-10 h-10 rounded-full overflow-hidden mr-[1rem]"
+                ? "w-8 h-8 rounded-full overflow-hidden mr-[1rem]"
                 : "w-6 h-6 rounded-full overflow-hidden mr-[1rem]"
             }
           >
@@ -154,7 +172,6 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                 className="w-full h-full object-cover rounded-full"
                 // src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
                 src={photo}
-                alt="Profile picture"
               />
             </Link>
           </div>
@@ -170,11 +187,13 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                   : "text-white light text-[14px]"
               }
             >
-              <Link to={`/UserProfile/${id}`}>{name}&nbsp;</Link>
+              <Link to={`/UserProfile/${id}`} className="text-[14px]">
+                {name}&nbsp;
+              </Link>
             </div>
             <div className="flex flex-row mt-1 sm:mt-2">
               {comment.parentId === "null" ? (
-                <div className="text-gray-300 text-xs sm:text-sm">
+                <div className="text-gray-300 text-[10px] sm:text-sm">
                   -Posted in-&nbsp;{toolData?.Category} &nbsp;-&nbsp;{" "}
                   {toolData?.Name} &nbsp;-&nbsp;{comment.timeAgo}
                 </div>
@@ -184,6 +203,59 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                 </div>
               )}
             </div>
+            {comment?.userId === currentUser?.uid && (
+              <div className="relative">
+                <button
+                  id="dropdownComment1Button"
+                  data-dropdown-toggle="dropdownComment1"
+                  className="inline-flex items-center p-2 text-sm font-medium text-center text-white  ml-4 rounded-lg  "
+                  type="button"
+                  onClick={() => setDropdownVisible(!isDropdownVisible)}
+                >
+                  <svg
+                    className="w-5 h-5"
+                    aria-hidden="true"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                  </svg>
+                  <span className="sr-only">Comment settings</span>
+                </button>
+
+                {/* <!-- Dropdown menu --> */}
+                <div
+                  id="dropdownComment1"
+                  className={`${
+                    isDropdownVisible ? "block" : "hidden"
+                  } z-10 w15 bg-[#1c1c1c] rounded divide-y divide-gray-100 shadow  absolute right-0`}
+                >
+                  <ul
+                    className="py-1 text-sm text-white "
+                    aria-labelledby="dropdownMenuIconHorizontalButton"
+                  >
+                    <li>
+                      <div
+                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+                        // onClick={handleEdditDiscussion}
+                      >
+                        Edit
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+                        onClick={handleDeleteComment}
+                      >
+                        Delete
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                {/* <!--End Dropdown menu --> */}
+              </div>
+            )}
           </div>
 
           {/* <div className="flex justify-between items-center">
