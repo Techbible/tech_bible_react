@@ -30,7 +30,8 @@ const Home = () => {
 
   const limitedTools = useRecoilValue(homeToolsAtom);
   //CONTEXT
-  const { currentUser, currentUserData, updateUserData } = useContext(AuthContext);
+  const { currentUser, currentUserData, updateUserData } =
+    useContext(AuthContext);
   const { DataAPI, MongoDBData } = useContext(NewsContext);
 
   //RECOIL
@@ -136,7 +137,7 @@ const Home = () => {
 
   // useEffect(()=>{alert(ToolToFolder)},[ToolToFolder])
 
-//HANDLE ADDING A TOOL TO A FOLDER START FIREBASE
+  //HANDLE ADDING A TOOL TO A FOLDER START FIREBASE
   // const handleAddToFolder = () => {
   //   const usersRef = collection(db, "Users");
   //   const userDocRef = doc(usersRef, currentUser?.uid);
@@ -181,33 +182,33 @@ const Home = () => {
   //   closeModal();
   //   forceRender();
   // };
-//HANDLE ADDING A TOOL TO A FOLDER END
+  //HANDLE ADDING A TOOL TO A FOLDER END
 
+  //HANDLE ADD TOOL TO FOLDER MONGODB START
+  const handleAddToolToFolder = async (index) => {
+    // alert(index);
+    try {
+      const uid = currentUser.uid;
+      const requestBody = {
+        uid: uid,
+        index: index,
+        toolId: ToolToFolder,
+      };
 
-//HANDLE ADD TOOL TO FOLDER MONGODB START
-const handleAddToolToFolder = async (index) => {
-  // alert(index);
-  try {
-    const uid = currentUser.uid;
-    const requestBody = {
-      uid : uid,
-      index : index,
-      toolId : ToolToFolder
-    };
-
-    const response = await axios.post(`${BASE_URL}/addToolToFolder`, requestBody);
-    console.log(response.data); // Newly added tool object
-    updateUserData();
-    // Handle any additional logic or UI updates upon successful response
-    closeModal();
-  } catch (error) {
-    console.error(error);
-    // Handle error cases and display error messages to the user
-  }
-};
-//HANDLE ADD TOOL TO FOLDER MONGODB END
-
-
+      const response = await axios.post(
+        `${BASE_URL}/addToolToFolder`,
+        requestBody
+      );
+      console.log(response.data); // Newly added tool object
+      updateUserData();
+      // Handle any additional logic or UI updates upon successful response
+      closeModal();
+    } catch (error) {
+      console.error(error);
+      // Handle error cases and display error messages to the user
+    }
+  };
+  //HANDLE ADD TOOL TO FOLDER MONGODB END
 
   // handling  by price
   const handleFilter = async () => {
@@ -553,8 +554,9 @@ const handleAddToolToFolder = async (index) => {
 
                   {allTools &&
                     allTools.length > 0 &&
-                    allTools.filter((tool) => tool.Keywords.toLowerCase().includes(value.toLowerCase()))
-                      .length === 0 && <p>Nothing found for {value}.</p>}
+                    allTools.filter((tool) =>
+                      tool.Keywords.toLowerCase().includes(value.toLowerCase())
+                    ).length === 0 && <p>Nothing found for {value}.</p>}
                   <hr className="my-20 border-white" />
                 </div>
               ) : null}
@@ -752,7 +754,7 @@ const handleAddToolToFolder = async (index) => {
                         key={tool._id}
                         toolData={tool}
                         forceRender={forceRender}
-                        setToolToFolder ={setToolToFolder}
+                        setToolToFolder={setToolToFolder}
                         setIsOpen={setIsOpen}
                         homeTool={false}
                       />
@@ -798,7 +800,7 @@ const handleAddToolToFolder = async (index) => {
           </div>
         </main>
         <aside className="sidebarWithSeparator right pl-6 ">
-          <div className="flex flex-column align-items-center ml-16">
+          <div className="flex flex-column align-items-center ml-[20%]">
             <div>
               <Link to="/News">
                 <p className="text-[16px] fontWeight-700 mt-16 mb-4 ">
@@ -828,6 +830,14 @@ const handleAddToolToFolder = async (index) => {
                       url={article?.url}
                     />
                   ))}
+              <Link to="/community">
+                <div
+                  className="tracking-wider hover:tracking-widest mt-8"
+                  style={{ transition: "0.3s", cursor: "pointer" }}
+                >
+                  Community
+                </div>
+              </Link>
               {/* <Link to="/News">
             <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer mb-20">
               See all News
@@ -909,21 +919,36 @@ const handleAddToolToFolder = async (index) => {
           style={ModalcustomStyles}
           contentLabel="Example Modal"
         >
-          <div>
-            {
-              <div className={`space-x-4 grid grid-cols-3 gap-4`}>
-                {currentUserData?.folders?.map((item, index) => (
-                  <div
-                    className="cursor-pointer"
-                    key={index}
-                    onClick={() => handleAddToolToFolder(index)}
-                  >
-                    <Folder key={index} isRowsView={false} item={item} />
+          {!currentUser ? (
+            <div>
+              <Link to={"/signup"}>
+                <u>Sign up</u> to personalize your folders
+              </Link>
+            </div>
+          ) : (
+            <div>
+              {currentUserData?.folders?.length === 0 ? (
+                <Link to={"/folders"}>
+                  <div>
+                    {" "}
+                    <u>Create</u> folders for easy organization.
                   </div>
-                ))}
-              </div>
-            }
-          </div>
+                </Link>
+              ) : (
+                <div className={`space-x-4 grid grid-cols-3 gap-4`}>
+                  {currentUserData?.folders?.map((item, index) => (
+                    <div
+                      className="cursor-pointer"
+                      key={index}
+                      onClick={() => handleAddToolToFolder(index)}
+                    >
+                      <Folder key={index} isRowsView={false} item={item} />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </Modal>
       </div>
       {/* <Footer /> */}
