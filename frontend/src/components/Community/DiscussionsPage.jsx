@@ -330,7 +330,7 @@ const DiscussionsPage = ({
               </div>
             ) : isPopularClicked ? (
               <div className="mr-16">
-                {Discussions?.sort((a, b) => b.votes - a.votes)?.map(
+                {Discussions?.sort((a, b) => (b.LikedBy.length-b.DislikedBy.length) -  (a.LikedBy.length-a.DislikedBy.length) )?.map(
                   (discussion) => {
                     if (discussion.ParentId === null) {
                       return (

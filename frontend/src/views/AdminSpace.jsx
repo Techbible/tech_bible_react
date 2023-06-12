@@ -21,7 +21,7 @@ const AdminSpace = () => {
     <div>
      <div className="bg-black min-h-screen flex items-center justify-center">
   <div className="container mx-auto py-10">
-    <div className="flex flex-wrap justify-center lg:justify-start gap-6">
+    <div className="flex flex-wrap justify-center  gap-6">
       <div className="flex items-center justify-center p-8 bg-gray-800 rounded-lg w-full lg:w-1/3">
         <Link to="/news" className="text-white hover:text-gray-200">
           <img src="https://rutecprojekt.de/assets/images/2/News_AdobeStock_116225048_neu-de28855b.jpg" alt="News" className="w-32 h-32" />
