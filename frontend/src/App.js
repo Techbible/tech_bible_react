@@ -4,9 +4,7 @@ import { NewsList } from "./components";
 import { Suspense, lazy, useContext } from "react";
 
 // Importing the views
-import {
-  Profile,
-} from "./views";
+import { Profile } from "./views";
 
 // Importing the components
 import { Navbar, MyComponent, UpdatePassword } from "./components";
@@ -26,6 +24,7 @@ import { useRecoilValue } from "recoil";
 import { allToolsAtom } from "./recoil/tool";
 import FoldersContent from "./components/UserProfile/FoldersContent";
 import LoadingCommunity from "./components/pageLoaders/LoadingCommunity";
+import CircleLoader from "./components/CircleLoader";
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
 
@@ -52,6 +51,7 @@ function App() {
   const UserProfile = lazy(() =>
     import("./components/UserProfile/UserProfile")
   );
+  const ProfilePhoto = lazy(() => import("./components/ProfilePhoto"));
   const AdminSpace = lazy(() => import("./views/AdminSpace"));
 
   const { currentUser, isAdmin } = useContext(AuthContext);
@@ -311,6 +311,14 @@ function App() {
               }
             >
               <UserProfile />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/ProfilePhoto"
+          element={
+            <Suspense fallback={<CircleLoader />}>
+              <ProfilePhoto />
             </Suspense>
           }
         />

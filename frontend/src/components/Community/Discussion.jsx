@@ -4,6 +4,7 @@ import { BASE_URL } from "../../config/mongo";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import UserInDiscussion from "./UserInDiscussion";
+import ProfilePhoto from "../ProfilePhoto";
 
 const Discussion = ({
   discussion,
@@ -31,7 +32,7 @@ const Discussion = ({
   const [edditedDescription, setEdditedDescription] = useState(
     discussion?.Description
   );
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, currentUserData } = useContext(AuthContext);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -258,8 +259,8 @@ const Discussion = ({
         );
         console.log("discussion updated succesfuly");
         setIsEdditDiscussionClicked(false);
-        window.location.reload();
-        alert("Your discussion has been modified successfully.");
+        // window.location.reload();
+        alert("Confirm to edit your discussion.");
       } catch (error) {
         console.log("Update discussion error : " + error);
       }
@@ -272,8 +273,8 @@ const Discussion = ({
         );
         console.log("discussion updated succesfuly");
         setIsEdditDiscussionClicked(false);
-        window.location.reload();
-        alert("Your reply has been modified successfully.");
+        // window.location.reload();
+        alert("Confirm to edit your reply.");
       } catch (error) {
         console.log("Update discussion error : " + error);
       }
@@ -299,7 +300,12 @@ const Discussion = ({
                   onMouseLeave={handleMouseLeave}
                 >
                   <Link to={`/UserProfile/${userData?.uid}`}>
-                    <div>
+                    {discussion?.ParentId === null ? (
+                      <ProfilePhoto url={userData?.photo} size={12} />
+                    ) : (
+                      <ProfilePhoto url={userData?.photo} size={8} />
+                    )}
+                    {/* <div>
                       <img
                         className={
                           discussion?.ParentId === null
@@ -309,7 +315,7 @@ const Discussion = ({
                         src={userData?.photo}
                         alt={userData?.username}
                       />
-                    </div>
+                    </div> */}
                   </Link>
                   <div
                     className="absolute z-[999] w-[300px] top-[-120px] left-[20px]"
@@ -342,67 +348,60 @@ const Discussion = ({
                 </div>
               )}
             </div>
-            {discussion?.UserId === currentUser?.uid && (
-              <div className="relative">
-                <button
-                  id="dropdownComment1Button"
-                  data-dropdown-toggle="dropdownComment1"
-                  className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-[#1C1C1C] rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-white dark:focus:ring-gray-600"
-                  type="button"
-                  onClick={() => setDropdownVisible(!isDropdownVisible)}
-                >
-                  <svg
-                    className="w-5 h-5"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
+            {discussion?.UserId === currentUser?.uid ||
+              (currentUserData?.isAdmin === true && (
+                <div className="relative">
+                  <button
+                    id="dropdownComment1Button"
+                    data-dropdown-toggle="dropdownComment1"
+                    className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-[#1C1C1C] rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-white dark:focus:ring-gray-600"
+                    type="button"
+                    onClick={() => setDropdownVisible(!isDropdownVisible)}
                   >
-                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                  </svg>
-                  <span className="sr-only">Comment settings</span>
-                </button>
+                    <svg
+                      className="w-5 h-5"
+                      aria-hidden="true"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                    </svg>
+                    <span className="sr-only">Comment settings</span>
+                  </button>
 
-                {/* <!-- Dropdown menu --> */}
-                <div
-                  id="dropdownComment1"
-                  className={`${
-                    isDropdownVisible ? "block" : "hidden"
-                  } z-10 w15 bg-[#1c1c1c] rounded divide-y divide-gray-100 shadow  absolute right-0`}
-                >
-                  <ul
-                    className="py-1 text-sm text-white "
-                    aria-labelledby="dropdownMenuIconHorizontalButton"
+                  {/* <!-- Dropdown menu --> */}
+                  <div
+                    id="dropdownComment1"
+                    className={`${
+                      isDropdownVisible ? "block" : "hidden"
+                    } z-10 w15 bg-[#1c1c1c] rounded divide-y divide-gray-100 shadow  absolute right-0`}
                   >
-                    <li>
-                      <div
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-                        onClick={handleEdditDiscussion}
-                      >
-                        Edit
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-                        onClick={handleRemoveDiscussion}
-                      >
-                        Remove
-                      </div>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-                      >
-                        Report
-                      </a>
-                    </li>
-                  </ul>
+                    <ul
+                      className="py-1 text-sm text-white "
+                      aria-labelledby="dropdownMenuIconHorizontalButton"
+                    >
+                      <li>
+                        <div
+                          className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+                          onClick={handleEdditDiscussion}
+                        >
+                          Edit
+                        </div>
+                      </li>
+                      <li>
+                        <div
+                          className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+                          onClick={handleRemoveDiscussion}
+                        >
+                          Delete
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  {/* <!--End Dropdown menu --> */}
                 </div>
-                {/* <!--End Dropdown menu --> */}
-              </div>
-            )}
+              ))}
           </footer>
 
           <div className="flex flex-column align-items-center my-1 ">
@@ -467,11 +466,13 @@ const Discussion = ({
                 <div>
                   {!discussion?.ParentId && (
                     <p className="text-white fontWeight-500 opacity-[.9] text-[16px] mb-4">
-                      {discussion?.Title}
+                      {/* {discussion?.Title} */}
+                      {edditedTitle}
                     </p>
                   )}
                   <p className="text-white text-sm opacity-[.8] ">
-                    {discussion?.Description}
+                    {/* {discussion?.Description} */}
+                    {edditedDescription}
                   </p>
                 </div>
               )}

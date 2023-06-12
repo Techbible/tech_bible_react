@@ -297,6 +297,42 @@ app.post("/unlikeToolComment/:toolCommentId/:userId", async (req, res) => {
   }
 });
 
+//DELETE TOOLCOMMENT
+app.delete("/deleteToolComment/:id", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    // console.log("Connected to MongoDB");
+    const toolComment = await ToolsComments.deleteOne({ _id: req.params.id });
+
+    res.send(toolComment); // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting tool data");
+  }
+});
+//DELETE TOOLCOMMENT ID FROM COMMENT
+app.post("/removeCommentIdFromTool/:toolID/:CommentID", async (req, res) => {
+  let { toolID, CommentID } = req.params;
+  try {
+    const tool = await Tools.findById(toolID);
+
+    const updatedCommentsArray = tool.comments.filter(
+      (commentid) => commentid !== CommentID
+    );
+    // Update the discussion document with the updated LikedBy array
+    const updatedDiscussion = await Tools.findByIdAndUpdate(toolID, {
+      comment: updatedCommentsArray,
+    });
+    return res.send(updatedDiscussion);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log("discussion upvote has been removed succefuly!!!!!");
+});
+
 //  Add a HomeTool Comment
 app.post(
   "/addHomeToolComment/:toolId/:userId/:commentText/:parentId",
@@ -667,8 +703,6 @@ app.post("/updateDiscussion/:id/:title/:description", async (req, res) => {
   }
 });
 
-
-
 // Get All User Folders
 app.get("/userFolders/:userUid", async (req, res) => {
   try {
@@ -688,9 +722,6 @@ app.get("/userFolders/:userUid", async (req, res) => {
     res.status(500).send("Error retrieving user folders");
   }
 });
-
-
-
 
 // Create New Folder
 app.post("/createFolder", async (req, res) => {
@@ -722,9 +753,6 @@ app.post("/createFolder", async (req, res) => {
     res.status(500).send("Error adding folder to the user's folders array");
   }
 });
-
-
-
 
 // Create New Tool in Folder
 app.post("/addToolToFolder", async (req, res) => {
@@ -763,7 +791,6 @@ app.post("/addToolToFolder", async (req, res) => {
   }
 });
 
-
 // Get Tools in folder
 app.get("/getToolsInFolder", async (req, res) => {
   try {
@@ -786,7 +813,7 @@ app.get("/getToolsInFolder", async (req, res) => {
 
     // Search for tools with the specified toolIds
     const foundTools = await Tools.find({ _id: { $in: toolIds } });
-    console.log(foundTools)
+    console.log(foundTools);
 
     res.status(200).json(foundTools);
   } catch (err) {

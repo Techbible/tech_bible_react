@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import ProfilePhoto from "../ProfilePhoto";
 
 function Navbar() {
   const [authUser, setAuthUser] = useState(null);
@@ -85,18 +86,23 @@ function Navbar() {
                       Community
                       </li>
                   </Link> */}
-                  {isAdmin ? (
+                  {isAdmin && (
                     <Link to="/AdminSpace">
-                      <li
+                      <div className="text-[15px] px-4 py-2 transition text-white duration-300 hover:text-gray-800 ">
+                        Admin Space
+                      </div>
+                    </Link>
+                  )}
+                  {/* {isAdmin && (
+                    <Link to="/AdminSpace">
+                      <div
                         className="tracking-wider hover:tracking-widest"
                         style={{ transition: "0.3s", cursor: "pointer" }}
                       >
                         Admin Space
-                      </li>
+                      </div>
                     </Link>
-                  ) : (
-                    <div></div>
-                  )}
+                  )} */}
 
                   {/* <Link to="/contactus">
                     <li
