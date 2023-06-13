@@ -32,7 +32,7 @@ const UserList = () => {
   //to force re-render
   const [reducerValue, forceRender] = useReducer((x) => x + 1, 0);
 
-  const { currentUser,updateUserData} = useContext(AuthContext);
+  const { currentUser, updateUserData } = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
   const [Category, setCategory] = useState("");
   const [Name, setName] = useState("");
@@ -59,27 +59,27 @@ const UserList = () => {
       console.log(error);
     }
   };
-// const createFolder = () => {
-  
-//     const usersRef = collection(db, "Users");
-//     const userDocRef = doc(usersRef, currentUser?.uid);
-//     updateDoc(userDocRef, {
-//             folders: arrayUnion({
-//               name: Name,
-//               category: Category,
-//               tools: [],
-//             }),
-//           })
-//             .then(() => {
-//               console.log("Photo uploaded!");
-//             })
-//             .catch((error) => {
-//               console.log("Error updating photo:", error);
-//             });
+  // const createFolder = () => {
 
-//     closeModal();
-//     forceRender();
-//   };
+  //     const usersRef = collection(db, "Users");
+  //     const userDocRef = doc(usersRef, currentUser?.uid);
+  //     updateDoc(userDocRef, {
+  //             folders: arrayUnion({
+  //               name: Name,
+  //               category: Category,
+  //               tools: [],
+  //             }),
+  //           })
+  //             .then(() => {
+  //               console.log("Photo uploaded!");
+  //             })
+  //             .catch((error) => {
+  //               console.log("Error updating photo:", error);
+  //             });
+
+  //     closeModal();
+  //     forceRender();
+  //   };
 
   // const LoadFolders = async () => {
   //   const UserRef = collection(db, "Users");
@@ -95,19 +95,23 @@ const UserList = () => {
   //   }
   // };
   const fetchUserFolders = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/userFolders/${currentUser.uid}`);
-        setUserFolders(response.data);
-      } catch (error) {
-        console.error(error);
-        // Handle error cases and display error messages to the user
-      }
-    };
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/userFolders/${currentUser.uid}`
+      );
+      setUserFolders(response.data);
+    } catch (error) {
+      console.error(error);
+      // Handle error cases and display error messages to the user
+    }
+  };
 
   useEffect(() => {
     const fetchUserFolders = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/userFolders/${currentUser.uid}`);
+        const response = await axios.get(
+          `${BASE_URL}/userFolders/${currentUser.uid}`
+        );
         setUserFolders(response.data);
       } catch (error) {
         console.error(error);
@@ -115,8 +119,7 @@ const UserList = () => {
       }
     };
     fetchUserFolders();
-  }, []); 
-
+  }, []);
 
   const handleCreateFolder = async (e) => {
     e.preventDefault();
@@ -128,7 +131,10 @@ const UserList = () => {
         Category,
       };
 
-      const response = await axios.post(`${BASE_URL}/createFolder`, requestBody);
+      const response = await axios.post(
+        `${BASE_URL}/createFolder`,
+        requestBody
+      );
       fetchUserFolders();
       closeModal();
       console.log(response.data); // Newly created folder object
@@ -138,7 +144,6 @@ const UserList = () => {
       // Handle error cases and display error messages to the user
     }
   };
-
 
   const getCategories = () => {
     //getting the categories
@@ -180,7 +185,7 @@ const UserList = () => {
   }
   //*************************END Modal Configs*********************************/
 
-  const [isRowsView, setIsRowsView] = useState(true);
+  const [isRowsView, setIsRowsView] = useState(false);
 
   const toggleView = () => {
     setIsRowsView(!isRowsView);
@@ -193,40 +198,46 @@ const UserList = () => {
       </div>
 
       <div className="container mx-auto px-4">
-
         <div className="max-w-sm w-full lg:max-w-full mb-[10rem] lg:flex">
-        <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-         style={{backgroundImage: "url('https://images.ctfassets.net/lzny33ho1g45/6VcDGWbQfWElVwAiMWLk9c/1bfe7635d6b112fb7be963620c0c6a0d/best_apps_14.png?w=1520&fm=jpg&q=30&fit=thumb&h=760')", title:"Woman holding a mug"}}>
-        </div>
-        <div className="border-b border-gray-400 lg:border-gray-400 bg-dark lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-          <div className="mb-8">
-            <div className="text-white font-bold text-xl mb-2">
-            <Link to="/liked-tools">All your liked tools</Link>
+          <div
+            className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+            style={{
+              backgroundImage:
+                "url('https://images.ctfassets.net/lzny33ho1g45/6VcDGWbQfWElVwAiMWLk9c/1bfe7635d6b112fb7be963620c0c6a0d/best_apps_14.png?w=1520&fm=jpg&q=30&fit=thumb&h=760')",
+              title: "Woman holding a mug",
+            }}
+          ></div>
+          <div className="border-b border-gray-400 lg:border-gray-400 bg-dark lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+            <div className="mb-8">
+              <div className="text-white font-bold text-xl mb-2">
+                <Link to="/liked-tools">All your liked tools</Link>
+              </div>
             </div>
           </div>
-          </div>
-      </div>
-      <div className="flex justify-end mb-4">
-      <button
-        className="px-2 py-1 rounded bg-dark-500 text-white"
-        onClick={toggleView}
-      >
-        <img
-          src={
-            isRowsView
-              ? `${process.env.PUBLIC_URL}/assets/column.png`
-              : `${process.env.PUBLIC_URL}/assets/row.png`
-          }
-          alt="view"
-          width="28px"
-        />
-      </button>
-    </div>
+        </div>
+        <div className="flex justify-end mb-4">
+          <button
+            className="px-2 py-1 rounded bg-dark-500 text-white"
+            onClick={toggleView}
+          >
+            <img
+              src={
+                isRowsView
+                  ? `${process.env.PUBLIC_URL}/assets/column.png`
+                  : `${process.env.PUBLIC_URL}/assets/row.png`
+              }
+              alt="view"
+              width="28px"
+            />
+          </button>
+        </div>
 
-        <div className={`space-x-4 grid grid-cols-${isRowsView ? "1" : "3"} gap-4`}>
+        <div
+          className={`space-x-4 grid grid-cols-${isRowsView ? "1" : "3"} gap-4`}
+        >
           {UserFolders.map((item, index) => (
             <Link to={`/folder/f/${index}`}>
-            <Folder key={index} isRowsView={isRowsView} item={item} />
+              <Folder key={index} isRowsView={isRowsView} item={item} />
             </Link>
           ))}
         </div>
@@ -258,25 +269,25 @@ const UserList = () => {
           <div className="flex m-5">
             <h4>Folder Category : </h4>
             <div className="ml-2">
-            <select
-              onChange={(e) => setCategory(e.target.value)}
-              className="combo-box bg-white text-black px-1 rounded-[4px] "
-            >
-              <option value="all categories">All Categories</option>
-              {CategoriesData?.map((group) => {
-                return group.categories.map((category) => {
-                  return (
-                    <option className="text-black" value={category}>
-                      {category}{" "}
-                    </option>
-                  );
-                });
-              })}
-            </select>
-          </div>
+              <select
+                onChange={(e) => setCategory(e.target.value)}
+                className="combo-box bg-white text-black px-1 rounded-[4px] "
+              >
+                <option value="all categories">All Categories</option>
+                {CategoriesData?.map((group) => {
+                  return group.categories.map((category) => {
+                    return (
+                      <option className="text-black" value={category}>
+                        {category}{" "}
+                      </option>
+                    );
+                  });
+                })}
+              </select>
+            </div>
           </div>
         </div>
-        <span className="save-btn" onClick={(e)=>handleCreateFolder(e)}>
+        <span className="save-btn" onClick={(e) => handleCreateFolder(e)}>
           + create
         </span>
       </Modal>

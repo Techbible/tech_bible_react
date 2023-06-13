@@ -25,6 +25,7 @@ import { allToolsAtom } from "./recoil/tool";
 import FoldersContent from "./components/UserProfile/FoldersContent";
 import LoadingCommunity from "./components/pageLoaders/LoadingCommunity";
 import CircleLoader from "./components/CircleLoader";
+import AdminUsers from "./admin/AdminUsers";
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
 
@@ -326,6 +327,7 @@ function App() {
         <Route path="/LoadingHomePage" element={<LoadingHomePage />} />
         <Route path="/folder/f/:index" element={<FoldersContent />} />
         <Route path="/LoadingCommunity" element={<LoadingCommunity />} />
+        <Route path="/adminusers" element={<AdminUsers />} />
       </Routes>
     </div>
   );

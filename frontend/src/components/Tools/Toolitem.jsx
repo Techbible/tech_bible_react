@@ -12,7 +12,7 @@ const Toolitem = ({
   setIsOpen,
   setToolToFolder,
   homeTool,
-  FolderTool
+  FolderTool,
 }) => {
   const { currentUser, isAdmin } = useContext(AuthContext);
   // const LikeMethodsRef = useRef(null);
@@ -164,9 +164,7 @@ const Toolitem = ({
                     currentUser ? handleLikeUnlike : () => navigate("/signin")
                   }
                 ></i>
-                <div
-                  className="text-white fontSize-12 fontWeight-600 noOfLines-undefined"
-                >
+                <div className="text-white fontSize-12 fontWeight-600 noOfLines-undefined">
                   {simulatedLikesNumber}
                 </div>
               </>
@@ -174,11 +172,11 @@ const Toolitem = ({
             <div
               className="cursor-pointer ml-2 text-center"
               onClick={() => {
-                setToolToFolder(toolData._id);
+                // setToolToFolder(toolData._id);
                 setIsOpen(true);
               }}
             >
-              {!homeTool && !FolderTool && <h1>+</h1>} 
+              {!homeTool && !FolderTool && <h1>+</h1>}
             </div>
 
             <div>

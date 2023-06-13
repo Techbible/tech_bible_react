@@ -33,7 +33,7 @@ function FoldersContent() {
 
   return (
     <div className="m-[5em]">
-      <h1>Here are you tools : </h1>
+      <h1>You tools : </h1>
       {FolderTools?.map((item) => (
         <Toolitem FolderTool={true} toolData={item} />
       ))}

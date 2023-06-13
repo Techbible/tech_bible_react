@@ -181,6 +181,12 @@ const Profile = () => {
     currentUserData?.username
   );
 
+  const uploadImageUsername = async (username, url) => {
+    const res = await axios.post(
+      `${BASE_URL}/updateUsernameAndPhoto/${currentUser?.uid}/${username}/${url}`
+    );
+  };
+
   const uploadImage = async () => {
     // const usersRef = collection(db, "Users");
     // const userDocRef = doc(usersRef, currentUser?.uid);
@@ -218,7 +224,7 @@ const Profile = () => {
       .then((snapshot) => {
         console.log("Image uploaded");
         getDownloadURL(snapshot.ref)
-          .then(async (url) => {
+          .then((url) => {
             try {
               console.log(
                 "UPDATE name and photo : " +
@@ -228,9 +234,8 @@ const Profile = () => {
                   " " +
                   url
               );
-              const res = await axios.post(
-                `${BASE_URL}/updateUsernameAndPhoto/${currentUser?.uid}/${editedUsername}/${url}`
-              );
+
+              uploadImageUsername(editedUsername, url);
               console.log("IMAGE URL try  : " + url);
 
               updateUserData();

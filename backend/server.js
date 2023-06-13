@@ -579,12 +579,20 @@ app.post("/updateUsernameAndPhoto/:uid/:username/:photo", async (req, res) => {
     const { uid, username, photo } = req.params;
 
     // Update the user document
-    await User.updateOne(
+    const updatedUser = await User.findOneAndUpdate(
       { uid: uid },
-      { $set: { username: username, photo: photo } }
+      { $set: { username: username, photo: photo } },
+      { new: true } // Return the updated document
     );
 
-    res.status(200).json({ message: "User bio updated successfully" });
+    if (!updatedUser) {
+      // User with the specified uid not found
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "User bio updated successfully", user: updatedUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error updating user bio" });
@@ -819,5 +827,24 @@ app.get("/getToolsInFolder", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Error retrieving tools in folder");
+  }
+});
+
+//GET ALL USERS
+app.get("/getUsers", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    // console.log("Connected to MongoDB");
+    const users = await User.find();
+
+    // console.log("TOOLS : ",tools);
+    res.send(users);
+    // Send an object containing both variables
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching tools data");
   }
 });
