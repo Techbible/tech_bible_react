@@ -800,7 +800,7 @@ const Home = () => {
           </div>
         </main>
         <aside className="sidebarWithSeparator right pl-6 ">
-          <div className="flex flex-column align-items-center ml-[20%]">
+          <div className="flex flex-column align-items-center ml-[20%] ">
             <div>
               <Link to="/News">
                 <p className="text-[16px] fontWeight-700 mt-16 mb-4 ">
@@ -830,14 +830,7 @@ const Home = () => {
                       url={article?.url}
                     />
                   ))}
-              <Link to="/community">
-                <div
-                  className="tracking-wider hover:tracking-widest mt-8"
-                  style={{ transition: "0.3s", cursor: "pointer" }}
-                >
-                  Community
-                </div>
-              </Link>
+             
               {/* <Link to="/News">
             <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer mb-20">
               See all News
@@ -845,9 +838,22 @@ const Home = () => {
           </Link> */}
               <div className="my-[46px] w-[300px] h-[1px] bg-white "></div>
               <NewsLetterSubscribe />
-
+               
               <div className="my-[50px] w-[300px] h-[1px] bg-white "></div>
+              <Link to="/community">
+            
+
+                <div
+                  className="tracking-wider hover:tracking-widest mt-8 flex flex-column ml-20"
+                  style={{ transition: "0.3s", cursor: "pointer" }}
+                >
+                    <img src="https://zahiraccounting.com/en-my/wp-content/uploads/2015/10/zahir-accounting-software-have-more-than-60.000-users.png" alt="Users" className="w-14 h-14 ml-4" />
+                  Community
+                </div>
+              </Link>
+              <hr className="my-15 border-white w-[120]"/>
               <div className=" flex flex-column ">
+            
                 <ul className="flex flex-row lg:gap-[64px] gap-3 mb-5 ">
                   <h3>Follow us</h3>
                   <li

@@ -127,6 +127,8 @@ const DiscussionsPage = ({
                 <input
                   onChange={(e) => {
                     setSearch(e.target.value);
+                    setsearchResultVisible(true);
+                    setIsAllClicked(true);
                   }}
                   onKeyDown={(e) => {
                     if (e.keyCode === 13) {
@@ -330,20 +332,20 @@ const DiscussionsPage = ({
               </div>
             ) : isPopularClicked ? (
               <div className="mr-16">
-               {Discussions &&
-                  Discussions?.map((discussion) => {
-                    if (discussion?.ParentId === null) {
-                      return (
-                        <Discussion
-                          discussion={discussion}
-                          Discussions={Discussions}
-                          setUserDiscussionData={setUserDiscussionData}
-                          setShowUserAside={setShowUserAside}
-                          setCategoryOfDiscussion={setCategoryOfDiscussion}
-                        />
-                      );
-                    }
-                  })}
+                {Discussions?.filter((discussion) => {
+                  // Filter out discussions with null or undefined LikedBy arrays
+                  return discussion.LikedBy != null && discussion.ParentId===null;
+                })
+                  .sort((a, b) => b.LikedBy.length - a.LikedBy.length) // Sort discussions in descending order based on LikedBy length
+                  .map((discussion) => (
+                    <Discussion
+                      discussion={discussion}
+                      Discussions={Discussions}
+                      setUserDiscussionData={setUserDiscussionData}
+                      setShowUserAside={setShowUserAside}
+                      setCategoryOfDiscussion={setCategoryOfDiscussion}
+                    />
+                  ))}
               </div>
             ) : isCategoryClicked && category !== "" ? (
               <div className="mr-16">
