@@ -2,9 +2,11 @@ import React from "react";
 import { useRef } from "react";
 import emailjs from "@emailjs/browser"
 import { CategoriesData } from "../dataJson/CategoriesData";
+import { useNavigate } from "react-router-dom";
 
 const ContactUs = () => {
   const form = useRef();
+  const navigate=useNavigate();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -19,6 +21,8 @@ const ContactUs = () => {
       .then(
         (result) => {
           console.log(result.text);
+          alert('Well received!, Thank you for contacting us!');
+          navigate('/');
         },
         (error) => {
           console.log(error.text);
