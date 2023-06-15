@@ -464,7 +464,7 @@ const Profile = () => {
                         Bio
                       </p>
                       <input
-                        className="h-7 p-2 w-full text-sm leading-tight text-black border-gray-400 border rounded-lg"
+                        className="h-7 p-2 w-[30px] text-sm leading-tight text-black border-gray-400 border rounded-lg"
                         placeholder={currentUserData.bio}
                         onChange={(e) => setBio(e.target.value)}
                         type="text"
@@ -513,7 +513,7 @@ const Profile = () => {
 
                   {addBio ? (
                     <input
-                      className="h-7 p-2 w-full text-sm leading-tight text-black border-gray-400 border rounded-lg"
+                      className="h-7 p-2 w-[30px] text-sm leading-tight text-black border-gray-400 border rounded-lg"
                       placeholder="You can add your bio here"
                       onChange={(e) => setBio(e.target.value)}
                       type="text"

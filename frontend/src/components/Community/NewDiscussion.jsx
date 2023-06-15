@@ -92,7 +92,7 @@ function NewDiscussion() {
   };
 
   return (
-    <div className="w-full max-w-sm p-6 bg-[#1C1C1C] rounded shadow-md w-[90%] mt-4 ">
+    <div className="w-full px-[10%] py-[5%] bg-[#1C1C1C] rounded shadow-md w-[90%] mt-4 ">
       <h2 className="text-2xl font-semibold text-white text-center mb-4">
         Create New Discussion
       </h2>

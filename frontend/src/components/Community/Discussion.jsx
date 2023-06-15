@@ -12,6 +12,7 @@ const Discussion = ({
   setUserDiscussionData,
   setShowUserAside,
   setCategoryOfDiscussion,
+  replyTo,
 }) => {
   const [userData, setUserData] = useState();
   const [upvoteClicked, setUpvoteClicked] = useState(false);
@@ -348,39 +349,43 @@ const Discussion = ({
                 </div>
               )}
             </div>
-            {discussion?.UserId === currentUser?.uid ||
-              (currentUserData?.isAdmin === true && (
-                <div className="relative">
-                  <button
-                    id="dropdownComment1Button"
-                    data-dropdown-toggle="dropdownComment1"
-                    className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-[#1C1C1C] rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-white dark:focus:ring-gray-600"
-                    type="button"
-                    onClick={() => setDropdownVisible(!isDropdownVisible)}
+            {(discussion?.UserId === currentUser?.uid ||
+              currentUserData?.isAdmin === true) && (
+              <div className="relative">
+                <button
+                  id="dropdownComment1Button"
+                  data-dropdown-toggle="dropdownComment1"
+                  className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-[#1C1C1C] rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-white dark:focus:ring-gray-600"
+                  type="button"
+                  onClick={() => setDropdownVisible(!isDropdownVisible)}
+                >
+                  <svg
+                    className="w-5 h-5"
+                    aria-hidden="true"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
-                      className="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                    </svg>
-                    <span className="sr-only">Comment settings</span>
-                  </button>
+                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                  </svg>
+                  <span className="sr-only">Comment settings</span>
+                </button>
 
-                  {/* <!-- Dropdown menu --> */}
-                  <div
-                    id="dropdownComment1"
-                    className={`${
-                      isDropdownVisible ? "block" : "hidden"
-                    } z-10 w15 bg-[#1c1c1c] rounded divide-y divide-gray-100 shadow  absolute right-0`}
+                {/* <!-- Dropdown menu --> */}
+                <div
+                  id="dropdownComment1"
+                  className={`${
+                    isDropdownVisible ? "block" : "hidden"
+                  } z-10 w15 bg-[#1c1c1c] rounded divide-y divide-gray-100 shadow  absolute right-0`}
+                >
+                  <ul
+                    className="py-1 text-sm text-white "
+                    aria-labelledby="dropdownMenuIconHorizontalButton"
                   >
-                    <ul
-                      className="py-1 text-sm text-white "
-                      aria-labelledby="dropdownMenuIconHorizontalButton"
-                    >
+                    {!(
+                      discussion?.UserId !== currentUser?.uid &&
+                      currentUserData?.isAdmin === true
+                    ) && (
                       <li>
                         <div
                           className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
@@ -389,19 +394,20 @@ const Discussion = ({
                           Edit
                         </div>
                       </li>
-                      <li>
-                        <div
-                          className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-                          onClick={handleRemoveDiscussion}
-                        >
-                          Delete
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  {/* <!--End Dropdown menu --> */}
+                    )}
+                    <li>
+                      <div
+                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+                        onClick={handleRemoveDiscussion}
+                      >
+                        Delete
+                      </div>
+                    </li>
+                  </ul>
                 </div>
-              ))}
+                {/* <!--End Dropdown menu --> */}
+              </div>
+            )}
           </footer>
 
           <div className="flex flex-column align-items-center my-1 ">
@@ -470,8 +476,13 @@ const Discussion = ({
                       {edditedTitle}
                     </p>
                   )}
-                  <p className="text-white text-sm opacity-[.8] ">
+                  <p className="text-gray-400 text-sm">
                     {/* {discussion?.Description} */}
+                    {discussion?.ParentId !== null && (
+                      <i className="text-white text-sm opacity-[1]">
+                        {"@" + replyTo}{" "}
+                      </i>
+                    )}
                     {edditedDescription}
                   </p>
                 </div>
@@ -483,11 +494,10 @@ const Discussion = ({
                 className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400"
                 onClick={() => {
                   setShowReplies(!showReplies);
-                  if (discussion?.ParentId === null) {
-                    setUserDiscussionData(userData);
-                    setShowUserAside(true);
-                    setCategoryOfDiscussion(discussion?.Category);
-                  }
+
+                  setUserDiscussionData(userData);
+                  setShowUserAside(true);
+                  setCategoryOfDiscussion(discussion?.Category);
                 }}
               >
                 <svg
@@ -566,31 +576,66 @@ const Discussion = ({
       </div>
       {showReplies && (
         <div className={discussion?.ParentId === null && "ml-8"}>
-          {replies?.map((reply) => (
-            <Discussion discussion={reply} Discussions={Discussions} />
-          ))}
-          {discussion?.ParentId === null && (
-            <div class="mb-10">
-              <input
-                type="text"
-                id="comment"
-                rows="6"
-                class="px-0 w-[60%] mr-2 text-sm text-black rounded-[8px] max-h-[30px] px-3 py-3 border-0 focus:ring-0 focus:outline-none   bg-white "
-                placeholder="Reply..."
-                value={reply}
-                onChange={(e) => {
-                  setReply(e.target.value);
-                }}
+          {replies &&
+            replies.map((reply) => (
+              <Discussion
+                key={reply._id}
+                discussion={reply}
+                Discussions={Discussions}
+                setUserDiscussionData={setUserDiscussionData}
+                setShowUserAside={setShowUserAside}
+                setCategoryOfDiscussion={setCategoryOfDiscussion}
+                replyTo={discussion?.parentId !== null && userData?.username}
               />
-
+            ))}
+          {/* {discussion?.ParentId === null && ( */}
+          <div class="flex flex-row align-items-center mb-10">
+            <input
+              type="text"
+              id="comment"
+              rows="6"
+              className={
+                discussion?.ParentId === null
+                  ? "px-0 w-[60%] mr-2 text-sm text-black rounded-[8px] max-h-[30px] px-3 py-3 border-0 focus:ring-0 focus:outline-none   bg-white "
+                  : "px-0 w-[40%] mr-2 text-sm text-black rounded-[8px] max-h-[26px] px-3 py-3 border-0 focus:ring-0 focus:outline-none   bg-white ml-[6%]"
+              }
+              placeholder={
+                discussion?.ParentId === null
+                  ? "Reply..."
+                  : "Reply to @" + userData?.username
+              }
+              value={reply}
+              onChange={(e) => {
+                setReply(e.target.value);
+              }}
+            />
+            {discussion?.ParentId === null ? (
               <button
                 onClick={handleAddReply}
                 class="inline-flex items-center mt-2 py-2 px-4 text-xs font-medium text-center text-white bg-[#EF4823] rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
               >
                 Post reply
               </button>
-            </div>
-          )}
+            ) : (
+              <button onClick={handleAddReply}>
+                <svg
+                  className="h-5 w-5 hover:h-6 hover:w-6 text-orange-500"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  {" "}
+                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                  <line x1="10" y1="14" x2="21" y2="3" />{" "}
+                  <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" />
+                </svg>
+              </button>
+            )}
+          </div>
+          {/* )} */}
         </div>
       )}
     </div>
