@@ -332,12 +332,9 @@ const DiscussionsPage = ({
               </div>
             ) : isPopularClicked ? (
               <div className="mr-16">
-                {Discussions?.filter((discussion) => {
-                  // Filter out discussions with null or undefined LikedBy arrays
-                  return (
-                    discussion.LikedBy != null && discussion.ParentId === null
-                  );
-                })
+                {Discussions?.filter(
+                  (discussion) => discussion.ParentId === null
+                )
                   .sort((a, b) => b.LikedBy.length - a.LikedBy.length) // Sort discussions in descending order based on LikedBy length
                   .map((discussion) => (
                     <Discussion

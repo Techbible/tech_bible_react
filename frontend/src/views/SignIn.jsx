@@ -1,10 +1,15 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
 import { auth, db, provider } from "../config/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../assets/styles/signin_signup/signin_signup.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Timestamp,
   collection,
@@ -66,6 +71,8 @@ const SignIn = () => {
         navigate("/");
       })
       .catch((err) => {
+        setIsEmailValid(true);
+        setIsPasswordValid(true);
         // console.log(error);
         if (email === "") {
           setEmailError("Field is empty");
@@ -144,6 +151,41 @@ const SignIn = () => {
       console.log(error);
     }
   };
+  const handleForgotPassword = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        // Password reset email sent!
+        console.log("Password reset email sent to " + email);
+        toast.success(" 👉An email has been sent to you", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("ERROR : " + errorCode + " " + errorMessage);
+        toast.error(
+          "An error occurred. Please check if the email is correct.",
+          {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          }
+        );
+      });
+  };
 
   return (
     <div className="sign-in h-full bg-[#] w-full h-[100%] py-16 px-6">
@@ -212,6 +254,9 @@ const SignIn = () => {
           {!isPasswordValid ? (
             <div className="text-danger my-2">{passwordError}</div>
           ) : null}
+          <div className="mt-2 cursor-pointer " onClick={handleForgotPassword}>
+            Forgot password?
+          </div>
           <div className="mt-8">
             <button
               onClick={(e) => handleSignIn(e)}
@@ -271,6 +316,18 @@ const SignIn = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

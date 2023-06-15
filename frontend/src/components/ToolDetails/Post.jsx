@@ -135,7 +135,38 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
     const sortedReplies = replies.sort((a, b) => {
       return new Date(a.createdAt) - new Date(b.createdAt);
     });
-    setCurrentReplies(sortedReplies);
+    const repliesWithTimeAgo = sortedReplies.map((comment) => {
+      const createdAt = new Date(comment.createdAt);
+      const currentDate = new Date();
+      const timeDifferenceInSeconds = Math.floor(
+        (currentDate - createdAt) / 1000
+      );
+
+      let formattedTimeAgo;
+      if (timeDifferenceInSeconds < 1) {
+        formattedTimeAgo = "Now";
+      } else if (timeDifferenceInSeconds < 60) {
+        formattedTimeAgo = `${timeDifferenceInSeconds}s ago`;
+      } else if (timeDifferenceInSeconds < 3600) {
+        const minutes = Math.floor(timeDifferenceInSeconds / 60);
+        formattedTimeAgo = `${minutes}m ago`;
+      } else if (timeDifferenceInSeconds < 86400) {
+        const hours = Math.floor(timeDifferenceInSeconds / 3600);
+        formattedTimeAgo = `${hours}h ago`;
+      } else if (timeDifferenceInSeconds < 31536000) {
+        const days = Math.floor(timeDifferenceInSeconds / 86400);
+        formattedTimeAgo = `${days}d ago`;
+      } else {
+        const years = Math.floor(timeDifferenceInSeconds / 31536000);
+        formattedTimeAgo = `${years}y ago`;
+      }
+
+      return {
+        ...comment,
+        timeAgo: formattedTimeAgo,
+      };
+    });
+    setCurrentReplies(repliesWithTimeAgo);
   };
   const [replyAdded, setReplyAdded] = useState(false);
   const addReply = () => {
@@ -191,7 +222,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                 {name}&nbsp;
               </Link>
             </div>
-            <div className="flex flex-row mt-1 sm:mt-2">
+            <div className="flex flex-row  mt-1 sm:mt-2">
               {comment.parentId === "null" ? (
                 <div className="text-gray-300 text-[10px] sm:text-sm">
                   -Posted in-&nbsp;{toolData?.Category} &nbsp;-&nbsp;{" "}
@@ -199,7 +230,7 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                 </div>
               ) : (
                 <div className="text-gray-300 text-[12px]">
-                  -&nbsp;{comment.timeAgo}
+                  {"-" + comment.timeAgo}
                 </div>
               )}
             </div>
@@ -288,16 +319,20 @@ const Post = ({ comment, toolData, replies, submitLabel, handleSubmit }) => {
                 ></i>
               )}
               <div className="text-[14px]">{simulatedLikesNumber}</div>
-              <button
-                onClick={handleIsAddCommentClick}
-                className=" bi bi-chat-left-dots text-[18px] hover:text-[19px] active:text-[18px]"
-              ></button>
-              {currentReplies === 0 ? (
-                <div className="text-[12px]">Comments</div>
-              ) : (
-                <div className="text-[12px]">
-                  {currentReplies.length} Comments
-                </div>
+              {comment?.parentId === "null" && (
+                <>
+                  <button
+                    onClick={handleIsAddCommentClick}
+                    className=" bi bi-chat-left-dots text-[18px] hover:text-[19px] active:text-[18px]"
+                  ></button>
+                  {currentReplies === 0 ? (
+                    <div className="text-[12px]">Comments</div>
+                  ) : (
+                    <div className="text-[12px]">
+                      {currentReplies.length} Comments
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
