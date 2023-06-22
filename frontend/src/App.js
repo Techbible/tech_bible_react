@@ -26,6 +26,9 @@ import FoldersContent from "./components/UserProfile/FoldersContent";
 import LoadingCommunity from "./components/pageLoaders/LoadingCommunity";
 import CircleLoader from "./components/CircleLoader";
 import AdminUsers from "./admin/AdminUsers";
+import BlogPage from "./views/BlogPage";
+import AutomationeRecipes from "./static pages/AutomationeRecipes";
+import PluginsGpt from "./static pages/PluginsGpt";
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
 
@@ -328,6 +331,9 @@ function App() {
         <Route path="/folder/f/:index" element={<FoldersContent />} />
         <Route path="/LoadingCommunity" element={<LoadingCommunity />} />
         <Route path="/adminusers" element={<AdminUsers />} />
+        <Route path="/blogs-page" element={<BlogPage />} />
+        <Route path="/blogs-post/automation-recipes-part-ii" element={<AutomationeRecipes/>} />
+        <Route path="/blogs-post/chatgpt-plugins-list" element={<PluginsGpt/>} />
       </Routes>
     </div>
   );

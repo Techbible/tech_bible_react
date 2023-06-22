@@ -117,6 +117,7 @@ function Tools() {
                           className="card-img-top"
                           alt="..."
                         />
+                        {tool._id}
                         <div className="image-overlay">
                           <span
                             className="delete-btn"

@@ -12,15 +12,21 @@ const NewsList = () => {
   const { isAdmin } = useContext(AuthContext);
   
 
+  
   const handleDelete = async (id) => {
+    if (window.confirm("Are you sure that you want to delete this item?")) {
+
     try {
-      const response = await axios.delete(`${BASE_URL}/deleteArticle/${id}`);
+      const response = await axios.delete(`${BASE_URL}/delete-article/${id}`);
       console.log("Article deleted:", response.data);
+      document.location.reload();
+
       // Handle successful deletion, such as updating the UI or showing a success message
     } catch (error) {
       console.error("Error deleting article:", error);
       // Handle error, such as displaying an error message or performing necessary error handling
     }
+  }
   };
 
   useEffect(() => {

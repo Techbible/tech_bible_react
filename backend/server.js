@@ -235,6 +235,25 @@ app.post("/addArticle", async (req, res) => {
 
 // Add a News Article END
 
+
+//DELETE AN ARTICLE
+app.delete("/delete-article/:id", async (req, res) => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log(req.params.id);
+    const tool = await NewsArticle.deleteOne({ _id: req.params.id });
+
+    res.send(tool); // Send an object containing both variables
+  } catch (error) {
+    //console.error(error);
+    res.status(500).send("Error deleting tool data");
+  }
+});
+
 //  Add a Tool Comment
 app.post(
   "/addToolComment/:toolId/:userId/:commentText/:parentId",
