@@ -3,7 +3,7 @@ import NewsLetter from "../components/home components/NewsLetter";
 
 function AutomationRecipes() {
   return (
-    <div className="bg-black text-white min-h-screen w-full py-8 sm:px-6">
+<div className="bg-black text-white min-h-screen w-full py-8 sm:px-6">
       <div className="mx-auto">
         <div className="grid grid-cols-6 gap-8">
           <div className="col-span-4">

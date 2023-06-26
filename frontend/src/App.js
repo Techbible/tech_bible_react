@@ -29,6 +29,8 @@ import AdminUsers from "./admin/AdminUsers";
 import BlogPage from "./views/BlogPage";
 import AutomationeRecipes from "./static pages/AutomationeRecipes";
 import PluginsGpt from "./static pages/PluginsGpt";
+import ContentCalender from "./static pages/ContentCalender";
+import PromptsForGPT from "./static pages/PromptsForGPT";
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
 
@@ -334,6 +336,8 @@ function App() {
         <Route path="/blogs-page" element={<BlogPage />} />
         <Route path="/blogs-post/automation-recipes-part-ii" element={<AutomationeRecipes/>} />
         <Route path="/blogs-post/chatgpt-plugins-list" element={<PluginsGpt/>} />
+        <Route path="/blogs-post/free-content-calendars" element={<ContentCalender/>} />
+        <Route path="/blogs-post/how-to-get-the-most-out-of-chatgpt" element={<PromptsForGPT/>} />
       </Routes>
     </div>
   );

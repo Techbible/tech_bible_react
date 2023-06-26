@@ -9,12 +9,12 @@ function BlogPage() {
       BLOG
     </h1>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-    <Link to="/blogs-post/automation-recipes-part-ii">  
+{   /*  <Link to="/blogs-post/automation-recipes-part-ii">  
     <BlogPost
         title="Automation Recipes Part II"
         backgroundImage="url('https://uploads-ssl.webflow.com/645299d48a785f5f60711d8f/6486fabd86e9f3861f81bfab_23-p-800.png')"
       />
-      </Link>
+      </Link> */}
     <Link to="/blogs-post/chatgpt-plugins-list">  
     <BlogPost
         title="Chat GPT Plugins List"
@@ -22,10 +22,19 @@ function BlogPage() {
       />
       </Link>
       
+      <Link to="/blogs-post/free-content-calendars">  
       <BlogPost
-        title="Every marketer should bookmark these websites for inspiration"
-        backgroundImage="url('https://uploads-ssl.webflow.com/645299d48a785f5f60711d8f/6486faa19ff9c75880e3ad88_24-p-800.png')"
+        title="Free Content Calendars to Download"
+        backgroundImage="url('https://uploads-ssl.webflow.com/645299d48a785f5f60711d8f/6486fb7564b286f1d7dfb930_8-p-1080.png')"
       />
+      </Link>
+      
+      <Link to="/blogs-post/how-to-get-the-most-out-of-chatgpt">  
+      <BlogPost
+        title="How to get the most out of CHATGPT"
+        backgroundImage="url('https://uploads-ssl.webflow.com/645299d48a785f5f60711d8f/64873c904703bfb76cf44f74_AUTOMATION%20RECIPES%20(2)-p-800.png')"
+      />
+      </Link>
 
       {/* Add more BlogPosts as needed */}
     </div>

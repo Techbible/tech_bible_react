@@ -7,7 +7,7 @@ function PluginsGpt() {
   return (
     <div className="container mx-auto grid gap-4 grid-cols-1 md:grid-cols-12 mt-10">
       <div className="col-span-12 md:col-span-8 py-4">
-        <h1 className="text-orange-500 text-3xl font-bold">ChatGPT Plugins List</h1>
+        <h1 className="text-[#ef4823] text-3xl font-bold">ChatGPT Plugins List</h1>
       </div>
 
       <div className="col-span-12 md:col-span-8 py-4 text-lg text-left ml-5">
