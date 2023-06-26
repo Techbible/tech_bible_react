@@ -333,11 +333,11 @@ function App() {
         <Route path="/folder/f/:index" element={<FoldersContent />} />
         <Route path="/LoadingCommunity" element={<LoadingCommunity />} />
         <Route path="/adminusers" element={<AdminUsers />} />
-        <Route path="/blogs-page" element={<BlogPage />} />
-        <Route path="/blogs-post/automation-recipes-part-ii" element={<AutomationeRecipes/>} />
-        <Route path="/blogs-post/chatgpt-plugins-list" element={<PluginsGpt/>} />
-        <Route path="/blogs-post/free-content-calendars" element={<ContentCalender/>} />
-        <Route path="/blogs-post/how-to-get-the-most-out-of-chatgpt" element={<PromptsForGPT/>} />
+        <Route path="/blogs" element={<BlogPage />} />
+        <Route path="/blogs/automation-recipes-part-ii" element={<AutomationeRecipes/>} />
+        <Route path="/blogs/chatgpt-plugins-list" element={<PluginsGpt/>} />
+        <Route path="/blogs/free-content-calendars" element={<ContentCalender/>} />
+        <Route path="/blogs/how-to-get-the-most-out-of-chatgpt" element={<PromptsForGPT/>} />
       </Routes>
     </div>
   );

@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import NewsLetter from "../components/home components/NewsLetter";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import RelatedArticleCard from "./RelatedBlogs";
+
 
 function ContentCalender() {
+  const navigate = useNavigate();
+   //CONTEXT
+   const { currentUser } = useContext(AuthContext);
+   const handleButtonClick = () => {
+    if (!currentUser) {
+        navigate("/signin");
+      
+    } else {
+      // Navigate to the desired link if currentUser is filled or true
+      window.location.href =
+        "https://pensight.com/x/techbible/new-digital-item/a1f753d8-24d9-4333-9e16-dd52fe788b21";
+    }
+  };
+
+
   return (
     <div className="container mx-auto grid gap-4 grid-cols-1 md:grid-cols-12 mt-10">
-      <div className="col-span-12 md:col-span-8 py-4">
-        <h1 className="text-[#ef4823] text-4xl font-bold">
-          Free Content Calendars to Download
-        </h1>
-      </div>
+    <div className="col-span-12 md:col-span-12 py-4 flex justify-center">
+    <h1 className="text-[#ef4823] text-4xl font-bold">
+      Free Content Calendars to Download
+    </h1>
+  </div>
+  
       <div className="col-span-12 md:col-span-8 py-4">
         <h2 className="text-2xl font-bold">
           Streamline Your Email Campaigns, Social Media Posts, and Content
@@ -23,12 +43,13 @@ function ContentCalender() {
             alt="1"
             className="max-w-full"
           />
-          <a
-          href="https://pensight.com/x/techbible/new-digital-item/a1f753d8-24d9-4333-9e16-dd52fe788b21"
+          <button
           className="text-orange-600 mb-10"
+          onClick={handleButtonClick}
+
         >
           Download your free content calendars by clicking here !
-        </a>
+        </button>
         </div>
         Greetings, tech-savvy marketers and trailblazers!
         <br />
@@ -103,23 +124,21 @@ function ContentCalender() {
         tech startup to unprecedented heights. We at Techbible are excited to be
         part of your journey. Let's pave the path to success together!
         <br />
-        <a
-          href="https://pensight.com/x/techbible/new-digital-item/a1f753d8-24d9-4333-9e16-dd52fe788b21"
-          className="text-orange-600 mb-10"
-        >
-          Download your free content calendars by clicking here !
-        </a>
+
         <br />
+        Download your free content calendars by <br/>
         <button
           className="text-white mt-5 mb-20 light rounded-[6px] px-[10px] py-[5px] bg-[#ef4823] transition duration-250 hover:bg-[#ca391c] active:bg-[#b32712]"
-          onClick={() => window.history.back()}
+          onClick={handleButtonClick}
         >
-          Go back
+        clicking here !
         </button>
       </div>
 
-      <div className="col-span-12 md:col-span-4 py-4">
+      <div className="col-span-12 md:col-span-4 py-4 ml-20">
         <NewsLetter />
+        <RelatedArticleCard />
+
       </div>
     </div>
   );
