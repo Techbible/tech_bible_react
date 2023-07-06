@@ -373,7 +373,7 @@ const Home = () => {
               <div className="flex flex-column  max-w-[560px]  my-4 mx-4  md:mb-[2rem] rounded-xl ">
                 <div className="text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 mt-2">
                   <div>
-                    The Largest Tech Directory To Help You Get The Job Done
+                    Your job done, with the latest tool.
                   </div>
                 </div>
 
@@ -399,7 +399,7 @@ const Home = () => {
                     </div>
                   ) : (
                     <div className="fontWeight-300 poppins text-[#F5F5F7] xl:text-[20px] lg:text-[18px] md:text-[16px] sm:text-[14px] text-[14px] w-[290px] opacity-[.9]">
-                      Browse +1890 software tools per task Updated daily
+                      We curate, test and review tools before recommending them to you
                     </div>
                   )}
                   {isFiltering && (
@@ -443,7 +443,7 @@ const Home = () => {
                       type="text"
                       id="voice-search"
                       className="bg-white h-[36px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="Search your tool..."
+                      placeholder="Type Keyword..."
                       value={value}
                       onChange={(e) => {
                         onChange(e);
@@ -845,11 +845,6 @@ const Home = () => {
                   className="tracking-wider hover:tracking-widest mt-8 flex flex-column ml-20"
                   style={{ transition: "0.3s", cursor: "pointer" }}
                 >
-                  <img
-                    src="https://zahiraccounting.com/en-my/wp-content/uploads/2015/10/zahir-accounting-software-have-more-than-60.000-users.png"
-                    alt="Users"
-                    className="w-14 ml-4"
-                  />
                   Community
                 </div>
               </Link>
@@ -904,7 +899,7 @@ const Home = () => {
                   <div className="text-[14px] fontWeight-500 poppins mb-4 ">
                     Made by{" "}
                     <div className="text-[#EF4823] inline-block ">
-                      Mytechbible Studio
+                      Techbible Studio
                     </div>
                   </div>
                 </a>
@@ -913,7 +908,7 @@ const Home = () => {
                   target="_blank"
                 >
                   <div className="text-[14px] fontWeight-500 poppins ">
-                    Blogs
+                    Submit your tool
                   </div>
                 </a>
               </div>
