@@ -1,6 +1,5 @@
 use("techbible");
 
-// Insert a few documents into the sales collection.
 db.getCollection("tools").insertMany([
   {
     _id: " ",
