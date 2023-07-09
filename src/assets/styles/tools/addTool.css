@@ -1,0 +1,208 @@
+/* *{
+  border: 1px solid;
+} */
+.addtool-page{
+  align-items: center;
+}
+
+.form h1 {
+  margin-top: 1vh;
+}
+
+.form {
+  /* margin-top: 10vh; */
+  margin-left: 20%;
+  width: 500px;
+  padding: 20px;
+  background: #0D0C12;
+}
+
+h1 {
+  font-size: 1.8em;
+  color: white;
+  font-weight: 400;
+  margin-bottom: 2vh;
+}
+
+
+.form label {
+  display: block;
+  color: white;
+  font-weight: 700;
+}
+
+.form input[type="text"],
+.form input[type="textarea"],
+.form input[type="date"],
+.form input[type="email"] {
+  width: 100%;
+  min-height: 35px;
+  display: block;
+  margin: 40px 0px;
+  height: 30px;
+  background: rgb(27, 29, 31);
+  color: white;
+  padding: 5px;
+  font-size: 1.5em;
+  outline: none;
+  border: 0px;
+}
+.form select  {
+  width: 100%;
+  display: block;
+  margin: 40px 0px;
+  min-height: 30px;
+  border: 1px solid white;
+  background: rgb(27, 29, 31);
+  color: white;
+  padding: 5px;
+  font-size: 1.5em;
+  outline: none;
+  border: 0px;
+}
+.form-container select  {
+  width: 100%;
+  display: block;
+  height: 30px;
+  /* border: 1px solid white; */
+  background: rgb(27, 29, 31);
+  color: rgba(177, 177, 177, 1);
+  padding: 5px;
+  /* font-size: 1.5em; */
+  outline: none;
+  border: 0px;
+}
+
+.form-container,.content-container{
+  margin: auto;
+  width: 100%;
+}
+
+.addtool-page input[type="text"]:focus,
+.addtool-page input[type="textarea"]:focus,
+.addtool-page input[type="date"]:focus,
+.addtool-page input[type="email"]:focus,
+.form input[type="text"]:focus,
+.form input[type="textarea"]:focus,
+.form input[type="date"]:focus,
+.form input[type="email"]:focus {
+  border-bottom: 1px solid #5c6bc0;
+  box-shadow: inset 0 -4px 0px #5c6bc0;
+  background: rgba(255, 255, 255, 0.178);
+  border: none;
+  outline: none;
+}
+
+.form button {
+  display: block;
+  padding: 10px 20px;
+  background: white;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  color: #000;
+}
+
+textarea{
+  width: 100%;
+  display: block;
+  margin: 40px 0px;
+  background: rgb(27, 29, 31);
+  color: white;
+  padding: 5px;
+}
+
+input[type="submit"]:hover {
+  background: #5c6bc0;
+}
+
+.terms {
+  font-size: 0.6em;
+  color: white;
+}
+
+
+.content-container {
+  width: 500px;
+  height: 350px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 500px;
+  height: auto;
+
+  margin-top: 5px;
+  padding-top: 20px;
+
+  border-radius: 12px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  background: #000;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+}
+
+.subtitle {
+  font-size: 16px;
+
+color: rgba(255,255,255,0.7)
+}
+
+
+.flex-container{
+  margin: auto;
+  width: 100% !important;
+  height: 95vh;
+}
+
+.flex-container
+
+.flex-container h1{
+font-size: 44px;
+
+}
+
+.flex-container input {
+  border: none;
+  border-bottom: solid rgb(143, 143, 143) 1px;
+  margin-bottom: 30px;
+  background: none;
+  color: rgba(255, 255, 255, 0.555);
+  height: 45px;
+  width: 300px;
+}
+
+
+.flex-container .submit-btn {
+  cursor: pointer;
+
+  border: none;
+  border-radius: 8px;
+
+  box-shadow: 2px 2px 7px #5c6bc0;
+
+  background: #5c6bc0;
+  color: rgba(255, 255, 255, 0.8);
+
+  width: 80px;
+
+  transition: all 1s;
+}
+
+.flex-container .submit-btn:hover {
+  color: rgb(255, 255, 255);
+  box-shadow: none;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+}
+
+
