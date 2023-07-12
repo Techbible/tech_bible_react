@@ -63,7 +63,7 @@ function Navbar() {
     <header aria-label="Site Header" className="navbar-header py-6 border-none bg-black bg-opacity-50">
     <div className="lg:px-[94px] px-[20px]">
     <div className="flex h-16 items-center justify-between">
-      <div className="flex items-center justify-center flex-grow ml-50">
+      <div className="flex items-center justify-center flex-grow ml-60">
         <Link to="/" className="flex items-center">
           <img
             className="xl:w-[200px] lg:w-[160px] md:w-[180px] sm:w-[140px] w-[140px] mx-auto"

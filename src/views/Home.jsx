@@ -590,7 +590,7 @@ const Home = () => {
 
             {/***********END You might also like********/}
             {!isFiltering && (
-              <div className="container xxl:w-[1300px] xl:w-[1050px] max-w-full py-4 mb-6 border-b-[.2px] border-white align-items-center justify-center text-center">
+              <div className="container xxl:w-[1300px] xl:w-[1050px] max-w-full py-4 mb-6 border-b-[.2px] border-none align-items-center justify-center text-center ml-1">
                 <div
                 className={
                   screenWidth > 1100
@@ -603,7 +603,7 @@ const Home = () => {
                 selectedTopic === "" && !isTopicChosen
                  ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] text-[#DD5434] px-4 py-2 rounded-full"
                  : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent text-[#DD5434] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-                } hover:bg-[#FCEFD9]`}
+                } `}
                 onClick={() => {
         setIsTopicChosen(false);
         setTopic("");
@@ -618,7 +618,7 @@ const Home = () => {
                  selectedTopic === "Marketing Automation"
                    ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
                    : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-                  } hover:bg-[#FCEFD9]`}
+                  } `}
                  onClick={() => {
                  chooseTopic("Marketing Automation");
                  setSelectedTopic("Marketing Automation");
@@ -633,7 +633,7 @@ const Home = () => {
         selectedTopic === "No-code"
           ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
           : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-      } hover:bg-[#FCEFD9]`}
+      } `}
       onClick={() => {
         chooseTopic("No-code");
         setSelectedTopic("No-code");
@@ -648,7 +648,7 @@ const Home = () => {
       selectedTopic === "Artificial Intelligence and Machine Learning"
         ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
         : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-    } hover:bg-[#FCEFD9]`}
+    } `}
     onClick={() => {
       chooseTopic("Artificial Intelligence and Machine Learning");
       setSelectedTopic("Artificial Intelligence and Machine Learning");
@@ -662,7 +662,7 @@ const Home = () => {
       selectedTopic === "Productivity tools"
         ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
         : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-    } hover:bg-[#FCEFD9]`}
+    } `}
     onClick={() => {
       chooseTopic("Productivity tools");
       setSelectedTopic("Productivity tools");
@@ -677,7 +677,7 @@ const Home = () => {
         selectedTopic === "Graphic Design"
           ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
           : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-      } hover:bg-[#FCEFD9]`}
+      } `}
       onClick={() => {
         chooseTopic("Graphic Design");
         setSelectedTopic("Graphic Design");
