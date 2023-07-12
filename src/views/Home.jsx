@@ -293,6 +293,7 @@ const Home = () => {
   //input value
   const [value, setValue] = useState("");
   const inputRef = useRef(null);
+  const [selectedTopic, setSelectedTopic] = useState("");
 
   const onChange = (event) => {
     const inputValue = event.target.value;
@@ -360,129 +361,81 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <div className="homeContainer mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
+    <div >
+      <div className="homeContainer mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer ml-20">
         <main
-          className="layoutMain xl:mt-15 lg:mt-15 ml:mt-15 sm:mt-12 "
+          className="layoutMain xl:mt-15 lg:mt-15 ml:mt-15 sm:mt-12 mb-5"
           onMouseLeave={() => setisSuggestionsVisible(false)}
         >
-          <div className="flex direction-column  ">
-            {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
+        <div className="flex direction-column mb-20 mt-10">
 
-            <div className="flex direction-column align-items-center">
-              <div className="flex flex-column  max-w-[560px]  my-4 mx-4  md:mb-[2rem] rounded-xl ">
-                <div className="text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 mt-2">
+          <div className="flex direction-column align-items-center mb-20 mt-10">
+              <div className="flex flex-column  max-w-[560px]  my-4 mx-4  md:mb-[2rem] rounded-xl mb-20">
+                <div className="text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 ml-1000 mt-50">
                   <div>
-                    Your job done, with the latest tool.
+                   Your job done, with the latest tool
                   </div>
                 </div>
 
-                <div className="flex flex-wrap logo-search-container">
-                  <div className="my-0 mr-4">
-                    <img
-                      className="w-[100px]"
-                      src={`${process.env.PUBLIC_URL}/assets/logo-homepage.png`}
-                      alt="search-box-logo"
-                    />
+                <div className="flex flex-wrap logo-search-container justify-center">
+                  <div className="fontWeight-300 poppins text-[#F5F5F7] xl:text-[20px] lg:text-[18px] md:text-[16px] sm:text-[14px] text-[14px] w-[290px] opacity-[.9] whitespace-nowrap mr-80 mt-10">
+                    We curate, test and review tools before recommending them to you
                   </div>
-                  {isFiltering ? (
-                    <div className="filter-box">
-                      <select
-                        className="combo-box bg-white text-black rounded-[4px] "
-                        onChange={(e) => setPricing(e.target.value)}
-                      >
-                        <option value="all">All</option>
-                        <option value="Freemium">Freemium</option>
-                        <option value="Free">Free</option>
-                        <option value="Paid">Paid</option>
-                      </select>
-                    </div>
-                  ) : (
-                    <div className="fontWeight-300 poppins text-[#F5F5F7] xl:text-[20px] lg:text-[18px] md:text-[16px] sm:text-[14px] text-[14px] w-[290px] opacity-[.9]">
-                      We curate, test and review tools before recommending them to you
-                    </div>
-                  )}
-                  {isFiltering && (
-                    <div className="ml-2">
-                      <select
-                        onChange={(e) => setCategory(e.target.value)}
-                        className="combo-box bg-white text-black px-1 rounded-[4px] "
-                      >
-                        <option value="all categories">All Categories</option>
-                        {CategoriesData?.map((group) => {
-                          return group.categories.map((category) => {
-                            return (
-                              <option className="text-black" value={category}>
-                                {category}{" "}
-                              </option>
-                            );
-                          });
-                        })}
-                      </select>
-                    </div>
-                  )}
                 </div>
-                <form className="flex items-center my-2 ">
-                  <div className="relative w-full">
-                    <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                      <svg
-                        className="w-5 h-5 pointer text-gray-500 dark:text-gray-400"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </div>
 
-                    <input
-                      type="text"
-                      id="voice-search"
-                      className="bg-white h-[36px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="Type Keyword..."
-                      value={value}
-                      onChange={(e) => {
-                        onChange(e);
-                        setIsSearching(false);
-                      }}
-                      disabled={allTools !== null ? false : true}
-                      ref={inputRef}
-                      required
-                      autoComplete="off"
-                      onKeyDown={(e) => {
-                        if (e.keyCode === 13) {
-                          e.preventDefault();
-                          setIsSearching(true);
-                          setisSuggestionsVisible(false);
-                        }
-                      }}
-                    />
-                  </div>
+
+                <div className="relative w-full max-w-[4000px] ml-1000 py-4 px-300 mt-5">
+                 <div className="relative flex items-center">
+                   <svg
+                    className="absolute w-5 h-5 pointer text-gray-500 dark:text-gray-400 left-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                   >
+                   <path
+                    fillRule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clipRule="evenodd"
+                   ></path>
+                   </svg>
+                   <input
+                   type="text"
+                   id="voice-search"
+                   className="black h-16 w-full pl-14 pr-10 border border-gray-300 rounded-full text-black focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="Type Keyword..."
+                   value={value}
+                   onChange={(e) => {
+                   onChange(e);
+                   setIsSearching(false);
+                                     }}
+                   disabled={allTools !== null ? false : true}
+                   ref={inputRef}
+                    required
+                   autoComplete="off"
+                   onKeyDown={(e) => {
+                   if (e.keyCode === 13) {
+                   e.preventDefault();
+                   setIsSearching(true);
+                   setisSuggestionsVisible(false);
+                   }
+                   }}
+                  />
+            <button
+             className="absolute top-0 right-0 h-full px-4 py-2 bg-orange-600 text-white rounded-full hover:bg-orange-500 bg-opacity-75"
+              onClick={() => {
+               setIsSearching(true);
+               setisSuggestionsVisible(false);
+                            }}
+                   >
+                   search
+             </button>
+              </div>
+             </div>
+
+
                   {/* <div className="ml-2"> */}
 
-                  <div onClick={() => setIsFiltering(!isFiltering)}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-7 h-7 hover:w-8 hover:h-8 cursor-pointer"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5"
-                      />
-                    </svg>
-                  </div>
-
                   {/* </div> */}
-                </form>
                 {isSuggestionsVisible && value !== "" && (
                   <div
                     ref={suggestionContainerRef}
@@ -527,7 +480,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="flex direction-column align-items-center">
+            <div className="flex direction-column align-items-center justify-center text-center ">
               {/* keyword filter            */}
               {isSearching && value !== "" ? (
                 <div>
@@ -637,92 +590,106 @@ const Home = () => {
 
             {/***********END You might also like********/}
             {!isFiltering && (
-              // <div
-              //   className={
-              //     topic === ""
-              //       ? "xxl:w-[1300px] xl:w-[1050px]   w-[100%] mb-6 border-b border-b-[.5px]  border-white py-3 px-16"
-              //       : " xl:w-[1050px] xxl:w-[1300px]  w-[100%] mb-6 border-b border-white py-3 px-16"
-              //   }
-              // >
-              <div className="container xxl:w-[1300px] xl:w-[1050px] max-w-full mb-6 border-b-[.5px]  border-white py-3">
+              <div className="container xxl:w-[1300px] xl:w-[1050px] max-w-full py-4 mb-6 border-b-[.2px] border-white align-items-center justify-center text-center">
                 <div
-                  className={
-                    screenWidth > 1100
-                      ? "flex flex-row ml-[12%] gap-[6%] "
-                      : "flex flex-row ml-[8%] gap-[6%] "
-                  }
+                className={
+                  screenWidth > 1100
+                  ? "flex flex-row ml-[12%] gap-[6%]"
+                  : "flex flex-row ml-[8%] gap-[6%]"
+                }
                 >
-                  <div
-                    className="xxl:text-[16px] xl:text-[16px] lg:text-[15px] md:text-[14px] sm:text-[13px] text-[14px] fontWeight-700 poppins cursor-pointer"
-                    onClick={() => {
-                      setIsTopicChosen(false);
-                      setTopic("");
-                    }}
-                  >
-                    Popular
-                  </div>
-
-                  <div
-                    className={
-                      topic === "Marketing Automation"
-                        ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                        : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
-                    }
-                    onClick={(topic) => chooseTopic("Marketing Automation")}
-                  >
-                    Automation
-                  </div>
-                  {screenWidth >= 700 && (
-                    <div
-                      className={
-                        topic === "No-code"
-                          ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                          : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
-                      }
-                      onClick={(topic) => chooseTopic("No-code")}
-                    >
-                      No Code
-                    </div>
-                  )}
-                  <div
-                    className={
-                      topic === "Artificial Intelligence and Machine Learning"
-                        ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                        : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
-                    }
-                    onClick={(topic) =>
-                      chooseTopic(
-                        "Artificial Intelligence and Machine Learning"
-                      )
-                    }
-                  >
-                    AI
-                  </div>
-                  <div
-                    className={
-                      topic === "Productivity tools"
-                        ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                        : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
-                    }
-                    onClick={(topic) => chooseTopic("Productivity tools")}
-                  >
-                    Productivity
-                  </div>
-
-                  {screenWidth >= 810 && (
-                    <div
-                      className={
-                        topic === "Graphic Design"
-                          ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer  "
-                          : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer  "
-                      }
-                      onClick={(topic) => chooseTopic("Graphic Design")}
-                    >
-                      Design
-                    </div>
-                  )}
+                <div
+                className={`${
+                selectedTopic === "" && !isTopicChosen
+                 ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] text-[#DD5434] px-4 py-2 rounded-full"
+                 : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent text-[#DD5434] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                } hover:bg-[#FCEFD9]`}
+                onClick={() => {
+        setIsTopicChosen(false);
+        setTopic("");
+        setSelectedTopic("");
+      }}
+    >
+      Popular
                 </div>
-              </div>
+
+                <div
+                 className={`${
+                 selectedTopic === "Marketing Automation"
+                   ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                   : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } hover:bg-[#FCEFD9]`}
+                 onClick={() => {
+                 chooseTopic("Marketing Automation");
+                 setSelectedTopic("Marketing Automation");
+                  }}
+                >
+                     Automation
+  </div>
+
+  {screenWidth >= 700 && (
+    <div
+      className={`${
+        selectedTopic === "No-code"
+          ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+          : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+      } hover:bg-[#FCEFD9]`}
+      onClick={() => {
+        chooseTopic("No-code");
+        setSelectedTopic("No-code");
+      }}
+    >
+      No Code
+    </div>
+  )}
+
+  <div
+    className={`${
+      selectedTopic === "Artificial Intelligence and Machine Learning"
+        ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+        : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+    } hover:bg-[#FCEFD9]`}
+    onClick={() => {
+      chooseTopic("Artificial Intelligence and Machine Learning");
+      setSelectedTopic("Artificial Intelligence and Machine Learning");
+    }}
+  >
+    AI
+  </div>
+
+  <div
+    className={`${
+      selectedTopic === "Productivity tools"
+        ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+        : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+    } hover:bg-[#FCEFD9]`}
+    onClick={() => {
+      chooseTopic("Productivity tools");
+      setSelectedTopic("Productivity tools");
+    }}
+  >
+    Productivity
+  </div>
+
+  {screenWidth >= 810 && (
+    <div
+      className={`${
+        selectedTopic === "Graphic Design"
+          ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+          : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+      } hover:bg-[#FCEFD9]`}
+      onClick={() => {
+        chooseTopic("Graphic Design");
+        setSelectedTopic("Graphic Design");
+      }}
+    >
+      Design
+    </div>
+  )}
+</div>
+
+   
+</div>
             )}
             {/* <div className=" xl:w-[1000px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px]"></div> */}
             <div
@@ -837,6 +804,47 @@ const Home = () => {
           )}
         </Modal>
       </div>
+      <footer className="bg-black text-white py-10">
+         <div className="flex flex-column justify-center items-center">
+         <ul className="flex flex-row lg:gap-[64px] gap-3 mb-5">
+          <h3>Follow us</h3>
+          <li className="tracking-wider hover:tracking-widest">
+           <a
+            href="https://www.tiktok.com/@tech.bible"
+            target="_blank"
+            rel="noopener noreferrer"
+           >
+          <i className="fab fa-tiktok text-white text-xl"></i>
+           </a>
+          </li>
+          <li className="tracking-wider hover:tracking-widest">
+           <a
+          href="https://youtube.com/@MyTechBible"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fab fa-youtube text-white text-xl"></i>
+        </a>
+      </li>
+      <li className="tracking-wider hover:tracking-widest">
+        <a
+          href="https://www.instagram.com/techbible.ai/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fab fa-instagram text-white text-xl"></i>
+        </a>
+      </li>
+    </ul>
+    <a href="https://www.mytechbible.com/" target="_blank">
+      <div className="text-[14px] font-semibold mb-4">
+        Made by{" "}
+        <div className="text-[#EF4823] inline-block">Techbible Studio</div>
+      </div>
+    </a>
+  </div>
+</footer>
+
       {/* <Footer /> */}
     </div>
   );

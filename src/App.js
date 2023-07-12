@@ -39,6 +39,7 @@ function App() {
   // const Profile = lazy(() => import("./views/Profile"));
   const SignIn = lazy(() => import("./views/SignIn"));
   const SignUp = lazy(() => import("./views/SignUp"));
+  const chat = lazy(()=> import("./views/chat"));
   const Tools = lazy(() => import("./views/Tools"));
   const Community = lazy(() => import("./views/Community"));
   const DiscussionReply = lazy(() => import("./views/DiscussionReply"));
@@ -89,6 +90,20 @@ function App() {
                 <Home />
               </Suspense>
             </NewsContextProvider>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <Suspense
+              fallback={
+                <div className="text-[50px] text-white font-bold ">
+                  Chat Loading...
+                </div>
+              }
+            >
+              <chat/>
+            </Suspense>
           }
         />
         <Route

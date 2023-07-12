@@ -427,14 +427,6 @@ select {
   background-size: 2900%;
 }
 
-.styles_icon___8PK0.styles_lightGrey__b_fhT {
-  /* background-image: url(https://ph-static.imgix.net/upvote-burst-2022.png?format=auto&auto=compress); */
-}
-
-.styles_icon___8PK0.styles_white__zYBPo {
-  /* background-image: url(https://ph-static.imgix.net/upvote-burst-2022-big-button.png?format=auto&auto=compress); */
-}
-
 .styles_voted__DPbzg {
   background-position: 100%;
 }
@@ -784,10 +776,6 @@ select {
 .styles_voteButton__tIPE0 span:first-child {
   display: flex;
   flex-direction: column;
-}
-
-.styles_active__LO7aj span div:first-child {
-  /* background-image: url(https://ph-static.imgix.net/upvote-burst-orange.png?format=auto&auto=compress) !important; */
 }
 
 .styles_small__n0ajb.styles_active__LO7aj {
