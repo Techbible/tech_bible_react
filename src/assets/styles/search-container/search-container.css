@@ -1,0 +1,13 @@
+.search-tool-container {
+  margin: 1rem;
+  background-color: #272727;
+
+  color: white;
+  border-radius: 15px;
+}
+
+.logo-search-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
