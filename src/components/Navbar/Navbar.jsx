@@ -84,11 +84,6 @@ function Navbar() {
             </div>
           </Link>
         )}
-        <Link to="/chat">
-        <div className="text-[15px] px-4 py-2 transition duration-300 hover:bg-[#ef4823] hover:text-black bg-[#ef4823] text-white rounded-md">
-            Chat
-          </div>
-        </Link>
       </div>
     </ul>
   </nav>
