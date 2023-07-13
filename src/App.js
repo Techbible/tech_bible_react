@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 // import { NewsList, UserProfile } from "./components";
 import { NewsList } from "./components";
@@ -33,7 +34,6 @@ import ContentCalender from "./static pages/ContentCalender";
 import PromptsForGPT from "./static pages/PromptsForGPT";
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
-
 function App() {
   const Home = lazy(() => import("./views/Home"));
   // const Profile = lazy(() => import("./views/Profile"));
