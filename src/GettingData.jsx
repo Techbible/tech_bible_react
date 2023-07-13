@@ -3,12 +3,12 @@ import React, { useState, useEffect } from "react";
 function GettingData() {
   const [tools, setTools] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/mongo-tools")
-      .then((response) => response.json())
-      .then((data) => setTools(data))
-      .catch((error) => console.error(error));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/mongo-tools")
+  //     .then((response) => response.json())
+  //     .then((data) => setTools(data))
+  //     .catch((error) => console.error(error));
+  // }, []);
 
   return (
     <div className="mt-10">

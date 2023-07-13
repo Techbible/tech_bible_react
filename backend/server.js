@@ -157,11 +157,14 @@ app.post("/likeHomeTool/:id/:uid", async (req, res) => {
     await HomePageTool.findByIdAndUpdate(id, {
       $addToSet: { LikedBy: uid },
     });
+    res.status(200).send({message:"added to liked"})
   } catch (error) {
     console.log(error);
+    res.status(500).send({ message: "error" });
+
   }
 
-  console.log("tool has been liked successfully!!!!!");
+  // console.log("tool has been liked successfully!!!!!");
 });
 
 //remove a user from a HomePageTool likedBy array
@@ -556,7 +559,7 @@ app.get("/check-user/:uid", async (req, res) => {
     });
     console.log("Connected to MongoDB");
     const user = await User.findOne({ uid: uid });
-    console.log("USER UID Sent : " + user);
+    // console.log("USER UID Sent : " + user);
 
     res.send(user); // Send an object containing both variables
   } catch (error) {
@@ -593,9 +596,9 @@ app.post("/updateUsername/:uid/:username", async (req, res) => {
   }
 });
 //Update USERNAME AND PHOTO
-app.post("/updateUsernameAndPhoto/:uid/:username/:photo", async (req, res) => {
+app.post("/updateUsernameAndPhoto", async (req, res) => {
   try {
-    const { uid, username, photo } = req.params;
+    const { uid, username, photo } = req.body;
 
     // Update the user document
     const updatedUser = await User.findOneAndUpdate(
@@ -819,7 +822,7 @@ app.post("/addToolToFolder", async (req, res) => {
 });
 
 // Get Tools in folder
-app.get("/getToolsInFolder", async (req, res) => {
+app.post("/getToolsInFolder", async (req, res) => {
   try {
     await mongoose.connect(uri, {
       useNewUrlParser: true,
@@ -827,7 +830,7 @@ app.get("/getToolsInFolder", async (req, res) => {
       socketTimeoutMS: 30000,
     });
 
-    const { toolIds } = req.query;
+    const { toolIds } = req.body;
     console.log(toolIds);
 
     // let toolIdArray = [];
@@ -850,7 +853,7 @@ app.get("/getToolsInFolder", async (req, res) => {
 });
 
 //GET ALL USERS
-app.get("/getUsers", async (req, res) => {
+app.post("/getUsers", async (req, res) => {
   try {
     await mongoose.connect(uri, {
       useNewUrlParser: true,

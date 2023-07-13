@@ -198,7 +198,7 @@ const UserList = () => {
       </div>
 
       <div className="container mx-auto px-4">
-        <div className="max-w-sm w-full lg:max-w-full mb-[10rem] lg:flex">
+        {/* <div className="max-w-sm w-full lg:max-w-full mb-[10rem] lg:flex">
           <div
             className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
             style={{
@@ -214,7 +214,7 @@ const UserList = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex justify-end mb-4">
           <button
             className="px-2 py-1 rounded bg-dark-500 text-white"

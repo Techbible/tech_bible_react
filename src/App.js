@@ -17,7 +17,7 @@ import { DataParser } from "./admin";
 // Importing the App's context
 import { NewsContextProvider } from "./context/NewsContext";
 import { AuthContext } from "./context/AuthContext";
-import GettingData from "./GettingData";
+// import GettingData from "./GettingData";
 // import AdminSpace from "./views/AdminSpace";
 import { homeToolsAtom } from "./recoil/homePageTools";
 import { useRecoilValue } from "recoil";
@@ -39,7 +39,6 @@ function App() {
   // const Profile = lazy(() => import("./views/Profile"));
   const SignIn = lazy(() => import("./views/SignIn"));
   const SignUp = lazy(() => import("./views/SignUp"));
-  const chat = lazy(()=> import("./views/chat"));
   const Tools = lazy(() => import("./views/Tools"));
   const Community = lazy(() => import("./views/Community"));
   const DiscussionReply = lazy(() => import("./views/DiscussionReply"));
@@ -68,12 +67,12 @@ function App() {
     }
     return children;
   };
-  const AdminVerif = ({ children }) => {
-    // if (!isAdmin) {
-    //   return <Navigate to="/" />;
-    // }
-    return children;
-  };
+  // const AdminVerif = ({ children }) => {
+  //   // if (!isAdmin) {
+  //   //   return <Navigate to="/" />;
+  //   // }
+  //   return children;
+  // };
 
   const location = useLocation();
 
@@ -90,20 +89,6 @@ function App() {
                 <Home />
               </Suspense>
             </NewsContextProvider>
-          }
-        />
-        <Route
-          path="/chat"
-          element={
-            <Suspense
-              fallback={
-                <div className="text-[50px] text-white font-bold ">
-                  Chat Loading...
-                </div>
-              }
-            >
-              <chat/>
-            </Suspense>
           }
         />
         <Route
