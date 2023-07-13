@@ -172,7 +172,7 @@ const Toolitem = ({
             <div
               className="cursor-pointer ml-2 text-center"
               onClick={() => {
-                // setToolToFolder(toolData._id);
+                setToolToFolder(toolData._id);
                 setIsOpen(true);
               }}
             >

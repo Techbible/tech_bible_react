@@ -18,6 +18,7 @@ import "../assets/styles/profile/profile.css";
 import "../assets/styles/Modal/modal.css";
 import axios from "axios";
 import { BASE_URL } from "../config/mongo";
+import Folder from "./profile/Folder";
 
 export const ModalcustomStyles = {
   content: {
@@ -56,7 +57,7 @@ const Profile = () => {
   const [updateBio, setUpdateBio] = useState(false);
   const [updateInterests, setUpdateInterests] = useState(false);
 
-  const [LikedTools, setLikedTools] = useState([]);
+  const [LikedTools, setLikedTools] = useState(null);
   const [bio, setBio] = useState("");
   const [categories, setCategories] = useState();
   const [checkedInterests, setcheckedInterests] = useState([]);
@@ -87,10 +88,20 @@ const Profile = () => {
   //______________________________Modal Configs____________________________________________
   //Modal Styles
 
+  useEffect(() => {
+  
+    updateUserData()
+  
+  }, [])
+  
+
+
   Modal.setAppElement("#root");
   let subtitle;
   const [modalIsOpen2, setIsOpen2] = React.useState(false);
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [addToFoldermodalIsOpen, setAddToFoldermodalIsOpen] =
+    React.useState(false);
 
   function openModal() {
     setIsOpen(true);
@@ -103,6 +114,12 @@ const Profile = () => {
   }
   function closeModal2() {
     setIsOpen2(false);
+  }
+  function addToFolerOpenModal() {
+    setAddToFoldermodalIsOpen(true);
+  }
+  function addToFolerCloseModal() {
+    setAddToFoldermodalIsOpen(false);
   }
   //************************END Modal Configs********************************
 
@@ -182,9 +199,36 @@ const Profile = () => {
   );
 
   const uploadImageUsername = async (username, url) => {
-    const res = await axios.post(
-      `${BASE_URL}/updateUsernameAndPhoto/${currentUser?.uid}/${username}/${url}`
-    );
+    const res = await axios.post(`${BASE_URL}/updateUsernameAndPhoto`, {
+      uid: currentUser?.uid,
+      username: username,
+      photo: url,
+    });
+  };
+  const [ToolToFolder, setToolToFolder] = useState("");
+
+  const handleAddToolToFolder = async (index) => {
+    // alert(index);
+    try {
+      const uid = currentUser.uid;
+      const requestBody = {
+        uid: uid,
+        index: index,
+        toolId: ToolToFolder,
+      };
+
+      const response = await axios.post(
+        `${BASE_URL}/addToolToFolder`,
+        requestBody
+      );
+      console.log(response.data); // Newly added tool object
+      updateUserData();
+      // Handle any additional logic or UI updates upon successful response
+      addToFolerCloseModal();
+    } catch (error) {
+      console.error(error);
+      // Handle error cases and display error messages to the user
+    }
   };
 
   const uploadImage = async () => {
@@ -239,6 +283,7 @@ const Profile = () => {
               console.log("IMAGE URL try  : " + url);
 
               updateUserData();
+              window.location.reload();
             } catch (e) {
               console.log("Update username and photo error : " + e);
               console.log("IMAGE URL catch  : " + url);
@@ -275,12 +320,21 @@ const Profile = () => {
   //this is mongo
   const LoadLikedTools = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/mongo-tools`);
-      const LikedOnes = response.data.filter((tool) =>
-        tool.LikedBy.includes(currentUser?.uid)
-      );
-      setLikedTools(LikedOnes);
+      const response = await axios.get(`${BASE_URL}/homePageTools`);
+      let LikedOnes = null;
+      if (currentUser && currentUser.uid) {
+        LikedOnes = response.data.filter((tool) =>
+          tool.LikedBy.includes(currentUser.uid)
+        );
+      }
+      console.log("====================================");
+      console.log({ res: response.data });
+      console.log("====================================");
+      if (LikedOnes !== null) {
+        setLikedTools(LikedOnes);
+      }
       forceRender();
+      return LikedOnes;
     } catch (error) {
       console.error(error);
     }
@@ -288,13 +342,19 @@ const Profile = () => {
 
   //Verifying Sign in and loading users infos on load
   useEffect(() => {
-    LoadLikedTools();
+    if (LikedTools === null) {
+      LoadLikedTools().then((data) => {
+        console.log("====================================");
+        console.log(data);
+        console.log("====================================");
+      });
+    }
     const listen = onAuthStateChanged(
       auth,
       (user) => {
         if (user) {
           setAuthUser(user);
-          currentUserData.interests.length > 0
+          currentUserData?.interests?.length > 0
             ? setAddInterests(false)
             : setAddInterests(false);
         } else {
@@ -306,7 +366,7 @@ const Profile = () => {
     );
 
     return listen();
-  }, [LikedTools]);
+  }, [LikedTools, currentUser]);
 
   // useEffect(() => {
   //   //getting the available categories
@@ -351,34 +411,34 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex flex-column align-items-center pt-[6rem]">
-      <div className="mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer">
-        <main className="layoutMain pl-desktop-5 pl-mobile-4 ">
+    <div className='flex flex-column align-items-center pt-[6rem]'>
+      <div className='mt-desktop-10 mt-mobile-8 mt-tablet-8 mt-widescreen-30 layoutContainer'>
+        <main className='layoutMain pl-desktop-5 pl-mobile-4 '>
           {/* <div className="text-[16px] fontWeight-500 ml-[2.5rem] ">
             WELCOME,
           </div> */}
-          <div className="relative xl:w-[711px] lg:w-[711px] max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10">
-            <div className="row">
-              <div className="col-md-2">
-                <div className="mb-3">
+          <div className='relative xl:w-[711px] lg:w-[711px] max-w-[711px] m-0 pl-0 w-widescreen-5 mb-[4rem] profile-info-container bg-[#0D0C12] rounded-xl p-10'>
+            <div className='row'>
+              <div className='col-md-2'>
+                <div className='mb-3'>
                   <img
                     src={currentUserData.photo}
-                    className="w-[80px] h-[80px] sm:w-[80px] sm:h-[80px] md:w-[80px] md:h-[80px] border-2 border-gray-300 rounded-full"
-                    alt=""
+                    className='w-[80px] h-[80px] sm:w-[80px] sm:h-[80px] md:w-[80px] md:h-[80px] border-2 border-gray-300 rounded-full'
+                    alt=''
                   />
                 </div>
               </div>
-              <div className="col-md-7 mr-[100px] ">
-                <div className="row justify-content-center">
-                  <div className="col-md-3 mb-3">
-                    <p className="fontWeight-500">{currentUserData.username}</p>
+              <div className='col-md-7 mr-[100px] '>
+                <div className='row justify-content-center'>
+                  <div className='col-md-3 mb-3'>
+                    <p className='fontWeight-500'>{currentUserData.username}</p>
                   </div>
-                  <div className="col">
+                  <div className='col'>
                     {name?.length === 0 ? (
                       <button
                         onClick={openEditProfileModal}
-                        className="edit-profile-btn mb-3 transition duration-250 "
-                        type="button"
+                        className='edit-profile-btn mb-3 transition duration-250 '
+                        type='button'
                       >
                         Edit
                       </button>
@@ -387,7 +447,7 @@ const Profile = () => {
                     )}
 
                     <button
-                      className="absolute top-[44px] right-[10px] text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]"
+                      className='absolute top-[44px] right-[10px] text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]'
                       onClick={() => openModal2()}
                     >
                       Share
@@ -400,21 +460,21 @@ const Profile = () => {
                     </button> */}
                     <button
                       onClick={openEditProfileModal}
-                      className="text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] my-3 rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]"
-                      type="button"
+                      className='text-[12px]  bg-[#ef4823] px-[15px] py-[1.5px] my-3 rounded-[4px] transition duration-300 hover:bg-[#ca391c] active:bg-[#b32712]'
+                      type='button'
                     >
                       Edit
                     </button>
                   </div>
                 </div>
-                <div className="bio-interests-texts">
-                  <div className="row">
-                    <div className="col mb-4">
+                <div className='bio-interests-texts'>
+                  <div className='row'>
+                    <div className='col mb-4'>
                       <p>{currentUserData.bio}</p>
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="col-md-12">
+                  <div className='row'>
+                    <div className='col-md-12'>
                       {CategoriesData?.map((group) => {
                         if (
                           currentUserData?.interests?.some((interest) =>
@@ -422,7 +482,7 @@ const Profile = () => {
                           )
                         ) {
                           return (
-                            <p className="text-[12] d-inline-block">
+                            <p className='text-[12] d-inline-block'>
                               {group.groupName}&nbsp;&nbsp;
                             </p>
                           );
@@ -431,10 +491,10 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col profile-info-buttons">
-                    <button className="mr-4 transition duration-250 w-[100px] my-2 ">
-                      <Link to="/folders">My Folders</Link>
+                <div className='row'>
+                  <div className='col profile-info-buttons'>
+                    <button className='mr-4 transition duration-250 w-[100px] my-2 '>
+                      <Link to='/folders'>My Folders</Link>
                     </button>
                     {/* <button className="mr-4 transition duration-250 ">
                       Share
@@ -458,47 +518,50 @@ const Profile = () => {
             {currentUserData.bio ? (
               <div>
                 {updateBio ? (
-                  <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
-                    <div className="mb-4 md:mb-0">
-                      <p className="font-bold text-lg leading-tight mb-3">
+                  <div className='bg-[#232628] rounded-lg p-4  md:flex-row md:items-center md:justify-between mb-[2rem]'>
+                    <div className='mb-4 md:mb-0'>
+                      <p className='font-bold text-lg leading-tight mb-3'>
                         Bio
                       </p>
-                      <input
-                        className="h-7 p-2 w-[30px] text-sm leading-tight text-black border-gray-400 border rounded-lg"
+                      <textarea
+                        style={{
+                          width: "100%",
+                        }}
+                        className=' p-2  text-sm leading-tight  border-gray-400 border rounded-lg'
                         placeholder={currentUserData.bio}
                         onChange={(e) => setBio(e.target.value)}
-                        type="text"
+                        type='text'
                       />
                     </div>
                     <div>
                       <button
                         onClick={() => setUpdateBio(false)}
-                        className="cancel-btn fw-500"
+                        className='cancel-btn fw-500'
                       >
                         Cancel
                       </button>
                       <button
                         onClick={() => UpdatingBio()}
-                        className="update-btn"
+                        className='update-btn'
                       >
                         Update
                       </button>
                     </div>
                   </div>
                 ) : (
-                  <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
-                    <div className="mb-4 md:mb-0">
-                      <p className="font-bold text-lg leading-tight mb-3">
+                  <div className='bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]'>
+                    <div className='mb-4 md:mb-0'>
+                      <p className='font-bold text-lg leading-tight mb-3'>
                         Bio
                       </p>
-                      <div className="max-w-[10rem]">
-                        <p className="text-sm">{currentUserData.bio}</p>
+                      <div className='max-w-[10rem]'>
+                        <p className='text-sm'>{currentUserData.bio}</p>
                       </div>
                     </div>
                     <div>
                       <button
                         onClick={() => setUpdateBio(true)}
-                        className="edit-btn"
+                        className='edit-btn'
                       >
                         Edit
                       </button>
@@ -507,56 +570,67 @@ const Profile = () => {
                 )}
               </div>
             ) : (
-              <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]">
-                <div className="mb-4 md:mb-0">
-                  <p className="font-bold text-lg leading-tight mb-3">Bio</p>
-
-                  {addBio ? (
-                    <input
-                      className="h-7 p-2 w-[30px] text-sm leading-tight text-black border-gray-400 border rounded-lg"
-                      placeholder="You can add your bio here"
-                      onChange={(e) => setBio(e.target.value)}
-                      type="text"
-                    />
-                  ) : (
-                    <span style={{ color: "green" }}>
-                      Tell us a little bit about you
-                    </span>
-                  )}
-                </div>
+              <>
                 {addBio ? (
-                  <div>
-                    <button
-                      onClick={() => setAddBio(false)}
-                      className="cancel-btn"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      onClick={() => UpdatingBio()}
-                      className="submit-btn"
-                    >
-                      Submit
-                    </button>
+                  <div className='bg-[#232628] rounded-lg p-4  md:flex-row md:items-center md:justify-between mb-[2rem]'>
+                    <div className='mb-4 md:mb-0'>
+                      <p className='font-bold text-lg leading-tight mb-3'>
+                        Bio
+                      </p>
+
+                      <textarea
+                        style={{
+                          width: "100%",
+                        }}
+                        className=' p-2  text-sm leading-tight  border-gray-400 border rounded-lg'
+                        placeholder='You can add your bio here'
+                        onChange={(e) => setBio(e.target.value)}
+                        type='text'
+                      />
+                    </div>
+
+                    <div>
+                      <button
+                        onClick={() => setAddBio(false)}
+                        className='cancel-btn'
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={() => UpdatingBio()}
+                        className='submit-btn'
+                      >
+                        Submit
+                      </button>
+                    </div>
                   </div>
                 ) : (
-                  <div>
-                    <button onClick={() => setAddBio(true)} className="add-btn">
+                  <div className='bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[2rem]'>
+                    <div className='mb-4 md:mb-0'>
+                      <p className='font-bold text-lg leading-tight mb-3'>
+                        Bio
+                      </p>
+
+                      <span style={{ color: "green" }}>
+                        Tell us a little bit about you
+                      </span>
+                    </div>
+                    <button onClick={() => setAddBio(true)} className='add-btn'>
                       +Add
                     </button>
                   </div>
                 )}
-              </div>
+              </>
             )}
             {/* End Of BIO components */}
 
             {/* Interests components */}
-            <div className="bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]">
-              <div className="mb-4 md:mb-0">
-                <p className="font-bold text-lg leading-tight mb-3">
+            <div className='bg-[#232628] rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between mb-[4]'>
+              <div className='mb-4 md:mb-0'>
+                <p className='font-bold text-lg leading-tight mb-3'>
                   Interests
                 </p>
-                <div className="flex flex-wrap">
+                <div className='flex flex-wrap'>
                   {/* {currentUserData?.interests?.map((i, index) => (
                     <p
                       className="text-sm leading-tight d-inline mr-1 mb-1"
@@ -572,8 +646,8 @@ const Profile = () => {
                       )
                     ) {
                       return (
-                        <div className="bg-[#535353] rounded-md py-[2px] px-[4px] mr-2 mb-2">
-                          <p className="text-sm leading-tight d-inline mr-1 mb-1">
+                        <div className='bg-[#535353] rounded-md py-[2px] px-[4px] mr-2 mb-2'>
+                          <p className='text-sm leading-tight d-inline mr-1 mb-1'>
                             {group.groupName}&nbsp;&nbsp;
                           </p>
                         </div>
@@ -583,12 +657,12 @@ const Profile = () => {
                 </div>
               </div>
               {currentUserData?.interests?.length === 0 ? (
-                <button onClick={editInterests} className="edit-btn">
+                <button onClick={editInterests} className='edit-btn'>
                   +Add
                 </button>
               ) : (
                 <div>
-                  <button onClick={editInterests} className="edit-btn">
+                  <button onClick={editInterests} className='edit-btn'>
                     Edit
                   </button>
                 </div>
@@ -599,10 +673,10 @@ const Profile = () => {
           </div>
 
           {/* My List Container */}
-          <div className="mylist-container" style={{ marginTop: "4rem" }}>
-            <h2 className="font-bold mb-[2rem]">My List</h2>
+          <div className='mylist-container' style={{ marginTop: "4rem" }}>
+            <h2 className='font-bold mb-[2rem]'>My List</h2>
             <div
-              className="list-tools"
+              className='list-tools'
               style={{ padding: "0 0 0 3rem", borderLeft: "1px solid white" }}
             >
               {LikedTools?.map((tool) => (
@@ -610,6 +684,8 @@ const Profile = () => {
                   toolData={tool}
                   forceRender={forceRender}
                   homeTool={false}
+                  setIsOpen={setAddToFoldermodalIsOpen}
+                  setToolToFolder={setToolToFolder}
                 />
               ))}
             </div>
@@ -625,30 +701,30 @@ const Profile = () => {
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={ModalcustomStyles}
-            contentLabel="Example Modal"
+            contentLabel='Example Modal'
           >
-            <div className="mx-16">
+            <div className='mx-16'>
               <h2
                 ref={(_subtitle) => (subtitle = _subtitle)}
-                className="mb-4 text-white xl:text-[30px] lg:text-[28px] md:text-[26px] sm:text-[24px] light fontWeight-500"
+                className='mb-4 text-white xl:text-[30px] lg:text-[28px] md:text-[26px] sm:text-[24px] light fontWeight-500'
               >
                 Please choose your interests:
               </h2>
               <span
-                id="close-button"
-                className="text-gray-600 hover:text-black hovet:text-white cursor-pointer px-3 transition duration-250"
+                id='close-button'
+                className='text-gray-600 hover:text-black hovet:text-white cursor-pointer px-3 transition duration-250'
                 onClick={closeModal}
               >
                 X
               </span>
               <div
-                className="flex flex-wrap justify-start gap-4 h-[40vh] "
+                className='flex flex-wrap justify-start gap-4 h-[40vh] '
                 style={{ maxHeight: "200px", overflowY: "auto" }}
               >
                 {CategoriesData?.map((group) => (
                   <label
                     key={group.groupName}
-                    className="flex items-center bg-gray-300 max-w-lg rounded-md py-1 px-3 transition duration-250 hover:bg-white cursor-pointer mr-3"
+                    className='flex items-center bg-gray-300 max-w-lg rounded-md py-1 px-3 transition duration-250 hover:bg-white cursor-pointer mr-3'
                     htmlFor={group.groupName}
                     style={
                       checkedInterests.includes(group.groupName)
@@ -656,19 +732,19 @@ const Profile = () => {
                         : {}
                     }
                   >
-                    <div className="flex items-center w-full">
+                    <div className='flex items-center w-full'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         id={group.groupName}
                         value={group.groupName}
                         onChange={(e) => handleInterestCheck(e)}
                         checked={checkedInterests.includes(group.groupName)}
-                        className="form-checkbox  w-4 text-primary"
+                        className='form-checkbox  w-4 text-primary'
                         style={{ display: "none" }}
                       />
 
                       <span
-                        className="ml-2 text-black xl:text-[15px] lg:text-[15px] md:text-[12px] sm:text-[12px] text-[12px]  font-medium w-full"
+                        className='ml-2 text-black xl:text-[15px] lg:text-[15px] md:text-[12px] sm:text-[12px] text-[12px]  font-medium w-full'
                         style={
                           checkedInterests.includes(group.groupName)
                             ? { color: "white" }
@@ -682,7 +758,7 @@ const Profile = () => {
                 ))}
               </div>
               <span
-                className="inline-block mt-4 px-4 py-1 bg-white text-black transition duration-250 hover:bg-black hover:fontWeight-bold rounded-lg cursor-pointer"
+                className='inline-block mt-4 px-4 py-1 bg-white text-black transition duration-250 hover:bg-black hover:fontWeight-bold rounded-lg cursor-pointer'
                 onClick={handleInterestsChange}
               >
                 Save
@@ -691,37 +767,37 @@ const Profile = () => {
           </Modal>
         </div>
       ) : (
-        <div className="form-container">
+        <div className='form-container'>
           <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={ModalcustomStyles}
-            contentLabel="Example Modal"
+            contentLabel='Example Modal'
           >
-            <div className="flex flex-col items-center">
-              <label className="form-label text-[14px] text-[#FF6700] poppins">
+            <div className='flex flex-col items-center'>
+              <label className='form-label text-[14px] text-[#FF6700] poppins'>
                 Username
               </label>
               <input
-                className=" w-[235px] form-input text-black bg-white rounded-md py-1 px-2 ml-2 light text-[12px]  "
+                className=' w-[235px] form-input text-black bg-white rounded-md py-1 px-2 ml-2 light text-[12px]  '
                 value={editedUsername}
                 onChange={(e) => {
                   setEditedUsername(e.target.value);
                 }}
               />
 
-              <label className="form-label text-[14px] text-[#FF6700] poppins mt-2">
+              <label className='form-label text-[14px] text-[#FF6700] poppins mt-2'>
                 Select a photo:
               </label>
               <input
-                className="form-input text-black bg-white rounded-md py-1 px-2 ml-2 light text-[12px] max-w-[400px] "
-                type="file"
-                accept="image/*"
+                className='form-input text-black bg-white rounded-md py-1 px-2 ml-2 light text-[12px] max-w-[400px] '
+                type='file'
+                accept='image/*'
                 onChange={(event) => setProfilePicture(event.target.files[0])}
               />
 
               <button
-                className="bg-[#EF4823] w-[10vh] py-[2px] rounded-md text-[14px] poppins transition duration-250 hover:bg-[#FF6700] mt-2"
+                className='bg-[#EF4823] w-[10vh] py-[2px] rounded-md text-[14px] poppins transition duration-250 hover:bg-[#FF6700] mt-2'
                 onClick={uploadImage}
               >
                 Upload
@@ -735,29 +811,29 @@ const Profile = () => {
         isOpen={modalIsOpen2}
         onRequestClose={closeModal}
         style={ModalcustomStyles}
-        contentLabel="Example Modal-LINK"
+        contentLabel='Example Modal-LINK'
       >
-        <div className="p-6">
+        <div className='p-6'>
           <button
             onClick={closeModal2}
-            className="absolute top-2 right-2 text-gray-400 hover:text-gray-200 focus:outline-none"
+            className='absolute top-2 right-2 text-gray-400 hover:text-gray-200 focus:outline-none'
           >
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-6 w-6'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M6 18L18 6M6 6l12 12'
               />
             </svg>
           </button>
-          <p className="mb-4 font-bold">Profile link:</p>
+          <p className='mb-4 font-bold'>Profile link:</p>
           <code>{`UserProfile/${currentUserData?.uid}`}</code>
           <br />
           <button
@@ -769,6 +845,44 @@ const Profile = () => {
             {copied ? "Copied!" : "Copy Link"}
           </button>
         </div>
+      </Modal>
+
+      <Modal
+        isOpen={addToFoldermodalIsOpen}
+        onRequestClose={addToFolerCloseModal}
+        style={ModalcustomStyles}
+        contentLabel='Example Modal'
+      >
+        {!currentUser ? (
+          <div>
+            <Link to={"/signup"}>
+              <u>Sign up</u> to personalize your folders
+            </Link>
+          </div>
+        ) : (
+          <div>
+            {currentUserData?.folders?.length === 0 ? (
+              <Link to={"/folders"}>
+                <div>
+                  {" "}
+                  <u>Create</u> folders for easy organization.
+                </div>
+              </Link>
+            ) : (
+              <div className={`space-x-4 grid grid-cols-3 gap-4`}>
+                {currentUserData?.folders?.map((item, index) => (
+                  <div
+                    className='cursor-pointer'
+                    key={index}
+                    onClick={() => handleAddToolToFolder(index)}
+                  >
+                    <Folder key={index} isRowsView={false} item={item} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </Modal>
     </div>
   );

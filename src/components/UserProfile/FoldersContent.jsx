@@ -18,9 +18,11 @@ function FoldersContent() {
           (tool) => tool.toolId
         );
         console.log(toolIds);
-        const response = await axios.get(`${BASE_URL}/getToolsInFolder`, {
-          params: { toolIds: toolIds },
+
+        const response = await axios.post(`${BASE_URL}/getToolsInFolder`, {
+           toolIds: toolIds 
         });
+
         setFolderTools(response.data);
         console.log(response.data);
       } catch (error) {
