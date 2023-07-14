@@ -371,12 +371,12 @@ const Home = () => {
 
           <div className="flex direction-column align-items-center mb-20 mt-10">
               <div className="flex flex-column  max-w-[560px]  my-4 mx-4  md:mb-[2rem] rounded-xl mb-20">
-                <div className="text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 ml-1000 mt-50">
+                <div className={`text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 ml-1000 mt-50 ${screenWidth < 768 ? 'ml-20 fontWeight-500' : ''}`}
+>
                   <div>
                    Your job done, with the latest tool
                   </div>
                 </div>
-
                 <div className="flex flex-wrap logo-search-container justify-center">
                   <div className="fontWeight-300 poppins text-[#F5F5F7] xl:text-[20px] lg:text-[18px] md:text-[16px] sm:text-[14px] text-[14px] w-[290px] opacity-[.9] whitespace-nowrap mr-80 mt-10">
                     We curate, test and review tools before recommending them to you
