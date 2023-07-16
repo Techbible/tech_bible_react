@@ -1,0 +1,59 @@
+#close-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background-color: #fff;
+  color: #000;
+  padding: 4px 7px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.save-btn {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background-color: #fff;
+  color: #000;
+  padding: 7px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.under-line {
+  border-bottom: 2px solid purple;
+}
+
+.modal-flex {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.interests-wrapper {
+  max-width: 300px;
+  width: auto;
+  flex-wrap: wrap;
+  padding: 5px;
+  /* margin: 50px 0px; */
+}
+
+.Interest {
+  padding: 4px;
+  margin: 2px;
+  background-color: #272727;
+  color: #fff;
+  border-radius: 12px;
+  display: inline-flex;
+}
+
+.folder-input {
+  background: rgb(27, 29, 31);
+  color: white;
+  padding: 5px;
+  outline: none;
+  border: 0px;
+  margin-left: 20px;
+}

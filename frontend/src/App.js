@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 // import { NewsList, UserProfile } from "./components";
 import { NewsList } from "./components";
@@ -33,12 +34,12 @@ import ContentCalender from "./static pages/ContentCalender";
 import PromptsForGPT from "./static pages/PromptsForGPT";
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
-
 function App() {
   const Home = lazy(() => import("./views/Home"));
   // const Profile = lazy(() => import("./views/Profile"));
   const SignIn = lazy(() => import("./views/SignIn"));
   const SignUp = lazy(() => import("./views/SignUp"));
+  const chat = lazy(()=> import("./views/chat"));
   const Tools = lazy(() => import("./views/Tools"));
   const Community = lazy(() => import("./views/Community"));
   const DiscussionReply = lazy(() => import("./views/DiscussionReply"));
@@ -89,6 +90,20 @@ function App() {
                 <Home />
               </Suspense>
             </NewsContextProvider>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <Suspense
+              fallback={
+                <div className="text-[50px] text-white font-bold ">
+                  Chat Loading...
+                </div>
+              }
+            >
+              <chat/>
+            </Suspense>
           }
         />
         <Route
