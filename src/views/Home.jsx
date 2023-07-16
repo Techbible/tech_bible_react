@@ -592,105 +592,104 @@ const Home = () => {
             {/***********END You might also like********/}
             {!isFiltering && (
               <div className="container xxl:w-[1300px] xl:w-[1050px] max-w-full py-4 mb-6 border-b-[.2px] border-none align-items-center justify-center text-center ml-1">
-                <div
+              <div
                 className={
                   screenWidth > 1100
-                  ? "flex flex-row ml-[12%] gap-[6%]"
-                  : "flex flex-row ml-[8%] gap-[6%]"
+                    ? "flex flex-row ml-[12%] gap-[6%]"
+                    : "flex flex-row ml-0 gap-[6%]"
                 }
-                >
+              >
                 <div
-                className={`${
-                selectedTopic === "" && !isTopicChosen
-                 ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] text-[#DD5434] px-4 py-2 rounded-full"
-                 : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent text-[#DD5434] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-                } `}
-                onClick={() => {
-        setIsTopicChosen(false);
-        setTopic("");
-        setSelectedTopic("");
-      }}
-    >
-      Popular
-                </div>
-
-                <div
-                 className={`${
-                 selectedTopic === "Marketing Automation"
-                   ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
-                   : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  className={`${
+                    selectedTopic === "" && !isTopicChosen
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] text-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent text-[#DD5434] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
                   } `}
-                 onClick={() => {
-                 chooseTopic("Marketing Automation");
-                 setSelectedTopic("Marketing Automation");
+                  onClick={() => {
+                    setIsTopicChosen(false);
+                    setTopic("");
+                    setSelectedTopic("");
                   }}
                 >
-                     Automation
-  </div>
-
-  {screenWidth >= 700 && (
-    <div
-      className={`${
-        selectedTopic === "No-code"
-          ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
-          : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-      } `}
-      onClick={() => {
-        chooseTopic("No-code");
-        setSelectedTopic("No-code");
-      }}
-    >
-      No Code
-    </div>
-  )}
-
-  <div
-    className={`${
-      selectedTopic === "Artificial Intelligence and Machine Learning"
-        ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
-        : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-    } `}
-    onClick={() => {
-      chooseTopic("Artificial Intelligence and Machine Learning");
-      setSelectedTopic("Artificial Intelligence and Machine Learning");
-    }}
-  >
-    AI
-  </div>
-
-  <div
-    className={`${
-      selectedTopic === "Productivity tools"
-        ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
-        : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-    } `}
-    onClick={() => {
-      chooseTopic("Productivity tools");
-      setSelectedTopic("Productivity tools");
-    }}
-  >
-    Productivity
-  </div>
-
-  {screenWidth >= 810 && (
-    <div
-      className={`${
-        selectedTopic === "Graphic Design"
-          ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
-          : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
-      } `}
-      onClick={() => {
-        chooseTopic("Graphic Design");
-        setSelectedTopic("Graphic Design");
-      }}
-    >
-      Design
-    </div>
-  )}
-</div>
-
-   
-</div>
+                  Popular
+                </div>
+            
+                <div
+                  className={`${
+                    selectedTopic === "Marketing Automation"
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    chooseTopic("Marketing Automation");
+                    setSelectedTopic("Marketing Automation");
+                  }}
+                >
+                  Automation
+                </div>
+            
+                {screenWidth >= 700 && (
+                  <div
+                    className={`${
+                      selectedTopic === "No-code"
+                        ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                        : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                    } `}
+                    onClick={() => {
+                      chooseTopic("No-code");
+                      setSelectedTopic("No-code");
+                    }}
+                  >
+                    No Code
+                  </div>
+                )}
+            
+                <div
+                  className={`${
+                    selectedTopic === "Artificial Intelligence and Machine Learning"
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    chooseTopic("Artificial Intelligence and Machine Learning");
+                    setSelectedTopic("Artificial Intelligence and Machine Learning");
+                  }}
+                >
+                  AI
+                </div>
+            
+                <div
+                  className={`${
+                    selectedTopic === "Productivity tools"
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    chooseTopic("Productivity tools");
+                    setSelectedTopic("Productivity tools");
+                  }}
+                >
+                  Productivity
+                </div>
+            
+                {screenWidth >= 810 && (
+                  <div
+                    className={`${
+                      selectedTopic === "Graphic Design"
+                        ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                        : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                    } `}
+                    onClick={() => {
+                      chooseTopic("Graphic Design");
+                      setSelectedTopic("Graphic Design");
+                    }}
+                  >
+                    Design
+                  </div>
+                )}
+              </div>
+            </div>
+            
             )}
             {/* <div className=" xl:w-[1000px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px]"></div> */}
             <div
