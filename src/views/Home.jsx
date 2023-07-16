@@ -371,20 +371,21 @@ const Home = () => {
 
           <div className="flex direction-column align-items-center mb-20 mt-10">
               <div className="flex flex-column  max-w-[560px]  my-4 mx-4  md:mb-[2rem] rounded-xl mb-20">
-                <div className={`text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 ml-1000 mt-50 ${screenWidth < 768 ? 'ml-20 fontWeight-500' : ''}`}
+                <div className={`text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 ml-1000 mt-50 ${screenWidth < 768 ? 'ml-20 fontWeight-400' : ''}`}
 >
                   <div>
                    Your job done, with the latest tool
                   </div>
                 </div>
-                <div className="flex flex-wrap logo-search-container justify-center">
-                  <div className="fontWeight-300 poppins text-[#F5F5F7] xl:text-[20px] lg:text-[18px] md:text-[16px] sm:text-[14px] text-[14px] w-[290px] opacity-[.9] whitespace-nowrap mr-80 mt-10">
+                <div className={`flex flex-wrap logo-search-container ${screenWidth < 768 ? '' : 'justify-center'}`}>
+                  <div className={`fontWeight-300 poppins text-[#F5F5F7] xl:text-[20px] lg:text-[18px] md:text-[16px] sm:text-[14px] text-[14px] w-[290px] opacity-[.9] whitespace-nowrap mr-80 mt-10 ${screenWidth < 768 ? 'fontWeight-80 ml-20 ' : ''}`}  >
                     We curate, test and review tools before recommending them to you
                   </div>
                 </div>
+                
 
 
-                <div className="relative w-full max-w-[4000px] ml-1000 py-4 px-300 mt-5">
+                <div className={`relative w-full max-w-[4000px] ml-1000 py-4 px-300 mt-5${screenWidth < 768 ? 'max-w-[1500px] ml-10 ' : ''}`}>
                  <div className="relative flex items-center">
                    <svg
                     className="absolute w-5 h-5 pointer text-gray-500 dark:text-gray-400 left-3"
@@ -401,7 +402,7 @@ const Home = () => {
                    <input
                    type="text"
                    id="voice-search"
-                   className="black h-16 w-full pl-14 pr-10 border border-gray-300 rounded-full text-black focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                   className={`black h-16 w-full pl-14 pr-10 border border-gray-300 rounded-full text-black focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${screenWidth < 768 ? 'h-12' : ''}`}
                    placeholder="Type Keyword..."
                    value={value}
                    onChange={(e) => {
