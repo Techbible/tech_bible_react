@@ -359,6 +359,10 @@ const Home = () => {
     setTopic(topic);
     setIsTopicChosen(true);
   };
+  const handleArticleClick = (url) => {
+    // Logic to handle the article click, such as navigating to the article URL
+    window.open(url, '_blank'); // Open the article URL in a new tab
+  };
 
   return (
     <div >
@@ -587,6 +591,126 @@ const Home = () => {
               // </p>
               null}
             </div>
+            <div className="text-center">
+  <Link to="/News">
+    <p
+      className="text-[25px] mt-4 mb-10 happening-text text-orange-600 font-bold poppins cursor-pointer hover:text-white"
+  >
+      Happening in Tech
+    </p>
+    
+  </Link>
+</div>
+
+<div className="flex flex-column align-items-center mt-4 mb-40">
+  <div>
+    <div
+      className="cards"
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '40px',
+        alignItems: 'center',
+      }}
+    >
+      {DataAPI?.length > 0
+        ? DataAPI.slice(0, 3).map((article, index) => (
+            <div
+              key={index}
+              className={`card ${index === 0 ? 'red' : index === 1 ? 'white' : 'blue'}`}
+              onClick={() => handleArticleClick(article.url)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                textAlign: 'center',
+                height: '200px',
+                width: '300px',
+                borderRadius: '10px',
+                color: 'white',
+                cursor: 'pointer',
+                transition: '400ms',
+                backgroundColor: index === 0 ? '#000' : index === 1 ? '#000' : '#000', // Set black background
+                border: '2px solid white', // Set white border
+              }}
+            >
+              <p
+                className="second-text"
+                style={{
+                  fontSize: '1em',
+                  fontWeight: 'bold',
+                  marginBottom: '10px', // Add margin at the bottom of the title
+                }}
+              >
+                {article.name}
+              </p>
+              <button
+                className="see-more-button text-[15px] text-white bg-orange-600 px-4 py-2 transition duration-300 hover:bg-orange-200 hover:text-orange-600 rounded"
+                onClick={() => handleArticleClick(article.url)}
+                style={{
+                  cursor: 'pointer',
+                  marginTop: '10px', // Add margin at the top of the button
+                }}
+              >
+                See More
+              </button>
+            </div>
+          ))
+        : MongoDBData?.slice(0, 3).map((article, index) => (
+            <div
+              key={index}
+              className={`card ${index === 0 ? 'red' : index === 1 ? 'white' : 'blue'}`}
+              onClick={() => handleArticleClick(article.url)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                textAlign: 'center',
+                height: '200px',
+                width: '300px',
+                borderRadius: '10px',
+                color: 'white',
+                cursor: 'pointer',
+                transition: '400ms',
+                backgroundColor: index === 0 ? '#000' : index === 1 ? '#000' : '#000', // Set black background
+                border: '2px solid white', // Set white border
+              }}
+            >
+              <p
+                className="second-text"
+                style={{
+                  fontSize: '1em',
+                  fontWeight: 'bold',
+                  marginBottom: '10px', // Add margin at the bottom of the title
+                }}
+              >
+                {article.name}
+              </p>
+              <button
+                className="see-more-button text-[15px] text-white bg-orange-600 px-4 py-2 transition duration-300 hover:bg-orange-200 hover:text-orange-600 rounded"
+                onClick={() => handleArticleClick(article.url)}
+                style={{
+                  cursor: 'pointer',
+                  marginTop: '10px', // Add margin at the top of the button
+                }}
+              >
+                See More
+              </button>
+            </div>
+          ))}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
             {/* <div className="text-white text-[25px]">{screenWidth}</div> */}
 
             {/***********END You might also like********/}
