@@ -1,0 +1,161 @@
+.liked-tools-container {
+    width: 66.4rem;
+    height: 2.4rem;
+    position: absolute;
+    left: 31rem;
+    top: 70.9rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #F5F5F7;
+    font-family: Poppins, 'Source Sans Pro';
+    /* border: 1px solid; */
+}
+.tools-list-container{
+  width: 66.4rem;
+  height: 100%;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F5F5F7;
+  font-family: Poppins, 'Source Sans Pro';
+}
+
+.create-folder{
+  color: #F5F5F7;
+  background-color: #272727;
+  padding: 5px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.tools-list-container .tool-container, .liked-tools-container .tool-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    min-height: 4rem;
+    margin-top: 2em;
+}
+
+.tools-list-container .tool-container .tool-logo , .liked-tools-container .tool-container .tool-logo {
+    height: 7.9rem;
+    object-fit: cover;
+    vertical-align: top;
+    flex-shrink: 0;
+    margin: 0rem 3.8rem 0.4rem 0rem;
+    width: 8.1rem;
+}
+
+.tools-list-container .tool-container .tool-data , .liked-tools-container .tool-container .tool-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.tools-list-container .tool-container .tool-title , .liked-tools-container .tool-container .tool-title {
+    flex-shrink: 0;
+    margin-bottom: 0.2rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #F5F5F7;
+    font-family: Poppins, 'Source Sans Pro';
+    white-space: nowrap;
+}
+
+.tools-list-container .tool-container .tool-comments  ,.liked-tools-container .tool-container .tool-comments {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #F5F5F7;
+    font-family: Poppins, 'Source Sans Pro';
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-right: 4.1rem;
+}
+
+.tools-list-container .tool-container .tool-comments .layer1-xx5  ,.liked-tools-container .tool-container .tool-comments .layer1-xx5 {
+    object-fit: contain;
+    vertical-align: top;
+    flex-shrink: 0;
+    margin: 0.2rem 0.5rem 0rem 0rem;
+    width: 1.3rem;
+    height: 1.1rem;
+}
+
+.tools-list-container .tool-container .tool-data .tool-description ,.liked-tools-container .tool-container .tool-data .tool-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #F5F5F7;
+    font-family: Poppins, 'Source Sans Pro';
+    flex-shrink: 0;
+    margin-bottom: 0.7rem;
+    max-width: 42rem;
+}
+
+.tools-list-container .tool-container .tool-icons ,.liked-tools-container .tool-container .tool-icons {
+    display: flex;
+}
+.tools-list-container .tool-container .tool-icons .like-eGV ,.liked-tools-container .tool-container .tool-icons .like-eGV {
+    height: 2.1rem;
+    object-fit: contain;
+    vertical-align: top;
+    flex-shrink: 0;
+    margin: 0.2rem 1.6rem 0rem 0rem;
+    width: 2.4rem;
+    cursor: pointer;
+}
+
+.tools-list-container .tool-container .tool-icons .save-3ZX,.liked-tools-container .tool-container .tool-icons .save-3ZX{
+    width: 2.5rem;
+    height: 100%;
+    position: relative;
+    flex-shrink: 0;
+}
+.tools-list-container .tool-container .tool-icons .ellipse-4-v7X, .liked-tools-container .tool-container .tool-icons .ellipse-4-v7X{
+    left: 0.0735rem;
+    top: 0.0735rem;
+    object-fit: contain;
+    vertical-align: top;
+    width: 2.3529rem;
+    height: 2.2794rem;
+    position: absolute;
+    z-index: 0;
+}
+
+.tools-list-container .tool-container .tool-icons .item-32360-1-iJH, .liked-tools-container .tool-container .tool-icons .item-32360-1-iJH{
+    width: 2.5rem;
+    height: 2.5rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+    vertical-align: top;
+}
+
+
+.lists-container{
+  display : flex;
+  flex-direction : column;
+  height: 100%;
+  z-index:1;
+}
+
+.under-line{
+  border-bottom: 3px solid purple;
+}
+
+.folder-input{
+  width: 15em;
+  height: 2.1em;
+  margin-left: 15em;
+  border-radius: 7px;
+  background-color: #272727;
+  color: #F5F5F7;
+}

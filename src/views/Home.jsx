@@ -293,7 +293,6 @@ const Home = () => {
   //input value
   const [value, setValue] = useState("");
   const inputRef = useRef(null);
-  const [selectedTopic, setSelectedTopic] = useState("");
 
   const onChange = (event) => {
     const inputValue = event.target.value;
@@ -365,82 +364,129 @@ const Home = () => {
   };
 
   return (
-    <div >
-      <div className="homeContainer mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer ml-20">
+    <div>
+      <div className="homeContainer mt-desktop-30 mt-mobile-12 mt-tablet-8 mt-widescreen-20 layoutContainer">
         <main
-          className="layoutMain xl:mt-15 lg:mt-15 ml:mt-15 sm:mt-12 mb-5"
+          className="layoutMain xl:mt-15 lg:mt-15 ml:mt-15 sm:mt-12 "
           onMouseLeave={() => setisSuggestionsVisible(false)}
         >
-        <div className="flex direction-column mb-20 mt-10">
+          <div className="flex direction-column  ">
+            {/* <div className="max-w-[750px] mx-auto flex flex-column py-2 my-4 md:mb-[2rem] lg:w-[900px] p-[30px] rounded-xl bg-gradient-to-r from-[#18151D] to-[#27242E]"> */}
 
-          <div className="flex direction-column align-items-center mb-20 mt-10">
-              <div className="flex flex-column  max-w-[560px]  my-4 mx-4  md:mb-[2rem] rounded-xl mb-20">
-                <div className={`text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 ml-1000 mt-50 ${screenWidth < 768 ? 'ml-20 fontWeight-400' : ''}`}
->
+            <div className="flex direction-column align-items-center">
+              <div className="flex flex-column  max-w-[560px]  my-4 mx-4  md:mb-[2rem] rounded-xl ">
+                <div className="text-white flex flex-column align-items-center poppins xl:text-[25px] lg:text-[23px] md:text-[22px] sm:text-[18px] text-[18px] fontWeight-700 mt-2">
                   <div>
-                   Your job done, with the latest tool
+                    The Largest Tech Directory To Help You Get The Job Done
                   </div>
                 </div>
-                <div className={`flex flex-wrap logo-search-container ${screenWidth < 768 ? '' : 'justify-center'}`}>
-                  <div className={`fontWeight-300 poppins text-[#F5F5F7] xl:text-[20px] lg:text-[18px] md:text-[16px] sm:text-[14px] text-[14px] w-[290px] opacity-[.9] whitespace-nowrap mr-80 mt-10 ${screenWidth < 768 ? 'fontWeight-80 ml-20 ' : ''}`}  >
-                    We curate, test and review tools before recommending them to you
+
+                <div className="flex flex-wrap logo-search-container">
+                  <div className="my-0 mr-4">
+                    <img
+                      className="w-[100px]"
+                      src={`${process.env.PUBLIC_URL}/assets/logo-homepage.png`}
+                      alt="search-box-logo"
+                    />
                   </div>
+                  {isFiltering ? (
+                    <div className="filter-box">
+                      <select
+                        className="combo-box bg-white text-black rounded-[4px] "
+                        onChange={(e) => setPricing(e.target.value)}
+                      >
+                        <option value="all">All</option>
+                        <option value="Freemium">Freemium</option>
+                        <option value="Free">Free</option>
+                        <option value="Paid">Paid</option>
+                      </select>
+                    </div>
+                  ) : (
+                    <div className="fontWeight-300 poppins text-[#F5F5F7] xl:text-[20px] lg:text-[18px] md:text-[16px] sm:text-[14px] text-[14px] w-[290px] opacity-[.9]">
+                      Browse +1890 software tools per task Updated daily
+                    </div>
+                  )}
+                  {isFiltering && (
+                    <div className="ml-2">
+                      <select
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="combo-box bg-white text-black px-1 rounded-[4px] "
+                      >
+                        <option value="all categories">All Categories</option>
+                        {CategoriesData?.map((group) => {
+                          return group.categories.map((category) => {
+                            return (
+                              <option className="text-black" value={category}>
+                                {category}{" "}
+                              </option>
+                            );
+                          });
+                        })}
+                      </select>
+                    </div>
+                  )}
                 </div>
-                
+                <form className="flex items-center my-2 ">
+                  <div className="relative w-full">
+                    <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                      <svg
+                        className="w-5 h-5 pointer text-gray-500 dark:text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                    </div>
 
-
-                <div className={`relative w-full max-w-[4000px] ml-1000 py-4 px-300 mt-5${screenWidth < 768 ? 'max-w-[1500px] ml-10 ' : ''}`}>
-                 <div className="relative flex items-center">
-                   <svg
-                    className="absolute w-5 h-5 pointer text-gray-500 dark:text-gray-400 left-3"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                   >
-                   <path
-                    fillRule="evenodd"
-                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                    clipRule="evenodd"
-                   ></path>
-                   </svg>
-                   <input
-                   type="text"
-                   id="voice-search"
-                   className={`black h-16 w-full pl-14 pr-10 border border-gray-300 rounded-full text-black focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${screenWidth < 768 ? 'h-12' : ''}`}
-                   placeholder="Type Keyword..."
-                   value={value}
-                   onChange={(e) => {
-                   onChange(e);
-                   setIsSearching(false);
-                                     }}
-                   disabled={allTools !== null ? false : true}
-                   ref={inputRef}
-                    required
-                   autoComplete="off"
-                   onKeyDown={(e) => {
-                   if (e.keyCode === 13) {
-                   e.preventDefault();
-                   setIsSearching(true);
-                   setisSuggestionsVisible(false);
-                   }
-                   }}
-                  />
-            <button
-             className="absolute top-0 right-0 h-full px-4 py-2 bg-orange-600 text-white rounded-full hover:bg-orange-500 bg-opacity-75"
-              onClick={() => {
-               setIsSearching(true);
-               setisSuggestionsVisible(false);
-                            }}
-                   >
-                   search
-             </button>
-              </div>
-             </div>
-
-
+                    <input
+                      type="text"
+                      id="voice-search"
+                      className="bg-white h-[36px] border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Search your tool..."
+                      value={value}
+                      onChange={(e) => {
+                        onChange(e);
+                        setIsSearching(false);
+                      }}
+                      disabled={allTools !== null ? false : true}
+                      ref={inputRef}
+                      required
+                      autoComplete="off"
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 13) {
+                          e.preventDefault();
+                          setIsSearching(true);
+                          setisSuggestionsVisible(false);
+                        }
+                      }}
+                    />
+                  </div>
                   {/* <div className="ml-2"> */}
 
+                  <div onClick={() => setIsFiltering(!isFiltering)}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-7 h-7 hover:w-8 hover:h-8 cursor-pointer"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5"
+                      />
+                    </svg>
+                  </div>
+
                   {/* </div> */}
+                </form>
                 {isSuggestionsVisible && value !== "" && (
                   <div
                     ref={suggestionContainerRef}
@@ -485,7 +531,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="flex direction-column align-items-center justify-center text-center ">
+            <div className="flex direction-column align-items-center">
               {/* keyword filter            */}
               {isSearching && value !== "" ? (
                 <div>
@@ -715,6 +761,7 @@ const Home = () => {
 
             {/***********END You might also like********/}
             {!isFiltering && (
+
               <div className="container xxl:w-[1300px] xl:w-[1050px] max-w-full py-4 mb-6 border-b-[.2px] border-none align-items-center justify-center text-center ml-1">
               <div
                 className={
@@ -814,6 +861,7 @@ const Home = () => {
               </div>
             </div>
             
+
             )}
             {/* <div className=" xl:w-[1000px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px]"></div> */}
             <div
@@ -890,6 +938,127 @@ const Home = () => {
             </div>
           </div>
         </main>
+        <aside className="sidebarWithSeparator right pl-6 ">
+          <div className="flex flex-column align-items-center ml-[20%] ">
+            <div>
+              <Link to="/News">
+                <p className="text-[16px] fontWeight-700 mt-16 mb-4 ">
+                  Happening in Tech
+                </p>
+              </Link>
+              {DataAPI?.length > 0
+                ? DataAPI.slice(0, 3).map((article, index) => (
+                    <NewsHomePage
+                      key={index}
+                      title={article.name}
+                      date={article.datePublished}
+                      provider={
+                        article?.provider?.[0]?.name || "Unknown Provider"
+                      }
+                      url={article?.url}
+                    />
+                  ))
+                : MongoDBData?.slice(0, 3).map((article, index) => (
+                    <NewsHomePage
+                      key={index}
+                      title={article.name}
+                      date={article.datePublished}
+                      provider={
+                        article?.provider?.[0]?.name || "Unknown Provider"
+                      }
+                      url={article?.url}
+                    />
+                  ))}
+
+              {/* <Link to="/News">
+            <div className="underline text-[14px] transition duration-300 hover:tracking-[.2px] hover:cursor-pointer mb-20">
+              See all News
+            </div>
+          </Link> */}
+              <div className="my-[46px] w-[300px] h-[1px] bg-white "></div>
+              <NewsLetterSubscribe />
+
+              <div className="my-[46px] w-[300px] h-[1px] bg-white  "></div>
+              <Link to="/community">
+                <div
+                  className="tracking-wider hover:tracking-widest mt-8 flex flex-column ml-20"
+                  style={{ transition: "0.3s", cursor: "pointer" }}
+                >
+                  <img
+                    src="https://zahiraccounting.com/en-my/wp-content/uploads/2015/10/zahir-accounting-software-have-more-than-60.000-users.png"
+                    alt="Users"
+                    className="w-14 ml-4"
+                  />
+                  Community
+                </div>
+              </Link>
+              <div className="my-[46px] w-[300px] h-[1px] bg-white "></div>
+              <div className=" flex flex-column ">
+                <ul className="flex flex-row lg:gap-[64px] gap-3 mb-5 ">
+                  <h3>Follow us</h3>
+                  <li
+                    className="tracking-wider hover:tracking-widest"
+                    style={{ transition: "0.3s", cursor: "pointer" }}
+                  >
+                    <span className="text-white rounded-full p-1">
+                      <a
+                        href="https://www.tiktok.com/@tech.bible"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="fab fa-tiktok text-white text-xl"></i>
+                      </a>
+                    </span>
+                  </li>
+                  <li
+                    className="tracking-wider hover:tracking-widest"
+                    style={{ transition: "0.3s", cursor: "pointer" }}
+                  >
+                    <span className="text-white rounded-full p-1">
+                      <a
+                        href="https://youtube.com/@MyTechBible"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="fab fa-youtube text-white text-xl"></i>
+                      </a>
+                    </span>
+                  </li>
+                  <li
+                    className="tracking-wider hover:tracking-widest"
+                    style={{ transition: "0.3s", cursor: "pointer" }}
+                  >
+                    <span className="text-white rounded-full p-1">
+                      <a
+                        href="https://www.instagram.com/techbible.ai/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="fab fa-instagram text-white text-xl"></i>
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+                <a href="https://www.mytechbible.com/" target="_blank">
+                  <div className="text-[14px] fontWeight-500 poppins mb-4 ">
+                    Made by{" "}
+                    <div className="text-[#EF4823] inline-block ">
+                      Mytechbible Studio
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="https://www.mytechbible.com/blogs-page"
+                  target="_blank"
+                >
+                  <div className="text-[14px] fontWeight-500 poppins ">
+                    Blogs
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
@@ -928,47 +1097,6 @@ const Home = () => {
           )}
         </Modal>
       </div>
-      <footer className="bg-black text-white py-10">
-         <div className="flex flex-column justify-center items-center">
-         <ul className="flex flex-row lg:gap-[64px] gap-3 mb-5">
-          <h3>Follow us</h3>
-          <li className="tracking-wider hover:tracking-widest">
-           <a
-            href="https://www.tiktok.com/@tech.bible"
-            target="_blank"
-            rel="noopener noreferrer"
-           >
-          <i className="fab fa-tiktok text-white text-xl"></i>
-           </a>
-          </li>
-          <li className="tracking-wider hover:tracking-widest">
-           <a
-          href="https://youtube.com/@MyTechBible"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i className="fab fa-youtube text-white text-xl"></i>
-        </a>
-      </li>
-      <li className="tracking-wider hover:tracking-widest">
-        <a
-          href="https://www.instagram.com/techbible.ai/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i className="fab fa-instagram text-white text-xl"></i>
-        </a>
-      </li>
-    </ul>
-    <a href="https://www.mytechbible.com/" target="_blank">
-      <div className="text-[14px] font-semibold mb-4">
-        Made by{" "}
-        <div className="text-[#EF4823] inline-block">Techbible Studio</div>
-      </div>
-    </a>
-  </div>
-</footer>
-
       {/* <Footer /> */}
     </div>
   );

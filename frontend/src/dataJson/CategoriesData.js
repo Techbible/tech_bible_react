@@ -1,0 +1,123 @@
+export const CategoriesData = [
+  {
+    groupName: "Cybersecurity",
+    categories: [
+      "Cybersecurity",
+      "Network Management",
+      "Database Management",
+      "Web Hosting and Domain Management",
+      "Cloud Computing Services",
+      "Privacy and Data Protection",
+      "Compliance Management",
+      "Disaster Recovery and Backup",
+      "Security Testing tools",
+    ],
+  },
+  {
+    groupName: "Data and Analytics",
+    categories: [
+      "Data Visualization",
+      "Web Analytics",
+      "Product analytics",
+      "Business Intelligence",
+      "Artificial Intelligence and Machine Learning",
+    ],
+  },
+  {
+    groupName: "Marketing and Advertising",
+    categories: [
+      "Marketing Automation",
+      "Search Engine Optimization (SEO)",
+      "Social Listening",
+      "Branding and Design",
+      "Copywriting and Content Creation",
+      "Search Advertising",
+      "Affiliate Marketing",
+      "Influencer Marketing",
+      "Social media marketing",
+      "Email marketing",
+    ],
+  },
+  {
+    groupName: "Human Resources and Workforce Management",
+    categories: [
+      "Learning Management Systems",
+      "Employee Performance Management",
+      "Employee Engagement and Feedback",
+      "Time and Attendance Tracking",
+      "Expense Management",
+    ],
+  },
+  {
+    groupName: "Sales and Customer Support",
+    categories: [
+      "Sales Enablement",
+      "Customer Service and Support",
+      "Customer Feedback and Survey",
+      "Online Reputation Management",
+      "Help Desk and Ticketing Systems",
+    ],
+  },
+  {
+    groupName: "Development and IT Operations",
+    categories: [
+      "Web Development Frameworks",
+      "Mobile App Development Platforms",
+      "E-commerce Platforms",
+      "DevOps Tools",
+      "Continuous Integration and Deployment (CI-CD) tools",
+      "Infrastructure as Code (IaC) tools",
+      "Configuration Management tools",
+      "Monitoring and Alerting tools",
+      "Version Control Systems",
+    ],
+  },
+  {
+    groupName: "Design and Multimedia",
+    categories: [
+      "Video and Audio Editing",
+      "Graphic Design",
+      "Animation and 3D Modeling",
+      "Audio and Music Production",
+    ],
+  },
+  {
+    groupName: "Business and Financial Management",
+    categories: [
+      "Inventory Management",
+      "Supply Chain Management",
+      "Logistics and Shipping",
+      "Payment Processing",
+      "Tax and Accounting",
+      "Legal Document Management",
+      "Contract Management",
+      "Electronic Signature and Document Workflow",
+    ],
+  },
+  {
+    groupName: "Localization and Communication",
+    categories: ["Translation and Localization", "Copywriting"],
+  },
+  {
+    groupName: "Productivity",
+    categories: [
+      "Virtualization and Containerization",
+      "Productivity tools",
+      "Image and Video Compression",
+      "Load Testing tools",
+      "API Testing tools",
+      "Performance Testing tools",
+      "Code Review and Analysis tools",
+      "Workflow Management",
+      "Knowledge Management",
+      "Fleet Management",
+      "GPS Tracking and Telematics",
+      "Energy and Utilities Management",
+      "Scheduling",
+      "Crypto social network",
+      "No-code",
+    ],
+  },
+];
+
+console.log(CategoriesData);
