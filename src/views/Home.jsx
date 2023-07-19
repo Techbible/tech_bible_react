@@ -358,6 +358,10 @@ const Home = () => {
     setTopic(topic);
     setIsTopicChosen(true);
   };
+  const handleArticleClick = (url) => {
+    // Logic to handle the article click, such as navigating to the article URL
+    window.open(url, '_blank'); // Open the article URL in a new tab
+  };
 
   return (
     <div>
@@ -633,96 +637,231 @@ const Home = () => {
               // </p>
               null}
             </div>
+            <div className="text-center">
+  <Link to="/News">
+    <p
+      className="text-[25px] mt-4 mb-10 happening-text text-orange-600 font-bold poppins cursor-pointer hover:text-white"
+  >
+      Happening in Tech
+    </p>
+    
+  </Link>
+</div>
+
+<div className="flex flex-column align-items-center mt-4 mb-40">
+  <div>
+    <div
+      className="cards"
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '40px',
+        alignItems: 'center',
+      }}
+    >
+      {DataAPI?.length > 0
+        ? DataAPI.slice(0, 3).map((article, index) => (
+            <div
+              key={index}
+              className={`card ${index === 0 ? 'red' : index === 1 ? 'white' : 'blue'}`}
+              onClick={() => handleArticleClick(article.url)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                textAlign: 'center',
+                height: '200px',
+                width: '300px',
+                borderRadius: '10px',
+                color: 'white',
+                cursor: 'pointer',
+                transition: '400ms',
+                backgroundColor: index === 0 ? '#000' : index === 1 ? '#000' : '#000', // Set black background
+                border: '2px solid white', // Set white border
+              }}
+            >
+              <p
+                className="second-text"
+                style={{
+                  fontSize: '1em',
+                  fontWeight: 'bold',
+                  marginBottom: '10px', // Add margin at the bottom of the title
+                }}
+              >
+                {article.name}
+              </p>
+              <button
+                className="see-more-button text-[15px] text-white bg-orange-600 px-4 py-2 transition duration-300 hover:bg-orange-200 hover:text-orange-600 rounded"
+                onClick={() => handleArticleClick(article.url)}
+                style={{
+                  cursor: 'pointer',
+                  marginTop: '10px', // Add margin at the top of the button
+                }}
+              >
+                See More
+              </button>
+            </div>
+          ))
+        : MongoDBData?.slice(0, 3).map((article, index) => (
+            <div
+              key={index}
+              className={`card ${index === 0 ? 'red' : index === 1 ? 'white' : 'blue'}`}
+              onClick={() => handleArticleClick(article.url)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                textAlign: 'center',
+                height: '200px',
+                width: '300px',
+                borderRadius: '10px',
+                color: 'white',
+                cursor: 'pointer',
+                transition: '400ms',
+                backgroundColor: index === 0 ? '#000' : index === 1 ? '#000' : '#000', // Set black background
+                border: '2px solid white', // Set white border
+              }}
+            >
+              <p
+                className="second-text"
+                style={{
+                  fontSize: '1em',
+                  fontWeight: 'bold',
+                  marginBottom: '10px', // Add margin at the bottom of the title
+                }}
+              >
+                {article.name}
+              </p>
+              <button
+                className="see-more-button text-[15px] text-white bg-orange-600 px-4 py-2 transition duration-300 hover:bg-orange-200 hover:text-orange-600 rounded"
+                onClick={() => handleArticleClick(article.url)}
+                style={{
+                  cursor: 'pointer',
+                  marginTop: '10px', // Add margin at the top of the button
+                }}
+              >
+                See More
+              </button>
+            </div>
+          ))}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
             {/* <div className="text-white text-[25px]">{screenWidth}</div> */}
 
             {/***********END You might also like********/}
             {!isFiltering && (
-              // <div
-              //   className={
-              //     topic === ""
-              //       ? "xxl:w-[1300px] xl:w-[1050px]   w-[100%] mb-6 border-b border-b-[.5px]  border-white py-3 px-16"
-              //       : " xl:w-[1050px] xxl:w-[1300px]  w-[100%] mb-6 border-b border-white py-3 px-16"
-              //   }
-              // >
-              <div className="container xxl:w-[1300px] xl:w-[1050px] max-w-full mb-6 border-b-[.5px]  border-white py-3">
+
+              <div className="container xxl:w-[1300px] xl:w-[1050px] max-w-full py-4 mb-6 border-b-[.2px] border-none align-items-center justify-center text-center ml-1">
+              <div
+                className={
+                  screenWidth > 1100
+                    ? "flex flex-row ml-[12%] gap-[6%]"
+                    : "flex flex-row ml-0 gap-[6%]"
+                }
+              >
                 <div
-                  className={
-                    screenWidth > 1100
-                      ? "flex flex-row ml-[12%] gap-[6%] "
-                      : "flex flex-row ml-[8%] gap-[6%] "
-                  }
+                  className={`${
+                    selectedTopic === "" && !isTopicChosen
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] text-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent text-[#DD5434] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    setIsTopicChosen(false);
+                    setTopic("");
+                    setSelectedTopic("");
+                  }}
                 >
+                  Popular
+                </div>
+            
+                <div
+                  className={`${
+                    selectedTopic === "Marketing Automation"
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    chooseTopic("Marketing Automation");
+                    setSelectedTopic("Marketing Automation");
+                  }}
+                >
+                  Automation
+                </div>
+            
+                {screenWidth >= 700 && (
                   <div
-                    className="xxl:text-[16px] xl:text-[16px] lg:text-[15px] md:text-[14px] sm:text-[13px] text-[14px] fontWeight-700 poppins cursor-pointer"
+                    className={`${
+                      selectedTopic === "No-code"
+                        ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                        : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                    } `}
                     onClick={() => {
-                      setIsTopicChosen(false);
-                      setTopic("");
+                      chooseTopic("No-code");
+                      setSelectedTopic("No-code");
                     }}
                   >
-                    Popular
+                    No Code
                   </div>
-
-                  <div
-                    className={
-                      topic === "Marketing Automation"
-                        ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                        : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
-                    }
-                    onClick={(topic) => chooseTopic("Marketing Automation")}
-                  >
-                    Automation
-                  </div>
-                  {screenWidth >= 700 && (
-                    <div
-                      className={
-                        topic === "No-code"
-                          ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                          : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
-                      }
-                      onClick={(topic) => chooseTopic("No-code")}
-                    >
-                      No Code
-                    </div>
-                  )}
-                  <div
-                    className={
-                      topic === "Artificial Intelligence and Machine Learning"
-                        ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                        : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
-                    }
-                    onClick={(topic) =>
-                      chooseTopic(
-                        "Artificial Intelligence and Machine Learning"
-                      )
-                    }
-                  >
-                    AI
-                  </div>
-                  <div
-                    className={
-                      topic === "Productivity tools"
-                        ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer"
-                        : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer"
-                    }
-                    onClick={(topic) => chooseTopic("Productivity tools")}
-                  >
-                    Productivity
-                  </div>
-
-                  {screenWidth >= 810 && (
-                    <div
-                      className={
-                        topic === "Graphic Design"
-                          ? "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-[#DD5434] fontWeight-300 poppins cursor-pointer  "
-                          : "xxl:text-[15px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px] text-[13px] text-white fontWeight-300 poppins cursor-pointer  "
-                      }
-                      onClick={(topic) => chooseTopic("Graphic Design")}
-                    >
-                      Design
-                    </div>
-                  )}
+                )}
+            
+                <div
+                  className={`${
+                    selectedTopic === "Artificial Intelligence and Machine Learning"
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    chooseTopic("Artificial Intelligence and Machine Learning");
+                    setSelectedTopic("Artificial Intelligence and Machine Learning");
+                  }}
+                >
+                  AI
                 </div>
+            
+                <div
+                  className={`${
+                    selectedTopic === "Productivity tools"
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    chooseTopic("Productivity tools");
+                    setSelectedTopic("Productivity tools");
+                  }}
+                >
+                  Productivity
+                </div>
+            
+                {screenWidth >= 810 && (
+                  <div
+                    className={`${
+                      selectedTopic === "Graphic Design"
+                        ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                        : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                    } `}
+                    onClick={() => {
+                      chooseTopic("Graphic Design");
+                      setSelectedTopic("Graphic Design");
+                    }}
+                  >
+                    Design
+                  </div>
+                )}
               </div>
+            </div>
+            
+
             )}
             {/* <div className=" xl:w-[1000px] lg:w-[900px] md:w-[900px] sm:w-[800px] w-[300px]"></div> */}
             <div
