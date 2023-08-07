@@ -1,3 +1,4 @@
+import React from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 // import { NewsList, UserProfile } from "./components";
 import { NewsList } from "./components";
@@ -33,8 +34,9 @@ import ContentCalender from "./static pages/ContentCalender";
 import PromptsForGPT from "./static pages/PromptsForGPT";
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
-
+import {data} from  './data.js';
 function App() {
+  console.log(typeof data)
   const Home = lazy(() => import("./views/Home"));
   // const Profile = lazy(() => import("./views/Profile"));
   const SignIn = lazy(() => import("./views/SignIn"));
@@ -165,7 +167,7 @@ function App() {
                 <div className="text-[50px] text-white font-bold ">
                   Tool Loading...
                 </div>
-              }
+              } 
             >
               <NewToolDetails />
             </Suspense>

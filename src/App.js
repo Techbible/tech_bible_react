@@ -33,6 +33,7 @@ import ContentCalender from "./static pages/ContentCalender";
 import PromptsForGPT from "./static pages/PromptsForGPT";
 // import ContactUs from "./views/ContactUs";
 // import NewDiscussion from "./components/Community/NewDiscussion";
+import Frontpage from "./views/frontpage";
 
 function App() {
   const Home = lazy(() => import("./views/Home"));
@@ -84,13 +85,18 @@ function App() {
           index
           path="/"
           element={
-            <NewsContextProvider>
+               <NewsContextProvider>
               <Suspense fallback={<LoadingHomePage />}>
                 <Home />
               </Suspense>
-            </NewsContextProvider>
-          }
+              </NewsContextProvider>  }
         />
+        <Route
+          
+          path="/frontpage"
+          element={
+              
+               <Frontpage/> }/>
         <Route
           path="/signup"
           element={

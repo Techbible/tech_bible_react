@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { BrowserRouter, HashRouter } from 'react-router-dom';
+import Titlee from './title.js'
+import { HashRouter } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
 import {
   RecoilRoot,
 } from 'recoil';
+import Titlee from './title';
 
 
 
@@ -16,6 +18,7 @@ root.render(
     <RecoilRoot>
       <HashRouter hashType="noslash" basename={process.env.PUBLIC_URL}>
         <App />
+        <Titlee />
       </HashRouter>
     </RecoilRoot>
   </AuthContextProvider>

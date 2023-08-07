@@ -1,11 +1,19 @@
 .home-container {
   margin-top: 10vh !important;
+  
 }
 
 .homeContainer {
   margin-top: 2vh !important;
+  
 }
 
+.flexx{
+  display: flex;
+  min-height:400px;
+  box-sizing: border-box;
+
+}
 .styles_container__5MXSs .styles_dropdown__BQ713 {
   cursor: pointer;
 }
@@ -387,7 +395,7 @@ select {
   border-radius: 4px;
   padding: 2px;
   background: #feb6b0;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
@@ -425,14 +433,6 @@ select {
   background-position: 0;
   background-repeat: no-repeat;
   background-size: 2900%;
-}
-
-.styles_icon___8PK0.styles_lightGrey__b_fhT {
-  /* background-image: url(https://ph-static.imgix.net/upvote-burst-2022.png?format=auto&auto=compress); */
-}
-
-.styles_icon___8PK0.styles_white__zYBPo {
-  /* background-image: url(https://ph-static.imgix.net/upvote-burst-2022-big-button.png?format=auto&auto=compress); */
 }
 
 .styles_voted__DPbzg {
@@ -503,7 +503,7 @@ select {
   padding: 1px;
   border-radius: 4px;
   background: linear-gradient(227deg, #ff4582, #e12e0d);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
@@ -786,9 +786,6 @@ select {
   flex-direction: column;
 }
 
-.styles_active__LO7aj span div:first-child {
-  /* background-image: url(https://ph-static.imgix.net/upvote-burst-orange.png?format=auto&auto=compress) !important; */
-}
 
 .styles_small__n0ajb.styles_active__LO7aj {
   color: #fff;
@@ -1229,6 +1226,7 @@ select {
   flex-direction: column;
   position: relative;
   background-color: #1d1d1f !important;
+  
 }
 
 .combo-box {
@@ -1265,6 +1263,7 @@ input {
   border-radius: 5px;
   /* font-weight: 500; */
   transition: 0.35s;
+ 
 }
 .signup-btn:hover {
   background-color: #ca391c;
@@ -1295,3 +1294,13 @@ input {
   /* background-color: grey; */
   padding: 2rem;
 }
+.btn{
+    color: white;
+    background-color: #ef4823;
+    border: 1px solid #ef4823;
+    padding: 5px 12px;
+    border-radius: 5px;
+    /* font-weight: 500; */
+    transition: 0.35s;
+   
+  }

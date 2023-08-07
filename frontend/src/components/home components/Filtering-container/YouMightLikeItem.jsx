@@ -13,9 +13,9 @@ function YouMightLikeItem({ id,title, description, icon, category }) {
           {description}
         </h4>
         <div className="mt-4 flex-wrap gap-1">
-          {/* <span className="whitespace-nowrap rounded-2 bg-black text-white  px-3 py-0.5 text-xs text-black fw-700">
+          { <span className="whitespace-nowrap rounded-2 bg-black text-white  px-3 py-0.5 text-xs text-black fw-700">
             <Link to={`/tooldetails/${id}`}>Visit</Link>
-          </span> */}
+          </span>}
         </div>
       </div>
     </article>

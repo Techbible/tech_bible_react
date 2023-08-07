@@ -121,7 +121,7 @@ const Home = () => {
   //     SearchedTools.push(doc.data());
   //   });
   //   setSearchedTool(SearchedTools);
-  //   console.log(SearchedTool);
+    console.log(SearchedTool);
   // };
 
   //keeping track on what's the user is searching for
@@ -223,13 +223,17 @@ const Home = () => {
     //this is mongo
     // const response = await axios.get(`${BASE_URL}/mongo-tools`);
 
-    if (Pricing === "all" && category === "all categories") {
+    if (Pricing === "all" && category === "all categories") 
+    {
       const toolsWithMatchingPrice = allTools;
       setSearchedTool(SearchedTools.concat(allTools));
       if (toolsWithMatchingPrice.length === 0)
         setResultFilter(`There is no tool in '${category}'`);
       else setResultFilter("");
-    } else if (category === "all categories") {
+    
+    }
+     else if (category === "all categories") 
+     {
       const toolsWithMatchingPrice = allTools?.filter(
         (tool) => tool.Price === Pricing
       );
@@ -258,8 +262,8 @@ const Home = () => {
         );
       else setResultFilter("");
     }
-    console.log(typeof SearchedTool);
-    console.log(typeof SearchedTools);
+    //console.log(typeof SearchedTool);
+    //console.log(typeof SearchedTools);
   };
 
   // useEffect(() => {
@@ -338,8 +342,9 @@ const Home = () => {
       if (
         selectedSuggestion >= 0 &&
         selectedSuggestion < filteredSuggestions.length
-      ) {
-        const selectedTool = filteredSuggestions[selectedSuggestion];
+      ) 
+      {
+         const selectedTool = filteredSuggestions[selectedSuggestion];
         window.location.href = `/tooldetails/${selectedTool._id}/${"0"}`;
         // navigate(`/tooldetails/${selectedTool._id}`);
       }

@@ -5904,6 +5904,7 @@ body.search-mode {
 
 .layoutMain {
   flex: 1;
+  margin-left: ;
 }
 
 @media (max-width: 1099px) {
