@@ -223,15 +223,13 @@ const Home = () => {
     //this is mongo
     // const response = await axios.get(`${BASE_URL}/mongo-tools`);
 
-    if (Pricing === "all" && category === "all categories") 
-    {
+    if (Pricing === "all" && category === "all categories") {
       const toolsWithMatchingPrice = allTools;
       setSearchedTool(SearchedTools.concat(allTools));
       if (toolsWithMatchingPrice.length === 0)
         setResultFilter(`There is no tool in '${category}'`);
       else setResultFilter("");
-    } else if (category === "all categories") 
-    {
+    } else if (category === "all categories") {
       const toolsWithMatchingPrice = allTools?.filter(
         (tool) => tool.Price === Pricing
       );
@@ -241,8 +239,7 @@ const Home = () => {
           `There is no tool in '${category}' that is '${Pricing}'`
         );
       else setResultFilter("");
-    } else if (Pricing === "all")
-    {
+    } else if (Pricing === "all") {
       const toolsWithMatchingPrice = allTools?.filter((tool) => {
         return tool.Category === category;
       });
@@ -250,8 +247,7 @@ const Home = () => {
       if (toolsWithMatchingPrice.length === 0)
         setResultFilter(`There is no tool in '${category}'`);
       else setResultFilter("");
-    } else 
-    {
+    } else {
       const toolsWithMatchingPrice = allTools?.filter((tool) => {
         return tool.Price === Pricing && tool.Category === category;
       });
@@ -774,13 +770,94 @@ const Home = () => {
                     : "flex flex-row ml-0 gap-[6%]"
                 }
               >
-               
+                <div
+                  className={`${
+                    selectedTopic === "" && !isTopicChosen
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] text-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent text-[#DD5434] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    setIsTopicChosen(false);
+                    setTopic("");
+                    setSelectedTopic("");
+                  }}
+                >
+                  Popular
+                </div>
             
+                <div
+                  className={`${
+                    selectedTopic === "Marketing Automation"
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    chooseTopic("Marketing Automation");
+                    setSelectedTopic("Marketing Automation");
+                  }}
+                >
+                  Automation
+                </div>
             
+                {screenWidth >= 700 && (
+                  <div
+                    className={`${
+                      selectedTopic === "No-code"
+                        ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                        : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                    } `}
+                    onClick={() => {
+                      chooseTopic("No-code");
+                      setSelectedTopic("No-code");
+                    }}
+                  >
+                    No Code
+                  </div>
+                )}
             
-                
+                <div
+                  className={`${
+                    selectedTopic === "Artificial Intelligence and Machine Learning"
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    chooseTopic("Artificial Intelligence and Machine Learning");
+                    setSelectedTopic("Artificial Intelligence and Machine Learning");
+                  }}
+                >
+                  AI
+                </div>
             
-               
+                <div
+                  className={`${
+                    selectedTopic === "Productivity tools"
+                      ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                      : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                  } `}
+                  onClick={() => {
+                    chooseTopic("Productivity tools");
+                    setSelectedTopic("Productivity tools");
+                  }}
+                >
+                  Productivity
+                </div>
+            
+                {screenWidth >= 810 && (
+                  <div
+                    className={`${
+                      selectedTopic === "Graphic Design"
+                        ? "text-white font-semibold poppins cursor-pointer bg-[#DD5434] px-4 py-2 rounded-full"
+                        : "text-[#DD5434] font-semibold poppins cursor-pointer bg-transparent bg-[#DD5434 bg-opacity-10] px-4 py-2 rounded-full hover:bg-[#DD5434] text-white"
+                    } `}
+                    onClick={() => {
+                      chooseTopic("Graphic Design");
+                      setSelectedTopic("Graphic Design");
+                    }}
+                  >
+                    Design
+                  </div>
+                )}
               </div>
             </div>
             
