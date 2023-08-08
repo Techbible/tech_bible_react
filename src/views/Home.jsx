@@ -46,6 +46,7 @@ const Home = () => {
   const [ToolToFolderIndex, setToolToFolderIndex] = useState();
   const [toolsNumber, setToolsNumber] = useState(30);
   const [topic, setTopic] = useState("");
+  const [selectedTopic,setSelectedTopic]=useState();
   const [isTopicChosen, setIsTopicChosen] = useState(false);
 
   // Handle Screen Sizing
